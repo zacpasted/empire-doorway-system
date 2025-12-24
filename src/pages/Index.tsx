@@ -4,6 +4,8 @@ import WhatItIsSection from "@/components/sections/WhatItIsSection";
 import WhoThisIsForSection from "@/components/sections/WhoThisIsForSection";
 import WhatYouGetSection from "@/components/sections/WhatYouGetSection";
 import WhyPastedSection from "@/components/sections/WhyPastedSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import OutcomeSection from "@/components/sections/OutcomeSection";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import Footer from "@/components/Footer";
@@ -25,6 +27,8 @@ const Index = () => {
       <WhoThisIsForSection />
       <WhatYouGetSection />
       <WhyPastedSection />
+      <BrandsShowcaseSection />
+      <TestimonialsSection />
       <OutcomeSection />
       <FinalCTASection onApplyClick={scrollToForm} />
       <Footer />
