@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import HeroSection from "@/components/sections/HeroSection";
+import ProblemsWeSolveSection from "@/components/sections/ProblemsWeSolveSection";
 import WhatItIsSection from "@/components/sections/WhatItIsSection";
 import WhoThisIsForSection from "@/components/sections/WhoThisIsForSection";
 import WhatYouGetSection from "@/components/sections/WhatYouGetSection";
@@ -24,6 +25,7 @@ const Index = () => {
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
       
       <HeroSection />
+      <ProblemsWeSolveSection />
       <WhatItIsSection />
       <WhoThisIsForSection />
       <WhatYouGetSection />
