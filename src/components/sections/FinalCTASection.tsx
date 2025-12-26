@@ -15,19 +15,38 @@ const FinalCTASection = ({ onApplyClick }: FinalCTASectionProps) => {
   };
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-24 md:py-32">
       <div className="container max-w-2xl mx-auto px-4 text-center">
-        <Button
-          variant="premium"
-          size="xl"
-          className="rounded-md"
-          onClick={handleClick}
-        >
-          Apply to Associate to Empire™
-        </Button>
+        <p className="text-lg text-muted-foreground mb-8">
+          Associate to Empire™ is intentionally selective.
+        </p>
+
+        <p className="text-foreground/80 mb-12">
+          This is not an enrollment.<br />
+          <span className="text-foreground">It is a request for consideration.</span>
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button
+            variant="premium"
+            size="xl"
+            className="rounded-md"
+            onClick={handleClick}
+          >
+            Request Access
+          </Button>
+          <Button
+            variant="outline"
+            size="xl"
+            className="rounded-md border-border/50 text-foreground/80 hover:text-foreground hover:bg-card/50"
+            onClick={handleClick}
+          >
+            Explore Eligibility
+          </Button>
+        </div>
         
-        <p className="text-sm text-muted-foreground mt-4">
-          Limited seats. Applications reviewed manually.
+        <p className="text-sm text-muted-foreground mt-6">
+          Applications reviewed manually.
         </p>
       </div>
     </section>
