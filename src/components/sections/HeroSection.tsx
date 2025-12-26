@@ -1,5 +1,5 @@
 import VideoPlayer from "@/components/VideoPlayer";
-import ApplicationForm from "@/components/ApplicationForm";
+import EligibilityForm from "@/components/EligibilityForm";
 
 const HeroSection = () => {
   return (
@@ -26,9 +26,9 @@ const HeroSection = () => {
           <VideoPlayer />
         </div>
 
-        {/* Application Form */}
+        {/* Eligibility Form */}
         <div className="max-w-2xl mx-auto animate-fade-up opacity-0 delay-500">
-          <ApplicationForm />
+          <EligibilityForm />
         </div>
       </div>
     </section>
