@@ -1,35 +1,25 @@
 import { CheckCircle2 } from "lucide-react";
-
-const problems = [
-  {
-    pain: "You're posting content but getting zero traction",
-    insight: "Random posts don't build authority. Strategic positioning does."
-  },
-  {
-    pain: "You feel invisible compared to louder, less qualified dentists",
-    insight: "Visibility isn't about volume—it's about clarity and consistency."
-  },
-  {
-    pain: "You don't have time to figure out content strategy",
-    insight: "You shouldn't have to. That's exactly what we do."
-  },
-  {
-    pain: "You're worried about looking 'too salesy' or inauthentic",
-    insight: "The right positioning makes you magnetic—not desperate."
-  },
-  {
-    pain: "You've tried agencies before and felt like just another client",
-    insight: "We only work with dentists. We know your world inside out."
-  },
-  {
-    pain: "You know you should be building a personal brand, but where do you start?",
-    insight: "With a system built specifically for dental professionals like you."
-  }
-];
-
+const problems = [{
+  pain: "You're posting content but getting zero traction",
+  insight: "Random posts don't build authority. Strategic positioning does."
+}, {
+  pain: "You feel invisible compared to louder, less qualified dentists",
+  insight: "Visibility isn't about volume—it's about clarity and consistency."
+}, {
+  pain: "You don't have time to figure out content strategy",
+  insight: "You shouldn't have to. That's exactly what we do."
+}, {
+  pain: "You're worried about looking 'too salesy' or inauthentic",
+  insight: "The right positioning makes you magnetic—not desperate."
+}, {
+  pain: "You've tried agencies before and felt like just another client",
+  insight: "We only work with dentists. We know your world inside out."
+}, {
+  pain: "You know you should be building a personal brand, but where do you start?",
+  insight: "With a system built specifically for dental professionals like you."
+}];
 const ProblemsWeSolveSection = () => {
-  return (
-    <section className="py-20 md:py-28 bg-background">
+  return <section className="py-20 md:py-28 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -48,11 +38,7 @@ const ProblemsWeSolveSection = () => {
 
         {/* Problems Grid */}
         <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {problems.map((item, index) => (
-            <div 
-              key={index}
-              className="group p-6 md:p-8 border border-border rounded-lg bg-card/50 hover:bg-card hover:border-primary/30 transition-all duration-300"
-            >
+          {problems.map((item, index) => <div key={index} className="group p-6 md:p-8 border border-border rounded-lg bg-card/50 hover:bg-card hover:border-primary/30 transition-all duration-300">
               <p className="text-foreground text-lg md:text-xl font-medium mb-3 leading-relaxed">
                 "{item.pain}"
               </p>
@@ -62,8 +48,7 @@ const ProblemsWeSolveSection = () => {
                   {item.insight}
                 </p>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Industry Positioning */}
@@ -84,25 +69,24 @@ const ProblemsWeSolveSection = () => {
             
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-center">
               <div>
-                <p className="text-3xl md:text-4xl font-serif text-primary mb-1">100+</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider">Dental Brands Built</p>
+                <p className="text-3xl md:text-4xl font-serif text-primary mb-1">97%</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider">Client retention </p>
               </div>
               <div className="hidden md:block w-px h-16 bg-border" />
               <div>
-                <p className="text-3xl md:text-4xl font-serif text-primary mb-1">5M+</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider">Audience Reached</p>
+                <p className="text-3xl md:text-4xl font-serif text-primary mb-1">$100,000,000+</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider">Generated </p>
               </div>
               <div className="hidden md:block w-px h-16 bg-border" />
               <div>
-                <p className="text-3xl md:text-4xl font-serif text-primary mb-1">#1</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider">Dental Brand Agency</p>
+                <p className="text-3xl md:text-4xl font-serif text-primary mb-1">$5M</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider">
+              </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ProblemsWeSolveSection;
