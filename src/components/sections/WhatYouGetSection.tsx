@@ -1,87 +1,86 @@
 const WhatYouGetSection = () => {
-  const deliverables = [
-    {
-      title: "Content Strategy & Scripting",
-      description: "Monthly content built specifically for dentists—no guesswork, no generic templates"
-    },
-    {
-      title: "Full Editing & Scheduling",
-      description: "We handle all editing and publishing. You never touch an app at midnight again."
-    },
-    {
-      title: "Personal Brand Positioning",
-      description: "Clarity on who you are, what you stand for, and why patients should choose you at a premium"
-    },
-    {
-      title: "Expert Guidance",
-      description: "Direction from the team behind the most recognized names in aesthetic dentistry"
-    },
-    {
-      title: "Filming Frameworks",
-      description: "Simple systems requiring under two hours per month of your time"
-    },
-    {
-      title: "Group Calls & Community",
-      description: "Execution-focused sessions with dentists building real authority"
-    },
+  const included = [
+    "Personal brand positioning so the market understands who you are and why you're different",
+    "A defined content narrative that removes posting guesswork",
+    "Professionally edited short-form content built to premium standards",
+    "Direction and guidance from the team behind dentistry's top 1%",
+    "A strategy designed to compound into patients, referrals, and opportunity",
+    "Operational relief: we handle editing, structure, cadence, and quality control",
+  ];
+
+  const replaces = [
+    "Random posting",
+    "Vendor roulette",
+    "Wasted spend on agencies that don't understand dentistry",
+    "Time lost managing creatives",
+    "Content that looks busy but goes nowhere",
   ];
 
   return (
     <section className="py-20 md:py-28 bg-secondary/30">
       <div className="container max-w-5xl mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-16">
           <p className="text-primary uppercase tracking-[0.3em] text-sm mb-4">
-            Inside Associate to Empire™
+            What Associate to Empire™ Gives You
           </p>
-          <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-6">
-            Everything You Need.<br />
-            <span className="text-primary">Nothing You Don't.</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-8 leading-tight max-w-3xl mx-auto">
+            The Guesswork, Time Drain, and Wasted Effort<br />
+            <span className="text-primary">That Keeps Talented Dentists Invisible—Removed.</span>
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            You get clear brand positioning, a defined content narrative, and high-quality short-form content—edited, 
+            directed, and structured by the same team that has driven hundreds of millions in aesthetic case revenue 
+            for dentistry's elite.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {deliverables.map((item, index) => (
-            <div
-              key={index}
-              className="p-6 border border-border/50 rounded-lg bg-background hover:border-primary/30 transition-all duration-300"
-            >
-              <h3 className="text-lg font-serif text-foreground mb-2">{item.title}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          {/* What's Included */}
+          <div className="p-8 border border-primary/20 rounded-xl bg-card/30">
+            <h3 className="text-xl font-serif text-foreground mb-6">What's Included</h3>
+            <div className="space-y-4">
+              {included.map((item, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary mt-2.5" />
+                  <p className="text-muted-foreground">{item}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Member Benefits */}
-        <div className="relative mb-12">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl" />
-          <div className="relative p-8 md:p-10 border border-primary/20 rounded-2xl">
-            <div className="text-center mb-8">
-              <p className="text-primary uppercase tracking-[0.3em] text-xs mb-4">
-                Member Advantage
-              </p>
-              <h3 className="text-xl md:text-2xl font-serif text-foreground">
-                No Agency Roulette. We're Invested in You.
-              </h3>
+          {/* What This Replaces */}
+          <div className="p-8 border border-border/50 rounded-xl bg-background">
+            <h3 className="text-xl font-serif text-foreground mb-6">What This Replaces</h3>
+            <div className="space-y-4">
+              {replaces.map((item, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-destructive/60 mt-2.5" />
+                  <p className="text-muted-foreground line-through decoration-muted-foreground/30">{item}</p>
+                </div>
+              ))}
             </div>
-            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-              <div className="text-center p-4">
-                <p className="text-3xl font-serif text-primary mb-2">50% Off</p>
-                <p className="text-muted-foreground text-sm">Ad management services for A2E members</p>
-              </div>
-              <div className="text-center p-4">
-                <p className="text-3xl font-serif text-primary mb-2">Priority Access</p>
-                <p className="text-muted-foreground text-sm">To PASTED Studio and advanced services</p>
-              </div>
-            </div>
-            <p className="text-center text-muted-foreground mt-6 max-w-xl mx-auto">
-              Associate to Empire™ is just the start. We curate careers—and we're invested in our doctors winning long-term.
-            </p>
           </div>
         </div>
 
-        <p className="text-center text-sm text-muted-foreground">
-          We don't just manage socials. We build trajectories.
-        </p>
+        {/* Bottom Statement */}
+        <div className="text-center">
+          <p className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto">
+            We handle the thinking, the editing, and the standards—so your content builds authority 
+            and momentum instead of just keeping up with posting.
+          </p>
+          <div className="h-px bg-border/50 my-8 max-w-xs mx-auto" />
+          <p className="text-xl font-serif text-foreground mb-2">
+            This is not social media management.
+          </p>
+          <p className="text-xl font-serif text-primary">
+            It's career curation.
+          </p>
+          <p className="text-sm text-muted-foreground mt-4">
+            Built by PASTED.
+          </p>
+        </div>
       </div>
     </section>
   );

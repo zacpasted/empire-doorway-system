@@ -16,6 +16,7 @@ import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import OutcomeSection from "@/components/sections/OutcomeSection";
 import FinalCTASection from "@/components/sections/FinalCTASection";
+import FAQSection from "@/components/sections/FAQSection";
 import SectionDivider from "@/components/sections/SectionDivider";
 import Footer from "@/components/Footer";
 
@@ -49,6 +50,7 @@ const Index = () => {
       <WhyPastedSection />
       <FoundersLetterSection />
       <SectionDivider text="Scarcity is structural, not promotional. We are not booking calls. We are granting access to a trajectory." />
+      <FAQSection />
       <OutcomeSection />
       <FinalCTASection onApplyClick={scrollToForm} />
       <Footer />
