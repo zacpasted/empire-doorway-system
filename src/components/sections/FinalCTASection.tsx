@@ -9,7 +9,6 @@ const FinalCTASection = ({ onApplyClick }: FinalCTASectionProps) => {
     if (onApplyClick) {
       onApplyClick();
     } else {
-      // Scroll to top where the form is
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -21,9 +20,13 @@ const FinalCTASection = ({ onApplyClick }: FinalCTASectionProps) => {
           Associate to Empire™ is intentionally selective.
         </p>
 
-        <p className="text-foreground/80 mb-12">
+        <p className="text-foreground/80 mb-6">
           This is not an enrollment.<br />
           <span className="text-foreground">It is a request for consideration.</span>
+        </p>
+        
+        <p className="text-muted-foreground mb-12 italic">
+          We are not booking calls. We are granting access to a trajectory.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -46,7 +49,7 @@ const FinalCTASection = ({ onApplyClick }: FinalCTASectionProps) => {
         </div>
         
         <p className="text-sm text-muted-foreground mt-6">
-          Applications reviewed manually.
+          Applications reviewed manually. Scarcity is structural, not promotional.
         </p>
       </div>
     </section>
