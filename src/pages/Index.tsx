@@ -33,14 +33,14 @@ const Index = () => {
       <HeroSection />
       <ProblemsWeSolveSection />
       <AuthoritySection />
-      <SectionDivider text="Authority compounds earlier than income." />
+      <SectionDivider text="We do not sell marketing. We build the conditions where marketing becomes inevitable." />
       <WhyDifferentSection />
       <MarketTeardownSection />
-      <SectionDivider text="Brand is leverage, not decoration." />
+      <SectionDivider text="Becoming the obvious choice is not a tactic. It is an infrastructure decision." />
       <WhatItIsSection />
       <WhoThisIsForSection />
       <WhatYouGetSection />
-      <SectionDivider text="Waiting is the most expensive strategy in dentistry." />
+      <SectionDivider text="The cost of being unknown compounds faster than the cost of investment." />
       <CompetitiveComparisonSection />
       <DisqualificationSection />
       <WhyPastedSection />
@@ -48,7 +48,7 @@ const Index = () => {
       <ClientLogosSection />
       <BrandsShowcaseSection />
       <TestimonialsSection />
-      <SectionDivider text="The market rewards clarity, not effort." />
+      <SectionDivider text="Scarcity is structural, not promotional. We are not booking calls. We are granting access to a trajectory." />
       <OutcomeSection />
       <FinalCTASection onApplyClick={scrollToForm} />
       <Footer />

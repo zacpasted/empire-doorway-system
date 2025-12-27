@@ -3,24 +3,58 @@ const WhatItIsSection = () => {
     <section className="py-20 md:py-28 bg-cream-dark">
       <div className="container max-w-4xl mx-auto px-4">
         <div className="text-center">
+          <p className="text-primary uppercase tracking-[0.3em] text-sm mb-6">
+            The Offer Ladder
+          </p>
+          
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-8">
-            What Associate to Empire™ Actually Is
+            Access to the Same Infrastructure.<br />
+            <span className="text-muted-foreground">At Different Altitudes.</span>
           </h2>
           
-          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
             <p>
-              Associate to Empire™ is not a content template library or a trend-based program.
-            </p>
-            <p>
-              It is a structured brand and content system designed specifically for associate dentists and early owners who want clarity, confidence, and long-term authority.
+              Your portfolio already supports a clean ladder that reinforces authority rather than cannibalizing it.
             </p>
           </div>
           
-          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-12">
-            <span className="text-lg font-serif text-foreground">Minimal time.</span>
-            <span className="hidden md:block w-px h-6 bg-border" />
-            <span className="text-lg font-serif text-foreground">Maximum leverage.</span>
+          <div className="grid md:grid-cols-2 gap-6 text-left mb-12">
+            <div className="p-6 border border-border/50 rounded-lg bg-card/30">
+              <p className="text-primary text-sm uppercase tracking-wider mb-2">Entry Point</p>
+              <h3 className="text-xl font-serif text-foreground mb-3">Associate to Empire™</h3>
+              <p className="text-muted-foreground">
+                For future stars to build identity early and stop being invisible.
+              </p>
+            </div>
+            
+            <div className="p-6 border border-border/50 rounded-lg bg-card/30">
+              <p className="text-primary text-sm uppercase tracking-wider mb-2">Cinematic Execution</p>
+              <h3 className="text-xl font-serif text-foreground mb-3">PASTED Studio</h3>
+              <p className="text-muted-foreground">
+                For the best in the world. The output is not "content"—it is cultural signal.
+              </p>
+            </div>
+            
+            <div className="p-6 border border-border/50 rounded-lg bg-card/30">
+              <p className="text-primary text-sm uppercase tracking-wider mb-2">Full-Stack</p>
+              <h3 className="text-xl font-serif text-foreground mb-3">PASTED Bespoke</h3>
+              <p className="text-muted-foreground">
+                Brand, conversion, and growth architecture for practices that want an ecosystem, not a campaign.
+              </p>
+            </div>
+            
+            <div className="p-6 border border-border/50 rounded-lg bg-card/30">
+              <p className="text-primary text-sm uppercase tracking-wider mb-2">Amplifier</p>
+              <h3 className="text-xl font-serif text-foreground mb-3">Cosmetic Social Club</h3>
+              <p className="text-muted-foreground">
+                Paid media scales what already works. It does not create meaning from scratch.
+              </p>
+            </div>
           </div>
+          
+          <p className="text-sm text-muted-foreground italic">
+            The altitude metaphor keeps it premium, coherent, and non-commoditized.
+          </p>
         </div>
       </div>
     </section>
