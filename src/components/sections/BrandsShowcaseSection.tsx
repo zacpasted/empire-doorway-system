@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface Brand {
   id: number;
@@ -8,7 +9,11 @@ interface Brand {
   examples: { type: "video" | "image"; label: string }[];
 }
 
-const BrandsShowcaseSection = () => {
+interface BrandsShowcaseSectionProps {
+  onApplyClick?: () => void;
+}
+
+const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => {
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
 
   // Placeholder brands - replace with real content
@@ -120,6 +125,19 @@ const BrandsShowcaseSection = () => {
               </div>
             </button>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <Button 
+            onClick={onApplyClick}
+            className="px-8 py-6 text-base"
+          >
+            Request Consideration
+          </Button>
+          <p className="text-xs text-muted-foreground mt-4">
+            This is not an application for a service. It is a request for access.
+          </p>
         </div>
 
         {/* Brand Detail Modal */}

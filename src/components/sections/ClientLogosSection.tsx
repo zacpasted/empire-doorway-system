@@ -1,4 +1,10 @@
-const ClientLogosSection = () => {
+import { Button } from "@/components/ui/button";
+
+interface ClientLogosSectionProps {
+  onApplyClick?: () => void;
+}
+
+const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
   // Placeholder logos - duplicate for seamless loop
   const logos = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -41,6 +47,19 @@ const ClientLogosSection = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* CTA */}
+      <div className="container max-w-6xl mx-auto px-4 mt-12 text-center">
+        <Button 
+          onClick={onApplyClick}
+          className="px-8 py-6 text-base"
+        >
+          Request Consideration
+        </Button>
+        <p className="text-xs text-muted-foreground mt-4">
+          Limited capacity. Application required.
+        </p>
       </div>
     </section>
   );

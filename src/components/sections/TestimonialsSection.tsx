@@ -1,4 +1,10 @@
-const TestimonialsSection = () => {
+import { Button } from "@/components/ui/button";
+
+interface TestimonialsSectionProps {
+  onApplyClick?: () => void;
+}
+
+const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
   // Placeholder testimonials - replace with real content
   const testimonials = [
     { id: 1 },
@@ -65,6 +71,19 @@ const TestimonialsSection = () => {
             <div className="h-4 w-40 bg-muted rounded mx-auto mb-1" />
             <div className="h-3 w-32 bg-muted/60 rounded mx-auto" />
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <Button 
+            onClick={onApplyClick}
+            className="px-8 py-6 text-base"
+          >
+            Request Consideration
+          </Button>
+          <p className="text-xs text-muted-foreground mt-4">
+            Join dentists who are building authority, not dependency.
+          </p>
         </div>
       </div>
     </section>
