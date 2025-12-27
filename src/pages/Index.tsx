@@ -31,9 +31,12 @@ const Index = () => {
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
       
       <HeroSection />
+      <ClientLogosSection onApplyClick={scrollToForm} />
+      <TestimonialsSection onApplyClick={scrollToForm} />
+      <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      <SectionDivider text="We do not sell marketing. We build the conditions where marketing becomes inevitable." />
       <ProblemsWeSolveSection />
       <AuthoritySection />
-      <SectionDivider text="We do not sell marketing. We build the conditions where marketing becomes inevitable." />
       <WhyDifferentSection />
       <MarketTeardownSection />
       <SectionDivider text="Becoming the obvious choice is not a tactic. It is an infrastructure decision." />
@@ -45,9 +48,6 @@ const Index = () => {
       <DisqualificationSection />
       <WhyPastedSection />
       <FoundersLetterSection />
-      <ClientLogosSection />
-      <BrandsShowcaseSection />
-      <TestimonialsSection />
       <SectionDivider text="Scarcity is structural, not promotional. We are not booking calls. We are granting access to a trajectory." />
       <OutcomeSection />
       <FinalCTASection onApplyClick={scrollToForm} />
