@@ -35,6 +35,7 @@ const Index = () => {
       <ClientLogosSection onApplyClick={scrollToForm} />
       <TestimonialsSection onApplyClick={scrollToForm} />
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      <WhyPastedSection />
       <SectionDivider text="We do not sell marketing. We build the conditions where marketing becomes inevitable." />
       <ProblemsWeSolveSection />
       <AuthoritySection />
@@ -47,7 +48,6 @@ const Index = () => {
       <SectionDivider text="The cost of being unknown compounds faster than the cost of investment." />
       <CompetitiveComparisonSection />
       <DisqualificationSection />
-      <WhyPastedSection />
       <FoundersLetterSection />
       <SectionDivider text="Scarcity is structural, not promotional. We are not booking calls. We are granting access to a trajectory." />
       <FAQSection />
