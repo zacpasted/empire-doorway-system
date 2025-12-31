@@ -129,7 +129,7 @@ const EligibilityForm = () => {
             Associate to Empire™ is intentionally selective.
           </p>
           <p>
-            This is not an application for a course or a service.
+            This is not just an application for a course or a service.
             <br />
             It is a request for consideration into a long-term brand trajectory built by PASTED.
           </p>
