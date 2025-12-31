@@ -11,6 +11,7 @@ import WhyPastedSection from "@/components/sections/WhyPastedSection";
 import FoundersLetterSection from "@/components/sections/FoundersLetterSection";
 import DisqualificationSection from "@/components/sections/DisqualificationSection";
 import CompetitiveComparisonSection from "@/components/sections/CompetitiveComparisonSection";
+import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -47,6 +48,7 @@ const Index = () => {
       <WhatYouGetSection />
       <SectionDivider text="The cost of being unknown compounds faster than the cost of investment." />
       <CompetitiveComparisonSection />
+      <AdCaseStudiesSection />
       <DisqualificationSection />
       <FoundersLetterSection />
       <SectionDivider text="Scarcity is structural, not promotional. We are not booking calls. We are granting access to a trajectory." />
