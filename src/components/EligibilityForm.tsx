@@ -6,8 +6,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface FormData {
+  // Contact Info (Step 1)
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
   // Core Eligibility
   currentRole: string;
   yearsInPractice: string;
@@ -30,6 +36,10 @@ interface FormData {
 }
 
 const initialFormData: FormData = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
   currentRole: "",
   yearsInPractice: "",
   timing: "",
@@ -49,13 +59,18 @@ const initialFormData: FormData = {
   longView: "",
 };
 
+// Zapier webhook URL - replace with your actual webhook
+const ZAPIER_WEBHOOK_URL = "";
+
 const EligibilityForm = () => {
-  const [step, setStep] = useState(1); // Start directly at first question
+  const [step, setStep] = useState(1); // Start with contact info
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [contactSaved, setContactSaved] = useState(false);
+  const { toast } = useToast();
 
-  const totalSteps = 17; // 16 questions + confirmation
+  const totalSteps = 17; // 1 contact + 16 questions
 
   const updateField = (field: keyof FormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -70,41 +85,96 @@ const EligibilityForm = () => {
     }
   };
 
+  const saveContactToWebhook = async () => {
+    if (contactSaved || !ZAPIER_WEBHOOK_URL) return;
+    
+    try {
+      await fetch(ZAPIER_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          source: "eligibility_form_partial",
+          step: step,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      setContactSaved(true);
+      console.log("Contact info saved to webhook");
+    } catch (error) {
+      console.error("Error saving contact to webhook:", error);
+    }
+  };
+
   const canProceed = () => {
     switch (step) {
-      case 1: return formData.currentRole !== "";
-      case 2: return formData.yearsInPractice !== "";
-      case 3: return formData.timing.trim().length > 0;
-      case 4: return formData.realCost.length > 0;
-      case 5: return formData.identity.trim().length > 0;
-      case 6: return formData.brandMaturity !== "";
-      case 7: return formData.visibility !== "";
-      case 8: return formData.alignment !== "";
-      case 9: return formData.friction !== "";
-      case 10: return formData.commitment !== "";
-      case 11: return formData.careerHorizon !== "";
-      case 12: return formData.importantAreas.length > 0;
-      case 13: return formData.buildStyle !== "";
-      case 14: return formData.lookingAhead !== "";
-      case 15: return formData.readiness !== "";
-      case 16: return true; // Optional
+      case 1: 
+        // Contact info - require name and email
+        return formData.firstName.trim() !== "" && 
+               formData.lastName.trim() !== "" && 
+               formData.email.trim() !== "" &&
+               formData.email.includes("@");
+      case 2: return formData.currentRole !== "";
+      case 3: return formData.yearsInPractice !== "";
+      case 4: return formData.timing.trim().length > 0;
+      case 5: return formData.realCost.length > 0;
+      case 6: return formData.identity.trim().length > 0;
+      case 7: return formData.brandMaturity !== "";
+      case 8: return formData.visibility !== "";
+      case 9: return formData.alignment !== "";
+      case 10: return formData.friction !== "";
+      case 11: return formData.commitment !== "";
+      case 12: return formData.careerHorizon !== "";
+      case 13: return formData.importantAreas.length > 0;
+      case 14: return formData.buildStyle !== "";
+      case 15: return formData.lookingAhead !== "";
+      case 16: return formData.readiness !== "";
+      case 17: return true; // Optional
       default: return true;
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsSubmitting(true);
+    
+    // Send complete form data to webhook
+    if (ZAPIER_WEBHOOK_URL) {
+      try {
+        await fetch(ZAPIER_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
+          body: JSON.stringify({
+            ...formData,
+            source: "eligibility_form_complete",
+            timestamp: new Date().toISOString(),
+          }),
+        });
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    }
+    
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
     }, 1500);
   };
 
-  const nextStep = () => {
-    if (step === 16) {
+  const nextStep = async () => {
+    // Save contact info after step 1
+    if (step === 1 && !contactSaved) {
+      await saveContactToWebhook();
+    }
+    
+    if (step === 17) {
       handleSubmit();
     } else {
-      setStep((s) => Math.min(s + 1, 16));
+      setStep((s) => Math.min(s + 1, 17));
     }
   };
 
@@ -165,7 +235,7 @@ const EligibilityForm = () => {
           onClick={nextStep}
           disabled={!canProceed() || isSubmitting}
         >
-          {isSubmitting ? "Submitting..." : step === 16 ? "Submit Request" : "Continue"}
+          {isSubmitting ? "Submitting..." : step === 17 ? "Submit Request" : "Continue"}
         </Button>
       </div>
     </div>
@@ -296,6 +366,67 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         <div className={questionClass}>
           <QuestionHeader
             number={1}
+            section="Contact Information"
+            title="Your Details"
+            subtitle="We'll use this to follow up on your request."
+          />
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName" className="text-sm text-muted-foreground">First Name *</Label>
+                <Input
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={(e) => updateField("firstName", e.target.value)}
+                  placeholder="First name"
+                  className="bg-background"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName" className="text-sm text-muted-foreground">Last Name *</Label>
+                <Input
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={(e) => updateField("lastName", e.target.value)}
+                  placeholder="Last name"
+                  className="bg-background"
+                  required
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm text-muted-foreground">Email *</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => updateField("email", e.target.value)}
+                placeholder="you@example.com"
+                className="bg-background"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-sm text-muted-foreground">Phone (Optional)</Label>
+              <Input
+                id="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => updateField("phone", e.target.value)}
+                placeholder="(555) 123-4567"
+                className="bg-background"
+              />
+            </div>
+          </div>
+        </div>
+      );
+
+    case 2:
+      return (
+        <div className={questionClass}>
+          <QuestionHeader
+            number={2}
             section="Core Eligibility"
             title="Current Role"
             subtitle="Which best describes you right now?"
@@ -313,11 +444,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 2:
+    case 3:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={2}
+            number={3}
             section="Core Eligibility"
             title="Years in Practice"
             subtitle="How long have you been practicing?"
@@ -335,11 +466,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 3:
+    case 4:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={3}
+            number={4}
             section="Core Eligibility"
             title="Timing"
             subtitle="What prompted you to seek this now rather than waiting another year?"
@@ -353,11 +484,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 4:
+    case 5:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={4}
+            number={5}
             section="Core Eligibility"
             title="The Real Cost"
             subtitle="What feels most expensive about remaining where you are for the next 3–5 years?"
@@ -396,11 +527,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 5:
+    case 6:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={5}
+            number={6}
             section="Core Eligibility"
             title="Identity"
             subtitle="In one sentence, what do you want to be known for five years from now?"
@@ -414,11 +545,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 6:
+    case 7:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={6}
+            number={7}
             section="Core Eligibility"
             title="Brand Maturity"
             subtitle="Which statement feels most accurate right now?"
@@ -436,11 +567,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 7:
+    case 8:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={7}
+            number={8}
             section="Core Eligibility"
             title="Relationship With Visibility"
             subtitle="Which best describes you today?"
@@ -458,11 +589,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 8:
+    case 9:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={8}
+            number={9}
             section="Core Eligibility"
             title="Alignment"
             subtitle="Associate to Empire™ prioritizes identity, authority, and long-term positioning over speed or virality. Does that align with how you think about growth?"
@@ -479,11 +610,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 9:
+    case 10:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={9}
+            number={10}
             section="Core Eligibility"
             title="Friction Test"
             subtitle="Which would frustrate you most?"
@@ -501,11 +632,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 10:
+    case 11:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={10}
+            number={11}
             section="Core Eligibility"
             title="Commitment"
             subtitle="If accepted, are you prepared to invest focused time and attention each month?"
@@ -522,11 +653,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 11:
+    case 12:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={11}
+            number={12}
             section="Future Direction & Trajectory"
             title="Career Horizon"
             subtitle="How do you see the next 12–24 months?"
@@ -547,11 +678,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 12:
+    case 13:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={12}
+            number={13}
             section="Future Direction & Trajectory"
             title="What Will Matter Most"
             subtitle="Which areas feel most important next?"
@@ -594,11 +725,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 13:
+    case 14:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={13}
+            number={14}
             section="Future Direction & Trajectory"
             title="Build Style"
             subtitle="How do you prefer to build?"
@@ -616,11 +747,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 14:
+    case 15:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={14}
+            number={15}
             section="Future Direction & Trajectory"
             title="Looking Ahead"
             subtitle="If Associate to Empire™ creates clarity and momentum, what would you most want to explore next?"
@@ -639,11 +770,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 15:
+    case 16:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={15}
+            number={16}
             section="Future Direction & Trajectory"
             title="Readiness"
             subtitle="Which statement feels most accurate?"
@@ -661,11 +792,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 16:
+    case 17:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={16}
+            number={17}
             section="Future Direction & Trajectory"
             title="Long View"
             subtitle="If everything went right over the next five years, what would you be building?"
