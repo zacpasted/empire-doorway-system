@@ -308,6 +308,7 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
             <RadioOption value="associate" label="Associate" />
             <RadioOption value="associate-ownership" label="Associate with ownership path" />
             <RadioOption value="early-owner" label="Early-stage owner" />
+            <RadioOption value="established-owner" label="Established owner" />
           </RadioGroup>
         </div>
       );
