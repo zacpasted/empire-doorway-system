@@ -50,7 +50,7 @@ const initialFormData: FormData = {
 };
 
 const EligibilityForm = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1); // Start directly at first question
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -108,7 +108,7 @@ const EligibilityForm = () => {
     }
   };
 
-  const prevStep = () => setStep((s) => Math.max(s - 1, 0));
+  const prevStep = () => setStep((s) => Math.max(s - 1, 1)); // Don't go below step 1
 
   if (isSubmitted) {
     return <ConfirmationScreen />;
@@ -116,37 +116,48 @@ const EligibilityForm = () => {
 
   return (
     <div className="bg-card rounded-lg p-8 md:p-12 shadow-sm max-w-2xl mx-auto">
-      {step === 0 ? (
-        <IntroScreen onStart={() => setStep(1)} />
-      ) : (
-        <>
-          <ProgressBar current={step} total={16} />
-          <div className="mt-8 min-h-[320px]">
-            <QuestionRenderer
-              step={step}
-              formData={formData}
-              updateField={updateField}
-              toggleArrayField={toggleArrayField}
-            />
-          </div>
-          <div className="flex justify-between mt-8 pt-6 border-t border-border">
-            <Button
-              variant="ghost"
-              onClick={prevStep}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Back
-            </Button>
-            <Button
-              variant="premium"
-              onClick={nextStep}
-              disabled={!canProceed() || isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : step === 16 ? "Submit Request" : "Continue"}
-            </Button>
-          </div>
-        </>
-      )}
+      {/* Form Header */}
+      <div className="text-center mb-8 pb-6 border-b border-border">
+        <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
+          Associate to Empire™
+        </p>
+        <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-3">
+          Request for Consideration
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Answer directly. Clarity matters more than polish.
+        </p>
+      </div>
+      
+      <ProgressBar current={step} total={16} />
+      <div className="mt-8 min-h-[320px]">
+        <QuestionRenderer
+          step={step}
+          formData={formData}
+          updateField={updateField}
+          toggleArrayField={toggleArrayField}
+        />
+      </div>
+      <div className="flex justify-between mt-8 pt-6 border-t border-border">
+        {step > 1 ? (
+          <Button
+            variant="ghost"
+            onClick={prevStep}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Back
+          </Button>
+        ) : (
+          <div /> // Empty div to maintain flex spacing
+        )}
+        <Button
+          variant="premium"
+          onClick={nextStep}
+          disabled={!canProceed() || isSubmitting}
+        >
+          {isSubmitting ? "Submitting..." : step === 16 ? "Submit Request" : "Continue"}
+        </Button>
+      </div>
     </div>
   );
 };
@@ -162,37 +173,6 @@ const ProgressBar = ({ current, total }: { current: number; total: number }) => 
         className="h-full bg-primary transition-all duration-500 ease-out"
         style={{ width: `${(current / total) * 100}%` }}
       />
-    </div>
-  </div>
-);
-
-const IntroScreen = ({ onStart }: { onStart: () => void }) => (
-  <div className="text-center space-y-6 animate-fade-up">
-    <div className="space-y-2">
-      <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
-        Associate to Empire™
-      </p>
-      <h2 className="text-3xl md:text-4xl font-serif text-foreground">
-        Request for Consideration
-      </h2>
-    </div>
-    <div className="max-w-lg mx-auto space-y-4 text-muted-foreground leading-relaxed">
-      <p>
-        Associate to Empire™ is intentionally selective.
-      </p>
-      <p>
-        This is not an application for a course or a service.
-        <br />
-        It is a request for consideration into a long-term brand trajectory built by PASTED.
-      </p>
-      <p className="text-foreground/80">
-        Answer directly. Clarity matters more than polish.
-      </p>
-    </div>
-    <div className="pt-4">
-      <Button variant="premium" size="xl" onClick={onStart}>
-        Begin
-      </Button>
     </div>
   </div>
 );
