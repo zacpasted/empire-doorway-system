@@ -13,15 +13,17 @@ const HeroSection = () => {
           </p>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6 animate-fade-up opacity-0 delay-200">
-            Stop Being Interchangeable.
+            The Operating System for Aesthetic Dentists<br />
+            <span className="text-primary">Who Refuse to Be Anonymous.</span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-up opacity-0 delay-300 mb-8">
-            We do not sell marketing. We build the conditions where marketing becomes inevitable.
+            From trained but invisible to chosen, trusted, and known.
           </p>
           
           <p className="text-base text-foreground/70 max-w-2xl mx-auto animate-fade-up opacity-0 delay-400">
-            Associate to Empire™ is brand infrastructure and authority engineering for dentists who refuse to compete on volume, discounts, or noise.
+            Not louder. Not busier. Not cheaper.<br />
+            <span className="text-foreground font-medium">Clearer. Recognised. Selected.</span>
           </p>
         </div>
 

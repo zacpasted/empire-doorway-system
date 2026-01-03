@@ -1,24 +1,21 @@
 import { useRef } from "react";
 import HeroSection from "@/components/sections/HeroSection";
-import ProblemsWeSolveSection from "@/components/sections/ProblemsWeSolveSection";
-import AuthoritySection from "@/components/sections/AuthoritySection";
-import WhyDifferentSection from "@/components/sections/WhyDifferentSection";
-import MarketTeardownSection from "@/components/sections/MarketTeardownSection";
-import WhatItIsSection from "@/components/sections/WhatItIsSection";
-import WhoThisIsForSection from "@/components/sections/WhoThisIsForSection";
-import WhatYouGetSection from "@/components/sections/WhatYouGetSection";
-import WhyPastedSection from "@/components/sections/WhyPastedSection";
+import WhyPastedExistsSection from "@/components/sections/WhyPastedExistsSection";
+import WhatWeStandAgainstSection from "@/components/sections/WhatWeStandAgainstSection";
 import FoundersLetterSection from "@/components/sections/FoundersLetterSection";
-import DisqualificationSection from "@/components/sections/DisqualificationSection";
-import CompetitiveComparisonSection from "@/components/sections/CompetitiveComparisonSection";
-import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
+import TalentedDentistSection from "@/components/sections/TalentedDentistSection";
+import WhatWeWillNeverDoSection from "@/components/sections/WhatWeWillNeverDoSection";
+import ThePromiseSection from "@/components/sections/ThePromiseSection";
+import FoundersRoleSection from "@/components/sections/FoundersRoleSection";
+import WhoThisIsForSection from "@/components/sections/WhoThisIsForSection";
+import MarketContextSection from "@/components/sections/MarketContextSection";
+import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
 import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import OutcomeSection from "@/components/sections/OutcomeSection";
+import SectionDivider from "@/components/sections/SectionDivider";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import FAQSection from "@/components/sections/FAQSection";
-import SectionDivider from "@/components/sections/SectionDivider";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -36,24 +33,25 @@ const Index = () => {
       <ClientLogosSection onApplyClick={scrollToForm} />
       <TestimonialsSection onApplyClick={scrollToForm} />
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
-      <WhyPastedSection />
-      <SectionDivider text="We do not sell marketing. We build the conditions where marketing becomes inevitable." />
-      <ProblemsWeSolveSection />
-      <AuthoritySection />
-      <WhyDifferentSection />
-      <MarketTeardownSection />
-      <SectionDivider text="Becoming the obvious choice is not a tactic. It is an infrastructure decision." />
-      <WhatItIsSection />
-      <WhoThisIsForSection />
-      <WhatYouGetSection />
-      <SectionDivider text="The cost of being unknown compounds faster than the cost of investment." />
-      <CompetitiveComparisonSection />
-      <AdCaseStudiesSection />
-      <DisqualificationSection />
+      
+      <WhyPastedExistsSection />
+      <WhatWeStandAgainstSection />
       <FoundersLetterSection />
-      <SectionDivider text="Scarcity is structural, not promotional. We are not booking calls. We are granting access to a trajectory." />
+      
+      <SectionDivider text="The operating system for aesthetic dentists who refuse to be anonymous." />
+      
+      <TalentedDentistSection />
+      <WhatWeWillNeverDoSection />
+      <ThePromiseSection />
+      
+      <SectionDivider text="We will never monetise your insecurity. We build confidence by amplifying your existing excellence." />
+      
+      <FoundersRoleSection />
+      <WhoThisIsForSection />
+      <MarketContextSection />
+      <PrivateAdvisorySection />
+      
       <FAQSection />
-      <OutcomeSection />
       <FinalCTASection onApplyClick={scrollToForm} />
       <Footer />
     </main>
