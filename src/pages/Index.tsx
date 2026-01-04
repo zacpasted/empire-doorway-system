@@ -10,6 +10,7 @@ import FoundersRoleSection from "@/components/sections/FoundersRoleSection";
 import WhoThisIsForSection from "@/components/sections/WhoThisIsForSection";
 import MarketContextSection from "@/components/sections/MarketContextSection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
+import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
 import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
@@ -52,6 +53,7 @@ const Index = () => {
       <WhoThisIsForSection />
       <MarketContextSection />
       <PrivateAdvisorySection />
+      <ProgramDeliverablesSection />
       
       <FAQSection />
       <FinalCTASection onApplyClick={scrollToForm} />
