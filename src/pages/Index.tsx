@@ -53,7 +53,7 @@ const Index = () => {
       <WhoThisIsForSection />
       <MarketContextSection />
       <PrivateAdvisorySection />
-      <ProgramDeliverablesSection />
+      <ProgramDeliverablesSection onApplyClick={scrollToForm} />
       
       <FAQSection />
       <FinalCTASection onApplyClick={scrollToForm} />
