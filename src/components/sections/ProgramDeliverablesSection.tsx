@@ -75,17 +75,17 @@ const timeline = [
     description: "Deep-dive into your vision, clinical philosophy, and market positioning",
   },
   {
-    week: "Week 3-4",
+    week: "Week 2-3",
     title: "Brand Architecture",
     description: "Visual identity development and content strategy creation",
   },
   {
-    week: "Week 5-8",
+    week: "Week 3-5",
     title: "Content Production",
     description: "Cinematic shoot days and asset creation at your practice",
   },
   {
-    week: "Week 9-12",
+    week: "Week 5-6",
     title: "Launch & Amplify",
     description: "Strategic rollout, optimization, and ongoing advisory support",
   },
@@ -104,7 +104,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             Everything You Get
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            A complete personal brand transformation delivered in 12 weeks
+            A complete personal brand transformation delivered in 45 days
           </p>
         </div>
 
@@ -133,19 +133,95 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           ))}
         </div>
 
-        {/* Pricing Card */}
-        <div className="max-w-3xl mx-auto mb-20">
-          <div className="bg-gradient-to-br from-primary/10 via-background to-primary/5 border border-primary/30 rounded-2xl p-8 md:p-12 text-center">
-            <p className="text-primary font-medium tracking-widest uppercase text-sm mb-2">
-              Investment
+        {/* Pricing Section */}
+        <div className="max-w-4xl mx-auto mb-20">
+          {/* Market Comparison */}
+          <div className="text-center mb-8">
+            <p className="text-muted-foreground text-sm mb-2">
+              Typical agency brand builds cost <span className="text-foreground font-medium">£12,000–£50,000</span> upfront
             </p>
-            <div className="flex items-baseline justify-center gap-2 mb-4">
-              <span className="font-display text-5xl md:text-6xl text-foreground">£15,000</span>
-              <span className="text-muted-foreground text-lg">one-time</span>
+            <p className="text-muted-foreground text-sm">
+              Standard ad management runs <span className="text-foreground font-medium">£4,000+/month</span>
+            </p>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {/* Initial Brand Build */}
+            <div className="bg-background/50 border border-border/30 rounded-xl p-8 text-center">
+              <p className="text-primary font-medium tracking-widest uppercase text-xs mb-2">
+                Initial Brand Build
+              </p>
+              <div className="flex items-baseline justify-center gap-1 mb-2">
+                <span className="font-display text-4xl text-foreground">£3,500</span>
+              </div>
+              <p className="text-muted-foreground text-sm mb-4">
+                45-day launch • Complete brand identity
+              </p>
+              <ul className="text-left space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Full brand identity system</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Professional content shoot</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Video asset library</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>12-month content strategy</span>
+                </li>
+              </ul>
             </div>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-              Payment plans available. Includes everything listed above plus 12 months of advisory support.
+
+            {/* Monthly Retainer */}
+            <div className="bg-gradient-to-br from-primary/10 via-background to-primary/5 border border-primary/30 rounded-xl p-8 text-center">
+              <p className="text-primary font-medium tracking-widest uppercase text-xs mb-2">
+                Monthly Retainer
+              </p>
+              <div className="flex items-baseline justify-center gap-1 mb-2">
+                <span className="font-display text-4xl text-foreground">£2,750</span>
+                <span className="text-muted-foreground text-sm">/month</span>
+              </div>
+              <p className="text-muted-foreground text-sm mb-4">
+                Ongoing support • Cancel anytime
+              </p>
+              <ul className="text-left space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Weekly strategy calls</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Direct Slack access</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Creative direction support</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  <span>Performance reviews</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Ad Management Add-on */}
+          <div className="bg-background/30 border border-border/20 rounded-xl p-6 text-center mb-8">
+            <p className="text-muted-foreground text-sm">
+              <span className="text-foreground font-medium">Optional from Month 4:</span> Add performance ad management for{" "}
+              <span className="text-primary font-medium">£1,250+/month</span>
+              <span className="text-muted-foreground/60"> (vs. £4,000+ industry standard)</span>
             </p>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
             <Button 
               onClick={onApplyClick}
               size="lg" 
@@ -165,7 +241,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           <div className="flex items-center justify-center gap-3 mb-12">
             <Calendar className="w-5 h-5 text-primary" />
             <h3 className="font-display text-2xl md:text-3xl text-foreground">
-              12-Week Timeline
+              45-Day Timeline
             </h3>
           </div>
 
