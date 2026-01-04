@@ -32,9 +32,9 @@ const Index = () => {
       
       <HeroSection />
       <ClientLogosSection onApplyClick={scrollToForm} />
+      <VideoCarouselSection />
       <TestimonialsSection onApplyClick={scrollToForm} />
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
-      <VideoCarouselSection />
       
       <WhyPastedExistsSection />
       <WhatWeStandAgainstSection />
