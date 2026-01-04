@@ -14,6 +14,18 @@ import tozzi08 from "@/assets/brands/tozzi/showcase-08.jpeg";
 import tozzi09 from "@/assets/brands/tozzi/showcase-09.jpeg";
 import tozzi10 from "@/assets/brands/tozzi/showcase-10.jpeg";
 
+// OnlyFangs images
+import onlyfangs01 from "@/assets/brands/onlyfangs/showcase-01.jpeg";
+import onlyfangs02 from "@/assets/brands/onlyfangs/showcase-02.jpeg";
+import onlyfangs03 from "@/assets/brands/onlyfangs/showcase-03.jpeg";
+import onlyfangs04 from "@/assets/brands/onlyfangs/showcase-04.jpeg";
+import onlyfangs05 from "@/assets/brands/onlyfangs/showcase-05.jpeg";
+import onlyfangs06 from "@/assets/brands/onlyfangs/showcase-06.jpeg";
+import onlyfangs07 from "@/assets/brands/onlyfangs/showcase-07.jpeg";
+import onlyfangs08 from "@/assets/brands/onlyfangs/showcase-08.jpeg";
+import onlyfangs09 from "@/assets/brands/onlyfangs/showcase-09.jpeg";
+import onlyfangs10 from "@/assets/brands/onlyfangs/showcase-10.jpeg";
+
 interface BrandExample {
   type: "video" | "image";
   label: string;
@@ -56,9 +68,21 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
     },
     {
       id: 2,
-      name: "Coming Soon",
-      description: "Additional brand examples will be featured here.",
-      examples: [],
+      name: "OnlyFangs",
+      description: "Bold, unapologetic dental content that commands attention and builds authority.",
+      thumbnail: onlyfangs01,
+      examples: [
+        { type: "image", label: "Brand Identity", src: onlyfangs01 },
+        { type: "image", label: "Visual System", src: onlyfangs02 },
+        { type: "image", label: "Content Strategy", src: onlyfangs03 },
+        { type: "image", label: "Social Campaign", src: onlyfangs04 },
+        { type: "image", label: "Brand Assets", src: onlyfangs05 },
+        { type: "image", label: "Editorial Design", src: onlyfangs06 },
+        { type: "image", label: "Brand Expression", src: onlyfangs07 },
+        { type: "image", label: "Visual Identity", src: onlyfangs08 },
+        { type: "image", label: "Content Design", src: onlyfangs09 },
+        { type: "image", label: "Brand System", src: onlyfangs10 },
+      ],
     },
     {
       id: 3,
