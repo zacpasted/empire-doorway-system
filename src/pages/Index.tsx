@@ -19,6 +19,7 @@ import SectionDivider from "@/components/sections/SectionDivider";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import FAQSection from "@/components/sections/FAQSection";
 import Footer from "@/components/Footer";
+import StickyHeader from "@/components/StickyHeader";
 
 const Index = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -30,6 +31,8 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background">
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
+      
+      <StickyHeader onApplyClick={scrollToForm} />
       
       <HeroSection />
       <ClientLogosSection onApplyClick={scrollToForm} />
