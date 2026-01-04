@@ -1,19 +1,30 @@
 import { Button } from "@/components/ui/button";
+import { Quote } from "lucide-react";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
 }
 
+const testimonials = [
+  {
+    id: 1,
+    name: "Dr Serena Wong",
+    role: "Aesthetic Dentist",
+    quote: "Working with this team has been an exceptional experience. They have consistently supported me with clarity, kindness, and a deep understanding of the dental field, which is rare in the marketing space. They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am. They are always available, thoughtful in their approach, and genuinely care about the quality of their work — you never feel left on your own. I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail. I would highly recommend them to anyone looking for marketing that is both strategic and truly human.",
+    featured: true,
+  },
+  {
+    id: 2,
+    name: "Dr Nav Atwal",
+    role: "Dental Surgeon",
+    quote: "Dr. Alan Clarke and Zac at Paste are helping translate vision into something tangible. They understand that strong brands are built with intention, not shortcuts.",
+    featured: false,
+  },
+];
+
 const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
-  // Placeholder testimonials - replace with real content
-  const testimonials = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-  ];
+  const featuredTestimonial = testimonials.find((t) => t.featured);
+  const regularTestimonials = testimonials.filter((t) => !t.featured);
 
   return (
     <section className="py-20 md:py-28 bg-secondary/30">
@@ -27,51 +38,42 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
           </p>
         </div>
 
-        {/* Testimonial Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {testimonials.map((testimonial) => (
-            <div
-              key={testimonial.id}
-              className="bg-background rounded-lg p-8 border border-border/50 hover:border-border transition-colors"
-            >
-              {/* Placeholder for testimonial content */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 mb-6">
-                  {/* Avatar placeholder */}
-                  <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center">
-                    <span className="text-muted-foreground text-xs">Photo</span>
-                  </div>
-                  <div>
-                    <div className="h-4 w-32 bg-muted rounded mb-2" />
-                    <div className="h-3 w-24 bg-muted/60 rounded" />
-                  </div>
-                </div>
-                {/* Quote placeholder */}
-                <div className="space-y-2">
-                  <div className="h-3 w-full bg-muted/40 rounded" />
-                  <div className="h-3 w-full bg-muted/40 rounded" />
-                  <div className="h-3 w-3/4 bg-muted/40 rounded" />
-                </div>
+        {/* Featured testimonial - larger format */}
+        {featuredTestimonial && (
+          <div className="mb-12 bg-background rounded-lg p-10 md:p-14 border border-border/50">
+            <div className="max-w-3xl mx-auto text-center">
+              <Quote className="w-10 h-10 text-primary/40 mx-auto mb-6" />
+              <blockquote className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-8 font-serif italic">
+                "{featuredTestimonial.quote}"
+              </blockquote>
+              <div>
+                <p className="font-medium text-foreground">{featuredTestimonial.name}</p>
+                <p className="text-sm text-muted-foreground">{featuredTestimonial.role}</p>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Featured testimonial - larger format */}
-        <div className="mt-12 bg-background rounded-lg p-10 md:p-14 border border-border/50">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="w-20 h-20 rounded-full bg-muted mx-auto mb-6 flex items-center justify-center">
-              <span className="text-muted-foreground text-sm">Photo</span>
-            </div>
-            <div className="space-y-3 mb-6">
-              <div className="h-4 w-full max-w-2xl mx-auto bg-muted/40 rounded" />
-              <div className="h-4 w-full max-w-xl mx-auto bg-muted/40 rounded" />
-              <div className="h-4 w-3/4 max-w-lg mx-auto bg-muted/40 rounded" />
-            </div>
-            <div className="h-4 w-40 bg-muted rounded mx-auto mb-1" />
-            <div className="h-3 w-32 bg-muted/60 rounded mx-auto" />
           </div>
-        </div>
+        )}
+
+        {/* Regular Testimonials Grid */}
+        {regularTestimonials.length > 0 && (
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {regularTestimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="bg-background rounded-lg p-8 border border-border/50 hover:border-border transition-colors"
+              >
+                <Quote className="w-6 h-6 text-primary/30 mb-4" />
+                <blockquote className="text-foreground/80 leading-relaxed mb-6 italic">
+                  "{testimonial.quote}"
+                </blockquote>
+                <div>
+                  <p className="font-medium text-foreground">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* CTA */}
         <div className="mt-16 text-center">
