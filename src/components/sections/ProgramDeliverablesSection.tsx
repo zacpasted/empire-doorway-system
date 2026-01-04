@@ -138,10 +138,10 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           {/* Market Comparison */}
           <div className="text-center mb-8">
             <p className="text-muted-foreground text-sm mb-2">
-              Typical agency brand builds cost <span className="text-foreground font-medium">£12,000–£50,000</span> upfront
+              Typical agency brand builds cost <span className="text-foreground font-medium">$12,000–$50,000</span> upfront
             </p>
             <p className="text-muted-foreground text-sm">
-              Standard ad management runs <span className="text-foreground font-medium">£4,000+/month</span>
+              Standard ad management runs <span className="text-foreground font-medium">$4,000+/month</span>
             </p>
           </div>
 
@@ -153,7 +153,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
                 Initial Brand Build
               </p>
               <div className="flex items-baseline justify-center gap-1 mb-2">
-                <span className="font-display text-4xl text-foreground">£3,500</span>
+                <span className="font-display text-4xl text-foreground">$3,500</span>
               </div>
               <p className="text-muted-foreground text-sm mb-4">
                 45-day launch • Complete brand identity
@@ -184,7 +184,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
                 Monthly Retainer
               </p>
               <div className="flex items-baseline justify-center gap-1 mb-2">
-                <span className="font-display text-4xl text-foreground">£2,750</span>
+                <span className="font-display text-4xl text-foreground">$2,750</span>
                 <span className="text-muted-foreground text-sm">/month</span>
               </div>
               <p className="text-muted-foreground text-sm mb-4">
@@ -215,8 +215,8 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           <div className="bg-background/30 border border-border/20 rounded-xl p-6 text-center mb-8">
             <p className="text-muted-foreground text-sm">
               <span className="text-foreground font-medium">Optional from Month 4:</span> Add performance ad management for{" "}
-              <span className="text-primary font-medium">£1,250+/month</span>
-              <span className="text-muted-foreground/60"> (vs. £4,000+ industry standard)</span>
+              <span className="text-primary font-medium">$1,250+/month</span>
+              <span className="text-muted-foreground/60"> (vs. $4,000+ industry standard)</span>
             </p>
           </div>
 
