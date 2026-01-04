@@ -38,6 +38,17 @@ import serena08 from "@/assets/brands/serena-wong/showcase-08.jpeg";
 import serena09 from "@/assets/brands/serena-wong/showcase-09.jpeg";
 import serena10 from "@/assets/brands/serena-wong/showcase-10.jpeg";
 
+// Brand 04 images (placeholder name - update when brand name is confirmed)
+import brand04_01 from "@/assets/brands/brand-04/showcase-01.jpeg";
+import brand04_02 from "@/assets/brands/brand-04/showcase-02.jpeg";
+import brand04_03 from "@/assets/brands/brand-04/showcase-03.jpeg";
+import brand04_04 from "@/assets/brands/brand-04/showcase-04.jpeg";
+import brand04_05 from "@/assets/brands/brand-04/showcase-05.jpeg";
+import brand04_06 from "@/assets/brands/brand-04/showcase-06.jpeg";
+import brand04_07 from "@/assets/brands/brand-04/showcase-07.jpeg";
+import brand04_08 from "@/assets/brands/brand-04/showcase-08.jpeg";
+import brand04_09 from "@/assets/brands/brand-04/showcase-09.jpeg";
+
 interface BrandExample {
   type: "video" | "image";
   label: string;
@@ -114,6 +125,23 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
         { type: "image", label: "Brand System", src: serena10 },
       ],
     },
+    {
+      id: 4,
+      name: "Brand Coming Soon",
+      description: "A new brand showcase is being prepared. Check back soon for the full reveal.",
+      thumbnail: brand04_01,
+      examples: [
+        { type: "image", label: "Brand Identity", src: brand04_01 },
+        { type: "image", label: "Visual System", src: brand04_02 },
+        { type: "image", label: "Brand Campaign", src: brand04_03 },
+        { type: "image", label: "Content Strategy", src: brand04_04 },
+        { type: "image", label: "Brand Assets", src: brand04_05 },
+        { type: "image", label: "Editorial Design", src: brand04_06 },
+        { type: "image", label: "Brand Expression", src: brand04_07 },
+        { type: "image", label: "Visual Identity", src: brand04_08 },
+        { type: "image", label: "Brand System", src: brand04_09 },
+      ],
+    },
   ];
 
   return (
@@ -129,7 +157,7 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
         </div>
 
         {/* Clickable Brand Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {brands.map((brand) => (
             <button
               key={brand.id}
