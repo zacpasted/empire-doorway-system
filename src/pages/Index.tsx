@@ -12,6 +12,7 @@ import MarketContextSection from "@/components/sections/MarketContextSection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
 import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
+import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import SectionDivider from "@/components/sections/SectionDivider";
 import FinalCTASection from "@/components/sections/FinalCTASection";
@@ -33,6 +34,7 @@ const Index = () => {
       <ClientLogosSection onApplyClick={scrollToForm} />
       <TestimonialsSection onApplyClick={scrollToForm} />
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      <VideoCarouselSection />
       
       <WhyPastedExistsSection />
       <WhatWeStandAgainstSection />
