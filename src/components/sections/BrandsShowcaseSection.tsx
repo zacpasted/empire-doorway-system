@@ -26,6 +26,18 @@ import onlyfangs08 from "@/assets/brands/onlyfangs/showcase-08.jpeg";
 import onlyfangs09 from "@/assets/brands/onlyfangs/showcase-09.jpeg";
 import onlyfangs10 from "@/assets/brands/onlyfangs/showcase-10.jpeg";
 
+// Dr. Serena Wong images
+import serena01 from "@/assets/brands/serena-wong/showcase-01.jpeg";
+import serena02 from "@/assets/brands/serena-wong/showcase-02.jpeg";
+import serena03 from "@/assets/brands/serena-wong/showcase-03.jpeg";
+import serena04 from "@/assets/brands/serena-wong/showcase-04.jpeg";
+import serena05 from "@/assets/brands/serena-wong/showcase-05.jpeg";
+import serena06 from "@/assets/brands/serena-wong/showcase-06.jpeg";
+import serena07 from "@/assets/brands/serena-wong/showcase-07.jpeg";
+import serena08 from "@/assets/brands/serena-wong/showcase-08.jpeg";
+import serena09 from "@/assets/brands/serena-wong/showcase-09.jpeg";
+import serena10 from "@/assets/brands/serena-wong/showcase-10.jpeg";
+
 interface BrandExample {
   type: "video" | "image";
   label: string;
@@ -86,9 +98,21 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
     },
     {
       id: 3,
-      name: "Coming Soon",
-      description: "Additional brand examples will be featured here.",
-      examples: [],
+      name: "Dr. Serena Wong",
+      description: "Quiet confidence, beautifully expressed. Cosmetic dentistry with understated elegance.",
+      thumbnail: serena03,
+      examples: [
+        { type: "image", label: "Storefront Branding", src: serena01 },
+        { type: "image", label: "Window Display", src: serena02 },
+        { type: "image", label: "Brand Identity", src: serena03 },
+        { type: "image", label: "Typography System", src: serena04 },
+        { type: "image", label: "Print Collateral", src: serena05 },
+        { type: "image", label: "Brand Book", src: serena06 },
+        { type: "image", label: "Logo Application", src: serena07 },
+        { type: "image", label: "Brand Overview", src: serena08 },
+        { type: "image", label: "Visual Identity", src: serena09 },
+        { type: "image", label: "Brand System", src: serena10 },
+      ],
     },
   ];
 
