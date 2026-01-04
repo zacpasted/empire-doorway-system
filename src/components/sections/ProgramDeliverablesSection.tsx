@@ -1,30 +1,70 @@
-import { Check, Calendar, Video, Palette, FileText, Users, Sparkles } from "lucide-react";
+import { Check, Calendar, Video, Palette, FileText, Users, Sparkles, Camera, MessageSquare, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+interface ProgramDeliverablesSectionProps {
+  onApplyClick?: () => void;
+}
 
 const deliverables = [
   {
     icon: Palette,
-    title: "Brand Identity System",
-    description: "Complete visual identity including logo, typography, and color palette tailored to your clinical philosophy",
+    title: "Complete Brand Identity",
+    items: [
+      "Custom logo & visual system",
+      "Brand color palette & typography",
+      "Brand guidelines document",
+      "Social media templates",
+    ],
+  },
+  {
+    icon: Camera,
+    title: "Professional Content Shoot",
+    items: [
+      "2 full production days",
+      "Cinematic video content",
+      "Professional photography",
+      "Behind-the-scenes footage",
+    ],
   },
   {
     icon: Video,
-    title: "Cinematic Content Library",
-    description: "Professional video and photo assets that capture your craft and differentiate you from competitors",
+    title: "Video Asset Library",
+    items: [
+      "12+ edited short-form videos",
+      "3+ long-form brand films",
+      "Procedure highlight reels",
+      "Patient journey stories",
+    ],
   },
   {
     icon: FileText,
-    title: "Content Strategy Blueprint",
-    description: "A 12-month editorial calendar with hooks, themes, and posting cadence mapped to your goals",
+    title: "Content Strategy",
+    items: [
+      "12-month content calendar",
+      "Posting schedule & cadence",
+      "Hook & caption frameworks",
+      "Hashtag strategy",
+    ],
   },
   {
-    icon: Users,
-    title: "Private Advisory Access",
-    description: "Direct access to our team for strategic guidance, creative direction, and ongoing refinement",
+    icon: MessageSquare,
+    title: "Private Advisory",
+    items: [
+      "Weekly strategy calls",
+      "Direct Slack access",
+      "Creative direction support",
+      "Performance reviews",
+    ],
   },
   {
     icon: Sparkles,
-    title: "50% Ad Management Discount",
-    description: "Exclusive reduced rates on PASTED's performance advertising services for program members",
+    title: "Exclusive Member Benefits",
+    items: [
+      "50% off ad management",
+      "Priority booking for shoots",
+      "Access to private community",
+      "Quarterly trend briefings",
+    ],
   },
 ];
 
@@ -51,7 +91,7 @@ const timeline = [
   },
 ];
 
-const ProgramDeliverablesSection = () => {
+const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSectionProps) => {
   return (
     <section className="py-24 bg-card/30">
       <div className="container mx-auto px-6">
@@ -61,7 +101,7 @@ const ProgramDeliverablesSection = () => {
             Associate to Empire™
           </p>
           <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6">
-            What You Get
+            Everything You Get
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             A complete personal brand transformation delivered in 12 weeks
@@ -69,7 +109,7 @@ const ProgramDeliverablesSection = () => {
         </div>
 
         {/* Deliverables Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {deliverables.map((item, index) => (
             <div
               key={index}
@@ -78,14 +118,46 @@ const ProgramDeliverablesSection = () => {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <item.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-display text-xl text-foreground mb-2">
+              <h3 className="font-display text-xl text-foreground mb-4">
                 {item.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {item.description}
-              </p>
+              <ul className="space-y-2">
+                {item.items.map((listItem, i) => (
+                  <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
+                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>{listItem}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
+        </div>
+
+        {/* Pricing Card */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <div className="bg-gradient-to-br from-primary/10 via-background to-primary/5 border border-primary/30 rounded-2xl p-8 md:p-12 text-center">
+            <p className="text-primary font-medium tracking-widest uppercase text-sm mb-2">
+              Investment
+            </p>
+            <div className="flex items-baseline justify-center gap-2 mb-4">
+              <span className="font-display text-5xl md:text-6xl text-foreground">£15,000</span>
+              <span className="text-muted-foreground text-lg">one-time</span>
+            </div>
+            <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+              Payment plans available. Includes everything listed above plus 12 months of advisory support.
+            </p>
+            <Button 
+              onClick={onApplyClick}
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-medium"
+            >
+              Apply for Associate to Empire™
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            <p className="text-muted-foreground/60 text-sm mt-4">
+              Limited to 4 new members per quarter
+            </p>
+          </div>
         </div>
 
         {/* Timeline */}
