@@ -33,28 +33,36 @@ const Index = () => {
       
       <HeroSection />
       <ClientLogosSection onApplyClick={scrollToForm} />
-      <VideoCarouselSection />
-      <TestimonialsSection onApplyClick={scrollToForm} />
-      <BrandsShowcaseSection onApplyClick={scrollToForm} />
       
+      {/* Problem & Agitation */}
+      <TalentedDentistSection />
+      <MarketContextSection />
+      
+      {/* Solution & Differentiation */}
       <WhyPastedExistsSection />
       <WhatWeStandAgainstSection />
-      <FoundersLetterSection />
+      <ThePromiseSection />
       
       <SectionDivider text="The operating system for aesthetic dentists who refuse to be anonymous." />
       
-      <TalentedDentistSection />
-      <WhatWeWillNeverDoSection />
-      <ThePromiseSection />
+      {/* Social Proof */}
+      <VideoCarouselSection />
+      <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      <TestimonialsSection onApplyClick={scrollToForm} />
       
-      <SectionDivider text="We will never monetise your insecurity. We build confidence by amplifying your existing excellence." />
-      
-      <FoundersRoleSection />
+      {/* Qualification & Mechanism */}
       <WhoThisIsForSection />
-      <MarketContextSection />
       <PrivateAdvisorySection />
       <ProgramDeliverablesSection onApplyClick={scrollToForm} />
       
+      <SectionDivider text="We will never monetise your insecurity. We build confidence by amplifying your existing excellence." />
+      
+      {/* Trust & Authority */}
+      <FoundersRoleSection />
+      <FoundersLetterSection />
+      <WhatWeWillNeverDoSection />
+      
+      {/* Close */}
       <FAQSection />
       <FinalCTASection onApplyClick={scrollToForm} />
       <Footer />
