@@ -6,6 +6,7 @@ import WhatThisIsSection from "@/components/sections/WhatThisIsSection";
 import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
+import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import ProofSection from "@/components/sections/ProofSection";
 import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import TransformationSection from "@/components/sections/TransformationSection";
@@ -45,6 +46,9 @@ const Index = () => {
       
       {/* Social Proof - Brand Examples */}
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      
+      {/* Brands That Trust Us - Logo Carousel */}
+      <ClientLogosSection onApplyClick={scrollToForm} />
       
       {/* Proof of Authority - Stats */}
       <ProofSection />
