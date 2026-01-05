@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Quote } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -10,59 +11,152 @@ const testimonials = [
     id: 1,
     name: "Dr Serena Wong",
     role: "Aesthetic Dentist",
-    quote: "Working with this team has been an exceptional experience. They have consistently supported me with clarity, kindness, and a deep understanding of the dental field, which is rare in the marketing space. They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am. They are always available, thoughtful in their approach, and genuinely care about the quality of their work — you never feel left on your own. I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail. I would highly recommend them to anyone looking for marketing that is both strategic and truly human.",
+    quote: "Working with this team has been an exceptional experience. They have consistently supported me with clarity, kindness, and a deep understanding of the dental field, which is rare in the marketing space. They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am.",
+    highlight: "I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail.",
     featured: true,
   },
   {
     id: 2,
     name: "Dr Nav Atwal",
     role: "Dental Surgeon",
-    quote: "Dr. Alan Clarke and Zac at Paste are helping translate vision into something tangible. They understand that strong brands are built with intention, not shortcuts.",
+    quote: "Dr. Alan Clarke and Zac at Paste are helping translate vision into something tangible.",
+    highlight: "They understand that strong brands are built with intention, not shortcuts.",
     featured: false,
   },
   {
     id: 3,
     name: "Dr Tim Hoeschen",
     role: "Dentist",
-    quote: "Working with Zac and Alan has been fantastic. They've pushed the boundaries of dental marketing, not by overhyping and making up a new meme. Instead they tapped into something lasting and refreshing, your own story. You were easy to work with. Adaptive and accommodating. Creative and purposeful. Professional and enriching. You have given us a voice and helped tell our story with vision, creativity and style. Helping along the way with direction and encouragement.",
+    quote: "Working with Zac and Alan has been fantastic. They've pushed the boundaries of dental marketing, not by overhyping and making up a new meme. Instead they tapped into something lasting and refreshing — your own story.",
+    highlight: "You have given us a voice and helped tell our story with vision, creativity and style.",
     featured: false,
   },
   {
     id: 4,
     name: "Dr Nour Diabi",
     role: "Clinician",
-    quote: "Pasted Studio don't just create content, they tell your story. Alan and Zac captured who I am as a clinician with real depth and authenticity. Their focus on genuine storytelling over forced marketing is clear in every piece of content, which feels honest, engaging, and truly representative of me as a dentist.",
+    quote: "Pasted Studio don't just create content, they tell your story. Alan and Zac captured who I am as a clinician with real depth and authenticity.",
+    highlight: "Their focus on genuine storytelling over forced marketing is clear in every piece of content.",
     featured: false,
   },
 ];
 
+const TestimonialCard = ({ 
+  testimonial, 
+  index, 
+  isVisible 
+}: { 
+  testimonial: typeof testimonials[0]; 
+  index: number;
+  isVisible: boolean;
+}) => {
+  return (
+    <div
+      className={`group relative bg-card/50 backdrop-blur-sm rounded-xl p-8 md:p-10 border border-border/30 
+        hover:border-primary/30 hover:bg-card/80 transition-all duration-500 
+        ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+      `}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      {/* Decorative gradient */}
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative">
+        <Quote className="w-8 h-8 text-primary/40 mb-6 transform group-hover:scale-110 transition-transform duration-300" />
+        
+        <blockquote className="text-foreground/80 leading-relaxed mb-4">
+          {testimonial.quote}
+        </blockquote>
+        
+        {testimonial.highlight && (
+          <p className="text-foreground font-medium leading-relaxed mb-6 border-l-2 border-primary/50 pl-4">
+            {testimonial.highlight}
+          </p>
+        )}
+        
+        <div className="flex items-center gap-3 pt-4 border-t border-border/30">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+            <span className="text-primary font-serif text-lg">{testimonial.name.charAt(0)}</span>
+          </div>
+          <div>
+            <p className="font-medium text-foreground">{testimonial.name}</p>
+            <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  
   const featuredTestimonial = testimonials.find((t) => t.featured);
   const regularTestimonials = testimonials.filter((t) => !t.featured);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-20 md:py-28 bg-secondary/30">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-gradient-to-b from-background via-secondary/20 to-background overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            What Dentists Are Saying
+        {/* Header */}
+        <div className={`text-center mb-16 md:mb-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className="text-sm tracking-[0.3em] uppercase text-primary mb-4">
+            Testimonials
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6">
+            Voices of Trust
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Real results from dentists building their authority.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Hear from dentists who chose substance over noise — and built brands that speak for themselves.
           </p>
         </div>
 
-        {/* Featured testimonial - larger format */}
+        {/* Featured testimonial */}
         {featuredTestimonial && (
-          <div className="mb-12 bg-background rounded-lg p-10 md:p-14 border border-border/50">
-            <div className="max-w-3xl mx-auto text-center">
-              <Quote className="w-10 h-10 text-primary/40 mx-auto mb-6" />
-              <blockquote className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-8 font-serif italic">
-                "{featuredTestimonial.quote}"
-              </blockquote>
-              <div>
-                <p className="font-medium text-foreground">{featuredTestimonial.name}</p>
-                <p className="text-sm text-muted-foreground">{featuredTestimonial.role}</p>
+          <div 
+            className={`relative mb-16 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent rounded-2xl blur-xl" />
+            <div className="relative bg-card/60 backdrop-blur-sm rounded-2xl p-10 md:p-16 border border-border/30">
+              <div className="max-w-4xl mx-auto">
+                <Quote className="w-12 h-12 text-primary/50 mb-8" />
+                
+                <blockquote className="text-xl md:text-2xl text-foreground/90 leading-relaxed mb-6 font-serif">
+                  "{featuredTestimonial.quote}"
+                </blockquote>
+                
+                {featuredTestimonial.highlight && (
+                  <p className="text-lg md:text-xl text-primary font-medium leading-relaxed mb-10 italic">
+                    "{featuredTestimonial.highlight}"
+                  </p>
+                )}
+                
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center">
+                    <span className="text-primary font-serif text-2xl">{featuredTestimonial.name.charAt(0)}</span>
+                  </div>
+                  <div>
+                    <p className="text-lg font-medium text-foreground">{featuredTestimonial.name}</p>
+                    <p className="text-muted-foreground">{featuredTestimonial.role}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -70,35 +164,30 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
 
         {/* Regular Testimonials Grid */}
         {regularTestimonials.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {regularTestimonials.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="bg-background rounded-lg p-8 border border-border/50 hover:border-border transition-colors"
-              >
-                <Quote className="w-6 h-6 text-primary/30 mb-4" />
-                <blockquote className="text-foreground/80 leading-relaxed mb-6 italic">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div>
-                  <p className="font-medium text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {regularTestimonials.map((testimonial, index) => (
+              <TestimonialCard 
+                key={testimonial.id} 
+                testimonial={testimonial} 
+                index={index}
+                isVisible={isVisible}
+              />
             ))}
           </div>
         )}
 
         {/* CTA */}
-        <div className="mt-16 text-center">
+        <div className={`mt-20 text-center transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Button 
+            variant="premium"
+            size="xl"
             onClick={onApplyClick}
-            className="px-8 py-6 text-base"
+            className="rounded-md"
           >
-            Request Consideration
+            Join These Dentists
           </Button>
-          <p className="text-xs text-muted-foreground mt-4">
-            Join dentists who are building authority, not dependency.
+          <p className="text-sm text-muted-foreground mt-4">
+            Build authority, not dependency.
           </p>
         </div>
       </div>
