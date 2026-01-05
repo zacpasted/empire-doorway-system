@@ -18,12 +18,11 @@ const HeroSection = () => {
           </p>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-            Dental School Trains Skill. CE Improves Technique.<br />
-            <span className="text-muted-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
+            <span className="text-primary">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
           </h1>
           
           <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
-            <span className="text-primary font-medium">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
+            Dental School Trains Skill. CE Improves Technique. Without brand, story, and strategy—they just become debt with no destination.
           </p>
         </div>
         
