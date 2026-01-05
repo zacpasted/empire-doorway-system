@@ -1,4 +1,4 @@
 const ProofSection = () => {
-  return;
+  return null;
 };
 export default ProofSection;
