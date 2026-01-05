@@ -14,6 +14,7 @@ import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverable
 import FilterSection from "@/components/sections/FilterSection";
 import ClosingCTASection from "@/components/sections/ClosingCTASection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -67,6 +68,9 @@ const Index = () => {
       
       {/* Closing CTA */}
       <ClosingCTASection />
+      
+      {/* Testimonials */}
+      <TestimonialsSection onApplyClick={scrollToForm} />
       
       {/* Private Advisory - Brief Bottom Section */}
       <PrivateAdvisorySection />
