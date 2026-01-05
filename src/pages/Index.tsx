@@ -16,6 +16,7 @@ import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
+import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
 import SectionDivider from "@/components/sections/SectionDivider";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import FAQSection from "@/components/sections/FAQSection";
@@ -45,6 +46,7 @@ const Index = () => {
       <SectionDivider text="The operating system for aesthetic dentists who refuse to be anonymous." />
       
       {/* Social Proof */}
+      <MemberCardsCarousel />
       <VideoCarouselSection />
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
       <TestimonialsSection onApplyClick={scrollToForm} />
