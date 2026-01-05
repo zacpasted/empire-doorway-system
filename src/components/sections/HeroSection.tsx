@@ -35,7 +35,7 @@ const HeroSection = () => {
         {/* The Promise - Below Form */}
         <div className="mt-16 text-center animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
           <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            <span className="font-serif font-semibold text-foreground">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
+            <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
           </p>
         </div>
         
