@@ -1,4 +1,5 @@
 import VideoPlayer from "@/components/VideoPlayer";
+import EligibilityForm from "@/components/EligibilityForm";
 
 const HeroSection = () => {
   return (
@@ -31,14 +32,9 @@ const HeroSection = () => {
           <VideoPlayer />
         </div>
         
-        {/* CTA */}
-        <div className="text-center animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
-          <a
-            href="#apply"
-            className="inline-block text-sm tracking-[0.3em] uppercase text-foreground border-b border-primary pb-2 hover:text-primary transition-colors duration-300"
-          >
-            Enter the Program
-          </a>
+        {/* Application Form */}
+        <div id="apply" className="animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
+          <EligibilityForm />
         </div>
       </div>
       
