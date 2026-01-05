@@ -15,6 +15,7 @@ import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import SectionDivider from "@/components/sections/SectionDivider";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import FAQSection from "@/components/sections/FAQSection";
@@ -52,6 +53,7 @@ const Index = () => {
       <VideoCarouselSection />
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
       <TestimonialsSection onApplyClick={scrollToForm} />
+      <AdCaseStudiesSection />
       
       {/* Qualification & Mechanism */}
       <WhoThisIsForSection />
