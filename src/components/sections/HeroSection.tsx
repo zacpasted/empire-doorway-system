@@ -18,11 +18,11 @@ const HeroSection = () => {
           </p>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-            <span className="text-primary">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
+            <span className="font-bold">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
           </h1>
           
           <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
-            Dental School Trains Skill. CE Improves Technique. Without brand, story, and strategy—they just become debt with no destination.
+            Dental School Trains Skill. CE Improves Technique. <span className="font-serif font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
           </p>
         </div>
         
@@ -47,7 +47,7 @@ const HeroSection = () => {
               { value: "+63%", label: "Avg Lift in 120 days" },
             ].map((stat, i) => (
               <div key={i} className="text-center group">
-                <p className="text-2xl md:text-3xl font-serif text-primary mb-1 transition-transform group-hover:scale-105">{stat.value}</p>
+                <p className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-1 transition-transform group-hover:scale-105">{stat.value}</p>
                 <p className="text-xs text-muted-foreground tracking-wide uppercase">{stat.label}</p>
               </div>
             ))}
@@ -55,7 +55,7 @@ const HeroSection = () => {
           
           {/* What This Is - Visual Transformation */}
           <div className="mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary text-center mb-10">The Transformation</p>
+            <p className="text-xs tracking-[0.3em] uppercase font-bold text-foreground text-center mb-10">The Transformation</p>
             
             <div className="relative flex flex-col md:flex-row items-stretch justify-center gap-0">
               {/* Before Card */}
@@ -71,21 +71,21 @@ const HeroSection = () => {
               {/* Arrow/Timeline Center */}
               <div className="flex items-center justify-center py-6 md:py-0 md:px-8 relative">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="hidden md:block w-full h-px bg-gradient-to-r from-border/50 via-primary to-border/50" />
-                  <div className="md:hidden h-full w-px bg-gradient-to-b from-border/50 via-primary to-border/50" />
+                  <div className="hidden md:block w-full h-px bg-gradient-to-r from-border/50 via-foreground/30 to-border/50" />
+                  <div className="md:hidden h-full w-px bg-gradient-to-b from-border/50 via-foreground/30 to-border/50" />
                 </div>
-                <div className="relative z-10 bg-background border border-primary/50 px-4 py-2 shadow-[0_0_20px_hsl(var(--primary)/0.3)]">
-                  <p className="text-xs tracking-[0.2em] uppercase text-primary font-medium">45 Days</p>
+                <div className="relative z-10 bg-background border border-foreground/30 px-4 py-2">
+                  <p className="text-xs tracking-[0.2em] uppercase font-bold text-foreground">45 Days</p>
                 </div>
               </div>
               
               {/* After Card */}
-              <div className="flex-1 max-w-xs mx-auto md:mx-0 p-8 border border-primary/30 bg-primary/5 backdrop-blur-sm relative group transition-all duration-500 hover:bg-primary/10 hover:border-primary/50 hover:shadow-[0_0_40px_hsl(var(--primary)/0.15)]">
-                <div className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase text-primary">After</div>
+              <div className="flex-1 max-w-xs mx-auto md:mx-0 p-8 border border-foreground/20 bg-foreground/5 backdrop-blur-sm relative group transition-all duration-500 hover:bg-foreground/10 hover:border-foreground/30">
+                <div className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase font-bold text-foreground">After</div>
                 <div className="pt-4 space-y-3">
-                  <p className="text-foreground animate-fade-in" style={{ animationDelay: "100ms" }}>Recognized & chosen</p>
-                  <p className="text-foreground animate-fade-in" style={{ animationDelay: "200ms" }}>Strategic clarity</p>
-                  <p className="text-foreground animate-fade-in" style={{ animationDelay: "300ms" }}>Commanding premiums</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "100ms" }}>Recognized & chosen</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "200ms" }}>Strategic clarity</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "300ms" }}>Commanding premiums</p>
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ const HeroSection = () => {
           
           {/* The Gate */}
           <div className="relative">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary text-center mb-10">The Gate</p>
+            <p className="text-xs tracking-[0.3em] uppercase font-bold text-foreground text-center mb-10">The Gate</p>
             
             <div className="grid md:grid-cols-2 gap-0 relative">
               {/* Divider Line */}
@@ -126,12 +126,12 @@ const HeroSection = () => {
               </div>
               
               {/* For Side */}
-              <div className="p-8 md:p-10 border border-primary/20 bg-primary/5 group hover:bg-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_60px_hsl(var(--primary)/0.1)]">
+              <div className="p-8 md:p-10 border border-foreground/20 bg-foreground/5 group hover:bg-foreground/10 hover:border-foreground/30 transition-all duration-500">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 rounded-full border border-primary/50 flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.3)] group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.5)] transition-shadow duration-500">
-                    <span className="text-primary text-lg">✓</span>
+                  <div className="w-8 h-8 rounded-full border border-foreground/50 flex items-center justify-center">
+                    <span className="text-foreground font-bold text-lg">✓</span>
                   </div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-primary">For</p>
+                  <p className="text-xs tracking-[0.2em] uppercase font-bold text-foreground">For</p>
                 </div>
                 <div className="space-y-4">
                   {[
@@ -144,8 +144,8 @@ const HeroSection = () => {
                       className="flex items-center gap-3 opacity-0 animate-fade-in group-hover:translate-x-1 transition-transform duration-300"
                       style={{ animationDelay: item.delay, animationFillMode: "forwards" }}
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
-                      <p className="text-foreground">{item.text}</p>
+                      <div className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                      <p className="text-foreground font-medium">{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -157,7 +157,7 @@ const HeroSection = () => {
       
       {/* Scroll indicator */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-        <div className="w-px h-16 bg-gradient-to-b from-transparent via-primary/50 to-transparent animate-pulse" />
+        <div className="w-px h-16 bg-gradient-to-b from-transparent via-foreground/30 to-transparent animate-pulse" />
       </div>
     </section>
   );
