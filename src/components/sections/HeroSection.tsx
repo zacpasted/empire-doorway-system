@@ -17,13 +17,13 @@ const HeroSection = () => {
             PASTED
           </p>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground leading-[0.9] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-            The Institution<br />
-            <span className="text-primary">Forgot You.</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
+            Dental School Trains Skill.<br />
+            <span className="text-muted-foreground">CE Improves Technique.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-12 animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
-            We didn't.
+          <p className="text-2xl md:text-3xl lg:text-4xl font-serif text-primary max-w-3xl mx-auto mb-12 animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
+            We Turn Skill & Technique into Undeniable Demand.
           </p>
         </div>
         
