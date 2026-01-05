@@ -1,90 +1,148 @@
 import { useEffect, useRef, useState } from "react";
-
 interface AggregateMetric {
   label: string;
   value: string;
 }
-
 interface CaseStudy {
   title: string;
-  metrics: { label: string; value: string; highlight?: boolean }[];
+  metrics: {
+    label: string;
+    value: string;
+    highlight?: boolean;
+  }[];
   roasValue?: string;
 }
-
-const aggregateMetrics: AggregateMetric[] = [
-  { label: "Revenue Generated", value: "$100M+" },
-  { label: "Client Retention", value: "97%" },
-  { label: "Avg Engagement", value: "22.4 mo" },
-  { label: "Practices at $250k+/mo", value: "41" },
-  { label: "120-Day Revenue Lift", value: "+63%" },
-];
-
-const caseStudies: CaseStudy[] = [
-  {
-    title: "High-Ticket Veneer Growth",
-    roasValue: "86.1x",
-    metrics: [
-      { label: "Ad spend", value: "$6,000/mo" },
-      { label: "Leads (60 days)", value: "418" },
-      { label: "Cost per lead", value: "$14.35" },
-      { label: "Cases accepted", value: "34" },
-      { label: "Case revenue", value: "$516,800", highlight: true },
-    ],
-  },
-  {
-    title: "Cold Market Authority Ads",
-    roasValue: "78.3x",
-    metrics: [
-      { label: "Ad spend", value: "$4,000/mo" },
-      { label: "Video impressions", value: "412k" },
-      { label: "Cost per lead", value: "$21.50" },
-      { label: "Cases accepted", value: "18" },
-      { label: "Revenue", value: "$313,200", highlight: true },
-    ],
-  },
-  {
-    title: "Conversion Infrastructure",
-    metrics: [
-      { label: "Show rate (before)", value: "44%" },
-      { label: "Show rate (after)", value: "69%" },
-      { label: "Close rate lift", value: "+95%" },
-      { label: "Monthly lift", value: "$110k–$165k", highlight: true },
-    ],
-  },
-  {
-    title: "Education-First Funnel",
-    roasValue: "71.7x",
-    metrics: [
-      { label: "Long-form views", value: "68k" },
-      { label: "Cost per view", value: "$0.19" },
-      { label: "Cases accepted", value: "29" },
-      { label: "Revenue", value: "$394,400", highlight: true },
-    ],
-  },
-  {
-    title: "Retargeting System",
-    roasValue: "92.6x",
-    metrics: [
-      { label: "Dormant pool", value: "3,200" },
-      { label: "Reactivated", value: "94" },
-      { label: "Cases accepted", value: "14" },
-      { label: "Revenue", value: "$166,600", highlight: true },
-    ],
-  },
-  {
-    title: "Market Domination",
-    metrics: [
-      { label: "Monthly reach", value: "380k" },
-      { label: "Brand recall lift", value: "+64%" },
-      { label: "Consults (before/after)", value: "52 → 141" },
-      { label: "Monthly revenue", value: "$496,800", highlight: true },
-    ],
-  },
-];
-
-const AnimatedNumber = ({ value, isVisible }: { value: string; isVisible: boolean }) => {
+const aggregateMetrics: AggregateMetric[] = [{
+  label: "Revenue Generated",
+  value: "$100M+"
+}, {
+  label: "Client Retention",
+  value: "97%"
+}, {
+  label: "Avg Engagement",
+  value: "22.4 mo"
+}, {
+  label: "Practices at $250k+/mo",
+  value: "41"
+}, {
+  label: "120-Day Revenue Lift",
+  value: "+63%"
+}];
+const caseStudies: CaseStudy[] = [{
+  title: "High-Ticket Veneer Growth",
+  roasValue: "86.1x",
+  metrics: [{
+    label: "Ad spend",
+    value: "$6,000/mo"
+  }, {
+    label: "Leads (60 days)",
+    value: "418"
+  }, {
+    label: "Cost per lead",
+    value: "$14.35"
+  }, {
+    label: "Cases accepted",
+    value: "34"
+  }, {
+    label: "Case revenue",
+    value: "$516,800",
+    highlight: true
+  }]
+}, {
+  title: "Cold Market Authority Ads",
+  roasValue: "78.3x",
+  metrics: [{
+    label: "Ad spend",
+    value: "$4,000/mo"
+  }, {
+    label: "Video impressions",
+    value: "412k"
+  }, {
+    label: "Cost per lead",
+    value: "$21.50"
+  }, {
+    label: "Cases accepted",
+    value: "18"
+  }, {
+    label: "Revenue",
+    value: "$313,200",
+    highlight: true
+  }]
+}, {
+  title: "Conversion Infrastructure",
+  metrics: [{
+    label: "Show rate (before)",
+    value: "44%"
+  }, {
+    label: "Show rate (after)",
+    value: "69%"
+  }, {
+    label: "Close rate lift",
+    value: "+95%"
+  }, {
+    label: "Monthly lift",
+    value: "$110k–$165k",
+    highlight: true
+  }]
+}, {
+  title: "Education-First Funnel",
+  roasValue: "71.7x",
+  metrics: [{
+    label: "Long-form views",
+    value: "68k"
+  }, {
+    label: "Cost per view",
+    value: "$0.19"
+  }, {
+    label: "Cases accepted",
+    value: "29"
+  }, {
+    label: "Revenue",
+    value: "$394,400",
+    highlight: true
+  }]
+}, {
+  title: "Retargeting System",
+  roasValue: "92.6x",
+  metrics: [{
+    label: "Dormant pool",
+    value: "3,200"
+  }, {
+    label: "Reactivated",
+    value: "94"
+  }, {
+    label: "Cases accepted",
+    value: "14"
+  }, {
+    label: "Revenue",
+    value: "$166,600",
+    highlight: true
+  }]
+}, {
+  title: "Market Domination",
+  metrics: [{
+    label: "Monthly reach",
+    value: "380k"
+  }, {
+    label: "Brand recall lift",
+    value: "+64%"
+  }, {
+    label: "Consults (before/after)",
+    value: "52 → 141"
+  }, {
+    label: "Monthly revenue",
+    value: "$496,800",
+    highlight: true
+  }]
+}];
+const AnimatedNumber = ({
+  value,
+  isVisible
+}: {
+  value: string;
+  isVisible: boolean;
+}) => {
   const [displayValue, setDisplayValue] = useState("0");
-
   useEffect(() => {
     if (!isVisible) return;
     const numMatch = value.match(/[\d,]+\.?\d*/);
@@ -92,137 +150,46 @@ const AnimatedNumber = ({ value, isVisible }: { value: string; isVisible: boolea
       setDisplayValue(value);
       return;
     }
-
     const numStr = numMatch[0].replace(/,/g, "");
     const targetNum = parseFloat(numStr);
     const prefix = value.substring(0, value.indexOf(numMatch[0]));
     const suffix = value.substring(value.indexOf(numMatch[0]) + numMatch[0].length);
-
     let startTime: number;
     const duration = 1200;
-
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easeOut = 1 - Math.pow(1 - progress, 3);
       const current = targetNum * easeOut;
-
       let formatted: string;
       if (numMatch[0].includes(".")) {
         formatted = current.toLocaleString("en-US", {
           minimumFractionDigits: numMatch[0].split(".")[1]?.length || 0,
-          maximumFractionDigits: numMatch[0].split(".")[1]?.length || 0,
+          maximumFractionDigits: numMatch[0].split(".")[1]?.length || 0
         });
       } else {
         formatted = Math.round(current).toLocaleString("en-US");
       }
-
       setDisplayValue(`${prefix}${formatted}${suffix}`);
       if (progress < 1) requestAnimationFrame(animate);
     };
-
     requestAnimationFrame(animate);
   }, [value, isVisible]);
-
   return <span>{displayValue}</span>;
 };
-
 const AdCaseStudiesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.1 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsVisible(true);
+    }, {
+      threshold: 0.1
+    });
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-
-  return (
-    <section ref={sectionRef} className="py-32 md:py-48 bg-background">
-      <div className="container max-w-6xl mx-auto px-4">
-        {/* Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <p className="text-sm tracking-[0.3em] uppercase text-primary mb-6">
-            Performance Data
-          </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
-            The Numbers Behind the Brand
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Real results. No hypotheticals.
-          </p>
-        </div>
-
-        {/* Aggregate Metrics */}
-        <div className={`mb-20 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <div className="border border-primary/30 p-8 md:p-12">
-            <p className="text-center text-sm tracking-[0.2em] uppercase text-primary mb-10">
-              Aggregate Performance
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-              {aggregateMetrics.map((metric, index) => (
-                <div key={index} className="text-center">
-                  <p className="text-3xl md:text-4xl font-serif text-foreground mb-2">
-                    <AnimatedNumber value={metric.value} isVisible={isVisible} />
-                  </p>
-                  <p className="text-xs text-muted-foreground tracking-wide">{metric.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Case Studies Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30">
-          {caseStudies.map((study, index) => (
-            <div
-              key={index}
-              className={`bg-background p-8 transition-all duration-700 hover:bg-card/50 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${300 + index * 100}ms` }}
-            >
-              <div className="flex items-start justify-between mb-6">
-                <h3 className="text-lg font-serif text-foreground leading-tight pr-4">
-                  {study.title}
-                </h3>
-                {study.roasValue && (
-                  <div className="text-right flex-shrink-0">
-                    <p className="text-2xl font-serif text-primary">
-                      <AnimatedNumber value={study.roasValue} isVisible={isVisible} />
-                    </p>
-                    <p className="text-xs text-muted-foreground">ROAS</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-3">
-                {study.metrics.map((metric, i) => (
-                  <div
-                    key={i}
-                    className={`flex justify-between items-center py-2 border-b border-border/20 last:border-0 ${
-                      metric.highlight ? "bg-primary/5 -mx-2 px-2" : ""
-                    }`}
-                  >
-                    <span className="text-sm text-muted-foreground">{metric.label}</span>
-                    <span className={`text-sm font-medium ${metric.highlight ? "text-primary" : "text-foreground"}`}>
-                      <AnimatedNumber value={metric.value} isVisible={isVisible} />
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return;
 };
-
 export default AdCaseStudiesSection;
