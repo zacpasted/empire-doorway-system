@@ -1,5 +1,5 @@
-import { Check, Calendar, Video, Palette, FileText, Users, Sparkles, Camera, MessageSquare, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 interface ProgramDeliverablesSectionProps {
   onApplyClick?: () => void;
@@ -7,125 +7,85 @@ interface ProgramDeliverablesSectionProps {
 
 const deliverables = [
   {
-    icon: Palette,
     title: "Complete Brand Identity",
-    items: [
-      "Custom logo & visual system",
-      "Brand color palette & typography",
-      "Brand guidelines document",
-      "Social media templates",
-    ],
+    items: ["Custom logo & visual system", "Brand guidelines", "Social templates"],
   },
   {
-    icon: Camera,
     title: "Professional Content Shoot",
-    items: [
-      "2 full production days",
-      "Cinematic video content",
-      "Professional photography",
-      "Behind-the-scenes footage",
-    ],
+    items: ["2 full production days", "Cinematic video content", "Professional photography"],
   },
   {
-    icon: Video,
     title: "Video Asset Library",
-    items: [
-      "12+ edited short-form videos",
-      "3+ long-form brand films",
-      "Procedure highlight reels",
-      "Patient journey stories",
-    ],
+    items: ["12+ edited short-form videos", "3+ long-form brand films", "Procedure highlights"],
   },
   {
-    icon: FileText,
     title: "Content Strategy",
-    items: [
-      "12-month content calendar",
-      "Posting schedule & cadence",
-      "Hook & caption frameworks",
-      "Hashtag strategy",
-    ],
+    items: ["12-month content calendar", "Hook & caption frameworks", "Posting cadence"],
   },
   {
-    icon: MessageSquare,
     title: "Private Advisory",
-    items: [
-      "Weekly strategy calls",
-      "Direct Slack access",
-      "Creative direction support",
-      "Performance reviews",
-    ],
+    items: ["Weekly strategy calls", "Direct Slack access", "Creative direction"],
   },
   {
-    icon: Sparkles,
-    title: "Exclusive Member Benefits",
-    items: [
-      "50% off ad management",
-      "Priority booking for shoots",
-      "Access to private community",
-      "Quarterly trend briefings",
-    ],
+    title: "Member Benefits",
+    items: ["50% off ad management", "Priority booking", "Private community"],
   },
 ];
 
 const timeline = [
-  {
-    week: "Week 1-2",
-    title: "Discovery & Strategy",
-    description: "Deep-dive into your vision, clinical philosophy, and market positioning",
-  },
-  {
-    week: "Week 2-3",
-    title: "Brand Architecture",
-    description: "Visual identity development and content strategy creation",
-  },
-  {
-    week: "Week 3-5",
-    title: "Content Production",
-    description: "Cinematic shoot days and asset creation at your practice",
-  },
-  {
-    week: "Week 5-6",
-    title: "Launch & Amplify",
-    description: "Strategic rollout, optimization, and ongoing advisory support",
-  },
+  { week: "1-2", phase: "Discovery & Strategy" },
+  { week: "2-3", phase: "Brand Architecture" },
+  { week: "3-5", phase: "Content Production" },
+  { week: "5-6", phase: "Launch & Amplify" },
 ];
 
 const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSectionProps) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-24 bg-card/30">
-      <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-primary font-medium tracking-widest uppercase text-sm mb-4">
+    <section ref={sectionRef} className="py-32 md:py-48 bg-card/30">
+      <div className="container max-w-6xl mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <p className="text-sm tracking-[0.3em] uppercase text-primary mb-6">
             Associate to Empire™
           </p>
-          <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6">
+          <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
             Everything You Get
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             A complete personal brand transformation delivered in 45 days
           </p>
         </div>
 
         {/* Deliverables Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30 mb-20">
           {deliverables.map((item, index) => (
             <div
               key={index}
-              className="bg-background/50 border border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors"
+              className={`bg-background p-8 transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <item.icon className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-display text-xl text-foreground mb-4">
-                {item.title}
-              </h3>
-              <ul className="space-y-2">
+              <h3 className="text-xl font-serif text-foreground mb-6">{item.title}</h3>
+              <ul className="space-y-3">
                 {item.items.map((listItem, i) => (
-                  <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
-                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span>{listItem}</span>
+                  <li key={i} className="text-muted-foreground text-sm flex items-start gap-3">
+                    <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
+                    {listItem}
                   </li>
                 ))}
               </ul>
@@ -133,158 +93,76 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           ))}
         </div>
 
-        {/* Pricing Section */}
+        {/* Pricing */}
         <div className="max-w-4xl mx-auto mb-20">
-          {/* Market Comparison */}
-          <div className="text-center mb-8">
-            <p className="text-muted-foreground text-sm mb-2">
-              Typical agency brand builds cost <span className="text-foreground font-medium">$12,000–$50,000</span> upfront
-            </p>
-            <p className="text-muted-foreground text-sm">
-              Standard ad management runs <span className="text-foreground font-medium">$4,000+/month</span>
-            </p>
-          </div>
-
-          {/* Pricing Cards */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {/* Initial Brand Build */}
-            <div className="bg-background/50 border border-border/30 rounded-xl p-8 text-center">
-              <p className="text-primary font-medium tracking-widest uppercase text-xs mb-2">
+          <div className="grid md:grid-cols-2 gap-px bg-border/30">
+            {/* Initial Build */}
+            <div className={`bg-background p-10 text-center transition-all duration-700 delay-300 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}>
+              <p className="text-sm tracking-[0.2em] uppercase text-muted-foreground mb-4">
                 Initial Brand Build
               </p>
-              <div className="flex items-baseline justify-center gap-1 mb-2">
-                <span className="font-display text-4xl text-foreground">$3,500</span>
-              </div>
-              <p className="text-muted-foreground text-sm mb-4">
-                45-day launch • Complete brand identity
-              </p>
-              <ul className="text-left space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Full brand identity system</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Professional content shoot</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Video asset library</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>12-month content strategy</span>
-                </li>
-              </ul>
+              <p className="text-5xl font-serif text-foreground mb-2">$3,500</p>
+              <p className="text-sm text-muted-foreground">45-day launch</p>
             </div>
 
             {/* Monthly Retainer */}
-            <div className="bg-gradient-to-br from-primary/10 via-background to-primary/5 border border-primary/30 rounded-xl p-8 text-center">
-              <p className="text-primary font-medium tracking-widest uppercase text-xs mb-2">
+            <div className={`bg-primary/5 p-10 text-center border-l border-primary/20 transition-all duration-700 delay-400 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}>
+              <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4">
                 Monthly Retainer
               </p>
-              <div className="flex items-baseline justify-center gap-1 mb-2">
-                <span className="font-display text-4xl text-foreground">$2,750</span>
-                <span className="text-muted-foreground text-sm">/month</span>
-              </div>
-              <p className="text-muted-foreground text-sm mb-4">
-                Ongoing support • Cancel anytime
-              </p>
-              <ul className="text-left space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Weekly strategy calls</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Direct Slack access</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Creative direction support</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span>Performance reviews</span>
-                </li>
-              </ul>
+              <p className="text-5xl font-serif text-foreground mb-2">$2,750</p>
+              <p className="text-sm text-muted-foreground">Ongoing support</p>
             </div>
           </div>
 
-          {/* Ad Management Add-on */}
-          <div className="bg-background/30 border border-border/20 rounded-xl p-6 text-center mb-8">
-            <p className="text-muted-foreground text-sm">
-              <span className="text-foreground font-medium">Optional from Month 4:</span> Add performance ad management for{" "}
-              <span className="text-primary font-medium">$1,250+/month</span>
-              <span className="text-muted-foreground/60"> (vs. $4,000+ industry standard)</span>
-            </p>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center">
-            <Button 
-              onClick={onApplyClick}
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-medium"
-            >
-              Apply for Associate to Empire™
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <p className="text-muted-foreground/60 text-sm mt-4">
-              Limited to 4 new members per quarter
+          <div className={`text-center mt-6 p-4 border border-border/30 transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
+            <p className="text-sm text-muted-foreground">
+              <span className="text-foreground">Month 4+:</span> Ad management from{" "}
+              <span className="text-primary">$1,250/mo</span>
+              <span className="text-muted-foreground/60"> (50% below market)</span>
             </p>
           </div>
         </div>
 
         {/* Timeline */}
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-12">
-            <Calendar className="w-5 h-5 text-primary" />
-            <h3 className="font-display text-2xl md:text-3xl text-foreground">
-              45-Day Timeline
-            </h3>
+        <div className={`max-w-3xl mx-auto mb-16 transition-all duration-700 delay-600 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}>
+          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground text-center mb-10">
+            45-Day Timeline
+          </p>
+          <div className="flex justify-between items-center relative">
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-border/50 -translate-y-1/2" />
+            {timeline.map((phase, index) => (
+              <div key={index} className="relative text-center z-10">
+                <div className="w-3 h-3 rounded-full bg-primary mx-auto mb-4" />
+                <p className="text-xs text-primary mb-1">Week {phase.week}</p>
+                <p className="text-sm text-foreground">{phase.phase}</p>
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-[22px] md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border/50" />
-
-            <div className="space-y-8">
-              {timeline.map((phase, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-start gap-6 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 w-11 h-11 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center z-10">
-                    <Check className="w-5 h-5 text-primary" />
-                  </div>
-
-                  {/* Content */}
-                  <div
-                    className={`ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${
-                      index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8"
-                    }`}
-                  >
-                    <span className="inline-block text-primary font-medium text-sm tracking-wide mb-1">
-                      {phase.week}
-                    </span>
-                    <h4 className="font-display text-xl text-foreground mb-1">
-                      {phase.title}
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                      {phase.description}
-                    </p>
-                  </div>
-
-                  {/* Spacer for alternating layout */}
-                  <div className="hidden md:block md:w-[calc(50%-2rem)]" />
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* CTA */}
+        <div className={`text-center transition-all duration-700 delay-700 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}>
+          <button
+            onClick={onApplyClick}
+            className="inline-flex items-center gap-3 text-sm tracking-[0.2em] uppercase text-background bg-primary px-10 py-5 hover:bg-primary/90 transition-colors duration-300"
+          >
+            Apply Now
+            <ArrowRight className="w-4 h-4" />
+          </button>
+          <p className="text-sm text-muted-foreground mt-6">
+            Limited to 4 new members per quarter
+          </p>
         </div>
       </div>
     </section>

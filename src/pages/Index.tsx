@@ -4,8 +4,12 @@ import HeroSection from "@/components/sections/HeroSection";
 import EnemySection from "@/components/sections/EnemySection";
 import WhatThisIsSection from "@/components/sections/WhatThisIsSection";
 import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
+import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
+import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import ProofSection from "@/components/sections/ProofSection";
+import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import TransformationSection from "@/components/sections/TransformationSection";
+import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
 import FilterSection from "@/components/sections/FilterSection";
 import ClosingCTASection from "@/components/sections/ClosingCTASection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
@@ -24,23 +28,35 @@ const Index = () => {
       
       <StickyHeader onApplyClick={scrollToForm} />
       
-      {/* Hero - Cinematic Entry */}
+      {/* Hero - Cinematic Entry with VSL */}
       <HeroSection />
       
       {/* The Enemy - Manifesto Block */}
       <EnemySection />
       
-      {/* Social Proof - Member Cards */}
-      <MemberCardsCarousel />
-      
       {/* What This Is - Clarity */}
       <WhatThisIsSection />
       
-      {/* Proof of Authority */}
+      {/* Social Proof - Member Cards */}
+      <MemberCardsCarousel />
+      
+      {/* Social Proof - Video Examples */}
+      <VideoCarouselSection />
+      
+      {/* Social Proof - Brand Examples */}
+      <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      
+      {/* Proof of Authority - Stats */}
       <ProofSection />
+      
+      {/* Case Studies with Metrics */}
+      <AdCaseStudiesSection />
       
       {/* Transformation - Before/After */}
       <TransformationSection />
+      
+      {/* Program & Pricing */}
+      <ProgramDeliverablesSection onApplyClick={scrollToForm} />
       
       {/* The Gate - Filter */}
       <FilterSection />
