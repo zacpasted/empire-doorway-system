@@ -34,7 +34,7 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
 
     let animationId: number;
     let scrollPos = 0;
-    const speed = 0.5;
+    const speed = 1.5;
 
     const animate = () => {
       if (!isHovered) {
@@ -81,12 +81,12 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
           {duplicatedLogos.map((logo, index) => (
             <div
               key={index}
-              className="flex-shrink-0 mx-8 md:mx-12"
+              className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center"
             >
               <img 
                 src={logo.src} 
                 alt={logo.alt}
-                className="h-12 md:h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="h-8 md:h-10 w-auto max-w-[100px] md:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
               />
             </div>
           ))}
