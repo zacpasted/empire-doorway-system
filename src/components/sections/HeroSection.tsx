@@ -17,27 +17,30 @@ const HeroSection = () => {
             PASTED
           </p>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-            <span className="font-bold">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.2] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
+            Dental School Trains Skill. CE Improves Technique. <span className="font-bold">Without brand, story, and strategy—they just become debt with no destination.</span>
           </h1>
-          
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
-            Dental School Trains Skill. CE Improves Technique. <span className="font-serif font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
-          </p>
         </div>
         
         {/* VSL */}
-        <div className="mb-16 animate-fade-up opacity-0" style={{ animationDelay: "400ms", animationFillMode: "forwards" }}>
+        <div className="mb-16 animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
           <VideoPlayer />
         </div>
         
         {/* Application Form */}
-        <div id="apply" className="animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
+        <div id="apply" className="animate-fade-up opacity-0" style={{ animationDelay: "400ms", animationFillMode: "forwards" }}>
           <EligibilityForm />
         </div>
         
+        {/* The Promise - Below Form */}
+        <div className="mt-16 text-center animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
+          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            <span className="font-serif font-semibold text-foreground">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
+          </p>
+        </div>
+        
         {/* Below Form: Metrics + Gate + Definition */}
-        <div className="mt-24 animate-fade-up opacity-0" style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
+        <div className="mt-24 animate-fade-up opacity-0" style={{ animationDelay: "700ms", animationFillMode: "forwards" }}>
           {/* Metrics Strip */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {[
