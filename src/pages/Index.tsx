@@ -29,7 +29,7 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  return (
+    return (
     <main className="min-h-screen bg-background">
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
       
@@ -37,6 +37,18 @@ const Index = () => {
       
       <HeroSection />
       <ClientLogosSection onApplyClick={scrollToForm} />
+      
+      {/* A2E - What You Get & Who It's For */}
+      <ProgramDeliverablesSection onApplyClick={scrollToForm} />
+      <WhoThisIsForSection />
+      
+      <SectionDivider text="The operating system for aesthetic dentists who refuse to be anonymous." />
+      
+      {/* Social Proof */}
+      <VideoCarouselSection />
+      <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      <TestimonialsSection onApplyClick={scrollToForm} />
+      <AdCaseStudiesSection />
       
       {/* Problem & Agitation */}
       <TalentedDentistSection />
@@ -47,25 +59,15 @@ const Index = () => {
       <WhatWeStandAgainstSection />
       <ThePromiseSection />
       
-      <SectionDivider text="The operating system for aesthetic dentists who refuse to be anonymous." />
-      
-      {/* Social Proof */}
-      <VideoCarouselSection />
-      <BrandsShowcaseSection onApplyClick={scrollToForm} />
-      <TestimonialsSection onApplyClick={scrollToForm} />
-      <AdCaseStudiesSection />
-      
-      {/* Qualification & Mechanism */}
-      <WhoThisIsForSection />
-      <PrivateAdvisorySection />
-      <ProgramDeliverablesSection onApplyClick={scrollToForm} />
-      
       <SectionDivider text="We will never monetise your insecurity. We build confidence by amplifying your existing excellence." />
       
       {/* Trust & Authority */}
       <FoundersRoleSection />
       <FoundersLetterSection />
       <WhatWeWillNeverDoSection />
+      
+      {/* Pasted Studio / Advisory - Brief at bottom */}
+      <PrivateAdvisorySection />
       
       {/* Close */}
       <FAQSection />
