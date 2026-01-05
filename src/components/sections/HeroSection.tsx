@@ -91,22 +91,62 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Gate - Horizontal */}
-          <div className="border border-border/30 bg-card/20 backdrop-blur-sm p-8 md:p-10">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-              <div>
-                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">Not For</p>
-                <div className="flex flex-wrap gap-2">
-                  {["Trend chasers", "Loud marketers", "Volume-first clinicians"].map((item, i) => (
-                    <span key={i} className="text-sm text-foreground/50 border border-border/30 px-3 py-1.5">{item}</span>
+          {/* The Gate */}
+          <div className="relative">
+            <p className="text-xs tracking-[0.3em] uppercase text-primary text-center mb-10">The Gate</p>
+            
+            <div className="grid md:grid-cols-2 gap-0 relative">
+              {/* Divider Line */}
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border/50 to-transparent" />
+              
+              {/* Not For Side */}
+              <div className="p-8 md:p-10 border border-border/20 bg-card/5 md:border-r-0 group hover:bg-card/10 transition-all duration-500">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center">
+                    <span className="text-muted-foreground/50 text-lg">✕</span>
+                  </div>
+                  <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground/70">Not For</p>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { text: "Trend chasers", delay: "0ms" },
+                    { text: "Loud marketers", delay: "50ms" },
+                    { text: "Volume-first clinicians", delay: "100ms" },
+                  ].map((item, i) => (
+                    <div 
+                      key={i} 
+                      className="flex items-center gap-3 opacity-0 animate-fade-in group-hover:translate-x-1 transition-transform duration-300"
+                      style={{ animationDelay: item.delay, animationFillMode: "forwards" }}
+                    >
+                      <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                      <p className="text-muted-foreground/50">{item.text}</p>
+                    </div>
                   ))}
                 </div>
               </div>
-              <div>
-                <p className="text-xs tracking-[0.2em] uppercase text-primary mb-4">For</p>
-                <div className="flex flex-wrap gap-2">
-                  {["Merit overlooked", "Ready to author position", "Value restraint over noise"].map((item, i) => (
-                    <span key={i} className="text-sm text-primary border border-primary/30 px-3 py-1.5">{item}</span>
+              
+              {/* For Side */}
+              <div className="p-8 md:p-10 border border-primary/20 bg-primary/5 group hover:bg-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_60px_hsl(var(--primary)/0.1)]">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-full border border-primary/50 flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.3)] group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.5)] transition-shadow duration-500">
+                    <span className="text-primary text-lg">✓</span>
+                  </div>
+                  <p className="text-xs tracking-[0.2em] uppercase text-primary">For</p>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { text: "Dentists who feel overlooked despite merit", delay: "100ms" },
+                    { text: "Those ready to author their own position", delay: "150ms" },
+                    { text: "Practitioners who value restraint over noise", delay: "200ms" },
+                  ].map((item, i) => (
+                    <div 
+                      key={i} 
+                      className="flex items-center gap-3 opacity-0 animate-fade-in group-hover:translate-x-1 transition-transform duration-300"
+                      style={{ animationDelay: item.delay, animationFillMode: "forwards" }}
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.5)]" />
+                      <p className="text-foreground">{item.text}</p>
+                    </div>
                   ))}
                 </div>
               </div>
