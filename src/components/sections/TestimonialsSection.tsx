@@ -20,6 +20,20 @@ const testimonials = [
     quote: "Dr. Alan Clarke and Zac at Paste are helping translate vision into something tangible. They understand that strong brands are built with intention, not shortcuts.",
     featured: false,
   },
+  {
+    id: 3,
+    name: "Dr Tim Hoeschen",
+    role: "Dentist",
+    quote: "Working with Zac and Alan has been fantastic. They've pushed the boundaries of dental marketing, not by overhyping and making up a new meme. Instead they tapped into something lasting and refreshing, your own story. You were easy to work with. Adaptive and accommodating. Creative and purposeful. Professional and enriching. You have given us a voice and helped tell our story with vision, creativity and style. Helping along the way with direction and encouragement.",
+    featured: false,
+  },
+  {
+    id: 4,
+    name: "Dr Nour Diabi",
+    role: "Clinician",
+    quote: "Pasted Studio don't just create content, they tell your story. Alan and Zac captured who I am as a clinician with real depth and authenticity. Their focus on genuine storytelling over forced marketing is clear in every piece of content, which feels honest, engaging, and truly representative of me as a dentist.",
+    featured: false,
+  },
 ];
 
 const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
