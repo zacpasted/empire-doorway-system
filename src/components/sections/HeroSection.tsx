@@ -22,8 +22,8 @@ const HeroSection = () => {
             <span className="text-muted-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
           </h1>
           
-          <p className="text-2xl md:text-3xl lg:text-4xl font-serif text-primary max-w-3xl mx-auto mb-12 animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
-            We Curated the Careers of Your Heroes. Now We're Ready to Build Yours.
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
+            <span className="text-primary font-medium">Associate to Empire</span> by Pasted allows aesthetic dentists to build a world-class dental brand, guarantee demand, and build their dream life in less than 2 hours per month—without owning a practice.
           </p>
         </div>
         
