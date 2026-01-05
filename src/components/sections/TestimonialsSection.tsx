@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
 import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
 import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
+import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -46,7 +47,7 @@ const testimonials = [
     quote: "Pasted Studio don't just create content, they tell your story. Alan and Zac captured who I am as a clinician with real depth and authenticity.",
     highlight: "Their focus on genuine storytelling over forced marketing is clear in every piece of content.",
     featured: false,
-    cardImage: null,
+    cardImage: nourDiabiCard,
   },
 ];
 
