@@ -1,41 +1,33 @@
-import VideoPlayer from "@/components/VideoPlayer";
-import EligibilityForm from "@/components/EligibilityForm";
-
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen py-16 md:py-24">
-      <div className="container max-w-6xl mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          {/* Brand mark */}
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 animate-fade-up opacity-0 delay-100">
-            PASTED
-          </p>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6 animate-fade-up opacity-0 delay-200">
-            The Operating System for Aesthetic Dentists<br />
-            <span className="text-primary">Who Refuse to Be Anonymous.</span>
-          </h1>
-          
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-up opacity-0 delay-300 mb-8">
-            From trained but invisible to chosen, trusted, and known.
-          </p>
-          
-          <p className="text-base text-foreground/70 max-w-2xl mx-auto animate-fade-up opacity-0 delay-400">
-            Not louder. Not busier. Not cheaper.<br />
-            <span className="text-foreground font-medium">Clearer. Recognised. Selected.</span>
-          </p>
-        </div>
-
-        {/* VSL */}
-        <div className="mb-16 md:mb-20 animate-fade-up opacity-0 delay-400">
-          <VideoPlayer />
-        </div>
-
-        {/* Eligibility Form */}
-        <div className="max-w-2xl mx-auto animate-fade-up opacity-0 delay-500">
-          <EligibilityForm />
-        </div>
+    <section className="relative min-h-screen flex items-center justify-center">
+      {/* Abstract background texture */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" />
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+      }} />
+      
+      <div className="container relative z-10 max-w-5xl mx-auto px-4 text-center">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground leading-[0.9] tracking-tight mb-8">
+          The Institution<br />
+          <span className="text-primary">Forgot You.</span>
+        </h1>
+        
+        <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-16">
+          We didn't.
+        </p>
+        
+        <a
+          href="#apply"
+          className="inline-block text-sm tracking-[0.3em] uppercase text-foreground border-b border-primary pb-2 hover:text-primary transition-colors duration-300"
+        >
+          Enter the Program
+        </a>
+      </div>
+      
+      {/* Scroll indicator */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+        <div className="w-px h-16 bg-gradient-to-b from-transparent via-primary/50 to-transparent" />
       </div>
     </section>
   );

@@ -1,27 +1,15 @@
 import { useRef } from "react";
-import HeroSection from "@/components/sections/HeroSection";
-import WhyPastedExistsSection from "@/components/sections/WhyPastedExistsSection";
-import WhatWeStandAgainstSection from "@/components/sections/WhatWeStandAgainstSection";
-import FoundersLetterSection from "@/components/sections/FoundersLetterSection";
-import TalentedDentistSection from "@/components/sections/TalentedDentistSection";
-import WhatWeWillNeverDoSection from "@/components/sections/WhatWeWillNeverDoSection";
-import ThePromiseSection from "@/components/sections/ThePromiseSection";
-import FoundersRoleSection from "@/components/sections/FoundersRoleSection";
-import WhoThisIsForSection from "@/components/sections/WhoThisIsForSection";
-import MarketContextSection from "@/components/sections/MarketContextSection";
-import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
-import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
-import ClientLogosSection from "@/components/sections/ClientLogosSection";
-import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
-import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
-import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
-import SectionDivider from "@/components/sections/SectionDivider";
-import FinalCTASection from "@/components/sections/FinalCTASection";
-import FAQSection from "@/components/sections/FAQSection";
-import Footer from "@/components/Footer";
 import StickyHeader from "@/components/StickyHeader";
+import HeroSection from "@/components/sections/HeroSection";
+import EnemySection from "@/components/sections/EnemySection";
+import WhatThisIsSection from "@/components/sections/WhatThisIsSection";
+import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
+import ProofSection from "@/components/sections/ProofSection";
+import TransformationSection from "@/components/sections/TransformationSection";
+import FilterSection from "@/components/sections/FilterSection";
+import ClosingCTASection from "@/components/sections/ClosingCTASection";
+import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -30,50 +18,39 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-    return (
-    <main className="min-h-screen bg-background">
+  return (
+    <main className="min-h-screen bg-background text-foreground">
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
       
+      {/* Hero - Cinematic Entry */}
       <HeroSection />
-      <ClientLogosSection onApplyClick={scrollToForm} />
       
-      {/* A2E - What You Get & Who It's For */}
-      <ProgramDeliverablesSection onApplyClick={scrollToForm} />
-      <WhoThisIsForSection />
+      {/* The Enemy - Manifesto Block */}
+      <EnemySection />
       
-      <SectionDivider text="The operating system for aesthetic dentists who refuse to be anonymous." />
-      
-      {/* Social Proof */}
+      {/* Social Proof - Member Cards */}
       <MemberCardsCarousel />
-      <VideoCarouselSection />
-      <BrandsShowcaseSection onApplyClick={scrollToForm} />
-      <TestimonialsSection onApplyClick={scrollToForm} />
-      <AdCaseStudiesSection />
       
-      {/* Problem & Agitation */}
-      <TalentedDentistSection />
-      <MarketContextSection />
+      {/* What This Is - Clarity */}
+      <WhatThisIsSection />
       
-      {/* Solution & Differentiation */}
-      <WhyPastedExistsSection />
-      <WhatWeStandAgainstSection />
-      <ThePromiseSection />
+      {/* Proof of Authority */}
+      <ProofSection />
       
-      <SectionDivider text="We will never monetise your insecurity. We build confidence by amplifying your existing excellence." />
+      {/* Transformation - Before/After */}
+      <TransformationSection />
       
-      {/* Trust & Authority */}
-      <FoundersRoleSection />
-      <FoundersLetterSection />
-      <WhatWeWillNeverDoSection />
+      {/* The Gate - Filter */}
+      <FilterSection />
       
-      {/* Pasted Studio / Advisory - Brief at bottom */}
+      {/* Closing CTA */}
+      <ClosingCTASection />
+      
+      {/* Private Advisory - Brief Bottom Section */}
       <PrivateAdvisorySection />
       
-      {/* Close */}
-      <FAQSection />
-      <FinalCTASection onApplyClick={scrollToForm} />
       <Footer />
     </main>
   );
