@@ -53,11 +53,23 @@ const HeroSection = () => {
             ))}
           </div>
           
-          {/* What This Is - Compact */}
-          <div className="text-center mb-12">
-            <p className="text-lg md:text-xl text-foreground/90 max-w-2xl mx-auto">
-              A 45-day system that transforms aesthetic dentists into recognized authorities.
-            </p>
+          {/* What This Is - Visual Transformation */}
+          <div className="mb-12">
+            <p className="text-xs tracking-[0.3em] uppercase text-primary text-center mb-8">45 Days</p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+              <div className="text-center md:text-right">
+                <p className="text-lg md:text-xl text-muted-foreground/60 line-through decoration-primary/40">Trained but invisible</p>
+              </div>
+              <div className="hidden md:block w-24 h-px bg-gradient-to-r from-muted-foreground/20 via-primary to-muted-foreground/20 relative">
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-primary rotate-45" />
+              </div>
+              <div className="md:hidden h-8 w-px bg-gradient-to-b from-muted-foreground/20 via-primary to-muted-foreground/20 relative">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 border-b-2 border-r-2 border-primary rotate-45" />
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-lg md:text-xl text-foreground font-medium">Recognized authority</p>
+              </div>
+            </div>
           </div>
           
           {/* Gate - Horizontal */}
