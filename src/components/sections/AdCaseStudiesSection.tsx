@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { TrendingUp, DollarSign, Users, Target, Eye, BarChart3, Zap, ArrowUpRight } from "lucide-react";
+
+interface AggregateMetric {
+  label: string;
+  value: string;
+}
 
 interface CaseStudy {
   title: string;
-  tag: string;
-  tagColor: string;
   metrics: {
     label: string;
     value: string;
@@ -13,163 +15,167 @@ interface CaseStudy {
   roasValue?: string;
 }
 
+const aggregateMetrics: AggregateMetric[] = [
+  { label: "Total aesthetic case revenue generated", value: "$100,000,000+" },
+  { label: "Client retention rate", value: "97%" },
+  { label: "Average client engagement length", value: "22.4 months" },
+  { label: "Practices scaled to $250k+/month", value: "41" },
+  { label: "Average revenue lift within first 120 days", value: "+63%" },
+];
+
 const caseStudies: CaseStudy[] = [
   {
-    title: "High-Ticket Veneer Scale",
-    tag: "CSC",
-    tagColor: "from-amber-500/20 to-amber-600/20",
+    title: "High-Ticket Veneer Growth System",
     roasValue: "86.1x",
     metrics: [
-      { label: "Monthly Ad Spend", value: "$6,000" },
-      { label: "Leads Generated (60 days)", value: "418" },
-      { label: "Cost Per Lead", value: "$14.35" },
-      { label: "Consults Completed", value: "96" },
-      { label: "Cases Accepted", value: "34" },
-      { label: "Average Case Value", value: "$15,200" },
-      { label: "Total Revenue", value: "$516,800", highlight: true },
+      { label: "Monthly ad spend", value: "$6,000" },
+      { label: "Leads generated (60 days)", value: "418" },
+      { label: "Cost per lead", value: "$14.35" },
+      { label: "Consults booked", value: "132" },
+      { label: "Show rate", value: "73%" },
+      { label: "Consults completed", value: "96" },
+      { label: "Cases accepted", value: "34" },
+      { label: "Close rate", value: "35.4%" },
+      { label: "Average case value", value: "$15,200" },
+      { label: "Total case revenue", value: "$516,800", highlight: true },
     ],
   },
   {
-    title: "Cold Market Authority Ads",
-    tag: "CSC",
-    tagColor: "from-amber-500/20 to-amber-600/20",
+    title: "Cold Market Authority Ads (No Offers / No Discounts)",
     roasValue: "78.3x",
     metrics: [
-      { label: "Monthly Ad Spend", value: "$4,000" },
-      { label: "Video Impressions", value: "412,000" },
-      { label: "3-Second View Rate", value: "41%" },
-      { label: "Leads Generated", value: "186" },
-      { label: "Cases Accepted", value: "18" },
-      { label: "Average Case Value", value: "$17,400" },
-      { label: "Revenue Generated", value: "$313,200", highlight: true },
+      { label: "Monthly ad spend", value: "$4,000" },
+      { label: "Video impressions", value: "412,000" },
+      { label: "3-second view rate", value: "41%" },
+      { label: "50% watch rate", value: "22%" },
+      { label: "Leads generated", value: "186" },
+      { label: "Cost per lead", value: "$21.50" },
+      { label: "Consults completed", value: "61" },
+      { label: "Cases accepted", value: "18" },
+      { label: "Average case value", value: "$17,400" },
+      { label: "Revenue generated", value: "$313,200", highlight: true },
     ],
   },
   {
-    title: "Re-Activation + Retargeting",
-    tag: "CSC",
-    tagColor: "from-amber-500/20 to-amber-600/20",
-    roasValue: "92.6x",
+    title: "Follow-Up + Conversion Infrastructure",
     metrics: [
-      { label: "Monthly Ad Spend", value: "$1,800" },
-      { label: "Audience Size", value: "3,200" },
-      { label: "CTR", value: "3.9%" },
-      { label: "Reactivated Leads", value: "94" },
-      { label: "Cases Accepted", value: "14" },
-      { label: "Average Case Value", value: "$11,900" },
-      { label: "Revenue Generated", value: "$166,600", highlight: true },
+      { label: "Monthly ad spend", value: "$3,500" },
+      { label: "Leads per month", value: "128" },
+      { label: "Consult show rate (before)", value: "44%" },
+      { label: "Consult show rate (after)", value: "69%" },
+      { label: "Close rate (before)", value: "6.2%" },
+      { label: "Close rate (after)", value: "12.1%" },
+      { label: "Average case value", value: "$9,800–$18,400" },
+      { label: "Incremental monthly revenue", value: "$110,000–$165,000", highlight: true },
     ],
   },
   {
-    title: "Education-First Funnel",
-    tag: "CSC",
-    tagColor: "from-amber-500/20 to-amber-600/20",
+    title: "Education-First Aesthetic Funnel",
     roasValue: "71.7x",
     metrics: [
-      { label: "Monthly Ad Spend", value: "$5,500" },
-      { label: "Video Views (2+ min)", value: "68,000" },
-      { label: "Cost Per Engaged View", value: "$0.19" },
-      { label: "Leads Generated", value: "254" },
-      { label: "Cases Accepted", value: "29" },
-      { label: "Average Case Value", value: "$13,600" },
-      { label: "Revenue Generated", value: "$394,400", highlight: true },
+      { label: "Monthly ad spend", value: "$5,500" },
+      { label: "Long-form video views (2+ min)", value: "68,000" },
+      { label: "Cost per engaged view", value: "$0.19" },
+      { label: "Leads generated", value: "254" },
+      { label: "Cost per lead", value: "$21.65" },
+      { label: "Consults completed", value: "89" },
+      { label: "Cases accepted", value: "29" },
+      { label: "Average case value", value: "$13,600" },
+      { label: "Revenue generated", value: "$394,400", highlight: true },
     ],
   },
   {
-    title: "Personal Brand + Paid Amplification",
-    tag: "PASTED",
-    tagColor: "from-primary/20 to-primary/30",
+    title: "Re-Activation & Retargeting System",
+    roasValue: "92.6x",
     metrics: [
-      { label: "Monthly Budget", value: "$2,500" },
-      { label: "Reach Increase", value: "+480%" },
-      { label: "Profile Visits", value: "+610%" },
-      { label: "Inbound DMs", value: "6 → 41" },
-      { label: "Booked Consults", value: "3 → 17" },
-      { label: "Closed Retainers", value: "5" },
-      { label: "Annualized Revenue", value: "$270,000", highlight: true },
+      { label: "Monthly ad spend", value: "$1,800" },
+      { label: "Dormant lead pool", value: "3,200" },
+      { label: "CTR", value: "3.9%" },
+      { label: "Reactivated leads", value: "94" },
+      { label: "Consults booked", value: "37" },
+      { label: "Show rate", value: "81%" },
+      { label: "Cases accepted", value: "14" },
+      { label: "Average case value", value: "$11,900" },
+      { label: "Revenue generated", value: "$166,600", highlight: true },
     ],
   },
   {
-    title: "Authority Ads for Course Offer",
-    tag: "PASTED",
-    tagColor: "from-primary/20 to-primary/30",
-    roasValue: "41.6x",
+    title: "Single-City Market Domination",
     metrics: [
-      { label: "Ad Spend", value: "$3,200" },
-      { label: "Video Impressions", value: "287,000" },
-      { label: "Applications Submitted", value: "461" },
-      { label: "Qualified Applicants", value: "92" },
-      { label: "Seats Sold", value: "28" },
-      { label: "Average Ticket", value: "$4,750" },
-      { label: "Total Revenue", value: "$133,000", highlight: true },
-    ],
-  },
-  {
-    title: "Market Domination (Single City)",
-    tag: "CSC × PASTED",
-    tagColor: "from-amber-500/10 via-primary/20 to-amber-500/10",
-    metrics: [
-      { label: "Monthly Ad Spend", value: "$7,500" },
-      { label: "Market Population", value: "1.1M" },
-      { label: "Monthly Reach", value: "380,000" },
-      { label: "Brand Recall Lift", value: "+64%" },
-      { label: "Monthly Consults", value: "48 → 137" },
-      { label: "Cases Accepted (Monthly)", value: "44" },
-      { label: "Monthly Aesthetic Revenue", value: "$475,200", highlight: true },
-    ],
-  },
-  {
-    title: "Evergreen Scaling (12 Months)",
-    tag: "CSC",
-    tagColor: "from-amber-500/20 to-amber-600/20",
-    roasValue: "68.6x",
-    metrics: [
-      { label: "Total Ad Spend (12mo)", value: "$62,000" },
-      { label: "Total Leads", value: "3,840" },
-      { label: "Average CPL", value: "$16.14" },
-      { label: "Total Consults Completed", value: "1,104" },
-      { label: "Total Cases Accepted", value: "346" },
-      { label: "Average Case Value", value: "$12,300" },
-      { label: "Total Case Revenue", value: "$4,255,800", highlight: true },
+      { label: "Monthly ad spend", value: "$7,500" },
+      { label: "Metro population", value: "1.1M" },
+      { label: "Monthly reach", value: "380,000" },
+      { label: "Brand recall lift", value: "+64%" },
+      { label: "Monthly consults (before)", value: "52" },
+      { label: "Monthly consults (after)", value: "141" },
+      { label: "Cases accepted (monthly)", value: "46" },
+      { label: "Average case value", value: "$10,800" },
+      { label: "Monthly aesthetic revenue", value: "$496,800", highlight: true },
     ],
   },
   {
     title: "Entry Offer → High-Ticket Ascension",
-    tag: "CSC",
-    tagColor: "from-amber-500/20 to-amber-600/20",
     roasValue: "44.7x",
     metrics: [
-      { label: "Ad Spend", value: "$3,000" },
-      { label: "Entry Offer Starts", value: "31" },
-      { label: "Upsells to Veneers", value: "9" },
-      { label: "Upsell Conversion Rate", value: "29%" },
-      { label: "Average Veneer Case Value", value: "$14,900" },
-      { label: "Upsell Revenue", value: "$134,100", highlight: true },
+      { label: "Monthly ad spend", value: "$3,000" },
+      { label: "Entry offer starts", value: "31" },
+      { label: "Aesthetic upsells", value: "9" },
+      { label: "Upsell conversion rate", value: "29%" },
+      { label: "Average veneer case value", value: "$14,900" },
+      { label: "Upsell revenue", value: "$134,100", highlight: true },
+    ],
+  },
+  {
+    title: "12-Month Evergreen Scaling",
+    roasValue: "68.6x",
+    metrics: [
+      { label: "Total ad spend (12 months)", value: "$62,000" },
+      { label: "Total leads generated", value: "3,840" },
+      { label: "Average CPL", value: "$16.14" },
+      { label: "Consults completed", value: "1,104" },
+      { label: "Cases accepted", value: "346" },
+      { label: "Average case value", value: "$12,300" },
+      { label: "Total case revenue", value: "$4,255,800", highlight: true },
+    ],
+  },
+  {
+    title: "High-End Cosmetic Repositioning",
+    metrics: [
+      { label: "Monthly ad spend", value: "$5,000" },
+      { label: "Initial monthly aesthetic revenue", value: "$185,000" },
+      { label: "Revenue after 6 months", value: "$332,000" },
+      { label: "Monthly consult volume increase", value: "+118%" },
+      { label: "Case acceptance rate increase", value: "+67%" },
+      { label: "Average case value increase", value: "+31%" },
+      { label: "Revenue volatility reduction", value: "−54%", highlight: true },
     ],
   },
 ];
 
-const AnimatedNumber = ({ value, inView }: { value: string; inView: boolean }) => {
-  const [displayValue, setDisplayValue] = useState(value);
+// Animated number component
+const AnimatedNumber = ({ 
+  value, 
+  isVisible 
+}: { 
+  value: string; 
+  isVisible: boolean;
+}) => {
+  const [displayValue, setDisplayValue] = useState("0");
   
   useEffect(() => {
-    if (!inView) return;
+    if (!isVisible) return;
     
-    // Extract numeric part for animation
-    const numericMatch = value.match(/[\d,]+\.?\d*/);
-    if (!numericMatch) {
+    // Extract numeric part and suffix
+    const numMatch = value.match(/[\d,]+\.?\d*/);
+    if (!numMatch) {
       setDisplayValue(value);
       return;
     }
     
-    const numericPart = numericMatch[0].replace(/,/g, '');
-    const targetNum = parseFloat(numericPart);
-    const prefix = value.substring(0, value.indexOf(numericMatch[0]));
-    const suffix = value.substring(value.indexOf(numericMatch[0]) + numericMatch[0].length);
-    
-    if (isNaN(targetNum)) {
-      setDisplayValue(value);
-      return;
-    }
+    const numStr = numMatch[0].replace(/,/g, '');
+    const targetNum = parseFloat(numStr);
+    const prefix = value.substring(0, value.indexOf(numMatch[0]));
+    const suffix = value.substring(value.indexOf(numMatch[0]) + numMatch[0].length);
     
     let startTime: number;
     const duration = 1500;
@@ -183,35 +189,38 @@ const AnimatedNumber = ({ value, inView }: { value: string; inView: boolean }) =
       const easeOut = 1 - Math.pow(1 - progress, 3);
       const current = targetNum * easeOut;
       
-      // Format with commas if original had them
+      // Format the number
       let formatted: string;
-      if (value.includes(',')) {
-        formatted = current.toLocaleString('en-US', {
-          minimumFractionDigits: value.includes('.') ? 2 : 0,
-          maximumFractionDigits: value.includes('.') ? 2 : 0,
+      if (numMatch[0].includes('.')) {
+        formatted = current.toLocaleString('en-US', { 
+          minimumFractionDigits: numMatch[0].split('.')[1]?.length || 0,
+          maximumFractionDigits: numMatch[0].split('.')[1]?.length || 0
         });
-      } else if (value.includes('.')) {
-        formatted = current.toFixed(2);
       } else {
-        formatted = Math.round(current).toString();
+        formatted = Math.round(current).toLocaleString('en-US');
       }
       
-      setDisplayValue(prefix + formatted + suffix);
+      setDisplayValue(`${prefix}${formatted}${suffix}`);
       
       if (progress < 1) {
         requestAnimationFrame(animate);
-      } else {
-        setDisplayValue(value);
       }
     };
     
     requestAnimationFrame(animate);
-  }, [value, inView]);
+  }, [value, isVisible]);
   
   return <span>{displayValue}</span>;
 };
 
-const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) => {
+// Case study card component
+const CaseStudyCard = ({ 
+  study, 
+  index 
+}: { 
+  study: CaseStudy; 
+  index: number;
+}) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   
@@ -220,6 +229,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -231,167 +241,140 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
     
     return () => observer.disconnect();
   }, []);
-  
+
   return (
     <div
       ref={cardRef}
-      className={`group relative bg-gradient-to-br from-card/80 to-card border border-border/30 rounded-sm overflow-hidden transition-all duration-700 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      className={`
+        relative p-6 rounded-xl border border-border/30
+        bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm
+        transition-all duration-700 ease-out
+        hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5
+        ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+      `}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* Glow effect on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
       {/* Header */}
-      <div className="relative p-6 pb-4 border-b border-border/30">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <span className={`inline-block px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium rounded-full bg-gradient-to-r ${study.tagColor} text-foreground/80 mb-3`}>
-              {study.tag}
-            </span>
-            <h3 className="font-display text-lg md:text-xl font-medium text-foreground leading-tight">
-              {study.title}
-            </h3>
-          </div>
-          
-          {study.roasValue && (
-            <div className="flex-shrink-0 text-right">
-              <div className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-1">ROAS</div>
-              <div className="font-display text-2xl md:text-3xl font-light text-primary">
-                <AnimatedNumber value={study.roasValue} inView={isVisible} />
-              </div>
-            </div>
-          )}
+      <div className="flex items-start justify-between gap-4 mb-6">
+        <div className="flex-1">
+          <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary mb-3">
+            PASTED
+          </span>
+          <h3 className="text-lg font-semibold text-foreground leading-tight">
+            {study.title}
+          </h3>
         </div>
+        
+        {study.roasValue && (
+          <div className="text-right">
+            <div className="text-2xl font-bold text-primary">
+              <AnimatedNumber value={study.roasValue} isVisible={isVisible} />
+            </div>
+            <div className="text-xs text-muted-foreground uppercase tracking-wider">
+              ROAS
+            </div>
+          </div>
+        )}
       </div>
       
       {/* Metrics */}
-      <div className="relative p-6 space-y-3">
-        {study.metrics.map((metric, idx) => (
+      <div className="space-y-2">
+        {study.metrics.map((metric, i) => (
           <div
-            key={idx}
-            className={`flex items-center justify-between py-2 ${
-              metric.highlight 
-                ? 'bg-gradient-to-r from-primary/10 to-transparent -mx-6 px-6 border-l-2 border-primary' 
-                : 'border-b border-border/20 last:border-0'
-            }`}
+            key={i}
+            className={`
+              flex justify-between items-center py-2 border-b border-border/20 last:border-0
+              ${metric.highlight ? 'bg-primary/5 -mx-2 px-2 rounded' : ''}
+            `}
           >
             <span className={`text-sm ${metric.highlight ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
               {metric.label}
             </span>
-            <span className={`font-display text-base md:text-lg ${
-              metric.highlight 
-                ? 'text-primary font-medium' 
-                : 'text-foreground'
-            }`}>
-              <AnimatedNumber value={metric.value} inView={isVisible} />
+            <span className={`text-sm font-semibold ${metric.highlight ? 'text-primary' : 'text-foreground'}`}>
+              <AnimatedNumber value={metric.value} isVisible={isVisible} />
             </span>
           </div>
         ))}
       </div>
-      
-      {/* Corner accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
   );
 };
 
 const AdCaseStudiesSection = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const [headerVisible, setHeaderVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setHeaderVisible(true);
+          setIsVisible(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
     
-    if (headerRef.current) {
-      observer.observe(headerRef.current);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
     
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
-      </div>
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent pointer-events-none" />
       
-      <div className="container mx-auto px-6 max-w-7xl relative">
-        {/* Header */}
-        <div 
-          ref={headerRef}
-          className={`text-center mb-16 md:mb-20 transition-all duration-1000 ${
-            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <p className="text-xs uppercase tracking-[0.3em] text-primary/70 mb-4 flex items-center justify-center gap-2">
-            <BarChart3 className="w-4 h-4" />
-            Growth Metrics
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-foreground mb-6">
-            When <span className="text-primary">Strategy</span> Meets <span className="text-primary">Scale</span>
+      <div className="container mx-auto px-6 relative">
+        {/* Section Header */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-block px-4 py-2 text-sm font-medium rounded-full bg-primary/10 text-primary mb-6">
+            Performance Data
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6">
+            The Numbers Behind the Brand
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
-            Documented results from brand-led advertising. Strictly numbers. No narrative.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Real results from real practices. No hypotheticals, no projections—just verified performance data.
           </p>
         </div>
 
-        {/* Stats bar */}
-        <div 
-          className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16 transition-all duration-1000 delay-200 ${
-            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          {[
-            { label: "Combined Revenue", value: "$6.6M+", icon: <DollarSign className="w-5 h-5" /> },
-            { label: "Average ROAS", value: "72.4x", icon: <TrendingUp className="w-5 h-5" /> },
-            { label: "Total Leads", value: "5,700+", icon: <Users className="w-5 h-5" /> },
-            { label: "Cases Closed", value: "550+", icon: <Target className="w-5 h-5" /> },
-          ].map((stat, idx) => (
-            <div 
-              key={idx} 
-              className="bg-card/50 border border-border/30 rounded-sm p-4 md:p-6 text-center group hover:border-primary/30 transition-colors"
-            >
-              <div className="flex justify-center mb-2 text-primary/60 group-hover:text-primary transition-colors">
-                {stat.icon}
-              </div>
-              <div className="font-display text-2xl md:text-3xl font-light text-foreground mb-1">
-                {stat.value}
-              </div>
-              <div className="text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                {stat.label}
+        {/* Aggregate Metrics - Featured at Top */}
+        <div className={`mb-16 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="relative p-8 md:p-12 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-2xl" />
+            
+            <div className="relative">
+              <h3 className="text-center text-xl md:text-2xl font-display font-semibold text-foreground mb-10">
+                PASTED — Aggregate Performance Metrics
+              </h3>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                {aggregateMetrics.map((metric, index) => (
+                  <div 
+                    key={index} 
+                    className="text-center p-4 rounded-xl bg-background/50 border border-border/20"
+                  >
+                    <div className="text-2xl md:text-3xl font-bold text-primary mb-2">
+                      <AnimatedNumber value={metric.value} isVisible={isVisible} />
+                    </div>
+                    <div className="text-sm text-muted-foreground leading-tight">
+                      {metric.label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+          </div>
         </div>
-
+        
         {/* Case Studies Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {caseStudies.map((study, index) => (
             <CaseStudyCard key={index} study={study} index={index} />
           ))}
-        </div>
-
-        {/* Footer note */}
-        <div 
-          className={`mt-16 text-center transition-all duration-1000 delay-500 ${
-            headerVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            Results vary by market, execution, and commitment. All metrics represent documented client 
-            outcomes using PASTED's integrated brand + paid acquisition methodology.
-          </p>
         </div>
       </div>
     </section>
