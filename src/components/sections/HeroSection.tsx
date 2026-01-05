@@ -46,7 +46,7 @@ const HeroSection = () => {
             {[
               { value: "$100M+", label: "Revenue Generated" },
               { value: "97%", label: "Client Retention" },
-              { value: "41", label: "Practices to $250k+/mo" },
+              { value: "41", label: "Practices to $500k+/mo" },
               { value: "+63%", label: "Avg Lift in 120 days" },
             ].map((stat, i) => (
               <div key={i} className="text-center group">
