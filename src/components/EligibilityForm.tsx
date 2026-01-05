@@ -188,25 +188,12 @@ const EligibilityForm = () => {
     <div className="bg-card rounded-lg p-8 md:p-12 shadow-sm max-w-2xl mx-auto">
       {/* Form Header */}
       <div className="text-center mb-8 pb-6 border-b border-border">
-        <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-          Associate to Empire™
-        </p>
-        <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-4">
-          Request for Consideration
+        <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
+          See If You Qualify
         </h2>
-        <div className="max-w-lg mx-auto space-y-3 text-muted-foreground leading-relaxed text-sm">
-          <p>
-            Associate to Empire™ is intentionally selective.
-          </p>
-          <p>
-            This is not just an application for a course or a service.
-            <br />
-            It is a request for consideration into a long-term brand trajectory built by PASTED.
-          </p>
-          <p className="text-foreground/80">
-            Answer directly. Clarity matters more than polish.
-          </p>
-        </div>
+        <p className="text-muted-foreground text-sm">
+          Answer directly. Clarity matters more than polish.
+        </p>
       </div>
       
       <ProgressBar current={step} total={16} />
