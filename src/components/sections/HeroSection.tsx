@@ -54,20 +54,39 @@ const HeroSection = () => {
           </div>
           
           {/* What This Is - Visual Transformation */}
-          <div className="mb-12">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary text-center mb-8">45 Days</p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
-              <div className="text-center md:text-right">
-                <p className="text-lg md:text-xl text-muted-foreground/60 line-through decoration-primary/40">Trained but invisible</p>
+          <div className="mb-16">
+            <p className="text-xs tracking-[0.3em] uppercase text-primary text-center mb-10">The Transformation</p>
+            
+            <div className="relative flex flex-col md:flex-row items-stretch justify-center gap-0">
+              {/* Before Card */}
+              <div className="flex-1 max-w-xs mx-auto md:mx-0 p-8 border border-border/30 bg-card/10 backdrop-blur-sm relative group transition-all duration-500 hover:bg-card/20">
+                <div className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">Before</div>
+                <div className="pt-4 space-y-3">
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Trained but invisible</p>
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Guessing what to post</p>
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Competing on price</p>
+                </div>
               </div>
-              <div className="hidden md:block w-24 h-px bg-gradient-to-r from-muted-foreground/20 via-primary to-muted-foreground/20 relative">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-primary rotate-45" />
+              
+              {/* Arrow/Timeline Center */}
+              <div className="flex items-center justify-center py-6 md:py-0 md:px-8 relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="hidden md:block w-full h-px bg-gradient-to-r from-border/50 via-primary to-border/50" />
+                  <div className="md:hidden h-full w-px bg-gradient-to-b from-border/50 via-primary to-border/50" />
+                </div>
+                <div className="relative z-10 bg-background border border-primary/50 px-4 py-2 shadow-[0_0_20px_hsl(var(--primary)/0.3)]">
+                  <p className="text-xs tracking-[0.2em] uppercase text-primary font-medium">45 Days</p>
+                </div>
               </div>
-              <div className="md:hidden h-8 w-px bg-gradient-to-b from-muted-foreground/20 via-primary to-muted-foreground/20 relative">
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 border-b-2 border-r-2 border-primary rotate-45" />
-              </div>
-              <div className="text-center md:text-left">
-                <p className="text-lg md:text-xl text-foreground font-medium">Recognized authority</p>
+              
+              {/* After Card */}
+              <div className="flex-1 max-w-xs mx-auto md:mx-0 p-8 border border-primary/30 bg-primary/5 backdrop-blur-sm relative group transition-all duration-500 hover:bg-primary/10 hover:border-primary/50 hover:shadow-[0_0_40px_hsl(var(--primary)/0.15)]">
+                <div className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase text-primary">After</div>
+                <div className="pt-4 space-y-3">
+                  <p className="text-foreground animate-fade-in" style={{ animationDelay: "100ms" }}>Recognized & chosen</p>
+                  <p className="text-foreground animate-fade-in" style={{ animationDelay: "200ms" }}>Strategic clarity</p>
+                  <p className="text-foreground animate-fade-in" style={{ animationDelay: "300ms" }}>Commanding premiums</p>
+                </div>
               </div>
             </div>
           </div>
