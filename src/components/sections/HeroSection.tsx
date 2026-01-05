@@ -18,13 +18,12 @@ const HeroSection = () => {
           </p>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] tracking-tight mb-8 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-            We Curated the Careers of Your Heroes.<br />
-            <span className="text-primary">Now We're Ready to Build Yours.</span>
+            Dental School Trains Skill. CE Improves Technique.<br />
+            <span className="text-muted-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
-            Dental school trains skill. CE improves technique.<br className="hidden md:block" />
-            <span className="text-foreground/80">Without brand, story, and strategy—they just become debt with no destination.</span>
+          <p className="text-2xl md:text-3xl lg:text-4xl font-serif text-primary max-w-3xl mx-auto mb-12 animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
+            We Curated the Careers of Your Heroes. Now We're Ready to Build Yours.
           </p>
         </div>
         
