@@ -35,6 +35,53 @@ const HeroSection = () => {
         <div id="apply" className="animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
           <EligibilityForm />
         </div>
+        
+        {/* Below Form: Metrics + Gate + Definition */}
+        <div className="mt-24 animate-fade-up opacity-0" style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
+          {/* Metrics Strip */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            {[
+              { value: "$100M+", label: "Revenue Generated" },
+              { value: "97%", label: "Client Retention" },
+              { value: "41", label: "Practices to $250k+/mo" },
+              { value: "+63%", label: "Avg Lift in 120 days" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center group">
+                <p className="text-2xl md:text-3xl font-serif text-primary mb-1 transition-transform group-hover:scale-105">{stat.value}</p>
+                <p className="text-xs text-muted-foreground tracking-wide uppercase">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+          
+          {/* What This Is - Compact */}
+          <div className="text-center mb-12">
+            <p className="text-lg md:text-xl text-foreground/90 max-w-2xl mx-auto">
+              A 45-day system that transforms aesthetic dentists into recognized authorities.
+            </p>
+          </div>
+          
+          {/* Gate - Horizontal */}
+          <div className="border border-border/30 bg-card/20 backdrop-blur-sm p-8 md:p-10">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <div>
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">Not For</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Trend chasers", "Loud marketers", "Volume-first clinicians"].map((item, i) => (
+                    <span key={i} className="text-sm text-foreground/50 border border-border/30 px-3 py-1.5">{item}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-xs tracking-[0.2em] uppercase text-primary mb-4">For</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Merit overlooked", "Ready to author position", "Value restraint over noise"].map((item, i) => (
+                    <span key={i} className="text-sm text-primary border border-primary/30 px-3 py-1.5">{item}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
       {/* Scroll indicator */}
