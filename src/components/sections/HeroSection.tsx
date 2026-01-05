@@ -59,12 +59,14 @@ const HeroSection = () => {
             
             <div className="relative flex flex-col md:flex-row items-stretch justify-center gap-0">
               {/* Before Card */}
-              <div className="flex-1 max-w-xs mx-auto md:mx-0 p-8 border border-border/30 bg-card/10 backdrop-blur-sm relative group transition-all duration-500 hover:bg-card/20">
+              <div className="flex-1 max-w-sm mx-auto md:mx-0 p-8 border border-border/30 bg-card/10 backdrop-blur-sm relative group transition-all duration-500 hover:bg-card/20">
                 <div className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">Before</div>
                 <div className="pt-4 space-y-3">
-                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Trained but invisible</p>
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">No clear brand identity</p>
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">No growth strategy</p>
                   <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Guessing what to post</p>
-                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Competing on price</p>
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Content that doesn't convert</p>
+                  <p className="text-muted-foreground/40 line-through decoration-muted-foreground/20">Confused and unsupported</p>
                 </div>
               </div>
               
@@ -80,12 +82,14 @@ const HeroSection = () => {
               </div>
               
               {/* After Card */}
-              <div className="flex-1 max-w-xs mx-auto md:mx-0 p-8 border border-foreground/20 bg-foreground/5 backdrop-blur-sm relative group transition-all duration-500 hover:bg-foreground/10 hover:border-foreground/30">
+              <div className="flex-1 max-w-sm mx-auto md:mx-0 p-8 border border-foreground/20 bg-foreground/5 backdrop-blur-sm relative group transition-all duration-500 hover:bg-foreground/10 hover:border-foreground/30">
                 <div className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase font-bold text-foreground">After</div>
                 <div className="pt-4 space-y-3">
-                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "100ms" }}>Recognized & chosen</p>
-                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "200ms" }}>Strategic clarity</p>
-                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "300ms" }}>Commanding premiums</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "100ms" }}>A powerful brand identity you're proud of</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "150ms" }}>Clear strategy to reach your career goals</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "200ms" }}>Never guessing what to post</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "250ms" }}>Content that converts patients</p>
+                  <p className="text-foreground font-medium animate-fade-in" style={{ animationDelay: "300ms" }}>Clarity and full support</p>
                 </div>
               </div>
             </div>
