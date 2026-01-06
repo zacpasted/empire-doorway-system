@@ -33,10 +33,10 @@ const deliverables = [
 ];
 
 const timeline = [
-  { week: "1-2", phase: "Discovery & Strategy" },
-  { week: "2-3", phase: "Brand Architecture" },
-  { week: "3-5", phase: "Content Production" },
-  { week: "5-6", phase: "Launch & Amplify" },
+  { week: "1-2", phase: "Positioning & Strategy" },
+  { week: "2-3", phase: "Brand & Narrative" },
+  { week: "3-5", phase: "Content System Setup" },
+  { week: "5-6", phase: "Launch & Management" },
 ];
 
 const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSectionProps) => {
