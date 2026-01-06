@@ -15,6 +15,7 @@ import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import ProofSection from "@/components/sections/ProofSection";
 import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
+import MonthlyDeliverablesSection from "@/components/sections/MonthlyDeliverablesSection";
 import FilterSection from "@/components/sections/FilterSection";
 import ClosingCTASection from "@/components/sections/ClosingCTASection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
@@ -78,6 +79,9 @@ const Index = () => {
       
       {/* Program & Pricing */}
       <ProgramDeliverablesSection onApplyClick={scrollToForm} />
+      
+      {/* Monthly Retainer Breakdown */}
+      <MonthlyDeliverablesSection />
       
       {/* The Gate - Filter */}
       <FilterSection />
