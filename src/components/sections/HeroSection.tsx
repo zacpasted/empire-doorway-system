@@ -1,6 +1,56 @@
+import { useRef, useEffect, useState } from "react";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
+
+import logo1 from "@/assets/logos/brand-logo-01.jpeg";
+import logo2 from "@/assets/logos/brand-logo-02.jpeg";
+import logo3 from "@/assets/logos/brand-logo-03.jpeg";
+import logo4 from "@/assets/logos/brand-logo-04.png";
+import logo5 from "@/assets/logos/brand-logo-05.png";
+import logo6 from "@/assets/logos/brand-logo-06.webp";
+
 const HeroSection = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const logos = [
+    { src: logo1, alt: "Brand Partner 1" },
+    { src: logo2, alt: "Brand Partner 2" },
+    { src: logo3, alt: "Brand Partner 3" },
+    { src: logo4, alt: "Brand Partner 4" },
+    { src: logo5, alt: "Brand Partner 5" },
+    { src: logo6, alt: "Brand Partner 6" },
+  ];
+
+  const duplicatedLogos = [...logos, ...logos, ...logos];
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let animationId: number;
+    let scrollPos = 0;
+    const speed = 1;
+
+    const animate = () => {
+      if (!isHovered) {
+        scrollPos += speed;
+        const totalWidth = scrollContainer.scrollWidth / 3;
+        if (scrollPos >= totalWidth) {
+          scrollPos = 0;
+        }
+        scrollContainer.style.transform = `translateX(-${scrollPos}px)`;
+      }
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, [isHovered]);
+
   return <section className="relative min-h-screen py-24 md:py-32">
       {/* Abstract background texture */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" />
@@ -34,11 +84,45 @@ const HeroSection = () => {
         </div>
         
         {/* VSL */}
-        <div className="mb-16 animate-fade-up opacity-0" style={{
+        <div className="mb-10 animate-fade-up opacity-0" style={{
         animationDelay: "300ms",
         animationFillMode: "forwards"
       }}>
           <VideoPlayer />
+        </div>
+
+        {/* Discreet Logo Marquee */}
+        <div 
+          className="mb-12 animate-fade-up opacity-0 overflow-hidden relative"
+          style={{ animationDelay: "350ms", animationFillMode: "forwards" }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <p className="text-center text-muted-foreground/40 text-xs uppercase tracking-[0.2em] mb-4">
+            Trusted by
+          </p>
+          
+          {/* Fade edges */}
+          <div className="absolute left-0 top-6 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10" />
+
+          <div 
+            ref={scrollRef}
+            className="flex items-center will-change-transform"
+          >
+            {duplicatedLogos.map((logo, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 mx-4 md:mx-6 flex items-center justify-center"
+              >
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className="h-6 md:h-7 w-auto max-w-[80px] md:max-w-[100px] object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale"
+                />
+              </div>
+            ))}
+          </div>
         </div>
         
         {/* Application Form */}

@@ -11,7 +11,6 @@ import TransformationSection from "@/components/sections/TransformationSection";
 import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
-import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import ProofSection from "@/components/sections/ProofSection";
 import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
@@ -35,11 +34,8 @@ const Index = () => {
       
       <StickyHeader onApplyClick={scrollToForm} />
       
-      {/* Hero - Cinematic Entry with VSL */}
+      {/* Hero - Cinematic Entry with VSL + Logos + Form */}
       <HeroSection />
-      
-      {/* Brands That Trust Us - Logo Carousel */}
-      <ClientLogosSection onApplyClick={scrollToForm} />
       
       {/* Testimonials */}
       <TestimonialsSection onApplyClick={scrollToForm} />
