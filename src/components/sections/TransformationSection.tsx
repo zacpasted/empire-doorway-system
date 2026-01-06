@@ -1,4 +1,4 @@
 const TransformationSection = () => {
-  return;
+  return null;
 };
 export default TransformationSection;

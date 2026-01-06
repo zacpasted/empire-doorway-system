@@ -80,6 +80,6 @@ const MemberCardsCarousel = () => {
 
   // Duplicate cards for seamless loop
   const duplicatedCards = [...cards, ...cards];
-  return;
+  return null;
 };
 export default MemberCardsCarousel;
