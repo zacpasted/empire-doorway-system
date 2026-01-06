@@ -49,6 +49,13 @@ const MonthlyDeliverablesSection = () => {
     },
   ];
 
+  const replacementCosts = [
+    { role: "In-House Video Editor", cost: "$4,500+/mo", note: "salary + benefits" },
+    { role: "Content Manager", cost: "$3,500+/mo", note: "salary + benefits" },
+    { role: "Social Media Agency", cost: "$3,000-8,000/mo", note: "generic templates" },
+    { role: "Freelance Editor", cost: "$2,000+/mo", note: "no strategy included" },
+  ];
+
   return (
     <section ref={sectionRef} className="py-24 md:py-32 bg-secondary/20">
       <div className="container max-w-5xl mx-auto px-4">
@@ -78,7 +85,7 @@ const MonthlyDeliverablesSection = () => {
         </div>
 
         {/* Deliverables Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {deliverables.map((item, index) => (
             <div
               key={index}
@@ -100,6 +107,51 @@ const MonthlyDeliverablesSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Cost Comparison */}
+        <div
+          className={`max-w-3xl mx-auto transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="text-center mb-10">
+            <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground/60 mb-2">
+              What This Replaces
+            </p>
+            <h3 className="text-xl md:text-2xl font-serif text-foreground">
+              All of this for <span className="text-primary">$2,750/mo</span>
+            </h3>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-8">
+            {replacementCosts.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between p-4 border border-border/20 bg-background/30"
+              >
+                <div>
+                  <p className="text-foreground/80 text-sm">{item.role}</p>
+                  <p className="text-xs text-muted-foreground/50">{item.note}</p>
+                </div>
+                <p className="text-muted-foreground line-through decoration-destructive/50 text-sm">
+                  {item.cost}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center p-6 border border-primary/30 bg-primary/5">
+            <p className="text-sm text-muted-foreground mb-2">Combined market rate</p>
+            <p className="text-2xl font-serif text-foreground mb-1">
+              <span className="line-through decoration-destructive/50 text-muted-foreground">$13,000+/mo</span>
+              <span className="mx-3">→</span>
+              <span className="text-primary">$2,750/mo</span>
+            </p>
+            <p className="text-xs text-muted-foreground/60">
+              Premium quality. Fraction of the cost.
+            </p>
+          </div>
         </div>
 
         {/* Bottom note */}
