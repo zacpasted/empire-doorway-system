@@ -2,14 +2,14 @@ import { useRef, useEffect, useState } from "react";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
 
-import logo1 from "@/assets/logos/brand-logo-01.jpeg";
-import logo2 from "@/assets/logos/brand-logo-02.jpeg";
-import logo3 from "@/assets/logos/brand-logo-03.jpeg";
-import logo4 from "@/assets/logos/brand-logo-04.png";
-import logo5 from "@/assets/logos/brand-logo-05.png";
-import logo6 from "@/assets/logos/brand-logo-06.webp";
-import logoCocofloss from "@/assets/logos/brand-logo-cocofloss.png";
-import logoSolventum from "@/assets/logos/brand-logo-solventum.png";
+import logo1 from "@/assets/logos/brand-logo-01.png";
+import logo2 from "@/assets/logos/brand-logo-02.png";
+import logo3 from "@/assets/logos/brand-logo-03.png";
+import logo4 from "@/assets/logos/brand-logo-04-dark.png";
+import logo5 from "@/assets/logos/brand-logo-05-dark.png";
+import logo6 from "@/assets/logos/brand-logo-06-dark.png";
+import logoCocofloss from "@/assets/logos/brand-logo-cocofloss-dark.png";
+import logoSolventum from "@/assets/logos/brand-logo-solventum-dark.png";
 
 const HeroSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
