@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 const HowItWorksSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -17,30 +18,41 @@ const HowItWorksSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToShowcase = () => {
+    const showcaseSection = document.getElementById('brands-showcase');
+    if (showcaseSection) {
+      showcaseSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const steps = [
     {
       number: "01",
       title: "Positioning & Strategy",
       description: "Define what makes you singular. Ground your brand in truth, not trends.",
       feeling: "Clarity",
+      linkText: "See strategy examples",
     },
     {
       number: "02",
       title: "Brand & Narrative",
       description: "Craft a story that resonates. Human-centered, cinematic, unmistakably you.",
       feeling: "Recognition",
+      linkText: "View brand work",
     },
     {
       number: "03",
       title: "Content System Setup",
       description: "Build your editorial engine. Editing, scheduling, and posting—handled for you.",
       feeling: "Relief",
+      linkText: "See content examples",
     },
     {
       number: "04",
       title: "Launch & Management",
       description: "Go live with confidence. Ongoing support keeps momentum compounding.",
       feeling: "Momentum",
+      linkText: "View launch results",
     },
   ];
 
@@ -95,9 +107,18 @@ const HowItWorksSection = () => {
                 <h3 className="text-xl md:text-2xl font-serif text-foreground mb-4">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed max-w-md mx-auto md:mx-0 ${index % 2 === 1 ? 'md:ml-auto' : ''}">
+                <p className={`text-muted-foreground leading-relaxed max-w-md mx-auto md:mx-0 ${index % 2 === 1 ? 'md:ml-auto' : ''}`}>
                   {step.description}
                 </p>
+                <button
+                  onClick={scrollToShowcase}
+                  className={`inline-flex items-center gap-2 mt-4 text-sm text-foreground/60 hover:text-foreground transition-colors group ${index % 2 === 1 ? 'md:justify-end' : ''}`}
+                >
+                  <span className="border-b border-foreground/20 group-hover:border-foreground/60 transition-colors">
+                    {step.linkText}
+                  </span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
 
               {/* Right side - feeling indicator */}
