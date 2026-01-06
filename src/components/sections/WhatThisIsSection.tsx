@@ -38,6 +38,6 @@ const WhatThisIsSection = () => {
     after: "Commanding premiums",
     icon: "✦"
   }];
-  return;
+  return null;
 };
 export default WhatThisIsSection;
