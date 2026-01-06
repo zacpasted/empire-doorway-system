@@ -11,12 +11,12 @@ const deliverables = [
     items: ["Custom logo & visual system", "Brand guidelines", "Social templates"],
   },
   {
-    title: "Professional Content Shoot",
-    items: ["2 full production days", "Cinematic video content", "Professional photography"],
+    title: "Professional Content Manager",
+    items: ["Done-for-you posting", "Strategic scheduling", "Platform optimization"],
   },
   {
-    title: "Video Asset Library",
-    items: ["12+ edited short-form videos", "3+ long-form brand films", "Procedure highlights"],
+    title: "Private Editing & Creative Team",
+    items: ["Dedicated editor assigned", "Premium video production", "Rapid turnaround"],
   },
   {
     title: "Content Strategy",
