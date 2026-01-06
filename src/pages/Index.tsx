@@ -40,6 +40,24 @@ const Index = () => {
       {/* The Gap - Pain Section */}
       <TheGapSection />
       
+      {/* Social Proof - Member Cards */}
+      <MemberCardsCarousel />
+      
+      {/* Social Proof - Video Examples */}
+      <VideoCarouselSection />
+      
+      {/* Social Proof - Brand Examples */}
+      <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      
+      {/* Case Studies with Metrics */}
+      <AdCaseStudiesSection />
+      
+      {/* Proof of Authority - Stats */}
+      <ProofSection />
+      
+      {/* Brands That Trust Us - Logo Carousel */}
+      <ClientLogosSection onApplyClick={scrollToForm} />
+      
       {/* Why Paths Fail - Diagnostic */}
       <WhyPathsFailSection />
       
@@ -57,24 +75,6 @@ const Index = () => {
       
       {/* Transformation - Before/After */}
       <TransformationSection />
-      
-      {/* Social Proof - Member Cards */}
-      <MemberCardsCarousel />
-      
-      {/* Social Proof - Video Examples */}
-      <VideoCarouselSection />
-      
-      {/* Social Proof - Brand Examples */}
-      <BrandsShowcaseSection onApplyClick={scrollToForm} />
-      
-      {/* Brands That Trust Us - Logo Carousel */}
-      <ClientLogosSection onApplyClick={scrollToForm} />
-      
-      {/* Proof of Authority - Stats */}
-      <ProofSection />
-      
-      {/* Case Studies with Metrics */}
-      <AdCaseStudiesSection />
       
       {/* Program & Pricing */}
       <ProgramDeliverablesSection onApplyClick={scrollToForm} />
