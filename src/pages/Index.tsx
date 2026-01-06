@@ -38,11 +38,14 @@ const Index = () => {
       {/* Hero - Cinematic Entry with VSL */}
       <HeroSection />
       
-      {/* The Gap - Pain Section */}
-      <TheGapSection />
+      {/* Brands That Trust Us - Logo Carousel */}
+      <ClientLogosSection onApplyClick={scrollToForm} />
       
       {/* Social Proof - Video Testimonials */}
       <VideoCarouselSection />
+      
+      {/* The Gap - Pain Section */}
+      <TheGapSection />
       
       {/* Case Studies with Metrics */}
       <AdCaseStudiesSection />
@@ -55,9 +58,6 @@ const Index = () => {
       
       {/* Social Proof - Brand Examples */}
       <BrandsShowcaseSection onApplyClick={scrollToForm} />
-      
-      {/* Brands That Trust Us - Logo Carousel */}
-      <ClientLogosSection onApplyClick={scrollToForm} />
       
       {/* Why Paths Fail - Diagnostic */}
       <WhyPathsFailSection />
