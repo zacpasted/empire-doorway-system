@@ -8,6 +8,8 @@ import logo3 from "@/assets/logos/brand-logo-03.jpeg";
 import logo4 from "@/assets/logos/brand-logo-04.png";
 import logo5 from "@/assets/logos/brand-logo-05.png";
 import logo6 from "@/assets/logos/brand-logo-06.webp";
+import logoCocofloss from "@/assets/logos/brand-logo-cocofloss.png";
+import logoSolventum from "@/assets/logos/brand-logo-solventum.png";
 
 const HeroSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -20,6 +22,8 @@ const HeroSection = () => {
     { src: logo4, alt: "Brand Partner 4" },
     { src: logo5, alt: "Brand Partner 5" },
     { src: logo6, alt: "Brand Partner 6" },
+    { src: logoCocofloss, alt: "Cocofloss" },
+    { src: logoSolventum, alt: "Solventum" },
   ];
 
   const duplicatedLogos = [...logos, ...logos, ...logos];
