@@ -145,7 +145,7 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-secondary/20">
+    <section id="brands-showcase" className="py-20 md:py-28 bg-secondary/20">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
