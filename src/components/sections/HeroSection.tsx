@@ -117,12 +117,12 @@ const HeroSection = () => {
             {duplicatedLogos.map((logo, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 mx-4 md:mx-6 flex items-center justify-center"
+                className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center"
               >
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-6 md:h-7 w-auto max-w-[80px] md:max-w-[100px] object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale"
+                  className="h-10 md:h-14 w-auto max-w-[120px] md:max-w-[160px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300"
                 />
               </div>
             ))}
