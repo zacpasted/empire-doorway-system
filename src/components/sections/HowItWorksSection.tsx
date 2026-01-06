@@ -20,27 +20,27 @@ const HowItWorksSection = () => {
   const steps = [
     {
       number: "01",
-      title: "Identity & Positioning",
+      title: "Positioning & Strategy",
       description: "Define what makes you singular. Ground your brand in truth, not trends.",
       feeling: "Clarity",
     },
     {
       number: "02",
-      title: "Brand & Story",
-      description: "Craft a narrative that resonates. Human-centered, cinematic, editorial.",
+      title: "Brand & Narrative",
+      description: "Craft a story that resonates. Human-centered, cinematic, unmistakably you.",
       feeling: "Recognition",
     },
     {
       number: "03",
-      title: "Content System",
-      description: "Build a repeatable, professional engine. Control without chaos.",
-      feeling: "Consistency",
+      title: "Content System Setup",
+      description: "Build your editorial engine. Editing, scheduling, and posting—handled for you.",
+      feeling: "Relief",
     },
     {
       number: "04",
-      title: "Demand & Leverage",
-      description: "Amplify what already works. Authority compounds into optionality.",
-      feeling: "Choice",
+      title: "Launch & Management",
+      description: "Go live with confidence. Ongoing support keeps momentum compounding.",
+      feeling: "Momentum",
     },
   ];
 
