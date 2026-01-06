@@ -190,6 +190,73 @@ const AdCaseStudiesSection = () => {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-  return null;
+  return (
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background">
+      <div className="container max-w-6xl mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
+            Performance Data
+          </p>
+          <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
+            Case Studies
+          </h2>
+        </div>
+
+        {/* Aggregate Metrics Card */}
+        <div 
+          className={`mb-12 p-8 rounded-lg border border-foreground/10 bg-foreground/5 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <p className="text-xs tracking-[0.2em] text-foreground/50 uppercase mb-6 text-center">
+            PASTED — Aggregate Performance Metrics
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            {aggregateMetrics.map((metric, index) => (
+              <div key={index} className="text-center">
+                <p className="text-2xl md:text-3xl font-serif text-foreground mb-1">
+                  <AnimatedNumber value={metric.value} isVisible={isVisible} />
+                </p>
+                <p className="text-xs text-foreground/50">{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Case Study Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {caseStudies.map((study, index) => (
+            <div
+              key={index}
+              className={`p-6 rounded-lg border border-foreground/10 bg-background transition-all duration-700 hover:border-foreground/20 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${200 + index * 100}ms` }}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <h3 className="text-lg font-serif text-foreground">{study.title}</h3>
+                {study.roasValue && (
+                  <span className="text-xs px-2 py-1 rounded bg-foreground/10 text-foreground/70">
+                    {study.roasValue} ROAS
+                  </span>
+                )}
+              </div>
+              <div className="space-y-3">
+                {study.metrics.map((metric, mIndex) => (
+                  <div key={mIndex} className="flex justify-between items-baseline">
+                    <span className="text-sm text-foreground/50">{metric.label}</span>
+                    <span className={`text-sm ${metric.highlight ? 'text-foreground font-medium' : 'text-foreground/70'}`}>
+                      <AnimatedNumber value={metric.value} isVisible={isVisible} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 export default AdCaseStudiesSection;
