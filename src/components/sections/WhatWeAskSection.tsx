@@ -31,6 +31,16 @@ const WhatWeAskSection = () => {
     "No social media expertise",
   ];
 
+  const weekTimeline = [
+    { day: "Mon", activity: "Record 15-30 min of raw footage", isYou: true },
+    { day: "Tue", activity: "We edit & prepare content", isYou: false },
+    { day: "Wed", activity: "Content goes live", isYou: false },
+    { day: "Thu", activity: "Content goes live", isYou: false },
+    { day: "Fri", activity: "Content goes live", isYou: false },
+    { day: "Sat", activity: "Content goes live", isYou: false },
+    { day: "Sun", activity: "Rest — we've got it", isYou: false },
+  ];
+
   return (
     <section
       ref={sectionRef}
@@ -73,6 +83,75 @@ const WhatWeAskSection = () => {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Weekly Timeline */}
+        <div
+          className={`mt-20 transition-all duration-1000 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <p className="text-center text-xs tracking-[0.3em] uppercase text-muted-foreground/40 mb-8">
+            A Typical Week as an A2E Member
+          </p>
+          
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute top-6 left-0 right-0 h-px bg-border/30 hidden md:block" />
+            
+            <div className="grid grid-cols-7 gap-2 md:gap-4">
+              {weekTimeline.map((item, index) => (
+                <div
+                  key={index}
+                  className={`text-center transition-all duration-500`}
+                  style={{ transitionDelay: `${600 + index * 80}ms` }}
+                >
+                  {/* Day dot */}
+                  <div className="relative flex justify-center mb-3">
+                    <div
+                      className={`w-3 h-3 rounded-full ${
+                        item.isYou
+                          ? "bg-primary shadow-lg shadow-primary/30"
+                          : "bg-border/50"
+                      }`}
+                    />
+                  </div>
+                  
+                  {/* Day label */}
+                  <p
+                    className={`text-xs font-medium mb-2 ${
+                      item.isYou ? "text-primary" : "text-muted-foreground/60"
+                    }`}
+                  >
+                    {item.day}
+                  </p>
+                  
+                  {/* Activity */}
+                  <p
+                    className={`text-xs leading-tight ${
+                      item.isYou
+                        ? "text-foreground/90"
+                        : "text-muted-foreground/50"
+                    }`}
+                  >
+                    {item.activity}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Legend */}
+          <div className="flex justify-center gap-6 mt-8">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+              <span className="text-xs text-muted-foreground/60">You</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-border/50" />
+              <span className="text-xs text-muted-foreground/60">We handle</span>
+            </div>
+          </div>
         </div>
 
         {/* Not required list */}
