@@ -1,15 +1,19 @@
 import { useRef } from "react";
 import StickyHeader from "@/components/StickyHeader";
 import HeroSection from "@/components/sections/HeroSection";
-import EnemySection from "@/components/sections/EnemySection";
-import WhatThisIsSection from "@/components/sections/WhatThisIsSection";
+import TheGapSection from "@/components/sections/TheGapSection";
+import WhyPathsFailSection from "@/components/sections/WhyPathsFailSection";
+import HowItWorksSection from "@/components/sections/HowItWorksSection";
+import WhatWeAskSection from "@/components/sections/WhatWeAskSection";
+import WhatYouReceiveSection from "@/components/sections/WhatYouReceiveSection";
+import TheLongGameSection from "@/components/sections/TheLongGameSection";
+import TransformationSection from "@/components/sections/TransformationSection";
 import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
 import ClientLogosSection from "@/components/sections/ClientLogosSection";
 import ProofSection from "@/components/sections/ProofSection";
 import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
-import TransformationSection from "@/components/sections/TransformationSection";
 import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
 import FilterSection from "@/components/sections/FilterSection";
 import ClosingCTASection from "@/components/sections/ClosingCTASection";
@@ -33,11 +37,26 @@ const Index = () => {
       {/* Hero - Cinematic Entry with VSL */}
       <HeroSection />
       
-      {/* The Enemy - Manifesto Block */}
-      <EnemySection />
+      {/* The Gap - Pain Section */}
+      <TheGapSection />
       
-      {/* What This Is - Clarity */}
-      <WhatThisIsSection />
+      {/* Why Paths Fail - Diagnostic */}
+      <WhyPathsFailSection />
+      
+      {/* How It Works - Process Overview */}
+      <HowItWorksSection />
+      
+      {/* What We Ask - Trust Builder */}
+      <WhatWeAskSection />
+      
+      {/* What You Receive - Delivery */}
+      <WhatYouReceiveSection />
+      
+      {/* The Long Game - Trajectory */}
+      <TheLongGameSection />
+      
+      {/* Transformation - Before/After */}
+      <TransformationSection />
       
       {/* Social Proof - Member Cards */}
       <MemberCardsCarousel />
@@ -56,9 +75,6 @@ const Index = () => {
       
       {/* Case Studies with Metrics */}
       <AdCaseStudiesSection />
-      
-      {/* Transformation - Before/After */}
-      <TransformationSection />
       
       {/* Program & Pricing */}
       <ProgramDeliverablesSection onApplyClick={scrollToForm} />
