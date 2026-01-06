@@ -40,20 +40,20 @@ const Index = () => {
       {/* The Gap - Pain Section */}
       <TheGapSection />
       
-      {/* Social Proof - Member Cards */}
-      <MemberCardsCarousel />
-      
-      {/* Social Proof - Video Examples */}
+      {/* Social Proof - Video Testimonials */}
       <VideoCarouselSection />
-      
-      {/* Social Proof - Brand Examples */}
-      <BrandsShowcaseSection onApplyClick={scrollToForm} />
       
       {/* Case Studies with Metrics */}
       <AdCaseStudiesSection />
       
       {/* Proof of Authority - Stats */}
       <ProofSection />
+      
+      {/* Social Proof - Member Cards */}
+      <MemberCardsCarousel />
+      
+      {/* Social Proof - Brand Examples */}
+      <BrandsShowcaseSection onApplyClick={scrollToForm} />
       
       {/* Brands That Trust Us - Logo Carousel */}
       <ClientLogosSection onApplyClick={scrollToForm} />
