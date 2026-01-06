@@ -122,7 +122,7 @@ const HeroSection = () => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-10 md:h-14 w-auto max-w-[120px] md:max-w-[160px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300"
+                  className="h-14 md:h-20 w-auto max-w-[160px] md:max-w-[220px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300"
                 />
               </div>
             ))}
