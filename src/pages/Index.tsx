@@ -41,6 +41,9 @@ const Index = () => {
       {/* Brands That Trust Us - Logo Carousel */}
       <ClientLogosSection onApplyClick={scrollToForm} />
       
+      {/* Testimonials */}
+      <TestimonialsSection onApplyClick={scrollToForm} />
+      
       {/* Social Proof - Video Testimonials */}
       <VideoCarouselSection />
       
@@ -88,9 +91,6 @@ const Index = () => {
       
       {/* Closing CTA */}
       <ClosingCTASection />
-      
-      {/* Testimonials */}
-      <TestimonialsSection onApplyClick={scrollToForm} />
       
       {/* Private Advisory - Brief Bottom Section */}
       <PrivateAdvisorySection />
