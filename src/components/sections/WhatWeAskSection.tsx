@@ -18,10 +18,17 @@ const WhatWeAskSection = () => {
   }, []);
 
   const asks = [
+    "Record raw footage on your phone — we handle the rest.",
     "Show up as you are — no performance required.",
     "Trust the process, even when it feels slow.",
-    "Be honest about what you actually want.",
     "Stay consistent, not perfect.",
+  ];
+
+  const notRequired = [
+    "No editing skills needed",
+    "No posting or scheduling",
+    "No caption writing",
+    "No social media expertise",
   ];
 
   return (
@@ -68,15 +75,28 @@ const WhatWeAskSection = () => {
           ))}
         </div>
 
-        {/* Disarming note */}
+        {/* Not required list */}
         <div
           className={`mt-16 pt-12 border-t border-border/10 transition-all duration-1000 delay-700 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
-          <p className="text-center text-muted-foreground/60 text-sm leading-relaxed max-w-lg mx-auto">
-            You don't need to be an influencer. You don't need to be extroverted. 
-            You just need to be willing to be seen for who you actually are.
+          <p className="text-center text-xs tracking-[0.3em] uppercase text-muted-foreground/40 mb-6">
+            What You Don't Need
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {notRequired.map((item, index) => (
+              <span
+                key={index}
+                className="px-4 py-2 text-sm text-muted-foreground/70 border border-border/20 bg-background/30"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          <p className="text-center text-muted-foreground/60 text-sm leading-relaxed max-w-lg mx-auto mt-8">
+            You don't need to be an influencer. You just need to record raw footage. 
+            We handle editing, posting, and everything in between.
           </p>
         </div>
       </div>
