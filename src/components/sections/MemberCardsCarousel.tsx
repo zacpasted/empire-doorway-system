@@ -80,18 +80,6 @@ const MemberCardsCarousel = () => {
 
   // Duplicate cards for seamless loop
   const duplicatedCards = [...cards, ...cards];
-  return <section className="py-16 md:py-24 overflow-hidden">
-      <div className="container max-w-6xl mx-auto px-4 mb-10">
-        <p className="text-primary uppercase tracking-[0.3em] text-sm text-center">
-          Official Pasted Club Members
-        </p>
-      </div>
-
-      <div ref={scrollRef} className="flex gap-6 overflow-x-hidden cursor-grab" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-        {duplicatedCards.map((card, index) => <div key={`${card.id}-${index}`} className="flex-shrink-0 w-[280px] md:w-[320px] transition-transform duration-300 hover:scale-[1.02]">
-            
-          </div>)}
-      </div>
-    </section>;
+  return;
 };
 export default MemberCardsCarousel;
