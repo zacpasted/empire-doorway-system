@@ -41,6 +41,23 @@ const WhatWeAskSection = () => {
     { day: "Sun", activity: "Rest — we've got it", isYou: false },
   ];
 
+  const weHandle = [
+    "Video editing & production",
+    "Caption & hook writing",
+    "Scheduling & posting",
+    "Platform optimization",
+    "Analytics & reporting",
+    "Creative direction",
+    "Quality assurance",
+    "Strategy adjustments",
+  ];
+
+  const youDo = [
+    "Record raw footage (15-30 min/week)",
+    "Be yourself on camera",
+    "Approve final content (optional)",
+  ];
+
   return (
     <section
       ref={sectionRef}
@@ -154,7 +171,56 @@ const WhatWeAskSection = () => {
           </div>
         </div>
 
-        {/* Not required list */}
+        {/* Side-by-side Comparison */}
+        <div
+          className={`mt-16 transition-all duration-1000 delay-600 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* We Handle */}
+            <div className="p-6 md:p-8 border border-border/30 bg-background/50">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                  <span className="text-primary text-xs">✓</span>
+                </div>
+                <h4 className="font-serif text-foreground">What We Handle</h4>
+              </div>
+              <ul className="space-y-3">
+                {weHandle.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <span className="text-primary/60 mt-0.5">·</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* You Do */}
+            <div className="p-6 md:p-8 border border-primary/30 bg-primary/5">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-full bg-primary/30 border border-primary/40 flex items-center justify-center">
+                  <span className="text-primary text-xs font-medium">You</span>
+                </div>
+                <h4 className="font-serif text-foreground">What You Do</h4>
+              </div>
+              <ul className="space-y-3">
+                {youDo.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-foreground/80">
+                    <span className="text-primary mt-0.5">·</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-4 border-t border-primary/20">
+                <p className="text-xs text-muted-foreground/60">
+                  Total time commitment: ~2 hours/month
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div
           className={`mt-16 pt-12 border-t border-border/10 transition-all duration-1000 delay-700 ${
             isVisible ? "opacity-100" : "opacity-0"
