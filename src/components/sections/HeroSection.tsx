@@ -82,36 +82,45 @@ const HeroSection = () => {
       />
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
-        {/* Header */}
-        <motion.div className="text-center mb-16" style={{ opacity }}>
+        {/* New Primary Headline - Above VSL */}
+        <motion.div className="text-center mb-12" style={{ opacity }}>
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-8 animate-fade-up opacity-0" style={{
-          animationDelay: "100ms",
-          animationFillMode: "forwards"
-        }}>
+            animationDelay: "100ms",
+            animationFillMode: "forwards"
+          }}>
             PASTED
           </p>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.2] tracking-tight mb-6 animate-fade-up opacity-0" style={{
-          animationDelay: "200ms",
-          animationFillMode: "forwards"
-        }}>
-            Dental School Trains Skill. CE Improves Technique. <span className="font-bold">Without brand, story, and strategy—they just become debt with no destination.</span>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.15] tracking-tight animate-fade-up opacity-0" style={{
+            animationDelay: "200ms",
+            animationFillMode: "forwards"
+          }}>
+            We Take Aesthetic Dentists<br />
+            <span className="text-muted-foreground">From Skilled and Invisible</span><br />
+            <span className="text-muted-foreground">to </span>Recognized and Chosen<span className="text-muted-foreground"> —</span><br />
+            <span className="text-muted-foreground/70 text-2xl md:text-3xl lg:text-4xl">Without Waiting for Ownership</span>
           </h1>
-          
-          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed animate-fade-up opacity-0" style={{
-          animationDelay: "250ms",
-          animationFillMode: "forwards"
-        }}>
-            <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
-          </p>
         </motion.div>
         
         {/* VSL */}
         <div className="mb-10 animate-fade-up opacity-0" style={{
-        animationDelay: "300ms",
-        animationFillMode: "forwards"
-      }}>
+          animationDelay: "300ms",
+          animationFillMode: "forwards"
+        }}>
           <VideoPlayer />
+        </div>
+
+        {/* Secondary Headline - Below VSL */}
+        <div className="text-center mb-12 animate-fade-up opacity-0" style={{
+          animationDelay: "350ms",
+          animationFillMode: "forwards"
+        }}>
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-4">
+            Dental School Trains Skill. CE Improves Technique. <span className="font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
+          </p>
+          <p className="text-xl md:text-2xl text-muted-foreground">
+            <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
+          </p>
         </div>
 
         {/* Discreet Logo Marquee */}
