@@ -1,22 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const HowItWorksSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const scrollToShowcase = () => {
     const showcaseSection = document.getElementById('brands-showcase');
@@ -56,103 +44,131 @@ const HowItWorksSection = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const stepVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1] as const,
+      },
+    },
+  };
+
   return (
     <section
       ref={sectionRef}
-      className="py-32 md:py-48 bg-background relative"
+      className="py-32 md:py-48 bg-background relative overflow-hidden"
     >
-      {/* Subtle vertical line */}
-      <div className="absolute left-1/2 top-32 bottom-32 w-px bg-gradient-to-b from-transparent via-border/30 to-transparent hidden lg:block" />
+      {/* Decorative vertical line */}
+      <div className="absolute left-1/2 top-48 bottom-48 w-px bg-gradient-to-b from-transparent via-border/20 to-transparent hidden lg:block" />
 
       <div className="container max-w-6xl mx-auto px-4">
-        {/* Section label */}
-        <p
-          className={`text-xs tracking-[0.4em] uppercase text-muted-foreground/60 text-center mb-6 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-center mb-20 md:mb-28"
         >
-          The Infrastructure
-        </p>
+          <p className="text-xs tracking-[0.4em] uppercase text-muted-foreground/50 mb-6">
+            The Infrastructure
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
+            How Associate to Empire Works
+          </h2>
+        </motion.div>
 
-        {/* Title */}
-        <h2
-          className={`text-2xl md:text-4xl font-serif text-center text-foreground mb-24 transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+        {/* Steps grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="space-y-20 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-24 md:gap-y-20"
         >
-          How Associate to Empire Works
-        </h2>
-
-        {/* Steps - alternating layout */}
-        <div className="space-y-16 md:space-y-24">
           {steps.map((step, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center transition-all duration-1000 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${300 + index * 150}ms` }}
+              variants={stepVariants}
+              className="group relative"
             >
-              {/* Left side - alternates position */}
-              <div
-                className={`${
-                  index % 2 === 1 ? "md:order-2" : ""
-                } text-center md:text-left ${
-                  index % 2 === 1 ? "md:text-right" : ""
-                }`}
-              >
-                <span className="text-6xl md:text-8xl font-serif text-foreground/[0.08] block mb-4">
-                  {step.number}
-                </span>
-                <h3 className="text-xl md:text-2xl font-serif text-foreground mb-4">
-                  {step.title}
-                </h3>
-                <p className={`text-muted-foreground leading-relaxed max-w-md mx-auto md:mx-0 ${index % 2 === 1 ? 'md:ml-auto' : ''}`}>
-                  {step.description}
-                </p>
-                <button
-                  onClick={scrollToShowcase}
-                  className={`inline-flex items-center gap-2 mt-4 text-sm text-foreground/60 hover:text-foreground transition-colors group ${index % 2 === 1 ? 'md:justify-end' : ''}`}
-                >
-                  <span className="border-b border-foreground/20 group-hover:border-foreground/60 transition-colors">
-                    {step.linkText}
+              {/* Step card */}
+              <div className="relative p-8 md:p-10 rounded-2xl border border-border/20 bg-card/30 backdrop-blur-sm hover:border-border/40 hover:bg-card/50 transition-all duration-500">
+                {/* Step number - positioned absolutely */}
+                <div className="absolute -top-6 left-8 md:left-10">
+                  <span className="text-7xl md:text-8xl font-serif font-light text-foreground/[0.06] select-none">
+                    {step.number}
                   </span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
+                </div>
 
-              {/* Right side - feeling indicator */}
-              <div
-                className={`${
-                  index % 2 === 1 ? "md:order-1" : ""
-                } flex justify-center`}
-              >
-                <div className="relative">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-border/30 flex items-center justify-center">
-                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border border-border/20 flex items-center justify-center">
-                      <span className="text-sm tracking-[0.2em] uppercase text-muted-foreground/60">
-                        {step.feeling}
-                      </span>
-                    </div>
+                {/* Feeling badge */}
+                <div className="absolute -top-3 right-8 md:right-10">
+                  <div className="px-4 py-1.5 rounded-full border border-primary/20 bg-background/80 backdrop-blur-sm">
+                    <span className="text-[10px] tracking-[0.25em] uppercase text-primary/70">
+                      {step.feeling}
+                    </span>
                   </div>
-                  {/* Connecting line to center */}
-                  {index < steps.length - 1 && (
-                    <div className="absolute left-1/2 -bottom-16 md:-bottom-24 w-px h-16 md:h-24 bg-gradient-to-b from-border/30 to-transparent hidden md:block" />
-                  )}
+                </div>
+
+                {/* Content */}
+                <div className="pt-8 md:pt-10">
+                  <h3 className="text-xl md:text-2xl font-serif text-foreground mb-4 group-hover:text-foreground/90 transition-colors">
+                    {step.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground/80 leading-relaxed mb-6 text-sm md:text-base">
+                    {step.description}
+                  </p>
+
+                  {/* Link */}
+                  <button
+                    onClick={scrollToShowcase}
+                    className="inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors group/link"
+                  >
+                    <span className="relative">
+                      {step.linkText}
+                      <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-foreground/40 group-hover/link:w-full transition-all duration-300" />
+                    </span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-300" />
+                  </button>
+                </div>
+
+                {/* Subtle corner accent */}
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl pointer-events-none">
+                  <div className="absolute top-0 right-0 w-px h-8 bg-gradient-to-b from-primary/30 to-transparent" />
+                  <div className="absolute top-0 right-0 w-8 h-px bg-gradient-to-l from-primary/30 to-transparent" />
                 </div>
               </div>
-            </div>
+
+              {/* Connecting line between cards (visible on desktop) */}
+              {index < steps.length - 1 && index % 2 === 0 && (
+                <div className="hidden md:block absolute top-1/2 -right-8 lg:-right-12 w-8 lg:w-12 h-px bg-gradient-to-r from-border/30 to-transparent" />
+              )}
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom note */}
-        <p
-          className={`text-center mt-24 text-sm text-muted-foreground/50 transition-all duration-1000 delay-1000 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="text-center mt-20 md:mt-28 text-sm text-muted-foreground/40 tracking-wide"
         >
           Infrastructure, not conversion tricks.
-        </p>
+        </motion.p>
       </div>
     </section>
   );
