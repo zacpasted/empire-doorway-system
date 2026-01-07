@@ -98,11 +98,25 @@ const HeroSection = () => {
             Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic">not noise.</span>
           </p>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-foreground mb-5 md:mb-6 animate-fade-up opacity-0" style={{
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-foreground mb-5 md:mb-6 animate-fade-up opacity-0 overflow-hidden" style={{
             animationDelay: "200ms",
             animationFillMode: "forwards"
           }}>
-            Now we are here to build with you.
+            {"Now we are here to build with you.".split(" ").map((word, index) => (
+              <motion.span
+                key={index}
+                className="inline-block mr-[0.3em]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.4 + index * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
           </h1>
           
           <p className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-muted-foreground/40 max-w-xl mx-auto animate-fade-up opacity-0" style={{
