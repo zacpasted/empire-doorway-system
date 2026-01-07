@@ -82,48 +82,54 @@ const HeroSection = () => {
       />
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
-        {/* New Primary Headline - Above VSL */}
-        <motion.div className="text-center mb-12" style={{ opacity }}>
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-8 animate-fade-up opacity-0" style={{
+        {/* Primary Headline - Above VSL */}
+        <motion.div className="text-center mb-8" style={{ opacity }}>
+          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 animate-fade-up opacity-0" style={{
             animationDelay: "100ms",
             animationFillMode: "forwards"
           }}>
             PASTED
           </p>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.15] tracking-tight animate-fade-up opacity-0" style={{
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-foreground max-w-4xl mx-auto leading-relaxed mb-4 animate-fade-up opacity-0" style={{
+            animationDelay: "150ms",
+            animationFillMode: "forwards"
+          }}>
+            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic text-muted-foreground">not noise.</span>
+          </h1>
+          <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold text-foreground mb-6 animate-fade-up opacity-0" style={{
             animationDelay: "200ms",
             animationFillMode: "forwards"
           }}>
-            We Take Aesthetic Dentists<br />
-            <span className="text-muted-foreground">From Skilled and Invisible</span><br />
-            <span className="text-muted-foreground">to </span>Recognized and Chosen<span className="text-muted-foreground"> —</span><br />
-            <span className="text-muted-foreground/70 text-2xl md:text-3xl lg:text-4xl">Without Waiting for Ownership</span>
-          </h1>
+            Now we are here to build with you.
+          </p>
+          <p className="text-xs md:text-sm tracking-widest uppercase text-muted-foreground/60 max-w-2xl mx-auto animate-fade-up opacity-0" style={{
+            animationDelay: "250ms",
+            animationFillMode: "forwards"
+          }}>
+            Born from the brand and content strategy generating $100M+ in aesthetic case revenue for the best in the world
+          </p>
         </motion.div>
         
         {/* VSL */}
-        <div className="mb-8 animate-fade-up opacity-0" style={{
+        <div className="mb-10 animate-fade-up opacity-0" style={{
           animationDelay: "300ms",
           animationFillMode: "forwards"
         }}>
           <VideoPlayer />
         </div>
 
-        {/* Trust Statement - Below VSL */}
+        {/* Secondary Headline - Below VSL */}
         <div className="text-center mb-12 animate-fade-up opacity-0" style={{
           animationDelay: "350ms",
           animationFillMode: "forwards"
         }}>
-          <p className="text-xl md:text-2xl lg:text-3xl font-serif text-foreground max-w-4xl mx-auto leading-relaxed mb-4">
-            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic text-muted-foreground">not noise.</span>
-          </p>
-          <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold text-foreground mb-6">
-            Now we are here to build with you.
-          </p>
-          <p className="text-xs md:text-sm tracking-widest uppercase text-muted-foreground/60 max-w-2xl mx-auto">
-            Born from the brand and content strategy generating $100M+ in aesthetic case revenue for the best in the world
-          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.15] tracking-tight">
+            We Take Aesthetic Dentists<br />
+            <span className="text-muted-foreground">From Skilled and Invisible</span><br />
+            <span className="text-muted-foreground">to </span>Recognized and Chosen<span className="text-muted-foreground"> —</span><br />
+            <span className="text-muted-foreground/70 text-2xl md:text-3xl lg:text-4xl">Without Waiting for Ownership</span>
+          </h2>
         </div>
 
         {/* Discreet Logo Marquee */}
