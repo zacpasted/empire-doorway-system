@@ -103,30 +103,33 @@ const HeroSection = () => {
         </motion.div>
         
         {/* VSL */}
-        <div className="mb-10 animate-fade-up opacity-0" style={{
+        <div className="mb-8 animate-fade-up opacity-0" style={{
           animationDelay: "300ms",
           animationFillMode: "forwards"
         }}>
           <VideoPlayer />
         </div>
 
-        {/* Secondary Headline - Below VSL */}
+        {/* Trust Statement - Below VSL */}
         <div className="text-center mb-12 animate-fade-up opacity-0" style={{
           animationDelay: "350ms",
           animationFillMode: "forwards"
         }}>
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-4">
-            Dental School Trains Skill. CE Improves Technique. <span className="font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
+          <p className="text-xl md:text-2xl lg:text-3xl font-serif text-foreground max-w-4xl mx-auto leading-relaxed mb-4">
+            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic text-muted-foreground">not noise.</span>
           </p>
-          <p className="text-xl md:text-2xl text-muted-foreground">
-            <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
+          <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold text-foreground mb-6">
+            Now we are here to build with you.
+          </p>
+          <p className="text-xs md:text-sm tracking-widest uppercase text-muted-foreground/60 max-w-2xl mx-auto">
+            Born from the brand and content strategy generating $100M+ in aesthetic case revenue for the best in the world
           </p>
         </div>
 
         {/* Discreet Logo Marquee */}
         <div 
           className="mb-12 animate-fade-up opacity-0 overflow-hidden relative"
-          style={{ animationDelay: "350ms", animationFillMode: "forwards" }}
+          style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -159,10 +162,23 @@ const HeroSection = () => {
         
         {/* Application Form */}
         <div id="apply" className="animate-fade-up opacity-0" style={{
-        animationDelay: "400ms",
-        animationFillMode: "forwards"
-      }}>
+          animationDelay: "450ms",
+          animationFillMode: "forwards"
+        }}>
           <EligibilityForm />
+        </div>
+
+        {/* Secondary Statement - Below Form */}
+        <div className="text-center mt-16 animate-fade-up opacity-0" style={{
+          animationDelay: "500ms",
+          animationFillMode: "forwards"
+        }}>
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-4">
+            Dental School Trains Skill. CE Improves Technique. <span className="font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
+          </p>
+          <p className="text-xl md:text-2xl text-muted-foreground">
+            <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
+          </p>
         </div>
         
         {/* Below Form: Metrics + Gate + Definition */}
