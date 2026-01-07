@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
 
@@ -13,7 +14,18 @@ import logoSolventum from "@/assets/logos/brand-logo-solventum-dark.png";
 
 const HeroSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Parallax scroll effect
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const logos = [
     { src: logo1, alt: "Brand Partner 1" },
@@ -55,16 +67,23 @@ const HeroSection = () => {
     };
   }, [isHovered]);
 
-  return <section className="relative min-h-screen py-24 md:py-32">
-      {/* Abstract background texture */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" />
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-    }} />
+  return <section ref={sectionRef} className="relative min-h-screen py-24 md:py-32 overflow-hidden">
+      {/* Parallax background layers */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" 
+        style={{ y: backgroundY }}
+      />
+      <motion.div 
+        className="absolute inset-0 opacity-[0.02]" 
+        style={{ 
+          y: textureY,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
+        }}
+      />
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div className="text-center mb-16" style={{ opacity }}>
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-8 animate-fade-up opacity-0" style={{
           animationDelay: "100ms",
           animationFillMode: "forwards"
@@ -85,7 +104,7 @@ const HeroSection = () => {
         }}>
             <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
           </p>
-        </div>
+        </motion.div>
         
         {/* VSL */}
         <div className="mb-10 animate-fade-up opacity-0" style={{
