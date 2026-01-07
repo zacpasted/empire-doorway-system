@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
 import HeroSection from "@/components/sections/HeroSection";
+import WhatWeDoSection from "@/components/sections/WhatWeDoSection";
 import TheGapSection from "@/components/sections/TheGapSection";
 import WhyPathsFailSection from "@/components/sections/WhyPathsFailSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
@@ -57,6 +58,16 @@ const Index = () => {
       
       {/* Hero - Cinematic Entry with VSL + Logos + Form */}
       <HeroSection />
+      
+      {/* What We Do - Services Overview */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WhatWeDoSection />
+      </motion.div>
       
       {/* Testimonials */}
       <motion.div
