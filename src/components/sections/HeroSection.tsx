@@ -83,27 +83,29 @@ const HeroSection = () => {
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Primary Headline - Above VSL */}
-        <motion.div className="text-center mb-8" style={{ opacity }}>
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 animate-fade-up opacity-0" style={{
+        <motion.div className="text-center mb-10 md:mb-14" style={{ opacity }}>
+          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-muted-foreground/70 mb-8 md:mb-10 animate-fade-up opacity-0" style={{
             animationDelay: "100ms",
             animationFillMode: "forwards"
           }}>
             PASTED
           </p>
           
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-foreground max-w-4xl mx-auto leading-relaxed mb-4 animate-fade-up opacity-0" style={{
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-3 animate-fade-up opacity-0" style={{
             animationDelay: "150ms",
             animationFillMode: "forwards"
           }}>
-            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic text-muted-foreground">not noise.</span>
-          </h1>
-          <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold text-foreground mb-6 animate-fade-up opacity-0" style={{
+            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic">not noise.</span>
+          </p>
+          
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-foreground mb-5 md:mb-6 animate-fade-up opacity-0" style={{
             animationDelay: "200ms",
             animationFillMode: "forwards"
           }}>
             Now we are here to build with you.
-          </p>
-          <p className="text-xs md:text-sm tracking-widest uppercase text-muted-foreground/60 max-w-2xl mx-auto animate-fade-up opacity-0" style={{
+          </h1>
+          
+          <p className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-muted-foreground/40 max-w-xl mx-auto animate-fade-up opacity-0" style={{
             animationDelay: "250ms",
             animationFillMode: "forwards"
           }}>
@@ -112,7 +114,7 @@ const HeroSection = () => {
         </motion.div>
         
         {/* VSL */}
-        <div className="mb-10 animate-fade-up opacity-0" style={{
+        <div className="mb-12 md:mb-16 animate-fade-up opacity-0" style={{
           animationDelay: "300ms",
           animationFillMode: "forwards"
         }}>
@@ -120,16 +122,21 @@ const HeroSection = () => {
         </div>
 
         {/* Secondary Headline - Below VSL */}
-        <div className="text-center mb-12 animate-fade-up opacity-0" style={{
+        <div className="text-center mb-14 md:mb-16 animate-fade-up opacity-0" style={{
           animationDelay: "350ms",
           animationFillMode: "forwards"
         }}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.15] tracking-tight">
-            We Take Aesthetic Dentists<br />
-            <span className="text-muted-foreground">From Skilled and Invisible</span><br />
-            <span className="text-muted-foreground">to </span>Recognized and Chosen<span className="text-muted-foreground"> —</span><br />
-            <span className="text-muted-foreground/70 text-2xl md:text-3xl lg:text-4xl">Without Waiting for Ownership</span>
+          <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground/50 mb-6">
+            Associate to Empire™
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.3] tracking-tight max-w-3xl mx-auto">
+            We Take Aesthetic Dentists<br className="hidden sm:block" />
+            <span className="text-muted-foreground"> From Skilled and Invisible</span><br className="hidden sm:block" />
+            <span className="text-muted-foreground"> to </span>Recognized and Chosen
           </h2>
+          <p className="text-lg md:text-xl text-muted-foreground/60 mt-4 font-light">
+            Without Waiting for Ownership
+          </p>
         </div>
 
         {/* Discreet Logo Marquee */}
