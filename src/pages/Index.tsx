@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
 import HeroSection from "@/components/sections/HeroSection";
 import TheGapSection from "@/components/sections/TheGapSection";
@@ -21,6 +22,21 @@ import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import Footer from "@/components/Footer";
 
+const sectionVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 40 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94] as const
+    }
+  }
+};
+
 const Index = () => {
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +45,12 @@ const Index = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <motion.main 
+      className="min-h-screen bg-background text-foreground"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
@@ -38,61 +59,187 @@ const Index = () => {
       <HeroSection />
       
       {/* Testimonials */}
-      <TestimonialsSection onApplyClick={scrollToForm} />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <TestimonialsSection onApplyClick={scrollToForm} />
+      </motion.div>
       
       {/* Social Proof - Video Testimonials */}
-      <VideoCarouselSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <VideoCarouselSection />
+      </motion.div>
       
       {/* The Gap - Pain Section */}
-      <TheGapSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <TheGapSection />
+      </motion.div>
       
       {/* Case Studies with Metrics */}
-      <AdCaseStudiesSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <AdCaseStudiesSection />
+      </motion.div>
       
       {/* Proof of Authority - Stats */}
-      <ProofSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <ProofSection />
+      </motion.div>
       
       {/* Social Proof - Member Cards */}
-      <MemberCardsCarousel />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <MemberCardsCarousel />
+      </motion.div>
       
       {/* Social Proof - Brand Examples */}
-      <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      </motion.div>
       
       {/* Why Paths Fail - Diagnostic */}
-      <WhyPathsFailSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WhyPathsFailSection />
+      </motion.div>
       
       {/* How It Works - Process Overview */}
-      <HowItWorksSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <HowItWorksSection />
+      </motion.div>
       
       {/* What We Ask - Trust Builder */}
-      <WhatWeAskSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WhatWeAskSection />
+      </motion.div>
       
       {/* What You Receive - Delivery */}
-      <WhatYouReceiveSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WhatYouReceiveSection />
+      </motion.div>
       
       {/* The Long Game - Trajectory */}
-      <TheLongGameSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <TheLongGameSection />
+      </motion.div>
       
       {/* Transformation - Before/After */}
-      <TransformationSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <TransformationSection />
+      </motion.div>
       
       {/* Program & Pricing */}
-      <ProgramDeliverablesSection onApplyClick={scrollToForm} />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <ProgramDeliverablesSection onApplyClick={scrollToForm} />
+      </motion.div>
       
       {/* Monthly Retainer Breakdown */}
-      <MonthlyDeliverablesSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <MonthlyDeliverablesSection />
+      </motion.div>
       
       {/* The Gate - Filter */}
-      <FilterSection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <FilterSection />
+      </motion.div>
       
       {/* Closing CTA */}
-      <ClosingCTASection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <ClosingCTASection />
+      </motion.div>
       
       {/* Private Advisory - Brief Bottom Section */}
-      <PrivateAdvisorySection />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <PrivateAdvisorySection />
+      </motion.div>
       
       <Footer />
-    </main>
+    </motion.main>
   );
 };
 
