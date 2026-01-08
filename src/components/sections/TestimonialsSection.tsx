@@ -3,10 +3,10 @@ import { Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 // Player card images
-import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
-import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
-import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
-import nourDiabiCard from "@/assets/cards/nour-diabi.png";
+import marshallHansonCard from "@/assets/cards/marshall-hanson.jpeg";
+import jonMarashiCard from "@/assets/cards/jon-marashi.jpeg";
+import drewBallardCard from "@/assets/cards/drew-ballard.jpeg";
+import kooperRuminerCard from "@/assets/cards/kooper-ruminer.jpeg";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -15,39 +15,77 @@ interface TestimonialsSectionProps {
 const testimonials = [
   {
     id: 1,
-    name: "Dr Serena Wong",
+    name: "Dr. Marshall Hanson",
     role: "Aesthetic Dentist",
-    quote: "Working with this team has been an exceptional experience. They have consistently supported me with clarity, kindness, and a deep understanding of the dental field, which is rare in the marketing space. They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am.",
-    highlight: "I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail.",
+    quote: "There is so much out there that looks artistic and beautiful on the surface, but very little of it is truly holistic or empathetic. What Zac and Alan do is different. They are, quite simply, the best practitioners in the world at what they do. Their understanding of brand, identity, and human psychology is unmatched. What makes this so special is that they are making this level of talent accessible to doctors who genuinely need it. I believe everyone needs this. If you need to build a brand and you don't want to do it yourself, I would not recommend anyone else.",
     featured: true,
-    cardImage: serenaWongCard,
+    cardImage: marshallHansonCard,
   },
   {
     id: 2,
-    name: "Dr Nav Atwal",
-    role: "Dental Surgeon",
-    quote: "Dr. Alan Clarke and Zac at Paste are helping translate vision into something tangible.",
-    highlight: "They understand that strong brands are built with intention, not shortcuts.",
+    name: "Dr. Jon Marashi",
+    role: "Celebrity Dentist",
+    quote: "At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else.",
     featured: false,
-    cardImage: navAtwalCard,
+    cardImage: jonMarashiCard,
   },
   {
     id: 3,
-    name: "Dr Tim Hoeschen",
-    role: "Dentist",
-    quote: "Working with Zac and Alan has been fantastic. They've pushed the boundaries of dental marketing, not by overhyping and making up a new meme. Instead they tapped into something lasting and refreshing — your own story.",
-    highlight: "You have given us a voice and helped tell our story with vision, creativity and style.",
+    name: "Dr. Drew Ballard",
+    role: "Founder, Halo Dental Network",
+    quote: "I'm deeply grateful for everything we've built together. Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone.",
     featured: false,
-    cardImage: timHoeschenCard,
+    cardImage: drewBallardCard,
   },
   {
     id: 4,
-    name: "Dr Nour Diabi",
-    role: "Clinician",
-    quote: "Pasted Studio don't just create content, they tell your story. Alan and Zac captured who I am as a clinician with real depth and authenticity.",
-    highlight: "Their focus on genuine storytelling over forced marketing is clear in every piece of content.",
+    name: "Dr. Brian Harris",
+    role: "Cosmetic Dentist",
+    quote: "This is an easy recommendation. If a doctor asks who they should trust with their brand, this is the answer. They understand dentists, but more importantly, they understand people. That combination is incredibly rare.",
     featured: false,
-    cardImage: nourDiabiCard,
+  },
+  {
+    id: 5,
+    name: "Dr. Kooper Ruminer",
+    role: "Practice Owner",
+    quote: "I've built practices from the ground up, and I can say with absolute certainty—doing this without Zac and Alan would have taken years longer and cost far more mistakes. They remove confusion while preserving ambition. That alone is invaluable.",
+    featured: false,
+    cardImage: kooperRuminerCard,
+  },
+  {
+    id: 6,
+    name: "Dr. Sam Saleh",
+    role: "Cosmetic Dentist",
+    quote: "This is world-class work in every sense. The strategy is genius-level, the execution is flawless, and there is zero fluff. I could not recommend them more highly.",
+    featured: false,
+  },
+  {
+    id: 7,
+    name: "Dr. Beau Murphey",
+    role: "Dentist",
+    quote: "I was genuinely scared of content. I avoided it for years. Nothing ever worked, and it always felt uncomfortable. This is the first time content felt natural—and the first time it actually worked. That completely changed my outlook and my results.",
+    featured: false,
+  },
+  {
+    id: 8,
+    name: "Dr. Vik Ravoory",
+    role: "Associate Dentist",
+    quote: "As a young associate, this completely changed the trajectory of my career—faster than I thought possible. The clarity, confidence, and direction I gained gave me control over my future instead of guessing my next move.",
+    featured: false,
+  },
+  {
+    id: 9,
+    name: "Dr. Mark Hughes",
+    role: "Distinguished Practitioner",
+    quote: "My brand is highly distinguished, and I am extremely selective about who I trust with it. I would not hand this responsibility to anyone else. I'm also incredibly glad that this level of work is now accessible to more doctors.",
+    featured: false,
+  },
+  {
+    id: 10,
+    name: "Dr. Rhona Eksander",
+    role: "Cosmetic Dentist",
+    quote: "This work is intelligent, restrained, and deeply respectful of individuality. Zac and Alan build brands with intention and integrity. I'm genuinely grateful that more doctors can now access something this refined and thoughtful.",
+    featured: false,
   },
 ];
 
@@ -92,11 +130,6 @@ const TestimonialCard = ({
           {testimonial.quote}
         </blockquote>
         
-        {testimonial.highlight && (
-          <p className="text-foreground text-sm font-medium leading-relaxed mb-4 border-l-2 border-primary/50 pl-4">
-            {testimonial.highlight}
-          </p>
-        )}
         
         <div className="flex items-center gap-3 pt-4 border-t border-border/30">
           <div>
@@ -179,11 +212,6 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
                     "{featuredTestimonial.quote}"
                   </blockquote>
                   
-                  {featuredTestimonial.highlight && (
-                    <p className="text-lg md:text-xl text-primary font-medium leading-relaxed mb-10 italic">
-                      "{featuredTestimonial.highlight}"
-                    </p>
-                  )}
                   
                   <div className="flex items-center gap-4">
                     <div>
