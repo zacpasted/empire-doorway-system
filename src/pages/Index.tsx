@@ -25,6 +25,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import WistiaVideoEmbedSection from "@/components/sections/WistiaVideoEmbedSection";
 import TheTruthSection from "@/components/sections/TheTruthSection";
 import TransformationNarrativesSection from "@/components/sections/TransformationNarrativesSection";
+import TakeItSection from "@/components/sections/TakeItSection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -235,6 +236,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <TheLongGameSection />
+      </motion.div>
+      
+      {/* Take It - Editorial CTA */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <TakeItSection onApplyClick={scrollToForm} />
       </motion.div>
       
       {/* Transformation - Before/After */}
