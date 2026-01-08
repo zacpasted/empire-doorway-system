@@ -2,18 +2,10 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
-import logo1 from "@/assets/logos/brand-logo-01.png";
-import logo2 from "@/assets/logos/brand-logo-02.png";
-import logo3 from "@/assets/logos/brand-logo-03.png";
-import logo4 from "@/assets/logos/brand-logo-04-dark.png";
-import logo5 from "@/assets/logos/brand-logo-05-dark.png";
-import logo6 from "@/assets/logos/brand-logo-06-dark.png";
-import logoCocofloss from "@/assets/logos/brand-logo-cocofloss-dark.png";
-import logoSolventum from "@/assets/logos/brand-logo-solventum-dark.png";
-import logo7 from "@/assets/logos/brand-logo-07.jpeg";
-import logo8 from "@/assets/logos/brand-logo-08.webp";
-import logo9 from "@/assets/logos/brand-logo-09.jpeg";
-import logo10 from "@/assets/logos/brand-logo-10.jpeg";
+import logoFigs from "@/assets/logos/figs.jpeg";
+import logoCocofloss from "@/assets/logos/cocofloss.png";
+import logoSolventum from "@/assets/logos/solventum.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method.jpeg";
 
 // Animated Counter Hook
 const useCounter = (end: number, duration: number, isInView: boolean, delay: number) => {
@@ -116,56 +108,13 @@ const HeroSection = () => {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
-  const logos = [{
-    src: logo1,
-    alt: "Brand Partner 1",
-    needsFilter: false
-  }, {
-    src: logo2,
-    alt: "Brand Partner 2",
-    needsFilter: false
-  }, {
-    src: logo3,
-    alt: "Brand Partner 3",
-    needsFilter: false
-  }, {
-    src: logo4,
-    alt: "Brand Partner 4",
-    needsFilter: false
-  }, {
-    src: logo5,
-    alt: "Brand Partner 5",
-    needsFilter: false
-  }, {
-    src: logo6,
-    alt: "Brand Partner 6",
-    needsFilter: false
-  }, {
-    src: logoCocofloss,
-    alt: "Cocofloss",
-    needsFilter: false
-  }, {
-    src: logoSolventum,
-    alt: "Solventum",
-    needsFilter: false
-  }, {
-    src: logo7,
-    alt: "Brand Partner 7",
-    needsFilter: true
-  }, {
-    src: logo8,
-    alt: "Brand Partner 8",
-    needsFilter: true
-  }, {
-    src: logo9,
-    alt: "Brand Partner 9",
-    needsFilter: true
-  }, {
-    src: logo10,
-    alt: "Brand Partner 10",
-    needsFilter: true
-  }];
-  const duplicatedLogos = [...logos, ...logos, ...logos];
+  const logos = [
+    { src: logoFigs, alt: "FIGS" },
+    { src: logoCocofloss, alt: "Cocofloss" },
+    { src: logoSolventum, alt: "Solventum" },
+    { src: logoMHM, alt: "Marshall Hanson Method" },
+  ];
+  const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
@@ -303,13 +252,15 @@ const HeroSection = () => {
           <div className="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10" />
 
           <div ref={scrollRef} className="flex items-center will-change-transform">
-            {duplicatedLogos.map((logo, index) => <div key={index} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
+            {duplicatedLogos.map((logo, index) => (
+              <div key={index} className="flex-shrink-0 mx-8 md:mx-12 flex items-center justify-center">
                 <img 
                   src={logo.src} 
                   alt={logo.alt} 
-                  className={`h-14 md:h-20 w-auto max-w-[160px] md:max-w-[220px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 ${logo.needsFilter ? 'grayscale invert brightness-90' : ''}`} 
+                  className="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-90 transition-opacity duration-300 grayscale"
                 />
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
         
