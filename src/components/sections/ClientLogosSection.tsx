@@ -1,22 +1,10 @@
 import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-import logo1 from "@/assets/logos/brand-logo-01.jpeg";
-import logo2 from "@/assets/logos/brand-logo-02.jpeg";
-import logo3 from "@/assets/logos/brand-logo-03.jpeg";
-import logo4 from "@/assets/logos/brand-logo-04.png";
-import logo5 from "@/assets/logos/brand-logo-05.png";
-import logo6 from "@/assets/logos/brand-logo-06.webp";
-
-
-import logo13 from "@/assets/logos/brand-logo-13.jpeg";
-import logo14 from "@/assets/logos/brand-logo-14.jpeg";
-import logo15 from "@/assets/logos/brand-logo-15.png";
-import logo16 from "@/assets/logos/brand-logo-16.png";
-import logo17 from "@/assets/logos/brand-logo-17.jpeg";
-import logo18 from "@/assets/logos/brand-logo-18.webp";
-
-import logo20 from "@/assets/logos/brand-logo-20.jpeg";
+import logoFigs from "@/assets/logos/figs-white.png";
+import logoCocofloss from "@/assets/logos/cocofloss-white.png";
+import logoSolventum from "@/assets/logos/solventum-white.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
 
 interface ClientLogosSectionProps {
   onApplyClick?: () => void;
@@ -27,13 +15,10 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const logos = [
-    { src: logo13, alt: "Brand Partner 13" },
-    { src: logo14, alt: "Brand Partner 14" },
-    { src: logo15, alt: "Brand Partner 15" },
-    { src: logo16, alt: "Brand Partner 16" },
-    { src: logo17, alt: "Brand Partner 17" },
-    { src: logo18, alt: "Brand Partner 18" },
-    { src: logo20, alt: "Brand Partner 20" },
+    { src: logoFigs, alt: "FIGS" },
+    { src: logoCocofloss, alt: "Cocofloss" },
+    { src: logoSolventum, alt: "Solventum" },
+    { src: logoMHM, alt: "Marshall Hanson Method" },
   ];
 
   // Duplicate for seamless loop
@@ -97,7 +82,7 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-8 md:h-10 max-w-[120px] md:max-w-[140px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 grayscale brightness-200 contrast-50"
+                  className="h-8 md:h-10 max-w-[120px] md:max-w-[140px] object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                 />
             </div>
           ))}
