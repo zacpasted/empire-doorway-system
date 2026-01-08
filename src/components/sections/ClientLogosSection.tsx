@@ -82,7 +82,7 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-8 md:h-10 max-w-[120px] md:max-w-[140px] object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="h-8 md:h-10 max-w-[120px] md:max-w-[140px] object-contain"
                 />
             </div>
           ))}
