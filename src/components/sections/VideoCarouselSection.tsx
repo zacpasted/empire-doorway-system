@@ -60,28 +60,28 @@ const VideoCarouselSection = () => {
   const duplicatedVideos = [...videos, ...videos];
 
   return (
-    <section className="py-20 bg-background overflow-hidden">
-      <div ref={headlineRef} className="container mx-auto px-6 mb-8 text-center overflow-hidden">
-        <h2 className="font-display font-medium text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight max-w-3xl mx-auto tracking-tight flex flex-wrap justify-center gap-x-3 gap-y-1">
+    <section className="py-10 bg-background overflow-hidden">
+      <div ref={headlineRef} className="container mx-auto px-6 mb-6 text-center overflow-hidden">
+        <h2 className="font-display font-medium text-lg md:text-xl lg:text-2xl text-foreground tracking-tight inline-flex flex-wrap justify-center gap-x-2">
           {words.map((word, index) => (
             <motion.span
               key={index}
-              initial={{ y: 60, opacity: 0, rotateX: -45 }}
-              animate={isInView ? { y: 0, opacity: 1, rotateX: 0 } : {}}
+              initial={{ y: 30, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{
-                duration: 0.6,
-                delay: index * 0.08,
+                duration: 0.4,
+                delay: index * 0.05,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`inline-block ${index >= 4 ? 'text-muted-foreground/70' : ''}`}
+              className={`inline-block ${index >= 4 ? 'text-muted-foreground/60' : ''}`}
             >
               {word}
             </motion.span>
           ))}
           <motion.span
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.7, ease: "backOut" }}
+            initial={{ scale: 0 }}
+            animate={isInView ? { scale: 1 } : {}}
+            transition={{ duration: 0.3, delay: 0.4, ease: "backOut" }}
             className="text-primary"
           >
             .
