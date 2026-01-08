@@ -10,6 +10,10 @@ import logo5 from "@/assets/logos/brand-logo-05-dark.png";
 import logo6 from "@/assets/logos/brand-logo-06-dark.png";
 import logoCocofloss from "@/assets/logos/brand-logo-cocofloss-dark.png";
 import logoSolventum from "@/assets/logos/brand-logo-solventum-dark.png";
+import logo7 from "@/assets/logos/brand-logo-07.jpeg";
+import logo8 from "@/assets/logos/brand-logo-08.webp";
+import logo9 from "@/assets/logos/brand-logo-09.jpeg";
+import logo10 from "@/assets/logos/brand-logo-10.jpeg";
 const HeroSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -49,6 +53,18 @@ const HeroSection = () => {
   }, {
     src: logoSolventum,
     alt: "Solventum"
+  }, {
+    src: logo7,
+    alt: "Brand Partner 7"
+  }, {
+    src: logo8,
+    alt: "Brand Partner 8"
+  }, {
+    src: logo9,
+    alt: "Brand Partner 9"
+  }, {
+    src: logo10,
+    alt: "Brand Partner 10"
   }];
   const duplicatedLogos = [...logos, ...logos, ...logos];
   useEffect(() => {
