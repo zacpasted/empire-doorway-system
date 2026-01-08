@@ -94,7 +94,7 @@ const HeroSection = () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-foreground mb-6 md:mb-8 leading-[1.1] tracking-tight overflow-hidden" style={{
             animationFillMode: "forwards"
           }}>
-            {"Now we are here to build with you.".split(" ").map((word, index) => (
+            {"Trusted by the most recognized names in aesthetic dentistry to build brands that disrupt, define and actually SCALE practices.".split(" ").map((word, index) => (
               <motion.span
                 key={index}
                 className="inline-block mr-[0.25em]"
@@ -115,7 +115,7 @@ const HeroSection = () => {
             animationDelay: "800ms",
             animationFillMode: "forwards"
           }}>
-            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic font-normal text-foreground/70">not noise.</span>
+            Now we are here to build with you.
           </p>
         </motion.div>
         
