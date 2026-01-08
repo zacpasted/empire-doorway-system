@@ -14,6 +14,7 @@ import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
 import brianHarrisCard from "@/assets/cards/brian-harris.png";
 import samSalehCard from "@/assets/cards/sam-saleh.png";
+import michaelAllenCard from "@/assets/cards/michael-allen.jpeg";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -142,6 +143,7 @@ const testimonials = [
     role: "Celebrity Dentist & Owner, Tucson, AZ · Co-founder, Smile Trend Institute",
     quote: "Working with Zac and his team have helped me realize how powerful social media can be to bringing in that perfect cosmetic patient. Not only do I have a consistent flow of cosmetic patients in my practice, it has also helped to establish me as the expert in my field, especially in my local area. Just meeting and talking with the team have helped me develop the skills in marketing and in cosmetic dentistry that I might have lacked in the past. I've already recommended PASTED to many other dentists. I've used the skills that I've learned from PASTED to help market other ventures that I'm involved in (SMILETREND). In my opinion, it's been a great investment for my practice, and I plan to continue using them for a long time.",
     featured: false,
+    cardImage: michaelAllenCard,
   },
 ];
 
