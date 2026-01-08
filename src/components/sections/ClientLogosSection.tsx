@@ -7,6 +7,16 @@ import logo3 from "@/assets/logos/brand-logo-03.jpeg";
 import logo4 from "@/assets/logos/brand-logo-04.png";
 import logo5 from "@/assets/logos/brand-logo-05.png";
 import logo6 from "@/assets/logos/brand-logo-06.webp";
+import logo11 from "@/assets/logos/brand-logo-11.jpeg";
+import logo12 from "@/assets/logos/brand-logo-12.webp";
+import logo13 from "@/assets/logos/brand-logo-13.jpeg";
+import logo14 from "@/assets/logos/brand-logo-14.jpeg";
+import logo15 from "@/assets/logos/brand-logo-15.png";
+import logo16 from "@/assets/logos/brand-logo-16.png";
+import logo17 from "@/assets/logos/brand-logo-17.jpeg";
+import logo18 from "@/assets/logos/brand-logo-18.webp";
+import logo19 from "@/assets/logos/brand-logo-19.png";
+import logo20 from "@/assets/logos/brand-logo-20.jpeg";
 
 interface ClientLogosSectionProps {
   onApplyClick?: () => void;
@@ -17,12 +27,16 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const logos = [
-    { src: logo1, alt: "Brand Partner 1" },
-    { src: logo2, alt: "Brand Partner 2" },
-    { src: logo3, alt: "Brand Partner 3" },
-    { src: logo4, alt: "Brand Partner 4" },
-    { src: logo5, alt: "Brand Partner 5" },
-    { src: logo6, alt: "Brand Partner 6" },
+    { src: logo11, alt: "Brand Partner 11", needsFilter: true },
+    { src: logo12, alt: "Brand Partner 12", needsFilter: true },
+    { src: logo13, alt: "Brand Partner 13", needsFilter: true },
+    { src: logo14, alt: "Brand Partner 14", needsFilter: true },
+    { src: logo15, alt: "Brand Partner 15", needsFilter: true },
+    { src: logo16, alt: "Brand Partner 16", needsFilter: true },
+    { src: logo17, alt: "Brand Partner 17", needsFilter: true },
+    { src: logo18, alt: "Brand Partner 18", needsFilter: true },
+    { src: logo19, alt: "Brand Partner 19", needsFilter: true },
+    { src: logo20, alt: "Brand Partner 20", needsFilter: true },
   ];
 
   // Duplicate for seamless loop
@@ -83,11 +97,11 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
               key={index}
               className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center"
             >
-              <img 
-                src={logo.src} 
-                alt={logo.alt}
-                className="h-8 md:h-10 w-auto max-w-[100px] md:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-              />
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className={`h-8 md:h-10 w-auto max-w-[100px] md:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 ${logo.needsFilter ? 'grayscale invert brightness-90' : ''}`}
+                />
             </div>
           ))}
         </div>
