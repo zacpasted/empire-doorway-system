@@ -1,10 +1,10 @@
 import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-import logoFigs from "@/assets/logos/figs-white.png";
-import logoCocofloss from "@/assets/logos/cocofloss-white.png";
-import logoSolventum from "@/assets/logos/solventum-white.png";
-import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
+import logoFigs from "@/assets/logos/figs-transparent.png";
+import logoCocofloss from "@/assets/logos/cocofloss-transparent.png";
+import logoSolventum from "@/assets/logos/solventum-transparent.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-transparent.png";
 
 interface ClientLogosSectionProps {
   onApplyClick?: () => void;

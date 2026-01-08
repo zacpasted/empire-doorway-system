@@ -2,10 +2,10 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
-import logoFigs from "@/assets/logos/figs-white.png";
-import logoCocofloss from "@/assets/logos/cocofloss-white.png";
+import logoFigs from "@/assets/logos/figs-transparent.png";
+import logoCocofloss from "@/assets/logos/cocofloss-transparent.png";
 import logoSolventum from "@/assets/logos/solventum-transparent.png";
-import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-transparent.png";
 
 // Animated Counter Hook
 const useCounter = (end: number, duration: number, isInView: boolean, delay: number) => {
