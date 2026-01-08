@@ -48,8 +48,18 @@ const ProblemSolutionSection = () => {
           </div>
         </motion.div>
         
-        {/* Divider */}
-        <div className="w-16 h-px bg-border mx-auto mb-20 md:mb-28" />
+        {/* Dramatic Divider */}
+        <motion.div 
+          className="py-16 md:py-24 flex items-center justify-center gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-border" />
+          <div className="w-2 h-2 rounded-full bg-primary/40" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-border" />
+        </motion.div>
         
         {/* The Solution */}
         <motion.div
