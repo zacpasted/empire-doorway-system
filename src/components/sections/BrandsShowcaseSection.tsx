@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { brands } from "@/data/brands";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface BrandsShowcaseSectionProps {
   onApplyClick?: () => void;
@@ -20,44 +27,57 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
           </p>
         </div>
 
-        {/* Clickable Brand Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {brands.map((brand) => (
-            <Link
-              key={brand.id}
-              to={`/case-study/${brand.slug}`}
-              className="group text-left bg-background rounded-xl p-6 border border-border/50 transition-all duration-300 hover:border-primary/40 hover:shadow-lg"
-            >
-              {/* Brand thumbnail */}
-              <div className="aspect-video bg-secondary/50 rounded-lg mb-5 flex items-center justify-center overflow-hidden">
-                {brand.thumbnail ? (
-                  <img 
-                    src={brand.thumbnail} 
-                    alt={brand.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <span className="text-muted-foreground text-sm">
-                    Coming Soon
-                  </span>
-                )}
-              </div>
+        {/* Swipeable Brand Cards Carousel */}
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {brands.map((brand) => (
+              <CarouselItem key={brand.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+                <Link
+                  to={`/case-study/${brand.slug}`}
+                  className="group block text-left bg-background rounded-xl p-6 border border-border/50 transition-all duration-300 hover:border-primary/40 hover:shadow-lg h-full"
+                >
+                  {/* Brand thumbnail */}
+                  <div className="aspect-video bg-secondary/50 rounded-lg mb-5 flex items-center justify-center overflow-hidden">
+                    {brand.thumbnail ? (
+                      <img 
+                        src={brand.thumbnail} 
+                        alt={brand.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <span className="text-muted-foreground text-sm">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
 
-              <h3 className="text-lg font-serif text-foreground mb-2 group-hover:text-primary transition-colors">
-                {brand.name}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                {brand.tagline}
-              </p>
+                  <h3 className="text-lg font-serif text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {brand.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                    {brand.tagline}
+                  </p>
 
-              {/* View case study link */}
-              <div className="flex items-center gap-2 text-sm text-foreground/60 group-hover:text-primary transition-colors">
-                <span>View case study</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-          ))}
-        </div>
+                  {/* View case study link */}
+                  <div className="flex items-center gap-2 text-sm text-foreground/60 group-hover:text-primary transition-colors">
+                    <span>View case study</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-center gap-4 mt-8">
+            <CarouselPrevious className="static translate-y-0" />
+            <CarouselNext className="static translate-y-0" />
+          </div>
+        </Carousel>
 
         {/* CTA */}
         <div className="mt-16 text-center">
