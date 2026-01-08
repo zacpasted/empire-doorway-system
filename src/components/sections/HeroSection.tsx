@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
 import logo1 from "@/assets/logos/brand-logo-01.png";
@@ -14,6 +14,65 @@ import logo7 from "@/assets/logos/brand-logo-07.jpeg";
 import logo8 from "@/assets/logos/brand-logo-08.webp";
 import logo9 from "@/assets/logos/brand-logo-09.jpeg";
 import logo10 from "@/assets/logos/brand-logo-10.jpeg";
+
+// Animated Metrics Bar Component
+const MetricsBar = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  const metrics = [
+    { label: "Revenue Generated", value: "$100M+", barWidth: 95 },
+    { label: "Client Retention", value: "97%", barWidth: 97 },
+    { label: "Practices Scaled", value: "41+", barWidth: 82 },
+    { label: "Countries", value: "12", barWidth: 60 },
+  ];
+
+  return (
+    <div ref={ref} className="max-w-3xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {metrics.map((metric, index) => (
+          <motion.div
+            key={metric.label}
+            className="relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            {/* Value */}
+            <motion.div
+              className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-1"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+            >
+              {metric.value}
+            </motion.div>
+            
+            {/* Label */}
+            <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted-foreground/60 mb-2">
+              {metric.label}
+            </p>
+            
+            {/* Animated Bar */}
+            <div className="h-1 bg-border/30 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-primary/60 to-primary/30 rounded-full"
+                initial={{ width: 0 }}
+                animate={isInView ? { width: `${metric.barWidth}%` } : {}}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 0.5 + index * 0.15,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const HeroSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -179,13 +238,20 @@ const HeroSection = () => {
         </motion.div>
         
         {/* VSL */}
-        <div className="mb-12 md:mb-16 animate-fade-up opacity-0" style={{
+        <div className="mb-8 md:mb-10 animate-fade-up opacity-0" style={{
         animationDelay: "300ms",
         animationFillMode: "forwards"
       }}>
           <VideoPlayer />
         </div>
 
+        {/* Animated Metrics Bar */}
+        <div className="mb-12 md:mb-16 animate-fade-up opacity-0" style={{
+          animationDelay: "350ms",
+          animationFillMode: "forwards"
+        }}>
+          <MetricsBar />
+        </div>
         {/* Post-VSL Headline */}
         
 
