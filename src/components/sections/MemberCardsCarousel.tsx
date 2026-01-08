@@ -11,6 +11,8 @@ import serenaWong from '@/assets/cards/serena-wong.jpeg';
 import timHoeschen from '@/assets/cards/tim-hoeschen.jpeg';
 import kooperRuminer from '@/assets/cards/kooper-ruminer.jpeg';
 import navAtwal from '@/assets/cards/nav-atwal.jpeg';
+import beauMurphey from '@/assets/cards/beau-murphey.jpeg';
+
 const cards = [{
   id: 1,
   image: smileTrend,
@@ -51,6 +53,10 @@ const cards = [{
   id: 10,
   image: navAtwal,
   name: 'Dr. Nav Atwal'
+}, {
+  id: 11,
+  image: beauMurphey,
+  name: 'Dr. Beau Murphey'
 }];
 const MemberCardsCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
