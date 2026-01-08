@@ -11,6 +11,7 @@ import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
 import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
 import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
 import nourDiabiCard from "@/assets/cards/nour-diabi.png";
+import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -66,9 +67,10 @@ const testimonials = [
   {
     id: 7,
     name: "Dr. Beau Murphey",
-    role: "Dentist & Owner, Oxford, MS",
+    role: "Cosmetic Dentist, Ridgeland, MS",
     quote: "I was genuinely scared of content. I avoided it for years. Nothing ever worked, and it always felt uncomfortable. This is the first time content felt natural—and the first time it actually worked. That completely changed my outlook and my results.",
     featured: false,
+    cardImage: beauMurpheyCard,
   },
   {
     id: 8,
