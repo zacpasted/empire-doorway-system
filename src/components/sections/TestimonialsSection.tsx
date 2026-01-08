@@ -130,6 +130,13 @@ const testimonials = [
     quote: "Juggling clinical work, patient satisfaction, admin, and social media can feel overwhelming, especially when you're stepping into a new environment and trying to stand out. Pasted took that pressure off my shoulders. They helped me translate who I am in the clinic into a clear, authentic personal brand the world can actually see. As a dentist, trust and perception matter and Pasted understood that instantly. They didn't just create content or advertisements—they helped me communicate confidence, credibility, and personality without it feeling forced or salesy. It finally feels like my online presence matches the standard of my work.",
     featured: false,
   },
+  {
+    id: 16,
+    name: "Dr. Michael Allen",
+    role: "Cosmetic Dentist",
+    quote: "Working with Zac and his team have helped me realize how powerful social media can be to bringing in that perfect cosmetic patient. Not only do I have a consistent flow of cosmetic patients in my practice, it has also helped to establish me as the expert in my field, especially in my local area. Just meeting and talking with the team have helped me develop the skills in marketing and in cosmetic dentistry that I might have lacked in the past. I've already recommended PASTED to many other dentists. I've used the skills that I've learned from PASTED to help market other ventures that I'm involved in (SMILETREND). In my opinion, it's been a great investment for my practice, and I plan to continue using them for a long time.",
+    featured: false,
+  },
 ];
 
 const TestimonialCard = ({ 
