@@ -116,50 +116,66 @@ const HeroSection = () => {
         <motion.div className="text-center mb-12 md:mb-16" style={{
         opacity
       }}>
-          <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-muted-foreground/50 mb-10 md:mb-12 animate-fade-up opacity-0 font-medium" style={{
-          animationDelay: "100ms",
-          animationFillMode: "forwards"
-        }}>
+          <motion.p 
+            className="text-[10px] md:text-[11px] tracking-[0.6em] uppercase text-muted-foreground/40 mb-10 md:mb-14 font-sans font-medium"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             PASTED
-          </p>
+          </motion.p>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-foreground mb-6 md:mb-8 leading-[1.1] tracking-tight overflow-hidden" style={{
-          animationFillMode: "forwards"
-        }}>
-            <motion.span className="block" initial={{
-            opacity: 0,
-            y: 30
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}>
-              Great Dentists Don't Struggle Because They Lack Skill.
+          <h1 className="font-serif font-bold text-foreground mb-8 md:mb-10 leading-[1.05] tracking-[-0.02em] overflow-hidden">
+            <motion.span 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              Great Dentists Don't Struggle
             </motion.span>
-            <motion.span className="block mt-2" initial={{
-            opacity: 0,
-            y: 30
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.5,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}>
-              They Struggle Because Branding and Content Were Never Simplified.
+            <motion.span 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-muted-foreground/60 font-normal italic mt-1" 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              Because They Lack Skill.
+            </motion.span>
+            <motion.span 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mt-4 md:mt-6" 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              They Struggle Because
+            </motion.span>
+            <motion.span 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <span className="text-primary/90">Branding</span> and <span className="text-primary/90">Content</span>
+            </motion.span>
+            <motion.span 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-muted-foreground/60 font-normal italic" 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              Were Never Simplified.
             </motion.span>
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed animate-fade-up opacity-0 font-sans" style={{
-          animationDelay: "800ms",
-          animationFillMode: "forwards"
-        }}>
+          <motion.p 
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
             We fixed that — built by the most successful premium international agency in aesthetic dentistry.
-          </p>
+          </motion.p>
         </motion.div>
         
         {/* VSL */}
