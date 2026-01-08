@@ -212,46 +212,38 @@ const HeroSection = () => {
             PASTED
           </motion.p>
           
-          <h1 className="font-serif font-bold text-foreground mb-8 md:mb-10 leading-[1.05] tracking-[-0.02em] overflow-hidden">
+          <h1 className="font-serif text-foreground mb-8 md:mb-10 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" 
-              initial={{ opacity: 0, y: 40 }}
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               Great Dentists Don't Struggle
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-muted-foreground/60 font-normal italic mt-1" 
-              initial={{ opacity: 0, y: 40 }}
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-muted-foreground/70 mt-1" 
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               Because They Lack Skill.
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mt-4 md:mt-6" 
-              initial={{ opacity: 0, y: 40 }}
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-6" 
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              They Struggle Because
+              They Struggle Because Branding
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" 
-              initial={{ opacity: 0, y: 40 }}
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-muted-foreground/70" 
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.6, delay: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <span className="text-primary/90">Branding</span> and <span className="text-primary/90">Content</span>
-            </motion.span>
-            <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-muted-foreground/60 font-normal italic" 
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            >
-              Were Never Simplified.
+              Was Never Simplified.
             </motion.span>
           </h1>
           
