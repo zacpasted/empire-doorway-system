@@ -12,8 +12,8 @@ import timHoeschen from '@/assets/cards/tim-hoeschen.jpeg';
 import kooperRuminer from '@/assets/cards/kooper-ruminer.jpeg';
 import navAtwal from '@/assets/cards/nav-atwal.jpeg';
 import beauMurphey from '@/assets/cards/beau-murphey.jpeg';
-import brianHarris from '@/assets/cards/brian-harris.jpeg';
-import samSaleh from '@/assets/cards/sam-saleh.jpeg';
+import brianHarris from '@/assets/cards/brian-harris.png';
+import samSaleh from '@/assets/cards/sam-saleh.png';
 
 const cards = [{
   id: 1,
