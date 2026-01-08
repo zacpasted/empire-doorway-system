@@ -12,8 +12,8 @@ import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
 import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
 import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
-import brianHarrisCard from "@/assets/cards/brian-harris.jpeg";
-import samSalehCard from "@/assets/cards/sam-saleh.jpeg";
+import brianHarrisCard from "@/assets/cards/brian-harris.png";
+import samSalehCard from "@/assets/cards/sam-saleh.png";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
