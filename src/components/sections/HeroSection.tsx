@@ -170,11 +170,25 @@ const HeroSection = () => {
           
           <motion.p 
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.02, delayChildren: 1 } }
+            }}
           >
-            We fixed that — built by the most successful premium international agency in aesthetic dentistry.
+            {"We fixed that — built by the most successful premium international agency in aesthetic dentistry.".split("").map((char, index) => (
+              <motion.span
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </motion.p>
         </motion.div>
         
