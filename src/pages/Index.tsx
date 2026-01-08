@@ -84,6 +84,16 @@ const Index = () => {
         <WhatWeDoSection />
       </motion.div>
       
+      {/* Social Proof - Video Carousel (A2E Content) */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <VideoCarouselSection />
+      </motion.div>
+      
       {/* Testimonials */}
       <motion.div
         initial="hidden"
@@ -92,16 +102,6 @@ const Index = () => {
         variants={sectionVariants}
       >
         <TestimonialsSection onApplyClick={scrollToForm} />
-      </motion.div>
-      
-      {/* Social Proof - Video Testimonials */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <VideoCarouselSection />
       </motion.div>
       
       {/* The Gap - Pain Section */}
