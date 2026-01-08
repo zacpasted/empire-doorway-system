@@ -114,6 +114,16 @@ const Index = () => {
         <TheGapSection />
       </motion.div>
       
+      {/* Social Proof - Brand Examples */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <BrandsShowcaseSection onApplyClick={scrollToForm} />
+      </motion.div>
+      
       {/* Case Studies with Metrics */}
       <motion.div
         initial="hidden"
@@ -124,34 +134,24 @@ const Index = () => {
         <AdCaseStudiesSection />
       </motion.div>
       
-      {/* Proof of Authority - Stats */}
+      {/* The Truth - Hard Stats */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
       >
-        <ProofSection />
+        <TheTruthSection />
       </motion.div>
-      
-      {/* Social Proof - Member Cards */}
+
+      {/* Take It - Editorial CTA */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
       >
-        <MemberCardsCarousel />
-      </motion.div>
-      
-      {/* Social Proof - Brand Examples */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <BrandsShowcaseSection onApplyClick={scrollToForm} />
+        <TakeItSection onApplyClick={scrollToForm} />
       </motion.div>
       
       {/* The Truth - Brand vs Ads */}
