@@ -1,97 +1,114 @@
 import { motion } from "framer-motion";
+import { X, Check } from "lucide-react";
 
 const ProblemSolutionSection = () => {
+  const problems = [
+    "No one taught you how to make dentistry feel human",
+    "Content feels awkward, time-consuming, inconsistent",
+    "Told to wait until ownership to build a brand",
+    "Don't know who to trust with your image",
+    "Best agencies are inaccessible or too expensive",
+  ];
+
+  const solutions = [
+    "Clear direction from day one",
+    "Done-for-you content that compounds",
+    "Build authority before ownership",
+    "Trusted by the industry's top names",
+    "Premium quality, now accessible",
+  ];
+
   return (
-    <section className="py-24 md:py-32 bg-background">
-      <div className="max-w-4xl mx-auto px-6 md:px-8">
-        {/* The Problem */}
-        <motion.div 
-          className="mb-20 md:mb-28"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-12 md:mb-16">
-            The Problem
-          </h2>
-          
-          <div className="space-y-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
-            <p className="text-foreground font-medium">
-              Almost every dentist struggles with their brand.
-              <br />
-              <span className="text-muted-foreground font-normal">Most don't know what actually works.</span>
-            </p>
+    <section className="py-16 md:py-24 bg-background">
+      <div className="max-w-6xl mx-auto px-6 md:px-8">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {/* The Problem */}
+          <motion.div 
+            className="relative p-8 md:p-10 rounded-2xl bg-card/30 border border-border/30"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-muted-foreground/20 rounded-tl-2xl" />
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-muted-foreground/20 rounded-br-2xl" />
             
-            <p>
-              Dentistry looks boring and sterile because no one was taught how to make it human.
-              <br />
-              Content feels awkward, time-consuming, and inconsistent — so it gets avoided or abandoned.
-            </p>
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-muted-foreground/10 flex items-center justify-center">
+                <X className="w-4 h-4 text-muted-foreground" />
+              </span>
+              The Problem
+            </h3>
             
-            <p>
-              <span className="text-foreground font-medium">Associates are told to wait until ownership to build a brand.</span>
-              <br />
-              That makes no sense.
-            </p>
+            <ul className="space-y-4">
+              {problems.map((problem, index) => (
+                <motion.li
+                  key={index}
+                  className="flex items-start gap-3 text-muted-foreground"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  <X className="w-4 h-4 text-muted-foreground/50 mt-1 flex-shrink-0" />
+                  <span className="text-sm md:text-base leading-relaxed">{problem}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* The Solution */}
+          <motion.div 
+            className="relative p-8 md:p-10 rounded-2xl bg-gradient-to-br from-primary/5 via-card/50 to-card/30 border border-primary/20"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary/30 rounded-tl-2xl" />
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary/30 rounded-br-2xl" />
             
-            <div className="space-y-2">
-              <p>You're expected to be authentic, visible, and trusted — without ever being trained how.</p>
-              <p>You don't know who to trust.</p>
-              <p>The best are inaccessible or too expensive.</p>
-              <p>Most vendors don't specialize, don't care, or don't last.</p>
+            {/* Subtle glow */}
+            <div className="absolute -inset-px bg-gradient-to-br from-primary/10 to-transparent rounded-2xl blur-xl opacity-50" />
+            
+            <div className="relative">
+              <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
+                <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-primary" />
+                </span>
+                The Solution
+              </h3>
+              
+              <ul className="space-y-4">
+                {solutions.map((solution, index) => (
+                  <motion.li
+                    key={index}
+                    className="flex items-start gap-3 text-foreground/90"
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
+                  >
+                    <Check className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                    <span className="text-sm md:text-base leading-relaxed">{solution}</span>
+                  </motion.li>
+                ))}
+              </ul>
+              
+              <motion.p 
+                className="mt-6 pt-6 border-t border-primary/20 text-sm text-muted-foreground italic"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                Built by the most successful premium agency in aesthetic dentistry — now made accessible.
+              </motion.p>
             </div>
-            
-            <p className="text-foreground font-medium">
-              Content is non-negotiable, yet it feels risky, draining, and unproductive.
-            </p>
-          </div>
-        </motion.div>
-        
-        {/* Dramatic Divider */}
-        <motion.div 
-          className="py-16 md:py-24 flex items-center justify-center gap-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-border" />
-          <div className="w-2 h-2 rounded-full bg-primary/40" />
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-border" />
-        </motion.div>
-        
-        {/* The Solution */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-12 md:mb-16">
-            The Solution
-          </h2>
-          
-          <div className="space-y-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
-            <p className="text-foreground font-medium text-xl md:text-2xl">
-              Associate to Empire fixes this.
-            </p>
-            
-            <p>
-              We give ambitious dentists a simple, reliable system to build their brand before ownership — with clear direction, done-for-you structure, and content that actually compounds into opportunity and revenue.
-            </p>
-            
-            <div className="space-y-2 text-foreground font-medium">
-              <p>No guessing.</p>
-              <p>No vendor roulette.</p>
-              <p>No wasted time.</p>
-            </div>
-            
-            <p className="text-muted-foreground italic">
-              Built by the most successful premium international agency in aesthetic dentistry — now made accessible.
-            </p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
