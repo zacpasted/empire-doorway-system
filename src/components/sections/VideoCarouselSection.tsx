@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 
 import video01 from "@/assets/videos/showcase-01.mp4";
 import video02 from "@/assets/videos/showcase-02.mp4";
@@ -11,6 +12,10 @@ const videos = [video01, video02, video03, video04, video05, video06];
 
 const VideoCarouselSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headlineRef, { once: true, margin: "-100px" });
+
+  const words = ["Create", "Content", "That", "Builds", "Your", "Dream", "Life"];
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -56,15 +61,31 @@ const VideoCarouselSection = () => {
 
   return (
     <section className="py-20 bg-background overflow-hidden">
-      <div className="container mx-auto px-6 mb-12 text-center">
-        <h2 className="font-display font-medium text-3xl md:text-4xl lg:text-5xl text-foreground leading-[1.15] max-w-4xl mx-auto tracking-tight">
-          Create the Best Content in the World—
-          <span className="block text-muted-foreground/70 font-normal mt-2">
-            Intimately You.
-          </span>
-          <span className="block mt-4 text-foreground">
-            Build Real Momentum That Builds Your Dream Life.
-          </span>
+      <div ref={headlineRef} className="container mx-auto px-6 mb-8 text-center overflow-hidden">
+        <h2 className="font-display font-medium text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight max-w-3xl mx-auto tracking-tight flex flex-wrap justify-center gap-x-3 gap-y-1">
+          {words.map((word, index) => (
+            <motion.span
+              key={index}
+              initial={{ y: 60, opacity: 0, rotateX: -45 }}
+              animate={isInView ? { y: 0, opacity: 1, rotateX: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className={`inline-block ${index >= 4 ? 'text-muted-foreground/70' : ''}`}
+            >
+              {word}
+            </motion.span>
+          ))}
+          <motion.span
+            initial={{ scale: 0, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.7, ease: "backOut" }}
+            className="text-primary"
+          >
+            .
+          </motion.span>
         </h2>
       </div>
 
