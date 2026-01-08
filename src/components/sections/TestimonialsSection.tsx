@@ -123,6 +123,13 @@ const testimonials = [
     featured: false,
     cardImage: nourDiabiCard,
   },
+  {
+    id: 15,
+    name: "Dr. Gage Lidder",
+    role: "Dentist",
+    quote: "Juggling clinical work, patient satisfaction, admin, and social media can feel overwhelming, especially when you're stepping into a new environment and trying to stand out. Pasted took that pressure off my shoulders. They helped me translate who I am in the clinic into a clear, authentic personal brand the world can actually see. As a dentist, trust and perception matter and Pasted understood that instantly. They didn't just create content or advertisements—they helped me communicate confidence, credibility, and personality without it feeling forced or salesy. It finally feels like my online presence matches the standard of my work.",
+    featured: false,
+  },
 ];
 
 const TestimonialCard = ({ 
