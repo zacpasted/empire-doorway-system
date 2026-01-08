@@ -58,7 +58,7 @@ const TheLongGameSection = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-3xl md:text-5xl font-serif text-center text-foreground mb-8"
         >
-          The Long Game
+          This isn't about quick wins. It's about building something that compounds.
         </motion.h2>
 
         {/* Subtitle */}
@@ -69,7 +69,7 @@ const TheLongGameSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-muted-foreground mb-24 max-w-xl mx-auto text-lg"
         >
-          This isn't about quick wins. It's about building something that compounds.
+          The Long Game
         </motion.p>
 
         {/* Trajectory timeline */}
