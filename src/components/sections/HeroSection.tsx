@@ -226,24 +226,24 @@ const HeroSection = () => {
 
         {/* Secondary Headline - Below Post-VSL */}
         {/* Secondary Statement - Above Logo Marquee */}
-        <div className="text-center mb-16 md:mb-20">
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-2 animate-fade-up opacity-0" style={{
+        <div className="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground/80 max-w-3xl mx-auto tracking-wide animate-fade-up opacity-0" style={{
             animationDelay: "400ms",
             animationFillMode: "forwards"
           }}>
-            <span className="font-semibold text-foreground">Dental School</span> Trains Skill. <span className="font-semibold text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
+            <span className="font-medium text-foreground">Dental School</span> Trains Skill. <span className="font-medium text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
           </p>
-          <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed mb-4 animate-fade-up opacity-0" style={{
+          <p className="font-serif text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto leading-tight animate-fade-up opacity-0" style={{
             animationDelay: "600ms",
             animationFillMode: "forwards"
           }}>
-            <span className="font-semibold text-foreground">they just become debt with no destination.</span>
+            <span className="font-semibold text-foreground italic">they just become debt with no destination.</span>
           </p>
-          <p className="text-xl md:text-2xl text-muted-foreground animate-fade-up opacity-0" style={{
+          <p className="text-base md:text-lg text-muted-foreground/70 pt-2 animate-fade-up opacity-0" style={{
             animationDelay: "800ms",
             animationFillMode: "forwards"
           }}>
-            <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
+            <span className="font-display font-medium text-foreground">Associate To Empire</span> <span className="text-muted-foreground/50">by PASTED</span> is the solution.
           </p>
         </div>
 
