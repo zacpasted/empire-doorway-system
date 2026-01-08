@@ -57,9 +57,9 @@ const VideoCarouselSection = () => {
   return (
     <section className="py-20 bg-background overflow-hidden">
       <div className="container mx-auto px-6 mb-12 text-center">
-        <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.2] max-w-4xl mx-auto">
+        <h2 className="font-display font-medium text-3xl md:text-4xl lg:text-5xl text-foreground leading-[1.15] max-w-4xl mx-auto tracking-tight">
           Create the Best Content in the World—
-          <span className="block text-muted-foreground/70 font-light italic mt-2">
+          <span className="block text-muted-foreground/70 font-normal mt-2">
             Intimately You.
           </span>
           <span className="block mt-4 text-foreground">

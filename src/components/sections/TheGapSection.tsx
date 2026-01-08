@@ -23,6 +23,22 @@ const TheGapSection = () => {
     text: "Watching others live the life you expected.",
     delay: 400
   }];
-  return;
+  return (
+    <section ref={sectionRef} className="py-20 md:py-28 bg-background">
+      <div className="container max-w-3xl mx-auto px-4 text-center">
+        <div className={`space-y-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {statements.map((statement, index) => (
+            <p
+              key={index}
+              className="text-xl md:text-2xl text-muted-foreground font-serif"
+              style={{ transitionDelay: `${statement.delay}ms` }}
+            >
+              {statement.text}
+            </p>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 export default TheGapSection;
