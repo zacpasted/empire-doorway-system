@@ -8,7 +8,7 @@ import logo4 from "@/assets/logos/brand-logo-04.png";
 import logo5 from "@/assets/logos/brand-logo-05.png";
 import logo6 from "@/assets/logos/brand-logo-06.webp";
 import logo11 from "@/assets/logos/brand-logo-11.jpeg";
-import logo12 from "@/assets/logos/brand-logo-12.webp";
+
 import logo13 from "@/assets/logos/brand-logo-13.jpeg";
 import logo14 from "@/assets/logos/brand-logo-14.jpeg";
 import logo15 from "@/assets/logos/brand-logo-15.png";
@@ -28,7 +28,7 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
 
   const logos = [
     { src: logo11, alt: "Brand Partner 11", needsFilter: true },
-    { src: logo12, alt: "Brand Partner 12", needsFilter: true },
+    
     { src: logo13, alt: "Brand Partner 13", needsFilter: true },
     { src: logo14, alt: "Brand Partner 14", needsFilter: true },
     { src: logo15, alt: "Brand Partner 15", needsFilter: true },
