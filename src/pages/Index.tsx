@@ -21,6 +21,7 @@ import FilterSection from "@/components/sections/FilterSection";
 import ClosingCTASection from "@/components/sections/ClosingCTASection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import WistiaVideoEmbedSection from "@/components/sections/WistiaVideoEmbedSection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -169,6 +170,19 @@ const Index = () => {
         <WhatWeAskSection />
       </motion.div>
       
+      {/* Video Examples - After What We Ask */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WistiaVideoEmbedSection 
+          title="Content Examples"
+          subtitle="See the type of content we create for our members"
+        />
+      </motion.div>
+      
       {/* What You Receive - Delivery */}
       <motion.div
         initial="hidden"
@@ -187,6 +201,19 @@ const Index = () => {
         variants={sectionVariants}
       >
         <TheLongGameSection />
+      </motion.div>
+      
+      {/* Video Examples - After The Long Game */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WistiaVideoEmbedSection 
+          title="Compounding Results"
+          subtitle="What consistent execution looks like over time"
+        />
       </motion.div>
       
       {/* Transformation - Before/After */}
