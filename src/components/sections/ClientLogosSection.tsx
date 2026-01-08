@@ -100,7 +100,7 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className={`h-8 md:h-10 w-auto max-w-[100px] md:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 ${logo.needsFilter ? 'grayscale invert brightness-90' : ''}`}
+                  className="h-10 md:h-12 w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 grayscale"
                 />
             </div>
           ))}
