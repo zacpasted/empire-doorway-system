@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { X, Check } from "lucide-react";
+import { X, Check, ArrowRight } from "lucide-react";
 
 const ProblemSolutionSection = () => {
   const problems = [
@@ -21,7 +21,7 @@ const ProblemSolutionSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 relative">
           {/* The Problem */}
           <motion.div 
             className="relative p-8 md:p-10 rounded-2xl bg-card/30 border border-border/30"
@@ -56,6 +56,23 @@ const ProblemSolutionSection = () => {
                 </motion.li>
               ))}
             </ul>
+          </motion.div>
+
+          {/* Animated Arrow Connector */}
+          <motion.div 
+            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <motion.div 
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center backdrop-blur-sm"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight className="w-5 h-5 text-primary" />
+            </motion.div>
           </motion.div>
 
           {/* The Solution */}
