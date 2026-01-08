@@ -94,28 +94,29 @@ const HeroSection = () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-foreground mb-6 md:mb-8 leading-[1.1] tracking-tight overflow-hidden" style={{
             animationFillMode: "forwards"
           }}>
-            {"Trusted by the most recognized names in dentistry to build brands that disrupt, define and actually SCALE practices.".split(" ").map((word, index) => (
-              <motion.span
-                key={index}
-                className="inline-block mr-[0.25em]"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.2 + index * 0.08,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-              >
-                {word}
-              </motion.span>
-            ))}
+            <motion.span
+              className="block"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              Great Dentists Don't Struggle Because They Lack Skill.
+            </motion.span>
+            <motion.span
+              className="block mt-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              They Struggle Because Branding and Content Were Never Simplified.
+            </motion.span>
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed animate-fade-up opacity-0 font-light" style={{
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed animate-fade-up opacity-0 font-sans" style={{
             animationDelay: "800ms",
             animationFillMode: "forwards"
           }}>
-            Now we are here to build with you.
+            We fixed that — built by the most successful premium international agency in aesthetic dentistry.
           </p>
         </motion.div>
         
