@@ -213,7 +213,7 @@ const Index = () => {
         <WistiaVideoEmbedSection 
           title="Content Examples"
           subtitle="See the type of content we create for our members"
-          videoIds={["6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5"]}
+          videoIds={["6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9"]}
         />
       </motion.div>
       
