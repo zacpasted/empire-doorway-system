@@ -31,40 +31,52 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
   const logos = [{
     src: logo1,
-    alt: "Brand Partner 1"
+    alt: "Brand Partner 1",
+    needsFilter: false
   }, {
     src: logo2,
-    alt: "Brand Partner 2"
+    alt: "Brand Partner 2",
+    needsFilter: false
   }, {
     src: logo3,
-    alt: "Brand Partner 3"
+    alt: "Brand Partner 3",
+    needsFilter: false
   }, {
     src: logo4,
-    alt: "Brand Partner 4"
+    alt: "Brand Partner 4",
+    needsFilter: false
   }, {
     src: logo5,
-    alt: "Brand Partner 5"
+    alt: "Brand Partner 5",
+    needsFilter: false
   }, {
     src: logo6,
-    alt: "Brand Partner 6"
+    alt: "Brand Partner 6",
+    needsFilter: false
   }, {
     src: logoCocofloss,
-    alt: "Cocofloss"
+    alt: "Cocofloss",
+    needsFilter: false
   }, {
     src: logoSolventum,
-    alt: "Solventum"
+    alt: "Solventum",
+    needsFilter: false
   }, {
     src: logo7,
-    alt: "Brand Partner 7"
+    alt: "Brand Partner 7",
+    needsFilter: true
   }, {
     src: logo8,
-    alt: "Brand Partner 8"
+    alt: "Brand Partner 8",
+    needsFilter: true
   }, {
     src: logo9,
-    alt: "Brand Partner 9"
+    alt: "Brand Partner 9",
+    needsFilter: true
   }, {
     src: logo10,
-    alt: "Brand Partner 10"
+    alt: "Brand Partner 10",
+    needsFilter: true
   }];
   const duplicatedLogos = [...logos, ...logos, ...logos];
   useEffect(() => {
@@ -197,7 +209,11 @@ const HeroSection = () => {
 
           <div ref={scrollRef} className="flex items-center will-change-transform">
             {duplicatedLogos.map((logo, index) => <div key={index} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
-                <img src={logo.src} alt={logo.alt} className="h-14 md:h-20 w-auto max-w-[160px] md:max-w-[220px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300" />
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt} 
+                  className={`h-14 md:h-20 w-auto max-w-[160px] md:max-w-[220px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 ${logo.needsFilter ? 'grayscale invert brightness-90' : ''}`} 
+                />
               </div>)}
           </div>
         </div>
