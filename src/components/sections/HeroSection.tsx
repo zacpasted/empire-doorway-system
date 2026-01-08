@@ -231,7 +231,7 @@ const HeroSection = () => {
         animationFillMode: "forwards"
       }}>
           <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-4">
-            Dental School Trains Skill. CE Improves Technique. <span className="font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
+            <span className="font-semibold text-foreground">Dental School</span> Trains Skill. <span className="font-semibold text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—<span className="font-semibold text-foreground">they just become debt with no destination.</span>
           </p>
           <p className="text-xl md:text-2xl text-muted-foreground">
             <span className="font-serif font-semibold text-foreground">Associate To Empire</span> by PASTED is the solution.
