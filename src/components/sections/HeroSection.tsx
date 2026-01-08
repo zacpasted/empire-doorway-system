@@ -231,13 +231,13 @@ const HeroSection = () => {
             animationDelay: "400ms",
             animationFillMode: "forwards"
           }}>
-            <span className="font-semibold text-foreground">Dental School</span> Trains Skill. <span className="font-semibold text-foreground">CE</span> Improves Technique.
+            <span className="font-semibold text-foreground">Dental School</span> Trains Skill. <span className="font-semibold text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
           </p>
           <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed mb-4 animate-fade-up opacity-0" style={{
             animationDelay: "600ms",
             animationFillMode: "forwards"
           }}>
-            <span className="font-semibold text-foreground">Without brand, story, and strategy—they just become debt with no destination.</span>
+            <span className="font-semibold text-foreground">they just become debt with no destination.</span>
           </p>
           <p className="text-xl md:text-2xl text-muted-foreground animate-fade-up opacity-0" style={{
             animationDelay: "800ms",
