@@ -13,6 +13,7 @@ import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
 import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
 import brianHarrisCard from "@/assets/cards/brian-harris.jpeg";
+import samSalehCard from "@/assets/cards/sam-saleh.jpeg";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -65,6 +66,7 @@ const testimonials = [
     role: "Celebrity Dentist, Los Angeles & London",
     quote: "This is world-class work in every sense. The strategy is genius-level, the execution is flawless, and there is zero fluff. I could not recommend them more highly.",
     featured: false,
+    cardImage: samSalehCard,
   },
   {
     id: 7,
