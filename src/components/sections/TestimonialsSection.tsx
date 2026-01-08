@@ -12,6 +12,7 @@ import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
 import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
 import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
+import brianHarrisCard from "@/assets/cards/brian-harris.jpeg";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -48,6 +49,7 @@ const testimonials = [
     role: "Celebrity Dentist, Gilbert, AZ · Founder, Smile Virtual & Smile Sculpt",
     quote: "This is an easy recommendation. If a doctor asks who they should trust with their brand, this is the answer. They understand dentists, but more importantly, they understand people. That combination is incredibly rare.",
     featured: false,
+    cardImage: brianHarrisCard,
   },
   {
     id: 5,
