@@ -7,7 +7,7 @@ import logo3 from "@/assets/logos/brand-logo-03.jpeg";
 import logo4 from "@/assets/logos/brand-logo-04.png";
 import logo5 from "@/assets/logos/brand-logo-05.png";
 import logo6 from "@/assets/logos/brand-logo-06.webp";
-import logo11 from "@/assets/logos/brand-logo-11.jpeg";
+
 
 import logo13 from "@/assets/logos/brand-logo-13.jpeg";
 import logo14 from "@/assets/logos/brand-logo-14.jpeg";
@@ -27,7 +27,6 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const logos = [
-    { src: logo11, alt: "Brand Partner 11" },
     { src: logo13, alt: "Brand Partner 13" },
     { src: logo14, alt: "Brand Partner 14" },
     { src: logo15, alt: "Brand Partner 15" },
