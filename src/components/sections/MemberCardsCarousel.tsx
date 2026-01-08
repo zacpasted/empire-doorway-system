@@ -13,6 +13,7 @@ import kooperRuminer from '@/assets/cards/kooper-ruminer.jpeg';
 import navAtwal from '@/assets/cards/nav-atwal.jpeg';
 import beauMurphey from '@/assets/cards/beau-murphey.jpeg';
 import brianHarris from '@/assets/cards/brian-harris.jpeg';
+import samSaleh from '@/assets/cards/sam-saleh.jpeg';
 
 const cards = [{
   id: 1,
@@ -62,6 +63,10 @@ const cards = [{
   id: 12,
   image: brianHarris,
   name: 'Dr. Brian Harris'
+}, {
+  id: 13,
+  image: samSaleh,
+  name: 'Dr. Sam Saleh'
 }];
 const MemberCardsCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
