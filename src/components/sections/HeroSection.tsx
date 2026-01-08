@@ -83,34 +83,26 @@ const HeroSection = () => {
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Primary Headline - Above VSL */}
-        <motion.div className="text-center mb-10 md:mb-14" style={{ opacity }}>
-          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-muted-foreground/70 mb-8 md:mb-10 animate-fade-up opacity-0" style={{
+        <motion.div className="text-center mb-12 md:mb-16" style={{ opacity }}>
+          <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-muted-foreground/50 mb-10 md:mb-12 animate-fade-up opacity-0 font-medium" style={{
             animationDelay: "100ms",
             animationFillMode: "forwards"
           }}>
             PASTED
           </p>
           
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-3 animate-fade-up opacity-0" style={{
-            animationDelay: "150ms",
-            animationFillMode: "forwards"
-          }}>
-            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic">not noise.</span>
-          </p>
-          
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-foreground mb-5 md:mb-6 animate-fade-up opacity-0 overflow-hidden" style={{
-            animationDelay: "200ms",
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-foreground mb-6 md:mb-8 leading-[1.1] tracking-tight overflow-hidden" style={{
             animationFillMode: "forwards"
           }}>
             {"Now we are here to build with you.".split(" ").map((word, index) => (
               <motion.span
                 key={index}
-                className="inline-block mr-[0.3em]"
-                initial={{ opacity: 0, y: 20 }}
+                className="inline-block mr-[0.25em]"
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.5,
-                  delay: 0.4 + index * 0.1,
+                  duration: 0.6,
+                  delay: 0.2 + index * 0.08,
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
               >
@@ -119,11 +111,11 @@ const HeroSection = () => {
             ))}
           </h1>
           
-          <p className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-muted-foreground/40 max-w-xl mx-auto animate-fade-up opacity-0" style={{
-            animationDelay: "250ms",
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed animate-fade-up opacity-0 font-light" style={{
+            animationDelay: "800ms",
             animationFillMode: "forwards"
           }}>
-            Born from the brand and content strategy generating $100M+ in aesthetic case revenue for the best in the world
+            Trusted by the most recognized names in aesthetic dentistry to build brands, demand, and careers — <span className="italic font-normal text-foreground/70">not noise.</span>
           </p>
         </motion.div>
         
@@ -136,19 +128,22 @@ const HeroSection = () => {
         </div>
 
         {/* Secondary Headline - Below VSL */}
-        <div className="text-center mb-14 md:mb-16 animate-fade-up opacity-0" style={{
+        <div className="text-center mb-16 md:mb-20 animate-fade-up opacity-0" style={{
           animationDelay: "350ms",
           animationFillMode: "forwards"
         }}>
-          <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground/50 mb-6">
+          <p className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/40 mb-8 font-medium">
             Associate to Empire™
           </p>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.3] tracking-tight max-w-3xl mx-auto">
-            We Take Aesthetic Dentists<br className="hidden sm:block" />
-            <span className="text-muted-foreground"> From Skilled and Invisible</span><br className="hidden sm:block" />
-            <span className="text-muted-foreground"> to </span>Recognized and Chosen
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-6">
+            We Take Aesthetic Dentists
+            <br className="hidden sm:block" />
+            <span className="text-muted-foreground/70 font-normal">From Skilled and Invisible</span>
+            <br className="hidden sm:block" />
+            <span className="text-muted-foreground/70 font-normal">to </span>
+            <span className="text-foreground font-semibold">Recognized and Chosen</span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground/60 mt-4 font-light">
+          <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide">
             Without Waiting for Ownership
           </p>
         </div>
