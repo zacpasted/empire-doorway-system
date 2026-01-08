@@ -253,11 +253,11 @@ const HeroSection = () => {
 
           <div ref={scrollRef} className="flex items-center will-change-transform">
             {duplicatedLogos.map((logo, index) => (
-              <div key={index} className="flex-shrink-0 mx-8 md:mx-12 flex items-center justify-center bg-black rounded px-4 py-2">
+              <div key={index} className="flex-shrink-0 mx-8 md:mx-12 flex items-center justify-center">
                 <img 
                   src={logo.src} 
                   alt={logo.alt} 
-                  className="h-8 md:h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 grayscale invert brightness-0 invert"
+                  className="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300 brightness-0 invert"
                 />
               </div>
             ))}
