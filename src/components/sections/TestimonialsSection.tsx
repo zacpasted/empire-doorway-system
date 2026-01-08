@@ -20,7 +20,7 @@ const testimonials = [
   {
     id: 1,
     name: "Dr. Marshall Hanson",
-    role: "Aesthetic Dentist",
+    role: "Aesthetic Dentist, Provo, UT · Founder, Marshall Hanson Method",
     quote: "There is so much out there that looks artistic and beautiful on the surface, but very little of it is truly holistic or empathetic. What Zac and Alan do is different. They are, quite simply, the best practitioners in the world at what they do. Their understanding of brand, identity, and human psychology is unmatched. What makes this so special is that they are making this level of talent accessible to doctors who genuinely need it. I believe everyone needs this. If you need to build a brand and you don't want to do it yourself, I would not recommend anyone else.",
     featured: true,
     cardImage: marshallHansonCard,
@@ -28,7 +28,7 @@ const testimonials = [
   {
     id: 2,
     name: "Dr. Jon Marashi",
-    role: "Celebrity Dentist",
+    role: "Celebrity Dentist, Los Angeles, CA",
     quote: "At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else.",
     featured: false,
     cardImage: jonMarashiCard,
@@ -36,7 +36,7 @@ const testimonials = [
   {
     id: 3,
     name: "Dr. Drew Ballard",
-    role: "Celebrity Dentist",
+    role: "Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education",
     quote: "I'm deeply grateful for everything we've built together. Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone.",
     featured: false,
     cardImage: drewBallardCard,
@@ -44,7 +44,7 @@ const testimonials = [
   {
     id: 4,
     name: "Dr. Brian Harris",
-    role: "Celebrity Dentist",
+    role: "Celebrity Dentist, Gilbert, AZ · Founder, Smile Virtual & Smile Sculpt",
     quote: "This is an easy recommendation. If a doctor asks who they should trust with their brand, this is the answer. They understand dentists, but more importantly, they understand people. That combination is incredibly rare.",
     featured: false,
   },
