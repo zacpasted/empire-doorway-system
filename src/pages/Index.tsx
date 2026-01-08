@@ -24,6 +24,7 @@ import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import WistiaVideoEmbedSection from "@/components/sections/WistiaVideoEmbedSection";
 import TheTruthSection from "@/components/sections/TheTruthSection";
+import TransformationNarrativesSection from "@/components/sections/TransformationNarrativesSection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -162,6 +163,16 @@ const Index = () => {
         <TheTruthSection />
       </motion.div>
       
+      {/* Transformation Narratives - Case Studies */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <TransformationNarrativesSection />
+      </motion.div>
+      
       {/* Why Paths Fail - Diagnostic */}
       <motion.div
         initial="hidden"
@@ -224,19 +235,6 @@ const Index = () => {
         variants={sectionVariants}
       >
         <TheLongGameSection />
-      </motion.div>
-      
-      {/* Video Examples - After The Long Game */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <WistiaVideoEmbedSection 
-          title="Compounding Results"
-          subtitle="What consistent execution looks like over time"
-        />
       </motion.div>
       
       {/* Transformation - Before/After */}
