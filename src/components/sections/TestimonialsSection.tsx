@@ -7,6 +7,10 @@ import marshallHansonCard from "@/assets/cards/marshall-hanson.jpeg";
 import jonMarashiCard from "@/assets/cards/jon-marashi.jpeg";
 import drewBallardCard from "@/assets/cards/drew-ballard.jpeg";
 import kooperRuminerCard from "@/assets/cards/kooper-ruminer.jpeg";
+import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
+import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
+import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
+import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -86,6 +90,38 @@ const testimonials = [
     role: "Cosmetic Dentist",
     quote: "This work is intelligent, restrained, and deeply respectful of individuality. Zac and Alan build brands with intention and integrity. I'm genuinely grateful that more doctors can now access something this refined and thoughtful.",
     featured: false,
+  },
+  {
+    id: 11,
+    name: "Dr. Serena Wong",
+    role: "Aesthetic Dentist",
+    quote: "Working with this team has been an exceptional experience. They have consistently supported me with clarity, kindness, and a deep understanding of the dental field, which is rare in the marketing space. They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am. I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail.",
+    featured: false,
+    cardImage: serenaWongCard,
+  },
+  {
+    id: 12,
+    name: "Dr. Nav Atwal",
+    role: "Dental Surgeon",
+    quote: "Dr. Alan Clarke and Zac at Paste are helping translate vision into something tangible. They understand that strong brands are built with intention, not shortcuts.",
+    featured: false,
+    cardImage: navAtwalCard,
+  },
+  {
+    id: 13,
+    name: "Dr. Tim Hoeschen",
+    role: "Dentist",
+    quote: "Working with Zac and Alan has been fantastic. They've pushed the boundaries of dental marketing, not by overhyping and making up a new meme. Instead they tapped into something lasting and refreshing — your own story. You have given us a voice and helped tell our story with vision, creativity and style.",
+    featured: false,
+    cardImage: timHoeschenCard,
+  },
+  {
+    id: 14,
+    name: "Dr. Nour Diabi",
+    role: "Clinician",
+    quote: "Pasted Studio don't just create content, they tell your story. Alan and Zac captured who I am as a clinician with real depth and authenticity. Their focus on genuine storytelling over forced marketing is clear in every piece of content.",
+    featured: false,
+    cardImage: nourDiabiCard,
   },
 ];
 
