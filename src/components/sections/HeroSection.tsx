@@ -128,22 +128,36 @@ const HeroSection = () => {
           <VideoPlayer />
         </div>
 
-        {/* Secondary Headline - Below VSL */}
-        <div className="text-center mb-16 md:mb-20 animate-fade-up opacity-0" style={{
+        {/* Post-VSL Headline */}
+        <div className="text-center mb-12 md:mb-16 animate-fade-up opacity-0" style={{
           animationDelay: "350ms",
+          animationFillMode: "forwards"
+        }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-foreground mb-6 leading-[1.1] tracking-tight">
+            <span className="block">Great Dentists Don't Struggle Because They Lack Skill.</span>
+            <span className="block mt-2">They Struggle Because Branding and Content Were Never Simplified.</span>
+          </h2>
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed font-sans">
+            We fixed that — built by the most successful premium international agency in aesthetic dentistry.
+          </p>
+        </div>
+
+        {/* Secondary Headline - Below Post-VSL */}
+        <div className="text-center mb-16 md:mb-20 animate-fade-up opacity-0" style={{
+          animationDelay: "400ms",
           animationFillMode: "forwards"
         }}>
           <p className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/40 mb-8 font-medium">
             Associate to Empire™
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-6">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-6">
             We Take Aesthetic Dentists
             <br className="hidden sm:block" />
             <span className="text-muted-foreground/70 font-normal">From Skilled and Invisible</span>
             <br className="hidden sm:block" />
             <span className="text-muted-foreground/70 font-normal">to </span>
             <span className="text-foreground font-semibold">Recognized and Chosen</span>
-          </h2>
+          </h3>
           <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide">
             Without Waiting for Ownership
           </p>
