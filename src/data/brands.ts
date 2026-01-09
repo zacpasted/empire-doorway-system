@@ -45,6 +45,18 @@ import brand04_07 from "@/assets/brands/brand-04/showcase-07.jpeg";
 import brand04_08 from "@/assets/brands/brand-04/showcase-08.jpeg";
 import brand04_09 from "@/assets/brands/brand-04/showcase-09.jpeg";
 
+// Nav Atwal images
+import nav01 from "@/assets/brands/nav-atwal/showcase-01.jpeg";
+import nav02 from "@/assets/brands/nav-atwal/showcase-02.jpeg";
+import nav03 from "@/assets/brands/nav-atwal/showcase-03.jpeg";
+import nav04 from "@/assets/brands/nav-atwal/showcase-04.jpeg";
+import nav05 from "@/assets/brands/nav-atwal/showcase-05.jpeg";
+import nav06 from "@/assets/brands/nav-atwal/showcase-06.jpeg";
+import nav07 from "@/assets/brands/nav-atwal/showcase-07.jpeg";
+import nav08 from "@/assets/brands/nav-atwal/showcase-08.jpeg";
+import nav09 from "@/assets/brands/nav-atwal/showcase-09.jpeg";
+import nav10 from "@/assets/brands/nav-atwal/showcase-10.jpeg";
+
 export interface BrandExample {
   type: "image" | "video";
   label: string;
@@ -184,6 +196,36 @@ export const brands: BrandCaseStudy[] = [
       { type: "image", label: "Brand Expression", src: brand04_07 },
       { type: "image", label: "Visual Identity", src: brand04_08 },
       { type: "image", label: "Brand Campaign", src: brand04_09 },
+    ],
+  },
+  {
+    id: 5,
+    slug: "dr-nav-atwal",
+    name: "Dr. Nav Atwal",
+    tagline: "A Rock Star in the Making",
+    description: "Dr. Nav Atwal now lives and practices in Miami—a city where taste, visibility, and cultural relevance are non-negotiable. His trajectory is unmistakable. He's not just becoming well known—he's becoming unavoidable.",
+    thumbnail: nav01,
+    challenge: "Dr. Atwal's first brand identity was designed to feel different, to stand out in a sea of sameness. And it did. But as he stepped into the next stage of his journey—redefining what cosmetic dentistry means—his brand needed to rise with him. The challenge was to keep the individuality and freshness that define Dr. Atwal while elevating the brand to mirror the sophistication, artistry, and luxury of the services he delivers.",
+    solution: "By blending serif character with sans-serif clarity, the ATWAL wordmark was crafted from the ground up to feel both distinctive and refined. It reflects Dr. Atwal's individuality while projecting elegance, confidence, and quality. The identity balances playfulness with professionalism—setting a new tone for his brand. With the right foundation, positioning, and narrative in place, Nav is building toward something far bigger than a practice.",
+    results: [
+      "Complete brand identity system elevating his practice to Miami standards",
+      "Distinctive wordmark balancing individuality with elegance",
+      "Positioning as a cultural operator, not just a clinician",
+      "Trajectory toward becoming unavoidable in the market"
+    ],
+    services: ["Brand Strategy", "Visual Identity", "Wordmark Design", "Brand Architecture", "Cultural Positioning"],
+    timeline: "45-day build + ongoing management",
+    examples: [
+      { type: "image", label: "Brand Identity", src: nav01 },
+      { type: "image", label: "ATWAL Wordmark", src: nav02 },
+      { type: "image", label: "Brand Mark", src: nav03 },
+      { type: "image", label: "NAV Logo", src: nav04 },
+      { type: "image", label: "Logo System", src: nav05 },
+      { type: "image", label: "Typography", src: nav06 },
+      { type: "image", label: "Social Content", src: nav07 },
+      { type: "image", label: "Patient Materials", src: nav08 },
+      { type: "image", label: "Brand Campaign", src: nav09 },
+      { type: "image", label: "Visual System", src: nav10 },
     ],
   },
 ];
