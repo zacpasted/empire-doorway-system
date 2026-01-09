@@ -32,7 +32,12 @@ const HowItWorksSection = () => {
         "Clear brand foundation that informs every decision"
       ],
       outcome: "Content stops being random. Messaging stops being borrowed. You finally know what you're building.",
-      highlight: "This is where most practitioners finally understand why nothing worked before."
+      highlight: "This is where most practitioners finally understand why nothing worked before.",
+      testimonial: {
+        quote: "For the first time, I actually understood what I was building and why. The clarity was immediate.",
+        name: "Dr. Drew Ballard",
+        role: "Halo Veneers, TX"
+      }
     },
     {
       number: "02",
@@ -50,7 +55,12 @@ const HowItWorksSection = () => {
         "Room for your natural personality"
       ],
       outcome: "You are never left staring at a blank screen. This is where confidence begins to compound.",
-      highlight: "Our scripting system has been trained on 500+ high-performing pieces of content."
+      highlight: "Our scripting system has been trained on 500+ high-performing pieces of content.",
+      testimonial: {
+        quote: "I used to spend hours figuring out what to say. Now I just show up and the scripts are ready.",
+        name: "Dr. Michael Allen",
+        role: "Celebrity Dentist, Tucson"
+      }
     },
     {
       number: "03",
@@ -68,7 +78,12 @@ const HowItWorksSection = () => {
         "In-person branding intensives (select clients)"
       ],
       outcome: "Easy capture, no friction, no wasted energy. Most clients are surprised how simple this becomes.",
-      highlight: "Average filming time: 15-30 minutes per week. That's it."
+      highlight: "Average filming time: 15-30 minutes per week. That's it.",
+      testimonial: {
+        quote: "I film on Monday mornings before patients. 20 minutes, done for the week. It's become effortless.",
+        name: "Dr. Beau Murphey",
+        role: "Private Practice Owner, OK"
+      }
     },
     {
       number: "04",
@@ -86,7 +101,12 @@ const HowItWorksSection = () => {
         "Audience psychology, not just posting frequency"
       ],
       outcome: "You are not chasing trends. You are building authority.",
-      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always."
+      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always.",
+      testimonial: {
+        quote: "I drop the footage and forget about it. A week later, content is live. It feels like magic.",
+        name: "Dr. Alan Clarke",
+        role: "Paste Dental, UK"
+      }
     },
     {
       number: "05",
@@ -104,7 +124,12 @@ const HowItWorksSection = () => {
         "Strategic guidance beyond content"
       ],
       outcome: "This is why outcomes compound over time instead of plateauing.",
-      highlight: "You're not a number. You're a partner in building something meaningful."
+      highlight: "You're not a number. You're a partner in building something meaningful.",
+      testimonial: {
+        quote: "They know my brand better than I do. The team feels like an extension of my practice.",
+        name: "Dr. Serena Wong",
+        role: "Aesthetic Specialist, CA"
+      }
     },
     {
       number: "06",
@@ -122,7 +147,12 @@ const HowItWorksSection = () => {
         "Preferred rates for A2E members"
       ],
       outcome: "This is how scale is done without dilution.",
-      highlight: "Ads on a strong brand convert 3-5x better than ads alone."
+      highlight: "Ads on a strong brand convert 3-5x better than ads alone.",
+      testimonial: {
+        quote: "We waited until month 4 to run ads. Best decision we made—ROI was immediate because the brand was already working.",
+        name: "Dr. Brian Harris",
+        role: "Practice Owner, LA"
+      }
     },
   ];
 
@@ -679,12 +709,38 @@ const HowItWorksSection = () => {
                                 ))}
                               </div>
 
+                              {/* Testimonial */}
+                              {phase.testimonial && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: 0.35 }}
+                                  className="p-5 rounded-xl bg-card/50 border border-border/30 mb-6"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                      <span className="text-primary text-lg">"</span>
+                                    </div>
+                                    <div>
+                                      <p className="text-foreground/90 italic text-sm leading-relaxed mb-3">
+                                        "{phase.testimonial.quote}"
+                                      </p>
+                                      <div className="flex items-center gap-2">
+                                        <span className="text-xs font-medium text-foreground">{phase.testimonial.name}</span>
+                                        <span className="text-xs text-muted-foreground">•</span>
+                                        <span className="text-xs text-muted-foreground">{phase.testimonial.role}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </motion.div>
+                              )}
+
                               {/* Outcome */}
                               <motion.div 
                                 className="p-5 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3 }}
+                                transition={{ delay: 0.4 }}
                               >
                                 <p className="text-xs uppercase tracking-wider text-primary/70 mb-2">The Outcome</p>
                                 <p className="text-foreground/90 font-medium italic">
