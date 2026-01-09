@@ -310,12 +310,16 @@ const TheTruthSection = () => {
             <p className="text-sm text-muted-foreground italic mb-8">
               Stop copying. Build authority. Create demand that compounds.
             </p>
-            <a 
+            <motion.a 
               href="#eligibility-form"
-              className="inline-flex items-center justify-center px-8 py-3 text-sm font-medium tracking-wide uppercase border border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-medium tracking-wide uppercase bg-primary text-primary-foreground rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-[1.02]"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              See If You Qualify
-            </a>
+              <span className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
+              <span className="absolute inset-0 bg-gradient-to-r from-primary/90 via-red-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10">See If You Qualify</span>
+            </motion.a>
           </div>
         </motion.div>
 

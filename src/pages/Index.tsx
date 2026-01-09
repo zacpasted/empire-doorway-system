@@ -26,6 +26,7 @@ import WistiaVideoEmbedSection from "@/components/sections/WistiaVideoEmbedSecti
 import TheTruthSection from "@/components/sections/TheTruthSection";
 import TransformationNarrativesSection from "@/components/sections/TransformationNarrativesSection";
 import TakeItSection from "@/components/sections/TakeItSection";
+import CTABannerSection from "@/components/sections/CTABannerSection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -92,6 +93,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <VideoCarouselSection />
+      </motion.div>
+      
+      {/* CTA Banner - Above Testimonials */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <CTABannerSection />
       </motion.div>
       
       {/* Testimonials */}
