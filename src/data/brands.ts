@@ -57,8 +57,6 @@ import nav08 from "@/assets/brands/nav-atwal/showcase-08.jpeg";
 import nav09 from "@/assets/brands/nav-atwal/showcase-09.jpeg";
 import nav10 from "@/assets/brands/nav-atwal/showcase-10.jpeg";
 
-// Jake Bateman - using player card as showcase
-import jakeBateman from "@/assets/cards/jake-bateman.jpeg";
 
 export interface BrandExample {
   type: "image" | "video";
@@ -207,7 +205,7 @@ export const brands: BrandCaseStudy[] = [
     name: "Dr. Nav Atwal",
     tagline: "A Rock Star in the Making",
     description: "Dr. Nav Atwal now lives and practices in Miami—a city where taste, visibility, and cultural relevance are non-negotiable. His trajectory is unmistakable. He's not just becoming well known—he's becoming unavoidable.",
-    thumbnail: nav01,
+    thumbnail: nav02,
     challenge: "Dr. Atwal's first brand identity was designed to feel different, to stand out in a sea of sameness. And it did. But as he stepped into the next stage of his journey—redefining what cosmetic dentistry means—his brand needed to rise with him. The challenge was to keep the individuality and freshness that define Dr. Atwal while elevating the brand to mirror the sophistication, artistry, and luxury of the services he delivers.",
     solution: "By blending serif character with sans-serif clarity, the ATWAL wordmark was crafted from the ground up to feel both distinctive and refined. It reflects Dr. Atwal's individuality while projecting elegance, confidence, and quality. The identity balances playfulness with professionalism—setting a new tone for his brand. With the right foundation, positioning, and narrative in place, Nav is building toward something far bigger than a practice.",
     results: [
@@ -229,27 +227,6 @@ export const brands: BrandCaseStudy[] = [
       { type: "image", label: "Patient Materials", src: nav08 },
       { type: "image", label: "Brand Campaign", src: nav09 },
       { type: "image", label: "Visual System", src: nav10 },
-    ],
-  },
-  {
-    id: 6,
-    slug: "dr-jake-bateman",
-    name: "Dr. Jake Bateman",
-    tagline: "The Making of a Modern Authority",
-    description: "Dr. Jake Bateman is not building a brand to be noticed. He's building one to last. As lead associate at Nashville Aesthetic Dentistry, working under the legendary Dr. Dennis Wells, Jake operates at the highest level of cosmetic dentistry every day.",
-    thumbnail: jakeBateman,
-    challenge: "Jake understood something most dentists don't realize until it's too late: clinical excellence is table stakes. Authority is built through authorship. Through clarity. Through standing for something distinct in a world full of replicas. While many practitioners chase visibility, Jake needed a brand focused on trajectory—every decision intentional, every signal considered.",
-    solution: "Braver is not an alter ego—it's an extension of how Jake practices: confident, exacting, and culturally fluent. Treating world-class artists has sharpened his understanding of trust, discretion, and presence. The same qualities that keep him indispensable in elite circles are the ones shaping his brand. Nothing loud. Nothing borrowed. Nothing accidental. This is not the story of someone trying to 'make a name.' It's the story of someone preparing to own a lane.",
-    results: [
-      "Brand architecture built for long-term trajectory, not short-term visibility",
-      "Positioned as ascending authority in elite cosmetic dentistry",
-      "Cultural fluency integrated into brand identity",
-      "Foundation for sustainable, lasting market presence"
-    ],
-    services: ["Brand Strategy", "Visual Identity", "Authority Positioning", "Cultural Alignment", "Content Architecture"],
-    timeline: "45-day build + ongoing management",
-    examples: [
-      { type: "image", label: "Brand Identity", src: jakeBateman },
     ],
   },
 ];
