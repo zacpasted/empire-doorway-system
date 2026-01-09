@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import OptimizedImage from "@/components/ui/optimized-image";
 import { Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -173,10 +174,11 @@ const TestimonialCard = ({
           <div className="mb-6 flex justify-center">
             <div className="relative group/card">
               <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 to-primary/10 rounded-lg blur-sm opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-              <img 
+              <OptimizedImage 
                 src={testimonial.cardImage} 
                 alt={`${testimonial.name} player card`}
-                className="relative w-32 h-auto rounded-lg shadow-lg transform group-hover/card:scale-105 transition-transform duration-300"
+                wrapperClassName="w-32 rounded-lg shadow-lg overflow-hidden"
+                className="w-full h-auto transform group-hover/card:scale-105 transition-transform duration-300"
               />
             </div>
           </div>
@@ -253,10 +255,12 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
                   <div className="flex-shrink-0">
                     <div className="relative group">
                       <div className="absolute -inset-2 bg-gradient-to-br from-primary/40 to-primary/10 rounded-xl blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                      <img 
+                      <OptimizedImage 
                         src={featuredTestimonial.cardImage} 
                         alt={`${featuredTestimonial.name} player card`}
-                        className="relative w-48 md:w-56 h-auto rounded-xl shadow-2xl transform group-hover:scale-[1.02] transition-transform duration-300"
+                        priority
+                        wrapperClassName="w-48 md:w-56 rounded-xl shadow-2xl overflow-hidden"
+                        className="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300"
                       />
                     </div>
                   </div>
