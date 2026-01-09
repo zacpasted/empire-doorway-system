@@ -29,6 +29,7 @@ import TransformationNarrativesSection from "@/components/sections/Transformatio
 import TakeItSection from "@/components/sections/TakeItSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
 import CommunitySection from "@/components/sections/CommunitySection";
+import FoundersVibeSection from "@/components/sections/FoundersVibeSection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -313,6 +314,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <ClosingCTASection />
+      </motion.div>
+      
+      {/* Founders Vibe - Zac & Alan */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <FoundersVibeSection />
       </motion.div>
       
       {/* Pasted Studio - Bespoke Service Level */}
