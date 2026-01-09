@@ -310,7 +310,7 @@ const Index = () => {
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
       >
-        <PrivateAdvisorySection onApplyClick={scrollToForm} />
+        <PrivateAdvisorySection videoId="nh7ancshfq" onApplyClick={scrollToForm} />
       </motion.div>
       
       <Footer />
