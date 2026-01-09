@@ -78,16 +78,6 @@ const Index = () => {
         <ProblemSolutionSection />
       </motion.div>
       
-      {/* The Gate - Filter */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <FilterSection />
-      </motion.div>
-      
       {/* What We Do - Services Overview */}
       <motion.div
         initial="hidden"
@@ -233,7 +223,6 @@ const Index = () => {
         <CommunitySection videoIds={["m70jgeiyir", "bhqnyc3yny", "r5lr03rr8t", "ibpxi0nzpq", "n3qopd7sum", "ggjvdzq6aq", "j5dqiq664l"]} />
       </motion.div>
       
-      
       {/* How It Works - Process Overview */}
       <motion.div
         initial="hidden"
@@ -306,6 +295,15 @@ const Index = () => {
         <ProgramDeliverablesSection onApplyClick={scrollToForm} />
       </motion.div>
       
+      {/* The Gate - Filter */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <FilterSection />
+      </motion.div>
       
       
       {/* Closing CTA */}
