@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      eligibility_submissions: {
+        Row: {
+          alignment: string | null
+          brand_maturity: string | null
+          career_horizon: string | null
+          commitment: string | null
+          created_at: string
+          email: string
+          first_name: string
+          friction: string | null
+          id: string
+          important_areas: string[] | null
+          is_partial: boolean
+          last_completed_step: number
+          last_name: string
+          phone: string | null
+          readiness: string | null
+          real_cost: string[] | null
+          real_cost_other: string | null
+          role_type: string | null
+          updated_at: string
+          visibility: string | null
+          years_in_practice: string | null
+        }
+        Insert: {
+          alignment?: string | null
+          brand_maturity?: string | null
+          career_horizon?: string | null
+          commitment?: string | null
+          created_at?: string
+          email: string
+          first_name: string
+          friction?: string | null
+          id?: string
+          important_areas?: string[] | null
+          is_partial?: boolean
+          last_completed_step?: number
+          last_name: string
+          phone?: string | null
+          readiness?: string | null
+          real_cost?: string[] | null
+          real_cost_other?: string | null
+          role_type?: string | null
+          updated_at?: string
+          visibility?: string | null
+          years_in_practice?: string | null
+        }
+        Update: {
+          alignment?: string | null
+          brand_maturity?: string | null
+          career_horizon?: string | null
+          commitment?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string
+          friction?: string | null
+          id?: string
+          important_areas?: string[] | null
+          is_partial?: boolean
+          last_completed_step?: number
+          last_name?: string
+          phone?: string | null
+          readiness?: string | null
+          real_cost?: string[] | null
+          real_cost_other?: string | null
+          role_type?: string | null
+          updated_at?: string
+          visibility?: string | null
+          years_in_practice?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
