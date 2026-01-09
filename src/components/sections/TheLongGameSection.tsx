@@ -156,6 +156,104 @@ const TheLongGameSection = () => {
           />
           
           <div className="relative border border-primary/20 rounded-2xl p-10 md:p-16 bg-background/80 backdrop-blur-md overflow-hidden">
+            {/* Constellation particle background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {/* Floating particles */}
+              {[...Array(20)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 rounded-full bg-primary/30"
+                  style={{
+                    left: `${5 + (i * 4.5) % 90}%`,
+                    top: `${10 + (i * 7.3) % 80}%`,
+                  }}
+                  animate={{
+                    y: [0, -15, 0],
+                    opacity: [0.2, 0.6, 0.2],
+                    scale: [1, 1.5, 1],
+                  }}
+                  transition={{
+                    duration: 3 + (i % 3),
+                    repeat: Infinity,
+                    delay: i * 0.2,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+              
+              {/* Connecting lines (constellation effect) */}
+              <svg className="absolute inset-0 w-full h-full">
+                <motion.line
+                  x1="10%" y1="20%" x2="25%" y2="35%"
+                  stroke="hsl(var(--primary))" strokeWidth="0.5" strokeOpacity="0.15"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.1, 0.3, 0.1] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                />
+                <motion.line
+                  x1="25%" y1="35%" x2="40%" y2="25%"
+                  stroke="hsl(var(--primary))" strokeWidth="0.5" strokeOpacity="0.15"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.1, 0.25, 0.1] }}
+                  transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
+                />
+                <motion.line
+                  x1="60%" y1="30%" x2="75%" y2="45%"
+                  stroke="hsl(var(--primary))" strokeWidth="0.5" strokeOpacity="0.15"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.1, 0.3, 0.1] }}
+                  transition={{ duration: 4.5, repeat: Infinity, delay: 1 }}
+                />
+                <motion.line
+                  x1="75%" y1="45%" x2="90%" y2="35%"
+                  stroke="hsl(var(--primary))" strokeWidth="0.5" strokeOpacity="0.15"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.1, 0.25, 0.1] }}
+                  transition={{ duration: 3.5, repeat: Infinity, delay: 1.5 }}
+                />
+                <motion.line
+                  x1="20%" y1="70%" x2="35%" y2="60%"
+                  stroke="hsl(var(--primary))" strokeWidth="0.5" strokeOpacity="0.15"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.1, 0.3, 0.1] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+                />
+                <motion.line
+                  x1="65%" y1="75%" x2="80%" y2="65%"
+                  stroke="hsl(var(--primary))" strokeWidth="0.5" strokeOpacity="0.15"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.1, 0.25, 0.1] }}
+                  transition={{ duration: 5, repeat: Infinity, delay: 2.5 }}
+                />
+              </svg>
+              
+              {/* Larger accent nodes */}
+              {[
+                { x: "15%", y: "25%" },
+                { x: "40%", y: "20%" },
+                { x: "70%", y: "35%" },
+                { x: "85%", y: "40%" },
+                { x: "25%", y: "65%" },
+                { x: "75%", y: "70%" },
+              ].map((pos, i) => (
+                <motion.div
+                  key={`node-${i}`}
+                  className="absolute w-2 h-2 rounded-full bg-primary/20"
+                  style={{ left: pos.x, top: pos.y }}
+                  animate={{
+                    scale: [1, 1.8, 1],
+                    opacity: [0.3, 0.7, 0.3],
+                  }}
+                  transition={{
+                    duration: 2.5 + (i % 2),
+                    repeat: Infinity,
+                    delay: i * 0.4,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
+            
             {/* Corner accents */}
             <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-primary/30 rounded-tl-2xl" />
             <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-primary/30 rounded-tr-2xl" />
