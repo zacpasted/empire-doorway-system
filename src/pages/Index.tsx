@@ -19,6 +19,7 @@ import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
 import MonthlyDeliverablesSection from "@/components/sections/MonthlyDeliverablesSection";
 import FilterSection from "@/components/sections/FilterSection";
+import FoundersPhilosophySection from "@/components/sections/FoundersPhilosophySection";
 import ClosingCTASection from "@/components/sections/ClosingCTASection";
 import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -291,6 +292,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <FilterSection />
+      </motion.div>
+      
+      {/* Founders Philosophy - Passion & Confidence */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <FoundersPhilosophySection />
       </motion.div>
       
       {/* Closing CTA */}
