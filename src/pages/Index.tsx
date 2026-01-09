@@ -148,16 +148,6 @@ const Index = () => {
         />
       </motion.div>
       
-      {/* Case Studies with Metrics */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <AdCaseStudiesSection />
-      </motion.div>
-
       {/* Take It - Editorial CTA */}
       <motion.div
         initial="hidden"
@@ -176,6 +166,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <TransformationNarrativesSection />
+      </motion.div>
+      
+      {/* Case Studies with Metrics - Under "When positioning is right, everything else follows" */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <AdCaseStudiesSection />
       </motion.div>
       
       {/* Why Paths Fail - Diagnostic */}
