@@ -1,5 +1,58 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+
+// Animated counter hook
+const useCounter = (end: number, duration: number = 2000, isActive: boolean) => {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    if (!isActive) return;
+    
+    let startTime: number | null = null;
+    let animationFrame: number;
+    
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+    
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      setCount(Math.floor(easeOutCubic(progress) * end));
+      
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+    
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, isActive]);
+  
+  return count;
+};
+
+// Animated number component
+const AnimatedStat = ({ value, suffix = "%", isVisible, delay = 0, className }: { 
+  value: number; 
+  suffix?: string; 
+  isVisible: boolean; 
+  delay?: number;
+  className?: string;
+}) => {
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+  
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => setShouldAnimate(true), delay);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, delay]);
+  
+  const count = useCounter(value, 1500, shouldAnimate);
+  
+  return <span className={className}>{count}{suffix}</span>;
+};
 
 const TheTruthSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -25,21 +78,21 @@ const TheTruthSection = () => {
   const proofBlocks = [
     {
       title: "Choice Happens Before the Click",
-      stat: "77%",
+      statValue: 77,
       statLabel: "of patients decide who they trust before ever contacting a practice",
       points: ["Content", "Reviews", "Brand presence", "Perceived authority"],
       conclusion: "If your organic presence doesn't differentiate you, ads just amplify mediocrity."
     },
     {
       title: "Content Determines Conversion",
-      stat: "74%",
+      statValue: 74,
       statLabel: "higher-quality demand from content-driven brands",
       points: ["Engaged audiences spend 20–40% more per case", "Strong narrative = higher consult-to-case conversion"],
       conclusion: "Ads bring attention. Content converts attention into revenue."
     },
     {
       title: "Why 'Copying What Works' Fails",
-      stat: "0%",
+      statValue: 0,
       statLabel: "differentiation when everyone copies the same playbook",
       points: ["Same veneers posts", "Same captions", "Same before-and-after angles"],
       conclusion: "When everyone looks the same, patients choose the cheapest or the loudest."
@@ -118,7 +171,7 @@ const TheTruthSection = () => {
                   animate={isVisible ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                  97%
+                  <AnimatedStat value={97} isVisible={isVisible} delay={500} />
                 </motion.div>
                 <p className="text-lg text-foreground/80 mb-4">of production growth is driven by:</p>
                 <ul className="space-y-2 text-muted-foreground">
@@ -145,7 +198,7 @@ const TheTruthSection = () => {
                   animate={isVisible ? { scale: 1, opacity: 0.4 } : {}}
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                  3%
+                  <AnimatedStat value={3} isVisible={isVisible} delay={600} />
                 </motion.div>
                 <p className="text-lg text-foreground/50 mb-4">is influenced by:</p>
                 <ul className="space-y-2 text-muted-foreground/50">
@@ -191,7 +244,7 @@ const TheTruthSection = () => {
                 animate={isVisible ? { scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
               >
-                {block.stat}
+                <AnimatedStat value={block.statValue} isVisible={isVisible} delay={600 + index * 100} />
               </motion.div>
               
               <p className="text-sm text-muted-foreground mb-4">{block.statLabel}</p>
