@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight, Target, Palette, Video, Rocket, Users, TrendingUp } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ArrowRight, Target, Palette, Video, Rocket, Users, TrendingUp, Clock, CheckCircle2, Zap, Shield, Star, Play } from "lucide-react";
 
 const HowItWorksSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activePhase, setActivePhase] = useState<number | null>(null);
+  const [hoveredMetric, setHoveredMetric] = useState<number | null>(null);
 
   const scrollToShowcase = () => {
     const showcaseSection = document.getElementById('brands-showcase');
@@ -21,6 +22,8 @@ const HowItWorksSection = () => {
       subtitle: "Before a single piece of content is created",
       feeling: "Clarity",
       icon: Target,
+      timeframe: "Week 1-2",
+      stats: { metric: "100%", label: "Strategic clarity" },
       description: "The process begins with clarity. We work with you to define who you are, what you stand for, and how you should be perceived in the market.",
       details: [
         "Guided onboarding & deep strategic inputs",
@@ -28,7 +31,8 @@ const HowItWorksSection = () => {
         "Tone, ambitions & patient attraction strategy",
         "Clear brand foundation that informs every decision"
       ],
-      outcome: "Content stops being random. Messaging stops being borrowed. You finally know what you're building."
+      outcome: "Content stops being random. Messaging stops being borrowed. You finally know what you're building.",
+      highlight: "This is where most practitioners finally understand why nothing worked before."
     },
     {
       number: "02",
@@ -36,6 +40,8 @@ const HowItWorksSection = () => {
       subtitle: "Once your brand direction is locked",
       feeling: "Confidence",
       icon: Palette,
+      timeframe: "Week 2-3",
+      stats: { metric: "40+", label: "Scripts created" },
       description: "We build the systems that make execution easy and repeatable. You are given access to AI-assisted scripting systems trained on high-performing content and real-world conversion patterns.",
       details: [
         "AI-assisted scripting shaped by strategy",
@@ -43,7 +49,8 @@ const HowItWorksSection = () => {
         "Scripts written for you or with you",
         "Room for your natural personality"
       ],
-      outcome: "You are never left staring at a blank screen. This is where confidence begins to compound."
+      outcome: "You are never left staring at a blank screen. This is where confidence begins to compound.",
+      highlight: "Our scripting system has been trained on 500+ high-performing pieces of content."
     },
     {
       number: "03",
@@ -51,6 +58,8 @@ const HowItWorksSection = () => {
       subtitle: "Self-filmed or fully supported",
       feeling: "Simplicity",
       icon: Video,
+      timeframe: "Week 3-4",
+      stats: { metric: "15min", label: "Weekly filming" },
       description: "Associate to Empire is designed to meet you where you are. Self-film with our guidance, or we coordinate vetted videographers in your area.",
       details: [
         "Clear filming guidance & prompts",
@@ -58,7 +67,8 @@ const HowItWorksSection = () => {
         "Videographer sourcing & coordination",
         "In-person branding intensives (select clients)"
       ],
-      outcome: "Easy capture, no friction, no wasted energy. Most clients are surprised how simple this becomes."
+      outcome: "Easy capture, no friction, no wasted energy. Most clients are surprised how simple this becomes.",
+      highlight: "Average filming time: 15-30 minutes per week. That's it."
     },
     {
       number: "04",
@@ -66,6 +76,8 @@ const HowItWorksSection = () => {
       subtitle: "Once content is filmed, your job is effectively done",
       feeling: "Relief",
       icon: Rocket,
+      timeframe: "Week 4+",
+      stats: { metric: "12+", label: "Monthly pieces" },
       description: "Our team handles editing, refinement, formatting, and distribution. Everything is intentional, nothing is rushed or overproduced.",
       details: [
         "Professional editing & final polish",
@@ -73,7 +85,8 @@ const HowItWorksSection = () => {
         "Narrative sequencing & cadence",
         "Audience psychology, not just posting frequency"
       ],
-      outcome: "You are not chasing trends. You are building authority."
+      outcome: "You are not chasing trends. You are building authority.",
+      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always."
     },
     {
       number: "05",
@@ -81,6 +94,8 @@ const HowItWorksSection = () => {
       subtitle: "This is not transactional",
       feeling: "Trust",
       icon: Users,
+      timeframe: "Ongoing",
+      stats: { metric: "24/7", label: "Team access" },
       description: "We build real relationships with our clients. Ongoing access to the team, regular check-ins, and strategic feedback loops.",
       details: [
         "Ongoing team access & check-ins",
@@ -88,7 +103,8 @@ const HowItWorksSection = () => {
         "Positioning refinement as opportunities change",
         "Strategic guidance beyond content"
       ],
-      outcome: "This is why outcomes compound over time instead of plateauing."
+      outcome: "This is why outcomes compound over time instead of plateauing.",
+      highlight: "You're not a number. You're a partner in building something meaningful."
     },
     {
       number: "06",
@@ -96,6 +112,8 @@ const HowItWorksSection = () => {
       subtitle: "Advertising is not introduced on day one",
       feeling: "Leverage",
       icon: TrendingUp,
+      timeframe: "Month 4+",
+      stats: { metric: "3-5x", label: "ROI typical" },
       description: "Around month four, once your brand and organic presence are working, we offer paid media management at preferred rates.",
       details: [
         "Ads amplify what already resonates",
@@ -103,8 +121,18 @@ const HowItWorksSection = () => {
         "Improved conversion (trust exists)",
         "Preferred rates for A2E members"
       ],
-      outcome: "This is how scale is done without dilution."
+      outcome: "This is how scale is done without dilution.",
+      highlight: "Ads on a strong brand convert 3-5x better than ads alone."
     },
+  ];
+
+  // Journey map data
+  const journeyStages = [
+    { label: "Unknown", week: 0, icon: "○" },
+    { label: "Defined", week: 2, icon: "◐" },
+    { label: "Creating", week: 4, icon: "◑" },
+    { label: "Growing", week: 8, icon: "◕" },
+    { label: "Recognized", week: 12, icon: "●" },
   ];
 
   const containerVariants = {
@@ -137,28 +165,28 @@ const HowItWorksSection = () => {
     >
       {/* Constellation background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(40)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 rounded-full bg-primary/20"
             style={{
-              left: `${(i * 3.3) % 100}%`,
-              top: `${(i * 7.7) % 100}%`,
+              left: `${(i * 2.5) % 100}%`,
+              top: `${(i * 5.7) % 100}%`,
             }}
             animate={{
-              opacity: [0.1, 0.4, 0.1],
-              scale: [1, 1.5, 1],
+              opacity: [0.1, 0.5, 0.1],
+              scale: [1, 1.8, 1],
             }}
             transition={{
-              duration: 4 + (i % 3),
+              duration: 3 + (i % 4),
               repeat: Infinity,
-              delay: i * 0.15,
+              delay: i * 0.1,
             }}
           />
         ))}
         
         {/* Connecting lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
+        <svg className="absolute inset-0 w-full h-full opacity-30">
           <motion.line
             x1="5%" y1="15%" x2="15%" y2="25%"
             stroke="hsl(var(--primary))" strokeWidth="0.5"
@@ -180,14 +208,26 @@ const HowItWorksSection = () => {
             animate={{ pathLength: 1 }}
             transition={{ duration: 3.5, repeat: Infinity, repeatType: "reverse", delay: 2 }}
           />
+          <motion.line
+            x1="75%" y1="65%" x2="90%" y2="75%"
+            stroke="hsl(var(--primary))" strokeWidth="0.5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+          />
         </svg>
       </div>
 
-      {/* Animated gradient orb */}
+      {/* Animated gradient orbs */}
       <motion.div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.02] blur-3xl"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] rounded-full bg-primary/[0.03] blur-3xl"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 12, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-primary/[0.02] blur-3xl"
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity, delay: 2 }}
       />
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
@@ -198,9 +238,16 @@ const HowItWorksSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8"
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-6">
-            The Infrastructure
-          </p>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+          >
+            <Zap className="w-4 h-4 text-primary" />
+            <span className="text-xs tracking-[0.3em] uppercase text-primary">The Complete System</span>
+          </motion.div>
+          
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6">
             How Associate to Empire Works
           </h2>
@@ -209,22 +256,164 @@ const HowItWorksSection = () => {
           </p>
         </motion.div>
 
+        {/* Journey Progress Map */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-16 md:mb-24"
+        >
+          <div className="relative max-w-4xl mx-auto">
+            {/* Background track */}
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-border/20 rounded-full -translate-y-1/2" />
+            
+            {/* Animated progress fill */}
+            <motion.div
+              className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full -translate-y-1/2"
+              initial={{ width: "0%" }}
+              animate={isInView ? { width: "100%" } : {}}
+              transition={{ duration: 2.5, ease: "easeOut", delay: 0.5 }}
+            />
+            
+            {/* Journey stages */}
+            <div className="relative flex justify-between items-center py-8">
+              {journeyStages.map((stage, index) => (
+                <motion.div
+                  key={stage.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.6 + index * 0.15, duration: 0.5 }}
+                  className="relative flex flex-col items-center"
+                  onMouseEnter={() => setHoveredMetric(index)}
+                  onMouseLeave={() => setHoveredMetric(null)}
+                >
+                  {/* Node */}
+                  <motion.div
+                    className={`relative w-12 h-12 md:w-14 md:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 cursor-pointer ${
+                      hoveredMetric === index 
+                        ? "bg-primary border-primary scale-110" 
+                        : "bg-card border-primary/30"
+                    }`}
+                    whileHover={{ scale: 1.15 }}
+                  >
+                    <span className={`text-lg md:text-xl transition-colors duration-300 ${
+                      hoveredMetric === index ? "text-primary-foreground" : "text-primary"
+                    }`}>
+                      {stage.icon}
+                    </span>
+                    
+                    {/* Pulse animation */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-primary/50"
+                      animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                    />
+                  </motion.div>
+                  
+                  {/* Label */}
+                  <div className="mt-3 text-center">
+                    <p className={`text-xs md:text-sm font-medium transition-colors duration-300 ${
+                      hoveredMetric === index ? "text-foreground" : "text-muted-foreground"
+                    }`}>
+                      {stage.label}
+                    </p>
+                    <p className="text-[10px] md:text-xs text-muted-foreground/60 mt-0.5">
+                      Week {stage.week}
+                    </p>
+                  </div>
+                  
+                  {/* Tooltip on hover */}
+                  <AnimatePresence>
+                    {hoveredMetric === index && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute -bottom-16 md:-bottom-14 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-card border border-primary/30 shadow-lg whitespace-nowrap z-10"
+                      >
+                        <p className="text-xs text-foreground">
+                          {index === 0 && "Where most practitioners start"}
+                          {index === 1 && "Brand clarity established"}
+                          {index === 2 && "Content system active"}
+                          {index === 3 && "Momentum building"}
+                          {index === 4 && "Authority established"}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
         {/* Opening statement */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="max-w-3xl mx-auto text-center mb-20"
         >
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-muted-foreground leading-relaxed text-lg">
             Associate to Empire is not a content subscription, an agency retainer, or a templated personal brand package. 
-            It is a structured system designed to take a dentist from uncertainty and inconsistency to clarity, authority, and demand.
+            It is a <span className="text-foreground font-medium">structured system</span> designed to take a dentist from uncertainty and inconsistency to clarity, authority, and demand.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-transparent to-primary/30" />
-            <p className="text-sm text-primary tracking-wide">Brand first. Execution second. Scale last.</p>
-            <div className="h-px flex-1 max-w-[80px] bg-gradient-to-l from-transparent to-primary/30" />
+          <div className="mt-10 flex items-center justify-center gap-4">
+            <motion.div 
+              className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-primary/40"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              style={{ originX: 0 }}
+            />
+            <motion.p 
+              className="text-sm text-primary tracking-wide font-medium"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Brand first. Execution second. Scale last.
+            </motion.p>
+            <motion.div 
+              className="h-px flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-primary/40"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              style={{ originX: 1 }}
+            />
           </div>
+        </motion.div>
+
+        {/* Key Stats Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20 max-w-4xl mx-auto"
+        >
+          {[
+            { value: "45", label: "Day Build Phase", icon: Clock },
+            { value: "6", label: "Phase System", icon: Shield },
+            { value: "100%", label: "Done-For-You", icon: CheckCircle2 },
+            { value: "24/7", label: "Team Access", icon: Users },
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="relative p-5 rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm text-center group cursor-default overflow-hidden"
+            >
+              {/* Hover glow */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+              
+              <stat.icon className="w-5 h-5 text-primary mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+              <p className="text-2xl md:text-3xl font-display text-foreground mb-1">{stat.value}</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</p>
+            </motion.div>
+          ))}
         </motion.div>
 
         {/* Phases with Timeline */}
@@ -239,66 +428,22 @@ const HowItWorksSection = () => {
               className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary via-primary to-primary/30"
               initial={{ height: "0%" }}
               animate={isInView ? { height: "100%" } : {}}
-              transition={{ duration: 3, ease: "easeOut", delay: 0.5 }}
+              transition={{ duration: 4, ease: "easeOut", delay: 0.5 }}
             />
             
             {/* Glowing orb that travels down */}
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50"
+              className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/50"
               initial={{ top: "0%" }}
               animate={isInView ? { top: ["0%", "100%"] } : {}}
-              transition={{ duration: 4, ease: "easeInOut", delay: 0.5 }}
+              transition={{ duration: 5, ease: "easeInOut", delay: 0.5 }}
             >
               <motion.div
                 className="absolute inset-0 rounded-full bg-primary"
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                animate={{ scale: [1, 2, 1], opacity: [1, 0.3, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
             </motion.div>
-
-            {/* Milestone Badges */}
-            {[
-              { position: "0%", label: "Start", icon: "◯" },
-              { position: "33%", label: "Foundation Built", icon: "◈" },
-              { position: "66%", label: "Momentum", icon: "◆" },
-              { position: "100%", label: "Scale", icon: "★" },
-            ].map((milestone, i) => (
-              <motion.div
-                key={milestone.label}
-                className="absolute -left-16 flex items-center gap-2"
-                style={{ top: milestone.position }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 1 + i * 0.3, duration: 0.5 }}
-              >
-                <div className="relative group">
-                  {/* Badge */}
-                  <motion.div
-                    className="px-2.5 py-1 rounded-md bg-card border border-primary/20 backdrop-blur-sm cursor-default"
-                    whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-primary text-xs">{milestone.icon}</span>
-                      <span className="text-[10px] tracking-wide uppercase text-muted-foreground/70 whitespace-nowrap">
-                        {milestone.label}
-                      </span>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Connector dot */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[calc(100%+4px)]">
-                    <motion.div
-                      className="w-2 h-2 rounded-full bg-primary/40"
-                      animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                    />
-                  </div>
-                  
-                  {/* Connecting line */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full w-4 h-px bg-gradient-to-r from-primary/30 to-transparent" />
-                </div>
-              </motion.div>
-            ))}
           </div>
 
           <motion.div
@@ -322,14 +467,14 @@ const HowItWorksSection = () => {
                   {/* Timeline Node - Desktop */}
                   <div className="hidden lg:flex absolute -left-20 top-8 items-center justify-center">
                     <motion.div
-                      className={`relative w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      className={`relative w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
                         isActive 
-                          ? "bg-primary border-primary" 
+                          ? "bg-primary border-primary shadow-lg shadow-primary/30" 
                           : "bg-background border-primary/30"
                       }`}
                       whileHover={{ scale: 1.2 }}
                     >
-                      <span className={`text-xs font-mono transition-colors duration-300 ${
+                      <span className={`text-sm font-mono transition-colors duration-300 ${
                         isActive ? "text-primary-foreground" : "text-primary/60"
                       }`}>
                         {phase.number}
@@ -337,17 +482,24 @@ const HowItWorksSection = () => {
                       
                       {/* Pulse ring on hover */}
                       {isActive && (
-                        <motion.div
-                          className="absolute inset-0 rounded-full border-2 border-primary"
-                          animate={{ scale: [1, 1.8], opacity: [0.8, 0] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                        />
+                        <>
+                          <motion.div
+                            className="absolute inset-0 rounded-full border-2 border-primary"
+                            animate={{ scale: [1, 1.8], opacity: [0.8, 0] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          />
+                          <motion.div
+                            className="absolute inset-0 rounded-full border border-primary"
+                            animate={{ scale: [1, 2.2], opacity: [0.5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                          />
+                        </>
                       )}
                     </motion.div>
                     
                     {/* Connector line to card */}
                     <motion.div
-                      className={`w-8 h-px transition-colors duration-300 ${
+                      className={`w-10 h-0.5 transition-colors duration-300 ${
                         isActive ? "bg-primary" : "bg-border/30"
                       }`}
                       initial={{ scaleX: 0 }}
@@ -358,30 +510,51 @@ const HowItWorksSection = () => {
                   </div>
 
                   {/* Phase card */}
-                  <div 
+                  <motion.div 
                     className={`relative p-6 md:p-8 rounded-2xl border transition-all duration-500 cursor-pointer overflow-hidden ${
                       isActive 
-                        ? "border-primary/40 bg-card/60 backdrop-blur-md" 
+                        ? "border-primary/50 bg-card/70 backdrop-blur-md shadow-xl shadow-primary/5" 
                         : "border-border/20 bg-card/20 hover:border-border/40"
                     }`}
+                    whileHover={{ x: 5 }}
                   >
                     {/* Active glow */}
-                    {isActive && (
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      />
-                    )}
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                        />
+                      )}
+                    </AnimatePresence>
 
                     {/* Scanning line on hover */}
                     {isActive && (
                       <motion.div
-                        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent"
-                        animate={{ y: [0, 200] }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"
+                        animate={{ y: [0, 300] }}
+                        transition={{ duration: 2.5, repeat: Infinity }}
                       />
+                    )}
+
+                    {/* Corner accents on active */}
+                    {isActive && (
+                      <>
+                        <motion.div
+                          className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary/60 rounded-tl-2xl"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        <motion.div
+                          className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary/60 rounded-br-2xl"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                        />
+                      </>
                     )}
 
                     <div className="relative z-10">
@@ -389,10 +562,14 @@ const HowItWorksSection = () => {
                       <div className="flex items-start gap-4 md:gap-6">
                         {/* Phase number & icon */}
                         <div className="flex-shrink-0">
-                          <div className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                            isActive ? "bg-primary/20" : "bg-card/50"
-                          }`}>
-                            <Icon className={`w-6 h-6 md:w-7 md:h-7 transition-colors duration-300 ${
+                          <motion.div 
+                            className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                              isActive ? "bg-primary/20" : "bg-card/50"
+                            }`}
+                            animate={isActive ? { scale: [1, 1.05, 1] } : {}}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            <Icon className={`w-7 h-7 md:w-8 md:h-8 transition-colors duration-300 ${
                               isActive ? "text-primary" : "text-muted-foreground/60"
                             }`} />
                             <span className="absolute -top-2 -left-2 text-xs font-mono text-primary/60 lg:hidden">
@@ -402,23 +579,23 @@ const HowItWorksSection = () => {
                             {/* Pulsing ring on active */}
                             {isActive && (
                               <motion.div
-                                className="absolute inset-0 rounded-xl border border-primary/40"
+                                className="absolute inset-0 rounded-xl border-2 border-primary/40"
                                 animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                               />
                             )}
-                          </div>
+                          </motion.div>
                         </div>
 
                         {/* Title & subtitle */}
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-3 mb-1">
+                          <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-2">
                             <h3 className={`text-lg md:text-xl font-serif transition-colors duration-300 ${
                               isActive ? "text-foreground" : "text-foreground/80"
                             }`}>
                               {phase.title}
                             </h3>
-                            <span className={`hidden md:inline-block px-3 py-1 text-[10px] tracking-[0.2em] uppercase rounded-full border transition-all duration-300 ${
+                            <span className={`px-3 py-1 text-[10px] tracking-[0.2em] uppercase rounded-full border transition-all duration-300 ${
                               isActive 
                                 ? "bg-primary/10 border-primary/30 text-primary" 
                                 : "bg-transparent border-border/30 text-muted-foreground/50"
@@ -426,68 +603,106 @@ const HowItWorksSection = () => {
                               {phase.feeling}
                             </span>
                           </div>
-                          <p className="text-sm text-muted-foreground/60 italic">{phase.subtitle}</p>
+                          <p className="text-sm text-muted-foreground/60 italic mb-2">{phase.subtitle}</p>
+                          
+                          {/* Timeframe & Stats badges */}
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background/50 border border-border/20 text-xs">
+                              <Clock className="w-3 h-3 text-primary/70" />
+                              <span className="text-muted-foreground">{phase.timeframe}</span>
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary/5 border border-primary/20 text-xs">
+                              <Star className="w-3 h-3 text-primary" />
+                              <span className="text-foreground font-medium">{phase.stats.metric}</span>
+                              <span className="text-muted-foreground">{phase.stats.label}</span>
+                            </span>
+                          </div>
                         </div>
 
                         {/* Expand indicator */}
                         <motion.div
-                          animate={{ rotate: isActive ? 90 : 0 }}
+                          animate={{ rotate: isActive ? 45 : 0 }}
                           transition={{ duration: 0.3 }}
                           className="flex-shrink-0 mt-2"
                         >
-                          <ArrowRight className={`w-5 h-5 transition-colors duration-300 ${
-                            isActive ? "text-primary" : "text-muted-foreground/30"
-                          }`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            isActive ? "bg-primary/20" : "bg-transparent"
+                          }`}>
+                            <Play className={`w-4 h-4 transition-colors duration-300 ${
+                              isActive ? "text-primary" : "text-muted-foreground/30"
+                            }`} />
+                          </div>
                         </motion.div>
                       </div>
 
                       {/* Expandable content */}
-                      <motion.div
-                        initial={false}
-                        animate={{ 
-                          height: isActive ? "auto" : 0,
-                          opacity: isActive ? 1 : 0 
-                        }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-6 md:pt-8 md:pl-20 lg:pl-22">
-                          <p className="text-muted-foreground leading-relaxed mb-6">
-                            {phase.description}
-                          </p>
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pt-6 md:pt-8 md:pl-22 lg:pl-26">
+                              <p className="text-muted-foreground leading-relaxed mb-6 text-base">
+                                {phase.description}
+                              </p>
 
-                          {/* Details grid */}
-                          <div className="grid md:grid-cols-2 gap-3 mb-6">
-                            {phase.details.map((detail, dIndex) => (
+                              {/* Highlight callout */}
                               <motion.div
-                                key={dIndex}
-                                initial={{ opacity: 0, x: -10 }}
+                                initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: dIndex * 0.1 }}
-                                className="flex items-start gap-3"
+                                transition={{ delay: 0.2 }}
+                                className="mb-6 p-4 rounded-lg bg-primary/5 border-l-2 border-primary"
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0" />
-                                <span className="text-sm text-foreground/70">{detail}</span>
+                                <p className="text-sm text-foreground/90 italic flex items-start gap-2">
+                                  <Zap className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                                  {phase.highlight}
+                                </p>
                               </motion.div>
-                            ))}
-                          </div>
 
-                          {/* Outcome */}
-                          <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
-                            <p className="text-sm text-foreground/80 italic">
-                              "{phase.outcome}"
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
+                              {/* Details grid */}
+                              <div className="grid md:grid-cols-2 gap-3 mb-6">
+                                {phase.details.map((detail, dIndex) => (
+                                  <motion.div
+                                    key={dIndex}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 + dIndex * 0.08 }}
+                                    className="flex items-start gap-3 p-3 rounded-lg bg-background/30 border border-border/10"
+                                  >
+                                    <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                                    <span className="text-sm text-foreground/80">{detail}</span>
+                                  </motion.div>
+                                ))}
+                              </div>
+
+                              {/* Outcome */}
+                              <motion.div 
+                                className="p-5 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                              >
+                                <p className="text-xs uppercase tracking-wider text-primary/70 mb-2">The Outcome</p>
+                                <p className="text-foreground/90 font-medium italic">
+                                  "{phase.outcome}"
+                                </p>
+                              </motion.div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Mobile connecting line between phases */}
                   {index < phases.length - 1 && (
-                    <div className="flex justify-center py-2 lg:hidden">
+                    <div className="flex justify-center py-3 lg:hidden">
                       <motion.div
-                        className="w-px h-6 bg-gradient-to-b from-primary/30 to-transparent"
+                        className="w-0.5 h-8 bg-gradient-to-b from-primary/40 via-primary/20 to-transparent rounded-full"
                         initial={{ scaleY: 0 }}
                         animate={isInView ? { scaleY: 1 } : {}}
                         transition={{ delay: 0.5 + index * 0.1 }}
@@ -505,50 +720,75 @@ const HowItWorksSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-20 md:mt-28 relative"
+          className="mt-24 md:mt-32 relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent rounded-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent rounded-3xl" />
           
-          <div className="relative p-8 md:p-12 rounded-2xl border border-primary/20 bg-card/30 backdrop-blur-sm">
-            <p className="text-xs tracking-[0.4em] uppercase text-primary/60 text-center mb-6">
-              What This Ultimately Creates
-            </p>
+          <div className="relative p-8 md:p-12 rounded-2xl border border-primary/30 bg-card/40 backdrop-blur-sm overflow-hidden">
+            {/* Animated border glow */}
+            <motion.div
+              className="absolute inset-0 rounded-2xl"
+              style={{
+                background: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.2), transparent)",
+                backgroundSize: "200% 100%",
+              }}
+              animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
             
-            <h3 className="text-2xl md:text-3xl font-serif text-center text-foreground mb-8">
-              Associate to Empire gives you more than content.
-            </h3>
-            
-            <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
-              {[
-                "A brand that attracts instead of chases.",
-                "Systems that remove friction instead of adding work.",
-                "Confidence rooted in clarity, not performance anxiety.",
-                "Access to a community, events, and opportunities that only open once the brand is built properly."
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 1.4 + index * 0.1 }}
-                  className="flex items-start gap-3 p-4 rounded-lg bg-background/50"
-                >
-                  <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                  <p className="text-foreground/80 text-sm leading-relaxed">{item}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center pt-8 border-t border-border/10">
-              <p className="text-lg md:text-xl text-foreground font-light">
-                You don't just post more.
-              </p>
-              <motion.p
-                className="text-xl md:text-2xl font-serif text-primary mt-2"
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 3, repeat: Infinity }}
+            <div className="relative z-10">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={isInView ? { scale: 1 } : {}}
+                transition={{ delay: 1.3, type: "spring" }}
+                className="w-16 h-16 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto mb-6"
               >
-                You stop being overlooked.
-              </motion.p>
+                <Star className="w-8 h-8 text-primary" />
+              </motion.div>
+              
+              <p className="text-xs tracking-[0.4em] uppercase text-primary/70 text-center mb-4">
+                What This Ultimately Creates
+              </p>
+              
+              <h3 className="text-2xl md:text-3xl font-serif text-center text-foreground mb-10">
+                Associate to Empire gives you more than content.
+              </h3>
+              
+              <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
+                {[
+                  { text: "A brand that attracts instead of chases.", icon: Target },
+                  { text: "Systems that remove friction instead of adding work.", icon: Zap },
+                  { text: "Confidence rooted in clarity, not performance anxiety.", icon: Shield },
+                  { text: "Access to a community, events, and opportunities that only open once the brand is built properly.", icon: Users }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 1.4 + index * 0.1 }}
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    className="flex items-start gap-4 p-5 rounded-xl bg-background/50 border border-border/20 hover:border-primary/30 transition-all duration-300 group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-foreground/80 text-sm leading-relaxed pt-2">{item.text}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="text-center pt-8 border-t border-border/20">
+                <p className="text-lg md:text-xl text-foreground font-light mb-3">
+                  You don't just post more.
+                </p>
+                <motion.p
+                  className="text-2xl md:text-3xl font-display text-primary"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  You stop being overlooked.
+                </motion.p>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -560,16 +800,15 @@ const HowItWorksSection = () => {
           transition={{ duration: 0.8, delay: 1.6 }}
           className="text-center mt-12"
         >
-          <button
+          <motion.button
             onClick={scrollToShowcase}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground/60 hover:text-foreground transition-colors group"
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-primary/30 bg-card/30 text-foreground hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <span className="relative">
-              See the work
-              <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-foreground/40 group-hover:w-full transition-all duration-300" />
-            </span>
+            <span className="text-sm font-medium">See the work we create</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </section>
