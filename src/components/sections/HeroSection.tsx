@@ -282,7 +282,7 @@ const HeroSection = () => {
         </div>
         
         {/* Application Form */}
-        <div id="apply" className="animate-fade-up opacity-0" style={{
+        <div id="eligibility-form" className="animate-fade-up opacity-0" style={{
         animationDelay: "450ms",
         animationFillMode: "forwards"
       }}>
