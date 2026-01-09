@@ -167,8 +167,23 @@ const FilterSection = () => {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
+            {/* Animated border glow */}
             <motion.div 
-              className="relative p-6 rounded-xl border border-primary/25 bg-primary/[0.08] overflow-hidden cursor-default"
+              className="absolute -inset-px rounded-xl bg-gradient-to-r from-primary/40 via-primary/20 to-primary/40 opacity-60 blur-[1px]"
+              animate={{ 
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                opacity: [0.4, 0.7, 0.4]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              style={{ backgroundSize: "200% 200%" }}
+            />
+            
+            <motion.div 
+              className="relative p-6 rounded-xl border border-primary/30 bg-primary/[0.08] overflow-hidden cursor-default"
               variants={cardVariants}
               initial="rest"
               whileHover="hover"
