@@ -255,6 +255,50 @@ const HowItWorksSection = () => {
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
             </motion.div>
+
+            {/* Milestone Badges */}
+            {[
+              { position: "0%", label: "Start", icon: "◯" },
+              { position: "33%", label: "Foundation Built", icon: "◈" },
+              { position: "66%", label: "Momentum", icon: "◆" },
+              { position: "100%", label: "Scale", icon: "★" },
+            ].map((milestone, i) => (
+              <motion.div
+                key={milestone.label}
+                className="absolute -left-16 flex items-center gap-2"
+                style={{ top: milestone.position }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 1 + i * 0.3, duration: 0.5 }}
+              >
+                <div className="relative group">
+                  {/* Badge */}
+                  <motion.div
+                    className="px-2.5 py-1 rounded-md bg-card border border-primary/20 backdrop-blur-sm cursor-default"
+                    whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-primary text-xs">{milestone.icon}</span>
+                      <span className="text-[10px] tracking-wide uppercase text-muted-foreground/70 whitespace-nowrap">
+                        {milestone.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                  
+                  {/* Connector dot */}
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[calc(100%+4px)]">
+                    <motion.div
+                      className="w-2 h-2 rounded-full bg-primary/40"
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                    />
+                  </div>
+                  
+                  {/* Connecting line */}
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full w-4 h-px bg-gradient-to-r from-primary/30 to-transparent" />
+                </div>
+              </motion.div>
+            ))}
           </div>
 
           <motion.div
