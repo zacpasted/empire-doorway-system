@@ -9,7 +9,7 @@ import WhyPathsFailSection from "@/components/sections/WhyPathsFailSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import WhatWeAskSection from "@/components/sections/WhatWeAskSection";
 import WhatYouReceiveSection from "@/components/sections/WhatYouReceiveSection";
-import TheLongGameSection from "@/components/sections/TheLongGameSection";
+
 import TransformationSection from "@/components/sections/TransformationSection";
 import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
 import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
@@ -252,15 +252,6 @@ const Index = () => {
         <WhatYouReceiveSection />
       </motion.div>
       
-      {/* The Long Game - Trajectory */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <TheLongGameSection />
-      </motion.div>
       
       {/* Take It - Editorial CTA */}
       <motion.div
