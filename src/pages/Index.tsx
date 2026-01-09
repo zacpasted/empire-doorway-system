@@ -154,16 +154,6 @@ const Index = () => {
         <TakeItSection onApplyClick={scrollToForm} />
       </motion.div>
       
-      {/* The Truth - Brand vs Ads */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <TheTruthSection />
-      </motion.div>
-      
       {/* Transformation Narratives - Case Studies */}
       <motion.div
         initial="hidden"
