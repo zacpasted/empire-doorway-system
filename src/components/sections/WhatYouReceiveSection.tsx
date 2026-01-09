@@ -1,116 +1,272 @@
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Film, Palette, Smartphone, FileText, Calendar, Target, Scissors, Clock, CheckCircle2, Sparkles } from "lucide-react";
 
 const WhatYouReceiveSection = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   const deliverables = [
     {
       category: "Production",
+      icon: Film,
+      accent: "from-primary/20 to-primary/5",
       items: [
-        "Monthly high-end video edits",
-        "Professional color grading",
-        "Platform-optimized formats",
+        { icon: Sparkles, text: "Monthly high-end video edits", highlight: true },
+        { icon: Palette, text: "Professional color grading" },
+        { icon: Smartphone, text: "Platform-optimized formats" },
       ],
     },
     {
       category: "Strategy",
+      icon: Target,
+      accent: "from-primary/15 to-transparent",
       items: [
-        "Scripting and narrative guidance",
-        "Content calendar architecture",
-        "Positioning refinement",
+        { icon: FileText, text: "Scripting and narrative guidance", highlight: true },
+        { icon: Calendar, text: "Content calendar architecture" },
+        { icon: Target, text: "Positioning refinement" },
       ],
     },
     {
       category: "Operations",
+      icon: Scissors,
+      accent: "from-primary/20 to-primary/5",
       items: [
-        "Done-for-you editing pipeline",
-        "Clear delivery cadence",
-        "Quality control at every stage",
+        { icon: Scissors, text: "Done-for-you editing pipeline", highlight: true },
+        { icon: Clock, text: "Clear delivery cadence" },
+        { icon: CheckCircle2, text: "Quality control at every stage" },
       ],
     },
   ];
 
-  return (
-    <section
-      ref={sectionRef}
-      className="py-32 md:py-48 bg-background relative"
-    >
-      <div className="container max-w-5xl mx-auto px-4">
-        {/* Section label */}
-        <p
-          className={`text-xs tracking-[0.4em] uppercase text-muted-foreground/60 text-center mb-6 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          The Delivery
-        </p>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
 
-        {/* Title */}
-        <h2
-          className={`text-2xl md:text-4xl font-serif text-center text-foreground mb-20 transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
+  return (
+    <section className="py-32 md:py-48 bg-background relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="container max-w-6xl mx-auto px-4 relative z-10">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
         >
-          What You Receive
-        </h2>
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.4em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-xs uppercase text-primary/80 mb-6"
+          >
+            The Delivery
+          </motion.p>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="font-playfair text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+          >
+            What You{" "}
+            <span className="italic text-muted-foreground">Receive</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+          >
+            A complete done-for-you system. No guesswork. No overwhelm.
+          </motion.p>
+        </motion.div>
 
         {/* Deliverables grid */}
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          {deliverables.map((group, groupIndex) => (
-            <div
-              key={groupIndex}
-              className={`transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${300 + groupIndex * 150}ms` }}
-            >
-              {/* Category header */}
-              <div className="pb-4 mb-6 border-b border-border/20">
-                <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground/50">
-                  {group.category}
-                </p>
-              </div>
-
-              {/* Items */}
-              <ul className="space-y-4">
-                {group.items.map((item, itemIndex) => (
-                  <li
-                    key={itemIndex}
-                    className="flex items-start gap-3 text-foreground/70"
-                  >
-                    <span className="text-muted-foreground/30 mt-1.5">·</span>
-                    <span className="font-light">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Reassurance */}
-        <div
-          className={`mt-20 text-center transition-all duration-1000 delay-700 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-3 gap-6 md:gap-8"
         >
-          <p className="text-muted-foreground/50 text-sm">
+          {deliverables.map((group, groupIndex) => (
+            <motion.div
+              key={groupIndex}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: groupIndex * 0.15 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="relative group"
+            >
+              {/* Card glow effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+              
+              {/* Card */}
+              <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 h-full overflow-hidden">
+                {/* Top gradient accent */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${group.accent}`} />
+                
+                {/* Animated corner decoration */}
+                <motion.div
+                  className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-primary/20 rounded-tr-lg"
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 3, repeat: Infinity, delay: groupIndex * 0.5 }}
+                />
+
+                {/* Category header */}
+                <div className="flex items-center gap-4 mb-8">
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <group.icon className="w-6 h-6 text-primary" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-playfair text-xl font-bold text-foreground">
+                      {group.category}
+                    </h3>
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-primary/50 to-transparent mt-1" />
+                  </div>
+                </div>
+
+                {/* Items */}
+                <motion.ul
+                  variants={containerVariants}
+                  className="space-y-5"
+                >
+                  {group.items.map((item, itemIndex) => (
+                    <motion.li
+                      key={itemIndex}
+                      variants={itemVariants}
+                      className="flex items-start gap-3 group/item"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.2, rotate: 10 }}
+                        className={`mt-0.5 p-1.5 rounded-lg ${
+                          item.highlight 
+                            ? "bg-primary/20 text-primary" 
+                            : "bg-muted/50 text-muted-foreground"
+                        }`}
+                      >
+                        <item.icon className="w-4 h-4" />
+                      </motion.div>
+                      <span className={`${
+                        item.highlight 
+                          ? "text-foreground font-medium" 
+                          : "text-foreground/70"
+                      } group-hover/item:text-foreground transition-colors`}>
+                        {item.text}
+                      </span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+
+                {/* Bottom ambient glow */}
+                <motion.div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20 bg-gradient-to-t from-primary/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Bottom statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-20 text-center relative"
+        >
+          {/* Decorative line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="w-24 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto mb-8"
+          />
+          
+          <motion.p
+            className="text-lg md:text-xl text-muted-foreground font-playfair italic"
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
             Predictable. Professional. No surprises.
-          </p>
-        </div>
+          </motion.p>
+
+          {/* Animated checkmarks */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="flex items-center justify-center gap-8 mt-8"
+          >
+            {["Monthly delivery", "Full transparency", "Zero guesswork"].map((text, i) => (
+              <motion.div
+                key={text}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.9 + i * 0.1 }}
+                className="flex items-center gap-2 text-sm text-muted-foreground"
+              >
+                <CheckCircle2 className="w-4 h-4 text-primary" />
+                <span>{text}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
