@@ -72,6 +72,63 @@ const FilterSection = () => {
       }
     }
   };
-  return;
+  return (
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
+      
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
+            The Gate
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            This isn't for everyone. That's the point.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Not For */}
+          <motion.div 
+            className="space-y-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            <h3 className="text-lg font-medium text-muted-foreground mb-6 text-center md:text-left">Not For</h3>
+            {notFor.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="flex items-center gap-3 text-muted-foreground/80"
+              >
+                <span className="text-primary/60">{item.icon}</span>
+                <span>{item.text}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+          
+          {/* Is For */}
+          <motion.div 
+            className="space-y-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            <h3 className="text-lg font-medium text-foreground mb-6 text-center md:text-left">Built For</h3>
+            {isFor.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariantsRight}
+                className="flex items-center gap-3 text-foreground"
+              >
+                <span className="text-primary">{item.icon}</span>
+                <span>{item.text}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 };
 export default FilterSection;
