@@ -159,20 +159,20 @@ export const brands: BrandCaseStudy[] = [
   },
   {
     id: 4,
-    slug: "the-face-institute",
-    name: "The Face Institute",
-    tagline: "Where artistry meets precision",
-    description: "Advanced facial aesthetics for the discerning patient. A comprehensive brand identity that positions the practice at the intersection of medical excellence and artistic vision.",
+    slug: "dr-vik-ravoory",
+    name: "Dr. Vik Ravoory",
+    tagline: "Brand Creation & Career Inflection",
+    description: "Vik entered the process as a young associate with ambition, clinical promise, and the same uncertainty most early-career dentists face: no clear differentiation, no narrative ownership, and no framework for long-term leverage.",
     thumbnail: brand04_01,
-    challenge: "The Face Institute needed to differentiate itself in a crowded facial aesthetics market while maintaining clinical credibility. The brand had to appeal to both referral partners and high-end consumers.",
-    solution: "We created a dual-audience brand strategy that speaks to professional peers while captivating affluent patients. The visual language balances clinical precision with artistic sophistication.",
+    challenge: "Like many associates, Vik was doing everything 'right' on paper, yet felt invisible in practice. No clear differentiation, no narrative ownership, and no framework for long-term leverage defined his early career trajectory.",
+    solution: "The early work focused not on exposure, but on foundation. Identity, voice, values, and long-term direction were clarified before a single piece of content mattered. There were real growing pains—iterations that didn't land, moments of doubt, recalibration of tone and positioning—but that friction was essential. The brand wasn't manufactured; it was built. As clarity emerged, confidence followed. Vik stopped trying to fit into existing molds and began operating from authorship.",
     results: [
-      "Established as a premier destination for complex cases",
-      "Strong referral network from other practitioners",
-      "Waiting list for new patient consultations",
-      "Recognition in both medical and lifestyle publications"
+      "Intentional, coherent brand identity established",
+      "Credible positioning in the market",
+      "Control over career trajectory",
+      "Accelerated momentum with stronger perception and clearer opportunities"
     ],
-    services: ["Brand Strategy", "Visual Identity", "Dual-Audience Messaging", "Editorial Content", "Professional Positioning"],
+    services: ["Brand Architecture", "Identity Development", "Voice & Values Clarification", "Content Strategy", "Career Positioning"],
     timeline: "45-day build + ongoing management",
     examples: [
       { type: "image", label: "Brand Identity", src: brand04_01 },
