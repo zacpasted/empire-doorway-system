@@ -268,7 +268,7 @@ const HeroSection = () => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt} 
-                  className="h-8 md:h-10 w-auto object-contain"
+                  className="h-6 md:h-8 w-auto max-w-[100px] md:max-w-[120px] object-contain"
                 />
               </div>
             ))}
