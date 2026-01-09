@@ -307,9 +307,15 @@ const TheTruthSection = () => {
           </p>
           
           <div className="mt-10 pt-8">
-            <p className="text-sm text-muted-foreground italic">
+            <p className="text-sm text-muted-foreground italic mb-8">
               Stop copying. Build authority. Create demand that compounds.
             </p>
+            <a 
+              href="#eligibility-form"
+              className="inline-flex items-center justify-center px-8 py-3 text-sm font-medium tracking-wide uppercase border border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            >
+              See If You Qualify
+            </a>
           </div>
         </motion.div>
 
