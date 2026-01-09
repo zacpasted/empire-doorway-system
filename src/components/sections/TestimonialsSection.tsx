@@ -285,12 +285,12 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
 
         {/* Regular Testimonials Grid */}
         {regularTestimonials.length > 0 && (
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {regularTestimonials.map((testimonial, index) => (
               <TestimonialCard 
                 key={testimonial.id} 
                 testimonial={testimonial} 
-                index={index}
+                index={index % 6}
                 isVisible={isVisible}
               />
             ))}
