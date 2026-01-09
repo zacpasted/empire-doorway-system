@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ const STORAGE_KEY = "leadMagnetDismissed";
 const STORAGE_UNLOCKED_KEY = "leadMagnetUnlocked";
 const VIDEO_ID = "jl8fuq6wcz";
 const POPUP_DELAY_SECONDS = 45;
+const EXIT_INTENT_THRESHOLD = 20; // pixels from top of viewport
 
 const LeadMagnetPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,10 +21,39 @@ const LeadMagnetPopup = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [hasTriggered, setHasTriggered] = useState(false);
   const { toast } = useToast();
 
   // Use shared Wistia loader - only load when unlocked and open
   useWistiaLoader(VIDEO_ID, { loadOnMount: isUnlocked && isOpen });
+
+  // Check if popup should be shown (not dismissed or unlocked)
+  const canShowPopup = useCallback(() => {
+    const dismissed = localStorage.getItem(STORAGE_KEY);
+    const unlocked = localStorage.getItem(STORAGE_UNLOCKED_KEY);
+    return !dismissed && !unlocked && !hasTriggered;
+  }, [hasTriggered]);
+
+  // Exit intent detection
+  useEffect(() => {
+    const handleMouseLeave = (e: MouseEvent) => {
+      // Check if mouse is leaving through the top of the viewport
+      if (e.clientY <= EXIT_INTENT_THRESHOLD && canShowPopup()) {
+        setIsOpen(true);
+        setHasTriggered(true);
+      }
+    };
+
+    // Only add listener on desktop (exit intent doesn't work well on mobile)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (!isMobile) {
+      document.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [canShowPopup]);
 
   useEffect(() => {
     // Check if already dismissed or unlocked
@@ -36,13 +66,16 @@ const LeadMagnetPopup = () => {
     
     if (dismissed || unlocked) return;
 
-    // Show popup after delay
+    // Show popup after delay (fallback if exit intent doesn't trigger)
     const timer = setTimeout(() => {
-      setIsOpen(true);
+      if (!hasTriggered) {
+        setIsOpen(true);
+        setHasTriggered(true);
+      }
     }, POPUP_DELAY_SECONDS * 1000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [hasTriggered]);
 
   const handleDismiss = () => {
     setIsOpen(false);
