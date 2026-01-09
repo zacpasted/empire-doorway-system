@@ -221,6 +221,16 @@ const Index = () => {
         <HowItWorksSection />
       </motion.div>
       
+      {/* Monthly Retainer Breakdown - What's Included Every Month */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <MonthlyDeliverablesSection />
+      </motion.div>
+      
       {/* What We Ask - Trust Builder */}
       <motion.div
         initial="hidden"
@@ -280,16 +290,6 @@ const Index = () => {
         variants={sectionVariants}
       >
         <ProgramDeliverablesSection onApplyClick={scrollToForm} />
-      </motion.div>
-      
-      {/* Monthly Retainer Breakdown */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <MonthlyDeliverablesSection />
       </motion.div>
       
       {/* The Gate - Filter */}
