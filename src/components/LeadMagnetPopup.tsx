@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 
 const STORAGE_KEY = "leadMagnetDismissed";
 const STORAGE_UNLOCKED_KEY = "leadMagnetUnlocked";
+const VIDEO_ID = "jl8fuq6wcz";
 
 const LeadMagnetPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,9 @@ const LeadMagnetPopup = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  // Use shared Wistia loader - only load when unlocked and open
+  useWistiaLoader(VIDEO_ID, { loadOnMount: isUnlocked && isOpen });
 
   useEffect(() => {
     // Check if already dismissed or unlocked
@@ -36,22 +41,6 @@ const LeadMagnetPopup = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  // Load Wistia script when unlocked
-  useEffect(() => {
-    if (isUnlocked && isOpen) {
-      const script = document.createElement('script');
-      script.src = 'https://fast.wistia.com/player.js';
-      script.async = true;
-      document.body.appendChild(script);
-
-      const embedScript = document.createElement('script');
-      embedScript.src = 'https://fast.wistia.com/embed/jl8fuq6wcz.js';
-      embedScript.async = true;
-      embedScript.type = 'module';
-      document.body.appendChild(embedScript);
-    }
-  }, [isUnlocked, isOpen]);
 
   const handleDismiss = () => {
     setIsOpen(false);
@@ -215,19 +204,10 @@ const LeadMagnetPopup = () => {
                 
                 {/* Wistia Video Embed */}
                 <div className="rounded-lg overflow-hidden">
-                  <style>
-                    {`
-                      wistia-player[media-id='jl8fuq6wcz']:not(:defined) {
-                        background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/jl8fuq6wcz/swatch');
-                        display: block;
-                        filter: blur(5px);
-                        padding-top: 56.56%;
-                      }
-                    `}
-                  </style>
+                  <style>{getWistiaPlaceholderStyles(VIDEO_ID, '56.56%')}</style>
                   {/* @ts-ignore - Wistia custom element */}
                   <wistia-player 
-                    media-id="jl8fuq6wcz" 
+                    media-id={VIDEO_ID} 
                     aspect="1.7679558011049723"
                   />
                 </div>

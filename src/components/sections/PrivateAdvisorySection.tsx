@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Crown, Sparkles, Globe, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useWistiaLoader, getWistiaPlaceholderStyles } from '@/hooks/use-wistia';
 
 interface PrivateAdvisorySectionProps {
   videoId?: string;
@@ -18,7 +19,8 @@ const PrivateAdvisorySection = ({ videoId, onApplyClick }: PrivateAdvisorySectio
         setIsVisible(true);
       }
     }, {
-      threshold: 0.2
+      threshold: 0.2,
+      rootMargin: '200px'
     });
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
@@ -26,15 +28,8 @@ const PrivateAdvisorySection = ({ videoId, onApplyClick }: PrivateAdvisorySectio
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    // Load Wistia script if video is provided
-    if (videoId && !document.querySelector('script[src*="wistia"]')) {
-      const script = document.createElement("script");
-      script.src = "https://fast.wistia.com/assets/external/E-v1.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, [videoId]);
+  // Use shared Wistia loader
+  useWistiaLoader(videoId || '', { loadOnMount: isVisible && !!videoId });
 
   const features = [
     {
@@ -126,10 +121,15 @@ const PrivateAdvisorySection = ({ videoId, onApplyClick }: PrivateAdvisorySectio
             <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-primary/30 rounded-br-2xl pointer-events-none z-10" />
 
             {videoId ? (
-              <div 
-                className={`wistia_embed wistia_async_${videoId} seo=false videoFoam=true h-full w-full`}
-                style={{ height: '100%', width: '100%' }}
-              />
+              <>
+                <style>{getWistiaPlaceholderStyles(videoId, '56.25%')}</style>
+                {/* @ts-ignore */}
+                <wistia-player 
+                  media-id={videoId} 
+                  aspect="1.7778"
+                  style={{ height: '100%', width: '100%' }}
+                />
+              </>
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40">
                 <div className="w-20 h-20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center mb-4">

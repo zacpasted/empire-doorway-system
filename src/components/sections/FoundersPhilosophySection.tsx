@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { useWistiaLoader, getWistiaPlaceholderStyles } from '@/hooks/use-wistia';
 
 // Founders philosophy video section - Zac & Alan
 const FoundersPhilosophySection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const mediaId = 'h2xbzknj3f';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -12,7 +14,7 @@ const FoundersPhilosophySection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '200px' }
     );
 
     if (sectionRef.current) {
@@ -22,31 +24,8 @@ const FoundersPhilosophySection = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!isVisible) return;
-
-    // Load Wistia scripts
-    const playerScript = document.createElement('script');
-    playerScript.src = 'https://fast.wistia.com/player.js';
-    playerScript.async = true;
-
-    const embedScript = document.createElement('script');
-    embedScript.src = 'https://fast.wistia.com/embed/h2xbzknj3f.js';
-    embedScript.async = true;
-    embedScript.type = 'module';
-
-    document.head.appendChild(playerScript);
-    document.head.appendChild(embedScript);
-
-    return () => {
-      if (document.head.contains(playerScript)) {
-        document.head.removeChild(playerScript);
-      }
-      if (document.head.contains(embedScript)) {
-        document.head.removeChild(embedScript);
-      }
-    };
-  }, [isVisible]);
+  // Use shared Wistia loader
+  useWistiaLoader(mediaId, { loadOnMount: isVisible });
 
   return (
     <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
@@ -79,19 +58,10 @@ const FoundersPhilosophySection = () => {
           }`}
         >
           <div className="rounded-2xl overflow-hidden shadow-2xl border border-border/50">
-            <style>
-              {`
-                wistia-player[media-id='h2xbzknj3f']:not(:defined) {
-                  background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h2xbzknj3f/swatch');
-                  display: block;
-                  filter: blur(5px);
-                  padding-top: 176.67%;
-                }
-              `}
-            </style>
+            <style>{getWistiaPlaceholderStyles(mediaId, '176.67%')}</style>
             {/* @ts-ignore - Wistia custom element */}
             <wistia-player 
-              media-id="h2xbzknj3f" 
+              media-id={mediaId} 
               aspect="0.5660377358490566"
             />
           </div>

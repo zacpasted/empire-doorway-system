@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 
 interface WistiaVideoEmbedSectionProps {
   title?: string;
@@ -21,41 +22,14 @@ const WistiaVideoEmbedSection = ({
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '200px' } // Start loading earlier
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  // Load Wistia scripts when videos are present
-  useEffect(() => {
-    if (videoIds.length === 0) return;
-
-    const playerScript = document.createElement("script");
-    playerScript.src = "https://fast.wistia.com/player.js";
-    playerScript.async = true;
-    document.head.appendChild(playerScript);
-
-    // Load each video's embed script
-    const embedScripts: HTMLScriptElement[] = [];
-    videoIds.forEach((id) => {
-      const embedScript = document.createElement("script");
-      embedScript.src = `https://fast.wistia.com/embed/${id}.js`;
-      embedScript.async = true;
-      embedScript.type = "module";
-      document.head.appendChild(embedScript);
-      embedScripts.push(embedScript);
-    });
-
-    return () => {
-      document.head.removeChild(playerScript);
-      embedScripts.forEach((script) => {
-        if (document.head.contains(script)) {
-          document.head.removeChild(script);
-        }
-      });
-    };
-  }, [videoIds]);
+  // Use shared Wistia loader - only loads when visible
+  useWistiaLoader(videoIds, { loadOnMount: isVisible });
 
   return (
     <section
@@ -96,21 +70,12 @@ const WistiaVideoEmbedSection = ({
         >
           {videoIds.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {videoIds.map((videoId, index) => (
+              {videoIds.map((videoId) => (
                 <div
                   key={videoId}
                   className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16]"
                 >
-                  <style>
-                    {`
-                      wistia-player[media-id='${videoId}']:not(:defined) {
-                        background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${videoId}/swatch');
-                        display: block;
-                        filter: blur(5px);
-                        padding-top: 177.78%;
-                      }
-                    `}
-                  </style>
+                  <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
                   {/* @ts-ignore */}
                   <wistia-player media-id={videoId} aspect="0.5625"></wistia-player>
                 </div>
