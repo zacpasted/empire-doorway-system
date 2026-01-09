@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-import logoFigs from "@/assets/logos/figs-transparent.png";
-import logoCocofloss from "@/assets/logos/cocofloss-transparent.png";
-import logoSolventum from "@/assets/logos/solventum-transparent.png";
-import logoMHM from "@/assets/logos/marshall-hanson-method-transparent.png";
+import logoFigs from "@/assets/logos/figs-white.png";
+import logoCocofloss from "@/assets/logos/cocofloss-white.png";
+import logoSolventum from "@/assets/logos/solventum-white.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
+import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
 
 interface ClientLogosSectionProps {
   onApplyClick?: () => void;
@@ -19,6 +20,7 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
     { src: logoCocofloss, alt: "Cocofloss" },
     { src: logoSolventum, alt: "Solventum" },
     { src: logoMHM, alt: "Marshall Hanson Method" },
+    { src: logoSmileVirtual, alt: "Smile Virtual" },
   ];
 
   // Duplicate for seamless loop

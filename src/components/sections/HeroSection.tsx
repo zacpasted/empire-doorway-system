@@ -2,10 +2,11 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
-import logoFigs from "@/assets/logos/figs-transparent.png";
-import logoCocofloss from "@/assets/logos/cocofloss-transparent.png";
-import logoSolventum from "@/assets/logos/solventum-transparent.png";
-import logoMHM from "@/assets/logos/marshall-hanson-method-transparent.png";
+import logoFigs from "@/assets/logos/figs-white.png";
+import logoCocofloss from "@/assets/logos/cocofloss-white.png";
+import logoSolventum from "@/assets/logos/solventum-white.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
+import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
 
 // Animated Counter Hook
 const useCounter = (end: number, duration: number, isInView: boolean, delay: number) => {
@@ -109,10 +110,11 @@ const HeroSection = () => {
   const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
   const logos = [
-    { src: logoFigs, alt: "FIGS", invert: false },
-    { src: logoCocofloss, alt: "Cocofloss", invert: false },
-    { src: logoSolventum, alt: "Solventum", invert: true },
-    { src: logoMHM, alt: "Marshall Hanson Method", invert: false },
+    { src: logoFigs, alt: "FIGS" },
+    { src: logoCocofloss, alt: "Cocofloss" },
+    { src: logoSolventum, alt: "Solventum" },
+    { src: logoMHM, alt: "Marshall Hanson Method" },
+    { src: logoSmileVirtual, alt: "Smile Virtual" },
   ];
   const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
   useEffect(() => {
@@ -266,7 +268,7 @@ const HeroSection = () => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt} 
-                  className={`h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300 ${logo.invert ? 'invert brightness-0 invert' : ''}`}
+                  className="h-8 md:h-10 w-auto object-contain"
                 />
               </div>
             ))}
