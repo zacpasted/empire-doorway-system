@@ -55,6 +55,24 @@ const LeadMagnetPopup = () => {
     };
   }, [canShowPopup]);
 
+  // Scroll depth tracking (50%)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!canShowPopup()) return;
+      
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = (window.scrollY / scrollHeight) * 100;
+      
+      if (scrollProgress >= 50) {
+        setIsOpen(true);
+        setHasTriggered(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [canShowPopup]);
+
   useEffect(() => {
     // Check if already dismissed or unlocked
     const dismissed = localStorage.getItem(STORAGE_KEY);
