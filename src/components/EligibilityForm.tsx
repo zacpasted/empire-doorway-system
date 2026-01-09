@@ -6,6 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   // Contact Info (Step 1)
@@ -48,18 +49,15 @@ const initialFormData: FormData = {
   readiness: "",
 };
 
-// Zapier webhook URL - replace with your actual webhook
-const ZAPIER_WEBHOOK_URL = "";
-
 const EligibilityForm = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [contactSaved, setContactSaved] = useState(false);
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const totalSteps = 12; // 1 contact + 11 questions
+  const totalSteps = 12;
 
   const updateField = (field: keyof FormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -74,28 +72,120 @@ const EligibilityForm = () => {
     }
   };
 
-  const saveContactToWebhook = async () => {
-    if (contactSaved || !ZAPIER_WEBHOOK_URL) return;
-    
+  const savePartialSubmission = async () => {
     try {
-      await fetch(ZAPIER_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "no-cors",
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          source: "eligibility_form_partial",
-          step: step,
-          timestamp: new Date().toISOString(),
-        }),
-      });
-      setContactSaved(true);
-      console.log("Contact info saved to webhook");
+      if (submissionId) {
+        // Update existing submission
+        const { error } = await supabase
+          .from('eligibility_submissions')
+          .update({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            role_type: formData.currentRole || null,
+            years_in_practice: formData.yearsInPractice || null,
+            real_cost: formData.realCost.length > 0 ? formData.realCost : null,
+            real_cost_other: formData.realCostOther || null,
+            brand_maturity: formData.brandMaturity || null,
+            visibility: formData.visibility || null,
+            alignment: formData.alignment || null,
+            friction: formData.friction || null,
+            commitment: formData.commitment || null,
+            career_horizon: formData.careerHorizon || null,
+            important_areas: formData.importantAreas.length > 0 ? formData.importantAreas : null,
+            readiness: formData.readiness || null,
+            last_completed_step: step,
+            is_partial: true,
+          })
+          .eq('id', submissionId);
+
+        if (error) throw error;
+      } else {
+        // Create new submission
+        const { data, error } = await supabase
+          .from('eligibility_submissions')
+          .insert({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            last_completed_step: step,
+            is_partial: true,
+          })
+          .select('id')
+          .single();
+
+        if (error) throw error;
+        if (data) setSubmissionId(data.id);
+      }
+      
+      console.log("Partial submission saved");
     } catch (error) {
-      console.error("Error saving contact to webhook:", error);
+      console.error("Error saving partial submission:", error);
+    }
+  };
+
+  const saveCompleteSubmission = async () => {
+    try {
+      if (submissionId) {
+        const { error } = await supabase
+          .from('eligibility_submissions')
+          .update({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            role_type: formData.currentRole || null,
+            years_in_practice: formData.yearsInPractice || null,
+            real_cost: formData.realCost.length > 0 ? formData.realCost : null,
+            real_cost_other: formData.realCostOther || null,
+            brand_maturity: formData.brandMaturity || null,
+            visibility: formData.visibility || null,
+            alignment: formData.alignment || null,
+            friction: formData.friction || null,
+            commitment: formData.commitment || null,
+            career_horizon: formData.careerHorizon || null,
+            important_areas: formData.importantAreas.length > 0 ? formData.importantAreas : null,
+            readiness: formData.readiness || null,
+            last_completed_step: totalSteps,
+            is_partial: false,
+          })
+          .eq('id', submissionId);
+
+        if (error) throw error;
+      } else {
+        // Create complete submission directly
+        const { error } = await supabase
+          .from('eligibility_submissions')
+          .insert({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            role_type: formData.currentRole || null,
+            years_in_practice: formData.yearsInPractice || null,
+            real_cost: formData.realCost.length > 0 ? formData.realCost : null,
+            real_cost_other: formData.realCostOther || null,
+            brand_maturity: formData.brandMaturity || null,
+            visibility: formData.visibility || null,
+            alignment: formData.alignment || null,
+            friction: formData.friction || null,
+            commitment: formData.commitment || null,
+            career_horizon: formData.careerHorizon || null,
+            important_areas: formData.importantAreas.length > 0 ? formData.importantAreas : null,
+            readiness: formData.readiness || null,
+            last_completed_step: totalSteps,
+            is_partial: false,
+          });
+
+        if (error) throw error;
+      }
+      
+      console.log("Complete submission saved");
+    } catch (error) {
+      console.error("Error saving complete submission:", error);
+      throw error;
     }
   };
 
@@ -124,32 +214,24 @@ const EligibilityForm = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
-    if (ZAPIER_WEBHOOK_URL) {
-      try {
-        await fetch(ZAPIER_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          mode: "no-cors",
-          body: JSON.stringify({
-            ...formData,
-            source: "eligibility_form_complete",
-            timestamp: new Date().toISOString(),
-          }),
-        });
-      } catch (error) {
-        console.error("Error submitting form:", error);
-      }
-    }
-    
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await saveCompleteSubmission();
       setIsSubmitted(true);
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const nextStep = async () => {
-    if (step === 1 && !contactSaved) {
-      await saveContactToWebhook();
+    // Save partial submission after step 1
+    if (step === 1) {
+      await savePartialSubmission();
     }
     
     if (step === totalSteps) {
@@ -226,14 +308,12 @@ const ProgressBar = ({ current, total }: { current: number; total: number }) => 
 
 const ConfirmationScreen = () => {
   useEffect(() => {
-    // Load Calendly widget script
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script on unmount
       const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
       if (existingScript) {
         existingScript.remove();
@@ -274,7 +354,6 @@ const ConfirmationScreen = () => {
           Please schedule your conversation using the calendar below.
         </p>
         
-        {/* Calendly Embed */}
         <div 
           className="calendly-inline-widget rounded-lg overflow-hidden border border-border" 
           data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff001e"
