@@ -61,14 +61,14 @@ const FoundersPhilosophySection = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            Why We Do This
+            Getting Started Is the Hardest Part
           </h2>
           <p 
             className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            A message from our founders on the philosophy behind everything we build.
+            Your winning edge is the most authentic version of you. Breathing that confidence into every client we work with is what we love most.
           </p>
         </div>
         
