@@ -20,10 +20,10 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            Brands We've Built for A2E Members
+            The Same Brand System Behind the Best Practices in the World
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Click to explore the work we've created for Associate to Empire clients.
+            Built using the same elite framework trusted by the world's best practices—without the six-figure investment.
           </p>
         </div>
 
