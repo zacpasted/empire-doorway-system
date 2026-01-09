@@ -138,6 +138,16 @@ const Index = () => {
         <BrandsShowcaseSection onApplyClick={scrollToForm} />
       </motion.div>
       
+      {/* Founders Philosophy - Passion & Confidence */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <FoundersPhilosophySection />
+      </motion.div>
+      
       {/* The Truth - Hard Stats */}
       <motion.div
         initial="hidden"
@@ -294,15 +304,6 @@ const Index = () => {
         <FilterSection />
       </motion.div>
       
-      {/* Founders Philosophy - Passion & Confidence */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <FoundersPhilosophySection />
-      </motion.div>
       
       {/* Closing CTA */}
       <motion.div
