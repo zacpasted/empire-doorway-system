@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 
 interface CommunitySectionProps {
   videoIds?: string[];
@@ -16,7 +17,7 @@ const CommunitySection = ({ videoIds = [] }: CommunitySectionProps) => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '200px' }
     );
 
     if (sectionRef.current) {
@@ -26,37 +27,8 @@ const CommunitySection = ({ videoIds = [] }: CommunitySectionProps) => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!isVisible || videoIds.length === 0) return;
-
-    // Load Wistia player script
-    const playerScript = document.createElement('script');
-    playerScript.src = 'https://fast.wistia.com/player.js';
-    playerScript.async = true;
-
-    // Load embed scripts for each video
-    const embedScripts = videoIds.map(id => {
-      const script = document.createElement('script');
-      script.src = `https://fast.wistia.com/embed/${id}.js`;
-      script.async = true;
-      script.type = 'module';
-      return script;
-    });
-
-    document.head.appendChild(playerScript);
-    embedScripts.forEach(script => document.head.appendChild(script));
-
-    return () => {
-      if (document.head.contains(playerScript)) {
-        document.head.removeChild(playerScript);
-      }
-      embedScripts.forEach(script => {
-        if (document.head.contains(script)) {
-          document.head.removeChild(script);
-        }
-      });
-    };
-  }, [isVisible, videoIds]);
+  // Use shared Wistia loader - only loads when visible
+  useWistiaLoader(videoIds, { loadOnMount: isVisible });
 
   return (
     <section 
@@ -94,17 +66,7 @@ const CommunitySection = ({ videoIds = [] }: CommunitySectionProps) => {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-              <style>
-                {`
-                  wistia-player[media-id='${videoIds[0]}']:not(:defined) {
-                    background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${videoIds[0]}/swatch');
-                    display: block;
-                    filter: blur(5px);
-                    height: 100%;
-                    width: 100%;
-                  }
-                `}
-              </style>
+              <style>{getWistiaPlaceholderStyles(videoIds[0], '177.78%')}</style>
               {/* @ts-ignore - Wistia custom element */}
               <wistia-player 
                 media-id={videoIds[0]} 
@@ -125,18 +87,7 @@ const CommunitySection = ({ videoIds = [] }: CommunitySectionProps) => {
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-                
-                <style>
-                  {`
-                    wistia-player[media-id='${videoId}']:not(:defined) {
-                      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${videoId}/swatch');
-                      display: block;
-                      filter: blur(5px);
-                      height: 100%;
-                      width: 100%;
-                    }
-                  `}
-                </style>
+                <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
                 {/* @ts-ignore - Wistia custom element */}
                 <wistia-player 
                   media-id={videoId} 

@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { useWistiaLoader, getWistiaPlaceholderStyles } from '@/hooks/use-wistia';
 
 const FoundersVibeSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const mediaId = 'tcg2sxyjch';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -11,7 +13,7 @@ const FoundersVibeSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '200px' }
     );
 
     if (sectionRef.current) {
@@ -21,31 +23,8 @@ const FoundersVibeSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!isVisible) return;
-
-    // Load Wistia scripts
-    const playerScript = document.createElement('script');
-    playerScript.src = 'https://fast.wistia.com/player.js';
-    playerScript.async = true;
-
-    const embedScript = document.createElement('script');
-    embedScript.src = 'https://fast.wistia.com/embed/tcg2sxyjch.js';
-    embedScript.async = true;
-    embedScript.type = 'module';
-
-    document.head.appendChild(playerScript);
-    document.head.appendChild(embedScript);
-
-    return () => {
-      if (document.head.contains(playerScript)) {
-        document.head.removeChild(playerScript);
-      }
-      if (document.head.contains(embedScript)) {
-        document.head.removeChild(embedScript);
-      }
-    };
-  }, [isVisible]);
+  // Use shared Wistia loader
+  useWistiaLoader(mediaId, { loadOnMount: isVisible });
 
   return (
     <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
@@ -78,19 +57,10 @@ const FoundersVibeSection = () => {
           }`}
         >
           <div className="rounded-2xl overflow-hidden shadow-2xl border border-border/50">
-            <style>
-              {`
-                wistia-player[media-id='tcg2sxyjch']:not(:defined) {
-                  background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/tcg2sxyjch/swatch');
-                  display: block;
-                  filter: blur(5px);
-                  padding-top: 176.67%;
-                }
-              `}
-            </style>
+            <style>{getWistiaPlaceholderStyles(mediaId, '176.67%')}</style>
             {/* @ts-ignore - Wistia custom element */}
             <wistia-player 
-              media-id="tcg2sxyjch" 
+              media-id={mediaId} 
               aspect="0.5660377358490566"
             />
           </div>
