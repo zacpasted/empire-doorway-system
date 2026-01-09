@@ -134,6 +134,20 @@ const Index = () => {
         <TheTruthSection />
       </motion.div>
       
+      {/* Content Examples - Before Case Studies */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <WistiaVideoEmbedSection 
+          title="If Your Content Looks Like Everyone Else's, You Lose."
+          subtitle="Chosen brands don't guess. We script, edit, and distribute everything for you."
+          videoIds={["6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
+        />
+      </motion.div>
+      
       {/* Case Studies with Metrics */}
       <motion.div
         initial="hidden"
@@ -194,19 +208,6 @@ const Index = () => {
         <WhatWeAskSection />
       </motion.div>
       
-      {/* Video Examples - After What We Ask */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <WistiaVideoEmbedSection 
-          title="Content Examples"
-          subtitle="See the type of content we create for our members"
-          videoIds={["6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
-        />
-      </motion.div>
       
       {/* What You Receive - Delivery */}
       <motion.div
