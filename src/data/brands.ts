@@ -57,10 +57,8 @@ import nav08 from "@/assets/brands/nav-atwal/showcase-08.jpeg";
 import nav09 from "@/assets/brands/nav-atwal/showcase-09.jpeg";
 import nav10 from "@/assets/brands/nav-atwal/showcase-10.jpeg";
 
-// Jake Bateman images
+// Jake Bateman - using player card as showcase
 import jakeBateman from "@/assets/cards/jake-bateman.jpeg";
-import jake01 from "@/assets/brands/jake-bateman/showcase-01.png";
-import jake02 from "@/assets/brands/jake-bateman/showcase-02.png";
 
 export interface BrandExample {
   type: "image" | "video";
@@ -251,9 +249,7 @@ export const brands: BrandCaseStudy[] = [
     services: ["Brand Strategy", "Visual Identity", "Authority Positioning", "Cultural Alignment", "Content Architecture"],
     timeline: "45-day build + ongoing management",
     examples: [
-      { type: "image", label: "Brand Identity", src: jake01 },
-      { type: "image", label: "Brand System", src: jake02 },
-      { type: "image", label: "Editorial Portrait", src: jakeBateman },
+      { type: "image", label: "Brand Identity", src: jakeBateman },
     ],
   },
 ];
