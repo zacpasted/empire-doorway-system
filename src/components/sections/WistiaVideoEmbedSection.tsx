@@ -95,42 +95,26 @@ const WistiaVideoEmbedSection = ({
           }`}
         >
           {videoIds.length > 0 ? (
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-              {videoIds.map((videoId, index) => {
-                // Varied heights for masonry effect
-                const heightVariants = [
-                  "aspect-[9/16]",    // Tall
-                  "aspect-[9/14]",    // Medium-tall
-                  "aspect-[9/12]",    // Medium
-                  "aspect-[9/16]",    // Tall
-                  "aspect-[9/13]",    // Medium-tall
-                  "aspect-[9/11]",    // Short
-                ];
-                const aspectClass = heightVariants[index % heightVariants.length];
-                
-                return (
-                  <div
-                    key={videoId}
-                    className={`relative rounded-xl overflow-hidden shadow-lg bg-card/50 ${aspectClass} break-inside-avoid mb-4`}
-                  >
-                    <style>
-                      {`
-                        wistia-player[media-id='${videoId}']:not(:defined) {
-                          background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${videoId}/swatch');
-                          display: block;
-                          filter: blur(5px);
-                          height: 100%;
-                        }
-                        wistia-player[media-id='${videoId}'] {
-                          height: 100%;
-                        }
-                      `}
-                    </style>
-                    {/* @ts-ignore */}
-                    <wistia-player media-id={videoId} style={{ height: '100%' }}></wistia-player>
-                  </div>
-                );
-              })}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {videoIds.map((videoId, index) => (
+                <div
+                  key={videoId}
+                  className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16]"
+                >
+                  <style>
+                    {`
+                      wistia-player[media-id='${videoId}']:not(:defined) {
+                        background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/${videoId}/swatch');
+                        display: block;
+                        filter: blur(5px);
+                        padding-top: 177.78%;
+                      }
+                    `}
+                  </style>
+                  {/* @ts-ignore */}
+                  <wistia-player media-id={videoId} aspect="0.5625"></wistia-player>
+                </div>
+              ))}
             </div>
           ) : (
             /* Placeholder state - empty slots for embedding */
