@@ -20,21 +20,21 @@ const caseStudies = [
     closingLine: "This wasn't growth for growth's sake. It was alignment—and everything followed."
   },
   {
-    name: "Miami-Based Clinic",
-    brand: "Practice Overhaul",
-    tagline: "From Struggling, Low-Quality Demand to High-Performance Growth",
-    story: "When we entered this practice, lead flow was inconsistent, patient quality was poor, and there was no cohesive narrative. Monthly revenue hovered around $115,000, with the business barely staying out of the red.",
-    approach: "We led the internal creative team with clear positioning and content strategy. We overhauled sales and conversions—hiring new team members, retraining staff, and installing processes focused on clarity and humanity.",
+    name: "Dr. Vik Ravoory",
+    brand: "Brand Creation & Career Inflection",
+    tagline: "From Uncertain Associate to Intentional Brand Architect",
+    story: "Vik entered the process as a young associate with ambition, clinical promise, and the same uncertainty most early-career dentists face: no clear differentiation, no narrative ownership, and no framework for long-term leverage. Like many associates, he was doing everything 'right' on paper, yet felt invisible in practice.",
+    approach: "The early work focused not on exposure, but on foundation. Identity, voice, values, and long-term direction were clarified before a single piece of content mattered. There were real growing pains—iterations that didn't land, moments of doubt, recalibration of tone and positioning—but that friction was essential. The brand wasn't manufactured; it was built.",
     results: [
-      { icon: TrendingUp, label: "Revenue", value: "$115K → $400K+", detail: "Monthly revenue in 7 months" },
-      { icon: Users, label: "Lead Volume", value: "+300%", detail: "1,500+ leads per month" },
-      { icon: DollarSign, label: "Cost Per Lead", value: "-80%", detail: "While increasing quality" },
+      { icon: Award, label: "Identity", value: "Clarity", detail: "Intentional, coherent brand" },
+      { icon: TrendingUp, label: "Trajectory", value: "Accelerated", detail: "Stronger perception & opportunities" },
+      { icon: Globe, label: "Direction", value: "Authorship", detail: "Operating from ownership" },
     ],
     transformation: {
-      before: ["$115K/month revenue", "Inconsistent lead flow", "Poor patient quality"],
-      after: ["$400K+/month revenue", "1,500+ leads/month", "2x conversion rate"]
+      before: ["No clear differentiation", "No narrative ownership", "Felt invisible in practice"],
+      after: ["Intentional brand identity", "Credible positioning", "Control over career trajectory"]
     },
-    closingLine: "This was not an advertising win. It was a systems, narrative, and leadership win."
+    closingLine: "What changed wasn't just visibility. It was direction. Vik moved from guessing his next move to building toward something inevitable."
   },
   {
     name: "Dr. Alan Clarke",
