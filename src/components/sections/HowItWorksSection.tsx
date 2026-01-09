@@ -227,166 +227,234 @@ const HowItWorksSection = () => {
           </div>
         </motion.div>
 
-        {/* Phases */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="space-y-6"
-        >
-          {phases.map((phase, index) => {
-            const Icon = phase.icon;
-            const isActive = activePhase === index;
+        {/* Phases with Timeline */}
+        <div className="relative">
+          {/* Vertical Timeline Line - Desktop */}
+          <div className="hidden lg:block absolute left-8 top-0 bottom-0 w-px">
+            {/* Background track */}
+            <div className="absolute inset-0 bg-border/20" />
             
-            return (
+            {/* Animated progress fill */}
+            <motion.div
+              className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary via-primary to-primary/30"
+              initial={{ height: "0%" }}
+              animate={isInView ? { height: "100%" } : {}}
+              transition={{ duration: 3, ease: "easeOut", delay: 0.5 }}
+            />
+            
+            {/* Glowing orb that travels down */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50"
+              initial={{ top: "0%" }}
+              animate={isInView ? { top: ["0%", "100%"] } : {}}
+              transition={{ duration: 4, ease: "easeInOut", delay: 0.5 }}
+            >
               <motion.div
-                key={index}
-                variants={phaseVariants}
-                className="relative"
-                onMouseEnter={() => setActivePhase(index)}
-                onMouseLeave={() => setActivePhase(null)}
-              >
-                {/* Phase card */}
-                <div 
-                  className={`relative p-6 md:p-8 rounded-2xl border transition-all duration-500 cursor-pointer overflow-hidden ${
-                    isActive 
-                      ? "border-primary/40 bg-card/60 backdrop-blur-md" 
-                      : "border-border/20 bg-card/20 hover:border-border/40"
-                  }`}
+                className="absolute inset-0 rounded-full bg-primary"
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="space-y-6 lg:pl-20"
+          >
+            {phases.map((phase, index) => {
+              const Icon = phase.icon;
+              const isActive = activePhase === index;
+              
+              return (
+                <motion.div
+                  key={index}
+                  variants={phaseVariants}
+                  className="relative"
+                  onMouseEnter={() => setActivePhase(index)}
+                  onMouseLeave={() => setActivePhase(null)}
                 >
-                  {/* Active glow */}
-                  {isActive && (
+                  {/* Timeline Node - Desktop */}
+                  <div className="hidden lg:flex absolute -left-20 top-8 items-center justify-center">
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                  )}
-
-                  {/* Scanning line on hover */}
-                  {isActive && (
+                      className={`relative w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                        isActive 
+                          ? "bg-primary border-primary" 
+                          : "bg-background border-primary/30"
+                      }`}
+                      whileHover={{ scale: 1.2 }}
+                    >
+                      <span className={`text-xs font-mono transition-colors duration-300 ${
+                        isActive ? "text-primary-foreground" : "text-primary/60"
+                      }`}>
+                        {phase.number}
+                      </span>
+                      
+                      {/* Pulse ring on hover */}
+                      {isActive && (
+                        <motion.div
+                          className="absolute inset-0 rounded-full border-2 border-primary"
+                          animate={{ scale: [1, 1.8], opacity: [0.8, 0] }}
+                          transition={{ duration: 1, repeat: Infinity }}
+                        />
+                      )}
+                    </motion.div>
+                    
+                    {/* Connector line to card */}
                     <motion.div
-                      className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent"
-                      animate={{ y: [0, 200] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                      className={`w-8 h-px transition-colors duration-300 ${
+                        isActive ? "bg-primary" : "bg-border/30"
+                      }`}
+                      initial={{ scaleX: 0 }}
+                      animate={isInView ? { scaleX: 1 } : {}}
+                      transition={{ delay: 0.3 + index * 0.15 }}
+                      style={{ originX: 0 }}
                     />
-                  )}
+                  </div>
 
-                  <div className="relative z-10">
-                    {/* Header row */}
-                    <div className="flex items-start gap-4 md:gap-6">
-                      {/* Phase number & icon */}
-                      <div className="flex-shrink-0">
-                        <div className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                          isActive ? "bg-primary/20" : "bg-card/50"
-                        }`}>
-                          <Icon className={`w-6 h-6 md:w-7 md:h-7 transition-colors duration-300 ${
-                            isActive ? "text-primary" : "text-muted-foreground/60"
-                          }`} />
-                          <span className="absolute -top-2 -left-2 text-xs font-mono text-primary/60">
-                            {phase.number}
-                          </span>
-                          
-                          {/* Pulsing ring on active */}
-                          {isActive && (
-                            <motion.div
-                              className="absolute inset-0 rounded-xl border border-primary/40"
-                              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            />
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Title & subtitle */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3 mb-1">
-                          <h3 className={`text-lg md:text-xl font-serif transition-colors duration-300 ${
-                            isActive ? "text-foreground" : "text-foreground/80"
-                          }`}>
-                            {phase.title}
-                          </h3>
-                          <span className={`hidden md:inline-block px-3 py-1 text-[10px] tracking-[0.2em] uppercase rounded-full border transition-all duration-300 ${
-                            isActive 
-                              ? "bg-primary/10 border-primary/30 text-primary" 
-                              : "bg-transparent border-border/30 text-muted-foreground/50"
-                          }`}>
-                            {phase.feeling}
-                          </span>
-                        </div>
-                        <p className="text-sm text-muted-foreground/60 italic">{phase.subtitle}</p>
-                      </div>
-
-                      {/* Expand indicator */}
+                  {/* Phase card */}
+                  <div 
+                    className={`relative p-6 md:p-8 rounded-2xl border transition-all duration-500 cursor-pointer overflow-hidden ${
+                      isActive 
+                        ? "border-primary/40 bg-card/60 backdrop-blur-md" 
+                        : "border-border/20 bg-card/20 hover:border-border/40"
+                    }`}
+                  >
+                    {/* Active glow */}
+                    {isActive && (
                       <motion.div
-                        animate={{ rotate: isActive ? 90 : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex-shrink-0 mt-2"
+                        className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      />
+                    )}
+
+                    {/* Scanning line on hover */}
+                    {isActive && (
+                      <motion.div
+                        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent"
+                        animate={{ y: [0, 200] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    )}
+
+                    <div className="relative z-10">
+                      {/* Header row */}
+                      <div className="flex items-start gap-4 md:gap-6">
+                        {/* Phase number & icon */}
+                        <div className="flex-shrink-0">
+                          <div className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                            isActive ? "bg-primary/20" : "bg-card/50"
+                          }`}>
+                            <Icon className={`w-6 h-6 md:w-7 md:h-7 transition-colors duration-300 ${
+                              isActive ? "text-primary" : "text-muted-foreground/60"
+                            }`} />
+                            <span className="absolute -top-2 -left-2 text-xs font-mono text-primary/60 lg:hidden">
+                              {phase.number}
+                            </span>
+                            
+                            {/* Pulsing ring on active */}
+                            {isActive && (
+                              <motion.div
+                                className="absolute inset-0 rounded-xl border border-primary/40"
+                                animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                              />
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Title & subtitle */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 mb-1">
+                            <h3 className={`text-lg md:text-xl font-serif transition-colors duration-300 ${
+                              isActive ? "text-foreground" : "text-foreground/80"
+                            }`}>
+                              {phase.title}
+                            </h3>
+                            <span className={`hidden md:inline-block px-3 py-1 text-[10px] tracking-[0.2em] uppercase rounded-full border transition-all duration-300 ${
+                              isActive 
+                                ? "bg-primary/10 border-primary/30 text-primary" 
+                                : "bg-transparent border-border/30 text-muted-foreground/50"
+                            }`}>
+                              {phase.feeling}
+                            </span>
+                          </div>
+                          <p className="text-sm text-muted-foreground/60 italic">{phase.subtitle}</p>
+                        </div>
+
+                        {/* Expand indicator */}
+                        <motion.div
+                          animate={{ rotate: isActive ? 90 : 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="flex-shrink-0 mt-2"
+                        >
+                          <ArrowRight className={`w-5 h-5 transition-colors duration-300 ${
+                            isActive ? "text-primary" : "text-muted-foreground/30"
+                          }`} />
+                        </motion.div>
+                      </div>
+
+                      {/* Expandable content */}
+                      <motion.div
+                        initial={false}
+                        animate={{ 
+                          height: isActive ? "auto" : 0,
+                          opacity: isActive ? 1 : 0 
+                        }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="overflow-hidden"
                       >
-                        <ArrowRight className={`w-5 h-5 transition-colors duration-300 ${
-                          isActive ? "text-primary" : "text-muted-foreground/30"
-                        }`} />
+                        <div className="pt-6 md:pt-8 md:pl-20 lg:pl-22">
+                          <p className="text-muted-foreground leading-relaxed mb-6">
+                            {phase.description}
+                          </p>
+
+                          {/* Details grid */}
+                          <div className="grid md:grid-cols-2 gap-3 mb-6">
+                            {phase.details.map((detail, dIndex) => (
+                              <motion.div
+                                key={dIndex}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: dIndex * 0.1 }}
+                                className="flex items-start gap-3"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0" />
+                                <span className="text-sm text-foreground/70">{detail}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+
+                          {/* Outcome */}
+                          <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                            <p className="text-sm text-foreground/80 italic">
+                              "{phase.outcome}"
+                            </p>
+                          </div>
+                        </div>
                       </motion.div>
                     </div>
-
-                    {/* Expandable content */}
-                    <motion.div
-                      initial={false}
-                      animate={{ 
-                        height: isActive ? "auto" : 0,
-                        opacity: isActive ? 1 : 0 
-                      }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pt-6 md:pt-8 md:pl-20 lg:pl-22">
-                        <p className="text-muted-foreground leading-relaxed mb-6">
-                          {phase.description}
-                        </p>
-
-                        {/* Details grid */}
-                        <div className="grid md:grid-cols-2 gap-3 mb-6">
-                          {phase.details.map((detail, dIndex) => (
-                            <motion.div
-                              key={dIndex}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: dIndex * 0.1 }}
-                              className="flex items-start gap-3"
-                            >
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0" />
-                              <span className="text-sm text-foreground/70">{detail}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-
-                        {/* Outcome */}
-                        <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
-                          <p className="text-sm text-foreground/80 italic">
-                            "{phase.outcome}"
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
                   </div>
-                </div>
 
-                {/* Connecting line between phases */}
-                {index < phases.length - 1 && (
-                  <div className="flex justify-center py-2">
-                    <motion.div
-                      className="w-px h-6 bg-gradient-to-b from-primary/30 to-transparent"
-                      initial={{ scaleY: 0 }}
-                      animate={isInView ? { scaleY: 1 } : {}}
-                      transition={{ delay: 0.5 + index * 0.1 }}
-                    />
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                  {/* Mobile connecting line between phases */}
+                  {index < phases.length - 1 && (
+                    <div className="flex justify-center py-2 lg:hidden">
+                      <motion.div
+                        className="w-px h-6 bg-gradient-to-b from-primary/30 to-transparent"
+                        initial={{ scaleY: 0 }}
+                        animate={isInView ? { scaleY: 1 } : {}}
+                        transition={{ delay: 0.5 + index * 0.1 }}
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
 
         {/* What This Creates - Summary */}
         <motion.div
