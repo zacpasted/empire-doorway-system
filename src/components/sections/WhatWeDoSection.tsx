@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Sparkles, FileText, Film, Video, ChevronRight, Check } from "lucide-react";
-
+import BeforeAfterVideoCompare from "@/components/BeforeAfterVideoCompare";
 const services = [
   {
     icon: Sparkles,
@@ -285,9 +285,14 @@ const WhatWeDoSection = () => {
           ))}
         </motion.div>
 
+        {/* Before/After Video Comparison */}
+        <div className="mt-20 md:mt-28 mb-20 md:mb-28">
+          <BeforeAfterVideoCompare isInView={isInView} />
+        </div>
+
         {/* Bottom Section */}
         <motion.div 
-          className="mt-20 md:mt-24 text-center"
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1 }}
