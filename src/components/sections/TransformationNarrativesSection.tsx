@@ -20,21 +20,21 @@ const caseStudies = [
     closingLine: "This wasn't growth for growth's sake. It was alignment—and everything followed."
   },
   {
-    name: "Dr. Vik Ravoory",
-    brand: "Brand Creation & Career Inflection",
-    tagline: "From Uncertain Associate to Intentional Brand Architect",
-    story: "Vik entered the process as a young associate with ambition, clinical promise, and the same uncertainty most early-career dentists face: no clear differentiation, no narrative ownership, and no framework for long-term leverage. Like many associates, he was doing everything 'right' on paper, yet felt invisible in practice.",
-    approach: "The early work focused not on exposure, but on foundation. Identity, voice, values, and long-term direction were clarified before a single piece of content mattered. There were real growing pains—iterations that didn't land, moments of doubt, recalibration of tone and positioning—but that friction was essential. The brand wasn't manufactured; it was built.",
+    name: "Miami Office",
+    brand: "Market Expansion & Brand Authority",
+    tagline: "From Local Practice to Multi-Location Powerhouse",
+    story: "The vision was clear: expand from a single successful location into Miami's competitive luxury dental market. But entering a saturated market without differentiation is a recipe for failure. The practice needed more than just a second location—it needed a brand presence that commanded attention from day one.",
+    approach: "We built the Miami expansion as a brand event, not just an office opening. Pre-launch content positioned the new location as inevitable. Strategic partnerships with local influencers and luxury brands created cultural relevance before the doors opened.",
     results: [
-      { icon: Award, label: "Identity", value: "Clarity", detail: "Intentional, coherent brand" },
-      { icon: TrendingUp, label: "Trajectory", value: "Accelerated", detail: "Stronger perception & opportunities" },
-      { icon: Globe, label: "Direction", value: "Authorship", detail: "Operating from ownership" },
+      { icon: DollarSign, label: "Launch Revenue", value: "$800K", detail: "First 6 months" },
+      { icon: Users, label: "New Patients", value: "400+", detail: "Pre-launch waitlist" },
+      { icon: Globe, label: "Market Position", value: "Top 3", detail: "Miami luxury dental" },
     ],
     transformation: {
-      before: ["No clear differentiation", "No narrative ownership", "Felt invisible in practice"],
-      after: ["Intentional brand identity", "Credible positioning", "Control over career trajectory"]
+      before: ["Single location ceiling", "Unknown in new market", "Competing on price"],
+      after: ["Multi-location brand", "Market authority", "Premium positioning"]
     },
-    closingLine: "What changed wasn't just visibility. It was direction. Vik moved from guessing his next move to building toward something inevitable."
+    closingLine: "This wasn't about opening another office. It was about proving that brand equity travels—when built correctly."
   },
   {
     name: "Dr. Alan Clarke",
