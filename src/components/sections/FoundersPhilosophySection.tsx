@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+// Founders philosophy video section - Zac & Alan
 const FoundersPhilosophySection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
