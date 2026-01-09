@@ -139,7 +139,7 @@ const TheLongGameSection = () => {
           </div>
         </div>
 
-        {/* The Result - New Section */}
+        {/* The Result - Enhanced Visual Section */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -147,15 +147,34 @@ const TheLongGameSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-32 relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent rounded-3xl" />
+          {/* Ambient background glow */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent rounded-3xl" />
+          <motion.div 
+            className="absolute -inset-4 bg-primary/5 rounded-[2rem] blur-3xl"
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
           
-          <div className="relative border border-border/20 rounded-2xl p-10 md:p-16 bg-background/50 backdrop-blur-sm">
+          <div className="relative border border-primary/20 rounded-2xl p-10 md:p-16 bg-background/80 backdrop-blur-md overflow-hidden">
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-primary/30 rounded-tl-2xl" />
+            <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-primary/30 rounded-tr-2xl" />
+            <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-primary/30 rounded-bl-2xl" />
+            <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-primary/30 rounded-br-2xl" />
+            
+            {/* Scanning line effect */}
+            <motion.div
+              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+              animate={{ y: [0, 400, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="text-xs tracking-[0.4em] uppercase text-primary/60 text-center mb-6"
+              className="text-xs tracking-[0.4em] uppercase text-primary text-center mb-8"
             >
               The Result
             </motion.p>
@@ -165,9 +184,10 @@ const TheLongGameSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-2xl md:text-3xl font-serif text-center text-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-3xl md:text-4xl lg:text-5xl font-display text-center text-foreground mb-10 max-w-4xl mx-auto leading-tight"
             >
-              A brand that distinguishes you. A system that delivers patients.
+              A brand that distinguishes you.
+              <span className="block mt-2 text-primary/90">A system that delivers patients.</span>
             </motion.h3>
             
             <motion.p
@@ -175,27 +195,77 @@ const TheLongGameSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="text-center text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10"
+              className="text-center text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed mb-12"
             >
               A team that understands your vision—and knows exactly how to realize it. 
               Because we've done this before. Many times.
             </motion.p>
+
+            {/* Visual Stats Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1 }}
+              className="grid grid-cols-3 gap-6 md:gap-10 mb-12 max-w-3xl mx-auto"
+            >
+              {[
+                { value: "100%", label: "Renewal Rate" },
+                { value: "6+", label: "Months Average" },
+                { value: "0", label: "Failed Investments" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 1.1 + index * 0.1 }}
+                  className="text-center group"
+                >
+                  <motion.div
+                    className="relative"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <p className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground relative">
+                      {stat.value}
+                    </p>
+                  </motion.div>
+                  <p className="text-xs md:text-sm tracking-wider uppercase text-muted-foreground mt-3">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
 
             {/* The Proof Statement */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 1 }}
-              className="text-center pt-8 border-t border-border/10"
+              transition={{ duration: 0.7, delay: 1.3 }}
+              className="text-center pt-10 border-t border-primary/10 relative"
             >
-              <p className="text-foreground/80 font-light text-lg md:text-xl max-w-2xl mx-auto">
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 -top-3 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center"
+                animate={{ boxShadow: ["0 0 0 0 rgba(var(--primary), 0.2)", "0 0 0 12px rgba(var(--primary), 0)", "0 0 0 0 rgba(var(--primary), 0.2)"] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="w-2 h-2 rounded-full bg-primary" />
+              </motion.div>
+              
+              <p className="text-foreground font-light text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed">
                 Not a single A2E member has failed to renew past six months—
-                <span className="font-medium text-foreground"> or to recoup their investment.</span>
+                <span className="font-semibold text-primary"> or to recoup their investment.</span>
               </p>
-              <p className="text-muted-foreground/50 text-sm mt-4 italic">
+              <motion.p 
+                className="text-muted-foreground/60 text-sm mt-6 italic"
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
                 That's not a claim. It's a record.
-              </p>
+              </motion.p>
             </motion.div>
           </div>
         </motion.div>
