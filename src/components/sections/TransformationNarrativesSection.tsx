@@ -37,6 +37,40 @@ const caseStudies = [
     closingLine: "What changed wasn't just visibility. It was direction. Vik moved from guessing his next move to building toward something inevitable."
   },
   {
+    name: "Dr. Tom Lawler",
+    brand: "Only Fangs™",
+    tagline: "Momentum → Monetized Brand",
+    story: "Operating out of Las Vegas Smile Suite, Tom was already creating buzz through personality, clinical work, and cultural relevance. The problem was not attention—it was structure. Only Fangs™ was built to turn momentum into a scalable, monetizable brand.",
+    approach: "The work centered on sharpening the concept, elevating the aesthetic, and building a narrative strong enough to sustain demand beyond novelty. What emerged was a clearly defined brand extension that transformed scattered interest into intentional engagement, opened new revenue pathways, and positioned Tom as more than a clinician—he became a cultural operator with a brand that could grow independently of geography.",
+    results: [
+      { icon: TrendingUp, label: "Brand", value: "Scalable", detail: "Independent of geography" },
+      { icon: DollarSign, label: "Revenue", value: "New Pathways", detail: "Monetized brand extension" },
+      { icon: Award, label: "Position", value: "Cultural Operator", detail: "Beyond clinician" },
+    ],
+    transformation: {
+      before: ["Scattered attention", "No brand structure", "Momentum without leverage"],
+      after: ["Intentional engagement", "Monetizable brand", "Cultural operator status"]
+    },
+    closingLine: "This wasn't about getting more attention. It was about making attention work."
+  },
+  {
+    name: "Dr. Serena Wong",
+    brand: "Invisible Excellence → Recognized Authority",
+    tagline: "Visibility Aligned with Standards",
+    story: "Serena's challenge was never quality—it was visibility aligned with her standards. The brand work focused on refinement, coherence, and authorship rather than amplification.",
+    approach: "By distilling her voice, values, and visual language into a unified identity, the brand began to work for her instead of demanding more from her. The result was stronger inbound alignment, greater confidence in communication, and a brand that reflected her level of care and intention.",
+    results: [
+      { icon: Award, label: "Brand", value: "Unified Identity", detail: "Voice, values, visual" },
+      { icon: Users, label: "Inbound", value: "Aligned", detail: "Stronger demand quality" },
+      { icon: Globe, label: "Presence", value: "Unmistakably Hers", detail: "Authentic authority" },
+    ],
+    transformation: {
+      before: ["Excellence without visibility", "Brand demanded more", "Compromises required"],
+      after: ["Recognized authority", "Brand works for her", "Fewer compromises, clearer demand"]
+    },
+    closingLine: "The transformation unlocked leverage: fewer compromises, clearer demand, and a professional presence that felt unmistakably her own."
+  },
+  {
     name: "Dr. Alan Clarke",
     brand: "Paste Dental",
     tagline: "From Burnt-Out Associate to Global Authority & Autonomous Practice",
@@ -79,7 +113,7 @@ const TransformationNarrativesSection = () => {
             Compounding Results
           </span>
           <h2 className="font-playfair text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Three Narrative-Driven
+            Five Narrative-Driven
             <br />
             <span className="italic text-muted-foreground">Transformations</span>
           </h2>
