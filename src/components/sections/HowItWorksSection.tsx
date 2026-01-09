@@ -261,7 +261,7 @@ const HowItWorksSection = () => {
       />
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
-        {/* Section header - Enhanced */}
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -275,30 +275,15 @@ const HowItWorksSection = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
           >
             <Zap className="w-4 h-4 text-primary" />
-            <span className="text-xs tracking-[0.3em] uppercase text-primary">Everything Done For You</span>
+            <span className="text-xs tracking-[0.3em] uppercase text-primary">The Complete System</span>
           </motion.div>
           
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display text-foreground mb-6">
-            The System
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6">
+            How Associate to Empire Works
           </h2>
-          
-          <motion.p 
-            className="text-xl md:text-2xl text-muted-foreground font-light max-w-3xl mx-auto mb-4"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3 }}
-          >
-            You show up. We build everything else.
-          </motion.p>
-          
-          <motion.p 
-            className="text-lg text-muted-foreground/70 italic max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-          >
+          <p className="text-xl md:text-2xl text-muted-foreground font-light italic max-w-2xl mx-auto">
             From invisible to in demand—built properly, step by step
-          </motion.p>
+          </p>
         </motion.div>
 
         {/* Journey Progress Map */}
@@ -392,35 +377,14 @@ const HowItWorksSection = () => {
           </div>
         </motion.div>
 
-        {/* Opening statement - Enhanced */}
+        {/* Opening statement */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-4xl mx-auto mb-20"
+          className="max-w-3xl mx-auto text-center mb-20"
         >
-          {/* Value proposition cards */}
-          <div className="grid md:grid-cols-3 gap-4 mb-10">
-            {[
-              { label: "Your Only Job", value: "Show up & record", subtext: "15-30 min/week" },
-              { label: "We Handle", value: "Everything else", subtext: "Strategy to posting" },
-              { label: "You Get", value: "A brand that works", subtext: "While you focus on dentistry" },
-            ].map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.5 + index * 0.1 }}
-                className="relative p-6 rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm text-center group hover:border-primary/30 transition-all duration-300"
-              >
-                <p className="text-xs uppercase tracking-wider text-primary/70 mb-2">{item.label}</p>
-                <p className="text-xl md:text-2xl font-display text-foreground mb-1">{item.value}</p>
-                <p className="text-sm text-muted-foreground">{item.subtext}</p>
-              </motion.div>
-            ))}
-          </div>
-          
-          <p className="text-muted-foreground leading-relaxed text-lg text-center">
+          <p className="text-muted-foreground leading-relaxed text-lg">
             Associate to Empire is not a content subscription, an agency retainer, or a templated personal brand package. 
             It is a <span className="text-foreground font-medium">structured system</span> designed to take a dentist from uncertainty and inconsistency to clarity, authority, and demand.
           </p>
