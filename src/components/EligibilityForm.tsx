@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
@@ -17,10 +16,8 @@ interface FormData {
   // Core Eligibility
   currentRole: string;
   yearsInPractice: string;
-  timing: string;
   realCost: string[];
   realCostOther: string;
-  identity: string;
   brandMaturity: string;
   visibility: string;
   alignment: string;
@@ -29,10 +26,7 @@ interface FormData {
   // Future Direction
   careerHorizon: string;
   importantAreas: string[];
-  buildStyle: string;
-  lookingAhead: string;
   readiness: string;
-  longView: string;
 }
 
 const initialFormData: FormData = {
@@ -42,10 +36,8 @@ const initialFormData: FormData = {
   phone: "",
   currentRole: "",
   yearsInPractice: "",
-  timing: "",
   realCost: [],
   realCostOther: "",
-  identity: "",
   brandMaturity: "",
   visibility: "",
   alignment: "",
@@ -53,24 +45,21 @@ const initialFormData: FormData = {
   commitment: "",
   careerHorizon: "",
   importantAreas: [],
-  buildStyle: "",
-  lookingAhead: "",
   readiness: "",
-  longView: "",
 };
 
 // Zapier webhook URL - replace with your actual webhook
 const ZAPIER_WEBHOOK_URL = "";
 
 const EligibilityForm = () => {
-  const [step, setStep] = useState(1); // Start with contact info
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [contactSaved, setContactSaved] = useState(false);
   const { toast } = useToast();
 
-  const totalSteps = 17; // 1 contact + 16 questions
+  const totalSteps = 12; // 1 contact + 11 questions
 
   const updateField = (field: keyof FormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -113,27 +102,21 @@ const EligibilityForm = () => {
   const canProceed = () => {
     switch (step) {
       case 1: 
-        // Contact info - require name and email
         return formData.firstName.trim() !== "" && 
                formData.lastName.trim() !== "" && 
                formData.email.trim() !== "" &&
                formData.email.includes("@");
       case 2: return formData.currentRole !== "";
       case 3: return formData.yearsInPractice !== "";
-      case 4: return formData.timing.trim().length > 0;
-      case 5: return formData.realCost.length > 0;
-      case 6: return formData.identity.trim().length > 0;
-      case 7: return formData.brandMaturity !== "";
-      case 8: return formData.visibility !== "";
-      case 9: return formData.alignment !== "";
-      case 10: return formData.friction !== "";
-      case 11: return formData.commitment !== "";
-      case 12: return formData.careerHorizon !== "";
-      case 13: return formData.importantAreas.length > 0;
-      case 14: return formData.buildStyle !== "";
-      case 15: return formData.lookingAhead !== "";
-      case 16: return formData.readiness !== "";
-      case 17: return true; // Optional
+      case 4: return formData.realCost.length > 0;
+      case 5: return formData.brandMaturity !== "";
+      case 6: return formData.visibility !== "";
+      case 7: return formData.alignment !== "";
+      case 8: return formData.friction !== "";
+      case 9: return formData.commitment !== "";
+      case 10: return formData.careerHorizon !== "";
+      case 11: return formData.importantAreas.length > 0;
+      case 12: return formData.readiness !== "";
       default: return true;
     }
   };
@@ -141,7 +124,6 @@ const EligibilityForm = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
-    // Send complete form data to webhook
     if (ZAPIER_WEBHOOK_URL) {
       try {
         await fetch(ZAPIER_WEBHOOK_URL, {
@@ -166,19 +148,18 @@ const EligibilityForm = () => {
   };
 
   const nextStep = async () => {
-    // Save contact info after step 1
     if (step === 1 && !contactSaved) {
       await saveContactToWebhook();
     }
     
-    if (step === 17) {
+    if (step === totalSteps) {
       handleSubmit();
     } else {
-      setStep((s) => Math.min(s + 1, 17));
+      setStep((s) => Math.min(s + 1, totalSteps));
     }
   };
 
-  const prevStep = () => setStep((s) => Math.max(s - 1, 1)); // Don't go below step 1
+  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
   if (isSubmitted) {
     return <ConfirmationScreen />;
@@ -186,7 +167,6 @@ const EligibilityForm = () => {
 
   return (
     <div className="bg-card rounded-lg p-8 md:p-12 shadow-sm max-w-2xl mx-auto">
-      {/* Form Header */}
       <div className="text-center mb-8 pb-6 border-b border-border">
         <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
           See If You Qualify
@@ -196,7 +176,7 @@ const EligibilityForm = () => {
         </p>
       </div>
       
-      <ProgressBar current={step} total={16} />
+      <ProgressBar current={step} total={totalSteps} />
       <div className="mt-8 min-h-[320px]">
         <QuestionRenderer
           step={step}
@@ -215,14 +195,14 @@ const EligibilityForm = () => {
             Back
           </Button>
         ) : (
-          <div /> // Empty div to maintain flex spacing
+          <div />
         )}
         <Button
           variant="premium"
           onClick={nextStep}
           disabled={!canProceed() || isSubmitting}
         >
-          {isSubmitting ? "Submitting..." : step === 17 ? "Submit Request" : "Continue"}
+          {isSubmitting ? "Submitting..." : step === totalSteps ? "Submit Request" : "Continue"}
         </Button>
       </div>
     </div>
@@ -244,98 +224,116 @@ const ProgressBar = ({ current, total }: { current: number; total: number }) => 
   </div>
 );
 
-const ConfirmationScreen = () => (
-  <div className="text-center space-y-8 animate-fade-up max-w-2xl mx-auto py-8">
-    <div className="space-y-2">
-      <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
-        Final Step to Proceed
-      </p>
-      <h2 className="text-3xl md:text-4xl font-serif text-foreground">
-        Request Received
-      </h2>
-    </div>
+const ConfirmationScreen = () => {
+  useEffect(() => {
+    // Load Calendly widget script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
 
-    <div className="space-y-4 text-muted-foreground leading-relaxed">
-      <p>
-        Your request for consideration into Associate to Empire™ has been reviewed and provisionally accepted.
-      </p>
-      <p>
-        The final step is a brief alignment conversation with <span className="text-foreground">Zac Orender</span>.
-      </p>
-      <p className="text-sm">
-        This conversation exists to confirm strategic fit, maturity, and trajectory.
-        <br />
-        <span className="text-foreground/80">It is not a sales call.</span>
-      </p>
-    </div>
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
 
-    <div className="py-6 space-y-4">
-      <h3 className="text-lg font-serif text-foreground">
-        Secure Your Conversation
-      </h3>
-      <p className="text-sm text-muted-foreground">
-        Please schedule your conversation using the private booking link below.
-      </p>
-      <Button
-        variant="premium"
-        size="xl"
-        className="animate-subtle-glow"
-        onClick={() => window.open("https://calendly.com", "_blank")}
-      >
-        Book Your Call
-      </Button>
-      <p className="text-xs text-muted-foreground">
-        Availability is intentionally limited.
-      </p>
-    </div>
+  return (
+    <div className="text-center space-y-8 animate-fade-up max-w-2xl mx-auto py-8">
+      <div className="space-y-2">
+        <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
+          Final Step to Proceed
+        </p>
+        <h2 className="text-3xl md:text-4xl font-serif text-foreground">
+          Request Received
+        </h2>
+      </div>
 
-    <div className="bg-background/50 rounded-lg p-6 text-left space-y-4 border border-border">
-      <h4 className="font-serif text-foreground text-sm">Capacity Notice</h4>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        Associate to Empire™ is approaching waitlist capacity.
-        <br />
-        Unbooked approvals may be released as remaining space tightens.
-      </p>
-    </div>
+      <div className="space-y-4 text-muted-foreground leading-relaxed">
+        <p>
+          Your request for consideration into Associate to Empire™ has been reviewed and provisionally accepted.
+        </p>
+        <p>
+          The final step is a brief alignment conversation with <span className="text-foreground">Zac Orender</span>.
+        </p>
+        <p className="text-sm">
+          This conversation exists to confirm strategic fit, maturity, and trajectory.
+          <br />
+          <span className="text-foreground/80">It is not a sales call.</span>
+        </p>
+      </div>
 
-    <div className="space-y-4 text-left bg-card rounded-lg p-6 border border-border">
-      <h4 className="font-serif text-foreground text-sm">Expectations</h4>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        This time is reserved for individuals who value clarity, preparation, and decisiveness.
-        Please book only if you can arrive on time, be fully present, and engage thoughtfully.
-      </p>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        This is a professional evaluation, not an exploratory discussion.
-      </p>
-    </div>
+      <div className="py-6 space-y-4">
+        <h3 className="text-lg font-serif text-foreground">
+          Secure Your Conversation
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          Please schedule your conversation using the calendar below.
+        </p>
+        
+        {/* Calendly Embed */}
+        <div 
+          className="calendly-inline-widget rounded-lg overflow-hidden border border-border" 
+          data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff001e"
+          style={{ minWidth: '320px', height: '700px' }}
+        />
+        
+        <p className="text-xs text-muted-foreground">
+          Availability is intentionally limited.
+        </p>
+      </div>
 
-    <div className="space-y-4 text-left">
-      <h4 className="font-serif text-foreground text-sm">Rescheduling & Attendance Policy</h4>
-      <p className="text-xs text-muted-foreground leading-relaxed">
-        If rescheduling is necessary, it must be done no less than 24 hours in advance using the link in your calendar confirmation.
-        Requests within 24 hours may result in forfeiture of your spot.
-        Missed calls are not rescheduled.
-      </p>
-      <p className="text-xs text-muted-foreground/70">
-        This policy is firm and intentional.
-      </p>
-    </div>
+      <div className="bg-background/50 rounded-lg p-6 text-left space-y-4 border border-border">
+        <h4 className="font-serif text-foreground text-sm">Capacity Notice</h4>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Associate to Empire™ is approaching waitlist capacity.
+          <br />
+          Unbooked approvals may be released as remaining space tightens.
+        </p>
+      </div>
 
-    <div className="pt-4 border-t border-border">
-      <h4 className="font-serif text-foreground text-sm mb-2">Final Note</h4>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        This conversation is designed to be precise and conclusive.
-        <br />
-        If alignment exists, next steps will be outlined clearly.
-        <br />
-        If it does not, you will leave with direction and clarity.
-      </p>
-      <p className="text-sm text-foreground/80 mt-4">
-        Proceed only if you are prepared for either outcome.
-      </p>
+      <div className="space-y-4 text-left bg-card rounded-lg p-6 border border-border">
+        <h4 className="font-serif text-foreground text-sm">Expectations</h4>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          This time is reserved for individuals who value clarity, preparation, and decisiveness.
+          Please book only if you can arrive on time, be fully present, and engage thoughtfully.
+        </p>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          This is a professional evaluation, not an exploratory discussion.
+        </p>
+      </div>
+
+      <div className="space-y-4 text-left">
+        <h4 className="font-serif text-foreground text-sm">Rescheduling & Attendance Policy</h4>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          If rescheduling is necessary, it must be done no less than 24 hours in advance using the link in your calendar confirmation.
+          Requests within 24 hours may result in forfeiture of your spot.
+          Missed calls are not rescheduled.
+        </p>
+        <p className="text-xs text-muted-foreground/70">
+          This policy is firm and intentional.
+        </p>
+      </div>
+
+      <div className="pt-4 border-t border-border">
+        <h4 className="font-serif text-foreground text-sm mb-2">Final Note</h4>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          This conversation is designed to be precise and conclusive.
+          <br />
+          If alignment exists, next steps will be outlined clearly.
+          <br />
+          If it does not, you will leave with direction and clarity.
+        </p>
+        <p className="text-sm text-foreground/80 mt-4">
+          Proceed only if you are prepared for either outcome.
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface QuestionRendererProps {
   step: number;
@@ -459,24 +457,6 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
           <QuestionHeader
             number={4}
             section="Core Eligibility"
-            title="Timing"
-            subtitle="What prompted you to seek this now rather than waiting another year?"
-          />
-          <Textarea
-            value={formData.timing}
-            onChange={(e) => updateField("timing", e.target.value)}
-            placeholder="Answer directly..."
-            className="bg-background min-h-[120px] resize-none"
-          />
-        </div>
-      );
-
-    case 5:
-      return (
-        <div className={questionClass}>
-          <QuestionHeader
-            number={5}
-            section="Core Eligibility"
             title="The Real Cost"
             subtitle="What feels most expensive about remaining where you are for the next 3–5 years?"
           />
@@ -514,29 +494,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 6:
+    case 5:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={6}
-            section="Core Eligibility"
-            title="Identity"
-            subtitle="In one sentence, what do you want to be known for five years from now?"
-          />
-          <Textarea
-            value={formData.identity}
-            onChange={(e) => updateField("identity", e.target.value)}
-            placeholder="Answer in one sentence..."
-            className="bg-background min-h-[100px] resize-none"
-          />
-        </div>
-      );
-
-    case 7:
-      return (
-        <div className={questionClass}>
-          <QuestionHeader
-            number={7}
+            number={5}
             section="Core Eligibility"
             title="Brand Maturity"
             subtitle="Which statement feels most accurate right now?"
@@ -554,11 +516,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 8:
+    case 6:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={8}
+            number={6}
             section="Core Eligibility"
             title="Relationship With Visibility"
             subtitle="Which best describes you today?"
@@ -576,11 +538,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 9:
+    case 7:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={9}
+            number={7}
             section="Core Eligibility"
             title="Alignment"
             subtitle="Associate to Empire™ prioritizes identity, authority, and long-term positioning over speed or virality. Does that align with how you think about growth?"
@@ -597,11 +559,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 10:
+    case 8:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={10}
+            number={8}
             section="Core Eligibility"
             title="Friction Test"
             subtitle="Which would frustrate you most?"
@@ -619,11 +581,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 11:
+    case 9:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={11}
+            number={9}
             section="Core Eligibility"
             title="Commitment"
             subtitle="If accepted, are you prepared to invest focused time and attention each month?"
@@ -640,11 +602,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 12:
+    case 10:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={12}
+            number={10}
             section="Future Direction & Trajectory"
             title="Career Horizon"
             subtitle="How do you see the next 12–24 months?"
@@ -665,11 +627,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 13:
+    case 11:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={13}
+            number={11}
             section="Future Direction & Trajectory"
             title="What Will Matter Most"
             subtitle="Which areas feel most important next?"
@@ -712,56 +674,11 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
         </div>
       );
 
-    case 14:
+    case 12:
       return (
         <div className={questionClass}>
           <QuestionHeader
-            number={14}
-            section="Future Direction & Trajectory"
-            title="Build Style"
-            subtitle="How do you prefer to build?"
-          />
-          <RadioGroup
-            value={formData.buildStyle}
-            onValueChange={(v) => updateField("buildStyle", v)}
-            className="space-y-3"
-          >
-            <RadioOption value="guided-independent" label="Guided but independent" />
-            <RadioOption value="collaborative" label="Collaborative and hands-on" />
-            <RadioOption value="structured" label="Highly structured with direction" />
-            <RadioOption value="exploring" label="Still exploring" />
-          </RadioGroup>
-        </div>
-      );
-
-    case 15:
-      return (
-        <div className={questionClass}>
-          <QuestionHeader
-            number={15}
-            section="Future Direction & Trajectory"
-            title="Looking Ahead"
-            subtitle="If Associate to Empire™ creates clarity and momentum, what would you most want to explore next?"
-          />
-          <RadioGroup
-            value={formData.lookingAhead}
-            onValueChange={(v) => updateField("lookingAhead", v)}
-            className="space-y-3"
-          >
-            <RadioOption value="brand-expansion" label="Advanced personal brand expansion" />
-            <RadioOption value="practice-brand" label="Full practice brand build" />
-            <RadioOption value="content-scale" label="Content systems at scale" />
-            <RadioOption value="patient-acquisition" label="Patient acquisition and conversion strategy" />
-            <RadioOption value="not-yet" label="Not thinking that far yet" />
-          </RadioGroup>
-        </div>
-      );
-
-    case 16:
-      return (
-        <div className={questionClass}>
-          <QuestionHeader
-            number={16}
+            number={12}
             section="Future Direction & Trajectory"
             title="Readiness"
             subtitle="Which statement feels most accurate?"
@@ -776,27 +693,6 @@ const QuestionRenderer = ({ step, formData, updateField, toggleArrayField }: Que
             <RadioOption value="exploring-carefully" label="I'm exploring carefully" />
             <RadioOption value="current-role" label="I'm only focused on my current role" />
           </RadioGroup>
-        </div>
-      );
-
-    case 17:
-      return (
-        <div className={questionClass}>
-          <QuestionHeader
-            number={17}
-            section="Future Direction & Trajectory"
-            title="Long View"
-            subtitle="If everything went right over the next five years, what would you be building?"
-          />
-          <p className="text-xs text-muted-foreground -mt-2">
-            Optional
-          </p>
-          <Textarea
-            value={formData.longView}
-            onChange={(e) => updateField("longView", e.target.value)}
-            placeholder="Share your vision..."
-            className="bg-background min-h-[120px] resize-none"
-          />
         </div>
       );
 
