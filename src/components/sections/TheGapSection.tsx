@@ -23,6 +23,40 @@ const TheGapSection = () => {
     text: "Watching others live the life you expected.",
     delay: 400
   }];
-  return;
+  return (
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background">
+      <div className="container max-w-3xl mx-auto px-4 text-center">
+        <p
+          className={`text-xs tracking-[0.4em] uppercase text-primary mb-8 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          The Gap
+        </p>
+        
+        <div className="space-y-6">
+          {statements.map((statement, index) => (
+            <h2
+              key={index}
+              className={`text-2xl md:text-4xl font-serif text-foreground transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: `${statement.delay}ms` }}
+            >
+              {statement.text}
+            </h2>
+          ))}
+        </div>
+        
+        <p
+          className={`mt-12 text-muted-foreground max-w-xl mx-auto transition-all duration-700 delay-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          You've earned the skill. But the system was never designed to surface you.
+        </p>
+      </div>
+    </section>
+  );
 };
 export default TheGapSection;
