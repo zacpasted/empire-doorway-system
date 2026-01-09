@@ -50,6 +50,7 @@ const WhatWeAskSection = () => {
     "Creative direction",
     "Quality assurance",
     "Strategy adjustments",
+    "Videographer sourcing & management",
   ];
 
   const youDo = [
@@ -241,7 +242,7 @@ const WhatWeAskSection = () => {
           </div>
           <p className="text-center text-muted-foreground/60 text-sm leading-relaxed max-w-lg mx-auto mt-8">
             You don't need to be an influencer. You just need to record raw footage. 
-            We handle editing, posting, and everything in between.
+            We handle editing, posting, and everything in between—including sourcing and managing videographers when needed.
           </p>
         </div>
       </div>
