@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
-import InvolveMeForm from "@/components/InvolveMeForm";
+import EligibilityForm from "@/components/EligibilityForm";
 import logoFigs from "@/assets/logos/figs-white.png";
 import logoCocofloss from "@/assets/logos/cocofloss-white.png";
 import logoSolventum from "@/assets/logos/solventum-white.png";
@@ -286,7 +286,7 @@ const HeroSection = () => {
         animationDelay: "450ms",
         animationFillMode: "forwards"
       }}>
-          <InvolveMeForm />
+          <EligibilityForm />
         </div>
 
         {/* Transition Headline - Below Form */}
