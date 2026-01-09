@@ -57,6 +57,9 @@ import nav08 from "@/assets/brands/nav-atwal/showcase-08.jpeg";
 import nav09 from "@/assets/brands/nav-atwal/showcase-09.jpeg";
 import nav10 from "@/assets/brands/nav-atwal/showcase-10.jpeg";
 
+// Jake Bateman - using player card as showcase
+import jakeBateman from "@/assets/cards/jake-bateman.jpeg";
+
 export interface BrandExample {
   type: "image" | "video";
   label: string;
@@ -226,6 +229,27 @@ export const brands: BrandCaseStudy[] = [
       { type: "image", label: "Patient Materials", src: nav08 },
       { type: "image", label: "Brand Campaign", src: nav09 },
       { type: "image", label: "Visual System", src: nav10 },
+    ],
+  },
+  {
+    id: 6,
+    slug: "dr-jake-bateman",
+    name: "Dr. Jake Bateman",
+    tagline: "The Making of a Modern Authority",
+    description: "Dr. Jake Bateman is not building a brand to be noticed. He's building one to last. As lead associate at Nashville Aesthetic Dentistry, working under the legendary Dr. Dennis Wells, Jake operates at the highest level of cosmetic dentistry every day.",
+    thumbnail: jakeBateman,
+    challenge: "Jake understood something most dentists don't realize until it's too late: clinical excellence is table stakes. Authority is built through authorship. Through clarity. Through standing for something distinct in a world full of replicas. While many practitioners chase visibility, Jake needed a brand focused on trajectory—every decision intentional, every signal considered.",
+    solution: "Braver is not an alter ego—it's an extension of how Jake practices: confident, exacting, and culturally fluent. Treating world-class artists has sharpened his understanding of trust, discretion, and presence. The same qualities that keep him indispensable in elite circles are the ones shaping his brand. Nothing loud. Nothing borrowed. Nothing accidental. This is not the story of someone trying to 'make a name.' It's the story of someone preparing to own a lane.",
+    results: [
+      "Brand architecture built for long-term trajectory, not short-term visibility",
+      "Positioned as ascending authority in elite cosmetic dentistry",
+      "Cultural fluency integrated into brand identity",
+      "Foundation for sustainable, lasting market presence"
+    ],
+    services: ["Brand Strategy", "Visual Identity", "Authority Positioning", "Cultural Alignment", "Content Architecture"],
+    timeline: "45-day build + ongoing management",
+    examples: [
+      { type: "image", label: "Brand Identity", src: jakeBateman },
     ],
   },
 ];
