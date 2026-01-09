@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
 import MobileFloatingCTA from "@/components/MobileFloatingCTA";
+import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
 import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import WhatWeDoSection from "@/components/sections/WhatWeDoSection";
@@ -67,6 +68,7 @@ const Index = () => {
       <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
+      <LeadMagnetPopup />
       
       {/* Hero - Cinematic Entry with VSL + Logos + Form */}
       <HeroSection />
