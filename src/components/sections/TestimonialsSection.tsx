@@ -12,9 +12,8 @@ import navAtwalCard from "@/assets/cards/nav-atwal.jpeg";
 import timHoeschenCard from "@/assets/cards/tim-hoeschen.jpeg";
 import nourDiabiCard from "@/assets/cards/nour-diabi.png";
 import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
-import brianHarrisCard from "@/assets/cards/brian-harris.png";
-import samSalehCard from "@/assets/cards/sam-saleh.png";
 import michaelAllenCard from "@/assets/cards/michael-allen.jpeg";
+import pastedPlaceholder from "@/assets/logos/pasted-placeholder.png";
 
 interface TestimonialsSectionProps {
   onApplyClick?: () => void;
@@ -51,7 +50,7 @@ const testimonials = [
     role: "Celebrity Dentist, Gilbert, AZ · Founder, Smile Virtual & Smile Sculpt",
     quote: "This is an easy recommendation. If a doctor asks who they should trust with their brand, this is the answer. They understand dentists, but more importantly, they understand people. That combination is incredibly rare.",
     featured: false,
-    cardImage: brianHarrisCard,
+    cardImage: pastedPlaceholder,
   },
   {
     id: 5,
@@ -67,7 +66,7 @@ const testimonials = [
     role: "Celebrity Dentist, Los Angeles & London",
     quote: "This is world-class work in every sense. The strategy is genius-level, the execution is flawless, and there is zero fluff. I could not recommend them more highly.",
     featured: false,
-    cardImage: samSalehCard,
+    cardImage: pastedPlaceholder,
   },
   {
     id: 7,
@@ -136,6 +135,7 @@ const testimonials = [
     role: "Associate, London",
     quote: "Juggling clinical work, patient satisfaction, admin, and social media can feel overwhelming, especially when you're stepping into a new environment and trying to stand out. Pasted took that pressure off my shoulders. They helped me translate who I am in the clinic into a clear, authentic personal brand the world can actually see. As a dentist, trust and perception matter and Pasted understood that instantly. They didn't just create content or advertisements—they helped me communicate confidence, credibility, and personality without it feeling forced or salesy. It finally feels like my online presence matches the standard of my work.",
     featured: false,
+    cardImage: pastedPlaceholder,
   },
   {
     id: 16,
