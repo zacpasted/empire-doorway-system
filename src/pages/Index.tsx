@@ -1,35 +1,38 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
+import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
 import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import WhatWeDoSection from "@/components/sections/WhatWeDoSection";
-import TheGapSection from "@/components/sections/TheGapSection";
-import WhyPathsFailSection from "@/components/sections/WhyPathsFailSection";
-import HowItWorksSection from "@/components/sections/HowItWorksSection";
-import WhatWeAskSection from "@/components/sections/WhatWeAskSection";
-import WhatYouReceiveSection from "@/components/sections/WhatYouReceiveSection";
-
-import TransformationSection from "@/components/sections/TransformationSection";
-import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
-import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
-import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
-import ProofSection from "@/components/sections/ProofSection";
-import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
-import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
-import MonthlyDeliverablesSection from "@/components/sections/MonthlyDeliverablesSection";
-import FilterSection from "@/components/sections/FilterSection";
 import FoundersPhilosophySection from "@/components/sections/FoundersPhilosophySection";
-import ClosingCTASection from "@/components/sections/ClosingCTASection";
-import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import WistiaVideoEmbedSection from "@/components/sections/WistiaVideoEmbedSection";
 import TheTruthSection from "@/components/sections/TheTruthSection";
-import TransformationNarrativesSection from "@/components/sections/TransformationNarrativesSection";
+import AdCaseStudiesSection from "@/components/sections/AdCaseStudiesSection";
 import TakeItSection from "@/components/sections/TakeItSection";
+import TransformationNarrativesSection from "@/components/sections/TransformationNarrativesSection";
+import TheGapSection from "@/components/sections/TheGapSection";
+import BrandsShowcaseSection from "@/components/sections/BrandsShowcaseSection";
+import VideoCarouselSection from "@/components/sections/VideoCarouselSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import ProofSection from "@/components/sections/ProofSection";
+import MemberCardsCarousel from "@/components/sections/MemberCardsCarousel";
+import WhyPathsFailSection from "@/components/sections/WhyPathsFailSection";
 import CommunitySection from "@/components/sections/CommunitySection";
+import FilterSection from "@/components/sections/FilterSection";
+import HowItWorksSection from "@/components/sections/HowItWorksSection";
+import MonthlyDeliverablesSection from "@/components/sections/MonthlyDeliverablesSection";
+import WhatYouReceiveSection from "@/components/sections/WhatYouReceiveSection";
+import WhatWeAskSection from "@/components/sections/WhatWeAskSection";
+import OutcomeSection from "@/components/sections/OutcomeSection";
 import FoundersVibeSection from "@/components/sections/FoundersVibeSection";
+import PrivateAdvisorySection from "@/components/sections/PrivateAdvisorySection";
+import ClosingCTASection from "@/components/sections/ClosingCTASection";
+import FinalCTASection from "@/components/sections/FinalCTASection";
+import FAQSection from "@/components/sections/FAQSection";
+import WistiaVideoEmbedSection from "@/components/sections/WistiaVideoEmbedSection";
+import TransformationSection from "@/components/sections/TransformationSection";
+import ProgramDeliverablesSection from "@/components/sections/ProgramDeliverablesSection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -337,6 +340,7 @@ const Index = () => {
       </motion.div>
       
       <Footer />
+      <MobileFloatingCTA />
     </motion.main>
   );
 };
