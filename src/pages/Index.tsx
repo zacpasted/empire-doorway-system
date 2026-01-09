@@ -113,7 +113,7 @@ const Index = () => {
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
       >
-        <CommunitySection videoIds={["m70jgeiyir", "bhqnyc3yny", "r5lr03rr8t", "ibpxi0nzpq"]} />
+        <CommunitySection videoIds={["m70jgeiyir", "bhqnyc3yny", "r5lr03rr8t", "ibpxi0nzpq", "n3qopd7sum"]} />
       </motion.div>
       
       {/* Testimonials */}
