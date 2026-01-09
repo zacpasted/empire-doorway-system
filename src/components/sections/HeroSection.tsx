@@ -154,14 +154,20 @@ const HeroSection = () => {
         <motion.div className="text-center mb-12 md:mb-16" style={{
         opacity
       }}>
-          <motion.p 
-            className="text-[10px] md:text-[11px] tracking-[0.6em] uppercase text-muted-foreground/40 mb-10 md:mb-14 font-sans font-medium"
+          {/* Logo Header */}
+          <motion.div 
+            className="flex flex-col items-center mb-12 md:mb-16"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            PASTED
-          </motion.p>
+            <span className="font-display text-lg md:text-xl tracking-[0.15em] uppercase text-foreground">
+              Associate to Empire
+            </span>
+            <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-1 font-sans">
+              by PASTED
+            </span>
+          </motion.div>
           
           <h1 className="font-serif text-foreground mb-8 md:mb-10 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
