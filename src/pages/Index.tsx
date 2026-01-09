@@ -106,15 +106,6 @@ const Index = () => {
         <CTABannerSection />
       </motion.div>
       
-      {/* Community - The Network */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <CommunitySection videoIds={["m70jgeiyir", "bhqnyc3yny", "r5lr03rr8t", "ibpxi0nzpq", "n3qopd7sum"]} />
-      </motion.div>
       
       {/* Testimonials */}
       <motion.div
@@ -208,6 +199,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <WhyPathsFailSection />
+      </motion.div>
+      
+      {/* Community - The Network */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <CommunitySection videoIds={["m70jgeiyir", "bhqnyc3yny", "r5lr03rr8t", "ibpxi0nzpq", "n3qopd7sum"]} />
       </motion.div>
       
       {/* How It Works - Process Overview */}
