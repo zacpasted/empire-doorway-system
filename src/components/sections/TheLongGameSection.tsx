@@ -309,7 +309,7 @@ const TheLongGameSection = () => {
             >
               {[
                 { value: "100%", label: "Renewal Rate" },
-                { value: "6+", label: "Months Average" },
+                { value: "2+", label: "Years Average" },
                 { value: "0", label: "Failed Investments" }
               ].map((stat, index) => (
                 <motion.div
@@ -354,8 +354,8 @@ const TheLongGameSection = () => {
               </motion.div>
               
               <p className="text-foreground font-light text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed">
-                Not a single A2E member has failed to renew past six months—
-                <span className="font-semibold text-primary"> or to recoup their investment.</span>
+                The average A2E member has been with us for 2+ years—
+                <span className="font-semibold text-primary"> and recouped their investment many times over.</span>
               </p>
               <motion.p 
                 className="text-muted-foreground/60 text-sm mt-6 italic"
