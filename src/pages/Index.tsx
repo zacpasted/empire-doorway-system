@@ -124,16 +124,6 @@ const Index = () => {
         <BrandsShowcaseSection onApplyClick={scrollToForm} />
       </motion.div>
       
-      {/* Case Studies with Metrics */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <AdCaseStudiesSection />
-      </motion.div>
-      
       {/* The Truth - Hard Stats */}
       <motion.div
         initial="hidden"
@@ -142,6 +132,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <TheTruthSection />
+      </motion.div>
+      
+      {/* Case Studies with Metrics */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <AdCaseStudiesSection />
       </motion.div>
 
       {/* Take It - Editorial CTA */}
