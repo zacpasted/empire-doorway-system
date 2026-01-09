@@ -110,9 +110,15 @@ const WhatWeDoSection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <p className="text-sm text-muted-foreground/50 tracking-wide">
+          <p className="text-sm text-muted-foreground/50 tracking-wide mb-6">
             Your only job: <span className="text-foreground/70">15-30 minutes of raw footage per week.</span>
           </p>
+          <a 
+            href="#eligibility-form"
+            className="inline-flex items-center justify-center px-8 py-3 text-sm font-medium tracking-wide uppercase border border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+          >
+            See If You Qualify
+          </a>
         </motion.div>
       </div>
     </section>
