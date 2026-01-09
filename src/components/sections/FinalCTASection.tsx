@@ -9,7 +9,7 @@ const FinalCTASection = ({ onApplyClick }: FinalCTASectionProps) => {
     if (onApplyClick) {
       onApplyClick();
     } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

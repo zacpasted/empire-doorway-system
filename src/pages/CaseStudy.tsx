@@ -352,7 +352,7 @@ const CaseStudy = () => {
           </p>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link 
-              to="/#eligibility"
+              to="/#eligibility-form"
               className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
             >
               Check Your Eligibility
