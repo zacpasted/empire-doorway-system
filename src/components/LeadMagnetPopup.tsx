@@ -13,6 +13,18 @@ const STORAGE_UNLOCKED_KEY = "leadMagnetUnlocked";
 const VIDEO_ID = "jl8fuq6wcz";
 const POPUP_DELAY_SECONDS = 45;
 const EXIT_INTENT_THRESHOLD = 20; // pixels from top of viewport
+const SCROLL_DEPTH_TRIGGER = 50; // percentage
+
+// Generate or retrieve session ID for anonymous tracking
+const getSessionId = () => {
+  const key = "popup_session_id";
+  let sessionId = sessionStorage.getItem(key);
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    sessionStorage.setItem(key, sessionId);
+  }
+  return sessionId;
+};
 
 const LeadMagnetPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +34,33 @@ const LeadMagnetPopup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
+  const [triggerType, setTriggerType] = useState<string | null>(null);
+  const [currentScrollDepth, setCurrentScrollDepth] = useState(0);
   const { toast } = useToast();
+
+  // Use shared Wistia loader - only load when unlocked and open
+  useWistiaLoader(VIDEO_ID, { loadOnMount: isUnlocked && isOpen });
+
+  // Track analytics event
+  const trackEvent = useCallback(async (
+    eventType: 'impression' | 'conversion' | 'dismiss',
+    trigger?: string,
+    scrollDepth?: number
+  ) => {
+    try {
+      await supabase.from('popup_analytics').insert({
+        event_type: eventType,
+        trigger_type: trigger || triggerType,
+        session_id: getSessionId(),
+        page_url: window.location.pathname,
+        user_agent: navigator.userAgent,
+        viewport_width: window.innerWidth,
+        scroll_depth_percent: scrollDepth ?? currentScrollDepth,
+      });
+    } catch (error) {
+      console.error('Failed to track popup event:', error);
+    }
+  }, [triggerType, currentScrollDepth]);
 
   // Use shared Wistia loader - only load when unlocked and open
   useWistiaLoader(VIDEO_ID, { loadOnMount: isUnlocked && isOpen });
@@ -39,6 +77,7 @@ const LeadMagnetPopup = () => {
     const handleMouseLeave = (e: MouseEvent) => {
       // Check if mouse is leaving through the top of the viewport
       if (e.clientY <= EXIT_INTENT_THRESHOLD && canShowPopup()) {
+        setTriggerType('exit_intent');
         setIsOpen(true);
         setHasTriggered(true);
       }
@@ -55,15 +94,15 @@ const LeadMagnetPopup = () => {
     };
   }, [canShowPopup]);
 
-  // Scroll depth tracking (50%)
+  // Scroll depth tracking
   useEffect(() => {
     const handleScroll = () => {
-      if (!canShowPopup()) return;
-      
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollProgress = (window.scrollY / scrollHeight) * 100;
+      const scrollProgress = Math.round((window.scrollY / scrollHeight) * 100);
+      setCurrentScrollDepth(scrollProgress);
       
-      if (scrollProgress >= 50) {
+      if (scrollProgress >= SCROLL_DEPTH_TRIGGER && canShowPopup()) {
+        setTriggerType('scroll_depth');
         setIsOpen(true);
         setHasTriggered(true);
       }
@@ -72,6 +111,13 @@ const LeadMagnetPopup = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [canShowPopup]);
+
+  // Track impression when popup opens
+  useEffect(() => {
+    if (isOpen && triggerType) {
+      trackEvent('impression', triggerType, currentScrollDepth);
+    }
+  }, [isOpen, triggerType]);
 
   useEffect(() => {
     // Check if already dismissed or unlocked
@@ -87,6 +133,7 @@ const LeadMagnetPopup = () => {
     // Show popup after delay (fallback if exit intent doesn't trigger)
     const timer = setTimeout(() => {
       if (!hasTriggered) {
+        setTriggerType('timer');
         setIsOpen(true);
         setHasTriggered(true);
       }
@@ -96,6 +143,7 @@ const LeadMagnetPopup = () => {
   }, [hasTriggered]);
 
   const handleDismiss = () => {
+    trackEvent('dismiss');
     setIsOpen(false);
     localStorage.setItem(STORAGE_KEY, "true");
   };
@@ -128,6 +176,9 @@ const LeadMagnetPopup = () => {
         });
 
       if (error) throw error;
+
+      // Track conversion
+      await trackEvent('conversion');
 
       localStorage.setItem(STORAGE_UNLOCKED_KEY, "true");
       setIsUnlocked(true);

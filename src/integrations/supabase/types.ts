@@ -110,6 +110,42 @@ export type Database = {
         }
         Relationships: []
       }
+      popup_analytics: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          page_url: string | null
+          scroll_depth_percent: number | null
+          session_id: string | null
+          trigger_type: string | null
+          user_agent: string | null
+          viewport_width: number | null
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          page_url?: string | null
+          scroll_depth_percent?: number | null
+          session_id?: string | null
+          trigger_type?: string | null
+          user_agent?: string | null
+          viewport_width?: number | null
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          page_url?: string | null
+          scroll_depth_percent?: number | null
+          session_id?: string | null
+          trigger_type?: string | null
+          user_agent?: string | null
+          viewport_width?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
