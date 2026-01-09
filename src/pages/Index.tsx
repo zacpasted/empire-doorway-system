@@ -27,6 +27,7 @@ import TheTruthSection from "@/components/sections/TheTruthSection";
 import TransformationNarrativesSection from "@/components/sections/TransformationNarrativesSection";
 import TakeItSection from "@/components/sections/TakeItSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
+import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
@@ -103,6 +104,16 @@ const Index = () => {
         variants={sectionVariants}
       >
         <CTABannerSection />
+      </motion.div>
+      
+      {/* Community - The Network */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+      >
+        <CommunitySection />
       </motion.div>
       
       {/* Testimonials */}
