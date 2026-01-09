@@ -20,21 +20,21 @@ const caseStudies = [
     closingLine: "This wasn't growth for growth's sake. It was alignment—and everything followed."
   },
   {
-    name: "Miami Office",
-    brand: "Market Expansion & Brand Authority",
-    tagline: "From Local Practice to Multi-Location Powerhouse",
-    story: "The vision was clear: expand from a single successful location into Miami's competitive luxury dental market. But entering a saturated market without differentiation is a recipe for failure. The practice needed more than just a second location—it needed a brand presence that commanded attention from day one.",
-    approach: "We built the Miami expansion as a brand event, not just an office opening. Pre-launch content positioned the new location as inevitable. Strategic partnerships with local influencers and luxury brands created cultural relevance before the doors opened.",
+    name: "Miami-Based Clinic",
+    brand: "Practice Overhaul & Revenue Transformation",
+    tagline: "From Struggling, Low-Quality Demand to High-Performance, High-Intent Growth",
+    story: "When we entered this practice, the clinic was struggling on multiple fronts. Lead flow was inconsistent, patient quality was poor, and there was no cohesive narrative guiding marketing, sales, or internal decision-making. Monthly revenue hovered around $115,000, with the business barely staying out of the red.",
+    approach: "We took full ownership of direction. First, we stepped in to lead the internal creative team, giving them a clear narrative, positioning, and content strategy aligned to the type of patients the practice actually wanted. Then we completely overhauled sales and conversions—hiring new team members, retraining staff, and installing new processes focused on clarity, follow-up, and humanity rather than pressure. We rebuilt the follow-up systems to feel personal, responsive, and human—dramatically improving patient trust and engagement.",
     results: [
-      { icon: DollarSign, label: "Launch Revenue", value: "$800K", detail: "First 6 months" },
-      { icon: Users, label: "New Patients", value: "400+", detail: "Pre-launch waitlist" },
-      { icon: Globe, label: "Market Position", value: "Top 3", detail: "Miami luxury dental" },
+      { icon: DollarSign, label: "Monthly Revenue", value: "$115K → $400K+", detail: "Revenue more than tripled" },
+      { icon: TrendingUp, label: "Cost Per Lead", value: "-80%", detail: "While ad spend decreased" },
+      { icon: Users, label: "Lead Volume", value: "+300%", detail: "Exceeding 1,500 leads/month" },
     ],
     transformation: {
-      before: ["Single location ceiling", "Unknown in new market", "Competing on price"],
-      after: ["Multi-location brand", "Market authority", "Premium positioning"]
+      before: ["Inconsistent lead flow", "Poor patient quality", "No cohesive narrative"],
+      after: ["Stabilized & scalable", "High-intent patients", "Systems-driven growth"]
     },
-    closingLine: "This wasn't about opening another office. It was about proving that brand equity travels—when built correctly."
+    closingLine: "This was not an advertising win. It was a systems, narrative, and leadership win."
   },
   {
     name: "Dr. Alan Clarke",
