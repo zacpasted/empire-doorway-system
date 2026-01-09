@@ -126,20 +126,20 @@ const FilterSection = () => {
             animate={isInView ? "visible" : "hidden"}
           >
             <motion.div 
-              className="relative p-6 rounded-xl border border-muted-foreground/10 bg-card/20 backdrop-blur-sm overflow-hidden cursor-default"
+              className="relative p-6 rounded-xl border border-muted/40 bg-muted/10 overflow-hidden cursor-default"
               variants={cardVariantsMuted}
               initial="rest"
               whileHover="hover"
             >
-              {/* Hover glow overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-muted-foreground/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              {/* Dark overlay for contrast */}
+              <div className="absolute inset-0 bg-gradient-to-br from-background/60 to-background/40 pointer-events-none" />
               
-              <h3 className="text-xs uppercase tracking-[0.15em] text-muted-foreground/50 mb-5 flex items-center gap-2">
-                <span className="w-4 h-px bg-muted-foreground/20" />
+              <h3 className="text-xs uppercase tracking-[0.15em] text-muted-foreground/40 mb-5 flex items-center gap-2 relative z-10">
+                <span className="w-4 h-px bg-muted-foreground/15" />
                 Not For
               </h3>
               
-              <div className="space-y-3">
+              <div className="space-y-3 relative z-10">
                 {notFor.map((item, index) => (
                   <motion.div
                     key={index}
@@ -148,10 +148,10 @@ const FilterSection = () => {
                     whileHover={{ x: 4 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full border border-muted-foreground/15 flex items-center justify-center bg-muted/20 group-hover/item:border-muted-foreground/30 transition-colors">
-                      <X className="w-3 h-3 text-muted-foreground/40 group-hover/item:text-muted-foreground/60 transition-colors" />
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full border border-muted-foreground/10 flex items-center justify-center bg-background/50 group-hover/item:border-muted-foreground/20 transition-colors">
+                      <X className="w-3 h-3 text-muted-foreground/30 group-hover/item:text-muted-foreground/50 transition-colors" />
                     </div>
-                    <span className="text-muted-foreground/60 text-sm group-hover/item:text-muted-foreground transition-colors duration-200">
+                    <span className="text-muted-foreground/50 text-sm group-hover/item:text-muted-foreground/70 transition-colors duration-200 line-through decoration-muted-foreground/20">
                       {item.text}
                     </span>
                   </motion.div>
@@ -168,16 +168,17 @@ const FilterSection = () => {
             animate={isInView ? "visible" : "hidden"}
           >
             <motion.div 
-              className="relative p-6 rounded-xl border border-primary/15 bg-card/30 backdrop-blur-sm overflow-hidden cursor-default"
+              className="relative p-6 rounded-xl border border-primary/25 bg-primary/[0.08] overflow-hidden cursor-default"
               variants={cardVariants}
               initial="rest"
               whileHover="hover"
             >
-              {/* Hover glow overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-transparent pointer-events-none" />
+              {/* Glowing gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/[0.05] to-transparent pointer-events-none" />
+              <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
               
-              <h3 className="text-xs uppercase tracking-[0.15em] text-primary/60 mb-5 flex items-center gap-2 relative z-10">
-                <span className="w-4 h-px bg-primary/30" />
+              <h3 className="text-xs uppercase tracking-[0.15em] text-primary/80 mb-5 flex items-center gap-2 relative z-10">
+                <span className="w-4 h-px bg-primary/50" />
                 Built For
               </h3>
               
