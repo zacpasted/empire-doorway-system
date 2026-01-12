@@ -302,13 +302,11 @@ const LeadMagnetPopup = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        {/* Thumbnail image with blur placeholder */}
+                        {/* Thumbnail background */}
                         <div 
                           className="absolute inset-0 bg-cover bg-center"
                           style={{ 
-                            backgroundImage: `url('https://fast.wistia.com/embed/medias/${VIDEO_ID}/swatch')`,
-                            filter: 'blur(8px)',
-                            transform: 'scale(1.1)'
+                            backgroundImage: `url('https://fast.wistia.com/embed/medias/${VIDEO_ID}/swatch')`
                           }}
                         />
                         <img 
