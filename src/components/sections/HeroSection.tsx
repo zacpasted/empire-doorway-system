@@ -155,38 +155,43 @@ const HeroSection = () => {
         <motion.div className="text-center mb-4 md:mb-8" style={{
         opacity
       }}>
-          {/* Logo Header - Instant visibility, no animation delay */}
+          {/* Opening statement */}
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide mb-4 md:mb-6">
+            Dental School Trains Skill. CE Improves Technique. Without brand, story, and strategy—<br />
+            they just become debt with no destination.
+          </p>
+          
+          <p className="text-xs sm:text-sm md:text-base text-muted-foreground/50 max-w-xl mx-auto mb-4 md:mb-8 font-sans">
+            Associate To Empire by PASTED is the solution.
+          </p>
+          
+          {/* Logo Header */}
           <div className="flex flex-col items-center mb-3 md:mb-6">
-            <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
-              Associate to Empire
-            </span>
-            <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
-              by PASTED
+            <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-primary">
+              Associate to Empire™
             </span>
           </div>
           
-          {/* Single powerful headline - Instant render, no delay */}
+          {/* Main headline */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
-            <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              High Converting Aesthetic Dental
+            <span className="block text-lg sm:text-xl md:text-3xl lg:text-4xl font-light text-muted-foreground mb-2">
+              We Take Aesthetic Dentists
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Content & Branding
+              From Skilled and Invisible
+            </span>
+            <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
+              to Recognized and Chosen
             </span>
             <motion.span 
-              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light italic text-primary/90 mt-1" 
+              className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-primary/90 mt-3" 
               initial={{ opacity: 0.7 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Made Easy.
+              Without Waiting for Ownership
             </motion.span>
           </h1>
-          
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            Done-for-you content, strategy, and brand system —<br />
-            built by the best in the world. With the best in the world. For the <span className="italic">(next)</span> best in the world.
-          </p>
         </motion.div>
         
         {/* VSL - Instant visibility, no animation delay */}
