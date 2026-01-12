@@ -49,39 +49,39 @@ const MetricsBar = () => {
     <div ref={ref} className="max-w-3xl mx-auto">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {metrics.map((metric, index) => {
-          const count = useCounter(metric.numValue, 1.5, isInView, 0.3 + index * 0.1);
+          const count = useCounter(metric.numValue, 1.2, isInView, 0.1 + index * 0.05);
           return (
             <motion.div
               key={metric.label}
               className="relative"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
             >
               {/* Value with counter */}
               <motion.div
-                className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-1"
-                initial={{ opacity: 0, scale: 0.8 }}
+                className="text-xl md:text-2xl font-serif font-bold text-foreground mb-0.5"
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
               >
                 {metric.prefix}{count}{metric.suffix}
               </motion.div>
               
               {/* Label */}
-              <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted-foreground/60 mb-2">
+              <p className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground/60 mb-1.5">
                 {metric.label}
               </p>
               
               {/* Animated Bar */}
-              <div className="h-1 bg-border/30 rounded-full overflow-hidden">
+              <div className="h-0.5 bg-border/30 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-gradient-to-r from-primary/60 to-primary/30 rounded-full"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: `${metric.barWidth}%` } : {}}
                   transition={{ 
-                    duration: 1.2, 
-                    delay: 0.5 + index * 0.15,
+                    duration: 0.8, 
+                    delay: 0.2 + index * 0.08,
                     ease: [0.22, 1, 0.36, 1] as const
                   }}
                 />
@@ -140,7 +140,7 @@ const HeroSection = () => {
       cancelAnimationFrame(animationId);
     };
   }, [isHovered]);
-  return <section ref={sectionRef} className="relative min-h-screen py-24 md:py-32 overflow-hidden">
+  return <section ref={sectionRef} className="relative min-h-screen py-16 md:py-24 overflow-hidden">
       {/* Parallax background layers */}
       <motion.div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" style={{
       y: backgroundY
@@ -152,57 +152,57 @@ const HeroSection = () => {
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Primary Headline - Above VSL */}
-        <motion.div className="text-center mb-10 md:mb-12" style={{
+        <motion.div className="text-center mb-6 md:mb-8" style={{
         opacity
       }}>
           {/* Logo Header - Instant visibility */}
           <motion.div 
-            className="flex flex-col items-center mb-8 md:mb-10"
+            className="flex flex-col items-center mb-5 md:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
-            <span className="font-display text-lg md:text-xl tracking-[0.15em] uppercase text-foreground">
+            <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
               Associate to Empire
             </span>
-            <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-1 font-sans">
+            <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
               by PASTED
             </span>
           </motion.div>
           
           {/* Single powerful headline */}
-          <h1 className="font-serif text-foreground mb-6 md:mb-8 leading-[1.1] tracking-[-0.01em]">
+          <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
-              initial={{ opacity: 0, y: 20 }}
+              className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold" 
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.3, delay: 0.02 }}
             >
               High Converting Aesthetic Dental
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
-              initial={{ opacity: 0, y: 20 }}
+              className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold" 
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.3, delay: 0.05 }}
             >
               Content & Branding
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-primary/90 mt-2" 
-              initial={{ opacity: 0, y: 20 }}
+              className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light italic text-primary/90 mt-1" 
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.3, delay: 0.08 }}
             >
               Made Easy.
             </motion.span>
           </h1>
           
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
-            initial={{ opacity: 0, y: 15 }}
+            className="text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide"
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.25 }}
+            transition={{ duration: 0.3, delay: 0.12 }}
           >
             Done-for-you content, strategy, and brand system —<br />
             built by the best in the world. With the best in the world. For the <span className="italic">(next)</span> best in the world.
@@ -211,47 +211,47 @@ const HeroSection = () => {
         
         {/* VSL - Priority load with minimal delay */}
         <motion.div 
-          className="mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 15 }}
+          className="mb-6 md:mb-8"
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
         >
           <VideoPlayer />
         </motion.div>
 
         {/* Animated Metrics Bar - Faster reveal */}
         <motion.div 
-          className="mb-10 md:mb-12"
+          className="mb-8 md:mb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
         >
           <MetricsBar />
         </motion.div>
 
         {/* Secondary Statement - Faster cascade */}
-        <div className="text-center mb-10 md:mb-12 space-y-2 md:space-y-3">
+        <div className="text-center mb-6 md:mb-8 space-y-1.5 md:space-y-2">
           <motion.p 
-            className="text-base md:text-lg lg:text-xl text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-sm md:text-base lg:text-lg text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
           >
             <span className="font-medium text-foreground">Dental School</span> Trains Skill. <span className="font-medium text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
           </motion.p>
           <motion.p 
-            className="font-serif text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto leading-tight"
-            initial={{ opacity: 0, y: 10 }}
+            className="font-serif text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-tight"
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.35 }}
+            transition={{ duration: 0.3, delay: 0.18 }}
           >
             <span className="font-semibold text-foreground italic">they just become debt with no destination.</span>
           </motion.p>
           <motion.p 
-            className="text-base md:text-lg text-muted-foreground/70 pt-1"
+            className="text-sm md:text-base text-muted-foreground/70 pt-0.5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
           >
             <span className="font-display font-medium text-foreground">Associate To Empire</span> <span className="text-muted-foreground/50">by PASTED</span> is the solution.
           </motion.p>
@@ -259,30 +259,30 @@ const HeroSection = () => {
 
         {/* Discreet Logo Marquee - Faster load */}
         <motion.div 
-          className="mb-10 overflow-hidden relative"
+          className="mb-8 overflow-hidden relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.35 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
           onMouseEnter={() => setIsHovered(true)} 
           onMouseLeave={() => setIsHovered(false)}
         >
-          <p className="text-center text-muted-foreground/40 text-xs uppercase tracking-[0.2em] mb-4">
+          <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-3">
             Trusted by
           </p>
           
           {/* Fade edges */}
-          <div className="absolute left-0 top-6 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-5 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-5 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div ref={scrollRef} className="flex items-center will-change-transform">
             {duplicatedLogos.map((logo, index) => (
-              <div key={index} className="flex-shrink-0 mx-8 md:mx-12 flex items-center justify-center">
+              <div key={index} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
                 <img 
                   src={logo.src} 
                   alt={logo.alt} 
                   loading="eager"
                   decoding="async"
-                  className="h-6 md:h-8 w-auto max-w-[100px] md:max-w-[120px] object-contain"
+                  className="h-5 md:h-6 w-auto max-w-[90px] md:max-w-[100px] object-contain"
                 />
               </div>
             ))}
