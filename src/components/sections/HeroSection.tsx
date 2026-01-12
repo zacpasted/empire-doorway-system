@@ -199,22 +199,13 @@ const HeroSection = () => {
           </h1>
           
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide mb-2"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
             Done-for-you content, strategy, and brand systems —<br />
             built by the most trusted, successful business minds in aesthetic dentistry.
-          </motion.p>
-          
-          <motion.p 
-            className="text-sm sm:text-base md:text-lg text-muted-foreground/50 max-w-2xl mx-auto font-sans font-medium tracking-wide"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            ($100,000,000+ generated and 42+ 8 figure practices built with this system)
           </motion.p>
         </motion.div>
         
