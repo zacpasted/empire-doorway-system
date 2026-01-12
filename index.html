@@ -10,15 +10,21 @@
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fast.wistia.com" />
-    <link rel="preconnect" href="https://embedwistia-a.akamaihd.net" />
+    <link rel="preconnect" href="https://fast.wistia.com" crossorigin />
+    <link rel="preconnect" href="https://embedwistia-a.akamaihd.net" crossorigin />
+    <link rel="preconnect" href="https://embed-ssl.wistia.com" crossorigin />
     
-    <!-- Preload critical fonts -->
+    <!-- Preload critical fonts for instant text rendering -->
     <link rel="preload" href="/fonts/QuariaDisplay-Regular.otf" as="font" type="font/otf" crossorigin />
     <link rel="preload" href="/fonts/QuariaDisplay-Medium.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preload" href="/fonts/QuariaDisplay-Bold.otf" as="font" type="font/otf" crossorigin />
     
-    <!-- DNS prefetch for analytics -->
+    <!-- Preload Wistia E-v1 script for faster video initialization -->
+    <link rel="preload" href="https://fast.wistia.com/assets/external/E-v1.js" as="script" />
+    
+    <!-- DNS prefetch for analytics and CDNs -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://pipedream.wistia.com" />
     
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/RjSmjbvDI3a7o4P826gyS0lMBfo1/social-images/social-1767939151539-f709bd4f-93e1-4d1c-920a-99c8d2af44c2.jpeg">
