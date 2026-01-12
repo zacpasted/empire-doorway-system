@@ -11,9 +11,8 @@ import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia"
 const STORAGE_KEY = "leadMagnetDismissed";
 const STORAGE_UNLOCKED_KEY = "leadMagnetUnlocked";
 const VIDEO_ID = "jl8fuq6wcz";
-const POPUP_DELAY_SECONDS = 45;
 const EXIT_INTENT_THRESHOLD = 20; // pixels from top of viewport
-const SCROLL_DEPTH_TRIGGER = 50; // percentage
+const MOBILE_SCROLL_TRIGGER = 60; // percentage scroll depth for mobile
 
 // Generate or retrieve session ID for anonymous tracking
 const getSessionId = () => {
@@ -94,17 +93,27 @@ const LeadMagnetPopup = () => {
     };
   }, [canShowPopup]);
 
-  // Track scroll depth for analytics only (no popup trigger)
+  // Mobile: scroll depth trigger (since exit intent doesn't work)
+  // Desktop: just track scroll depth for analytics
   useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollProgress = Math.round((window.scrollY / scrollHeight) * 100);
       setCurrentScrollDepth(scrollProgress);
+      
+      // Trigger popup on mobile when user scrolls past threshold
+      if (isMobile && scrollProgress >= MOBILE_SCROLL_TRIGGER && canShowPopup()) {
+        setTriggerType('mobile_scroll');
+        setIsOpen(true);
+        setHasTriggered(true);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [canShowPopup]);
 
   // Track impression when popup opens
   useEffect(() => {
