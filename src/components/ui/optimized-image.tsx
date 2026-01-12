@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
@@ -8,6 +8,9 @@ interface OptimizedImageProps {
   wrapperClassName?: string;
   priority?: boolean;
   onLoad?: () => void;
+  width?: number;
+  height?: number;
+  sizes?: string;
 }
 
 /**
@@ -16,18 +19,22 @@ interface OptimizedImageProps {
  * - Blur-up placeholder effect
  * - Intersection Observer for deferred loading
  * - Smooth fade-in transition
+ * - Memoized to prevent unnecessary re-renders
  */
-const OptimizedImage = ({
+const OptimizedImage = memo(({
   src,
   alt,
   className,
   wrapperClassName,
   priority = false,
   onLoad,
+  width,
+  height,
+  sizes,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (priority) return;
@@ -39,11 +46,11 @@ const OptimizedImage = ({
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' } // Start loading 200px before entering viewport
+      { rootMargin: '300px' } // Start loading 300px before entering viewport
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
 
     return () => observer.disconnect();
@@ -56,7 +63,7 @@ const OptimizedImage = ({
 
   return (
     <div 
-      ref={imgRef}
+      ref={containerRef}
       className={cn(
         'relative overflow-hidden bg-muted/20',
         wrapperClassName
@@ -73,9 +80,13 @@ const OptimizedImage = ({
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
           onLoad={handleLoad}
+          width={width}
+          height={height}
+          sizes={sizes}
           className={cn(
-            'transition-opacity duration-500',
+            'transition-opacity duration-300',
             isLoaded ? 'opacity-100' : 'opacity-0',
             className
           )}
@@ -83,6 +94,8 @@ const OptimizedImage = ({
       )}
     </div>
   );
-};
+});
+
+OptimizedImage.displayName = 'OptimizedImage';
 
 export default OptimizedImage;
