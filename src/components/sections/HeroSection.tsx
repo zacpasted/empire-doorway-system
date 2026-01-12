@@ -199,33 +199,28 @@ const HeroSection = () => {
           <MetricsBar />
         </div>
 
-        {/* Secondary Statement - Below Stats, Above Trusted By */}
-        <div className="text-center mb-6 md:mb-8 space-y-1 md:space-y-2">
-          <motion.p 
-            className="text-sm md:text-base lg:text-lg text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <span className="font-medium text-foreground">Dental School</span> Trains Skill. <span className="font-medium text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
-          </motion.p>
-          <motion.p 
-            className="font-serif text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-tight"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.05 }}
-          >
-            <span className="font-semibold text-foreground italic">they just become debt with no destination.</span>
-          </motion.p>
-          <motion.p 
-            className="text-sm md:text-base text-muted-foreground/70 pt-0.5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-          >
-            <span className="font-display font-medium text-foreground">Associate To Empire</span> <span className="text-muted-foreground/50">by PASTED</span> is the solution.
-          </motion.p>
-        </div>
+        {/* Transition Headline - Below Metrics */}
+        <motion.div 
+          className="text-center mb-4 md:mb-8"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <p className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/40 mb-4 font-medium">
+            Associate to Empire™
+          </p>
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-3">
+            We Take Aesthetic Dentists
+            <br className="hidden sm:block" />
+            <span className="text-muted-foreground/70 font-normal">From Skilled and Invisible</span>
+            <br className="hidden sm:block" />
+            <span className="text-muted-foreground/70 font-normal">to </span>
+            <span className="text-foreground font-semibold">Recognized and Chosen</span>
+          </h3>
+          <p className="text-sm md:text-base text-muted-foreground/50 font-light tracking-wide">
+            Without Waiting for Ownership
+          </p>
+        </motion.div>
 
         {/* Discreet Logo Marquee - Instant visibility */}
         <div 
@@ -261,6 +256,36 @@ const HeroSection = () => {
           <EligibilityForm />
         </div>
 
+        {/* Secondary Statement - Below Form */}
+        <div className="text-center mt-14 space-y-1 md:space-y-2">
+          <motion.p 
+            className="text-sm md:text-base lg:text-lg text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="font-medium text-foreground">Dental School</span> Trains Skill. <span className="font-medium text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
+          </motion.p>
+          <motion.p 
+            className="font-serif text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-tight"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.05 }}
+          >
+            <span className="font-semibold text-foreground italic">they just become debt with no destination.</span>
+          </motion.p>
+          <motion.p 
+            className="text-sm md:text-base text-muted-foreground/70 pt-0.5"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
+            <span className="font-display font-medium text-foreground">Associate To Empire</span> <span className="text-muted-foreground/50">by PASTED</span> is the solution.
+          </motion.p>
+        </div>
         
         {/* Below Form: Metrics + Gate + Definition */}
         
