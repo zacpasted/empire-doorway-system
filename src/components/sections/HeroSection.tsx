@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState, memo, useMemo, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import EligibilityForm from "@/components/EligibilityForm";
@@ -33,17 +33,17 @@ const useCounter = (end: number, duration: number, isInView: boolean, delay: num
   return count;
 };
 
-// Animated Metrics Bar Component
-const MetricsBar = () => {
+// Memoized Metrics Bar Component
+const MetricsBar = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-  const metrics = [
+  const metrics = useMemo(() => [
     { label: "Revenue Generated", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
     { label: "8 Figure Practices Built", numValue: 42, prefix: "", suffix: "+", barWidth: 100 },
     { label: "Careers Curated", numValue: 200, prefix: "", suffix: "+", barWidth: 88 },
     { label: "Client Retention", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
-  ];
+  ], []);
 
   return (
     <div ref={ref} className="max-w-3xl mx-auto">
@@ -92,10 +92,11 @@ const MetricsBar = () => {
       </div>
     </div>
   );
-};
+});
+
+MetricsBar.displayName = 'MetricsBar';
 
 const HeroSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -109,38 +110,30 @@ const HeroSection = () => {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
-  const logos = [
+  
+  const logos = useMemo(() => [
     { src: logoFigs, alt: "FIGS" },
     { src: logoCocofloss, alt: "Cocofloss" },
     { src: logoSolventum, alt: "Solventum" },
     { src: logoMHM, alt: "Marshall Hanson Method" },
     { src: logoSmileVirtual, alt: "Smile Virtual" },
-  ];
-  // Reduce duplicates from 4x to 3x for better performance
-  const duplicatedLogos = [...logos, ...logos, ...logos];
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-    let animationId: number;
-    let scrollPos = 0;
-    const speed = 1;
-    const animate = () => {
-      if (!isHovered) {
-        scrollPos += speed;
-        const totalWidth = scrollContainer.scrollWidth / 3;
-        if (scrollPos >= totalWidth) {
-          scrollPos = 0;
-        }
-        scrollContainer.style.transform = `translateX(-${scrollPos}px)`;
-      }
-      animationId = requestAnimationFrame(animate);
-    };
-    animationId = requestAnimationFrame(animate);
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
-  }, [isHovered]);
+  ], []);
+  
+  // Reduce duplicates from 4x to 2x for CSS animation
+  const duplicatedLogos = useMemo(() => [...logos, ...logos], [logos]);
+  
   return <section ref={sectionRef} className="relative min-h-screen py-10 md:py-24 overflow-hidden">
+      {/* CSS animation for logo marquee */}
+      <style>{`
+        @keyframes logo-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-logo-marquee {
+          animation: logo-marquee 20s linear infinite;
+        }
+      `}</style>
+      
       {/* Parallax background layers */}
       <motion.div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" style={{
       y: backgroundY
@@ -236,7 +229,10 @@ const HeroSection = () => {
           <div className="absolute left-0 top-5 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-5 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          <div ref={scrollRef} className="flex items-center will-change-transform">
+          <div 
+            className={`flex items-center ${isHovered ? '' : 'animate-logo-marquee'}`}
+            style={{ animationPlayState: isHovered ? 'paused' : 'running' }}
+          >
             {duplicatedLogos.map((logo, index) => (
               <div key={index} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
                 <img 

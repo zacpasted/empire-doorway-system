@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef } from 'react';
 import { useWistiaLoader, getWistiaPlaceholderStyles } from '@/hooks/use-wistia';
 
-const FoundersVibeSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+const FoundersVibeSection = forwardRef<HTMLElement>((_, ref) => {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const mediaId = 'tcg2sxyjch';
 
@@ -26,8 +26,15 @@ const FoundersVibeSection = () => {
   // Use shared Wistia loader
   useWistiaLoader(mediaId, { loadOnMount: isVisible });
 
+  // Merge external ref with internal ref
+  const mergedRef = (node: HTMLElement | null) => {
+    sectionRef.current = node;
+    if (typeof ref === 'function') ref(node);
+    else if (ref) ref.current = node;
+  };
+
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <section ref={mergedRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
       {/* Subtle background effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
       
@@ -68,6 +75,8 @@ const FoundersVibeSection = () => {
       </div>
     </section>
   );
-};
+});
+
+FoundersVibeSection.displayName = 'FoundersVibeSection';
 
 export default FoundersVibeSection;

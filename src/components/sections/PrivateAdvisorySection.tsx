@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { Crown, Sparkles, Globe, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,8 +9,8 @@ interface PrivateAdvisorySectionProps {
   onApplyClick?: () => void;
 }
 
-const PrivateAdvisorySection = ({ videoId, onApplyClick }: PrivateAdvisorySectionProps) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySectionProps>(({ videoId, onApplyClick }, ref) => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -46,8 +46,15 @@ const PrivateAdvisorySection = ({ videoId, onApplyClick }: PrivateAdvisorySectio
     }
   ];
 
+  // Merge external ref with internal ref
+  const mergedRef = (node: HTMLDivElement | null) => {
+    sectionRef.current = node;
+    if (typeof ref === 'function') ref(node);
+    else if (ref) ref.current = node;
+  };
+
   return (
-    <section ref={sectionRef} className="py-24 md:py-40 bg-gradient-to-b from-background via-card/30 to-background relative overflow-hidden">
+    <section ref={mergedRef} className="py-24 md:py-40 bg-gradient-to-b from-background via-card/30 to-background relative overflow-hidden">
       {/* Subtle background accents */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -190,6 +197,8 @@ const PrivateAdvisorySection = ({ videoId, onApplyClick }: PrivateAdvisorySectio
       </div>
     </section>
   );
-};
+});
+
+PrivateAdvisorySection.displayName = 'PrivateAdvisorySection';
 
 export default PrivateAdvisorySection;
