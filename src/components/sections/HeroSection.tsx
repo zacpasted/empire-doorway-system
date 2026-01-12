@@ -140,7 +140,7 @@ const HeroSection = () => {
       cancelAnimationFrame(animationId);
     };
   }, [isHovered]);
-  return <section ref={sectionRef} className="relative min-h-screen py-16 md:py-24 overflow-hidden">
+  return <section ref={sectionRef} className="relative min-h-screen py-10 md:py-24 overflow-hidden">
       {/* Parallax background layers */}
       <motion.div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20" style={{
       y: backgroundY
@@ -152,12 +152,12 @@ const HeroSection = () => {
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Primary Headline - Above VSL */}
-        <motion.div className="text-center mb-6 md:mb-8" style={{
+        <motion.div className="text-center mb-4 md:mb-8" style={{
         opacity
       }}>
           {/* Logo Header - Instant visibility */}
           <motion.div 
-            className="flex flex-col items-center mb-5 md:mb-6"
+            className="flex flex-col items-center mb-3 md:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
@@ -171,7 +171,7 @@ const HeroSection = () => {
           </motion.div>
           
           {/* Single powerful headline */}
-          <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em]">
+          <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
               className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold" 
               initial={{ opacity: 0, y: 15 }}
@@ -211,7 +211,7 @@ const HeroSection = () => {
         
         {/* VSL - Priority load with minimal delay */}
         <motion.div 
-          className="mb-6 md:mb-8"
+          className="mb-4 md:mb-8"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.05 }}
@@ -221,7 +221,7 @@ const HeroSection = () => {
 
         {/* Animated Metrics Bar - Faster reveal */}
         <motion.div 
-          className="mb-8 md:mb-10"
+          className="mb-5 md:mb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.1 }}
@@ -230,7 +230,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Secondary Statement - Faster cascade */}
-        <div className="text-center mb-6 md:mb-8 space-y-1.5 md:space-y-2">
+        <div className="text-center mb-4 md:mb-8 space-y-1 md:space-y-2">
           <motion.p 
             className="text-sm md:text-base lg:text-lg text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
             initial={{ opacity: 0, y: 8 }}
@@ -259,7 +259,7 @@ const HeroSection = () => {
 
         {/* Discreet Logo Marquee - Faster load */}
         <motion.div 
-          className="mb-8 overflow-hidden relative"
+          className="mb-5 overflow-hidden relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.15 }}
