@@ -178,7 +178,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              High-Converting Dental
+              Aesthetic Dental
             </motion.span>
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
@@ -204,8 +204,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
-            Done-for-you content, strategy, and brand systems —<br />
-            built by the most trusted, successful business minds in aesthetic dentistry.
+            Done-for-you content, strategy, and brand system —<br />
+            built by the best in the world. With the best in the world. For the <span className="italic">(next)</span> best in the world.
           </motion.p>
         </motion.div>
         
