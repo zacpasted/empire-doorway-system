@@ -26,29 +26,31 @@ const VideoPlayer = () => {
   }, []);
 
   return (
-    <div className="relative w-full rounded-lg overflow-hidden shadow-2xl animate-subtle-glow">
+    <div className="relative w-full rounded-lg overflow-hidden shadow-2xl animate-subtle-glow group cursor-pointer">
       <style>
         {getWistiaPlaceholderStyles(mediaId, '56.56%')}
       </style>
       
-      {/* Engaging placeholder while video loads */}
+      {/* Compelling placeholder - looks like real video thumbnail */}
       {!isReady && (
-        <div className="absolute inset-0 z-10 bg-gradient-to-br from-card via-background to-card flex items-center justify-center">
-          <div className="relative">
-            {/* Pulsing ring effect */}
-            <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" style={{ animationDuration: '2s' }} />
-            <div className="absolute inset-0 rounded-full bg-primary/10 animate-pulse" />
-            
-            {/* Play button */}
-            <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/30">
-              <Play className="w-8 h-8 md:w-10 md:h-10 text-primary-foreground ml-1" fill="currentColor" />
-            </div>
-          </div>
+        <div className="absolute inset-0 z-10 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 flex items-center justify-center">
+          {/* Subtle grid pattern for visual interest */}
+          <div className="absolute inset-0 opacity-5" style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '20px 20px'
+          }} />
           
-          {/* Loading text */}
-          <p className="absolute bottom-8 text-sm text-muted-foreground/60 tracking-wide">
-            Loading video...
-          </p>
+          <div className="relative flex flex-col items-center">
+            {/* Play button with hover effect */}
+            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shadow-xl shadow-primary/40 group-hover:scale-110 transition-transform duration-200">
+              <Play className="w-6 h-6 md:w-8 md:h-8 text-primary-foreground ml-1" fill="currentColor" />
+            </div>
+            
+            {/* Watch now text */}
+            <p className="mt-4 text-xs md:text-sm text-white/80 font-medium tracking-wide uppercase">
+              Watch Now
+            </p>
+          </div>
         </div>
       )}
       

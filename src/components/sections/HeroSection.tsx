@@ -155,79 +155,49 @@ const HeroSection = () => {
         <motion.div className="text-center mb-4 md:mb-8" style={{
         opacity
       }}>
-          {/* Logo Header - Instant visibility */}
-          <motion.div 
-            className="flex flex-col items-center mb-3 md:mb-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          >
+          {/* Logo Header - Instant visibility, no animation delay */}
+          <div className="flex flex-col items-center mb-3 md:mb-6">
             <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
               Associate to Empire
             </span>
             <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
               by PASTED
             </span>
-          </motion.div>
+          </div>
           
-          {/* Single powerful headline */}
+          {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
-            <motion.span 
-              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold" 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.02 }}
-            >
+            <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
               High Converting Aesthetic Dental
-            </motion.span>
-            <motion.span 
-              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold" 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.05 }}
-            >
+            </span>
+            <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
               Content & Branding
-            </motion.span>
+            </span>
             <motion.span 
               className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light italic text-primary/90 mt-1" 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.08 }}
+              initial={{ opacity: 0.7 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
             >
               Made Easy.
             </motion.span>
           </h1>
           
-          <motion.p 
-            className="text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.12 }}
-          >
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
             Done-for-you content, strategy, and brand system —<br />
             built by the best in the world. With the best in the world. For the <span className="italic">(next)</span> best in the world.
-          </motion.p>
+          </p>
         </motion.div>
         
-        {/* VSL - Priority load with minimal delay */}
-        <motion.div 
-          className="mb-4 md:mb-8"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.05 }}
-        >
+        {/* VSL - Instant visibility, no animation delay */}
+        <div className="mb-4 md:mb-8">
           <VideoPlayer />
-        </motion.div>
+        </div>
 
-        {/* Animated Metrics Bar - Faster reveal */}
-        <motion.div 
-          className="mb-5 md:mb-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
-        >
+        {/* Animated Metrics Bar - Instant container, animated content */}
+        <div className="mb-5 md:mb-10">
           <MetricsBar />
-        </motion.div>
+        </div>
 
         {/* Secondary Statement - Faster cascade */}
         <div className="text-center mb-4 md:mb-8 space-y-1 md:space-y-2">
@@ -257,13 +227,10 @@ const HeroSection = () => {
           </motion.p>
         </div>
 
-        {/* Discreet Logo Marquee - Faster load */}
-        <motion.div 
+        {/* Discreet Logo Marquee - Instant visibility */}
+        <div 
           className="mb-5 overflow-hidden relative"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 0.15 }}
-          onMouseEnter={() => setIsHovered(true)} 
+          onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-3">
@@ -287,17 +254,12 @@ const HeroSection = () => {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
         
-        {/* Application Form - Priority visibility */}
-        <motion.div 
-          id="eligibility-form"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-        >
+        {/* Application Form - Instant visibility for conversion */}
+        <div id="eligibility-form">
           <EligibilityForm />
-        </motion.div>
+        </div>
 
         {/* Transition Headline - Below Form */}
         <motion.div 
