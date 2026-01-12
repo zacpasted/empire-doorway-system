@@ -173,7 +173,7 @@ const HeroSection = () => {
           {/* Single powerful headline */}
           <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
-              className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold" 
+              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold" 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.02 }}
@@ -181,7 +181,7 @@ const HeroSection = () => {
               High Converting Aesthetic Dental
             </motion.span>
             <motion.span 
-              className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold" 
+              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold" 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.05 }}
@@ -189,7 +189,7 @@ const HeroSection = () => {
               Content & Branding
             </motion.span>
             <motion.span 
-              className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light italic text-primary/90 mt-1" 
+              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light italic text-primary/90 mt-1" 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.08 }}
