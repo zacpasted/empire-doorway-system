@@ -94,23 +94,17 @@ const LeadMagnetPopup = () => {
     };
   }, [canShowPopup]);
 
-  // Scroll depth tracking
+  // Track scroll depth for analytics only (no popup trigger)
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollProgress = Math.round((window.scrollY / scrollHeight) * 100);
       setCurrentScrollDepth(scrollProgress);
-      
-      if (scrollProgress >= SCROLL_DEPTH_TRIGGER && canShowPopup()) {
-        setTriggerType('scroll_depth');
-        setIsOpen(true);
-        setHasTriggered(true);
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [canShowPopup]);
+  }, []);
 
   // Track impression when popup opens
   useEffect(() => {
@@ -120,27 +114,13 @@ const LeadMagnetPopup = () => {
   }, [isOpen, triggerType]);
 
   useEffect(() => {
-    // Check if already dismissed or unlocked
-    const dismissed = localStorage.getItem(STORAGE_KEY);
+    // Check if already unlocked
     const unlocked = localStorage.getItem(STORAGE_UNLOCKED_KEY);
     
     if (unlocked) {
       setIsUnlocked(true);
     }
-    
-    if (dismissed || unlocked) return;
-
-    // Show popup after delay (fallback if exit intent doesn't trigger)
-    const timer = setTimeout(() => {
-      if (!hasTriggered) {
-        setTriggerType('timer');
-        setIsOpen(true);
-        setHasTriggered(true);
-      }
-    }, POPUP_DELAY_SECONDS * 1000);
-
-    return () => clearTimeout(timer);
-  }, [hasTriggered]);
+  }, []);
 
   const handleDismiss = () => {
     trackEvent('dismiss');
