@@ -204,7 +204,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
-            We fixed that — built by the most successful premium international agency in aesthetic dentistry.
+            Done-for-you content, strategy, and brand systems — built by the most trusted agency in aesthetic dentistry.
           </motion.p>
         </motion.div>
         
