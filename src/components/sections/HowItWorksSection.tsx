@@ -69,7 +69,7 @@ const HowItWorksSection = () => {
       feeling: "Simplicity",
       icon: Video,
       timeframe: "Week 3-4",
-      stats: { metric: "15min", label: "Weekly filming" },
+      stats: { metric: "15min", label: "Per session" },
       description: "Associate to Empire is designed to meet you where you are. Self-film with our guidance, or we coordinate vetted videographers in your area.",
       details: [
         "Clear filming guidance & prompts",

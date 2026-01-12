@@ -24,7 +24,7 @@ const deliverables = [
   },
   {
     title: "Private Advisory",
-    items: ["Weekly strategy calls", "Direct Slack access", "Creative direction"],
+    items: ["Async strategy support", "Direct Slack access", "Creative direction"],
   },
   {
     title: "Member Benefits",

@@ -26,7 +26,7 @@ const FinalCTASection = ({ onApplyClick }: FinalCTASectionProps) => {
         </p>
         
         <p className="text-muted-foreground mb-12 italic">
-          We are not booking calls. We are granting access to a trajectory.
+          We are granting access to a trajectory.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
