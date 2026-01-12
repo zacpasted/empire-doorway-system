@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, memo } from "react";
+import { useRef, useState, memo } from "react";
 import { motion, useInView } from "framer-motion";
 
 import video01 from "@/assets/videos/showcase-01.mp4";
@@ -12,23 +12,9 @@ const videos = [video01, video02, video03, video04, video05, video06];
 
 // Memoized video component to prevent unnecessary re-renders
 const LazyVideo = memo(({ src, isVisible }: { src: string; isVisible: boolean }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    
-    if (isVisible) {
-      videoRef.current.play().catch(() => {});
-    } else {
-      videoRef.current.pause();
-    }
-  }, [isVisible]);
-
   return (
     <video
-      ref={videoRef}
       src={isVisible ? src : undefined}
-      poster={isVisible ? undefined : undefined}
       className="w-full h-full object-cover"
       loop
       muted
