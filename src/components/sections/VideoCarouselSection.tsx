@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 import { motion, useInView } from "framer-motion";
 
 import video01 from "@/assets/videos/showcase-01.mp4";
@@ -10,57 +10,50 @@ import video06 from "@/assets/videos/showcase-06.mp4";
 
 const videos = [video01, video02, video03, video04, video05, video06];
 
-const VideoCarouselSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(headlineRef, { once: true, margin: "-100px" });
-
-  const words = ["Create", "Content", "That", "Builds", "Your", "Dream", "Life"];
+// Memoized video component to prevent unnecessary re-renders
+const LazyVideo = memo(({ src, isVisible }: { src: string; isVisible: boolean }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
+    if (!videoRef.current) return;
+    
+    if (isVisible) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isVisible]);
 
-    let animationId: number;
-    let scrollPosition = 0;
-    const scrollSpeed = 1.5;
+  return (
+    <video
+      ref={videoRef}
+      src={isVisible ? src : undefined}
+      poster={isVisible ? undefined : undefined}
+      className="w-full h-full object-cover"
+      loop
+      muted
+      playsInline
+      preload="none"
+    />
+  );
+});
 
-    const animate = () => {
-      scrollPosition += scrollSpeed;
-      
-      // Reset scroll position when we've scrolled through half the content (since it's duplicated)
-      const maxScroll = scrollContainer.scrollWidth / 2;
-      if (scrollPosition >= maxScroll) {
-        scrollPosition = 0;
-      }
-      
-      scrollContainer.scrollLeft = scrollPosition;
-      animationId = requestAnimationFrame(animate);
-    };
+LazyVideo.displayName = 'LazyVideo';
 
-    animationId = requestAnimationFrame(animate);
+const VideoCarouselSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headlineRef, { once: true, margin: "-100px" });
+  const isSectionVisible = useInView(sectionRef, { margin: "200px" });
+  const [isPaused, setIsPaused] = useState(false);
 
-    // Pause animation on hover
-    const handleMouseEnter = () => cancelAnimationFrame(animationId);
-    const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(animate);
-    };
-
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+  const words = ["Create", "Content", "That", "Builds", "Your", "Dream", "Life"];
 
   // Duplicate videos for seamless loop
   const duplicatedVideos = [...videos, ...videos];
 
   return (
-    <section className="py-10 bg-background overflow-hidden">
+    <section ref={sectionRef} className="py-10 bg-background overflow-hidden">
       <div ref={headlineRef} className="container mx-auto px-6 mb-6 text-center overflow-hidden">
         <h2 className="font-display font-medium text-lg md:text-xl lg:text-2xl text-foreground tracking-tight inline-flex flex-wrap justify-center gap-x-2">
           {words.map((word, index) => (
@@ -89,27 +82,40 @@ const VideoCarouselSection = () => {
         </h2>
       </div>
 
-      <div
-        ref={scrollRef}
-        className="flex gap-6 overflow-hidden cursor-grab active:cursor-grabbing"
-        style={{ scrollBehavior: "auto" }}
+      {/* CSS-animated carousel for better performance */}
+      <div 
+        className="relative overflow-hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
-        {duplicatedVideos.map((video, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 w-[280px] md:w-[320px] aspect-[9/16] rounded-xl overflow-hidden bg-card/50 shadow-lg"
-          >
-            <video
-              src={video}
-              className="w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        ))}
+        <div 
+          className={`flex gap-6 ${isPaused ? '' : 'animate-carousel'}`}
+          style={{
+            width: 'fit-content',
+            animationPlayState: isPaused ? 'paused' : 'running',
+          }}
+        >
+          {duplicatedVideos.map((video, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[280px] md:w-[320px] aspect-[9/16] rounded-xl overflow-hidden bg-card/50 shadow-lg"
+            >
+              <LazyVideo src={video} isVisible={isSectionVisible} />
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Add carousel animation styles */}
+      <style>{`
+        @keyframes carousel {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-carousel {
+          animation: carousel 30s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };
