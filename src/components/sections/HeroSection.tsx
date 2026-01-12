@@ -40,7 +40,7 @@ const MetricsBar = () => {
 
   const metrics = [
     { label: "Revenue Generated", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
-    { label: "Views Generated", numValue: 500, prefix: "", suffix: "M+", barWidth: 100 },
+    { label: "8 Figure Practices Built", numValue: 42, prefix: "", suffix: "+", barWidth: 100 },
     { label: "Careers Curated", numValue: 200, prefix: "", suffix: "+", barWidth: 88 },
     { label: "Client Retention", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
   ];
