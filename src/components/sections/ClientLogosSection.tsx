@@ -84,6 +84,8 @@ const ClientLogosSection = ({ onApplyClick }: ClientLogosSectionProps) => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
+                  loading="lazy"
+                  decoding="async"
                   className="h-6 md:h-8 w-auto max-w-[100px] md:max-w-[120px] object-contain"
                 />
             </div>
