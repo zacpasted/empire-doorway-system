@@ -3,7 +3,7 @@ import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia"
 import { Play } from "lucide-react";
 
 const VideoPlayer = () => {
-  const mediaId = "qb6sa5q4g8";
+  const mediaId = "nh7ancshfq";
   const [isReady, setIsReady] = useState(false);
   
   // Use shared Wistia loader for efficient script management
