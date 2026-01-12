@@ -178,7 +178,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              We Made High-Converting
+              High-Converting Dental
             </motion.span>
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
@@ -186,7 +186,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              Dental Content & Branding
+              Content & Branding
             </motion.span>
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-primary/90 mt-2" 
@@ -194,17 +194,26 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              Easy.
+              Made Easy.
             </motion.span>
           </h1>
           
           <motion.p 
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide mb-2"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
-            Done-for-you content, strategy, and brand systems — built by the most trusted agency in aesthetic dentistry.
+            Done-for-you content, strategy, and brand systems — built by the most trusted, successful business minds in aesthetic dentistry.
+          </motion.p>
+          
+          <motion.p 
+            className="text-sm sm:text-base md:text-lg text-muted-foreground/50 max-w-2xl mx-auto font-sans font-medium tracking-wide"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+          >
+            ($100,000,000+ generated and 42+ 8 figure practices built with this system)
           </motion.p>
         </motion.div>
         
