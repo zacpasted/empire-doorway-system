@@ -183,7 +183,7 @@ const HeroSection = () => {
             </motion.span>
           </h1>
           
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
+          <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
             Done-for-you content, strategy, and brand system —<br />
             built by the best in the world. With the best in the world. For the <span className="italic">(next)</span> best in the world.
           </p>
