@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { getBrandBySlug, brands } from "@/data/brands";
 import StickyHeader from "@/components/StickyHeader";
 import Footer from "@/components/Footer";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -119,12 +120,12 @@ const CaseStudy = () => {
               {...scaleIn}
               className="relative"
             >
-              <img 
+              <OptimizedImage 
                 src={brand.thumbnail} 
                 alt={brand.name}
-                loading="eager"
-                decoding="async"
-                className="w-full aspect-[4/5] object-cover rounded-lg"
+                priority
+                wrapperClassName="w-full aspect-[4/5] rounded-lg overflow-hidden"
+                className="w-full h-full object-cover"
               />
             </motion.div>
           </div>
@@ -278,12 +279,11 @@ const CaseStudy = () => {
                   index === 0 ? "col-span-2 row-span-2" : ""
                 }`}
               >
-                <img 
+                <OptimizedImage 
                   src={example.src} 
                   alt={example.label}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
+                  wrapperClassName="w-full h-full aspect-square"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="absolute bottom-4 left-4">

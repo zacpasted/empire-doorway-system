@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { brands } from "@/data/brands";
+import OptimizedImage from "@/components/ui/optimized-image";
 import {
   Carousel,
   CarouselContent,
@@ -44,12 +45,11 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
                 >
                   {/* Brand thumbnail */}
                   <div className="aspect-video bg-secondary/50 rounded-lg mb-5 flex items-center justify-center overflow-hidden">
-                    {brand.thumbnail ? (
-                      <img 
+                  {brand.thumbnail ? (
+                      <OptimizedImage 
                         src={brand.thumbnail} 
                         alt={brand.name}
-                        loading="lazy"
-                        decoding="async"
+                        wrapperClassName="w-full h-full"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
