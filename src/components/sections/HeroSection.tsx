@@ -204,7 +204,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
-            Done-for-you content, strategy, and brand systems —<br className="hidden sm:block" />
+            Done-for-you content, strategy, and brand systems —<br />
             built by the most trusted, successful business minds in aesthetic dentistry.
           </motion.p>
           
