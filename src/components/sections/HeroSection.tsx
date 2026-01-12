@@ -116,7 +116,8 @@ const HeroSection = () => {
     { src: logoMHM, alt: "Marshall Hanson Method" },
     { src: logoSmileVirtual, alt: "Smile Virtual" },
   ];
-  const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
+  // Reduce duplicates from 4x to 3x for better performance
+  const duplicatedLogos = [...logos, ...logos, ...logos];
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
@@ -151,15 +152,15 @@ const HeroSection = () => {
       
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Primary Headline - Above VSL */}
-        <motion.div className="text-center mb-12 md:mb-16" style={{
+        <motion.div className="text-center mb-10 md:mb-12" style={{
         opacity
       }}>
-          {/* Logo Header */}
+          {/* Logo Header - Instant visibility */}
           <motion.div 
-            className="flex flex-col items-center mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col items-center mb-8 md:mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
             <span className="font-display text-lg md:text-xl tracking-[0.15em] uppercase text-foreground">
               Associate to Empire
@@ -169,36 +170,37 @@ const HeroSection = () => {
             </span>
           </motion.div>
           
-          <h1 className="font-serif text-foreground mb-8 md:mb-10 leading-[1.1] tracking-[-0.01em]">
+          {/* Faster headline reveal - reduced delays for quicker engagement */}
+          <h1 className="font-serif text-foreground mb-6 md:mb-8 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.4, delay: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               Great Dentists Don't Struggle
             </motion.span>
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-muted-foreground/70 mt-1" 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               Because They Lack Skill.
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-6" 
-              initial={{ opacity: 0, y: 30 }}
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4" 
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.4, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               They Struggle Because Branding
             </motion.span>
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-muted-foreground/70" 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.4, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               Was Never Simplified.
             </motion.span>
@@ -206,67 +208,78 @@ const HeroSection = () => {
           
           <motion.p 
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
           >
             We fixed that — built by the most successful premium international agency in aesthetic dentistry.
           </motion.p>
         </motion.div>
         
-        {/* VSL */}
-        <div className="mb-8 md:mb-10 animate-fade-up opacity-0" style={{
-        animationDelay: "300ms",
-        animationFillMode: "forwards"
-      }}>
+        {/* VSL - Priority load with minimal delay */}
+        <motion.div 
+          className="mb-8 md:mb-10"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <VideoPlayer />
-        </div>
+        </motion.div>
 
-        {/* Animated Metrics Bar */}
-        <div className="mb-12 md:mb-16 animate-fade-up opacity-0" style={{
-          animationDelay: "350ms",
-          animationFillMode: "forwards"
-        }}>
+        {/* Animated Metrics Bar - Faster reveal */}
+        <motion.div 
+          className="mb-10 md:mb-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
           <MetricsBar />
-        </div>
-        {/* Post-VSL Headline */}
-        
+        </motion.div>
 
-        {/* Secondary Headline - Below Post-VSL */}
-        {/* Secondary Statement - Above Logo Marquee */}
-        <div className="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground/80 max-w-3xl mx-auto tracking-wide animate-fade-up opacity-0" style={{
-            animationDelay: "400ms",
-            animationFillMode: "forwards"
-          }}>
+        {/* Secondary Statement - Faster cascade */}
+        <div className="text-center mb-10 md:mb-12 space-y-2 md:space-y-3">
+          <motion.p 
+            className="text-base md:text-lg lg:text-xl text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+          >
             <span className="font-medium text-foreground">Dental School</span> Trains Skill. <span className="font-medium text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
-          </p>
-          <p className="font-serif text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto leading-tight animate-fade-up opacity-0" style={{
-            animationDelay: "600ms",
-            animationFillMode: "forwards"
-          }}>
+          </motion.p>
+          <motion.p 
+            className="font-serif text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto leading-tight"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.35 }}
+          >
             <span className="font-semibold text-foreground italic">they just become debt with no destination.</span>
-          </p>
-          <p className="text-base md:text-lg text-muted-foreground/70 pt-2 animate-fade-up opacity-0" style={{
-            animationDelay: "800ms",
-            animationFillMode: "forwards"
-          }}>
+          </motion.p>
+          <motion.p 
+            className="text-base md:text-lg text-muted-foreground/70 pt-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+          >
             <span className="font-display font-medium text-foreground">Associate To Empire</span> <span className="text-muted-foreground/50">by PASTED</span> is the solution.
-          </p>
+          </motion.p>
         </div>
 
-        {/* Discreet Logo Marquee */}
-        <div className="mb-12 animate-fade-up opacity-0 overflow-hidden relative" style={{
-        animationDelay: "400ms",
-        animationFillMode: "forwards"
-      }} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        {/* Discreet Logo Marquee - Faster load */}
+        <motion.div 
+          className="mb-10 overflow-hidden relative"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.35 }}
+          onMouseEnter={() => setIsHovered(true)} 
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <p className="text-center text-muted-foreground/40 text-xs uppercase tracking-[0.2em] mb-4">
             Trusted by
           </p>
           
           {/* Fade edges */}
-          <div className="absolute left-0 top-6 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10" />
+          <div className="absolute left-0 top-6 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div ref={scrollRef} className="flex items-center will-change-transform">
             {duplicatedLogos.map((logo, index) => (
@@ -281,25 +294,29 @@ const HeroSection = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
         
-        {/* Application Form */}
-        <div id="eligibility-form" className="animate-fade-up opacity-0" style={{
-        animationDelay: "450ms",
-        animationFillMode: "forwards"
-      }}>
+        {/* Application Form - Priority visibility */}
+        <motion.div 
+          id="eligibility-form"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
           <EligibilityForm />
-        </div>
+        </motion.div>
 
         {/* Transition Headline - Below Form */}
-        <div className="text-center mt-16 animate-fade-up opacity-0" style={{
-        animationDelay: "500ms",
-        animationFillMode: "forwards"
-      }}>
-          <p className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/40 mb-8 font-medium">
+        <motion.div 
+          className="text-center mt-14"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <p className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/40 mb-6 font-medium">
             Associate to Empire™
           </p>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-6">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-5">
             We Take Aesthetic Dentists
             <br className="hidden sm:block" />
             <span className="text-muted-foreground/70 font-normal">From Skilled and Invisible</span>
@@ -310,7 +327,7 @@ const HeroSection = () => {
           <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide">
             Without Waiting for Ownership
           </p>
-        </div>
+        </motion.div>
         
         {/* Below Form: Metrics + Gate + Definition */}
         
