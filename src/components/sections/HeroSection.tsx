@@ -170,7 +170,7 @@ const HeroSection = () => {
             </span>
           </motion.div>
           
-          {/* Faster headline reveal - reduced delays for quicker engagement */}
+          {/* Single powerful headline */}
           <h1 className="font-serif text-foreground mb-6 md:mb-8 leading-[1.1] tracking-[-0.01em]">
             <motion.span 
               className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
@@ -178,31 +178,23 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              Great Dentists Don't Struggle
+              We Made High-Converting
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-muted-foreground/70 mt-1" 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              Because They Lack Skill.
+              Dental Content & Branding
             </motion.span>
             <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4" 
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-primary/90 mt-2" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              They Struggle Because Branding
-            </motion.span>
-            <motion.span 
-              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light italic text-muted-foreground/70" 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            >
-              Was Never Simplified.
+              Easy.
             </motion.span>
           </h1>
           
