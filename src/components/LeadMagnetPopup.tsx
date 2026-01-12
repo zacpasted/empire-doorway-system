@@ -302,18 +302,7 @@ const LeadMagnetPopup = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        {/* Thumbnail background */}
-                        <div 
-                          className="absolute inset-0 bg-cover bg-center"
-                          style={{ 
-                            backgroundImage: `url('https://fast.wistia.com/embed/medias/${VIDEO_ID}/swatch')`
-                          }}
-                        />
-                        <img 
-                          src={`https://fast.wistia.com/oembed/medias/${VIDEO_ID}.json?embedType=async`}
-                          alt=""
-                          className="hidden"
-                        />
+                        {/* HD Thumbnail */}
                         <div 
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                           style={{ 
