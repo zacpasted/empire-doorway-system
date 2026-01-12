@@ -12,6 +12,22 @@ const CTABannerSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          {/* Transition Headline - Moved from Hero */}
+          <p className="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/40 mb-4 font-medium">
+            Associate to Empire™
+          </p>
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-3">
+            We Take Aesthetic Dentists
+            <br className="hidden sm:block" />
+            <span className="text-muted-foreground/70 font-normal">From Skilled and Invisible</span>
+            <br className="hidden sm:block" />
+            <span className="text-muted-foreground/70 font-normal">to </span>
+            <span className="text-foreground font-semibold">Recognized and Chosen</span>
+          </h3>
+          <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide mb-8">
+            Without Waiting for Ownership
+          </p>
+          
           <p className="text-lg md:text-xl text-muted-foreground mb-8">
             Your only job: <span className="text-foreground font-medium">15-30 minutes of raw footage per week.</span>
           </p>
