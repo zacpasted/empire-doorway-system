@@ -462,10 +462,7 @@ const LeadMagnetPopup = () => {
                   <div className="rounded-xl overflow-hidden">
                     <style>{getWistiaPlaceholderStyles(VIDEO_ID, '56.25%')}</style>
                     {/* @ts-ignore - Wistia custom element */}
-                    <wistia-player 
-                      media-id={VIDEO_ID} 
-                      aspect="1.7778"
-                    />
+                    <wistia-player media-id={VIDEO_ID} aspect="1.7778" autoplay="false" end-video-behavior="default"></wistia-player>
                   </div>
 
                   <div className="mt-4 text-center">

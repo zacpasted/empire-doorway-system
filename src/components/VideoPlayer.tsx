@@ -54,8 +54,8 @@ const VideoPlayer = () => {
         </div>
       )}
       
-      {/* @ts-ignore */}
-      <wistia-player media-id={mediaId} aspect="1.7679558011049723"></wistia-player>
+      {/* @ts-ignore - Wistia custom element */}
+      <wistia-player media-id={mediaId} aspect="1.7679558011049723" autoplay="false" end-video-behavior="default"></wistia-player>
     </div>
   );
 };

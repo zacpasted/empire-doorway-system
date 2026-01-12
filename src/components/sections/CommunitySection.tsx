@@ -68,11 +68,7 @@ const CommunitySection = ({ videoIds = [] }: CommunitySectionProps) => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
               <style>{getWistiaPlaceholderStyles(videoIds[0], '177.78%')}</style>
               {/* @ts-ignore - Wistia custom element */}
-              <wistia-player 
-                media-id={videoIds[0]} 
-                aspect="0.5625"
-                style={{ height: '100%', width: '100%' }}
-              />
+              <wistia-player media-id={videoIds[0]} aspect="0.5625" autoplay="false" end-video-behavior="default" style={{ height: '100%', width: '100%' }}></wistia-player>
             </motion.div>
           )}
 
@@ -89,11 +85,7 @@ const CommunitySection = ({ videoIds = [] }: CommunitySectionProps) => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
                 <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
                 {/* @ts-ignore - Wistia custom element */}
-                <wistia-player 
-                  media-id={videoId} 
-                  aspect="0.5625"
-                  style={{ height: '100%', width: '100%' }}
-                />
+                <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default" style={{ height: '100%', width: '100%' }}></wistia-player>
               </motion.div>
             ))}
           </div>

@@ -130,12 +130,8 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
             {videoId ? (
               <>
                 <style>{getWistiaPlaceholderStyles(videoId, '56.25%')}</style>
-                {/* @ts-ignore */}
-                <wistia-player 
-                  media-id={videoId} 
-                  aspect="1.7778"
-                  style={{ height: '100%', width: '100%' }}
-                />
+                {/* @ts-ignore - Wistia custom element */}
+                <wistia-player media-id={videoId} aspect="1.7778" autoplay="false" end-video-behavior="default" style={{ height: '100%', width: '100%' }}></wistia-player>
               </>
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40">
