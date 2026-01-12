@@ -199,22 +199,12 @@ const HeroSection = () => {
           </h1>
           
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide mb-2"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground/70 max-w-3xl mx-auto leading-relaxed font-sans font-light tracking-wide"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
-            Done-for-you content, strategy, and brand systems —<br />
-            built by the most trusted, successful business minds in aesthetic dentistry.
-          </motion.p>
-          
-          <motion.p 
-            className="text-sm sm:text-base md:text-lg text-muted-foreground/50 max-w-2xl mx-auto font-sans font-medium tracking-wide"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            ($100,000,000+ generated and 42+ 8 figure practices built with this system)
+            Brought to you by the most successful aesthetic dentists in the world and their esteemed strategy team — <span className="font-medium text-foreground">PASTED</span>.
           </motion.p>
         </motion.div>
         
@@ -238,7 +228,7 @@ const HeroSection = () => {
           <MetricsBar />
         </motion.div>
 
-        {/* Secondary Statement - Faster cascade */}
+        {/* Secondary Statement - Moved subheadline below VSL */}
         <div className="text-center mb-10 md:mb-12 space-y-2 md:space-y-3">
           <motion.p 
             className="text-base md:text-lg lg:text-xl text-muted-foreground/80 max-w-3xl mx-auto tracking-wide"
@@ -246,7 +236,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            <span className="font-medium text-foreground">Dental School</span> Trains Skill. <span className="font-medium text-foreground">CE</span> Improves Technique. Without brand, story, and strategy—
+            Done-for-you content, strategy, and brand systems —
           </motion.p>
           <motion.p 
             className="font-serif text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto leading-tight"
@@ -255,14 +245,6 @@ const HeroSection = () => {
             transition={{ duration: 0.4, delay: 0.35 }}
           >
             <span className="font-semibold text-foreground italic">they just become debt with no destination.</span>
-          </motion.p>
-          <motion.p 
-            className="text-base md:text-lg text-muted-foreground/70 pt-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-          >
-            <span className="font-display font-medium text-foreground">Associate To Empire</span> <span className="text-muted-foreground/50">by PASTED</span> is the solution.
           </motion.p>
         </div>
 
