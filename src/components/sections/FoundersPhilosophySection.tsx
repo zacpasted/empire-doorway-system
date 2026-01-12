@@ -63,6 +63,8 @@ const FoundersPhilosophySection = () => {
             <wistia-player 
               media-id={mediaId} 
               aspect="0.5660377358490566"
+              autoplay="false"
+              end-video-behavior="default"
             />
           </div>
         </div>
