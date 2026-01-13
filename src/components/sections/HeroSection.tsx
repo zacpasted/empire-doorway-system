@@ -115,6 +115,7 @@ MetricsBar.displayName = 'MetricsBar';
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [calendlyLoaded, setCalendlyLoaded] = useState(false);
 
   // Load Calendly widget script
   useEffect(() => {
@@ -123,8 +124,19 @@ const HeroSection = () => {
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
+      script.onload = () => setCalendlyLoaded(true);
       document.body.appendChild(script);
+    } else {
+      setCalendlyLoaded(true);
     }
+
+    // Listen for Calendly ready event
+    const handleCalendlyReady = () => setCalendlyLoaded(true);
+    window.addEventListener('message', (e) => {
+      if (e.data.event === 'calendly.event_type_viewed') {
+        handleCalendlyReady();
+      }
+    });
   }, []);
 
   // Parallax scroll effect
@@ -266,11 +278,31 @@ const HeroSection = () => {
             </p>
           </div>
           
-          <div 
-            className="calendly-inline-widget rounded-xl overflow-hidden" 
-            data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff0000&hide_gdpr_banner=1"
-            style={{ minWidth: '320px', height: '700px' }}
-          />
+          <div className="relative" style={{ minHeight: '700px' }}>
+            {/* Loading skeleton */}
+            {!calendlyLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-card/80 rounded-xl">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                  <p className="text-sm text-muted-foreground">Loading calendar...</p>
+                </div>
+                {/* Skeleton lines */}
+                <div className="mt-8 space-y-3 w-full max-w-sm px-4">
+                  <div className="h-4 bg-border/50 rounded animate-pulse" />
+                  <div className="h-4 bg-border/40 rounded animate-pulse w-3/4" />
+                  <div className="h-10 bg-border/30 rounded animate-pulse mt-4" />
+                  <div className="h-10 bg-border/30 rounded animate-pulse" />
+                  <div className="h-10 bg-border/30 rounded animate-pulse" />
+                </div>
+              </div>
+            )}
+            
+            <div 
+              className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
+              data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff0000&hide_gdpr_banner=1"
+              style={{ minWidth: '320px', height: '700px' }}
+            />
+          </div>
         </div>
 
         {/* Secondary Statement - Below Form */}
