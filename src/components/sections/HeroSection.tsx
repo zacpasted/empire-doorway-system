@@ -121,39 +121,18 @@ const HeroSection = () => {
   const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
-  // Lazy load Calendly widget when it comes into view
+  // Load Calendly script immediately for faster calendar rendering
   useEffect(() => {
-    const container = calendlyContainerRef.current;
-    if (!container) return;
-
-    const loadCalendlyScript = () => {
-      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-      if (!existingScript) {
-        const script = document.createElement('script');
-        script.src = 'https://assets.calendly.com/assets/external/widget.js';
-        script.async = true;
-        script.onload = () => setCalendlyScriptLoaded(true);
-        document.body.appendChild(script);
-      } else {
-        setCalendlyScriptLoaded(true);
-      }
-    };
-
-    // Use IntersectionObserver to lazy load when section is near viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            loadCalendlyScript();
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: '200px' } // Load 200px before it enters viewport
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
+    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = () => setCalendlyScriptLoaded(true);
+      document.body.appendChild(script);
+    } else {
+      setCalendlyScriptLoaded(true);
+    }
   }, []);
 
   // Listen for Calendly events
