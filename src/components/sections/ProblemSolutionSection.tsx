@@ -1,8 +1,8 @@
-import { memo, useMemo, useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { X, Check, ArrowRight, AlertTriangle, Zap, Sparkles } from "lucide-react";
 
-const ProblemSolutionSection = memo(() => {
+const ProblemSolutionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const solutionRef = useRef<HTMLDivElement>(null);
   
@@ -475,8 +475,6 @@ const ProblemSolutionSection = memo(() => {
       </div>
     </section>
   );
-});
-
-ProblemSolutionSection.displayName = 'ProblemSolutionSection';
+};
 
 export default ProblemSolutionSection;
