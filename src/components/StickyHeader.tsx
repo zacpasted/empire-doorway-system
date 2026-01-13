@@ -23,7 +23,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
     if (onApplyClick) {
       onApplyClick();
     } else {
-      document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

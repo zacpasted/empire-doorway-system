@@ -28,7 +28,7 @@ const MobileFloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
-    document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Only show on mobile (md breakpoint and below)
