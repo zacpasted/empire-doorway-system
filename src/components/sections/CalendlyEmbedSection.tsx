@@ -1,19 +1,37 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const CalendlyEmbedSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "200px" });
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [widgetReady, setWidgetReady] = useState(false);
 
+  // Only load Calendly script when section is near viewport
   useEffect(() => {
-    // Load Calendly widget script
+    if (!isInView) return;
+    
     const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
     if (!existingScript) {
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
+      script.onload = () => setScriptLoaded(true);
       document.body.appendChild(script);
+    } else {
+      setScriptLoaded(true);
     }
+  }, [isInView]);
+
+  // Listen for Calendly widget ready event
+  useEffect(() => {
+    const handleCalendlyMessage = (e: MessageEvent) => {
+      if (e.data.event === 'calendly.event_type_viewed') {
+        setWidgetReady(true);
+      }
+    };
+    window.addEventListener('message', handleCalendlyMessage);
+    return () => window.removeEventListener('message', handleCalendlyMessage);
   }, []);
 
   return (
@@ -44,13 +62,32 @@ const CalendlyEmbedSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-card rounded-xl border border-border overflow-hidden shadow-lg"
+          className="bg-[#1a1a1a] rounded-xl border border-border overflow-hidden shadow-lg relative"
+          style={{ minHeight: '700px' }}
         >
-          <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff001e&hide_gdpr_banner=1"
-            style={{ minWidth: '320px', height: '700px' }}
-          />
+          {/* Loading skeleton */}
+          {!widgetReady && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                <p className="text-sm text-muted-foreground">Loading calendar...</p>
+              </div>
+              <div className="mt-8 space-y-3 w-full max-w-sm px-4">
+                <div className="h-4 bg-white/10 rounded animate-pulse" />
+                <div className="h-4 bg-white/8 rounded animate-pulse w-3/4" />
+                <div className="h-10 bg-white/5 rounded animate-pulse mt-4" />
+                <div className="h-10 bg-white/5 rounded animate-pulse" />
+              </div>
+            </div>
+          )}
+          
+          {scriptLoaded && (
+            <div 
+              className={`calendly-inline-widget transition-opacity duration-500 ${widgetReady ? 'opacity-100' : 'opacity-0'}`}
+              data-url="https://calendly.com/getpasted/associate-to-empire?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
+              style={{ minWidth: '320px', height: '700px' }}
+            />
+          )}
         </motion.div>
 
         <motion.p
