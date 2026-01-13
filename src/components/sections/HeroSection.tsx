@@ -1,7 +1,6 @@
 import { useRef, useState, memo, useMemo, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
-import EligibilityForm from "@/components/EligibilityForm";
 import logoFigs from "@/assets/logos/figs-white.png";
 import logoCocofloss from "@/assets/logos/cocofloss-white.png";
 import logoSolventum from "@/assets/logos/solventum-white.png";
@@ -112,9 +111,21 @@ const MetricsBar = memo(() => {
     </div>;
 });
 MetricsBar.displayName = 'MetricsBar';
+
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Load Calendly widget script
+  useEffect(() => {
+    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   // Parallax scroll effect
   const {
@@ -239,9 +250,27 @@ const HeroSection = () => {
           </div>
         </div>
         
-        {/* Application Form - Instant visibility for conversion */}
-        <div id="eligibility-form">
-          <EligibilityForm />
+        {/* Application Section - Calendly Embed */}
+        <div id="eligibility-form" className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50 p-6 md:p-10">
+          <div className="text-center mb-6">
+            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
+              Limited Availability
+            </p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
+              See If You Qualify
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+              Associate to Empire by PASTED was built to bring cutting-edge branding and content to dentistry's future stars.
+              <br className="hidden md:block" />
+              <span className="block mt-1">Now accepting driven associates and new owners.</span>
+            </p>
+          </div>
+          
+          <div 
+            className="calendly-inline-widget rounded-xl overflow-hidden" 
+            data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff0000&hide_gdpr_banner=1"
+            style={{ minWidth: '320px', height: '700px' }}
+          />
         </div>
 
         {/* Secondary Statement - Below Form */}
