@@ -39,6 +39,7 @@ const FAQSection = lazy(() => import("@/components/sections/FAQSection"));
 const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
 const TransformationSection = lazy(() => import("@/components/sections/TransformationSection"));
 const ProgramDeliverablesSection = lazy(() => import("@/components/sections/ProgramDeliverablesSection"));
+const CalendlyEmbedSection = lazy(() => import("@/components/sections/CalendlyEmbedSection"));
 
 // Minimal loading placeholder for lazy sections - memoized
 const SectionLoader = memo(() => (
@@ -348,6 +349,16 @@ const Index = () => {
           variants={sectionVariants}
         >
           <PrivateAdvisorySection videoId="qb6sa5q4g8" onApplyClick={scrollToForm} />
+        </motion.div>
+        
+        {/* Calendly Booking - Inline Embed */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={sectionVariants}
+        >
+          <CalendlyEmbedSection />
         </motion.div>
       </Suspense>
       

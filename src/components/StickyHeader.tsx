@@ -23,7 +23,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
     if (onApplyClick) {
       onApplyClick();
     } else {
-      window.open('https://calendly.com/getpasted/associate-to-empire', '_blank');
+      document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
