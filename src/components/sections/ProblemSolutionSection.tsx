@@ -1,7 +1,19 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { X, Check, ArrowRight, Sparkles } from "lucide-react";
+import { useRef } from "react";
 
 const ProblemSolutionSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const leftGlowY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const rightGlowY = useTransform(scrollYProgress, [0, 1], [-80, 120]);
+  const leftGlowX = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const rightGlowX = useTransform(scrollYProgress, [0, 1], [50, -30]);
   const problems = [
     "You know branding matters but don't know where to start.",
     "You know content is required but don't know what to say.",
@@ -62,11 +74,12 @@ const ProblemSolutionSection = () => {
   };
 
   return (
-    <section className="py-20 md:py-32 bg-background relative overflow-hidden">
-      {/* Ambient background effects */}
+    <section ref={sectionRef} className="py-20 md:py-32 bg-background relative overflow-hidden">
+      {/* Ambient background effects with parallax */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
           className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-muted-foreground/5 rounded-full blur-[120px]"
+          style={{ y: leftGlowY, x: leftGlowX }}
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -75,11 +88,17 @@ const ProblemSolutionSection = () => {
         />
         <motion.div 
           className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"
+          style={{ y: rightGlowY, x: rightGlowX }}
           animate={{ 
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.6, 0.4],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* Additional subtle glow */}
+        <motion.div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/3 rounded-full blur-[180px]"
+          style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
         />
       </div>
 
