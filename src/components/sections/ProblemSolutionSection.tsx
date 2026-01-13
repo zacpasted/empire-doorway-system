@@ -3,19 +3,31 @@ import { X, Check, ArrowRight } from "lucide-react";
 
 const ProblemSolutionSection = () => {
   const problems = [
-    "No one taught you how to make dentistry feel human",
-    "Content feels awkward, time-consuming, inconsistent",
-    "Told to wait until ownership to build a brand",
-    "Don't know who to trust with your image",
-    "Best agencies are inaccessible or too expensive",
+    "You know branding matters but don't know where to start.",
+    "You know content is required but don't know what to say.",
+    "Creating feels unnatural, inconsistent, and time-consuming.",
+    "Most dental content looks the same.",
+    "Attention doesn't turn into patients.",
+    "Virality is confused for growth.",
+    "You don't know who to trust.",
+    "Agencies promise exposure, not outcomes.",
+    "Branding feels hard to justify financially.",
+    "You worry about the payoff.",
+    "You delay because the risk feels unclear.",
   ];
 
   const solutions = [
-    "Clear direction from day one",
-    "Done-for-you content that compounds",
-    "Build authority before ownership",
-    "Trusted by the industry's top names",
-    "Premium quality, now accessible",
+    "A clear system for brand, content, and conversion.",
+    "Direction on exactly what to say and why it works.",
+    "A repeatable creation process that fits real clinical life.",
+    "Positioning that immediately differentiates you.",
+    "Content designed to convert, not just attract.",
+    "Strategy built for qualified patient demand.",
+    "Guidance from a team that's done this at the highest level.",
+    "Proven frameworks used by the best in the world.",
+    "Branding treated as a revenue asset.",
+    "Confidence in spend and direction.",
+    "Momentum that compounds over time.",
   ];
 
   return (
@@ -41,7 +53,7 @@ const ProblemSolutionSection = () => {
               The Problem
             </h3>
             
-            <ul className="space-y-4">
+            <ul className="space-y-3">
               {problems.map((problem, index) => (
                 <motion.li
                   key={index}
@@ -49,7 +61,7 @@ const ProblemSolutionSection = () => {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                 >
                   <X className="w-4 h-4 text-muted-foreground/50 mt-1 flex-shrink-0" />
                   <span className="text-sm md:text-base leading-relaxed">{problem}</span>
@@ -98,7 +110,7 @@ const ProblemSolutionSection = () => {
                 The Solution
               </h3>
               
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {solutions.map((solution, index) => (
                   <motion.li
                     key={index}
@@ -106,7 +118,7 @@ const ProblemSolutionSection = () => {
                     initial={{ opacity: 0, x: 10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 + 0.2 }}
                   >
                     <Check className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
                     <span className="text-sm md:text-base leading-relaxed">{solution}</span>
@@ -121,7 +133,7 @@ const ProblemSolutionSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                Built by the most successful premium agency in aesthetic dentistry — now made accessible.
+                We've turned brand and content into patient demand for some of the best aesthetic practices in the world. This is proven, not theoretical.
               </motion.p>
             </div>
           </motion.div>
