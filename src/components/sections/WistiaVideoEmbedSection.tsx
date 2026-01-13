@@ -1,19 +1,29 @@
 import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
+import { ChevronDown, Play } from "lucide-react";
 
 interface WistiaVideoEmbedSectionProps {
   title?: string;
   subtitle?: string;
   videoIds?: string[]; // Array of Wistia media IDs to embed
+  initialVisibleCount?: number; // Number of videos to show initially
 }
 
 const WistiaVideoEmbedSection = ({ 
   title = "See It In Action",
   subtitle = "Real examples from our work",
-  videoIds = []
+  videoIds = [],
+  initialVisibleCount = 4 // Show 4 videos initially
 }: WistiaVideoEmbedSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
+  // Calculate visible videos
+  const visibleVideoIds = showAll ? videoIds : videoIds.slice(0, initialVisibleCount);
+  const hiddenCount = videoIds.length - initialVisibleCount;
+  const hasMore = hiddenCount > 0;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,8 +38,8 @@ const WistiaVideoEmbedSection = ({
     return () => observer.disconnect();
   }, []);
 
-  // Use shared Wistia loader - only loads when visible
-  useWistiaLoader(videoIds, { loadOnMount: isVisible });
+  // Use shared Wistia loader - only loads visible videos when section is visible
+  useWistiaLoader(visibleVideoIds, { loadOnMount: isVisible });
 
   return (
     <section
@@ -69,47 +79,58 @@ const WistiaVideoEmbedSection = ({
           }`}
         >
           {videoIds.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {videoIds.map((videoId) => (
-                <div
-                  key={videoId}
-                  className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16]"
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <AnimatePresence mode="popLayout">
+                  {visibleVideoIds.map((videoId, index) => (
+                    <motion.div
+                      key={videoId}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16] group"
+                    >
+                      <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
+                      {/* @ts-ignore - Wistia custom element */}
+                      <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default"></wistia-player>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+
+              {/* Show More Button */}
+              {hasMore && !showAll && (
+                <motion.div
+                  className="mt-10 flex justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
                 >
-                  <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
-                  {/* @ts-ignore - Wistia custom element */}
-                  <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default"></wistia-player>
-                </div>
-              ))}
-            </div>
+                  <button
+                    onClick={() => setShowAll(true)}
+                    className="group flex items-center gap-3 px-8 py-4 rounded-full bg-card/50 border border-border/50 backdrop-blur-sm hover:bg-card/80 hover:border-primary/30 transition-all duration-300"
+                  >
+                    <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors">
+                      Show {hiddenCount} More Videos
+                    </span>
+                    <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-y-0.5 transition-all" />
+                  </button>
+                </motion.div>
+              )}
+            </>
           ) : (
             /* Placeholder state - empty slots for embedding */
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((_, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[1, 2, 3, 4].map((_, index) => (
                 <div
                   key={index}
                   className="relative rounded-xl overflow-hidden bg-card/30 border-2 border-dashed border-border/30 aspect-[9/16] flex items-center justify-center"
                 >
                   <div className="text-center p-6">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/20 flex items-center justify-center">
-                      <svg
-                        className="w-8 h-8 text-muted-foreground/40"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
+                      <Play className="w-8 h-8 text-muted-foreground/40" />
                     </div>
                     <p className="text-sm text-muted-foreground/50">
                       Wistia Video {index + 1}
