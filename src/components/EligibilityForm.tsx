@@ -229,8 +229,8 @@ const EligibilityForm = () => {
   };
 
   const nextStep = async () => {
-    // Save partial submission after step 1
-    if (step === 1) {
+    // Save partial submission after every step to capture progress
+    if (step < totalSteps) {
       await savePartialSubmission();
     }
     
