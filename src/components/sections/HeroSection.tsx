@@ -1,6 +1,7 @@
 import { useRef, useState, memo, useMemo, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import logoFigs from "@/assets/logos/figs-white.png";
 import logoCocofloss from "@/assets/logos/cocofloss-white.png";
 import logoSolventum from "@/assets/logos/solventum-white.png";
@@ -139,6 +140,7 @@ const HeroSection = () => {
       // Booking confirmed
       if (e.data.event === 'calendly.event_scheduled') {
         setBookingConfirmed(true);
+        trackCTAClick({ ctaId: 'calendly-booking', ctaText: 'Call Booked', section: 'hero-calendly' });
       }
     };
     

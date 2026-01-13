@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { X, Check, ArrowRight, AlertTriangle, Zap, Sparkles } from "lucide-react";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const ProblemSolutionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -461,6 +462,7 @@ const ProblemSolutionSection = () => {
             whileTap={{ scale: 0.98 }}
             onClick={(e) => {
               e.preventDefault();
+              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'See If You Qualify', section: 'problem-solution' });
               document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 interface StickyHeaderProps {
   onApplyClick?: () => void;
@@ -20,6 +21,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
   }, []);
 
   const handleClick = () => {
+    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Request Access', section: 'header' });
     if (onApplyClick) {
       onApplyClick();
     } else {
