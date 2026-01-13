@@ -254,7 +254,9 @@ const EligibilityForm = () => {
           See If You Qualify
         </h2>
         <p className="text-muted-foreground text-sm">
-          Associate to Empire by PASTED is the ultimate content and branding solution, built in tandem with dentistry's best, to make incredible content and branding easy for associates, new owners and beyond.
+          Associate to Empire by PASTED was built to bring cutting-edge branding and content to dentistry's future stars.
+          <br className="block" />
+          <span className="block mt-2">Now accepting driven associates and new owners.</span>
         </p>
       </div>
       
