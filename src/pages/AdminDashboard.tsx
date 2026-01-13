@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { 
   LogOut, 
@@ -17,9 +18,13 @@ import {
   ChevronRight,
   Trash2,
   Eye,
-  Filter
+  Filter,
+  MousePointerClick,
+  TrendingUp,
+  Users,
+  Calendar
 } from 'lucide-react';
-import { format } from 'date-fns';
+import { format, subDays, startOfDay, endOfDay } from 'date-fns';
 import {
   Dialog,
   DialogContent,
@@ -62,6 +67,26 @@ interface Submission {
   updated_at: string;
 }
 
+interface CTAClick {
+  id: string;
+  created_at: string;
+  event_type: string;
+  cta_id: string;
+  cta_text: string | null;
+  section: string | null;
+  page_url: string | null;
+  session_id: string | null;
+  viewport_width: number | null;
+}
+
+interface CTAStats {
+  cta_id: string;
+  cta_text: string | null;
+  section: string | null;
+  total_clicks: number;
+  unique_sessions: number;
+}
+
 const ITEMS_PER_PAGE = 10;
 
 const AdminDashboard = () => {
@@ -78,6 +103,12 @@ const AdminDashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('submissions');
+  
+  // CTA Analytics state
+  const [ctaClicks, setCTAClicks] = useState<CTAClick[]>([]);
+  const [ctaLoading, setCTALoading] = useState(false);
+  const [ctaDateRange, setCTADateRange] = useState('7');
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
@@ -88,12 +119,19 @@ const AdminDashboard = () => {
   useEffect(() => {
     if (user && isAdmin) {
       fetchSubmissions();
+      fetchCTAAnalytics();
     }
   }, [user, isAdmin]);
 
   useEffect(() => {
     filterSubmissions();
   }, [submissions, searchQuery, statusFilter, roleFilter]);
+
+  useEffect(() => {
+    if (user && isAdmin && activeTab === 'analytics') {
+      fetchCTAAnalytics();
+    }
+  }, [ctaDateRange, activeTab]);
 
   const fetchSubmissions = async () => {
     setIsLoading(true);
@@ -113,6 +151,30 @@ const AdminDashboard = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchCTAAnalytics = async () => {
+    setCTALoading(true);
+    try {
+      const startDate = subDays(new Date(), parseInt(ctaDateRange));
+      const { data, error } = await supabase
+        .from('cta_analytics')
+        .select('*')
+        .gte('created_at', startOfDay(startDate).toISOString())
+        .lte('created_at', endOfDay(new Date()).toISOString())
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setCTAClicks(data || []);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch CTA analytics.',
+        variant: 'destructive',
+      });
+    } finally {
+      setCTALoading(false);
     }
   };
 
@@ -248,6 +310,41 @@ const AdminDashboard = () => {
   // Get unique roles for filter
   const uniqueRoles = [...new Set(submissions.map((s) => s.role_type).filter(Boolean))];
 
+  // CTA Analytics calculations
+  const ctaStats = useMemo((): CTAStats[] => {
+    const statsMap = new Map<string, CTAStats>();
+    
+    ctaClicks.forEach((click) => {
+      const key = click.cta_id;
+      if (!statsMap.has(key)) {
+        statsMap.set(key, {
+          cta_id: click.cta_id,
+          cta_text: click.cta_text,
+          section: click.section,
+          total_clicks: 0,
+          unique_sessions: 0,
+        });
+      }
+      const stat = statsMap.get(key)!;
+      stat.total_clicks++;
+    });
+
+    // Calculate unique sessions per CTA
+    statsMap.forEach((stat, key) => {
+      const sessions = new Set(
+        ctaClicks.filter((c) => c.cta_id === key).map((c) => c.session_id)
+      );
+      stat.unique_sessions = sessions.size;
+    });
+
+    return Array.from(statsMap.values()).sort((a, b) => b.total_clicks - a.total_clicks);
+  }, [ctaClicks]);
+
+  const totalCTAClicks = ctaClicks.length;
+  const uniqueCTASessions = new Set(ctaClicks.map((c) => c.session_id)).size;
+  const bookingClicks = ctaClicks.filter((c) => c.cta_id === 'calendly-booking').length;
+  const conversionRate = uniqueCTASessions > 0 ? ((bookingClicks / uniqueCTASessions) * 100).toFixed(1) : '0';
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -286,201 +383,389 @@ const AdminDashboard = () => {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-card rounded-lg border border-border p-4">
-            <p className="text-sm text-muted-foreground">Total Submissions</p>
-            <p className="text-2xl font-bold text-foreground">{submissions.length}</p>
-          </div>
-          <div className="bg-card rounded-lg border border-border p-4">
-            <p className="text-sm text-muted-foreground">Complete</p>
-            <p className="text-2xl font-bold text-green-500">
-              {submissions.filter((s) => !s.is_partial).length}
-            </p>
-          </div>
-          <div className="bg-card rounded-lg border border-border p-4">
-            <p className="text-sm text-muted-foreground">Partial</p>
-            <p className="text-2xl font-bold text-yellow-500">
-              {submissions.filter((s) => s.is_partial).length}
-            </p>
-          </div>
-          <div className="bg-card rounded-lg border border-border p-4">
-            <p className="text-sm text-muted-foreground">Today</p>
-            <p className="text-2xl font-bold text-primary">
-              {submissions.filter((s) => 
-                new Date(s.created_at).toDateString() === new Date().toDateString()
-              ).length}
-            </p>
-          </div>
-        </div>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="submissions" className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              Submissions
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="flex items-center gap-2">
+              <MousePointerClick className="w-4 h-4" />
+              CTA Analytics
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Filters and Actions */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="Search by name, email, or phone..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-          <div className="flex gap-2">
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-[140px]">
-                <Filter className="w-4 h-4 mr-2" />
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="complete">Complete</SelectItem>
-                <SelectItem value="partial">Partial</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Role" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Roles</SelectItem>
-                {uniqueRoles.map((role) => (
-                  <SelectItem key={role} value={role!}>
-                    {role}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button variant="outline" onClick={fetchSubmissions} disabled={isLoading}>
-              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-            </Button>
-            <Button onClick={exportToCSV} disabled={filteredSubmissions.length === 0}>
-              <Download className="w-4 h-4 mr-2" />
-              Export CSV
-            </Button>
-          </div>
-        </div>
+          {/* Submissions Tab */}
+          <TabsContent value="submissions" className="space-y-6">
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Total Submissions</p>
+                <p className="text-2xl font-bold text-foreground">{submissions.length}</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Complete</p>
+                <p className="text-2xl font-bold text-green-500">
+                  {submissions.filter((s) => !s.is_partial).length}
+                </p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Partial</p>
+                <p className="text-2xl font-bold text-yellow-500">
+                  {submissions.filter((s) => s.is_partial).length}
+                </p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Today</p>
+                <p className="text-2xl font-bold text-primary">
+                  {submissions.filter((s) => 
+                    new Date(s.created_at).toDateString() === new Date().toDateString()
+                  ).length}
+                </p>
+              </div>
+            </div>
 
-        {/* Table */}
-        <div className="bg-card rounded-lg border border-border overflow-hidden">
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Progress</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {isLoading ? (
-                  <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8">
-                      <div className="flex items-center justify-center">
-                        <RefreshCw className="w-4 h-4 animate-spin mr-2" />
-                        Loading...
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ) : paginatedSubmissions.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                      No submissions found
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  paginatedSubmissions.map((submission) => (
-                    <TableRow key={submission.id}>
-                      <TableCell className="font-medium">
-                        {submission.first_name} {submission.last_name}
-                      </TableCell>
-                      <TableCell>{submission.email}</TableCell>
-                      <TableCell>
-                        {submission.role_type || (
-                          <span className="text-muted-foreground">—</span>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant={submission.is_partial ? 'secondary' : 'default'}>
-                          {submission.is_partial ? 'Partial' : 'Complete'}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-primary"
-                              style={{
-                                width: `${(submission.last_completed_step / 12) * 100}%`,
-                              }}
-                            />
-                          </div>
-                          <span className="text-xs text-muted-foreground">
-                            {submission.last_completed_step}/12
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">
-                        {format(new Date(submission.created_at), 'MMM d, yyyy')}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setSelectedSubmission(submission)}
-                          >
-                            <Eye className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setDeleteId(submission.id)}
-                            className="text-destructive hover:text-destructive"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </div>
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-              <p className="text-sm text-muted-foreground">
-                Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} to{' '}
-                {Math.min(currentPage * ITEMS_PER_PAGE, filteredSubmissions.length)} of{' '}
-                {filteredSubmissions.length} results
-              </p>
-              <div className="flex gap-1">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                >
-                  <ChevronLeft className="w-4 h-4" />
+            {/* Filters and Actions */}
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search by name, email, or phone..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <div className="flex gap-2">
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-[140px]">
+                    <Filter className="w-4 h-4 mr-2" />
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="complete">Complete</SelectItem>
+                    <SelectItem value="partial">Partial</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select value={roleFilter} onValueChange={setRoleFilter}>
+                  <SelectTrigger className="w-[160px]">
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Roles</SelectItem>
+                    {uniqueRoles.map((role) => (
+                      <SelectItem key={role} value={role!}>
+                        {role}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Button variant="outline" onClick={fetchSubmissions} disabled={isLoading}>
+                  <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
                 </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === totalPages}
-                >
-                  <ChevronRight className="w-4 h-4" />
+                <Button onClick={exportToCSV} disabled={filteredSubmissions.length === 0}>
+                  <Download className="w-4 h-4 mr-2" />
+                  Export CSV
                 </Button>
               </div>
             </div>
-          )}
-        </div>
+
+            {/* Table */}
+            <div className="bg-card rounded-lg border border-border overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>Role</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Progress</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {isLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-8">
+                          <div className="flex items-center justify-center">
+                            <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                            Loading...
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ) : paginatedSubmissions.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                          No submissions found
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      paginatedSubmissions.map((submission) => (
+                        <TableRow key={submission.id}>
+                          <TableCell className="font-medium">
+                            {submission.first_name} {submission.last_name}
+                          </TableCell>
+                          <TableCell>{submission.email}</TableCell>
+                          <TableCell>
+                            {submission.role_type || (
+                              <span className="text-muted-foreground">—</span>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={submission.is_partial ? 'secondary' : 'default'}>
+                              {submission.is_partial ? 'Partial' : 'Complete'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-primary"
+                                  style={{
+                                    width: `${(submission.last_completed_step / 12) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                              <span className="text-xs text-muted-foreground">
+                                {submission.last_completed_step}/12
+                              </span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-muted-foreground">
+                            {format(new Date(submission.created_at), 'MMM d, yyyy')}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex justify-end gap-1">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => setSelectedSubmission(submission)}
+                              >
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => setDeleteId(submission.id)}
+                                className="text-destructive hover:text-destructive"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+                  <p className="text-sm text-muted-foreground">
+                    Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} to{' '}
+                    {Math.min(currentPage * ITEMS_PER_PAGE, filteredSubmissions.length)} of{' '}
+                    {filteredSubmissions.length} results
+                  </p>
+                  <div className="flex gap-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={currentPage === totalPages}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </TabsContent>
+
+          {/* CTA Analytics Tab */}
+          <TabsContent value="analytics" className="space-y-6">
+            {/* Analytics Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-card rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <MousePointerClick className="w-4 h-4 text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground">Total Clicks</p>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{totalCTAClicks}</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Users className="w-4 h-4 text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground">Unique Sessions</p>
+                </div>
+                <p className="text-2xl font-bold text-blue-500">{uniqueCTASessions}</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Calendar className="w-4 h-4 text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground">Bookings</p>
+                </div>
+                <p className="text-2xl font-bold text-green-500">{bookingClicks}</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <TrendingUp className="w-4 h-4 text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground">Conversion Rate</p>
+                </div>
+                <p className="text-2xl font-bold text-primary">{conversionRate}%</p>
+              </div>
+            </div>
+
+            {/* Date Range Filter */}
+            <div className="flex items-center gap-4">
+              <Select value={ctaDateRange} onValueChange={setCTADateRange}>
+                <SelectTrigger className="w-[180px]">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <SelectValue placeholder="Date Range" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1">Last 24 hours</SelectItem>
+                  <SelectItem value="7">Last 7 days</SelectItem>
+                  <SelectItem value="30">Last 30 days</SelectItem>
+                  <SelectItem value="90">Last 90 days</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button variant="outline" onClick={fetchCTAAnalytics} disabled={ctaLoading}>
+                <RefreshCw className={`w-4 h-4 ${ctaLoading ? 'animate-spin' : ''}`} />
+              </Button>
+            </div>
+
+            {/* CTA Performance Table */}
+            <div className="bg-card rounded-lg border border-border overflow-hidden">
+              <div className="px-4 py-3 border-b border-border">
+                <h3 className="font-medium text-foreground">CTA Performance by Button</h3>
+                <p className="text-sm text-muted-foreground">Click metrics for each call-to-action</p>
+              </div>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>CTA Button</TableHead>
+                      <TableHead>Section</TableHead>
+                      <TableHead className="text-right">Total Clicks</TableHead>
+                      <TableHead className="text-right">Unique Sessions</TableHead>
+                      <TableHead className="text-right">Click Rate</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {ctaLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={5} className="text-center py-8">
+                          <div className="flex items-center justify-center">
+                            <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                            Loading...
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ) : ctaStats.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                          No CTA clicks recorded in this period
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      ctaStats.map((stat) => (
+                        <TableRow key={stat.cta_id}>
+                          <TableCell>
+                            <div>
+                              <p className="font-medium">{stat.cta_text || stat.cta_id}</p>
+                              <p className="text-xs text-muted-foreground">{stat.cta_id}</p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary">{stat.section || 'unknown'}</Badge>
+                          </TableCell>
+                          <TableCell className="text-right font-medium">
+                            {stat.total_clicks}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            {stat.unique_sessions}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex items-center justify-end gap-2">
+                              <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-primary"
+                                  style={{
+                                    width: `${Math.min((stat.total_clicks / Math.max(totalCTAClicks, 1)) * 100, 100)}%`,
+                                  }}
+                                />
+                              </div>
+                              <span className="text-xs text-muted-foreground w-10 text-right">
+                                {((stat.total_clicks / Math.max(totalCTAClicks, 1)) * 100).toFixed(0)}%
+                              </span>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+
+            {/* Recent Clicks */}
+            <div className="bg-card rounded-lg border border-border overflow-hidden">
+              <div className="px-4 py-3 border-b border-border">
+                <h3 className="font-medium text-foreground">Recent Clicks</h3>
+                <p className="text-sm text-muted-foreground">Last 20 CTA interactions</p>
+              </div>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Time</TableHead>
+                      <TableHead>Button</TableHead>
+                      <TableHead>Section</TableHead>
+                      <TableHead>Page</TableHead>
+                      <TableHead>Device</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {ctaClicks.slice(0, 20).map((click) => (
+                      <TableRow key={click.id}>
+                        <TableCell className="text-muted-foreground">
+                          {format(new Date(click.created_at), 'MMM d, h:mm a')}
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          {click.cta_text || click.cta_id}
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">{click.section || 'unknown'}</Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">
+                          {click.page_url || '/'}
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">
+                          {click.viewport_width ? (
+                            click.viewport_width < 768 ? 'Mobile' : click.viewport_width < 1024 ? 'Tablet' : 'Desktop'
+                          ) : '—'}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
       </main>
 
       {/* View Submission Dialog */}
