@@ -4,16 +4,33 @@ import { useRef } from "react";
 
 const ProblemSolutionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const solutionRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
   
+  // Track when solution section enters viewport for grayscale effect
+  const { scrollYProgress: solutionProgress } = useScroll({
+    target: solutionRef,
+    offset: ["start end", "center center"]
+  });
+  
   const leftGlowY = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const rightGlowY = useTransform(scrollYProgress, [0, 1], [-80, 120]);
   const leftGlowX = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const rightGlowX = useTransform(scrollYProgress, [0, 1], [50, -30]);
+  
+  // Problem section dramatic fade to grayscale as solution enters
+  const problemGrayscale = useTransform(solutionProgress, [0, 0.6, 1], [0, 0.7, 1]);
+  const problemOpacity = useTransform(solutionProgress, [0, 0.6, 1], [1, 0.6, 0.4]);
+  const problemScale = useTransform(solutionProgress, [0, 0.6, 1], [1, 0.98, 0.96]);
+  const problemBrightness = useTransform(solutionProgress, [0, 0.6, 1], [1, 0.7, 0.5]);
+  
+  // Solution section intensifies as it enters
+  const solutionBrightness = useTransform(solutionProgress, [0, 0.5, 1], [0.8, 1, 1.1]);
+  const solutionSaturation = useTransform(solutionProgress, [0, 0.5, 1], [0.5, 1, 1.2]);
 
   const problems = [
     "You know branding matters but don't know where to start.",
@@ -138,16 +155,29 @@ const ProblemSolutionSection = () => {
 
         {/* Side by side cards */}
         <div className="grid lg:grid-cols-2 gap-0 relative">
-          {/* The Problem - RED */}
+          {/* The Problem - RED with grayscale fade */}
           <motion.div 
             className="relative group"
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{
+              opacity: problemOpacity,
+              scale: problemScale,
+              filter: useTransform(
+                [problemGrayscale, problemBrightness],
+                ([grayscale, brightness]) => `grayscale(${grayscale}) brightness(${brightness})`
+              )
+            }}
           >
             {/* Red glow effect */}
-            <div className="absolute -inset-2 bg-gradient-to-br from-red-500/30 via-red-500/10 to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+            <motion.div 
+              className="absolute -inset-2 bg-gradient-to-br from-red-500/30 via-red-500/10 to-transparent rounded-3xl blur-2xl transition-opacity duration-700"
+              style={{
+                opacity: useTransform(problemOpacity, [0.4, 1], [0.2, 0.6])
+              }}
+            />
             
             <div className="relative p-8 md:p-10 lg:p-12 rounded-l-3xl lg:rounded-r-none rounded-r-3xl lg:border-r-0 bg-gradient-to-br from-red-950/40 via-red-950/20 to-card/40 backdrop-blur-sm border-2 border-red-500/30 h-full overflow-hidden">
               {/* Animated red pulse background */}
@@ -274,16 +304,28 @@ const ProblemSolutionSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* The Solution - GREEN */}
+          {/* The Solution - GREEN with intensifying effect */}
           <motion.div 
+            ref={solutionRef}
             className="relative group"
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+            style={{
+              filter: useTransform(
+                [solutionBrightness, solutionSaturation],
+                ([brightness, saturation]) => `brightness(${brightness}) saturate(${saturation})`
+              )
+            }}
           >
-            {/* Green glow effect */}
-            <div className="absolute -inset-2 bg-gradient-to-bl from-green-500/30 via-green-500/10 to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+            {/* Green glow effect - intensifies */}
+            <motion.div 
+              className="absolute -inset-2 bg-gradient-to-bl from-green-500/30 via-green-500/10 to-transparent rounded-3xl blur-2xl transition-opacity duration-700"
+              style={{
+                opacity: useTransform(solutionProgress, [0, 0.5, 1], [0.3, 0.6, 1])
+              }}
+            />
             
             <div className="relative p-8 md:p-10 lg:p-12 rounded-r-3xl lg:rounded-l-none rounded-l-3xl lg:border-l-0 bg-gradient-to-bl from-green-950/40 via-green-950/20 to-card/40 backdrop-blur-sm border-2 border-green-500/30 h-full overflow-hidden">
               {/* Animated green pulse background */}
