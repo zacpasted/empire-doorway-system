@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { X, Check, ArrowRight, Sparkles } from "lucide-react";
+import { X, Check, ArrowRight, Sparkles, AlertTriangle, Zap } from "lucide-react";
 import { useRef } from "react";
 
 const ProblemSolutionSection = () => {
@@ -14,6 +14,7 @@ const ProblemSolutionSection = () => {
   const rightGlowY = useTransform(scrollYProgress, [0, 1], [-80, 120]);
   const leftGlowX = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const rightGlowX = useTransform(scrollYProgress, [0, 1], [50, -30]);
+
   const problems = [
     "You know branding matters but don't know where to start.",
     "You know content is required but don't know what to say.",
@@ -47,29 +48,29 @@ const ProblemSolutionSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
+        staggerChildren: 0.06,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -20, filter: "blur(4px)" },
+    hidden: { opacity: 0, x: -15, filter: "blur(4px)" },
     visible: { 
       opacity: 1, 
       x: 0, 
       filter: "blur(0px)",
-      transition: { duration: 0.5, ease: "easeOut" as const }
+      transition: { duration: 0.4, ease: "easeOut" as const }
     },
   };
 
   const solutionItemVariants = {
-    hidden: { opacity: 0, x: 20, filter: "blur(4px)" },
+    hidden: { opacity: 0, x: 15, filter: "blur(4px)" },
     visible: { 
       opacity: 1, 
       x: 0, 
       filter: "blur(0px)",
-      transition: { duration: 0.5, ease: "easeOut" as const }
+      transition: { duration: 0.4, ease: "easeOut" as const }
     },
   };
 
@@ -77,42 +78,47 @@ const ProblemSolutionSection = () => {
     <section ref={sectionRef} className="py-20 md:py-32 bg-background relative overflow-hidden">
       {/* Ambient background effects with parallax */}
       <div className="absolute inset-0 pointer-events-none">
+        {/* Red glow for problem side */}
         <motion.div 
-          className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-muted-foreground/5 rounded-full blur-[120px]"
-          style={{ y: leftGlowY, x: leftGlowX }}
+          className="absolute top-1/4 left-0 w-[600px] h-[600px] rounded-full blur-[150px]"
+          style={{ 
+            y: leftGlowY, 
+            x: leftGlowX,
+            background: "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.05) 50%, transparent 70%)"
+          }}
           animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.3, 1],
+            opacity: [0.6, 0.8, 0.6],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* Green glow for solution side */}
         <motion.div 
-          className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"
-          style={{ y: rightGlowY, x: rightGlowX }}
+          className="absolute bottom-1/4 right-0 w-[600px] h-[600px] rounded-full blur-[150px]"
+          style={{ 
+            y: rightGlowY, 
+            x: rightGlowX,
+            background: "radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.05) 50%, transparent 70%)"
+          }}
           animate={{ 
             scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.6, 0.4],
+            opacity: [0.6, 0.9, 0.6],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {/* Additional subtle glow */}
-        <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/3 rounded-full blur-[180px]"
-          style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative">
         {/* Section header */}
         <motion.div
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-12 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
           <motion.span 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/80 text-sm font-medium mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -121,7 +127,7 @@ const ProblemSolutionSection = () => {
             <Sparkles className="w-4 h-4" />
             The Diagnosis
           </motion.span>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Why Most Dentists Stay{" "}
             <span className="text-muted-foreground italic">Invisible</span>
           </h2>
@@ -130,29 +136,42 @@ const ProblemSolutionSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 relative">
-          {/* The Problem */}
+        {/* Side by side cards */}
+        <div className="grid lg:grid-cols-2 gap-0 relative">
+          {/* The Problem - RED */}
           <motion.div 
             className="relative group"
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Card glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-muted-foreground/20 via-transparent to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            {/* Red glow effect */}
+            <div className="absolute -inset-2 bg-gradient-to-br from-red-500/30 via-red-500/10 to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
             
-            <div className="relative p-8 md:p-10 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/40 h-full">
-              {/* Animated corner accents */}
+            <div className="relative p-8 md:p-10 lg:p-12 rounded-l-3xl lg:rounded-r-none rounded-r-3xl lg:border-r-0 bg-gradient-to-br from-red-950/40 via-red-950/20 to-card/40 backdrop-blur-sm border-2 border-red-500/30 h-full overflow-hidden">
+              {/* Animated red pulse background */}
               <motion.div 
-                className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-muted-foreground/30 rounded-tl-2xl"
+                className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent"
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              {/* Diagonal stripes pattern */}
+              <div className="absolute inset-0 opacity-5" style={{
+                backgroundImage: "repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(239,68,68,0.3) 10px, rgba(239,68,68,0.3) 20px)"
+              }} />
+              
+              {/* Corner accent */}
+              <motion.div 
+                className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-red-500/60 rounded-tl-3xl"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               />
               <motion.div 
-                className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-muted-foreground/30 rounded-br-2xl"
+                className="absolute bottom-0 right-0 lg:hidden w-20 h-20 border-b-4 border-r-4 border-red-500/60 rounded-br-3xl"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -161,150 +180,174 @@ const ProblemSolutionSection = () => {
               
               {/* Scanning line effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-muted-foreground/5 via-transparent to-transparent rounded-2xl"
+                className="absolute inset-0 bg-gradient-to-b from-red-500/20 via-transparent to-transparent"
                 initial={{ y: "-100%" }}
                 whileInView={{ y: "200%" }}
                 viewport={{ once: true }}
-                transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 2.5, delay: 0.3, ease: "easeInOut" }}
               />
               
-              <div className="flex items-center gap-4 mb-8">
-                <motion.div 
-                  className="w-12 h-12 rounded-xl bg-muted-foreground/10 flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: -5 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <X className="w-5 h-5 text-muted-foreground" />
-                </motion.div>
-                <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground">
-                  The Problem
-                </h3>
-              </div>
-              
-              <motion.ul 
-                className="space-y-4"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {problems.map((problem, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start gap-3 text-muted-foreground group/item"
-                    variants={itemVariants}
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <motion.div 
+                    className="w-14 h-14 rounded-2xl bg-red-500/20 border border-red-500/40 flex items-center justify-center"
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    animate={{ 
+                      boxShadow: ["0 0 20px rgba(239,68,68,0.3)", "0 0 40px rgba(239,68,68,0.5)", "0 0 20px rgba(239,68,68,0.3)"]
+                    }}
+                    transition={{ 
+                      boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                      scale: { type: "spring", stiffness: 400 }
+                    }}
                   >
-                    <span className="mt-1.5 w-5 h-5 rounded-full bg-muted-foreground/10 flex items-center justify-center flex-shrink-0 group-hover/item:bg-muted-foreground/20 transition-colors">
-                      <X className="w-3 h-3 text-muted-foreground/60" />
-                    </span>
-                    <span className="text-sm md:text-base leading-relaxed group-hover/item:text-foreground transition-colors duration-300">
-                      {problem}
-                    </span>
-                  </motion.li>
-                ))}
-              </motion.ul>
+                    <AlertTriangle className="w-7 h-7 text-red-400" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                      The Problem
+                    </h3>
+                    <p className="text-red-300/80 text-sm font-medium">What's holding you back</p>
+                  </div>
+                </div>
+                
+                <motion.ul 
+                  className="space-y-3"
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  {problems.map((problem, index) => (
+                    <motion.li
+                      key={index}
+                      className="flex items-start gap-3 group/item"
+                      variants={itemVariants}
+                    >
+                      <span className="mt-1 w-6 h-6 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center flex-shrink-0 group-hover/item:bg-red-500/30 group-hover/item:border-red-500/50 transition-all duration-300">
+                        <X className="w-3.5 h-3.5 text-red-400" />
+                      </span>
+                      <span className="text-sm md:text-base leading-relaxed text-red-100/80 group-hover/item:text-white transition-colors duration-300">
+                        {problem}
+                      </span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </div>
             </div>
           </motion.div>
 
-          {/* Animated Arrow Connector */}
+          {/* Center divider with arrow */}
           <motion.div 
-            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5, type: "spring" }}
+            transition={{ duration: 0.6, delay: 0.6, type: "spring" }}
           >
             <motion.div 
-              className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/40 flex items-center justify-center backdrop-blur-md shadow-lg shadow-primary/20"
+              className="relative w-20 h-20 rounded-full bg-gradient-to-br from-red-500/20 via-background to-green-500/20 border-2 border-foreground/20 flex items-center justify-center backdrop-blur-xl shadow-2xl"
               animate={{ 
-                x: [0, 6, 0],
-                boxShadow: [
-                  "0 10px 40px -10px hsl(var(--primary) / 0.2)",
-                  "0 10px 60px -10px hsl(var(--primary) / 0.4)",
-                  "0 10px 40px -10px hsl(var(--primary) / 0.2)",
-                ]
+                x: [0, 8, 0],
+                rotate: [0, 5, 0]
               }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Inner glow */}
-              <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary/20 to-transparent" />
-              <ArrowRight className="w-6 h-6 text-primary relative z-10" />
+              <div className="absolute inset-1 rounded-full bg-background/80" />
+              <ArrowRight className="w-8 h-8 text-foreground relative z-10" />
             </motion.div>
           </motion.div>
 
           {/* Mobile arrow */}
           <motion.div 
-            className="flex lg:hidden justify-center -my-2"
+            className="flex lg:hidden justify-center py-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
             <motion.div
-              className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center rotate-90"
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-14 h-14 rounded-full bg-gradient-to-b from-red-500/20 to-green-500/20 border border-foreground/20 flex items-center justify-center rotate-90"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ArrowRight className="w-4 h-4 text-primary" />
+              <ArrowRight className="w-6 h-6 text-foreground" />
             </motion.div>
           </motion.div>
 
-          {/* The Solution */}
+          {/* The Solution - GREEN */}
           <motion.div 
             className="relative group"
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
           >
-            {/* Card glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+            {/* Green glow effect */}
+            <div className="absolute -inset-2 bg-gradient-to-bl from-green-500/30 via-green-500/10 to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
             
-            <div className="relative p-8 md:p-10 rounded-2xl bg-gradient-to-br from-primary/10 via-card/60 to-card/40 backdrop-blur-sm border border-primary/30 h-full overflow-hidden">
-              {/* Animated corner accents */}
+            <div className="relative p-8 md:p-10 lg:p-12 rounded-r-3xl lg:rounded-l-none rounded-l-3xl lg:border-l-0 bg-gradient-to-bl from-green-950/40 via-green-950/20 to-card/40 backdrop-blur-sm border-2 border-green-500/30 h-full overflow-hidden">
+              {/* Animated green pulse background */}
               <motion.div 
-                className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-primary/40 rounded-tl-2xl"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                className="absolute inset-0 bg-gradient-to-bl from-green-500/10 to-transparent"
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               />
+              
+              {/* Diagonal stripes pattern */}
+              <div className="absolute inset-0 opacity-5" style={{
+                backgroundImage: "repeating-linear-gradient(-135deg, transparent, transparent 10px, rgba(34,197,94,0.3) 10px, rgba(34,197,94,0.3) 20px)"
+              }} />
+              
+              {/* Corner accent */}
               <motion.div 
-                className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-primary/40 rounded-br-2xl"
+                className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-green-500/60 rounded-tr-3xl"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               />
+              <motion.div 
+                className="absolute bottom-0 left-0 lg:hidden w-20 h-20 border-b-4 border-l-4 border-green-500/60 rounded-bl-3xl"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              />
               
               {/* Scanning line effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent rounded-2xl"
+                className="absolute inset-0 bg-gradient-to-b from-green-500/20 via-transparent to-transparent"
                 initial={{ y: "-100%" }}
                 whileInView={{ y: "200%" }}
                 viewport={{ once: true }}
-                transition={{ duration: 2, delay: 0.7, ease: "easeInOut" }}
+                transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
               />
               
-              {/* Subtle inner glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl" />
-              
-              <div className="relative">
+              <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
                   <motion.div 
-                    className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center"
+                    className="w-14 h-14 rounded-2xl bg-green-500/20 border border-green-500/40 flex items-center justify-center"
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 400 }}
+                    animate={{ 
+                      boxShadow: ["0 0 20px rgba(34,197,94,0.3)", "0 0 40px rgba(34,197,94,0.5)", "0 0 20px rgba(34,197,94,0.3)"]
+                    }}
+                    transition={{ 
+                      boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
+                      scale: { type: "spring", stiffness: 400 }
+                    }}
                   >
-                    <Check className="w-5 h-5 text-primary" />
+                    <Zap className="w-7 h-7 text-green-400" />
                   </motion.div>
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground">
-                    The Solution
-                  </h3>
+                  <div>
+                    <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                      The Solution
+                    </h3>
+                    <p className="text-green-300/80 text-sm font-medium">How we solve it</p>
+                  </div>
                 </div>
                 
                 <motion.ul 
-                  className="space-y-4"
+                  className="space-y-3"
                   variants={containerVariants}
                   initial="hidden"
                   whileInView="visible"
@@ -313,46 +356,53 @@ const ProblemSolutionSection = () => {
                   {solutions.map((solution, index) => (
                     <motion.li
                       key={index}
-                      className="flex items-start gap-3 text-foreground/90 group/item"
+                      className="flex items-start gap-3 group/item"
                       variants={solutionItemVariants}
                     >
-                      <span className="mt-1.5 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary/30 transition-colors">
-                        <Check className="w-3 h-3 text-primary" />
+                      <span className="mt-1 w-6 h-6 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0 group-hover/item:bg-green-500/30 group-hover/item:border-green-500/50 transition-all duration-300">
+                        <Check className="w-3.5 h-3.5 text-green-400" />
                       </span>
-                      <span className="text-sm md:text-base leading-relaxed group-hover/item:text-foreground transition-colors duration-300">
+                      <span className="text-sm md:text-base leading-relaxed text-green-100/80 group-hover/item:text-white transition-colors duration-300">
                         {solution}
                       </span>
                     </motion.li>
                   ))}
                 </motion.ul>
-                
-                {/* Authority Line */}
-                <motion.div 
-                  className="mt-8 pt-8 border-t border-primary/20"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 1 }}
-                >
-                  <div className="flex items-start gap-3">
-                    <motion.div
-                      className="w-1 h-full min-h-[60px] bg-gradient-to-b from-primary via-primary/50 to-transparent rounded-full"
-                      initial={{ scaleY: 0 }}
-                      whileInView={{ scaleY: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 1.2 }}
-                      style={{ originY: 0 }}
-                    />
-                    <p className="text-sm md:text-base text-muted-foreground italic leading-relaxed">
-                      We've turned brand and content into patient demand for some of the best aesthetic practices in the world.{" "}
-                      <span className="text-foreground font-medium not-italic">This is proven, not theoretical.</span>
-                    </p>
-                  </div>
-                </motion.div>
               </div>
             </div>
           </motion.div>
         </div>
+
+        {/* Authority Line */}
+        <motion.div 
+          className="mt-12 md:mt-16 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
+          <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-r from-red-500/5 via-foreground/5 to-green-500/5 border border-foreground/10 backdrop-blur-sm">
+            {/* Gradient border effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500/20 via-transparent to-green-500/20 opacity-50 blur-xl" />
+            
+            <div className="relative flex items-center gap-4 md:gap-6">
+              <motion.div
+                className="hidden md:block w-1.5 h-16 rounded-full bg-gradient-to-b from-red-500 via-foreground/50 to-green-500"
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                style={{ originY: 0 }}
+              />
+              <div className="text-center md:text-left">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                  We've turned brand and content into patient demand for some of the best aesthetic practices in the world.{" "}
+                  <span className="text-foreground font-semibold">This is proven, not theoretical.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
