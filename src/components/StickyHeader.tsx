@@ -23,7 +23,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
     if (onApplyClick) {
       onApplyClick();
     } else {
-      document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+      window.open('https://calendly.com/getpasted/associate-to-empire', '_blank');
     }
   };
 
