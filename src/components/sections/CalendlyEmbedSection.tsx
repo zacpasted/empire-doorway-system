@@ -46,11 +46,11 @@ const CalendlyEmbedSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-card rounded-xl border border-border overflow-hidden shadow-lg"
         >
-          <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff001e&hide_gdpr_banner=1"
-            style={{ minWidth: '320px', height: '700px' }}
-          />
+        <div 
+          className="calendly-inline-widget" 
+          data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff0000"
+          style={{ minWidth: '320px', height: '700px' }}
+        />
         </motion.div>
 
         <motion.p
