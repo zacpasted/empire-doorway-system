@@ -116,8 +116,9 @@ const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
-  // Load Calendly widget script
+  // Load Calendly widget script and listen for events
   useEffect(() => {
     const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
     if (!existingScript) {
@@ -130,13 +131,19 @@ const HeroSection = () => {
       setCalendlyLoaded(true);
     }
 
-    // Listen for Calendly ready event
-    const handleCalendlyReady = () => setCalendlyLoaded(true);
-    window.addEventListener('message', (e) => {
+    // Listen for Calendly events
+    const handleCalendlyMessage = (e: MessageEvent) => {
       if (e.data.event === 'calendly.event_type_viewed') {
-        handleCalendlyReady();
+        setCalendlyLoaded(true);
       }
-    });
+      // Booking confirmed
+      if (e.data.event === 'calendly.event_scheduled') {
+        setBookingConfirmed(true);
+      }
+    };
+    
+    window.addEventListener('message', handleCalendlyMessage);
+    return () => window.removeEventListener('message', handleCalendlyMessage);
   }, []);
 
   // Parallax scroll effect
@@ -264,45 +271,129 @@ const HeroSection = () => {
         
         {/* Application Section - Calendly Embed */}
         <div id="eligibility-form" className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50 p-6 md:p-10">
-          <div className="text-center mb-6">
-            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-              Limited Availability
-            </p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-              See If You Qualify
-            </h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-              Associate to Empire by PASTED was built to bring cutting-edge branding and content to dentistry's future stars.
-              <br className="hidden md:block" />
-              <span className="block mt-1">Now accepting driven associates and new owners.</span>
-            </p>
-          </div>
-          
-          <div className="relative" style={{ minHeight: '700px' }}>
-            {/* Loading skeleton */}
-            {!calendlyLoaded && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-card/80 rounded-xl">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  <p className="text-sm text-muted-foreground">Loading calendar...</p>
-                </div>
-                {/* Skeleton lines */}
-                <div className="mt-8 space-y-3 w-full max-w-sm px-4">
-                  <div className="h-4 bg-border/50 rounded animate-pulse" />
-                  <div className="h-4 bg-border/40 rounded animate-pulse w-3/4" />
-                  <div className="h-10 bg-border/30 rounded animate-pulse mt-4" />
-                  <div className="h-10 bg-border/30 rounded animate-pulse" />
-                  <div className="h-10 bg-border/30 rounded animate-pulse" />
-                </div>
+          {bookingConfirmed ? (
+            // Confirmation Screen
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-center py-16 md:py-24"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center"
+              >
+                <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </motion.div>
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4"
+              >
+                You're Confirmed
+              </motion.h2>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="text-muted-foreground max-w-md mx-auto mb-6"
+              >
+                Thank you for scheduling your strategy call. You'll receive a calendar invite and confirmation email shortly.
+              </motion.p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="space-y-4"
+              >
+                <p className="text-sm text-muted-foreground/70">
+                  In the meantime, prepare to discuss:
+                </p>
+                <ul className="text-sm text-foreground/80 space-y-2 max-w-xs mx-auto text-left">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">•</span>
+                    Your current practice situation
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">•</span>
+                    Your brand vision and goals
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">•</span>
+                    Your timeline for growth
+                  </li>
+                </ul>
+              </motion.div>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="text-xs text-muted-foreground/50 mt-8"
+              >
+                We look forward to speaking with you.
+              </motion.p>
+            </motion.div>
+          ) : (
+            // Calendly Widget
+            <>
+              <div className="text-center mb-6">
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
+                  Limited Availability
+                </p>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
+                  See If You Qualify
+                </h2>
+                <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+                  Associate to Empire by PASTED was built to bring cutting-edge branding and content to dentistry's future stars.
+                  <br className="hidden md:block" />
+                  <span className="block mt-1">Now accepting driven associates and new owners.</span>
+                </p>
               </div>
-            )}
-            
-            <div 
-              className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
-              data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff0000&hide_gdpr_banner=1"
-              style={{ minWidth: '320px', height: '700px' }}
-            />
-          </div>
+              
+              <div className="relative" style={{ minHeight: '700px' }}>
+                {/* Loading skeleton */}
+                {!calendlyLoaded && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-card/80 rounded-xl">
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                      <p className="text-sm text-muted-foreground">Loading calendar...</p>
+                    </div>
+                    {/* Skeleton lines */}
+                    <div className="mt-8 space-y-3 w-full max-w-sm px-4">
+                      <div className="h-4 bg-border/50 rounded animate-pulse" />
+                      <div className="h-4 bg-border/40 rounded animate-pulse w-3/4" />
+                      <div className="h-10 bg-border/30 rounded animate-pulse mt-4" />
+                      <div className="h-10 bg-border/30 rounded animate-pulse" />
+                      <div className="h-10 bg-border/30 rounded animate-pulse" />
+                    </div>
+                  </div>
+                )}
+                
+                <div 
+                  className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  data-url="https://calendly.com/getpasted/associate-to-empire?primary_color=ff0000&hide_gdpr_banner=1"
+                  style={{ minWidth: '320px', height: '700px' }}
+                />
+              </div>
+            </>
+          )}
         </div>
 
         {/* Secondary Statement - Below Form */}
