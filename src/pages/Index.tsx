@@ -92,18 +92,6 @@ const Index = () => {
         <ProblemSolutionSection />
       </motion.div>
       
-      {/* CTA after Problem/Solution - drives conversion */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <Suspense fallback={<SectionLoader />}>
-          <CTABannerSection />
-        </Suspense>
-      </motion.div>
-      
       {/* All sections below are lazy loaded */}
       <Suspense fallback={<SectionLoader />}>
         {/* What We Do - Services Overview */}
