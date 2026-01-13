@@ -35,6 +35,45 @@ export type Database = {
         }
         Relationships: []
       }
+      cta_analytics: {
+        Row: {
+          created_at: string
+          cta_id: string
+          cta_text: string | null
+          event_type: string
+          id: string
+          page_url: string | null
+          section: string | null
+          session_id: string | null
+          user_agent: string | null
+          viewport_width: number | null
+        }
+        Insert: {
+          created_at?: string
+          cta_id: string
+          cta_text?: string | null
+          event_type?: string
+          id?: string
+          page_url?: string | null
+          section?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+          viewport_width?: number | null
+        }
+        Update: {
+          created_at?: string
+          cta_id?: string
+          cta_text?: string | null
+          event_type?: string
+          id?: string
+          page_url?: string | null
+          section?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+          viewport_width?: number | null
+        }
+        Relationships: []
+      }
       eligibility_submissions: {
         Row: {
           alignment: string | null

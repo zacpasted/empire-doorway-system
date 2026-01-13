@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const MobileFloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,6 +29,7 @@ const MobileFloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
+    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Apply Now', section: 'floating' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
