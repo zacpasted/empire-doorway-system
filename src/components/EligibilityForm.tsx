@@ -254,7 +254,7 @@ const EligibilityForm = () => {
           See If You Qualify
         </h2>
         <p className="text-muted-foreground text-sm">
-          Answer directly. Clarity matters more than polish.
+          Associate to Empire by PASTED is the ultimate content and branding solution, built in tandem with dentistry's best, to make incredible content and branding easy for associates, new owners and beyond.
         </p>
       </div>
       
