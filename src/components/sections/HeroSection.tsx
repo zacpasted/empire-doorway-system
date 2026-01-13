@@ -115,24 +115,49 @@ MetricsBar.displayName = 'MetricsBar';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const calendlyContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
+  const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
-  // Load Calendly widget script and listen for events
+  // Lazy load Calendly widget when it comes into view
   useEffect(() => {
-    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      script.onload = () => setCalendlyLoaded(true);
-      document.body.appendChild(script);
-    } else {
-      setCalendlyLoaded(true);
-    }
+    const container = calendlyContainerRef.current;
+    if (!container) return;
 
-    // Listen for Calendly events
+    const loadCalendlyScript = () => {
+      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        script.onload = () => setCalendlyScriptLoaded(true);
+        document.body.appendChild(script);
+      } else {
+        setCalendlyScriptLoaded(true);
+      }
+    };
+
+    // Use IntersectionObserver to lazy load when section is near viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadCalendlyScript();
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' } // Load 200px before it enters viewport
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  // Listen for Calendly events
+  useEffect(() => {
     const handleCalendlyMessage = (e: MessageEvent) => {
       if (e.data.event === 'calendly.event_type_viewed') {
         setCalendlyLoaded(true);
@@ -369,30 +394,32 @@ const HeroSection = () => {
                 </p>
               </div>
               
-              <div className="relative" style={{ minHeight: '700px' }}>
+              <div ref={calendlyContainerRef} className="relative" style={{ minHeight: '700px' }}>
                 {/* Loading skeleton */}
                 {!calendlyLoaded && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-card/80 rounded-xl">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a1a1a] rounded-xl border border-border/30">
                     <div className="flex flex-col items-center gap-4">
                       <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
                       <p className="text-sm text-muted-foreground">Loading calendar...</p>
                     </div>
-                    {/* Skeleton lines */}
+                    {/* Skeleton lines matching Calendly dark theme */}
                     <div className="mt-8 space-y-3 w-full max-w-sm px-4">
-                      <div className="h-4 bg-border/50 rounded animate-pulse" />
-                      <div className="h-4 bg-border/40 rounded animate-pulse w-3/4" />
-                      <div className="h-10 bg-border/30 rounded animate-pulse mt-4" />
-                      <div className="h-10 bg-border/30 rounded animate-pulse" />
-                      <div className="h-10 bg-border/30 rounded animate-pulse" />
+                      <div className="h-4 bg-white/10 rounded animate-pulse" />
+                      <div className="h-4 bg-white/8 rounded animate-pulse w-3/4" />
+                      <div className="h-10 bg-white/5 rounded animate-pulse mt-4" />
+                      <div className="h-10 bg-white/5 rounded animate-pulse" />
+                      <div className="h-10 bg-white/5 rounded animate-pulse" />
                     </div>
                   </div>
                 )}
                 
-                <div 
-                  className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  data-url="https://calendly.com/getpasted/associate-to-empire?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
-                  style={{ minWidth: '320px', height: '700px' }}
-                />
+                {calendlyScriptLoaded && (
+                  <div 
+                    className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    data-url="https://calendly.com/getpasted/associate-to-empire?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
+                    style={{ minWidth: '320px', height: '700px' }}
+                  />
+                )}
               </div>
             </>
           )}
