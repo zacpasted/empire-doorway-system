@@ -112,7 +112,7 @@ const WhyPathsFailSection = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl md:text-5xl font-serif text-center text-foreground mb-6"
         >
-          Why Most Paths Break Down
+          Dentistry Rewards Visibility, Not Talent.
         </motion.h2>
 
         <motion.p
@@ -122,8 +122,7 @@ const WhyPathsFailSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-muted-foreground max-w-2xl mx-auto mb-20"
         >
-          The traditional playbook optimizes for effort, not leverage. 
-          Here's why working harder doesn't work.
+          This is why everything you've tried stalls… until now.
         </motion.p>
 
         {/* Diagnostic Cards Grid */}
