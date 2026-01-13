@@ -445,6 +445,46 @@ const ProblemSolutionSection = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Custom CTA Button */}
+        <motion.div 
+          className="mt-10 md:mt-14 flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <motion.a
+            href="#eligibility-form"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-red-500/20 via-foreground/10 to-green-500/20 border border-foreground/20 backdrop-blur-sm overflow-hidden"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            {/* Animated gradient background */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-red-500/30 via-green-500/20 to-green-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            />
+            
+            {/* Glow effect */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/10 to-green-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Button content */}
+            <span className="relative z-10 text-base md:text-lg font-semibold text-foreground tracking-wide">
+              Transform Your Practice
+            </span>
+            <motion.span
+              className="relative z-10"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight className="w-5 h-5 text-green-400" />
+            </motion.span>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
