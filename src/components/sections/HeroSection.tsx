@@ -115,10 +115,8 @@ MetricsBar.displayName = 'MetricsBar';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const calendlyContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
-  const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
   // Load Calendly script immediately for faster calendar rendering
@@ -128,10 +126,7 @@ const HeroSection = () => {
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
-      script.onload = () => setCalendlyScriptLoaded(true);
       document.body.appendChild(script);
-    } else {
-      setCalendlyScriptLoaded(true);
     }
   }, []);
 
@@ -373,7 +368,7 @@ const HeroSection = () => {
                 </p>
               </div>
               
-              <div ref={calendlyContainerRef} className="relative" style={{ minHeight: '700px' }}>
+              <div id="eligibility-form" className="relative" style={{ minHeight: '700px' }}>
                 {/* Loading skeleton */}
                 {!calendlyLoaded && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a1a1a] rounded-xl border border-border/30">
@@ -392,13 +387,12 @@ const HeroSection = () => {
                   </div>
                 )}
                 
-                {calendlyScriptLoaded && (
-                  <div 
-                    className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
-                    data-url="https://calendly.com/getpasted/associate-to-empire?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
-                    style={{ minWidth: '320px', height: '700px' }}
-                  />
-                )}
+                {/* Always render widget - Calendly script will find and initialize it */}
+                <div 
+                  className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  data-url="https://calendly.com/getpasted/associate-to-empire?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
+                  style={{ minWidth: '320px', height: '700px' }}
+                />
               </div>
             </>
           )}
