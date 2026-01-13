@@ -28,7 +28,7 @@ const MobileFloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
-    window.open('https://calendly.com/getpasted/associate-to-empire', '_blank');
+    document.getElementById('book-call')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Only show on mobile (md breakpoint and below)
