@@ -28,7 +28,7 @@ const MobileFloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
-    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+    window.open('https://calendly.com/getpasted/associate-to-empire', '_blank');
   };
 
   // Only show on mobile (md breakpoint and below)
