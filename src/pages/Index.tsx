@@ -1,11 +1,13 @@
-import { useRef, lazy, Suspense } from "react";
+import { useRef, lazy, Suspense, memo } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
 import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
-import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import Footer from "@/components/Footer";
+
+// Lazy load ProblemSolutionSection since it's heavy with scroll transforms
+const ProblemSolutionSection = lazy(() => import("@/components/sections/ProblemSolutionSection"));
 
 // Lazy load below-the-fold sections for faster initial page load
 const WhatWeDoSection = lazy(() => import("@/components/sections/WhatWeDoSection"));
@@ -38,25 +40,21 @@ const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaV
 const TransformationSection = lazy(() => import("@/components/sections/TransformationSection"));
 const ProgramDeliverablesSection = lazy(() => import("@/components/sections/ProgramDeliverablesSection"));
 
-// Minimal loading placeholder for lazy sections
-const SectionLoader = () => (
-  <div className="min-h-[200px] flex items-center justify-center">
-    <div className="w-8 h-8 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+// Minimal loading placeholder for lazy sections - memoized
+const SectionLoader = memo(() => (
+  <div className="min-h-[100px] flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
   </div>
-);
+));
+SectionLoader.displayName = 'SectionLoader';
 
+// Simplified section animation for better performance
 const sectionVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 40 
-  },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94] as const
-    }
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }
   }
 };
 
@@ -82,18 +80,18 @@ const Index = () => {
       {/* Hero - Cinematic Entry with VSL + Logos + Form - NOT lazy loaded */}
       <HeroSection />
       
-      {/* Problem / Solution - Immediately below hero, not lazy loaded */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-      >
-        <ProblemSolutionSection />
-      </motion.div>
-      
-      {/* All sections below are lazy loaded */}
+      {/* All sections below hero are lazy loaded for performance */}
       <Suspense fallback={<SectionLoader />}>
+        {/* Problem / Solution */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+        >
+          <ProblemSolutionSection />
+        </motion.div>
+        
         {/* What We Do - Services Overview */}
         <motion.div
           initial="hidden"
