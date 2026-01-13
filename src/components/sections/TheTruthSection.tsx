@@ -312,6 +312,10 @@ const TheTruthSection = () => {
             </p>
             <motion.a 
               href="#eligibility-form"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-medium tracking-wide uppercase bg-primary text-primary-foreground rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-[1.02]"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
