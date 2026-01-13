@@ -24,7 +24,7 @@ import {
   Users,
   Calendar
 } from 'lucide-react';
-import { format, subDays, startOfDay, endOfDay } from 'date-fns';
+import { format, subDays, startOfDay, endOfDay, eachDayOfInterval, isSameDay } from 'date-fns';
 import {
   Dialog,
   DialogContent,
@@ -42,6 +42,18 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Legend,
+} from 'recharts';
 
 interface Submission {
   id: string;
@@ -345,6 +357,38 @@ const AdminDashboard = () => {
   const bookingClicks = ctaClicks.filter((c) => c.cta_id === 'calendly-booking').length;
   const conversionRate = uniqueCTASessions > 0 ? ((bookingClicks / uniqueCTASessions) * 100).toFixed(1) : '0';
 
+  // Chart data - clicks over time
+  const clicksOverTimeData = useMemo(() => {
+    const days = parseInt(ctaDateRange);
+    const startDate = subDays(new Date(), days);
+    const dateRange = eachDayOfInterval({ start: startDate, end: new Date() });
+    
+    return dateRange.map((date) => {
+      const dayClicks = ctaClicks.filter((click) => 
+        isSameDay(new Date(click.created_at), date)
+      );
+      const bookings = dayClicks.filter((c) => c.cta_id === 'calendly-booking').length;
+      const ctaButtonClicks = dayClicks.filter((c) => c.cta_id !== 'calendly-booking').length;
+      
+      return {
+        date: format(date, 'MMM d'),
+        fullDate: format(date, 'MMM d, yyyy'),
+        clicks: dayClicks.length,
+        bookings,
+        ctaClicks: ctaButtonClicks,
+      };
+    });
+  }, [ctaClicks, ctaDateRange]);
+
+  // Chart data - clicks by CTA
+  const clicksByCTAData = useMemo(() => {
+    return ctaStats.slice(0, 6).map((stat) => ({
+      name: stat.cta_text || stat.cta_id,
+      clicks: stat.total_clicks,
+      sessions: stat.unique_sessions,
+    }));
+  }, [ctaStats]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -645,6 +689,146 @@ const AdminDashboard = () => {
               <Button variant="outline" onClick={fetchCTAAnalytics} disabled={ctaLoading}>
                 <RefreshCw className={`w-4 h-4 ${ctaLoading ? 'animate-spin' : ''}`} />
               </Button>
+            </div>
+
+            {/* Charts Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Clicks Over Time Chart */}
+              <div className="bg-card rounded-lg border border-border p-4">
+                <div className="mb-4">
+                  <h3 className="font-medium text-foreground">Clicks Over Time</h3>
+                  <p className="text-sm text-muted-foreground">Daily CTA clicks and bookings</p>
+                </div>
+                <div className="h-[280px]">
+                  {ctaLoading ? (
+                    <div className="h-full flex items-center justify-center">
+                      <RefreshCw className="w-6 h-6 animate-spin text-muted-foreground" />
+                    </div>
+                  ) : clicksOverTimeData.length === 0 ? (
+                    <div className="h-full flex items-center justify-center text-muted-foreground">
+                      No data available
+                    </div>
+                  ) : (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={clicksOverTimeData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                        <defs>
+                          <linearGradient id="colorClicks" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
+                            <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                          </linearGradient>
+                          <linearGradient id="colorBookings" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} />
+                            <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis 
+                          dataKey="date" 
+                          stroke="hsl(var(--muted-foreground))" 
+                          fontSize={12}
+                          tickLine={false}
+                        />
+                        <YAxis 
+                          stroke="hsl(var(--muted-foreground))" 
+                          fontSize={12}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px',
+                            color: 'hsl(var(--foreground))'
+                          }}
+                          labelFormatter={(label, payload) => payload?.[0]?.payload?.fullDate || label}
+                        />
+                        <Area 
+                          type="monotone" 
+                          dataKey="ctaClicks" 
+                          name="CTA Clicks"
+                          stroke="hsl(var(--primary))" 
+                          fillOpacity={1} 
+                          fill="url(#colorClicks)" 
+                          strokeWidth={2}
+                        />
+                        <Area 
+                          type="monotone" 
+                          dataKey="bookings" 
+                          name="Bookings"
+                          stroke="#22c55e" 
+                          fillOpacity={1} 
+                          fill="url(#colorBookings)" 
+                          strokeWidth={2}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  )}
+                </div>
+              </div>
+
+              {/* Clicks by CTA Chart */}
+              <div className="bg-card rounded-lg border border-border p-4">
+                <div className="mb-4">
+                  <h3 className="font-medium text-foreground">Top Performing CTAs</h3>
+                  <p className="text-sm text-muted-foreground">Clicks by button type</p>
+                </div>
+                <div className="h-[280px]">
+                  {ctaLoading ? (
+                    <div className="h-full flex items-center justify-center">
+                      <RefreshCw className="w-6 h-6 animate-spin text-muted-foreground" />
+                    </div>
+                  ) : clicksByCTAData.length === 0 ? (
+                    <div className="h-full flex items-center justify-center text-muted-foreground">
+                      No data available
+                    </div>
+                  ) : (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={clicksByCTAData} layout="vertical" margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" horizontal={true} vertical={false} />
+                        <XAxis 
+                          type="number" 
+                          stroke="hsl(var(--muted-foreground))" 
+                          fontSize={12}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <YAxis 
+                          type="category" 
+                          dataKey="name" 
+                          stroke="hsl(var(--muted-foreground))" 
+                          fontSize={11}
+                          tickLine={false}
+                          axisLine={false}
+                          width={100}
+                          tickFormatter={(value) => value.length > 14 ? value.slice(0, 14) + '...' : value}
+                        />
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px',
+                            color: 'hsl(var(--foreground))'
+                          }}
+                        />
+                        <Legend />
+                        <Bar 
+                          dataKey="clicks" 
+                          name="Total Clicks"
+                          fill="hsl(var(--primary))" 
+                          radius={[0, 4, 4, 0]}
+                        />
+                        <Bar 
+                          dataKey="sessions" 
+                          name="Unique Sessions"
+                          fill="hsl(var(--primary) / 0.4)" 
+                          radius={[0, 4, 4, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* CTA Performance Table */}
