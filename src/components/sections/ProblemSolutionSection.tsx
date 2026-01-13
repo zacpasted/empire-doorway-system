@@ -474,7 +474,7 @@ const ProblemSolutionSection = () => {
             
             {/* Button content */}
             <span className="relative z-10 text-base md:text-lg font-semibold text-foreground tracking-wide">
-              Transform Your Practice
+              See If You Qualify
             </span>
             <motion.span
               className="relative z-10"
