@@ -16,6 +16,8 @@ import beauMurphey from '@/assets/cards/beau-murphey.jpeg';
 import brianHarris from '@/assets/cards/brian-harris.png';
 import samSaleh from '@/assets/cards/sam-saleh.png';
 import michaelAllen from '@/assets/cards/michael-allen.jpeg';
+import nourDiabi from '@/assets/cards/nour-diabi.jpeg';
+import gageLidder from '@/assets/cards/gage-lidder.jpeg';
 
 const cards = [{
   id: 1,
@@ -73,6 +75,14 @@ const cards = [{
   id: 14,
   image: michaelAllen,
   name: 'Dr. Michael Allen'
+}, {
+  id: 15,
+  image: nourDiabi,
+  name: 'Dr. Nour Diabi'
+}, {
+  id: 16,
+  image: gageLidder,
+  name: 'Dr. Gage Lidder'
 }];
 
 // Memoized card component to prevent re-renders
