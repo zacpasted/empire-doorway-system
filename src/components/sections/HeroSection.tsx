@@ -215,12 +215,12 @@ const HeroSection = () => {
           {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              High Converting Aesthetic Dental
+              The #1 Personal Brand Agency
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Content & Branding
+              for Aesthetic Dentists
             </span>
-            <motion.span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light italic text-primary/90 mt-1" initial={{
+            <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
           }} animate={{
             opacity: 1
@@ -228,13 +228,13 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              Made Easy.
+              Content. Strategy. Results.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            Done-for-you content, strategy, and brand system —<br />
-            built by the best in the world. With the best in the world. For the <span className="italic">(next)</span> best in the world.
+            Done-for-you branding that positions you as the authority —<br />
+            built by the best. With the best. For the <span className="italic">(next)</span> best.
           </p>
         </motion.div>
         
