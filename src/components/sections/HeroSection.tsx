@@ -215,10 +215,10 @@ const HeroSection = () => {
           {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              The #1 Personal Brand Agency
+              The Mind Behind
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              for Aesthetic Dentists
+              Aesthetic Dentistry's Top 1%.
             </span>
             <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
