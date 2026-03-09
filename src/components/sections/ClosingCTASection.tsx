@@ -17,12 +17,12 @@ const ClosingCTASection = () => {
           href="#eligibility-form"
           onClick={(e) => {
             e.preventDefault();
-            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Associate to Empire™', section: 'closing' });
+            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply to Work With PASTED', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
           }}
           className="inline-block text-sm tracking-[0.3em] uppercase text-background bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
         >
-          Apply for Associate to Empire™
+          Apply to Work With PASTED
         </a>
         
         <p className="text-sm text-muted-foreground mt-8">

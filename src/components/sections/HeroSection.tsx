@@ -228,13 +228,13 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              Content. Strategy. Results.
+              Brand. Content. Ads. Conversion. Advisory.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            Done-for-you branding that positions you as the authority —<br />
-            built by the best. With the best. For the <span className="italic">(next)</span> best.
+            A curated strategic partnership for aesthetic practices<br />
+            building category-defining brands. <span className="italic">By invitation only.</span>
           </p>
         </motion.div>
         
@@ -359,12 +359,12 @@ const HeroSection = () => {
                   Limited Availability
                 </p>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  See If You Qualify
+                  Apply to Work With PASTED
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-                  Associate to Empire by PASTED was built to bring cutting-edge branding and content to dentistry's future stars.
+                  We work with a small number of practices at a time. Clients are chosen based on alignment, ambition, and long-term vision.
                   <br className="hidden md:block" />
-                  <span className="block mt-1">Now accepting driven associates and new owners.</span>
+                  <span className="block mt-1">This is not an open service. It is a curated partnership.</span>
                 </p>
               </div>
               
