@@ -21,7 +21,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Request Access', section: 'header' });
+    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Apply to Work With PASTED', section: 'header' });
     if (onApplyClick) {
       onApplyClick();
     } else {
