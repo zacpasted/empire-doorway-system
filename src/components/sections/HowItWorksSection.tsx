@@ -279,10 +279,10 @@ const HowItWorksSection = () => {
           </motion.div>
           
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6">
-            How Associate to Empire Works
+            The PASTED Blueprint
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground font-light italic max-w-2xl mx-auto">
-            From invisible to in demand—built properly, step by step
+            Six stages. One integrated system. Total transformation.
           </p>
         </motion.div>
 
