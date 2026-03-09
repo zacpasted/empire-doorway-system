@@ -7,29 +7,29 @@ const FilterSection = () => {
     amount: 0.2
   });
   const notFor = [{
-    text: "Trend chasers",
+    text: "Trend chasers looking for quick wins",
     icon: "◇"
   }, {
-    text: "Loud marketers",
+    text: "Practices seeking a vendor, not a partner",
     icon: "◈"
   }, {
-    text: "Volume-first clinicians",
+    text: "Volume-first clinicians with no brand vision",
     icon: "◆"
   }, {
-    text: "Those who outsource responsibility",
+    text: "Those unwilling to invest in long-term positioning",
     icon: "◇"
   }];
   const isFor = [{
-    text: "Dentists who feel overlooked despite merit",
+    text: "Ambitious aesthetics-focused practices ready to lead",
     icon: "△"
   }, {
-    text: "Those ready to author their own position",
+    text: "Doctors who understand brand is the foundation of growth",
     icon: "▲"
   }, {
-    text: "Practitioners who value restraint over noise",
+    text: "Practitioners who value taste, restraint, and authority",
     icon: "△"
   }, {
-    text: "The ones who understand patience",
+    text: "Those committed to a long-term strategic partnership",
     icon: "▲"
   }];
   const containerVariants = {

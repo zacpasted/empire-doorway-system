@@ -21,7 +21,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Apply to Work With PASTED', section: 'header' });
+    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Apply to Work With PASTEDWith PASTED', section: 'header' });
     if (onApplyClick) {
       onApplyClick();
     } else {
@@ -54,7 +54,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             className="rounded-md"
             onClick={handleClick}
           >
-            Request Access
+ Apply Nowuest Access
           </Button>
         </div>
       </div>
