@@ -6,11 +6,15 @@ import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
 import Footer from "@/components/Footer";
 
-// Lazy load ProblemSolutionSection since it's heavy with scroll transforms
+// Lazy load below-the-fold sections
 const ProblemSolutionSection = lazy(() => import("@/components/sections/ProblemSolutionSection"));
-
-// Lazy load below-the-fold sections for faster initial page load
 const WhatWeDoSection = lazy(() => import("@/components/sections/WhatWeDoSection"));
+const CredibilitySection = lazy(() => import("@/components/sections/CredibilitySection"));
+const PartnershipPhilosophySection = lazy(() => import("@/components/sections/PartnershipPhilosophySection"));
+const OrganicPaidSection = lazy(() => import("@/components/sections/OrganicPaidSection"));
+const ConversionSystemsSection = lazy(() => import("@/components/sections/ConversionSystemsSection"));
+const DreamLifeSection = lazy(() => import("@/components/sections/DreamLifeSection"));
+const AuthorityStatementSection = lazy(() => import("@/components/sections/AuthorityStatementSection"));
 const FoundersPhilosophySection = lazy(() => import("@/components/sections/FoundersPhilosophySection"));
 const TheTruthSection = lazy(() => import("@/components/sections/TheTruthSection"));
 const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
@@ -21,8 +25,6 @@ const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsSho
 const VideoCarouselSection = lazy(() => import("@/components/sections/VideoCarouselSection"));
 const CTABannerSection = lazy(() => import("@/components/sections/CTABannerSection"));
 const TestimonialsSection = lazy(() => import("@/components/sections/TestimonialsSection"));
-const ProofSection = lazy(() => import("@/components/sections/ProofSection"));
-const MemberCardsCarousel = lazy(() => import("@/components/sections/MemberCardsCarousel"));
 const WhyPathsFailSection = lazy(() => import("@/components/sections/WhyPathsFailSection"));
 const CommunitySection = lazy(() => import("@/components/sections/CommunitySection"));
 const FilterSection = lazy(() => import("@/components/sections/FilterSection"));
@@ -30,18 +32,15 @@ const HowItWorksSection = lazy(() => import("@/components/sections/HowItWorksSec
 const MonthlyDeliverablesSection = lazy(() => import("@/components/sections/MonthlyDeliverablesSection"));
 const WhatYouReceiveSection = lazy(() => import("@/components/sections/WhatYouReceiveSection"));
 const WhatWeAskSection = lazy(() => import("@/components/sections/WhatWeAskSection"));
-const OutcomeSection = lazy(() => import("@/components/sections/OutcomeSection"));
 const FoundersVibeSection = lazy(() => import("@/components/sections/FoundersVibeSection"));
 const PrivateAdvisorySection = lazy(() => import("@/components/sections/PrivateAdvisorySection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
-const FinalCTASection = lazy(() => import("@/components/sections/FinalCTASection"));
-const FAQSection = lazy(() => import("@/components/sections/FAQSection"));
-const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
 const TransformationSection = lazy(() => import("@/components/sections/TransformationSection"));
 const ProgramDeliverablesSection = lazy(() => import("@/components/sections/ProgramDeliverablesSection"));
+const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
+const JournalSection = lazy(() => import("@/components/sections/JournalSection"));
+const MembershipSection = lazy(() => import("@/components/sections/MembershipSection"));
 
-
-// Minimal loading placeholder for lazy sections - memoized
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
@@ -49,7 +48,6 @@ const SectionLoader = memo(() => (
 ));
 SectionLoader.displayName = 'SectionLoader';
 
-// Simplified section animation for better performance
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
@@ -58,6 +56,18 @@ const sectionVariants = {
     transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }
   }
 };
+
+const AnimatedSection = memo(({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-100px" }}
+    variants={sectionVariants}
+  >
+    {children}
+  </motion.div>
+));
+AnimatedSection.displayName = 'AnimatedSection';
 
 const Index = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -73,284 +83,124 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <title>Associate to Empire™ by PASTED | Personal Brand System for Dentists</title>
+      <title>PASTED Studio | Strategic Brand Partner for Elite Aesthetic Practices</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
       <LeadMagnetPopup />
       
-      {/* Hero - Cinematic Entry with VSL + Logos + Form - NOT lazy loaded */}
+      {/* 1. Hero - Cinematic Entry with VSL + Calendly */}
       <HeroSection />
       
-      {/* All sections below hero are lazy loaded for performance */}
       <Suspense fallback={<SectionLoader />}>
-        {/* Problem / Solution */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={sectionVariants}
-        >
-          <ProblemSolutionSection />
-        </motion.div>
+        {/* 2. Philosophy — Problem / Solution */}
+        <AnimatedSection><ProblemSolutionSection /></AnimatedSection>
         
-        {/* What We Do - Services Overview */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <WhatWeDoSection />
-        </motion.div>
+        {/* 3. Credibility — Track Record */}
+        <AnimatedSection><CredibilitySection /></AnimatedSection>
         
-        {/* Social Proof - Video Carousel (A2E Content) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <VideoCarouselSection />
-        </motion.div>
+        {/* 4. What We Do — The Complete System */}
+        <AnimatedSection><WhatWeDoSection /></AnimatedSection>
         
-        {/* CTA Banner - Above Testimonials */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <CTABannerSection />
-        </motion.div>
+        {/* 5. Video Carousel — Content Examples */}
+        <AnimatedSection><VideoCarouselSection /></AnimatedSection>
         
+        {/* 6. CTA Banner */}
+        <AnimatedSection><CTABannerSection /></AnimatedSection>
         
-        {/* Testimonials */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TestimonialsSection onApplyClick={scrollToForm} />
-        </motion.div>
+        {/* 7. Testimonials */}
+        <AnimatedSection><TestimonialsSection onApplyClick={scrollToForm} /></AnimatedSection>
         
-        {/* The Gap - Pain Section */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TheGapSection />
-        </motion.div>
+        {/* 8. Partnership Philosophy — Why True Partnership */}
+        <AnimatedSection><PartnershipPhilosophySection /></AnimatedSection>
         
-        {/* Social Proof - Brand Examples */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <BrandsShowcaseSection onApplyClick={scrollToForm} />
-        </motion.div>
+        {/* 9. Organic + Paid — One System */}
+        <AnimatedSection><OrganicPaidSection /></AnimatedSection>
         
-        {/* Founders Philosophy - Passion & Confidence */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <FoundersPhilosophySection />
-        </motion.div>
+        {/* 10. Conversion Systems — Beyond Lead Gen */}
+        <AnimatedSection><ConversionSystemsSection /></AnimatedSection>
         
-        {/* The Truth - Hard Stats */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TheTruthSection />
-        </motion.div>
+        {/* 11. The Gap — Pain Section */}
+        <AnimatedSection><TheGapSection /></AnimatedSection>
         
-        {/* Content Examples - Before Case Studies */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
+        {/* 12. Brands Showcase — Social Proof */}
+        <AnimatedSection><BrandsShowcaseSection onApplyClick={scrollToForm} /></AnimatedSection>
+        
+        {/* 13. Founders Philosophy */}
+        <AnimatedSection><FoundersPhilosophySection /></AnimatedSection>
+        
+        {/* 14. The Truth — Hard Stats */}
+        <AnimatedSection><TheTruthSection /></AnimatedSection>
+        
+        {/* 15. Content Examples — Wistia Videos */}
+        <AnimatedSection>
           <WistiaVideoEmbedSection 
             title="If Your Content Looks Like Everyone Else's, You Lose."
             subtitle="Chosen brands don't guess. We script, edit, and distribute everything for you."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
           />
-        </motion.div>
+        </AnimatedSection>
         
-        {/* Take It - Editorial CTA */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TakeItSection onApplyClick={scrollToForm} />
-        </motion.div>
+        {/* 16. Take It — Editorial CTA */}
+        <AnimatedSection><TakeItSection onApplyClick={scrollToForm} /></AnimatedSection>
         
-        {/* Transformation Narratives - Case Studies */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TransformationNarrativesSection />
-        </motion.div>
+        {/* 17. Transformation Narratives — Case Studies */}
+        <AnimatedSection><TransformationNarrativesSection /></AnimatedSection>
         
-        {/* Case Studies with Metrics - Under "When positioning is right, everything else follows" */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <AdCaseStudiesSection />
-        </motion.div>
+        {/* 18. Ad Case Studies with Metrics */}
+        <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
         
-        {/* Why Paths Fail - Diagnostic */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <WhyPathsFailSection />
-        </motion.div>
+        {/* 19. Authority Statement */}
+        <AnimatedSection><AuthorityStatementSection /></AnimatedSection>
         
-        {/* Community - The Network */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
+        {/* 20. Dream Life Philosophy */}
+        <AnimatedSection><DreamLifeSection /></AnimatedSection>
+        
+        {/* 21. Why Paths Fail — Diagnostic */}
+        <AnimatedSection><WhyPathsFailSection /></AnimatedSection>
+        
+        {/* 22. Community */}
+        <AnimatedSection>
           <CommunitySection videoIds={["m70jgeiyir", "bhqnyc3yny", "r5lr03rr8t", "ibpxi0nzpq", "n3qopd7sum", "ggjvdzq6aq", "j5dqiq664l"]} />
-        </motion.div>
+        </AnimatedSection>
         
-        {/* How It Works - Process Overview */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <HowItWorksSection />
-        </motion.div>
+        {/* 23. The Gate — Filter */}
+        <AnimatedSection><FilterSection /></AnimatedSection>
         
-        {/* Monthly Retainer Breakdown - What's Included Every Month */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <MonthlyDeliverablesSection />
-        </motion.div>
+        {/* 24. How It Works — The PASTED Process */}
+        <AnimatedSection><HowItWorksSection /></AnimatedSection>
         
-        {/* What We Ask - Trust Builder */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <WhatWeAskSection />
-        </motion.div>
+        {/* 25. Monthly Deliverables */}
+        <AnimatedSection><MonthlyDeliverablesSection /></AnimatedSection>
         
+        {/* 26. What We Ask — Trust Builder */}
+        <AnimatedSection><WhatWeAskSection /></AnimatedSection>
         
-        {/* What You Receive - Delivery */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <WhatYouReceiveSection />
-        </motion.div>
+        {/* 27. What You Receive */}
+        <AnimatedSection><WhatYouReceiveSection /></AnimatedSection>
         
+        {/* 28. Take It — Second CTA */}
+        <AnimatedSection><TakeItSection onApplyClick={scrollToForm} /></AnimatedSection>
         
-        {/* Take It - Editorial CTA */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TakeItSection onApplyClick={scrollToForm} />
-        </motion.div>
+        {/* 29. Transformation — Before/After */}
+        <AnimatedSection><TransformationSection /></AnimatedSection>
         
-        {/* Transformation - Before/After */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <TransformationSection />
-        </motion.div>
+        {/* 30. Program & Pricing */}
+        <AnimatedSection><ProgramDeliverablesSection onApplyClick={scrollToForm} /></AnimatedSection>
         
-        {/* Program & Pricing */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <ProgramDeliverablesSection onApplyClick={scrollToForm} />
-        </motion.div>
+        {/* 31. Closing CTA */}
+        <AnimatedSection><ClosingCTASection /></AnimatedSection>
         
-        {/* The Gate - Filter */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <FilterSection />
-        </motion.div>
+        {/* 32. Founders Vibe */}
+        <AnimatedSection><FoundersVibeSection /></AnimatedSection>
         
+        {/* 33. PASTED Studio — Bespoke Service */}
+        <AnimatedSection><PrivateAdvisorySection videoId="qb6sa5q4g8" onApplyClick={scrollToForm} /></AnimatedSection>
         
-        {/* Closing CTA */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <ClosingCTASection />
-        </motion.div>
+        {/* 34. Journal — Newsletter Signup */}
+        <AnimatedSection><JournalSection /></AnimatedSection>
         
-        {/* Founders Vibe - Zac & Alan */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <FoundersVibeSection />
-        </motion.div>
-        
-        {/* Pasted Studio - Bespoke Service Level */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={sectionVariants}
-        >
-          <PrivateAdvisorySection videoId="qb6sa5q4g8" onApplyClick={scrollToForm} />
-        </motion.div>
-        
+        {/* 35. Membership — Waitlist */}
+        <AnimatedSection><MembershipSection /></AnimatedSection>
       </Suspense>
       
       <Footer />
