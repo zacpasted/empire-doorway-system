@@ -385,8 +385,8 @@ const HowItWorksSection = () => {
           className="max-w-3xl mx-auto text-center mb-20"
         >
           <p className="text-muted-foreground leading-relaxed text-lg">
-            Associate to Empire is not a content subscription, an agency retainer, or a templated personal brand package. 
-            It is a <span className="text-foreground font-medium">structured system</span> designed to take a dentist from uncertainty and inconsistency to clarity, authority, and demand.
+            PASTED is not a content subscription, an agency retainer, or a templated brand package. 
+            It is a <span className="text-foreground font-medium">360-degree transformation system</span> designed to take an aesthetic practice from invisible to category-defining.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <motion.div 
