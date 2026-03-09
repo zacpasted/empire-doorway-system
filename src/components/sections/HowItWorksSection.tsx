@@ -18,20 +18,20 @@ const HowItWorksSection = () => {
   const phases = [
     {
       number: "01",
-      title: "Foundation, Identity & Direction",
-      subtitle: "Before a single piece of content is created",
+      title: "Strategy",
+      subtitle: "Understanding the doctor's ambitions, vision, and desired lifestyle",
       feeling: "Clarity",
       icon: Target,
       timeframe: "Week 1-2",
       stats: { metric: "100%", label: "Strategic clarity" },
-      description: "The process begins with clarity. We work with you to define who you are, what you stand for, and how you should be perceived in the market.",
+      description: "Every engagement begins with understanding who you are and what you're building toward. We map your ambitions, vision, lifestyle goals, and market position before a single piece of content is created.",
       details: [
-        "Guided onboarding & deep strategic inputs",
-        "Unique positioning & aesthetic lane identification",
-        "Tone, ambitions & patient attraction strategy",
-        "Clear brand foundation that informs every decision"
+        "Deep-dive into your ambitions & desired lifestyle",
+        "Market positioning & competitive landscape analysis",
+        "Patient attraction strategy & ideal case profiling",
+        "Business model alignment with personal vision"
       ],
-      outcome: "Content stops being random. Messaging stops being borrowed. You finally know what you're building.",
+      outcome: "You finally have a clear strategic foundation that informs every decision moving forward.",
       highlight: "This is where most practitioners finally understand why nothing worked before.",
       testimonial: {
         quote: "For the first time, I actually understood what I was building and why. The clarity was immediate.",
@@ -41,44 +41,44 @@ const HowItWorksSection = () => {
     },
     {
       number: "02",
-      title: "Strategy, Systems & Scripting",
-      subtitle: "Once your brand direction is locked",
+      title: "Brand & Positioning",
+      subtitle: "Defining the identity and narrative that attracts the right patients",
       feeling: "Confidence",
       icon: Palette,
-      timeframe: "Week 2-3",
-      stats: { metric: "40+", label: "Scripts created" },
-      description: "We build the systems that make execution easy and repeatable. You are given access to AI-assisted scripting systems trained on high-performing content and real-world conversion patterns.",
+      timeframe: "Week 2-4",
+      stats: { metric: "360°", label: "Brand identity" },
+      description: "We define your unique aesthetic lane, craft your narrative, and build a brand identity that separates you from every other practice in your market. This is not a logo exercise — it is the foundation of perception.",
       details: [
-        "AI-assisted scripting shaped by strategy",
-        "Hooks, story arcs & delivery guidance",
-        "Scripts written for you or with you",
-        "Room for your natural personality"
+        "Unique positioning & aesthetic lane identification",
+        "Brand narrative & messaging architecture",
+        "Visual identity & tone of voice definition",
+        "Competitive differentiation strategy"
       ],
-      outcome: "You are never left staring at a blank screen. This is where confidence begins to compound.",
-      highlight: "Our scripting system has been trained on 500+ high-performing pieces of content.",
+      outcome: "Your brand stops being generic. You become the only option for the patients you actually want.",
+      highlight: "Positioning is the single most underleveraged asset in aesthetic dentistry.",
       testimonial: {
-        quote: "I used to spend hours figuring out what to say. Now I just show up and the scripts are ready.",
+        quote: "I used to blend in with every other cosmetic dentist. Now patients fly in specifically because of our brand.",
         name: "Dr. Michael Allen",
         role: "Celebrity Dentist, Tucson"
       }
     },
     {
       number: "03",
-      title: "Filming Made Easy",
-      subtitle: "Self-filmed or fully supported",
+      title: "Content & Creative",
+      subtitle: "Producing world-class content that reflects the quality of the practice",
       feeling: "Simplicity",
       icon: Video,
-      timeframe: "Week 3-4",
-      stats: { metric: "15min", label: "Per session" },
-      description: "Associate to Empire is designed to meet you where you are. Self-film with our guidance, or we coordinate vetted videographers in your area.",
+      timeframe: "Week 3-6",
+      stats: { metric: "12+", label: "Monthly pieces" },
+      description: "We script, film, edit, and produce content that matches the caliber of your clinical work. Every piece is crafted with intention — designed to build authority, not chase trends.",
       details: [
-        "Clear filming guidance & prompts",
-        "Framing instructions & shoot structures",
-        "Videographer sourcing & coordination",
-        "In-person branding intensives (select clients)"
+        "AI-assisted scripting shaped by strategy",
+        "Professional editing & cinematic production",
+        "Filming guidance or full videographer coordination",
+        "Narrative sequencing & content cadence"
       ],
-      outcome: "Easy capture, no friction, no wasted energy. Most clients are surprised how simple this becomes.",
-      highlight: "Average filming time: 15-30 minutes per week. That's it.",
+      outcome: "Your content becomes your most powerful asset — attracting the right patients before they ever call.",
+      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always.",
       testimonial: {
         quote: "I film on Monday mornings before patients. 20 minutes, done for the week. It's become effortless.",
         name: "Dr. Beau Murphey",
@@ -87,44 +87,44 @@ const HowItWorksSection = () => {
     },
     {
       number: "04",
-      title: "Shoot, Drop & Done-For-You",
-      subtitle: "Once content is filmed, your job is effectively done",
-      feeling: "Relief",
+      title: "Distribution",
+      subtitle: "Deploying organic content and paid media together to drive demand",
+      feeling: "Momentum",
       icon: Rocket,
       timeframe: "Week 4+",
-      stats: { metric: "12+", label: "Monthly pieces" },
-      description: "Our team handles editing, refinement, formatting, and distribution. Everything is intentional, nothing is rushed or overproduced.",
+      stats: { metric: "3-5x", label: "ROI typical" },
+      description: "Organic content builds authority. Paid media amplifies reach. We integrate both into one system — the same creative assets that build trust organically are strategically deployed in advertising to drive demand.",
       details: [
-        "Professional editing & final polish",
-        "Strategic scheduling & publishing",
-        "Narrative sequencing & cadence",
-        "Audience psychology, not just posting frequency"
+        "Strategic organic publishing & scheduling",
+        "Paid media management & optimization",
+        "Unified creative across organic and paid",
+        "Audience targeting refined by brand positioning"
       ],
-      outcome: "You are not chasing trends. You are building authority.",
-      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always.",
+      outcome: "You are not guessing where patients come from. You are engineering demand.",
+      highlight: "Ads on a strong brand convert 3-5x better than ads alone.",
       testimonial: {
-        quote: "I drop the footage and forget about it. A week later, content is live. It feels like magic.",
-        name: "Dr. Alan Clarke",
-        role: "Paste Dental, UK"
+        quote: "We waited until the brand was working to run ads. ROI was immediate because trust already existed.",
+        name: "Dr. Brian Harris",
+        role: "Practice Owner, LA"
       }
     },
     {
       number: "05",
-      title: "Relationship & Partnership",
-      subtitle: "This is not transactional",
+      title: "Systems & Conversion",
+      subtitle: "Optimizing the consultation experience and internal systems",
       feeling: "Trust",
       icon: Users,
       timeframe: "Ongoing",
-      stats: { metric: "24/7", label: "Team access" },
-      description: "We build real relationships with our clients. Ongoing access to the team, regular check-ins, and strategic feedback loops.",
+      stats: { metric: "97%", label: "Client retention" },
+      description: "Most agencies stop at lead generation. We continue into the practice itself — building conversion systems, consultation frameworks, patient communication workflows, and internal tools that turn attention into revenue.",
       details: [
-        "Ongoing team access & check-ins",
-        "Messaging adjustments as you evolve",
-        "Positioning refinement as opportunities change",
-        "Strategic guidance beyond content"
+        "Consultation process optimization",
+        "Patient communication frameworks",
+        "CRM systems & internal workflow design",
+        "Conversion tracking & refinement"
       ],
-      outcome: "This is why outcomes compound over time instead of plateauing.",
-      highlight: "You're not a number. You're a partner in building something meaningful.",
+      outcome: "Leads stop being wasted. Every touchpoint in the practice reinforces your brand.",
+      highlight: "Brand is not just visual identity — it includes how patients experience you.",
       testimonial: {
         quote: "They know my brand better than I do. The team feels like an extension of my practice.",
         name: "Dr. Serena Wong",
@@ -133,25 +133,25 @@ const HowItWorksSection = () => {
     },
     {
       number: "06",
-      title: "Scale (At the Right Time)",
-      subtitle: "Advertising is not introduced on day one",
+      title: "Growth & Expansion",
+      subtitle: "Scaling the practice while maintaining brand authority",
       feeling: "Leverage",
       icon: TrendingUp,
-      timeframe: "Month 4+",
-      stats: { metric: "3-5x", label: "ROI typical" },
-      description: "Around month four, once your brand and organic presence are working, we offer paid media management at preferred rates.",
+      timeframe: "Month 6+",
+      stats: { metric: "4-5yr", label: "Avg partnership" },
+      description: "Once the system is working, we help you scale — new locations, new markets, new revenue streams — without diluting the brand that made you successful. Growth is earned, not forced.",
       details: [
-        "Ads amplify what already resonates",
-        "Efficient targeting (message is clear)",
-        "Improved conversion (trust exists)",
-        "Preferred rates for A2E members"
+        "Multi-location brand consistency",
+        "New market expansion strategy",
+        "Revenue stream diversification",
+        "Strategic advisory & ongoing partnership"
       ],
-      outcome: "This is how scale is done without dilution.",
-      highlight: "Ads on a strong brand convert 3-5x better than ads alone.",
+      outcome: "This is how scale is done without dilution. Authority compounds over time.",
+      highlight: "Our longest partnerships are 4-5+ years — because the relationship keeps producing results.",
       testimonial: {
-        quote: "We waited until month 4 to run ads. Best decision we made—ROI was immediate because the brand was already working.",
-        name: "Dr. Brian Harris",
-        role: "Practice Owner, LA"
+        quote: "We've been with PASTED for over four years. Every quarter is better than the last.",
+        name: "Dr. Alan Clarke",
+        role: "Paste Dental, UK"
       }
     },
   ];
