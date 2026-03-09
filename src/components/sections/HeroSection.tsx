@@ -228,7 +228,7 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              Content. Strategy. Results.
+              Brand. Content. Ads. Conversion. Advisory.
             </motion.span>
           </h1>
           
