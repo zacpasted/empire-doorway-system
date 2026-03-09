@@ -233,8 +233,8 @@ const HeroSection = () => {
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            Done-for-you branding that positions you as the authority —<br />
-            built by the best. With the best. For the <span className="italic">(next)</span> best.
+            A curated strategic partnership for aesthetic practices<br />
+            building category-defining brands. <span className="italic">By invitation only.</span>
           </p>
         </motion.div>
         
