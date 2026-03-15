@@ -390,7 +390,7 @@ const HeroSection = () => {
                 {/* Always render widget - Calendly script will find and initialize it */}
                 <div 
                   className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  data-url="https://calendly.com/getpasted/associate-to-empire?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
+                  data-url="https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ff0f00"
                   style={{ minWidth: '320px', height: '700px' }}
                 />
               </div>
