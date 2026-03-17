@@ -15,38 +15,20 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-      }
-    }, {
-      threshold: 0.2,
-      rootMargin: '200px'
-    });
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+      if (entry.isIntersecting) setIsVisible(true);
+    }, { threshold: 0.2, rootMargin: '200px' });
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  // Use shared Wistia loader
   useWistiaLoader(videoId || '', { loadOnMount: isVisible && !!videoId });
 
   const features = [
-    {
-      icon: Crown,
-      label: "Bespoke Service"
-    },
-    {
-      icon: Sparkles,
-      label: "Elite Execution"
-    },
-    {
-      icon: Globe,
-      label: "Global Ambition"
-    }
+    { icon: Crown, label: "Bespoke Strategy" },
+    { icon: Sparkles, label: "Elite Execution" },
+    { icon: Globe, label: "Global Ambition" }
   ];
 
-  // Merge external ref with internal ref
   const mergedRef = (node: HTMLDivElement | null) => {
     sectionRef.current = node;
     if (typeof ref === 'function') ref(node);
@@ -55,7 +37,6 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
 
   return (
     <section ref={mergedRef} className="py-24 md:py-40 bg-gradient-to-b from-background via-card/30 to-background relative overflow-hidden">
-      {/* Subtle background accents */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl"
@@ -70,7 +51,6 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
       </div>
 
       <div className="container max-w-5xl mx-auto px-4 relative z-10">
-        {/* Header */}
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -78,21 +58,18 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
           transition={{ duration: 0.8 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-6">
-            Beyond Associate to Empire
+            Beyond Partnership
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-foreground mb-6">
-            Pasted Studio
+            PASTED Studio
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed">
-            Our bespoke service level for the most ambitious practitioners in the world.
+            Our bespoke service level for the most ambitious cosmetic practices building iconic brands.
           </p>
         </motion.div>
 
-        {/* Features */}
         <motion.div
-          className={`flex flex-wrap justify-center gap-8 md:gap-16 mb-16 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
+          className={`flex flex-wrap justify-center gap-8 md:gap-16 mb-16`}
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -113,7 +90,6 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
           ))}
         </motion.div>
 
-        {/* Video Container */}
         <motion.div
           className="mb-12"
           initial={{ opacity: 0, y: 30 }}
@@ -121,7 +97,6 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <div className="relative aspect-video max-w-3xl mx-auto rounded-2xl border border-border/30 bg-card/50 overflow-hidden">
-            {/* Corner accents */}
             <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-primary/30 rounded-tl-2xl pointer-events-none z-10" />
             <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-primary/30 rounded-tr-2xl pointer-events-none z-10" />
             <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-primary/30 rounded-bl-2xl pointer-events-none z-10" />
@@ -130,30 +105,15 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
             {videoId ? (
               <>
                 <style>{getWistiaPlaceholderStyles(videoId, '56.25%')}</style>
-                {/* @ts-ignore - Wistia custom element */}
+                {/* @ts-ignore */}
                 <wistia-player media-id={videoId} aspect="1.7778" autoplay="false" end-video-behavior="default" style={{ height: '100%', width: '100%' }}></wistia-player>
               </>
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40">
                 <div className="w-20 h-20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center mb-4">
-                  <svg 
-                    className="w-10 h-10" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={1.5} 
-                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" 
-                    />
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={1.5} 
-                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
-                    />
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <span className="text-sm tracking-wide uppercase">Video Coming Soon</span>
@@ -162,7 +122,6 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
           </div>
         </motion.div>
 
-        {/* CTA Button */}
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -174,14 +133,13 @@ const PrivateAdvisorySection = forwardRef<HTMLDivElement, PrivateAdvisorySection
             size="lg"
             className="relative group px-8 py-6 text-base font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl overflow-hidden"
           >
-            {/* Glow effect */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 3, repeat: Infinity }}
             />
             <span className="relative flex items-center gap-2">
-              Inquire About Pasted Studio
+              Inquire About PASTED Studio
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </Button>

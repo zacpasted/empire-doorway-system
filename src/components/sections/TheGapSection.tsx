@@ -14,13 +14,13 @@ const TheGapSection = () => {
     return () => observer.disconnect();
   }, []);
   const statements = [{
-    text: "Clinically ready.",
+    text: "Clinically exceptional.",
     delay: 0
   }, {
-    text: "Invisible.",
+    text: "Invisible in your market.",
     delay: 200
   }, {
-    text: "Watching others live the life you expected.",
+    text: "Watching less skilled competitors attract the patients you deserve.",
     delay: 400
   }];
   return (
@@ -53,7 +53,7 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          You've earned the skill. But the system was never designed to surface you.
+          Cosmetic dentistry is a perception category. The practices that dominate their market control authority, perception, and patient demand — not just clinical skill.
         </p>
       </div>
     </section>

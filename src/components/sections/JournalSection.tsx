@@ -14,15 +14,11 @@ const JournalSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !firstName) return;
-
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from("lead_magnet_submissions").insert({
-        email,
-        first_name: firstName,
-        source: "journal",
+        email, first_name: firstName, source: "journal",
       });
-
       if (error) throw error;
       setIsSubmitted(true);
       toast.success("You're on the list.");
@@ -46,12 +42,12 @@ const JournalSection = () => {
             The PASTED Journal
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4 leading-tight">
-            Insights on the Future of<br />
-            <span className="text-primary">Dentistry, Brand & Practice Growth.</span>
+            Insights on Authority, Growth &<br />
+            <span className="text-primary">Cosmetic Practice Strategy.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-            Not ready to apply? Start here. Curated perspectives on building a practice
-            that reflects your ambition — delivered to your inbox.
+            Not ready to apply? Start here. Strategic perspectives on building a cosmetic practice
+            that attracts the right patients and commands the right case values — delivered to your inbox.
           </p>
 
           {isSubmitted ? (
@@ -65,27 +61,12 @@ const JournalSection = () => {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <input
-                type="text"
-                placeholder="First name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-                className="flex-1 px-4 py-3 bg-background border border-border/50 rounded-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 px-4 py-3 bg-background border border-border/50 rounded-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="px-6 py-3 bg-primary text-primary-foreground text-sm tracking-[0.15em] uppercase font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
-              >
+              <input type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required
+                className="flex-1 px-4 py-3 bg-background border border-border/50 rounded-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors" />
+              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required
+                className="flex-1 px-4 py-3 bg-background border border-border/50 rounded-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors" />
+              <button type="submit" disabled={isSubmitting}
+                className="px-6 py-3 bg-primary text-primary-foreground text-sm tracking-[0.15em] uppercase font-medium hover:bg-primary/90 transition-colors disabled:opacity-50">
                 {isSubmitting ? "..." : "Subscribe"}
               </button>
             </form>

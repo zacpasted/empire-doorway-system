@@ -143,14 +143,14 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The Diagnosis
+            The Core Problem
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            Why Most Dentists Stay{" "}
+            Most Great Cosmetic Dentists Are{" "}
             <span className="text-muted-foreground italic">Invisible</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            And how we solve it — systematically.
+            Not because they lack skill — because they lack the positioning, visibility, and authority required to dominate perception in their market.
           </p>
         </motion.div>
 

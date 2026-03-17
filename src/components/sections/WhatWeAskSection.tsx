@@ -110,7 +110,7 @@ const WhatWeAskSection = () => {
           }`}
         >
           <p className="text-center text-xs tracking-[0.3em] uppercase text-muted-foreground/40 mb-8">
-            A Typical Week as an A2E Member
+            A Typical Week as a PASTED Partner
           </p>
           
           <div className="relative">

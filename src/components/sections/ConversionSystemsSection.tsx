@@ -6,10 +6,10 @@ const ConversionSystemsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const systems = [
-    "Conversion systems & consultation frameworks",
+    "Consultation process optimization & treatment presentation",
     "Patient communication scripts & follow-up sequences",
     "Internal CRM workflows & lead management",
-    "Team training on brand-aligned messaging",
+    "Team training on brand-aligned patient experience",
   ];
 
   return (
@@ -22,11 +22,11 @@ const ConversionSystemsSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Beyond Lead Generation
+            Conversion Engine
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Most Agencies Stop at Leads.<br />
-            <span className="text-primary">We Don't.</span>
+            Inquiries Mean Nothing<br />
+            <span className="text-primary">Without Accepted Cases.</span>
           </h2>
         </motion.div>
 
@@ -37,8 +37,8 @@ const ConversionSystemsSection = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            Driving interest to your practice means nothing if the systems behind the scenes
-            can't convert that interest into booked, high-value cases.
+            Attracting cosmetic patients means nothing if the consultation process, 
+            treatment presentation, and follow-up systems can't convert interest into high-value accepted cases.
           </p>
 
           <div className="space-y-4 max-w-xl mx-auto">
@@ -60,11 +60,11 @@ const ConversionSystemsSection = () => {
 
           <div className="text-center space-y-4">
             <p className="text-muted-foreground leading-relaxed">
-              Brand is far more than a logo or Instagram feed.
+              Most agencies deliver leads and disappear. They never optimize what happens after the inquiry arrives.
             </p>
             <p className="text-foreground font-serif text-xl md:text-2xl">
-              Brand is how the team communicates, how consultations are structured,
-              <br />how messaging is delivered, <span className="text-primary">how patients experience the practice.</span>
+              PASTED optimizes the entire patient journey —
+              <br />from first impression to <span className="text-primary">accepted treatment plan.</span>
             </p>
           </div>
         </motion.div>

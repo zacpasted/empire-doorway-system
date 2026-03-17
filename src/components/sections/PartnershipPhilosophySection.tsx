@@ -5,10 +5,11 @@ const PartnershipPhilosophySection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const vendorTraits = [
-    "They run ads.",
-    "They deliver leads.",
-    "They leave.",
+  const fragmentedApproach = [
+    "One agency for ads.",
+    "A freelancer for content.",
+    "A consultant for strategy.",
+    "None of them talk to each other.",
   ];
 
   return (
@@ -21,11 +22,11 @@ const PartnershipPhilosophySection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Partnership, Not Vendor
+            Strategic Partnership, Not Vendor
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Why True Partnership<br />
-            <span className="text-primary">Is Non-Negotiable.</span>
+            Why One Unified System<br />
+            <span className="text-primary">Outperforms Fragmentation.</span>
           </h2>
         </motion.div>
 
@@ -37,10 +38,10 @@ const PartnershipPhilosophySection = () => {
         >
           <div className="text-center">
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              Most marketing companies operate as vendors.
+              Most practices try to grow through disconnected efforts:
             </p>
             <div className="space-y-2 mb-8">
-              {vendorTraits.map((trait, i) => (
+              {fragmentedApproach.map((trait, i) => (
                 <p key={i} className="text-foreground/70 text-lg">{trait}</p>
               ))}
             </div>
@@ -50,16 +51,13 @@ const PartnershipPhilosophySection = () => {
 
           <div className="text-center space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              But real transformation requires much more.
-              Practices don't grow because of one tactic.
+              Real growth requires every part of the system working in coordination —
+              authority positioning, content quality, patient acquisition strategy,
+              conversion systems, and ongoing strategic advisory.
             </p>
             <p className="text-foreground text-lg leading-relaxed">
-              They grow when every part of the system works together:
-              brand authority, content quality, advertising strategy,
-              conversion systems, and patient experience.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              That level of alignment can only happen through true partnership.
+              That level of alignment only happens through a true strategic partnership,
+              not a collection of random vendors.
             </p>
           </div>
 

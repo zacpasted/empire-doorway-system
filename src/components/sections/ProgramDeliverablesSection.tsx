@@ -7,36 +7,36 @@ interface ProgramDeliverablesSectionProps {
 
 const deliverables = [
   {
-    title: "Complete Brand Identity",
-    items: ["Custom logo & visual system", "Brand guidelines", "Social templates"],
+    title: "Authority Positioning",
+    items: ["Brand identity & visual system", "Strategic positioning framework", "Competitive differentiation"],
   },
   {
-    title: "Professional Content Manager",
-    items: ["Done-for-you posting", "Strategic scheduling", "Platform optimization"],
+    title: "Content & Creative",
+    items: ["Done-for-you scripting & editing", "Cinematic production quality", "Platform-optimized content"],
   },
   {
-    title: "Private Editing & Creative Team",
-    items: ["Dedicated editor assigned", "Premium video production", "Rapid turnaround"],
+    title: "Patient Acquisition",
+    items: ["Paid media management", "Cosmetic-targeted campaigns", "Revenue attribution & tracking"],
   },
   {
-    title: "Content Strategy",
-    items: ["12-month content calendar", "Hook & caption frameworks", "Posting cadence"],
+    title: "Conversion Systems",
+    items: ["Consultation optimization", "Patient communication frameworks", "CRM & workflow design"],
   },
   {
-    title: "Private Advisory",
-    items: ["Async strategy support", "Direct Slack access", "Creative direction"],
+    title: "Strategic Advisory",
+    items: ["Ongoing strategy partnership", "Direct access to PASTED team", "Market intelligence & insights"],
   },
   {
-    title: "Member Benefits",
-    items: ["50% off ad management", "Priority booking", "Private community"],
+    title: "Partnership Benefits",
+    items: ["Ecosystem-level perspective", "Priority support", "Private community access"],
   },
 ];
 
 const timeline = [
-  { week: "1-2", phase: "Positioning & Strategy" },
-  { week: "2-3", phase: "Brand & Narrative" },
-  { week: "3-5", phase: "Content System Setup" },
-  { week: "5-6", phase: "Launch & Management" },
+  { week: "1-2", phase: "Strategy & Positioning" },
+  { week: "2-4", phase: "Brand & Identity" },
+  { week: "4-6", phase: "Content System Launch" },
+  { week: "6+", phase: "Full System Active" },
 ];
 
 const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSectionProps) => {
@@ -45,9 +45,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
       { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -57,20 +55,18 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
   return (
     <section ref={sectionRef} className="py-32 md:py-48 bg-card/30">
       <div className="container max-w-6xl mx-auto px-4">
-        {/* Header */}
         <div className="text-center mb-20">
           <p className="text-sm tracking-[0.3em] uppercase text-primary mb-6">
-            Associate to Empire™
+            PASTED Partnership
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
-            Everything You Get
+            The Complete Growth System
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            A complete personal brand transformation delivered in 45 days
+            A 12-month strategic growth partnership — not a collection of disconnected services
           </p>
         </div>
 
-        {/* Deliverables Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30 mb-20">
           {deliverables.map((item, index) => (
             <div
@@ -93,39 +89,18 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           ))}
         </div>
 
-        {/* Pricing */}
+        {/* Revenue Framing */}
         <div className="max-w-4xl mx-auto mb-20">
-          <div className="grid md:grid-cols-2 gap-px bg-border/30">
-            {/* Initial Build */}
-            <div className={`bg-background p-10 text-center transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}>
-              <p className="text-sm tracking-[0.2em] uppercase text-muted-foreground mb-4">
-                Initial Brand Build
-              </p>
-              <p className="text-5xl font-serif text-foreground mb-2">$3,500</p>
-              <p className="text-sm text-muted-foreground">45-day launch</p>
-            </div>
-
-            {/* Monthly Retainer */}
-            <div className={`bg-primary/5 p-10 text-center border-l border-primary/20 transition-all duration-700 delay-400 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}>
-              <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4">
-                Monthly Retainer
-              </p>
-              <p className="text-5xl font-serif text-foreground mb-2">$2,750</p>
-              <p className="text-sm text-muted-foreground">Ongoing support</p>
-            </div>
-          </div>
-
-          <div className={`text-center mt-6 p-4 border border-border/30 transition-all duration-700 delay-500 ${
+          <div className={`bg-background p-10 text-center border border-border/30 transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            <p className="text-sm text-muted-foreground">
-              <span className="text-foreground">Month 4+:</span> Ad management from{" "}
-              <span className="text-primary">$1,250/mo</span>
-              <span className="text-muted-foreground/60"> (50% below market)</span>
+            <p className="text-sm tracking-[0.2em] uppercase text-muted-foreground mb-4">
+              12-Month Revenue Target
+            </p>
+            <p className="text-5xl font-serif text-primary mb-4">$500K–$1M+</p>
+            <p className="text-muted-foreground max-w-lg mx-auto">
+              in additional aesthetic case revenue. Most cosmetic cases range from $6K–$15K+.
+              Adding 50–100 additional cosmetic cases per year creates transformative growth.
             </p>
           </div>
         </div>
@@ -135,7 +110,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}>
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground text-center mb-10">
-            45-Day Timeline
+            Onboarding Timeline
           </p>
           <div className="flex justify-between items-center relative">
             <div className="absolute top-1/2 left-0 right-0 h-px bg-border/50 -translate-y-1/2" />
@@ -157,11 +132,11 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             onClick={onApplyClick}
             className="inline-flex items-center gap-3 text-sm tracking-[0.2em] uppercase text-background bg-primary px-10 py-5 hover:bg-primary/90 transition-colors duration-300"
           >
-            Apply Now
+            Schedule a Discovery Call
             <ArrowRight className="w-4 h-4" />
           </button>
           <p className="text-sm text-muted-foreground mt-6">
-            Limited to 4 new members per quarter
+            Only 30 practices accepted per year
           </p>
         </div>
       </div>

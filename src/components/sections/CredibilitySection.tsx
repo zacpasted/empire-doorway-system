@@ -8,8 +8,8 @@ const CredibilitySection = () => {
   const stats = [
     { value: "97%", label: "Client Retention Rate", detail: "Since 2019" },
     { value: "4-5+", label: "Years Average Tenure", detail: "Not campaigns — partnerships" },
-    { value: "$100M+", label: "Aesthetic Case Revenue", detail: "Driven by our systems" },
-    { value: "Global", label: "Brands Built", detail: "From startup practices to international names" },
+    { value: "$100M+", label: "Aesthetic Case Revenue", detail: "Driven across our ecosystem" },
+    { value: "30", label: "Practices Per Year", detail: "Selectivity is structural" },
   ];
 
   return (
@@ -27,12 +27,13 @@ const CredibilitySection = () => {
             The Track Record
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Retention This High Doesn't Happen<br />
-            <span className="text-primary">Without Real Results.</span>
+            We See the Entire Ecosystem.<br />
+            <span className="text-primary">Most Agencies See One Practice.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Our clients don't leave because the relationship is built as a long-term partnership — not a campaign.
-            The average PASTED client has been with us for over four years.
+            PASTED has a level of access and perspective that traditional agencies simply don't have —
+            because we work closely with many of the top clinicians and brands in aesthetic dentistry.
+            That ecosystem view informs every strategy we build.
           </p>
         </motion.div>
 
@@ -59,11 +60,11 @@ const CredibilitySection = () => {
           transition={{ duration: 0.7, delay: 0.6 }}
         >
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            We've built brands for some of the most recognized names in aesthetic dentistry.
-            Our systems have driven hundreds of millions in case revenue for the best in the world.
+            While most agencies see one practice at a time, PASTED operates across the entire aesthetic dentistry landscape.
+            That perspective — across the best clinicians, the most competitive markets, and the highest-performing brands — gives our partners an unfair advantage.
           </p>
           <p className="text-foreground font-serif text-xl md:text-2xl">
-            Now we bring that same infrastructure to practices ready for the next level.
+            Retention this high doesn't happen without real results.
           </p>
         </motion.div>
       </div>

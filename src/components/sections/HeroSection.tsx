@@ -356,15 +356,15 @@ const HeroSection = () => {
             <>
               <div className="text-center mb-6">
                 <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-                  Limited Availability
+                  Only 30 Practices Per Year
                 </p>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  Apply to Work With PASTED
+                  Schedule a Partner Discovery Call
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-                  We work with a small number of practices at a time. Clients are chosen based on alignment, ambition, and long-term vision.
+                  PASTED Partnership is for cosmetic dentists who want to become the aesthetic authority in their market, attract more of the right patients, and build a practice with stronger long-term positioning.
                   <br className="hidden md:block" />
-                  <span className="block mt-1">This is not an open service. It is a curated partnership.</span>
+                  <span className="block mt-1">This is not an open service. It is a curated strategic partnership.</span>
                 </p>
               </div>
               
