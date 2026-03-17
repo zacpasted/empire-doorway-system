@@ -61,11 +61,11 @@ const CommunitySection = ({
             The Network
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6 leading-tight">
-            More Than a Program.{" "}
+            More Than a Partnership.{" "}
             <span className="block mt-2">A Table Worth Sitting At.</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Associate to Empire™ is the gateway into a community shaping the future of dentistry.
+            PASTED Partnership is the gateway into a community of the most ambitious cosmetic dentists shaping the future of the profession.
           </p>
         </motion.div>
 

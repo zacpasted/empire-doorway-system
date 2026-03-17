@@ -252,7 +252,7 @@ const WhatYouReceiveSection = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex items-center justify-center gap-8 mt-8"
           >
-            {["Monthly delivery", "Full transparency", "Zero guesswork"].map((text, i) => (
+            {["On-location shoots", "Full ad management", "Hospitality-led conversion"].map((text, i) => (
               <motion.div
                 key={text}
                 initial={{ opacity: 0, y: 10 }}

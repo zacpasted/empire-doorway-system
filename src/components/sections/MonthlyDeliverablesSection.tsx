@@ -59,7 +59,7 @@ const MonthlyDeliverablesSection = () => {
         </div>
 
         <p className={`text-center mt-12 text-sm text-muted-foreground/60 transition-all duration-700 delay-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          Your only requirement: record raw footage. We handle everything else.
+          Your only requirement: show up and do great dentistry. We handle the storytelling, the ads, and everything in between.
         </p>
       </div>
     </section>

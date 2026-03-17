@@ -90,7 +90,7 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
             Schedule a Discovery Call
           </Button>
           <p className="text-xs text-muted-foreground mt-4">
-            This is not an application for a service. It is a request for access.
+            Only 30 practices accepted per year. Applications reviewed individually.
           </p>
         </div>
       </div>
