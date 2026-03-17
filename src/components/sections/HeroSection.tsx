@@ -205,20 +205,20 @@ const HeroSection = () => {
           {/* Logo Header - Instant visibility, no animation delay */}
           <div className="flex flex-col items-center mb-3 md:mb-6">
             <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
-              Associate to Empire
+              PASTED Partnership
             </span>
             <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
-              by PASTED
+              Strategic Growth for Cosmetic Dentistry
             </span>
           </div>
           
           {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              The Branding & Ads System Behind
+              Become the Aesthetic Authority
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Aesthetic Dentistry's Top 1%
+              in Your Market
             </span>
             <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
@@ -228,13 +228,13 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              Brand. Content. Ads. Conversion. Advisory.
+              Authority. Visibility. Patient Acquisition. Conversion.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            A curated strategic partnership for aesthetic practices<br />
-            building category-defining brands. <span className="italic">By invitation only.</span>
+            A 12-month strategic growth partnership helping cosmetic dentists add $500K–$1M+ in aesthetic case revenue.<br />
+            <span className="italic">Only 30 practices accepted per year.</span>
           </p>
         </motion.div>
         
