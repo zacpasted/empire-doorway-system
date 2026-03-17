@@ -52,13 +52,13 @@ const OrganicPaidSection = () => {
 
           <div className="text-center space-y-4">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Most practices separate these into different agencies that never communicate.
+              Most practices separate storytelling, content, and ads into different agencies that never communicate.
               The content team doesn't know what the ad team is running.
-              The ad team doesn't understand the brand.
+              The ad team doesn't understand the brand story.
             </p>
             <p className="text-foreground text-lg leading-relaxed">
-              PASTED integrates them into one system — the same creative assets that build authority organically
-              are strategically deployed in advertising to drive qualified cosmetic patient demand.
+              PASTED integrates them into one system — the same storytelling assets from on-location shoots
+              are used both organically and as high-performing ad creative, all managed by one team.
             </p>
           </div>
 

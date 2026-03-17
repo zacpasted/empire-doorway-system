@@ -134,8 +134,8 @@ const Index = () => {
         {/* 15. Content Examples — Wistia Videos */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
-            title="If Your Content Looks Like Everyone Else's, You Lose."
-            subtitle="Chosen brands don't guess. We script, edit, and distribute everything for you."
+            title="Storytelling That Moves Patients to Choose You."
+            subtitle="Every piece is scripted, shot, and edited by our team — then deployed as both organic content and high-performing ad creative."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
           />
         </AnimatedSection>
