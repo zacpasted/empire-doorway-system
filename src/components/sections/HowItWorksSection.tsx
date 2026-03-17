@@ -64,21 +64,21 @@ const HowItWorksSection = () => {
     },
     {
       number: "03",
-      title: "Content & Creative",
-      subtitle: "Producing world-class content that reflects the quality of the practice",
+      title: "Content, Storytelling & Shoots",
+      subtitle: "Cinematic production that tells your story and attracts the right patients",
       feeling: "Simplicity",
       icon: Video,
       timeframe: "Week 3-6",
       stats: { metric: "12+", label: "Monthly pieces" },
-      description: "We script, film, edit, and produce content that matches the caliber of your clinical work. Every piece is crafted with intention — designed to build authority, not chase trends.",
+      description: "We script, shoot, edit, and produce content that matches the caliber of your clinical work. Our team comes to your practice for on-location production days — capturing your story, your philosophy, and your results with cinematic quality.",
       details: [
-        "AI-assisted scripting shaped by strategy",
+        "On-location shoots — our team comes to you",
+        "Storytelling-driven scripting & narrative arcs",
         "Professional editing & cinematic production",
-        "Filming guidance or full videographer coordination",
-        "Narrative sequencing & content cadence"
+        "Ad creative produced alongside organic content"
       ],
-      outcome: "Your content becomes your most powerful asset — attracting the right patients before they ever call.",
-      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always.",
+      outcome: "Your content becomes your most powerful asset — storytelling that attracts cosmetic patients before they ever call.",
+      highlight: "We come to you. Cinematic production days at your practice, capturing the real story.",
       testimonial: {
         quote: "I film on Monday mornings before patients. 20 minutes, done for the week. It's become effortless.",
         name: "Dr. Beau Murphey",
