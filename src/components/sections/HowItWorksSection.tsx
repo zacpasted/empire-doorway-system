@@ -87,20 +87,20 @@ const HowItWorksSection = () => {
     },
     {
       number: "04",
-      title: "Distribution",
-      subtitle: "Deploying organic content and paid media together to drive demand",
+      title: "Ads & Distribution",
+      subtitle: "Full paid media management plus organic distribution — one unified system",
       feeling: "Momentum",
       icon: Rocket,
       timeframe: "Week 4+",
       stats: { metric: "3-5x", label: "ROI typical" },
-      description: "Organic content builds authority. Paid media amplifies reach. We integrate both into one system — the same creative assets that build trust organically are strategically deployed in advertising to drive demand.",
+      description: "We build, manage, and optimize your entire paid media strategy — alongside organic distribution. The same storytelling assets that build authority organically are strategically deployed as high-performing ad creative to drive qualified cosmetic patient demand.",
       details: [
+        "Full ad strategy, build & ongoing management",
+        "Ad creative produced from shoot & content assets",
         "Strategic organic publishing & scheduling",
-        "Paid media management & optimization",
-        "Unified creative across organic and paid",
         "Audience targeting refined by brand positioning"
       ],
-      outcome: "You are not guessing where patients come from. You are engineering demand.",
+      outcome: "You are not guessing where patients come from. You are engineering demand through ads and storytelling.",
       highlight: "Ads on a strong brand convert 3-5x better than ads alone.",
       testimonial: {
         quote: "We waited until the brand was working to run ads. ROI was immediate because trust already existed.",
