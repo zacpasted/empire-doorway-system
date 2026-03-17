@@ -87,7 +87,7 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
             onClick={onApplyClick}
             className="px-8 py-6 text-base"
           >
-            Request Consideration
+            Schedule a Discovery Call
           </Button>
           <p className="text-xs text-muted-foreground mt-4">
             This is not an application for a service. It is a request for access.
