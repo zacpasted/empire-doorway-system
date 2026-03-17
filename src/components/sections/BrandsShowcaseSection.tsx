@@ -21,10 +21,10 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            The Same Brand System Behind the Best Practices in the World
+            Storytelling, Ads & Brand Systems Built for the Best
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Built using the same elite framework trusted by the world's best practices—without the six-figure investment.
+            The same strategic framework behind the most recognized names in aesthetic dentistry — storytelling, production, ads, and hospitality, all working as one.
           </p>
         </div>
 
