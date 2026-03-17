@@ -64,21 +64,21 @@ const HowItWorksSection = () => {
     },
     {
       number: "03",
-      title: "Content & Creative",
-      subtitle: "Producing world-class content that reflects the quality of the practice",
+      title: "Content, Storytelling & Shoots",
+      subtitle: "Cinematic production that tells your story and attracts the right patients",
       feeling: "Simplicity",
       icon: Video,
       timeframe: "Week 3-6",
       stats: { metric: "12+", label: "Monthly pieces" },
-      description: "We script, film, edit, and produce content that matches the caliber of your clinical work. Every piece is crafted with intention — designed to build authority, not chase trends.",
+      description: "We script, shoot, edit, and produce content that matches the caliber of your clinical work. Our team comes to your practice for on-location production days — capturing your story, your philosophy, and your results with cinematic quality.",
       details: [
-        "AI-assisted scripting shaped by strategy",
+        "On-location shoots — our team comes to you",
+        "Storytelling-driven scripting & narrative arcs",
         "Professional editing & cinematic production",
-        "Filming guidance or full videographer coordination",
-        "Narrative sequencing & content cadence"
+        "Ad creative produced alongside organic content"
       ],
-      outcome: "Your content becomes your most powerful asset — attracting the right patients before they ever call.",
-      highlight: "Every piece is crafted, not mass-produced. Quality over quantity, always.",
+      outcome: "Your content becomes your most powerful asset — storytelling that attracts cosmetic patients before they ever call.",
+      highlight: "We come to you. Cinematic production days at your practice, capturing the real story.",
       testimonial: {
         quote: "I film on Monday mornings before patients. 20 minutes, done for the week. It's become effortless.",
         name: "Dr. Beau Murphey",
@@ -87,20 +87,20 @@ const HowItWorksSection = () => {
     },
     {
       number: "04",
-      title: "Distribution",
-      subtitle: "Deploying organic content and paid media together to drive demand",
+      title: "Ads & Distribution",
+      subtitle: "Full paid media management plus organic distribution — one unified system",
       feeling: "Momentum",
       icon: Rocket,
       timeframe: "Week 4+",
       stats: { metric: "3-5x", label: "ROI typical" },
-      description: "Organic content builds authority. Paid media amplifies reach. We integrate both into one system — the same creative assets that build trust organically are strategically deployed in advertising to drive demand.",
+      description: "We build, manage, and optimize your entire paid media strategy — alongside organic distribution. The same storytelling assets that build authority organically are strategically deployed as high-performing ad creative to drive qualified cosmetic patient demand.",
       details: [
+        "Full ad strategy, build & ongoing management",
+        "Ad creative produced from shoot & content assets",
         "Strategic organic publishing & scheduling",
-        "Paid media management & optimization",
-        "Unified creative across organic and paid",
         "Audience targeting refined by brand positioning"
       ],
-      outcome: "You are not guessing where patients come from. You are engineering demand.",
+      outcome: "You are not guessing where patients come from. You are engineering demand through ads and storytelling.",
       highlight: "Ads on a strong brand convert 3-5x better than ads alone.",
       testimonial: {
         quote: "We waited until the brand was working to run ads. ROI was immediate because trust already existed.",
@@ -110,21 +110,21 @@ const HowItWorksSection = () => {
     },
     {
       number: "05",
-      title: "Systems & Conversion",
-      subtitle: "Optimizing the consultation experience and internal systems",
+      title: "Hospitality & Conversion",
+      subtitle: "Designing a patient experience that reflects the quality of your clinical work",
       feeling: "Trust",
       icon: Users,
       timeframe: "Ongoing",
       stats: { metric: "97%", label: "Client retention" },
-      description: "Most agencies stop at lead generation. We continue into the practice itself — building conversion systems, consultation frameworks, patient communication workflows, and internal tools that turn attention into revenue.",
+      description: "Most agencies stop at lead generation. We continue into the practice itself — designing hospitality-driven consultation experiences, patient communication workflows, and internal systems that turn attention into accepted high-value cases. The patient experience should feel as elevated as the clinical work.",
       details: [
-        "Consultation process optimization",
-        "Patient communication frameworks",
+        "Hospitality-driven consultation design",
+        "Patient communication & storytelling frameworks",
         "CRM systems & internal workflow design",
         "Conversion tracking & refinement"
       ],
-      outcome: "Leads stop being wasted. Every touchpoint in the practice reinforces your brand.",
-      highlight: "Brand is not just visual identity — it includes how patients experience you.",
+      outcome: "Every touchpoint in the practice reinforces your brand — from first call to treatment acceptance.",
+      highlight: "The patient experience should feel as premium as the dentistry itself.",
       testimonial: {
         quote: "They know my brand better than I do. The team feels like an extension of my practice.",
         name: "Dr. Serena Wong",
@@ -386,7 +386,7 @@ const HowItWorksSection = () => {
         >
           <p className="text-muted-foreground leading-relaxed text-lg">
             PASTED is not a content subscription, an agency retainer, or a templated brand package. 
-            It is a <span className="text-foreground font-medium">360-degree transformation system</span> designed to take an aesthetic practice from invisible to category-defining.
+            It is a <span className="text-foreground font-medium">360-degree growth system</span> — storytelling, ads, on-location shoots, hospitality design, and strategic advisory — coordinated as one partnership to take an aesthetic practice from invisible to category-defining.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <motion.div 

@@ -17,10 +17,10 @@ const OrganicPaidSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Visibility Engine
+            Storytelling + Ads
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Authority + Amplification.<br />
+            Brand Storytelling + Paid Media.<br />
             <span className="text-primary">One Coordinated System.</span>
           </h2>
         </motion.div>
@@ -33,19 +33,17 @@ const OrganicPaidSection = () => {
         >
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-6 border border-border/30 bg-card/20 rounded-lg">
-              <h3 className="font-serif text-xl text-foreground mb-3">Organic Authority</h3>
+              <h3 className="font-serif text-xl text-foreground mb-3">Storytelling & Content</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Positions you as the cosmetic authority in your market.
-                Creates the trust foundation that makes every advertising dollar work harder.
-                Patients choose you before they ever see an ad.
+                On-location shoots, scripted storytelling, and cinematic editing that positions you as the cosmetic authority in your market.
+                This is the trust foundation that makes every advertising dollar work harder.
               </p>
             </div>
             <div className="p-6 border border-border/30 bg-card/20 rounded-lg">
-              <h3 className="font-serif text-xl text-foreground mb-3">Paid Amplification</h3>
+              <h3 className="font-serif text-xl text-foreground mb-3">Paid Media & Ads</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Strategically deploys the content that already builds trust
-                to drive qualified cosmetic patient demand at scale.
-                Ads on a strong brand convert 3–5x better than ads alone.
+                We build, manage, and optimize your entire ad strategy — deploying the same storytelling content
+                as high-performing ad creative to drive qualified cosmetic patient demand at scale.
               </p>
             </div>
           </div>
@@ -54,13 +52,13 @@ const OrganicPaidSection = () => {
 
           <div className="text-center space-y-4">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Most practices separate these into different agencies that never communicate.
+              Most practices separate storytelling, content, and ads into different agencies that never communicate.
               The content team doesn't know what the ad team is running.
-              The ad team doesn't understand the brand.
+              The ad team doesn't understand the brand story.
             </p>
             <p className="text-foreground text-lg leading-relaxed">
-              PASTED integrates them into one system — the same creative assets that build authority organically
-              are strategically deployed in advertising to drive qualified cosmetic patient demand.
+              PASTED integrates them into one system — the same storytelling assets from on-location shoots
+              are used both organically and as high-performing ad creative, all managed by one team.
             </p>
           </div>
 

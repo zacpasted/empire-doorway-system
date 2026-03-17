@@ -7,12 +7,12 @@ const services = [
     icon: Crown,
     title: "Authority Engine",
     tagline: "Be seen as the cosmetic expert",
-    description: "We position the practice so patients clearly see you as the cosmetic authority in your market. This isn't a logo refresh — it's a complete repositioning of how the market perceives you.",
+    description: "We position the practice so patients clearly see you as the cosmetic authority in your market. Through strategic storytelling, brand narrative, and identity work — we shape how the market perceives you and why patients choose you over anyone else.",
     features: [
       "Strategic positioning & competitive differentiation",
-      "Brand narrative & messaging architecture",
+      "Brand narrative & storytelling architecture",
       "Visual identity aligned to cosmetic authority",
-      "Market perception engineering"
+      "On-location brand shoots — we come to you"
     ],
     stat: 100,
     statSuffix: "M+",
@@ -24,11 +24,11 @@ const services = [
     icon: Eye,
     title: "Visibility Engine",
     tagline: "Consistently in front of the right audience",
-    description: "We create systems that consistently put your practice, philosophy, and results in front of the right audience — not vanity impressions, but qualified cosmetic patients.",
+    description: "We create systems that consistently put your practice, philosophy, and results in front of the right audience. From cinematic on-location shoots to done-for-you scripting and editing — every piece of content is crafted to build trust and attract cosmetic patients.",
     features: [
-      "Done-for-you content production & scripting",
-      "Strategic organic publishing across platforms",
-      "Paid media management & optimization",
+      "On-location production shoots at your practice",
+      "Done-for-you scripting, editing & publishing",
+      "Strategic paid media management & ad creative",
       "Unified organic + paid creative system"
     ],
     stat: 12,
@@ -41,10 +41,10 @@ const services = [
     icon: Target,
     title: "Patient Acquisition Engine",
     tagline: "Attract cosmetic patients, not price shoppers",
-    description: "We help practices attract patients specifically looking for cosmetic procedures — not low-intent leads or price shoppers. Every dollar is engineered for qualified demand.",
+    description: "We build and manage high-performance ad campaigns designed specifically for cosmetic dentistry. Every dollar is engineered for qualified demand — not low-intent leads or price shoppers. Your ads run on content that already builds trust.",
     features: [
-      "High-intent audience targeting",
-      "Cosmetic-specific campaign architecture",
+      "Full paid media strategy, build & management",
+      "Cosmetic-specific ad creative & campaign architecture",
       "Lead quality scoring & filtering",
       "Revenue attribution & ROI tracking"
     ],
@@ -58,10 +58,10 @@ const services = [
     icon: Settings,
     title: "Conversion Engine",
     tagline: "Turn inquiries into high-value accepted cases",
-    description: "We optimize the patient journey, consultation process, and treatment presentation so more inquiries turn into high-value accepted cases. Most agencies stop at leads — we don't.",
+    description: "We optimize the entire patient journey — from the first touchpoint to the consultation room. Hospitality-driven communication frameworks, treatment presentation systems, and follow-up workflows ensure every patient interaction reflects the quality of your practice.",
     features: [
-      "Consultation process optimization",
-      "Patient communication frameworks",
+      "Hospitality-driven consultation optimization",
+      "Patient communication & storytelling frameworks",
       "CRM workflows & follow-up sequences",
       "Treatment presentation systems"
     ],

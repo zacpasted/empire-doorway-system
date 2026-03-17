@@ -15,12 +15,12 @@ const MonthlyDeliverablesSection = () => {
   }, []);
 
   const deliverables = [
-    { icon: Scissors, title: "8-12 Edited Videos", description: "Premium content professionally edited and optimized for cosmetic patient attraction" },
-    { icon: Calendar, title: "Done-For-You Publishing", description: "Strategic scheduling and publishing across all platforms" },
-    { icon: MessageSquare, title: "Scripting & Hooks", description: "Authority-building copy crafted for cosmetic patient engagement" },
-    { icon: TrendingUp, title: "Performance & Strategy Reviews", description: "Monthly analytics, revenue attribution, and strategy refinements" },
-    { icon: Users, title: "Dedicated Strategic Team", description: "Your personal editor, strategist, and growth partner on standby" },
-    { icon: Shield, title: "Conversion Optimization", description: "Ongoing refinement of consultation process and patient experience" },
+    { icon: Scissors, title: "8-12 Edited Videos", description: "Premium storytelling content — scripted, edited, and optimized for cosmetic patient attraction" },
+    { icon: Calendar, title: "Done-For-You Publishing", description: "Strategic scheduling and publishing across all platforms — you never touch a post" },
+    { icon: MessageSquare, title: "Ad Creative & Management", description: "Full paid media strategy, ad creative production, campaign management, and ongoing optimization" },
+    { icon: TrendingUp, title: "On-Location Shoots", description: "We come to your practice for cinematic production days — capturing your story, your team, and your results" },
+    { icon: Users, title: "Dedicated Strategic Team", description: "Your personal editor, strategist, ad manager, and growth partner — all coordinated as one" },
+    { icon: Shield, title: "Hospitality-Led Conversion", description: "Ongoing refinement of consultation experience, patient communication, and treatment presentation" },
   ];
 
   return (
@@ -59,7 +59,7 @@ const MonthlyDeliverablesSection = () => {
         </div>
 
         <p className={`text-center mt-12 text-sm text-muted-foreground/60 transition-all duration-700 delay-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          Your only requirement: record raw footage. We handle everything else.
+          Your only requirement: show up and do great dentistry. We handle the storytelling, the ads, and everything in between.
         </p>
       </div>
     </section>

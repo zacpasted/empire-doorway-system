@@ -45,7 +45,7 @@ const VideoCarouselSection = () => {
   const isSectionVisible = useInView(sectionRef, { margin: "200px" });
   const [isPaused, setIsPaused] = useState(false);
 
-  const words = ["Create", "Content", "That", "Builds", "Your", "Dream", "Life"];
+  const words = ["Storytelling", "That", "Moves", "Patients", "to", "Choose", "You"];
 
   // Duplicate videos for seamless loop
   const duplicatedVideos = [...videos, ...videos];

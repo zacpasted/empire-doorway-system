@@ -4,33 +4,33 @@ import { Film, Palette, Smartphone, FileText, Calendar, Target, Scissors, Clock,
 const WhatYouReceiveSection = () => {
   const deliverables = [
     {
-      category: "Production",
+      category: "Content & Storytelling",
       icon: Film,
       accent: "from-primary/20 to-primary/5",
       items: [
-        { icon: Sparkles, text: "Monthly high-end video edits", highlight: true },
-        { icon: Palette, text: "Professional color grading" },
-        { icon: Smartphone, text: "Platform-optimized formats" },
+        { icon: Sparkles, text: "Monthly cinematic video edits & storytelling", highlight: true },
+        { icon: Palette, text: "On-location production shoots at your practice" },
+        { icon: Smartphone, text: "Platform-optimized formats for organic & ads" },
       ],
     },
     {
-      category: "Strategy",
+      category: "Ads & Growth",
       icon: Target,
       accent: "from-primary/15 to-transparent",
       items: [
-        { icon: FileText, text: "Scripting and narrative guidance", highlight: true },
-        { icon: Calendar, text: "Content calendar architecture" },
-        { icon: Target, text: "Positioning refinement" },
+        { icon: Target, text: "Full paid media strategy, build & management", highlight: true },
+        { icon: FileText, text: "Ad creative production & ongoing optimization" },
+        { icon: Calendar, text: "Revenue attribution & performance reporting" },
       ],
     },
     {
-      category: "Operations",
+      category: "Hospitality & Conversion",
       icon: Scissors,
       accent: "from-primary/20 to-primary/5",
       items: [
-        { icon: Scissors, text: "Done-for-you editing pipeline", highlight: true },
-        { icon: Clock, text: "Clear delivery cadence" },
-        { icon: CheckCircle2, text: "Quality control at every stage" },
+        { icon: Scissors, text: "Hospitality-driven patient experience design", highlight: true },
+        { icon: Clock, text: "Consultation & treatment presentation systems" },
+        { icon: CheckCircle2, text: "CRM workflows & follow-up sequences" },
       ],
     },
   ];
@@ -241,7 +241,7 @@ const WhatYouReceiveSection = () => {
             animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
-            Predictable. Professional. No surprises.
+            Storytelling. Ads. Hospitality. One team. No surprises.
           </motion.p>
 
           {/* Animated checkmarks */}
@@ -252,7 +252,7 @@ const WhatYouReceiveSection = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex items-center justify-center gap-8 mt-8"
           >
-            {["Monthly delivery", "Full transparency", "Zero guesswork"].map((text, i) => (
+            {["On-location shoots", "Full ad management", "Hospitality-led conversion"].map((text, i) => (
               <motion.div
                 key={text}
                 initial={{ opacity: 0, y: 10 }}

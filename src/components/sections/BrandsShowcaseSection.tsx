@@ -21,10 +21,10 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            The Same Brand System Behind the Best Practices in the World
+            Storytelling, Ads & Brand Systems Built for the Best
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Built using the same elite framework trusted by the world's best practices—without the six-figure investment.
+            The same strategic framework behind the most recognized names in aesthetic dentistry — storytelling, production, ads, and hospitality, all working as one.
           </p>
         </div>
 
@@ -87,10 +87,10 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
             onClick={onApplyClick}
             className="px-8 py-6 text-base"
           >
-            Request Consideration
+            Schedule a Discovery Call
           </Button>
           <p className="text-xs text-muted-foreground mt-4">
-            This is not an application for a service. It is a request for access.
+            Only 30 practices accepted per year. Applications reviewed individually.
           </p>
         </div>
       </div>
