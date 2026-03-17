@@ -33,19 +33,17 @@ const OrganicPaidSection = () => {
         >
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-6 border border-border/30 bg-card/20 rounded-lg">
-              <h3 className="font-serif text-xl text-foreground mb-3">Organic Authority</h3>
+              <h3 className="font-serif text-xl text-foreground mb-3">Storytelling & Content</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Positions you as the cosmetic authority in your market.
-                Creates the trust foundation that makes every advertising dollar work harder.
-                Patients choose you before they ever see an ad.
+                On-location shoots, scripted storytelling, and cinematic editing that positions you as the cosmetic authority in your market.
+                This is the trust foundation that makes every advertising dollar work harder.
               </p>
             </div>
             <div className="p-6 border border-border/30 bg-card/20 rounded-lg">
-              <h3 className="font-serif text-xl text-foreground mb-3">Paid Amplification</h3>
+              <h3 className="font-serif text-xl text-foreground mb-3">Paid Media & Ads</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Strategically deploys the content that already builds trust
-                to drive qualified cosmetic patient demand at scale.
-                Ads on a strong brand convert 3–5x better than ads alone.
+                We build, manage, and optimize your entire ad strategy — deploying the same storytelling content
+                as high-performing ad creative to drive qualified cosmetic patient demand at scale.
               </p>
             </div>
           </div>
