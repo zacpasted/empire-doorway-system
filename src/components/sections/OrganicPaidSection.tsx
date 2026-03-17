@@ -17,10 +17,10 @@ const OrganicPaidSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Visibility Engine
+            Storytelling + Ads
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Authority + Amplification.<br />
+            Brand Storytelling + Paid Media.<br />
             <span className="text-primary">One Coordinated System.</span>
           </h2>
         </motion.div>
