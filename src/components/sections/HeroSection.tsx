@@ -37,22 +37,22 @@ const MetricsBar = memo(() => {
     margin: "-50px"
   });
   const metrics = useMemo(() => [{
-    label: "Revenue Generated",
+    label: "Aesthetic Revenue Generated",
     numValue: 100,
     prefix: "$",
     suffix: "M+",
     barWidth: 95
   }, {
-    label: "8 Figure Practices Built",
-    numValue: 42,
+    label: "Practices Accepted / Year",
+    numValue: 30,
     prefix: "",
-    suffix: "+",
+    suffix: "",
     barWidth: 100
   }, {
-    label: "Careers Curated",
-    numValue: 200,
-    prefix: "",
-    suffix: "+",
+    label: "Avg Revenue Added / Partner",
+    numValue: 500,
+    prefix: "$",
+    suffix: "K+",
     barWidth: 88
   }, {
     label: "Client Retention",
@@ -205,20 +205,20 @@ const HeroSection = () => {
           {/* Logo Header - Instant visibility, no animation delay */}
           <div className="flex flex-col items-center mb-3 md:mb-6">
             <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
-              Associate to Empire
+              PASTED Partnership
             </span>
             <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
-              by PASTED
+              Strategic Growth for Cosmetic Dentistry
             </span>
           </div>
           
           {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              The Branding & Ads System Behind
+              Become the Aesthetic Authority
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Aesthetic Dentistry's Top 1%
+              in Your Market
             </span>
             <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
@@ -228,13 +228,13 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              Brand. Content. Ads. Conversion. Advisory.
+              Authority. Visibility. Patient Acquisition. Conversion.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            A curated strategic partnership for aesthetic practices<br />
-            building category-defining brands. <span className="italic">By invitation only.</span>
+            A 12-month strategic growth partnership helping cosmetic dentists add $500K–$1M+ in aesthetic case revenue.<br />
+            <span className="italic">Only 30 practices accepted per year.</span>
           </p>
         </motion.div>
         
@@ -356,15 +356,15 @@ const HeroSection = () => {
             <>
               <div className="text-center mb-6">
                 <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-                  Limited Availability
+                  Only 30 Practices Per Year
                 </p>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  Apply to Work With PASTED
+                  Schedule a Partner Discovery Call
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-                  We work with a small number of practices at a time. Clients are chosen based on alignment, ambition, and long-term vision.
+                  PASTED Partnership is for cosmetic dentists who want to become the aesthetic authority in their market, attract more of the right patients, and build a practice with stronger long-term positioning.
                   <br className="hidden md:block" />
-                  <span className="block mt-1">This is not an open service. It is a curated partnership.</span>
+                  <span className="block mt-1">This is not an open service. It is a curated strategic partnership.</span>
                 </p>
               </div>
               

@@ -3,48 +3,27 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 const TransformationSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    margin: "-100px"
-  });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const transformations = [{
-    before: "Skilled",
-    after: "Recognized"
+    before: "Invisible",
+    after: "The Authority"
   }, {
-    before: "Unknown",
-    after: "Chosen"
+    before: "Price Shoppers",
+    after: "Cosmetic Patients"
   }, {
-    before: "Reactive",
-    after: "In Control"
+    before: "Fragmented Vendors",
+    after: "One Strategic System"
   }, {
-    before: "Hoping",
-    after: "Inevitable"
+    before: "Hoping for Growth",
+    after: "Engineering Demand"
   }];
   const containerVariants = {
-    hidden: {
-      opacity: 0
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
   };
   const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const
-      }
-    }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } }
   };
   return (
     <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
@@ -56,7 +35,7 @@ const TransformationSection = () => {
             The Shift
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            From where you are to where you belong
+            From where you are to where you belong — in 12 months
           </p>
         </div>
         

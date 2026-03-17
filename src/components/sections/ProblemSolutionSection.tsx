@@ -34,31 +34,31 @@ const ProblemSolutionSection = () => {
   const solutionSaturation = useTransform(solutionProgress, [0, 0.5, 1], [0.5, 1, 1.2]);
 
   const problems = [
-    "You know branding matters but don't know where to start.",
-    "You know content is required but don't know what to say.",
-    "Creating feels unnatural, inconsistent, and time-consuming.",
-    "Most dental content looks the same.",
-    "Attention doesn't turn into patients.",
-    "Virality is confused for growth.",
-    "You don't know who to trust.",
-    "Agencies promise exposure, not outcomes.",
-    "Branding feels hard to justify financially.",
-    "You worry about the payoff.",
-    "You delay because the risk feels unclear.",
+    "You're clinically excellent but patients don't know you exist.",
+    "You're losing cosmetic cases to louder, less skilled competitors.",
+    "Multiple agencies and freelancers — none of them talk to each other.",
+    "Your content looks like everyone else's in dentistry.",
+    "You're getting leads, but they're price shoppers, not cosmetic patients.",
+    "You've invested in marketing but can't measure what's working.",
+    "Your reputation doesn't match the quality of your clinical work.",
+    "Consultations feel harder than they should — patients aren't pre-sold.",
+    "You know you should be the go-to cosmetic dentist, but perception hasn't caught up.",
+    "You're spending money on ads without a brand worth amplifying.",
+    "You delay because nothing feels like the right strategic fit.",
   ];
 
   const solutions = [
-    "A clear system for brand, content, and conversion.",
-    "Direction on exactly what to say and why it works.",
-    "A repeatable creation process that fits real clinical life.",
-    "Positioning that immediately differentiates you.",
-    "Content designed to convert, not just attract.",
-    "Strategy built for qualified patient demand.",
-    "Guidance from a team that's done this at the highest level.",
-    "Proven frameworks used by the best in the world.",
-    "Branding treated as a revenue asset.",
-    "Confidence in spend and direction.",
-    "Momentum that compounds over time.",
+    "Strategic positioning that makes you the obvious cosmetic choice.",
+    "One unified system replacing fragmented agencies and freelancers.",
+    "Content that attracts patients looking for cosmetic procedures, not discounts.",
+    "Authority positioning that pre-sells patients before they ever call.",
+    "A patient acquisition engine built for high-value cosmetic cases.",
+    "Conversion systems that turn inquiries into accepted treatment plans.",
+    "A team with $100M+ in aesthetic revenue driving their strategy.",
+    "Proven frameworks from the top cosmetic practices in the world.",
+    "Brand infrastructure treated as the practice's highest-ROI asset.",
+    "Clear metrics and revenue attribution across every channel.",
+    "Compounding authority that makes every month stronger than the last.",
   ];
 
   const containerVariants = {
@@ -143,14 +143,14 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The Diagnosis
+            The Core Problem
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            Why Most Dentists Stay{" "}
+            Most Great Cosmetic Dentists Are{" "}
             <span className="text-muted-foreground italic">Invisible</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            And how we solve it — systematically.
+            Not because they lack skill — because they lack the positioning, visibility, and authority required to dominate perception in their market.
           </p>
         </motion.div>
 

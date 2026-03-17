@@ -2,75 +2,44 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 const FilterSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    amount: 0.2
-  });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const notFor = [{
-    text: "Trend chasers looking for quick wins",
+    text: "Practices looking for quick leads or cheap marketing",
     icon: "◇"
   }, {
-    text: "Practices seeking a vendor, not a partner",
+    text: "Dentists who want a vendor, not a strategic partner",
     icon: "◈"
   }, {
-    text: "Volume-first clinicians with no brand vision",
+    text: "Volume-first clinicians with no interest in cosmetic positioning",
     icon: "◆"
   }, {
-    text: "Those unwilling to invest in long-term positioning",
+    text: "Those who confuse templates and shortcuts for real brand building",
     icon: "◇"
   }];
   const isFor = [{
-    text: "Ambitious aesthetics-focused practices ready to lead",
+    text: "Cosmetic dentists who want to be the aesthetic authority in their city",
     icon: "△"
   }, {
-    text: "Doctors who understand brand is the foundation of growth",
+    text: "Doctors who understand that reputation compounds over time",
     icon: "▲"
   }, {
-    text: "Practitioners who value taste, restraint, and authority",
+    text: "Practitioners who want a brand and growth system that reflects their clinical excellence",
     icon: "△"
   }, {
-    text: "Those committed to a long-term strategic partnership",
+    text: "Those committed to building something iconic, not just running ads",
     icon: "▲"
   }];
   const containerVariants = {
-    hidden: {
-      opacity: 0
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } }
   };
   const itemVariants = {
-    hidden: {
-      opacity: 0,
-      x: -20
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.4, 0, 0.2, 1] as const
-      }
-    }
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] as const } }
   };
   const itemVariantsRight = {
-    hidden: {
-      opacity: 0,
-      x: 20
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.4, 0, 0.2, 1] as const
-      }
-    }
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] as const } }
   };
   return (
     <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
@@ -79,15 +48,14 @@ const FilterSection = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-            The Gate
+            This Is Not for Everyone
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            This isn't for everyone. That's the point.
+            Selectivity is how we maintain the quality of the partnership. That's the point.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Not For */}
           <motion.div 
             className="space-y-4"
             variants={containerVariants}
@@ -107,7 +75,6 @@ const FilterSection = () => {
             ))}
           </motion.div>
           
-          {/* Is For */}
           <motion.div 
             className="space-y-4"
             variants={containerVariants}

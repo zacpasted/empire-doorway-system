@@ -19,18 +19,17 @@ const AuthorityStatementSection = () => {
           </p>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
-            PASTED is the only company in the world
-            that has repeatedly built elite aesthetic practices
-            through this <span className="text-primary">integrated approach.</span>
+            PASTED is the only partner in cosmetic dentistry
+            that integrates authority, visibility, patient acquisition, and conversion
+            into one <span className="text-primary">coordinated growth system.</span>
           </h2>
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Over nearly a decade, the team has worked with some of the most ambitious dentists globally.
-            This experience created a blueprint that cannot be replicated by traditional agencies —
-            because it requires the intersection of brand, content, advertising, conversion systems,
-            and strategic advisory operating as one.
+            While most agencies see one practice at a time, PASTED operates across the entire aesthetic dentistry ecosystem.
+            That perspective — working closely with many of the top clinicians and brands in the industry — creates a strategic advantage
+            that cannot be replicated by traditional marketing agencies, freelancers, or consultants working in isolation.
           </p>
         </motion.div>
       </div>

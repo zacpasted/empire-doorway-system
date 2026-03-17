@@ -5,11 +5,11 @@ const DreamLifeSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const questions = [
-    "What kind of practice do you want?",
-    "What kind of life do you want?",
-    "Where do you want to live?",
-    "How much freedom do you want?",
+  const futureState = [
+    "Patients already know you for cosmetic dentistry before they call.",
+    "Consultations feel easier — patients arrive pre-sold on your expertise.",
+    "Your practice attracts more high-value cosmetic cases consistently.",
+    "Your reputation compounds locally and beyond your city.",
   ];
 
   return (
@@ -24,11 +24,11 @@ const DreamLifeSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Design Your Life
+            One Year From Now
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            We Don't Optimize for Revenue.<br />
-            <span className="text-primary">We Optimize for Life.</span>
+            Your Practice Looks and Feels<br />
+            <span className="text-primary">Fundamentally Different.</span>
           </h2>
         </motion.div>
 
@@ -38,16 +38,11 @@ const DreamLifeSection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            Most business advisors optimize for revenue.
-            Every engagement at PASTED begins with understanding your vision.
-          </p>
-
           <div className="space-y-3 max-w-md mx-auto py-4">
-            {questions.map((q, i) => (
+            {futureState.map((q, i) => (
               <motion.p
                 key={i}
-                className="text-center text-foreground/80 text-lg italic"
+                className="text-center text-foreground/80 text-lg"
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
@@ -61,11 +56,12 @@ const DreamLifeSection = () => {
 
           <div className="text-center space-y-4">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              The business is then designed around that vision.
+              This is what happens when authority, visibility, patient acquisition, and conversion
+              operate as one system over 12 months.
             </p>
             <p className="text-foreground font-serif text-xl md:text-2xl">
-              Dentistry becomes the tool to build the life you want —<br />
-              <span className="text-primary">not the constraint that limits it.</span>
+              The practice doesn't just grow —<br />
+              <span className="text-primary">it becomes the obvious choice in your market.</span>
             </p>
           </div>
         </motion.div>
