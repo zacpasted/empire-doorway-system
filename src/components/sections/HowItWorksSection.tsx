@@ -110,21 +110,21 @@ const HowItWorksSection = () => {
     },
     {
       number: "05",
-      title: "Systems & Conversion",
-      subtitle: "Optimizing the consultation experience and internal systems",
+      title: "Hospitality & Conversion",
+      subtitle: "Designing a patient experience that reflects the quality of your clinical work",
       feeling: "Trust",
       icon: Users,
       timeframe: "Ongoing",
       stats: { metric: "97%", label: "Client retention" },
-      description: "Most agencies stop at lead generation. We continue into the practice itself — building conversion systems, consultation frameworks, patient communication workflows, and internal tools that turn attention into revenue.",
+      description: "Most agencies stop at lead generation. We continue into the practice itself — designing hospitality-driven consultation experiences, patient communication workflows, and internal systems that turn attention into accepted high-value cases. The patient experience should feel as elevated as the clinical work.",
       details: [
-        "Consultation process optimization",
-        "Patient communication frameworks",
+        "Hospitality-driven consultation design",
+        "Patient communication & storytelling frameworks",
         "CRM systems & internal workflow design",
         "Conversion tracking & refinement"
       ],
-      outcome: "Leads stop being wasted. Every touchpoint in the practice reinforces your brand.",
-      highlight: "Brand is not just visual identity — it includes how patients experience you.",
+      outcome: "Every touchpoint in the practice reinforces your brand — from first call to treatment acceptance.",
+      highlight: "The patient experience should feel as premium as the dentistry itself.",
       testimonial: {
         quote: "They know my brand better than I do. The team feels like an extension of my practice.",
         name: "Dr. Serena Wong",
