@@ -23,16 +23,15 @@ const CredibilitySection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            The Track Record
+            Trust Stack
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            We See the Entire Ecosystem.<br />
-            <span className="text-primary">Most Agencies See One Practice.</span>
+            Built From the Inside of<br />
+            <span className="text-primary">Aesthetic Dentistry's Top Practices.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            PASTED has a level of access and perspective that traditional agencies simply don't have —
-            because we work closely with many of the top clinicians and brands in aesthetic dentistry.
-            That ecosystem view informs every strategy we build.
+            Trusted by leading cosmetic dentists globally. PASTED operates across the entire aesthetic ecosystem —
+            giving our partners a strategic advantage that isolated agencies, freelancers, and consultants cannot replicate.
           </p>
         </motion.div>
 
