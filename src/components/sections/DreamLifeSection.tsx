@@ -20,8 +20,8 @@ const DreamLifeSection = () => {
             Alignment
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            This Isn't Just Growth.<br />
-            <span className="text-primary">It's Alignment.</span>
+            Build the Practice — And the Life —<br />
+            <span className="text-primary">You Actually Want.</span>
           </h2>
         </motion.div>
 
