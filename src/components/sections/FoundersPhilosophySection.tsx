@@ -28,14 +28,15 @@ const FoundersPhilosophySection = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            Getting Started Is the Hardest Part
+            This Is a Controlled Gateway
           </h2>
           <p 
             className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            Your greatest competitive advantage is the most authentic version of your clinical philosophy and patient care. We help you build a brand around that truth.
+            Not a marketing funnel. A private opportunity for cosmetic dentists who are ready to build
+            the practice — and the reputation — they've always envisioned.
           </p>
         </div>
         

@@ -57,10 +57,10 @@ const MobileFloatingCTA = () => {
               className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary text-primary-foreground font-medium text-base tracking-wide uppercase rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform"
             >
               <ArrowUp className="w-4 h-4" />
-              Apply to Work With PASTED
+              Apply for Partnership
             </button>
             <p className="text-center text-xs text-muted-foreground mt-2">
-              Limited spots available
+              30 practices per year · Not all accepted
             </p>
           </div>
         </motion.div>

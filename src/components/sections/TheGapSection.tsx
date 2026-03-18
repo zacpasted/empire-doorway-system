@@ -13,16 +13,7 @@ const TheGapSection = () => {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-  const statements = [{
-    text: "Clinically exceptional.",
-    delay: 0
-  }, {
-    text: "Invisible in your market.",
-    delay: 200
-  }, {
-    text: "Watching less skilled competitors attract the patients you deserve.",
-    delay: 400
-  }];
+
   return (
     <section ref={sectionRef} className="py-24 md:py-32 bg-background">
       <div className="container max-w-3xl mx-auto px-4 text-center">
@@ -31,29 +22,46 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          The Gap
+          The Reframe
         </p>
         
-        <div className="space-y-6">
-          {statements.map((statement, index) => (
-            <h2
-              key={index}
-              className={`text-2xl md:text-4xl font-serif text-foreground transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-              style={{ transitionDelay: `${statement.delay}ms` }}
-            >
-              {statement.text}
-            </h2>
-          ))}
-        </div>
-        
-        <p
-          className={`mt-12 text-muted-foreground max-w-xl mx-auto transition-all duration-700 delay-700 ${
+        <h2
+          className={`text-2xl md:text-4xl font-serif text-foreground mb-8 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Cosmetic dentistry is a perception category. The practices that dominate their market control authority, perception, and patient demand — not just clinical skill.
+          Most dentists are stuck in a loop.
+        </h2>
+
+        <div className="space-y-3 mb-10">
+          {["More ads.", "More agencies.", "More spend.", "Same results."].map((line, i) => (
+            <p
+              key={i}
+              className={`text-xl md:text-2xl text-muted-foreground/70 transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: `${200 + i * 150}ms` }}
+            >
+              {line}
+            </p>
+          ))}
+        </div>
+
+        <p
+          className={`text-xl md:text-3xl font-serif text-foreground transition-all duration-700 delay-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          Because no one fixed the system.
+        </p>
+        
+        <p
+          className={`mt-12 text-muted-foreground max-w-xl mx-auto transition-all duration-700 delay-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          You don't need more marketing. You need better positioning, better patients, and better systems.
+          That's what PASTED rebuilds.
         </p>
       </div>
     </section>

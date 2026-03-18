@@ -57,10 +57,6 @@ const CredibilitySection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            While most agencies see one practice at a time, PASTED operates across the entire aesthetic dentistry landscape.
-            That perspective — across the best clinicians, the most competitive markets, and the highest-performing brands — gives our partners an unfair advantage.
-          </p>
           <p className="text-foreground font-serif text-xl md:text-2xl">
             Retention this high doesn't happen without real results.
           </p>

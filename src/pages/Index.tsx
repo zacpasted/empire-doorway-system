@@ -83,7 +83,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <title>PASTED Studio | Strategic Brand Partner for Elite Aesthetic Practices</title>
+      <title>PASTED Partnership | $500K–$1M+ Growth for Aesthetic Dentists</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
       <LeadMagnetPopup />

@@ -44,17 +44,13 @@ const ProblemSolutionSection = () => {
   ];
 
   const solutions = [
-    "Strategic positioning that makes you the obvious cosmetic choice.",
-    "One unified system replacing fragmented agencies and freelancers.",
-    "Content that attracts patients looking for cosmetic procedures, not discounts.",
-    "Authority positioning that pre-sells patients before they ever call.",
-    "A patient acquisition engine built for high-value cosmetic cases.",
-    "Conversion systems that turn inquiries into accepted treatment plans.",
-    "A team with $100M+ in aesthetic revenue driving their strategy.",
-    "Proven frameworks from the top cosmetic practices in the world.",
-    "Brand infrastructure treated as the practice's highest-ROI asset.",
+    "Everything in-house — no agencies, no handoffs, no dilution.",
+    "Built from real-world data, not theory or recycled strategies.",
+    "Elite creative + performance acquisition in one system.",
+    "Authority positioning that pre-sells patients before they call.",
+    "Focus isn't leads — it's who walks in, what they say yes to, and how much they spend.",
+    "Behavioral psychology applied to patient conversion.",
     "Clear metrics and revenue attribution across every channel.",
-    "Compounding authority that makes every month stronger than the last.",
   ];
 
   const containerVariants = {

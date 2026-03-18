@@ -359,15 +359,14 @@ const HeroSection = () => {
             <>
               <div className="text-center mb-6">
                 <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-                  Only 30 Practices Per Year
+                  Applications Reviewed Within 48 Hours
                 </p>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  Schedule a Partner Discovery Call
+                  Apply for Partnership
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-                  PASTED Partnership is for cosmetic dentists who want to become the aesthetic authority in their market, attract more of the right patients, and build a practice with stronger long-term positioning.
-                  <br className="hidden md:block" />
-                  <span className="block mt-1">This is not an open service. It is a curated strategic partnership.</span>
+                  Not all practices are accepted. We partner with a small number of cosmetic dentists each year
+                  who are serious about becoming the aesthetic authority in their market.
                 </p>
               </div>
               
