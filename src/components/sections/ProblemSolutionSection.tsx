@@ -135,14 +135,15 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The Pattern Interrupt
+            The System Is Broken
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            You Don't Need More Marketing.
+            Others Treat Symptoms.<br />
+            <span className="text-muted-foreground italic">PASTED Fixes Structure.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            More ads. More agencies. More spend. Same results. Because no one fixed the system.
-            You need better positioning, better patients, and better systems. That's what PASTED rebuilds.
+            The industry profits from your plateau — selling more ads, more tactics, more tools.
+            None of it fixes the system. PASTED rebuilds the structure that drives real growth.
           </p>
         </motion.div>
 
