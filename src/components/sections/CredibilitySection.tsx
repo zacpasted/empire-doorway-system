@@ -6,10 +6,9 @@ const CredibilitySection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
-    { value: "97%", label: "Client Retention Rate", detail: "Since 2019" },
-    { value: "4-5+", label: "Years Average Tenure", detail: "Not campaigns — partnerships" },
-    { value: "$100M+", label: "Aesthetic Case Revenue", detail: "Driven across our ecosystem" },
-    { value: "30", label: "Practices Per Year", detail: "Selectivity is structural" },
+    { value: "$100M+", label: "Aesthetic Revenue Generated", detail: "Across the ecosystem" },
+    { value: "97%", label: "Client Retention", detail: "Partners stay because it works" },
+    { value: "30", label: "Practices Accepted / Year", detail: "Selectivity is structural" },
   ];
 
   return (
