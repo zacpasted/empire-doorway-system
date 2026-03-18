@@ -23,11 +23,11 @@ const ConversionSystemsSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Conversion Engine
+            Differentiation
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            The Focus Isn't Leads.<br />
-            <span className="text-primary">It's Accepted Cases.</span>
+            Fully In-House. One System.<br />
+            <span className="text-primary">High-Value, Predictable Growth.</span>
           </h2>
         </motion.div>
 
