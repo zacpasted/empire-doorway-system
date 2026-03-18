@@ -361,11 +361,11 @@ const HeroSection = () => {
             <>
               <div className="text-center mb-6">
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  If You've Outgrown What the Industry Offers — This Is the Next Step
+                  If You're Ready to Operate at a Different Level — This Is the Next Step
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-                  We'll break down where your current growth is leaking, what's holding back case value and consistency,
-                  and how the PASTED Partnership restructures your practice for long-term, predictable growth.
+                  We'll assess where your current structure is limiting growth, show you what's separating you from the top tier,
+                  and map how the PASTED Partnership would rebuild your practice for long-term dominance.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
                   <span>Average call: 20–30 minutes</span>
