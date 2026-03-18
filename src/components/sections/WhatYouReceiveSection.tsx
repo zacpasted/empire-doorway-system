@@ -124,7 +124,7 @@ const WhatYouReceiveSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            A complete done-for-you system. No guesswork. No overwhelm.
+            30+ pieces of creative per month. Full ad management. On-location shoots. One in-house team with the highest insider knowledge in aesthetic dentistry.
           </motion.p>
         </motion.div>
 
