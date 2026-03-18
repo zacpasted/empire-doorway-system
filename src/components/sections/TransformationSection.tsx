@@ -4,19 +4,13 @@ import { ArrowRight } from "lucide-react";
 const TransformationSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const transformations = [{
-    before: "Invisible",
-    after: "The Authority"
-  }, {
-    before: "Price Shoppers",
-    after: "Cosmetic Patients"
-  }, {
-    before: "Fragmented Vendors",
-    after: "One Strategic System"
-  }, {
-    before: "Hoping for Growth",
-    after: "Engineering Demand"
-  }];
+  const transformations = [
+    { before: "Invisible", after: "Category Leader" },
+    { before: "Price Shoppers", after: "High-Value Patients" },
+    { before: "Fragmented Vendors", after: "One Strategic System" },
+    { before: "Hoping for Growth", after: "Engineering Demand" },
+    { before: "Harder Consultations", after: "Pre-Sold Patients" },
+  ];
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
@@ -40,7 +34,7 @@ const TransformationSection = () => {
         </div>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -55,7 +49,7 @@ const TransformationSection = () => {
               <div className="my-4 flex justify-center">
                 <ArrowRight className="h-5 w-5 text-primary" />
               </div>
-              <span className="text-foreground font-display text-xl">{item.after}</span>
+              <span className="text-foreground font-display text-lg">{item.after}</span>
             </motion.div>
           ))}
         </motion.div>

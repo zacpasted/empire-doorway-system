@@ -3,32 +3,18 @@ import { motion, useInView } from "framer-motion";
 const FilterSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const notFor = [{
-    text: "Practices looking for quick leads or cheap marketing",
-    icon: "◇"
-  }, {
-    text: "Dentists who want a vendor, not a strategic partner",
-    icon: "◈"
-  }, {
-    text: "Volume-first clinicians with no interest in cosmetic positioning",
-    icon: "◆"
-  }, {
-    text: "Those who confuse templates and shortcuts for real brand building",
-    icon: "◇"
-  }];
-  const isFor = [{
-    text: "Cosmetic dentists who want to be the aesthetic authority in their city",
-    icon: "△"
-  }, {
-    text: "Doctors who understand that reputation compounds over time",
-    icon: "▲"
-  }, {
-    text: "Practitioners who want a brand and growth system that reflects their clinical excellence",
-    icon: "△"
-  }, {
-    text: "Those committed to building something iconic, not just running ads",
-    icon: "▲"
-  }];
+  const notFor = [
+    { text: "Practices looking for quick leads or cheap marketing", icon: "◇" },
+    { text: "Dentists who want a vendor, not a strategic partner", icon: "◈" },
+    { text: "Volume-first clinicians with no interest in cosmetic positioning", icon: "◆" },
+    { text: "Those who confuse templates and shortcuts for brand building", icon: "◇" },
+  ];
+  const isFor = [
+    { text: "Cosmetic dentists who want to be the undeniable authority in their city", icon: "△" },
+    { text: "Doctors who understand that reputation compounds over time", icon: "▲" },
+    { text: "Practitioners who want a growth system that reflects their clinical excellence", icon: "△" },
+    { text: "Those committed to building something iconic — not just running ads", icon: "▲" },
+  ];
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } }
@@ -47,11 +33,14 @@ const FilterSection = () => {
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
+            Prestige Layer
+          </p>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-            This Is Not for Everyone
+            PASTED Is Not for Everyone.
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Selectivity is how we maintain the quality of the partnership. That's the point.
+            We partner with a small number of practices each year. Because results require focus, alignment, and execution at a high level.
           </p>
         </div>
         

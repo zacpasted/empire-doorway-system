@@ -34,31 +34,23 @@ const ProblemSolutionSection = () => {
   const solutionSaturation = useTransform(solutionProgress, [0, 0.5, 1], [0.5, 1, 1.2]);
 
   const problems = [
-    "You're clinically excellent but patients don't know you exist.",
-    "You're losing cosmetic cases to louder, less skilled competitors.",
-    "Multiple agencies and freelancers — none of them talk to each other.",
-    "Your content looks like everyone else's in dentistry.",
-    "You're getting leads, but they're price shoppers, not cosmetic patients.",
-    "You've invested in marketing but can't measure what's working.",
-    "Your reputation doesn't match the quality of your clinical work.",
+    "Clinically excellent — but patients don't know you exist.",
+    "Losing cosmetic cases to louder, less skilled competitors.",
+    "Multiple agencies and freelancers that never talk to each other.",
+    "Getting leads that are price shoppers, not cosmetic patients.",
+    "Spending on ads without a brand worth amplifying.",
     "Consultations feel harder than they should — patients aren't pre-sold.",
-    "You know you should be the go-to cosmetic dentist, but perception hasn't caught up.",
-    "You're spending money on ads without a brand worth amplifying.",
-    "You delay because nothing feels like the right strategic fit.",
+    "Your reputation doesn't match the quality of your work.",
   ];
 
   const solutions = [
-    "Strategic positioning that makes you the obvious cosmetic choice.",
-    "One unified system replacing fragmented agencies and freelancers.",
-    "Content that attracts patients looking for cosmetic procedures, not discounts.",
-    "Authority positioning that pre-sells patients before they ever call.",
-    "A patient acquisition engine built for high-value cosmetic cases.",
-    "Conversion systems that turn inquiries into accepted treatment plans.",
-    "A team with $100M+ in aesthetic revenue driving their strategy.",
-    "Proven frameworks from the top cosmetic practices in the world.",
-    "Brand infrastructure treated as the practice's highest-ROI asset.",
+    "Everything in-house — no agencies, no handoffs, no dilution.",
+    "Built from real-world data, not theory or recycled strategies.",
+    "Elite creative + performance acquisition in one system.",
+    "Authority positioning that pre-sells patients before they call.",
+    "Focus isn't leads — it's who walks in, what they say yes to, and how much they spend.",
+    "Behavioral psychology applied to patient conversion.",
     "Clear metrics and revenue attribution across every channel.",
-    "Compounding authority that makes every month stronger than the last.",
   ];
 
   const containerVariants = {
@@ -143,14 +135,14 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The Core Problem
+            The Pattern Interrupt
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            Most Great Cosmetic Dentists Are{" "}
-            <span className="text-muted-foreground italic">Invisible</span>
+            You Don't Need More Marketing.
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Not because they lack skill — because they lack the positioning, visibility, and authority required to dominate perception in their market.
+            More ads. More agencies. More spend. Same results. Because no one fixed the system.
+            You need better positioning, better patients, and better systems. That's what PASTED rebuilds.
           </p>
         </motion.div>
 

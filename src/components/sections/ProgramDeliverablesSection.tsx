@@ -60,10 +60,10 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             PASTED Partnership
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
-            The Complete Growth System
+            The Complete Growth Infrastructure
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            A 12-month strategic growth partnership — not a collection of disconnected services
+            A 12-month private partnership — not a collection of disconnected services. Executed entirely in-house.
           </p>
         </div>
 

@@ -48,13 +48,13 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             </span>
           </div>
 
-          <Button
+           <Button
             variant="premium"
             size="sm"
             className="rounded-md"
             onClick={handleClick}
           >
- Apply Nowuest Access
+            Apply Now
           </Button>
         </div>
       </div>

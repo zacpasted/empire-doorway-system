@@ -28,10 +28,10 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-4">
-              Authority isn't given.
+              I either apply now…
             </h2>
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground/70 leading-[1.1] mb-10">
-              It's built.
+              or I fall behind.
             </h2>
           </motion.div>
 
@@ -41,7 +41,7 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            PASTED Partnership is not enrollment. It is an application for strategic consideration.
+            The practices that will dominate in 12 months are making this decision right now.
           </motion.p>
 
           <motion.div
@@ -65,7 +65,7 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            Only 30 practices accepted per year. Applications reviewed individually.
+            30 practices per year. Applications reviewed within 48 hours.
           </motion.p>
         </div>
       </div>

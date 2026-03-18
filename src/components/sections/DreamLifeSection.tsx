@@ -10,6 +10,7 @@ const DreamLifeSection = () => {
     "Consultations feel easier — patients arrive pre-sold on your expertise.",
     "Your practice attracts more high-value cosmetic cases consistently.",
     "Your reputation compounds locally and beyond your city.",
+    "Your practice looks and feels fundamentally different from the average dental office.",
   ];
 
   return (
@@ -24,11 +25,11 @@ const DreamLifeSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            One Year From Now
+            12 Months From Now
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Your Practice Looks and Feels<br />
-            <span className="text-primary">Fundamentally Different.</span>
+            This Isn't Just About Growth.<br />
+            <span className="text-primary">It's About Identity.</span>
           </h2>
         </motion.div>
 
@@ -56,12 +57,13 @@ const DreamLifeSection = () => {
 
           <div className="text-center space-y-4">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              This is what happens when authority, visibility, patient acquisition, and conversion
-              operate as one system over 12 months.
+              This is business, identity, and lifestyle — aligned.
+              Becoming known for your work. Attracting patients who choose you, not price.
+              Building a practice that reflects your standard.
             </p>
             <p className="text-foreground font-serif text-xl md:text-2xl">
               The practice doesn't just grow —<br />
-              <span className="text-primary">it becomes the obvious choice in your market.</span>
+              <span className="text-primary">it becomes the obvious choice.</span>
             </p>
           </div>
         </motion.div>

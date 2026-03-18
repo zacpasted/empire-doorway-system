@@ -6,9 +6,10 @@ const ConversionSystemsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const systems = [
-    "Consultation process optimization & treatment presentation",
-    "Patient communication scripts & follow-up sequences",
-    "Internal CRM workflows & lead management",
+    "Hospitality-driven consultation optimization",
+    "Treatment presentation systems built on behavioral psychology",
+    "Patient communication scripts & storytelling frameworks",
+    "CRM workflows, follow-up sequences & lead management",
     "Team training on brand-aligned patient experience",
   ];
 
@@ -25,8 +26,8 @@ const ConversionSystemsSection = () => {
             Conversion Engine
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Inquiries Mean Nothing<br />
-            <span className="text-primary">Without Accepted Cases.</span>
+            The Focus Isn't Leads.<br />
+            <span className="text-primary">It's Accepted Cases.</span>
           </h2>
         </motion.div>
 
@@ -37,8 +38,8 @@ const ConversionSystemsSection = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            Attracting cosmetic patients means nothing if the consultation process, 
-            treatment presentation, and follow-up systems can't convert interest into high-value accepted cases.
+            Most agencies deliver leads and disappear. We optimize the entire patient journey —
+            from first impression to accepted treatment plan — so more inquiries become high-value cases.
           </p>
 
           <div className="space-y-4 max-w-xl mx-auto">
@@ -58,15 +59,10 @@ const ConversionSystemsSection = () => {
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
-          <div className="text-center space-y-4">
-            <p className="text-muted-foreground leading-relaxed">
-              Most agencies deliver leads and disappear. They never optimize what happens after the inquiry arrives.
-            </p>
-            <p className="text-foreground font-serif text-xl md:text-2xl">
-              PASTED optimizes the entire patient journey —
-              <br />from first impression to <span className="text-primary">accepted treatment plan.</span>
-            </p>
-          </div>
+          <p className="text-center text-foreground font-serif text-xl md:text-2xl">
+            Who walks in. What they say yes to.
+            <br /><span className="text-primary">How much they spend.</span>
+          </p>
         </motion.div>
       </div>
     </section>
