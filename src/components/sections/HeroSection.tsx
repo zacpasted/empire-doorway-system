@@ -215,10 +215,10 @@ const HeroSection = () => {
           {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Where Aesthetic Dentists Build
+              Where Aesthetic Dentists Add
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              $500K–$1M+ Growth
+              $500K–$1M+ Annually
             </span>
             <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
@@ -228,16 +228,16 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              And the Practice That Comes With It.
+              And Build the Practice They Actually Want.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            A private, in-house growth infrastructure responsible for transforming aesthetic practices into category leaders within 12 months.<br />
+            A private, in-house growth infrastructure that transforms aesthetic practices into category leaders through positioning, systems, and an uncompromising commitment to experience.<br />
             <span className="italic">Built from real data across the world's top-performing cosmetic practices.</span>
           </p>
           <p className="hidden md:block text-xs text-muted-foreground/50 mt-2 tracking-wide">
-            30 practices per year. Selective acceptance.
+            30 practices per year. Carefully selected.
           </p>
         </motion.div>
         
