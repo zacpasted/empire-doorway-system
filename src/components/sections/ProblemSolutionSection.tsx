@@ -34,17 +34,13 @@ const ProblemSolutionSection = () => {
   const solutionSaturation = useTransform(solutionProgress, [0, 0.5, 1], [0.5, 1, 1.2]);
 
   const problems = [
-    "You're clinically excellent but patients don't know you exist.",
-    "You're losing cosmetic cases to louder, less skilled competitors.",
-    "Multiple agencies and freelancers — none of them talk to each other.",
-    "Your content looks like everyone else's in dentistry.",
-    "You're getting leads, but they're price shoppers, not cosmetic patients.",
-    "You've invested in marketing but can't measure what's working.",
-    "Your reputation doesn't match the quality of your clinical work.",
+    "Clinically excellent — but patients don't know you exist.",
+    "Losing cosmetic cases to louder, less skilled competitors.",
+    "Multiple agencies and freelancers that never talk to each other.",
+    "Getting leads that are price shoppers, not cosmetic patients.",
+    "Spending on ads without a brand worth amplifying.",
     "Consultations feel harder than they should — patients aren't pre-sold.",
-    "You know you should be the go-to cosmetic dentist, but perception hasn't caught up.",
-    "You're spending money on ads without a brand worth amplifying.",
-    "You delay because nothing feels like the right strategic fit.",
+    "Your reputation doesn't match the quality of your work.",
   ];
 
   const solutions = [
