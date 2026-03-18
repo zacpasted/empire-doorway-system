@@ -14,6 +14,7 @@ const PartnershipPhilosophySection = lazy(() => import("@/components/sections/Pa
 const OrganicPaidSection = lazy(() => import("@/components/sections/OrganicPaidSection"));
 const ConversionSystemsSection = lazy(() => import("@/components/sections/ConversionSystemsSection"));
 const DreamLifeSection = lazy(() => import("@/components/sections/DreamLifeSection"));
+const AccessStatusSection = lazy(() => import("@/components/sections/AccessStatusSection"));
 const AuthorityStatementSection = lazy(() => import("@/components/sections/AuthorityStatementSection"));
 const FoundersPhilosophySection = lazy(() => import("@/components/sections/FoundersPhilosophySection"));
 const TheTruthSection = lazy(() => import("@/components/sections/TheTruthSection"));
