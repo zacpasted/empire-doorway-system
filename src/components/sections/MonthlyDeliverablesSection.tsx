@@ -15,12 +15,12 @@ const MonthlyDeliverablesSection = () => {
   }, []);
 
   const deliverables = [
-    { icon: Scissors, title: "8-12 Edited Videos", description: "Premium storytelling content — scripted, edited, and optimized for cosmetic patient attraction" },
+    { icon: Scissors, title: "30+ Pieces of Creative / Month", description: "Full creative — video, storytelling, ad assets — produced by the best teams in aesthetic dentistry, informed by real-time insider knowledge from across the ecosystem" },
     { icon: Calendar, title: "Done-For-You Publishing", description: "Strategic scheduling and publishing across all platforms — you never touch a post" },
-    { icon: MessageSquare, title: "Ad Creative & Management", description: "Full paid media strategy, ad creative production, campaign management, and ongoing optimization" },
-    { icon: TrendingUp, title: "On-Location Shoots", description: "We come to your practice for cinematic production days — capturing your story, your team, and your results" },
-    { icon: Users, title: "Dedicated Strategic Team", description: "Your personal editor, strategist, ad manager, and growth partner — all coordinated as one" },
-    { icon: Shield, title: "Hospitality-Led Conversion", description: "Ongoing refinement of consultation experience, patient communication, and treatment presentation" },
+    { icon: MessageSquare, title: "Full Ad Strategy & Management", description: "Paid media strategy, ad creative production, campaign management, and ongoing optimization — all in-house" },
+    { icon: TrendingUp, title: "On-Location Production Shoots", description: "We fly to your practice for cinematic shoot days — capturing your story, your philosophy, your results, and your team" },
+    { icon: Users, title: "Dedicated Strategic Team", description: "Your personal editor, strategist, ad manager, and growth partner — all coordinated as one in-house team" },
+    { icon: Shield, title: "Hospitality-Led Conversion", description: "Ongoing refinement of consultation experience, patient communication, and treatment presentation systems" },
   ];
 
   return (
