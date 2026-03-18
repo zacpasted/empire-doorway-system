@@ -204,11 +204,11 @@ const HeroSection = () => {
       }}>
           {/* Logo Header - Instant visibility, no animation delay */}
           <div className="flex flex-col items-center mb-3 md:mb-6">
-            <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
-              PASTED Partnership
+           <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
+              PASTED
             </span>
             <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
-              Strategic Growth for Cosmetic Dentistry
+              Private Growth Partnership
             </span>
           </div>
           
