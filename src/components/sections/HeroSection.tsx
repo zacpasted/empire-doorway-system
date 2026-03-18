@@ -358,15 +358,22 @@ const HeroSection = () => {
             // Calendly Widget
             <>
               <div className="text-center mb-6">
-                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-                  Applications Reviewed Within 48 Hours
-                </p>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  Apply for Partnership
+                  If You've Outgrown What the Industry Offers — This Is the Next Step
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-                  Not all practices are accepted. We partner with a small number of cosmetic dentists each year
-                  who are serious about becoming the aesthetic authority in their market.
+                <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
+                  We'll break down where your current growth is leaking, what's holding back case value and consistency,
+                  and how the PASTED Partnership restructures your practice for long-term, predictable growth.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
+                  <span>Average call: 20–30 minutes</span>
+                  <span className="hidden sm:inline">·</span>
+                  <span>Applications reviewed within 48 hours</span>
+                  <span className="hidden sm:inline">·</span>
+                  <span>Limited partnership availability</span>
+                </div>
+                <p className="text-xs text-muted-foreground/50 italic">
+                  This is a fit-based conversation. Not every practice is accepted.
                 </p>
               </div>
               
