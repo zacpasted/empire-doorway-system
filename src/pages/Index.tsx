@@ -117,10 +117,13 @@ const Index = () => {
         {/* 9. Organic + Paid — One System */}
         <AnimatedSection><OrganicPaidSection /></AnimatedSection>
         
-        {/* 10. Conversion Systems — Beyond Lead Gen */}
+        {/* 10. Conversion Systems — Differentiation */}
         <AnimatedSection><ConversionSystemsSection /></AnimatedSection>
         
-        {/* 11. The Gap — Pain Section */}
+        {/* 10.5. Access + Status — Proximity to the Top */}
+        <AnimatedSection><AccessStatusSection /></AnimatedSection>
+        
+        {/* 11. The Gap — Pattern Interrupt */}
         <AnimatedSection><TheGapSection /></AnimatedSection>
         
         {/* 12. Brands Showcase — Social Proof */}
