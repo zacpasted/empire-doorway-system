@@ -4,23 +4,23 @@ import { Film, Palette, Smartphone, FileText, Calendar, Target, Scissors, Clock,
 const WhatYouReceiveSection = () => {
   const deliverables = [
     {
-      category: "Content & Storytelling",
+      category: "30+ Pieces of Creative / Month",
       icon: Film,
       accent: "from-primary/20 to-primary/5",
       items: [
-        { icon: Sparkles, text: "Monthly cinematic video edits & storytelling", highlight: true },
-        { icon: Palette, text: "On-location production shoots at your practice" },
-        { icon: Smartphone, text: "Platform-optimized formats for organic & ads" },
+        { icon: Sparkles, text: "30+ monthly creative assets — video, storytelling, ad content", highlight: true },
+        { icon: Palette, text: "On-location production shoots — we fly to your practice" },
+        { icon: Smartphone, text: "Platform-optimized for organic reach & paid campaigns" },
       ],
     },
     {
-      category: "Ads & Growth",
+      category: "Full Ads & Growth Engine",
       icon: Target,
       accent: "from-primary/15 to-transparent",
       items: [
-        { icon: Target, text: "Full paid media strategy, build & management", highlight: true },
-        { icon: FileText, text: "Ad creative production & ongoing optimization" },
-        { icon: Calendar, text: "Revenue attribution & performance reporting" },
+        { icon: Target, text: "Complete paid media strategy, build & management", highlight: true },
+        { icon: FileText, text: "Ad creative produced from your storytelling assets" },
+        { icon: Calendar, text: "Revenue attribution & real-time performance reporting" },
       ],
     },
     {
@@ -30,7 +30,7 @@ const WhatYouReceiveSection = () => {
       items: [
         { icon: Scissors, text: "Hospitality-driven patient experience design", highlight: true },
         { icon: Clock, text: "Consultation & treatment presentation systems" },
-        { icon: CheckCircle2, text: "CRM workflows & follow-up sequences" },
+        { icon: CheckCircle2, text: "CRM workflows, follow-up sequences & team training" },
       ],
     },
   ];
