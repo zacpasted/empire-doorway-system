@@ -15,11 +15,10 @@ const PartnershipPhilosophySection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Why You Win
+            Beyond Marketing
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Everything Is In-House.<br />
-            <span className="text-primary">Nothing Is Diluted.</span>
+            This Is Practice Design.
           </h2>
         </motion.div>
 
@@ -29,12 +28,16 @@ const PartnershipPhilosophySection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
+          <p className="text-center text-lg text-muted-foreground leading-relaxed">
+            PASTED integrates principles most practices never touch:
+          </p>
+
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { title: "No agencies, no handoffs", detail: "Everything is built and managed by one team that understands your practice deeply." },
-              { title: "Built from real-world data", detail: "Not theory. Not recycled strategies. Frameworks from the top cosmetic practices in the world." },
-              { title: "Elite creative + performance", detail: "Combines brand storytelling, cinematic production, behavioral psychology, and performance acquisition." },
-              { title: "Focus isn't leads", detail: "It's who walks in, what they say yes to, and how much they spend." },
+              { title: "Unreasonable Hospitality", detail: "Designing every patient interaction to feel extraordinary — from the first touchpoint to post-treatment follow-up." },
+              { title: "Patient Experience Design", detail: "How patients feel, how they perceive value, and how trust is built before they ever walk in." },
+              { title: "Wellness-Driven Environments", detail: "Aligning the physical and digital presence of your practice with what high-value cosmetic patients expect." },
+              { title: "Psychological Alignment", detail: "Emotional and psychological alignment before the consult — so patients arrive ready to say yes." },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -51,9 +54,19 @@ const PartnershipPhilosophySection = () => {
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
+          <div className="text-center space-y-4">
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Because growth doesn't just happen in ads. It happens in how patients feel,
+              how they perceive value, and how trust is built before they ever walk in.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              This is what increases case value, acceptance rates, and long-term patient relationships.
+            </p>
+          </div>
+
           <p className="text-center text-foreground font-serif text-xl md:text-2xl">
-            This is why our partners see<br />
-            <span className="text-primary">fundamentally different results.</span>
+            Most groups help you get busier.<br />
+            <span className="text-primary">PASTED helps you get better — and more valuable.</span>
           </p>
         </motion.div>
       </div>

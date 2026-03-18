@@ -22,10 +22,13 @@ const CTABannerSection = () => {
             <span className="text-muted-foreground/70 font-normal">Designed to Add </span>
             <span className="text-primary font-semibold">$500K–$1M+</span>
             <br className="hidden sm:block" />
-            <span className="text-muted-foreground/70 font-normal">in Aesthetic Case Revenue</span>
+            <span className="text-muted-foreground/70 font-normal">in Aesthetic Production Annually</span>
           </h3>
-          <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide mb-8">
-            Executed entirely in-house. No fragmentation. No guesswork.
+          <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide mb-4">
+            Executed entirely in-house. Positioning. Content. Acquisition. Conversion. Patient Experience.
+          </p>
+          <p className="text-sm text-muted-foreground/40 mb-8">
+            Others optimize ads. PASTED rebuilds the entire growth system.
           </p>
           
           <motion.a
@@ -47,7 +50,7 @@ const CTABannerSection = () => {
           </motion.a>
           
           <p className="mt-6 text-sm text-muted-foreground/60">
-            30 practices per year · Not all applicants accepted
+            30 practices per year · Carefully selected
           </p>
         </motion.div>
       </div>

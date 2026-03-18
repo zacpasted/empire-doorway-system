@@ -215,10 +215,10 @@ const HeroSection = () => {
           {/* Single powerful headline - Instant render, no delay */}
           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Where Aesthetic Dentists Build
+              Where Aesthetic Dentists Add
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              $500K–$1M+ Growth
+              $500K–$1M+ Annually
             </span>
             <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
@@ -228,16 +228,16 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              And the Practice That Comes With It.
+              And Build the Practice They Actually Want.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            A private, in-house growth infrastructure responsible for transforming aesthetic practices into category leaders within 12 months.<br />
+            A private, in-house growth infrastructure that transforms aesthetic practices into category leaders through positioning, systems, and an uncompromising commitment to experience.<br />
             <span className="italic">Built from real data across the world's top-performing cosmetic practices.</span>
           </p>
           <p className="hidden md:block text-xs text-muted-foreground/50 mt-2 tracking-wide">
-            30 practices per year. Selective acceptance.
+            30 practices per year. Carefully selected.
           </p>
         </motion.div>
         
@@ -358,15 +358,22 @@ const HeroSection = () => {
             // Calendly Widget
             <>
               <div className="text-center mb-6">
-                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-2">
-                  Applications Reviewed Within 48 Hours
-                </p>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  Apply for Partnership
+                  If You've Outgrown What the Industry Offers — This Is the Next Step
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-                  Not all practices are accepted. We partner with a small number of cosmetic dentists each year
-                  who are serious about becoming the aesthetic authority in their market.
+                <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
+                  We'll break down where your current growth is leaking, what's holding back case value and consistency,
+                  and how the PASTED Partnership restructures your practice for long-term, predictable growth.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
+                  <span>Average call: 20–30 minutes</span>
+                  <span className="hidden sm:inline">·</span>
+                  <span>Applications reviewed within 48 hours</span>
+                  <span className="hidden sm:inline">·</span>
+                  <span>Limited partnership availability</span>
+                </div>
+                <p className="text-xs text-muted-foreground/50 italic">
+                  This is a fit-based conversation. Not every practice is accepted.
                 </p>
               </div>
               
@@ -397,6 +404,17 @@ const HeroSection = () => {
                 />
               </div>
             </>
+          )}
+          
+          {/* Below-embed microcopy */}
+          {!bookingConfirmed && (
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
+              <span>This is a strategic evaluation — not a sales call</span>
+              <span className="hidden sm:inline">·</span>
+              <span>Serious inquiries only</span>
+              <span className="hidden sm:inline">·</span>
+              <span>If we're not a fit, we'll tell you directly</span>
+            </div>
           )}
         </div>
 

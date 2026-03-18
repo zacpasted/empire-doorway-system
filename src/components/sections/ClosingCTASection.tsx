@@ -5,13 +5,12 @@ const ClosingCTASection = () => {
     <section id="apply" className="py-32 md:py-48">
       <div className="container max-w-3xl mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-foreground leading-tight mb-8">
-          This Is Where Practices<br />
-          <span className="text-primary">Become Category Leaders.</span>
+          This Is the Partnership That Changes<br />
+          <span className="text-primary">the Trajectory of Your Practice.</span>
         </h2>
         
         <p className="text-lg text-muted-foreground mb-16 max-w-xl mx-auto">
-          If you're serious about building a dominant aesthetic practice, this is the partnership.
-          This is not enrollment. It is an application for strategic consideration.
+          If you're serious about building a dominant aesthetic practice, this is where it starts.
         </p>
         
         <a
@@ -27,7 +26,7 @@ const ClosingCTASection = () => {
         </a>
         
         <p className="text-sm text-muted-foreground mt-8">
-          Limited to 30 practices annually. Not all applicants accepted.
+          Limited to 30 practices annually.
         </p>
       </div>
     </section>

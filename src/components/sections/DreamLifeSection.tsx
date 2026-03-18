@@ -5,14 +5,6 @@ const DreamLifeSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const futureState = [
-    "Patients already know you for cosmetic dentistry before they call.",
-    "Consultations feel easier — patients arrive pre-sold on your expertise.",
-    "Your practice attracts more high-value cosmetic cases consistently.",
-    "Your reputation compounds locally and beyond your city.",
-    "Your practice looks and feels fundamentally different from the average dental office.",
-  ];
-
   return (
     <section ref={ref} className="py-24 md:py-32 bg-background relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.015] to-transparent" />
@@ -25,11 +17,11 @@ const DreamLifeSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            12 Months From Now
+            Alignment
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            This Isn't Just About Growth.<br />
-            <span className="text-primary">It's About Identity.</span>
+            This Isn't Just Growth.<br />
+            <span className="text-primary">It's Alignment.</span>
           </h2>
         </motion.div>
 
@@ -39,14 +31,22 @@ const DreamLifeSection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
+          <p className="text-center text-lg text-muted-foreground leading-relaxed">
+            A better practice is not just more revenue.
+          </p>
+
           <div className="space-y-3 max-w-md mx-auto py-4">
-            {futureState.map((q, i) => (
+            {[
+              "Better patients.",
+              "Better systems.",
+              "Better days inside your business.",
+            ].map((q, i) => (
               <motion.p
                 key={i}
-                className="text-center text-foreground/80 text-lg"
+                className="text-center text-foreground text-xl md:text-2xl font-serif"
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.5 + i * 0.15 }}
               >
                 {q}
               </motion.p>
@@ -55,17 +55,10 @@ const DreamLifeSection = () => {
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
-          <div className="text-center space-y-4">
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              This is business, identity, and lifestyle — aligned.
-              Becoming known for your work. Attracting patients who choose you, not price.
-              Building a practice that reflects your standard.
-            </p>
-            <p className="text-foreground font-serif text-xl md:text-2xl">
-              The practice doesn't just grow —<br />
-              <span className="text-primary">it becomes the obvious choice.</span>
-            </p>
-          </div>
+          <p className="text-center text-foreground font-serif text-xl md:text-2xl">
+            PASTED exists to build practices that<br />
+            <span className="text-primary">perform at a high level — and feel like it too.</span>
+          </p>
         </motion.div>
       </div>
     </section>
