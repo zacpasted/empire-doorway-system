@@ -375,7 +375,7 @@ const HeroSection = () => {
                   <span>Limited partnership availability</span>
                 </div>
                 <p className="text-xs text-muted-foreground/50 italic">
-                  This is a fit-based conversation. Not every practice is accepted.
+                  This is a selective, fit-based conversation.
                 </p>
               </div>
               
