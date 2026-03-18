@@ -143,14 +143,14 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The Core Problem
+            The Pattern Interrupt
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            Most Great Cosmetic Dentists Are{" "}
-            <span className="text-muted-foreground italic">Invisible</span>
+            You Don't Need More Marketing.
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Not because they lack skill — because they lack the positioning, visibility, and authority required to dominate perception in their market.
+            More ads. More agencies. More spend. Same results. Because no one fixed the system.
+            You need better positioning, better patients, and better systems. That's what PASTED rebuilds.
           </p>
         </motion.div>
 
