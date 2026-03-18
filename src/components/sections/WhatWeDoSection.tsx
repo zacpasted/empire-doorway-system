@@ -23,18 +23,18 @@ const services = [
   {
     icon: Eye,
     title: "Visibility Engine",
-    tagline: "Consistently in front of the right audience",
-    description: "We create systems that consistently put your practice, philosophy, and results in front of the right audience. From cinematic on-location shoots to done-for-you scripting and editing — every piece of content is crafted to build trust and attract cosmetic patients.",
+    tagline: "30+ pieces of creative per month",
+    description: "Full creative from the best teams in aesthetic dentistry — informed by the highest insider knowledge in the world, in real time. From cinematic on-location shoots to done-for-you scripting, editing, and publishing — 30+ assets per month designed to build trust and attract cosmetic patients.",
     features: [
-      "On-location production shoots at your practice",
-      "Done-for-you scripting, editing & publishing",
-      "Strategic paid media management & ad creative",
-      "Unified organic + paid creative system"
+      "30+ creative assets per month — video, storytelling, ad content",
+      "On-location production shoots — we fly to your practice",
+      "Done-for-you scripting, editing & strategic publishing",
+      "Full paid media management & ad creative from the same team"
     ],
-    stat: 12,
+    stat: 30,
     statSuffix: "+",
     statPrefix: "",
-    statLabel: "Content pieces monthly",
+    statLabel: "Creative assets monthly",
     gradient: "from-blue-500/20 via-indigo-500/10 to-purple-500/5"
   },
   {
