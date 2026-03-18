@@ -32,14 +32,15 @@ const DreamLifeSection = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            A better practice is not just more revenue.
+            This is not just about revenue.
           </p>
 
           <div className="space-y-3 max-w-md mx-auto py-4">
             {[
-              "Better patients.",
-              "Better systems.",
-              "Better days inside your business.",
+              "Working with the right patients.",
+              "Doing the work you want to be known for.",
+              "Building a clinic that reflects your standard.",
+              "Creating a business that supports your life — not consumes it.",
             ].map((q, i) => (
               <motion.p
                 key={i}

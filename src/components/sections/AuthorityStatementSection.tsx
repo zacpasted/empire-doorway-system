@@ -18,6 +18,10 @@ const AuthorityStatementSection = () => {
             What This Looks Like in Practice
           </p>
 
+          <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-6">
+            Typical Outcome: <span className="text-primary">$500K–$1M+</span> Annual Increase
+          </h2>
+
           <div className="space-y-4">
             {[
               "$500K–$1M+ annual increase in aesthetic production",

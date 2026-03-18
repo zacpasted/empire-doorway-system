@@ -328,23 +328,23 @@ const HeroSection = () => {
                 transition={{ delay: 0.5 }}
                 className="space-y-4"
               >
-                <p className="text-sm text-muted-foreground/70">
-                  In the meantime, prepare to discuss:
-                </p>
-                <ul className="text-sm text-foreground/80 space-y-2 max-w-xs mx-auto text-left">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
-                    Your current practice situation
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
-                    Your brand vision and goals
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
-                    Your timeline for growth
-                  </li>
-                </ul>
+                 <p className="text-sm text-muted-foreground/70">
+                   In the meantime, prepare to discuss:
+                 </p>
+                 <ul className="text-sm text-foreground/80 space-y-2 max-w-xs mx-auto text-left">
+                   <li className="flex items-start gap-2">
+                     <span className="text-primary mt-0.5">•</span>
+                     Your current growth ceiling and where the structure is limiting you
+                   </li>
+                   <li className="flex items-start gap-2">
+                     <span className="text-primary mt-0.5">•</span>
+                     What's separating you from the top-performing practices
+                   </li>
+                   <li className="flex items-start gap-2">
+                     <span className="text-primary mt-0.5">•</span>
+                     Your path to $500K–$1M+ in annual growth
+                   </li>
+                 </ul>
               </motion.div>
               
               <motion.p
