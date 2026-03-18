@@ -18,7 +18,8 @@ const PartnershipPhilosophySection = () => {
             Beyond Marketing
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            This Is Practice Design.
+            This Is the Only Model<br />
+            <span className="text-primary">Built Like This.</span>
           </h2>
         </motion.div>
 
