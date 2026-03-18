@@ -17,18 +17,21 @@ const CTABannerSection = () => {
             The PASTED Partnership
           </p>
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-3">
-            A 12-Month Private Partnership
+            A Private, 12-Month Partnership
             <br className="hidden sm:block" />
-            <span className="text-muted-foreground/70 font-normal">Designed to Add </span>
-            <span className="text-primary font-semibold">$500K–$1M+</span>
+            <span className="text-muted-foreground/70 font-normal">Designed to Build a </span>
+            <span className="text-primary font-semibold">Dominant Aesthetic Practice</span>
             <br className="hidden sm:block" />
-            <span className="text-muted-foreground/70 font-normal">in Aesthetic Production Annually</span>
+            <span className="text-muted-foreground/70 font-normal">— Structurally, Financially, and Operationally</span>
           </h3>
-          <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide mb-4">
-            Executed entirely in-house. Positioning. Content. Acquisition. Conversion. Patient Experience.
+          <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide mb-2">
+            <span className="text-foreground font-medium">$500,000–$1,000,000+</span> in additional aesthetic production annually.
+          </p>
+          <p className="text-sm text-muted-foreground/40 mb-4">
+            Higher-value cases · Stronger patient trust · Consistent monthly production · Less reliance on volume
           </p>
           <p className="text-sm text-muted-foreground/40 mb-8">
-            Others optimize ads. PASTED rebuilds the entire growth system.
+            Executed entirely in-house across positioning, content, paid acquisition, conversion systems, and patient experience.
           </p>
           
           <motion.a

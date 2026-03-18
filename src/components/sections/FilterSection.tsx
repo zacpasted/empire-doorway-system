@@ -34,13 +34,13 @@ const FilterSection = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Prestige Layer
+            Selectivity
           </p>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-            PASTED Is Not for Everyone.
+            Not Everyone Gets In.
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            We partner with a small number of practices each year. Because results require focus, alignment, and execution at a high level.
+            We partner with a limited number of practices each year. Because access matters. Focus matters. Execution matters. This is built for those serious about operating at the highest level.
           </p>
         </div>
         

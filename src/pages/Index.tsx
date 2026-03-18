@@ -14,6 +14,7 @@ const PartnershipPhilosophySection = lazy(() => import("@/components/sections/Pa
 const OrganicPaidSection = lazy(() => import("@/components/sections/OrganicPaidSection"));
 const ConversionSystemsSection = lazy(() => import("@/components/sections/ConversionSystemsSection"));
 const DreamLifeSection = lazy(() => import("@/components/sections/DreamLifeSection"));
+const AccessStatusSection = lazy(() => import("@/components/sections/AccessStatusSection"));
 const AuthorityStatementSection = lazy(() => import("@/components/sections/AuthorityStatementSection"));
 const FoundersPhilosophySection = lazy(() => import("@/components/sections/FoundersPhilosophySection"));
 const TheTruthSection = lazy(() => import("@/components/sections/TheTruthSection"));
@@ -116,10 +117,13 @@ const Index = () => {
         {/* 9. Organic + Paid — One System */}
         <AnimatedSection><OrganicPaidSection /></AnimatedSection>
         
-        {/* 10. Conversion Systems — Beyond Lead Gen */}
+        {/* 10. Conversion Systems — Differentiation */}
         <AnimatedSection><ConversionSystemsSection /></AnimatedSection>
         
-        {/* 11. The Gap — Pain Section */}
+        {/* 10.5. Access + Status — Proximity to the Top */}
+        <AnimatedSection><AccessStatusSection /></AnimatedSection>
+        
+        {/* 11. The Gap — Pattern Interrupt */}
         <AnimatedSection><TheGapSection /></AnimatedSection>
         
         {/* 12. Brands Showcase — Social Proof */}
@@ -134,7 +138,7 @@ const Index = () => {
         {/* 15. Content Examples — Wistia Videos */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
-            title="How We Add $500K–$1M+ Per Year — By Fixing What Everyone Else Ignores"
+            title="How We Build Category-Leading Practices — And Why Most Never Break Through"
             subtitle="Every piece is scripted, shot, and edited by our in-house team on location — then deployed as both organic storytelling and high-performing ad creative."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
           />

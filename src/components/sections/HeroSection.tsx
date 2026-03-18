@@ -213,12 +213,12 @@ const HeroSection = () => {
           </div>
           
           {/* Single powerful headline - Instant render, no delay */}
-          <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
+           <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Where Aesthetic Dentists Add
+              Where Aesthetic Dentistry's
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              $500K–$1M+ Annually
+              Leading Practices Are Built
             </span>
             <motion.span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2" initial={{
             opacity: 0.7
@@ -228,15 +228,17 @@ const HeroSection = () => {
             duration: 0.5,
             delay: 0.1
           }}>
-              And Build the Practice They Actually Want.
+              $500K–$1M+ in Annual Growth. The Practice You Actually Want.
             </motion.span>
           </h1>
           
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            A private, in-house growth infrastructure that transforms aesthetic practices into category leaders through positioning, systems, and an uncompromising commitment to experience.<br />
-            <span className="italic">Built from real data across the world's top-performing cosmetic practices.</span>
+            PASTED is the private, in-house growth infrastructure trusted by elite cosmetic dentists — combining execution, positioning, and direct access to the highest level of the industry.
           </p>
-          <p className="hidden md:block text-xs text-muted-foreground/50 mt-2 tracking-wide">
+          <p className="hidden md:block text-xs text-muted-foreground/50 mt-2 tracking-wide italic">
+            Built from real data across the world's top-performing aesthetic practices.
+          </p>
+          <p className="hidden md:block text-xs text-muted-foreground/40 mt-1 tracking-wide">
             30 practices per year. Carefully selected.
           </p>
         </motion.div>
@@ -326,23 +328,23 @@ const HeroSection = () => {
                 transition={{ delay: 0.5 }}
                 className="space-y-4"
               >
-                <p className="text-sm text-muted-foreground/70">
-                  In the meantime, prepare to discuss:
-                </p>
-                <ul className="text-sm text-foreground/80 space-y-2 max-w-xs mx-auto text-left">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
-                    Your current practice situation
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
-                    Your brand vision and goals
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
-                    Your timeline for growth
-                  </li>
-                </ul>
+                 <p className="text-sm text-muted-foreground/70">
+                   In the meantime, prepare to discuss:
+                 </p>
+                 <ul className="text-sm text-foreground/80 space-y-2 max-w-xs mx-auto text-left">
+                   <li className="flex items-start gap-2">
+                     <span className="text-primary mt-0.5">•</span>
+                     Your current growth ceiling and where the structure is limiting you
+                   </li>
+                   <li className="flex items-start gap-2">
+                     <span className="text-primary mt-0.5">•</span>
+                     What's separating you from the top-performing practices
+                   </li>
+                   <li className="flex items-start gap-2">
+                     <span className="text-primary mt-0.5">•</span>
+                     Your path to $500K–$1M+ in annual growth
+                   </li>
+                 </ul>
               </motion.div>
               
               <motion.p
@@ -359,11 +361,11 @@ const HeroSection = () => {
             <>
               <div className="text-center mb-6">
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-                  If You've Outgrown What the Industry Offers — This Is the Next Step
+                  If You're Ready to Operate at a Different Level — This Is the Next Step
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-                  We'll break down where your current growth is leaking, what's holding back case value and consistency,
-                  and how the PASTED Partnership restructures your practice for long-term, predictable growth.
+                  We'll assess where your current structure is limiting growth, show you what's separating you from the top tier,
+                  and map how the PASTED Partnership would rebuild your practice for long-term dominance.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
                   <span>Average call: 20–30 minutes</span>
@@ -373,7 +375,7 @@ const HeroSection = () => {
                   <span>Limited partnership availability</span>
                 </div>
                 <p className="text-xs text-muted-foreground/50 italic">
-                  This is a fit-based conversation. Not every practice is accepted.
+                  This is a selective, fit-based conversation.
                 </p>
               </div>
               

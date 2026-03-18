@@ -5,12 +5,12 @@ const ClosingCTASection = () => {
     <section id="apply" className="py-32 md:py-48">
       <div className="container max-w-3xl mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-foreground leading-tight mb-8">
-          This Is the Partnership That Changes<br />
-          <span className="text-primary">the Trajectory of Your Practice.</span>
+          This Is Where Practices<br />
+          <span className="text-primary">Become Category Leaders.</span>
         </h2>
         
         <p className="text-lg text-muted-foreground mb-16 max-w-xl mx-auto">
-          If you're serious about building a dominant aesthetic practice, this is where it starts.
+          If you're serious about building a dominant aesthetic practice — and operating at the level of the best — this is the partnership.
         </p>
         
         <a

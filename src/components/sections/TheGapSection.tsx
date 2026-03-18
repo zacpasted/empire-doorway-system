@@ -22,7 +22,7 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          The Antidote
+          The Industry Isn't Built for Your Breakthrough
         </p>
         
         <h2
@@ -30,14 +30,14 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Most of the Industry Profits<br />From Your Plateau.
+          Most Solutions Are Designed to<br />Keep You Where You Are.
         </h2>
 
         <div className="space-y-3 mb-10">
           {[
-            "Agencies sell more ads.",
-            "Consultants sell more tactics.",
-            "Vendors sell more tools.",
+            "Keep you spending.",
+            "Keep you dependent.",
+            "Keep you optimizing small pieces.",
           ].map((line, i) => (
             <p
               key={i}
@@ -56,8 +56,8 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          All of it keeps you moving — but rarely moves you forward.<br />
-          Because none of it fixes the system.
+          Because treating symptoms is profitable.<br />
+          Fixing structure is not.
         </p>
 
         <div className="h-px bg-border/50 max-w-xs mx-auto mb-10" />
@@ -67,7 +67,7 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          PASTED is built differently.
+          PASTED Fixes What Everything Else Avoids.
         </p>
         
         <p
@@ -75,8 +75,8 @@ const TheGapSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          We don't optimize the surface. We rebuild the structure that drives
-          who you attract, what they say yes to, and how your practice grows over time.
+          We don't layer on tactics. We rebuild the system that drives patient perception,
+          case value, conversion, and long-term growth. This is why the results compound.
         </p>
       </div>
     </section>

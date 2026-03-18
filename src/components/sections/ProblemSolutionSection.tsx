@@ -138,8 +138,8 @@ const ProblemSolutionSection = () => {
             The System Is Broken
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            Others Treat Symptoms.<br />
-            <span className="text-muted-foreground italic">PASTED Fixes Structure.</span>
+            Others Help You Do More.<br />
+            <span className="text-muted-foreground italic">PASTED Changes What You Become.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             The industry profits from your plateau — selling more ads, more tactics, more tools.
