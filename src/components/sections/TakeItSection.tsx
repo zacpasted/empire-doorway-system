@@ -28,10 +28,10 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-4">
-              I either apply now…
+              Others treat symptoms.
             </h2>
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground/70 leading-[1.1] mb-10">
-              or I fall behind.
+              PASTED fixes structure.
             </h2>
           </motion.div>
 
@@ -65,7 +65,7 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            30 practices per year. Applications reviewed within 48 hours.
+            30 practices per year. Carefully selected.
           </motion.p>
         </div>
       </div>

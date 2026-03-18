@@ -405,6 +405,17 @@ const HeroSection = () => {
               </div>
             </>
           )}
+          
+          {/* Below-embed microcopy */}
+          {!bookingConfirmed && (
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
+              <span>This is a strategic evaluation — not a sales call</span>
+              <span className="hidden sm:inline">·</span>
+              <span>Serious inquiries only</span>
+              <span className="hidden sm:inline">·</span>
+              <span>If we're not a fit, we'll tell you directly</span>
+            </div>
+          )}
         </div>
 
         {/* Secondary Statement - Below Form */}

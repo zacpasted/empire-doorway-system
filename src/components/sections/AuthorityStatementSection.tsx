@@ -15,26 +15,33 @@ const AuthorityStatementSection = () => {
           transition={{ duration: 0.8 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-2">
-            A Singular Position
+            What This Looks Like in Practice
           </p>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
-            PASTED is not a marketing agency.<br />
-            It is a private growth infrastructure for<br />
-            <span className="text-primary">category-leading cosmetic practices.</span>
-          </h2>
+          <div className="space-y-4">
+            {[
+              "$500K–$1M+ annual increase in aesthetic production",
+              "Higher case values without relying on volume",
+              "More consistent monthly performance",
+              "Patients who are pre-sold before the consult",
+            ].map((item, i) => (
+              <motion.p
+                key={i}
+                className="text-lg md:text-xl text-foreground"
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+              >
+                {item}
+              </motion.p>
+            ))}
+          </div>
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
-          <div className="space-y-6 max-w-2xl mx-auto">
-            <p className="text-lg text-foreground leading-relaxed">
-              Typical outcome: <span className="text-primary font-serif text-2xl">$500K–$1M+</span> increase in aesthetic case revenue within 12 months.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              More predictable months. Higher-value cases. Less reliance on volume.
-              Execution and collaboration matter — but the system is built to produce measurable growth.
-            </p>
-          </div>
+          <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            Results require implementation and collaboration — but the system is built for repeatable, measurable growth.
+          </p>
         </motion.div>
       </div>
     </section>
