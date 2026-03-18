@@ -38,8 +38,7 @@ const ConversionSystemsSection = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            Most agencies deliver leads and disappear. We optimize the entire patient journey —
-            from first impression to accepted treatment plan — so more inquiries become high-value cases.
+            No agencies. No outsourcing. No fragmentation. Just one integrated system, built in-house, aligned to one goal: high-value, predictable aesthetic growth.
           </p>
 
           <div className="space-y-4 max-w-xl mx-auto">
