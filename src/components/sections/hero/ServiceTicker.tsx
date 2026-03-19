@@ -29,7 +29,7 @@ const ServiceTicker = () => {
       <div className="absolute right-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
       <div
-        className={`flex items-center whitespace-nowrap ${isHovered ? "" : "animate-service-ticker"}`}
+        className="flex items-center whitespace-nowrap animate-service-ticker"
         style={{ animationPlayState: isHovered ? "paused" : "running" }}
       >
         {[...Array(2)].map((_, setIndex) => (
