@@ -25,7 +25,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
     if (onApplyClick) {
       onApplyClick();
     } else {
-      document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 

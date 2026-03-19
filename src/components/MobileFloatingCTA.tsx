@@ -30,7 +30,7 @@ const MobileFloatingCTA = () => {
 
   const handleClick = () => {
     trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Apply Now', section: 'floating' });
-    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   // Only show on mobile (md breakpoint and below)

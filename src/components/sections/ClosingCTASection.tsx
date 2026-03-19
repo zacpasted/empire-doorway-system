@@ -18,7 +18,7 @@ const ClosingCTASection = () => {
           onClick={(e) => {
             e.preventDefault();
             trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for PASTED Partnership', section: 'closing' });
-            document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
           className="inline-block text-sm tracking-[0.3em] uppercase text-background bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
         >

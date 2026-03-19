@@ -379,7 +379,7 @@ const HeroSection = () => {
                 </p>
               </div>
               
-              <div id="eligibility-form" className="relative" style={{ minHeight: '700px' }}>
+              <div className="relative" style={{ minHeight: '700px' }}>
                 {/* Loading skeleton */}
                 {!calendlyLoaded && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a1a1a] rounded-xl border border-border/30">

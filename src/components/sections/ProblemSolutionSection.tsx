@@ -456,7 +456,7 @@ const ProblemSolutionSection = () => {
             onClick={(e) => {
               e.preventDefault();
               trackCTAClick({ ctaId: 'problem-solution', ctaText: 'See If You Qualify', section: 'problem-solution' });
-              document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+              document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
           >
             {/* Animated background glow */}
