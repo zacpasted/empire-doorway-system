@@ -107,12 +107,12 @@ const Index = () => {
         {/* 3. Credibility — Track Record */}
         <AnimatedSection><CredibilitySection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #1 — After credibility, reinforce with celebrity voice */}
+        {/* ── Inline Testimonial #1 — Brian Harris */}
         <InlineTestimonial
-          name="Dr. Jon Marashi"
-          role="Celebrity Dentist, Los Angeles, CA"
-          quote="At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else."
-          cardImage={jonMarashiCard}
+          name="Dr. Brian Harris"
+          role="Celebrity Dentist, Gilbert, AZ · Founder, Smile Virtual & Smile Sculpt"
+          quote="This is an easy recommendation. If a doctor asks who they should trust with their brand, this is the answer. They understand dentists, but more importantly, they understand people. That combination is incredibly rare."
+          cardImage={brianHarrisCard}
           variant="accent"
         />
         
