@@ -233,12 +233,12 @@ const Index = () => {
         {/* 27. What You Receive */}
         <AnimatedSection><WhatYouReceiveSection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #6 — Before final CTA, one last trust anchor */}
+        {/* ── Inline Testimonial #6 — Michaela Tozzi */}
         <InlineTestimonial
-          name="Dr. Gage Lidder"
-          role="Associate, London"
-          quote="Pasted took that pressure off my shoulders. They helped me translate who I am in the clinic into a clear, authentic personal brand the world can actually see. It finally feels like my online presence matches the standard of my work."
-          cardImage={gageLidderCard}
+          name="Dr. Michaela Tozzi"
+          role="Cosmetic Dentist & Owner, Las Vegas, NV"
+          quote="They didn't just build a brand — they built an identity that finally matched the level of my clinical work. Every detail, every decision, every piece of content reflects who I actually am. That kind of alignment is rare and invaluable."
+          cardImage={pastedPlaceholder}
           variant="accent"
         />
         
