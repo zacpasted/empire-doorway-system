@@ -49,6 +49,7 @@ const ProgramDeliverablesSection = lazy(() => import("@/components/sections/Prog
 const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
 const JournalSection = lazy(() => import("@/components/sections/JournalSection"));
 const MembershipSection = lazy(() => import("@/components/sections/MembershipSection"));
+const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
@@ -115,6 +116,13 @@ const Index = () => {
           cardImage={brianHarrisCard}
           variant="accent"
         />
+
+        {/* Video Testimonials — Early Social Proof */}
+        <AnimatedSection>
+          <VideoTestimonialsSection
+            videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
+          />
+        </AnimatedSection>
         
         {/* 4. What We Do — The Complete System */}
         <AnimatedSection><WhatWeDoSection /></AnimatedSection>
