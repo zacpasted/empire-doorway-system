@@ -116,6 +116,13 @@ const Index = () => {
           cardImage={brianHarrisCard}
           variant="accent"
         />
+
+        {/* Video Testimonials — Early Social Proof */}
+        <AnimatedSection>
+          <VideoTestimonialsSection
+            videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
+          />
+        </AnimatedSection>
         
         {/* 4. What We Do — The Complete System */}
         <AnimatedSection><WhatWeDoSection /></AnimatedSection>
