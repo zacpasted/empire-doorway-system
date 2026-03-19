@@ -273,19 +273,19 @@ const HeroSection = () => {
         </div>
 
         {/* Service Ticker - Above Calendly */}
-        <div className="mb-6 md:mb-8 overflow-hidden relative py-3">
+        <div className="mb-6 md:mb-8 overflow-hidden relative py-3" onMouseEnter={() => setIsServiceHovered(true)} onMouseLeave={() => setIsServiceHovered(false)}>
           <style>{`
             @keyframes service-ticker {
               0% { transform: translateX(0); }
               100% { transform: translateX(-50%); }
             }
             .animate-service-ticker {
-              animation: service-ticker 30s linear infinite;
+              animation: service-ticker 18s linear infinite;
             }
           `}</style>
           <div className="absolute left-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-          <div className="animate-service-ticker flex items-center whitespace-nowrap">
+          <div className={`flex items-center whitespace-nowrap ${isServiceHovered ? '' : 'animate-service-ticker'}`} style={{ animationPlayState: isServiceHovered ? 'paused' : 'running' }}>
             {[...Array(2)].map((_, setIndex) => (
               <div key={setIndex} className="flex items-center">
                 {["Branding", "Content", "Strategy", "Consulting", "Systems", "Conversion", "Advertising", "Marketing", "Ecosystem", "Global", "Events", "CE", "Media", "PR", "Editorial"].map((service) => (
