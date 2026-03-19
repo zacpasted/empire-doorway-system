@@ -83,7 +83,7 @@ const Index = () => {
   const formRef = useRef<HTMLDivElement>(null);
 
   const scrollToForm = () => {
-    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
