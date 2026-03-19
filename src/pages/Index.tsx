@@ -193,12 +193,12 @@ const Index = () => {
         {/* 17. Transformation Narratives — Case Studies */}
         <AnimatedSection><TransformationNarrativesSection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #5 — After case studies, ground-level proof */}
+        {/* ── Inline Testimonial #5 — Drew Ballard */}
         <InlineTestimonial
-          name="Dr. Kooper Ruminer"
-          role="Associate & Practice Owner, Oklahoma City, OK"
-          quote="I've built practices from the ground up, and I can say with absolute certainty—doing this without Zac and Alan would have taken years longer and cost far more mistakes. They remove confusion while preserving ambition. That alone is invaluable."
-          cardImage={kooperRuminerCard}
+          name="Dr. Drew Ballard"
+          role="Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education"
+          quote="Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone."
+          cardImage={drewBallardCard}
         />
         
         {/* 18. Ad Case Studies with Metrics */}
