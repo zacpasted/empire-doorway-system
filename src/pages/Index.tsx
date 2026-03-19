@@ -49,6 +49,7 @@ const ProgramDeliverablesSection = lazy(() => import("@/components/sections/Prog
 const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
 const JournalSection = lazy(() => import("@/components/sections/JournalSection"));
 const MembershipSection = lazy(() => import("@/components/sections/MembershipSection"));
+const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
