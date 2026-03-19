@@ -35,7 +35,7 @@ const LogoMarquee = () => {
       `}</style>
 
       <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-4">
-        Trusted by
+        Trusted by the world's most elite cosmetic dentists and aesthetic clinic operators
       </p>
 
       <div className="absolute left-0 top-8 bottom-0 w-8 md:w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
