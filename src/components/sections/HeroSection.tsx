@@ -259,7 +259,7 @@ const HeroSection = () => {
           <div className="animate-service-ticker flex items-center whitespace-nowrap">
             {[...Array(2)].map((_, setIndex) => (
               <div key={setIndex} className="flex items-center">
-                {["Branding", "Content", "Strategy", "Consulting", "Systems", "Conversion", "Advertising", "Marketing", "Ecosystem", "Global"].map((service) => (
+                {["Branding", "Content", "Strategy", "Consulting", "Systems", "Conversion", "Advertising", "Marketing", "Ecosystem", "Global", "Events", "CE", "Media", "PR", "Editorial"].map((service) => (
                   <span key={`${setIndex}-${service}`} className="flex items-center mx-3 md:mx-5">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary/60 mr-3 md:mr-4 flex-shrink-0" />
                     <span className="text-xs md:text-sm tracking-[0.2em] uppercase text-muted-foreground/70 font-sans font-medium">
