@@ -71,13 +71,8 @@ const VideoTestimonialsSection = ({
               className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16]"
             >
               <style>{getWistiaPlaceholderStyles(videoId, "177.78%")}</style>
-              {/* @ts-ignore - Wistia custom element */}
-              <wistia-player
-                media-id={videoId}
-                aspect="0.5625"
-                autoplay="false"
-                end-video-behavior="default"
-              ></wistia-player>
+              {/* @ts-ignore */}
+              <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default"></wistia-player>
             </div>
           ))}
         </div>
