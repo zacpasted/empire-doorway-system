@@ -368,11 +368,11 @@ const HeroSection = () => {
                   and map how the PASTED Partnership would rebuild your practice for long-term dominance.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
-                  <span>Average call: 20–30 minutes</span>
+                  <span>Average call: 45 min – 1 hour</span>
                   <span className="hidden sm:inline">·</span>
                   <span>Applications reviewed within 48 hours</span>
                   <span className="hidden sm:inline">·</span>
-                  <span>Limited partnership availability</span>
+                  <span>30 practices admitted per year</span>
                 </div>
                 <p className="text-xs text-muted-foreground/50 italic">
                   This is a selective, fit-based conversation.
