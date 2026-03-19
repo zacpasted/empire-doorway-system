@@ -8,12 +8,11 @@ import Footer from "@/components/Footer";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 
 // Player card images for inline testimonials
+import brianHarrisCard from "@/assets/cards/brian-harris.jpeg";
+import samSalehCard from "@/assets/cards/sam-saleh.jpeg";
 import jonMarashiCard from "@/assets/cards/jon-marashi.jpeg";
 import drewBallardCard from "@/assets/cards/drew-ballard.jpeg";
-import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
-import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
-import kooperRuminerCard from "@/assets/cards/kooper-ruminer.jpeg";
-import gageLidderCard from "@/assets/cards/gage-lidder.jpeg";
+import pastedPlaceholder from "@/assets/logos/pasted-placeholder.png";
 
 // Lazy load below-the-fold sections
 const ProblemSolutionSection = lazy(() => import("@/components/sections/ProblemSolutionSection"));
