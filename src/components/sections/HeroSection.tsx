@@ -244,19 +244,19 @@ const HeroSection = () => {
         </motion.div>
         
         {/* Logo Marquee - Above VSL */}
-        <div className="mb-4 md:mb-6 overflow-hidden relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-          <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-3">
+        <div className="mb-5 md:mb-8 overflow-hidden relative py-2" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+          <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-4">
             Trusted by
           </p>
           
-          <div className="absolute left-0 top-5 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-5 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-8 bottom-0 w-8 md:w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-8 bottom-0 w-8 md:w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div className={`flex items-center ${isHovered ? '' : 'animate-logo-marquee'}`} style={{
           animationPlayState: isHovered ? 'paused' : 'running'
         }}>
-            {duplicatedLogos.map((logo, index) => <div key={index} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
-                <img src={logo.src} alt={logo.alt} loading="eager" decoding="async" className="h-5 md:h-6 w-auto max-w-[90px] md:max-w-[100px] object-contain" />
+            {duplicatedLogos.map((logo, index) => <div key={index} className="flex-shrink-0 mx-4 md:mx-10 flex items-center justify-center">
+                <img src={logo.src} alt={logo.alt} loading="eager" decoding="async" className="h-4 md:h-6 w-auto max-w-[80px] md:max-w-[100px] object-contain" />
               </div>)}
           </div>
         </div>
