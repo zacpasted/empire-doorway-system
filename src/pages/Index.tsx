@@ -145,12 +145,12 @@ const Index = () => {
         {/* 10. Conversion Systems — Differentiation */}
         <AnimatedSection><ConversionSystemsSection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #3 — After conversion systems, show real results */}
+        {/* ── Inline Testimonial #3 — Jon Marashi */}
         <InlineTestimonial
-          name="Dr. Beau Murphey"
-          role="Cosmetic Dentist, Ridgeland, MS"
-          quote="I was genuinely scared of content. I avoided it for years. Nothing ever worked, and it always felt uncomfortable. This is the first time content felt natural—and the first time it actually worked. That completely changed my outlook and my results."
-          cardImage={beauMurpheyCard}
+          name="Dr. Jon Marashi"
+          role="Celebrity Dentist, Los Angeles, CA"
+          quote="At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else."
+          cardImage={jonMarashiCard}
           variant="minimal"
         />
         
