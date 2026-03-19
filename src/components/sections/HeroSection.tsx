@@ -244,19 +244,19 @@ const HeroSection = () => {
         </motion.div>
         
         {/* Logo Marquee - Above VSL */}
-        <div className="mb-4 md:mb-6 overflow-hidden relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-          <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-3">
+        <div className="mb-5 md:mb-8 overflow-hidden relative py-2" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+          <p className="text-center text-muted-foreground/40 text-[10px] uppercase tracking-[0.2em] mb-4">
             Trusted by
           </p>
           
-          <div className="absolute left-0 top-5 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-5 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-8 bottom-0 w-8 md:w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-8 bottom-0 w-8 md:w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div className={`flex items-center ${isHovered ? '' : 'animate-logo-marquee'}`} style={{
           animationPlayState: isHovered ? 'paused' : 'running'
         }}>
-            {duplicatedLogos.map((logo, index) => <div key={index} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
-                <img src={logo.src} alt={logo.alt} loading="eager" decoding="async" className="h-5 md:h-6 w-auto max-w-[90px] md:max-w-[100px] object-contain" />
+            {duplicatedLogos.map((logo, index) => <div key={index} className="flex-shrink-0 mx-4 md:mx-10 flex items-center justify-center">
+                <img src={logo.src} alt={logo.alt} loading="eager" decoding="async" className="h-4 md:h-6 w-auto max-w-[80px] md:max-w-[100px] object-contain" />
               </div>)}
           </div>
         </div>
@@ -272,25 +272,25 @@ const HeroSection = () => {
         </div>
 
         {/* Service Ticker - Above Calendly */}
-        <div className="mb-5 overflow-hidden relative">
+        <div className="mb-6 md:mb-8 overflow-hidden relative py-3">
           <style>{`
             @keyframes service-ticker {
               0% { transform: translateX(0); }
               100% { transform: translateX(-50%); }
             }
             .animate-service-ticker {
-              animation: service-ticker 25s linear infinite;
+              animation: service-ticker 30s linear infinite;
             }
           `}</style>
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-10 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
           <div className="animate-service-ticker flex items-center whitespace-nowrap">
             {[...Array(2)].map((_, setIndex) => (
               <div key={setIndex} className="flex items-center">
                 {["Branding", "Content", "Strategy", "Consulting", "Systems", "Conversion", "Advertising", "Marketing", "Ecosystem", "Global", "Events", "CE", "Media", "PR", "Editorial"].map((service) => (
-                  <span key={`${setIndex}-${service}`} className="flex items-center mx-3 md:mx-5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/60 mr-3 md:mr-4 flex-shrink-0" />
-                    <span className="text-xs md:text-sm tracking-[0.2em] uppercase text-muted-foreground/70 font-sans font-medium">
+                  <span key={`${setIndex}-${service}`} className="flex items-center mx-2.5 md:mx-5">
+                    <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary/60 mr-2 md:mr-4 flex-shrink-0" />
+                    <span className="text-[10px] md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase text-muted-foreground/70 font-sans font-medium">
                       {service}
                     </span>
                   </span>
