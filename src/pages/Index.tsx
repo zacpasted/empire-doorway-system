@@ -8,12 +8,11 @@ import Footer from "@/components/Footer";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 
 // Player card images for inline testimonials
+import brianHarrisCard from "@/assets/cards/brian-harris.jpeg";
+import samSalehCard from "@/assets/cards/sam-saleh.jpeg";
 import jonMarashiCard from "@/assets/cards/jon-marashi.jpeg";
 import drewBallardCard from "@/assets/cards/drew-ballard.jpeg";
-import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
-import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
-import kooperRuminerCard from "@/assets/cards/kooper-ruminer.jpeg";
-import gageLidderCard from "@/assets/cards/gage-lidder.jpeg";
+import pastedPlaceholder from "@/assets/logos/pasted-placeholder.png";
 
 // Lazy load below-the-fold sections
 const ProblemSolutionSection = lazy(() => import("@/components/sections/ProblemSolutionSection"));
@@ -108,12 +107,12 @@ const Index = () => {
         {/* 3. Credibility — Track Record */}
         <AnimatedSection><CredibilitySection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #1 — After credibility, reinforce with celebrity voice */}
+        {/* ── Inline Testimonial #1 — Brian Harris */}
         <InlineTestimonial
-          name="Dr. Jon Marashi"
-          role="Celebrity Dentist, Los Angeles, CA"
-          quote="At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else."
-          cardImage={jonMarashiCard}
+          name="Dr. Brian Harris"
+          role="Celebrity Dentist, Gilbert, AZ · Founder, Smile Virtual & Smile Sculpt"
+          quote="This is an easy recommendation. If a doctor asks who they should trust with their brand, this is the answer. They understand dentists, but more importantly, they understand people. That combination is incredibly rare."
+          cardImage={brianHarrisCard}
           variant="accent"
         />
         
@@ -132,12 +131,12 @@ const Index = () => {
         {/* 8. Partnership Philosophy — Why True Partnership */}
         <AnimatedSection><PartnershipPhilosophySection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #2 — After partnership philosophy, prove the model */}
+        {/* ── Inline Testimonial #2 — Sam Saleh */}
         <InlineTestimonial
-          name="Dr. Drew Ballard"
-          role="Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education"
-          quote="Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone."
-          cardImage={drewBallardCard}
+          name="Dr. Sam Saleh"
+          role="Celebrity Dentist, Los Angeles & London"
+          quote="This is world-class work in every sense. The strategy is genius-level, the execution is flawless, and there is zero fluff. I could not recommend them more highly."
+          cardImage={samSalehCard}
         />
         
         {/* 9. Organic + Paid — One System */}
@@ -146,12 +145,12 @@ const Index = () => {
         {/* 10. Conversion Systems — Differentiation */}
         <AnimatedSection><ConversionSystemsSection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #3 — After conversion systems, show real results */}
+        {/* ── Inline Testimonial #3 — Jon Marashi */}
         <InlineTestimonial
-          name="Dr. Beau Murphey"
-          role="Cosmetic Dentist, Ridgeland, MS"
-          quote="I was genuinely scared of content. I avoided it for years. Nothing ever worked, and it always felt uncomfortable. This is the first time content felt natural—and the first time it actually worked. That completely changed my outlook and my results."
-          cardImage={beauMurpheyCard}
+          name="Dr. Jon Marashi"
+          role="Celebrity Dentist, Los Angeles, CA"
+          quote="At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else."
+          cardImage={jonMarashiCard}
           variant="minimal"
         />
         
@@ -167,12 +166,12 @@ const Index = () => {
         {/* 13. Founders Philosophy */}
         <AnimatedSection><FoundersPhilosophySection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #4 — After founders philosophy, reinforce trust */}
+        {/* ── Inline Testimonial #4 — Rhona Eksander */}
         <InlineTestimonial
-          name="Dr. Serena Wong"
-          role="Cosmetic Dentist & Owner, Ottawa, ON"
-          quote="They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am. I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail."
-          cardImage={serenaWongCard}
+          name="Dr. Rhona Eksander"
+          role="Celebrity Dentist, Chelsea Dental Clinic, London"
+          quote="This work is intelligent, restrained, and deeply respectful of individuality. Zac and Alan build brands with intention and integrity. I'm genuinely grateful that more doctors can now access something this refined and thoughtful."
+          cardImage={pastedPlaceholder}
           variant="accent"
         />
         
@@ -194,12 +193,12 @@ const Index = () => {
         {/* 17. Transformation Narratives — Case Studies */}
         <AnimatedSection><TransformationNarrativesSection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #5 — After case studies, ground-level proof */}
+        {/* ── Inline Testimonial #5 — Drew Ballard */}
         <InlineTestimonial
-          name="Dr. Kooper Ruminer"
-          role="Associate & Practice Owner, Oklahoma City, OK"
-          quote="I've built practices from the ground up, and I can say with absolute certainty—doing this without Zac and Alan would have taken years longer and cost far more mistakes. They remove confusion while preserving ambition. That alone is invaluable."
-          cardImage={kooperRuminerCard}
+          name="Dr. Drew Ballard"
+          role="Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education"
+          quote="Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone."
+          cardImage={drewBallardCard}
         />
         
         {/* 18. Ad Case Studies with Metrics */}
@@ -234,12 +233,12 @@ const Index = () => {
         {/* 27. What You Receive */}
         <AnimatedSection><WhatYouReceiveSection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #6 — Before final CTA, one last trust anchor */}
+        {/* ── Inline Testimonial #6 — Michaela Tozzi */}
         <InlineTestimonial
-          name="Dr. Gage Lidder"
-          role="Associate, London"
-          quote="Pasted took that pressure off my shoulders. They helped me translate who I am in the clinic into a clear, authentic personal brand the world can actually see. It finally feels like my online presence matches the standard of my work."
-          cardImage={gageLidderCard}
+          name="Dr. Michaela Tozzi"
+          role="Cosmetic Dentist & Owner, Las Vegas, NV"
+          quote="They didn't just build a brand — they built an identity that finally matched the level of my clinical work. Every detail, every decision, every piece of content reflects who I actually am. That kind of alignment is rare and invaluable."
+          cardImage={pastedPlaceholder}
           variant="accent"
         />
         
