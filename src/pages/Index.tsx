@@ -5,6 +5,15 @@ import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
 import Footer from "@/components/Footer";
+import InlineTestimonial from "@/components/sections/InlineTestimonial";
+
+// Player card images for inline testimonials
+import jonMarashiCard from "@/assets/cards/jon-marashi.jpeg";
+import drewBallardCard from "@/assets/cards/drew-ballard.jpeg";
+import serenaWongCard from "@/assets/cards/serena-wong.jpeg";
+import beauMurpheyCard from "@/assets/cards/beau-murphey.jpeg";
+import kooperRuminerCard from "@/assets/cards/kooper-ruminer.jpeg";
+import gageLidderCard from "@/assets/cards/gage-lidder.jpeg";
 
 // Lazy load below-the-fold sections
 const ProblemSolutionSection = lazy(() => import("@/components/sections/ProblemSolutionSection"));
@@ -98,6 +107,15 @@ const Index = () => {
         
         {/* 3. Credibility — Track Record */}
         <AnimatedSection><CredibilitySection /></AnimatedSection>
+
+        {/* ── Inline Testimonial #1 — After credibility, reinforce with celebrity voice */}
+        <InlineTestimonial
+          name="Dr. Jon Marashi"
+          role="Celebrity Dentist, Los Angeles, CA"
+          quote="At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite. If you are serious about building a real brand—one that lasts—I would not work with anyone else."
+          cardImage={jonMarashiCard}
+          variant="accent"
+        />
         
         {/* 4. What We Do — The Complete System */}
         <AnimatedSection><WhatWeDoSection /></AnimatedSection>
@@ -108,17 +126,34 @@ const Index = () => {
         {/* 6. CTA Banner */}
         <AnimatedSection><CTABannerSection /></AnimatedSection>
         
-        {/* 7. Testimonials */}
+        {/* 7. Testimonials — Full Section */}
         <AnimatedSection><TestimonialsSection onApplyClick={scrollToForm} /></AnimatedSection>
         
         {/* 8. Partnership Philosophy — Why True Partnership */}
         <AnimatedSection><PartnershipPhilosophySection /></AnimatedSection>
+
+        {/* ── Inline Testimonial #2 — After partnership philosophy, prove the model */}
+        <InlineTestimonial
+          name="Dr. Drew Ballard"
+          role="Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education"
+          quote="Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone."
+          cardImage={drewBallardCard}
+        />
         
         {/* 9. Organic + Paid — One System */}
         <AnimatedSection><OrganicPaidSection /></AnimatedSection>
         
         {/* 10. Conversion Systems — Differentiation */}
         <AnimatedSection><ConversionSystemsSection /></AnimatedSection>
+
+        {/* ── Inline Testimonial #3 — After conversion systems, show real results */}
+        <InlineTestimonial
+          name="Dr. Beau Murphey"
+          role="Cosmetic Dentist, Ridgeland, MS"
+          quote="I was genuinely scared of content. I avoided it for years. Nothing ever worked, and it always felt uncomfortable. This is the first time content felt natural—and the first time it actually worked. That completely changed my outlook and my results."
+          cardImage={beauMurpheyCard}
+          variant="minimal"
+        />
         
         {/* 10.5. Access + Status — Proximity to the Top */}
         <AnimatedSection><AccessStatusSection /></AnimatedSection>
@@ -131,6 +166,15 @@ const Index = () => {
         
         {/* 13. Founders Philosophy */}
         <AnimatedSection><FoundersPhilosophySection /></AnimatedSection>
+
+        {/* ── Inline Testimonial #4 — After founders philosophy, reinforce trust */}
+        <InlineTestimonial
+          name="Dr. Serena Wong"
+          role="Cosmetic Dentist & Owner, Ottawa, ON"
+          quote="They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am. I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail."
+          cardImage={serenaWongCard}
+          variant="accent"
+        />
         
         {/* 14. The Truth — Hard Stats */}
         <AnimatedSection><TheTruthSection /></AnimatedSection>
@@ -149,6 +193,14 @@ const Index = () => {
         
         {/* 17. Transformation Narratives — Case Studies */}
         <AnimatedSection><TransformationNarrativesSection /></AnimatedSection>
+
+        {/* ── Inline Testimonial #5 — After case studies, ground-level proof */}
+        <InlineTestimonial
+          name="Dr. Kooper Ruminer"
+          role="Associate & Practice Owner, Oklahoma City, OK"
+          quote="I've built practices from the ground up, and I can say with absolute certainty—doing this without Zac and Alan would have taken years longer and cost far more mistakes. They remove confusion while preserving ambition. That alone is invaluable."
+          cardImage={kooperRuminerCard}
+        />
         
         {/* 18. Ad Case Studies with Metrics */}
         <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
@@ -181,6 +233,15 @@ const Index = () => {
         
         {/* 27. What You Receive */}
         <AnimatedSection><WhatYouReceiveSection /></AnimatedSection>
+
+        {/* ── Inline Testimonial #6 — Before final CTA, one last trust anchor */}
+        <InlineTestimonial
+          name="Dr. Gage Lidder"
+          role="Associate, London"
+          quote="Pasted took that pressure off my shoulders. They helped me translate who I am in the clinic into a clear, authentic personal brand the world can actually see. It finally feels like my online presence matches the standard of my work."
+          cardImage={gageLidderCard}
+          variant="accent"
+        />
         
         {/* 28. Take It — Second CTA */}
         <AnimatedSection><TakeItSection onApplyClick={scrollToForm} /></AnimatedSection>
