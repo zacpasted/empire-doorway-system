@@ -131,12 +131,12 @@ const Index = () => {
         {/* 8. Partnership Philosophy — Why True Partnership */}
         <AnimatedSection><PartnershipPhilosophySection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #2 — After partnership philosophy, prove the model */}
+        {/* ── Inline Testimonial #2 — Sam Saleh */}
         <InlineTestimonial
-          name="Dr. Drew Ballard"
-          role="Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education"
-          quote="Halo did not scale by accident. The growth, the positioning, the clarity—it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone."
-          cardImage={drewBallardCard}
+          name="Dr. Sam Saleh"
+          role="Celebrity Dentist, Los Angeles & London"
+          quote="This is world-class work in every sense. The strategy is genius-level, the execution is flawless, and there is zero fluff. I could not recommend them more highly."
+          cardImage={samSalehCard}
         />
         
         {/* 9. Organic + Paid — One System */}
