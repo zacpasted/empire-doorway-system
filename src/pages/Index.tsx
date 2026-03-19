@@ -166,12 +166,12 @@ const Index = () => {
         {/* 13. Founders Philosophy */}
         <AnimatedSection><FoundersPhilosophySection /></AnimatedSection>
 
-        {/* ── Inline Testimonial #4 — After founders philosophy, reinforce trust */}
+        {/* ── Inline Testimonial #4 — Rhona Eksander */}
         <InlineTestimonial
-          name="Dr. Serena Wong"
-          role="Cosmetic Dentist & Owner, Ottawa, ON"
-          quote="They gave me the confidence to tell my story in a way that feels authentic and aligned with who I am. I am very selective about what I put my name behind, and their work stands out for its intention, professionalism, creativity and attention to detail."
-          cardImage={serenaWongCard}
+          name="Dr. Rhona Eksander"
+          role="Celebrity Dentist, Chelsea Dental Clinic, London"
+          quote="This work is intelligent, restrained, and deeply respectful of individuality. Zac and Alan build brands with intention and integrity. I'm genuinely grateful that more doctors can now access something this refined and thoughtful."
+          cardImage={pastedPlaceholder}
           variant="accent"
         />
         
