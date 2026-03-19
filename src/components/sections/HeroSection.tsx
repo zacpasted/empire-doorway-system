@@ -243,6 +243,35 @@ const HeroSection = () => {
           </p>
         </motion.div>
         
+        {/* Service Ticker */}
+        <div className="mb-4 md:mb-6 overflow-hidden relative">
+          <style>{`
+            @keyframes service-ticker {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-service-ticker {
+              animation: service-ticker 25s linear infinite;
+            }
+          `}</style>
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="animate-service-ticker flex items-center whitespace-nowrap">
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex items-center">
+                {["Branding", "Content", "Strategy", "Consulting", "Systems", "Conversion", "Advertising", "Marketing", "Ecosystem", "Global"].map((service) => (
+                  <span key={`${setIndex}-${service}`} className="flex items-center mx-3 md:mx-5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary/60 mr-3 md:mr-4 flex-shrink-0" />
+                    <span className="text-xs md:text-sm tracking-[0.2em] uppercase text-muted-foreground/70 font-sans font-medium">
+                      {service}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* VSL - Instant visibility, no animation delay */}
         <div className="mb-4 md:mb-8">
           <VideoPlayer />
