@@ -116,6 +116,7 @@ MetricsBar.displayName = 'MetricsBar';
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isServiceHovered, setIsServiceHovered] = useState(false);
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
