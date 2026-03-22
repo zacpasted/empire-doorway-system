@@ -725,6 +725,140 @@ const AdminDashboard = () => {
             </div>
           </TabsContent>
 
+          {/* Quiz Submissions Tab */}
+          <TabsContent value="quiz" className="space-y-6">
+            {/* Quiz Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Total Quiz Leads</p>
+                <p className="text-2xl font-bold text-foreground">{quizSubmissions.length}</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Avg Score</p>
+                <p className="text-2xl font-bold text-primary">{avgQuizScore} / 16</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Top Tier</p>
+                <p className="text-2xl font-bold text-foreground">
+                  {Object.entries(quizTierCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || '—'}
+                </p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Today</p>
+                <p className="text-2xl font-bold text-foreground">
+                  {quizSubmissions.filter((q) => new Date(q.created_at).toDateString() === new Date().toDateString()).length}
+                </p>
+              </div>
+            </div>
+
+            {/* Tier Breakdown */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {['Foundation Stage', 'Growth Stage', 'Acceleration Stage', 'Elite Stage'].map((tier) => (
+                <div key={tier} className="bg-card rounded-lg border border-border p-3 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">{tier}</p>
+                  <p className="text-lg font-bold text-foreground">{quizTierCounts[tier] || 0}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={fetchQuizSubmissions} disabled={quizLoading}>
+                <RefreshCw className={`w-4 h-4 ${quizLoading ? 'animate-spin' : ''}`} />
+              </Button>
+              <Button onClick={exportQuizCSV} disabled={quizSubmissions.length === 0}>
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
+            </div>
+
+            {/* Quiz Table */}
+            <div className="bg-card rounded-lg border border-border overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>Score</TableHead>
+                      <TableHead>Tier</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {quizLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-8">
+                          <div className="flex items-center justify-center">
+                            <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                            Loading...
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ) : paginatedQuiz.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                          No quiz submissions yet
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      paginatedQuiz.map((quiz) => (
+                        <TableRow key={quiz.id}>
+                          <TableCell className="font-medium">{quiz.first_name || '—'}</TableCell>
+                          <TableCell>{quiz.email || '—'}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <div className="w-12 h-2 bg-muted rounded-full overflow-hidden">
+                                <div className="h-full bg-primary" style={{ width: `${(quiz.score / 16) * 100}%` }} />
+                              </div>
+                              <span className="text-sm font-medium">{quiz.score}/16</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={
+                              quiz.score_label === 'Elite Stage' ? 'default' :
+                              quiz.score_label === 'Acceleration Stage' ? 'default' :
+                              quiz.score_label === 'Growth Stage' ? 'secondary' : 'outline'
+                            }>
+                              {quiz.score_label}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-muted-foreground">
+                            {format(new Date(quiz.created_at), 'MMM d, yyyy h:mm a')}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedQuiz(quiz)}>
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {quizTotalPages > 1 && (
+                <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+                  <p className="text-sm text-muted-foreground">
+                    Showing {(quizPage - 1) * ITEMS_PER_PAGE + 1} to{' '}
+                    {Math.min(quizPage * ITEMS_PER_PAGE, quizSubmissions.length)} of{' '}
+                    {quizSubmissions.length} results
+                  </p>
+                  <div className="flex gap-1">
+                    <Button variant="outline" size="sm" onClick={() => setQuizPage((p) => Math.max(1, p - 1))} disabled={quizPage === 1}>
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => setQuizPage((p) => Math.min(quizTotalPages, p + 1))} disabled={quizPage === quizTotalPages}>
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </TabsContent>
+
           {/* CTA Analytics Tab */}
           <TabsContent value="analytics" className="space-y-6">
             {/* Analytics Stats */}
