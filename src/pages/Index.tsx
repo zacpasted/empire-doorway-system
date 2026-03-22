@@ -51,6 +51,7 @@ const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaV
 const JournalSection = lazy(() => import("@/components/sections/JournalSection"));
 const MembershipSection = lazy(() => import("@/components/sections/MembershipSection"));
 const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
+const PracticeQuizSection = lazy(() => import("@/components/sections/PracticeQuizSection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
@@ -133,6 +134,9 @@ const Index = () => {
         
         {/* 6. CTA Banner */}
         <AnimatedSection><CTABannerSection /></AnimatedSection>
+        
+        {/* 6.5. Practice Growth Quiz — Engagement + Lead Capture */}
+        <AnimatedSection><PracticeQuizSection /></AnimatedSection>
         
         {/* 7. Testimonials — Full Section */}
         <AnimatedSection><TestimonialsSection onApplyClick={scrollToForm} /></AnimatedSection>
