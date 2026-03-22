@@ -2,6 +2,7 @@ import { useRef, lazy, Suspense, memo } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
 import MobileFloatingCTA from "@/components/MobileFloatingCTA";
+import ScrollEngagementHook from "@/components/ScrollEngagementHook";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
 import Footer from "@/components/Footer";
@@ -99,6 +100,7 @@ const Index = () => {
       
       <StickyHeader onApplyClick={scrollToForm} />
       <LeadMagnetPopup />
+      <ScrollEngagementHook />
       
       {/* 1. Hero - Cinematic Entry with VSL + Calendly */}
       <HeroSection />

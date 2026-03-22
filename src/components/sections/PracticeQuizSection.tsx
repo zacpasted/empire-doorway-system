@@ -154,7 +154,7 @@ const PracticeQuizSection = () => {
     : 0;
 
   return (
-    <section className="py-16 md:py-24">
+    <section id="practice-quiz" className="py-16 md:py-24">
       <div className="container max-w-2xl mx-auto px-4">
         <div className="bg-card/60 backdrop-blur-sm border border-border/40 rounded-2xl p-6 md:p-10 overflow-hidden">
           <AnimatePresence mode="wait">
