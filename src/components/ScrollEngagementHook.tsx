@@ -42,7 +42,7 @@ const ScrollEngagementHook = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="md:hidden fixed bottom-20 left-3 right-3 z-40 bg-card/95 backdrop-blur-md border border-border/60 rounded-xl p-4 shadow-2xl"
+          className="md:hidden fixed bottom-28 left-3 right-3 z-[55] bg-card/95 backdrop-blur-md border border-border/60 rounded-xl p-4 shadow-2xl"
         >
           <button
             onClick={handleDismiss}
