@@ -511,10 +511,14 @@ const AdminDashboard = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsList className="grid w-full max-w-lg grid-cols-3">
             <TabsTrigger value="submissions" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
               Submissions
+            </TabsTrigger>
+            <TabsTrigger value="quiz" className="flex items-center gap-2">
+              <ClipboardList className="w-4 h-4" />
+              Quiz
             </TabsTrigger>
             <TabsTrigger value="analytics" className="flex items-center gap-2">
               <MousePointerClick className="w-4 h-4" />
