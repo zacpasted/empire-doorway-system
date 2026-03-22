@@ -26,7 +26,13 @@ const CalendlyEmbedSection = () => {
   // Listen for Calendly widget ready event
   useEffect(() => {
     const handleCalendlyMessage = (e: MessageEvent) => {
-      if (e.data.event === 'calendly.event_type_viewed') {
+      let data = e.data;
+      if (typeof data === 'string') {
+        try { data = JSON.parse(data); } catch { return; }
+      }
+      if (!data || typeof data !== 'object') return;
+      
+      if (data.event === 'calendly.event_type_viewed') {
         setWidgetReady(true);
       }
     };
