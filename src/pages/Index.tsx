@@ -129,14 +129,14 @@ const Index = () => {
         {/* 4. What We Do — The Complete System */}
         <AnimatedSection><WhatWeDoSection /></AnimatedSection>
         
+        {/* 4.5. Practice Growth Quiz — Engagement + Lead Capture (moved above video carousel to catch scrollers) */}
+        <AnimatedSection><PracticeQuizSection /></AnimatedSection>
+        
         {/* 5. Video Carousel — Content Examples */}
         <AnimatedSection><VideoCarouselSection /></AnimatedSection>
         
         {/* 6. CTA Banner */}
         <AnimatedSection><CTABannerSection /></AnimatedSection>
-        
-        {/* 6.5. Practice Growth Quiz — Engagement + Lead Capture */}
-        <AnimatedSection><PracticeQuizSection /></AnimatedSection>
         
         {/* 7. Testimonials — Full Section */}
         <AnimatedSection><TestimonialsSection onApplyClick={scrollToForm} /></AnimatedSection>
