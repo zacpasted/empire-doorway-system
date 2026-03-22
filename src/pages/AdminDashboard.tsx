@@ -1240,6 +1240,52 @@ const AdminDashboard = () => {
         </DialogContent>
       </Dialog>
 
+      {/* Quiz Detail Dialog */}
+      <Dialog open={!!selectedQuiz} onOpenChange={() => setSelectedQuiz(null)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Quiz Submission Details</DialogTitle>
+            <DialogDescription>
+              {selectedQuiz && (
+                <>
+                  {selectedQuiz.first_name || 'Anonymous'} • Score: {selectedQuiz.score}/16 •{' '}
+                  {format(new Date(selectedQuiz.created_at), 'MMMM d, yyyy h:mm a')}
+                </>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          {selectedQuiz && (
+            <div className="space-y-4 mt-4">
+              <div className="grid grid-cols-2 gap-4">
+                <DetailField label="Name" value={selectedQuiz.first_name} />
+                <DetailField label="Email" value={selectedQuiz.email} />
+                <DetailField label="Score" value={`${selectedQuiz.score} / 16`} />
+                <DetailField label="Tier" value={selectedQuiz.score_label} />
+              </div>
+              <div className="border-t border-border pt-4">
+                <p className="text-sm font-medium text-foreground mb-3">Answers</p>
+                <div className="space-y-2">
+                  {Object.entries(selectedQuiz.answers || {}).map(([key, value]) => (
+                    <div key={key} className="flex justify-between items-start gap-4">
+                      <p className="text-sm text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</p>
+                      <Badge variant="secondary">{String(value)}</Badge>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="border-t border-border pt-4 grid grid-cols-2 gap-4">
+                <DetailField label="Device" value={
+                  selectedQuiz.viewport_width
+                    ? selectedQuiz.viewport_width < 768 ? 'Mobile' : selectedQuiz.viewport_width < 1024 ? 'Tablet' : 'Desktop'
+                    : null
+                } />
+                <DetailField label="Session ID" value={selectedQuiz.session_id?.slice(0, 8) || null} />
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
