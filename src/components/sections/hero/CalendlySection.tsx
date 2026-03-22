@@ -96,10 +96,18 @@ const CalendlySection = () => {
 
   useEffect(() => {
     const handleCalendlyMessage = (e: MessageEvent) => {
-      if (e.data.event === "calendly.event_type_viewed") {
+      // Calendly can send data as string or object
+      let data = e.data;
+      if (typeof data === 'string') {
+        try { data = JSON.parse(data); } catch { return; }
+      }
+      if (!data || typeof data !== 'object') return;
+      
+      const eventName = data.event;
+      if (eventName === "calendly.event_type_viewed") {
         setCalendlyLoaded(true);
       }
-      if (e.data.event === "calendly.event_scheduled") {
+      if (eventName === "calendly.event_scheduled") {
         setBookingConfirmed(true);
         trackCTAClick({ ctaId: "calendly-booking", ctaText: "Call Booked", section: "hero-calendly" });
       }
