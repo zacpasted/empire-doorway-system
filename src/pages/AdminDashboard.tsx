@@ -22,7 +22,8 @@ import {
   MousePointerClick,
   TrendingUp,
   Users,
-  Calendar
+  Calendar,
+  ClipboardList,
 } from 'lucide-react';
 import { format, subDays, startOfDay, endOfDay, eachDayOfInterval, isSameDay } from 'date-fns';
 import {
