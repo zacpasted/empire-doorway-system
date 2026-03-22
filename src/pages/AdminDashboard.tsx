@@ -210,6 +210,27 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchQuizSubmissions = async () => {
+    setQuizLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('quiz_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setQuizSubmissions((data as unknown as QuizSubmission[]) || []);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch quiz submissions.',
+        variant: 'destructive',
+      });
+    } finally {
+      setQuizLoading(false);
+    }
+  };
+
   const filterSubmissions = () => {
     let filtered = [...submissions];
 
