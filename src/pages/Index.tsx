@@ -100,6 +100,7 @@ const Index = () => {
       
       <StickyHeader onApplyClick={scrollToForm} />
       <LeadMagnetPopup />
+      <ScrollEngagementHook />
       
       {/* 1. Hero - Cinematic Entry with VSL + Calendly */}
       <HeroSection />
