@@ -44,6 +44,7 @@ const WhatWeAskSection = lazy(() => import("@/components/sections/WhatWeAskSecti
 const FoundersVibeSection = lazy(() => import("@/components/sections/FoundersVibeSection"));
 const PrivateAdvisorySection = lazy(() => import("@/components/sections/PrivateAdvisorySection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
+const MidPageCTASection = lazy(() => import("@/components/sections/MidPageCTASection"));
 const TransformationSection = lazy(() => import("@/components/sections/TransformationSection"));
 const ProgramDeliverablesSection = lazy(() => import("@/components/sections/ProgramDeliverablesSection"));
 const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
