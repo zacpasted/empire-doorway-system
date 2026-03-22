@@ -44,6 +44,7 @@ const WhatWeAskSection = lazy(() => import("@/components/sections/WhatWeAskSecti
 const FoundersVibeSection = lazy(() => import("@/components/sections/FoundersVibeSection"));
 const PrivateAdvisorySection = lazy(() => import("@/components/sections/PrivateAdvisorySection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
+const MidPageCTASection = lazy(() => import("@/components/sections/MidPageCTASection"));
 const TransformationSection = lazy(() => import("@/components/sections/TransformationSection"));
 const ProgramDeliverablesSection = lazy(() => import("@/components/sections/ProgramDeliverablesSection"));
 const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
@@ -185,6 +186,9 @@ const Index = () => {
         
         {/* 14. The Truth — Hard Stats */}
         <AnimatedSection><TheTruthSection /></AnimatedSection>
+        
+        {/* 14.5 Mid-Page Interrupt CTA — Capture Direct Scrollers */}
+        <AnimatedSection><MidPageCTASection /></AnimatedSection>
         
         {/* 15. Content Examples — Wistia Videos */}
         <AnimatedSection>
