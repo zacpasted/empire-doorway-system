@@ -151,6 +151,7 @@ const AdminDashboard = () => {
     if (user && isAdmin) {
       fetchSubmissions();
       fetchCTAAnalytics();
+      fetchQuizSubmissions();
     }
   }, [user, isAdmin]);
 
