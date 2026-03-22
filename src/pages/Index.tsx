@@ -187,6 +187,9 @@ const Index = () => {
         {/* 14. The Truth — Hard Stats */}
         <AnimatedSection><TheTruthSection /></AnimatedSection>
         
+        {/* 14.5 Mid-Page Interrupt CTA — Capture Direct Scrollers */}
+        <AnimatedSection><MidPageCTASection /></AnimatedSection>
+        
         {/* 15. Content Examples — Wistia Videos */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
