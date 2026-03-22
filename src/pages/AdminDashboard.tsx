@@ -398,6 +398,48 @@ const AdminDashboard = () => {
   const bookingClicks = ctaClicks.filter((c) => c.cta_id === 'calendly-booking').length;
   const conversionRate = uniqueCTASessions > 0 ? ((bookingClicks / uniqueCTASessions) * 100).toFixed(1) : '0';
 
+  // Quiz computed values
+  const quizTotalPages = Math.ceil(quizSubmissions.length / ITEMS_PER_PAGE);
+  const paginatedQuiz = quizSubmissions.slice(
+    (quizPage - 1) * ITEMS_PER_PAGE,
+    quizPage * ITEMS_PER_PAGE
+  );
+  const quizTierCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    quizSubmissions.forEach((q) => {
+      counts[q.score_label] = (counts[q.score_label] || 0) + 1;
+    });
+    return counts;
+  }, [quizSubmissions]);
+  const avgQuizScore = quizSubmissions.length > 0
+    ? (quizSubmissions.reduce((sum, q) => sum + q.score, 0) / quizSubmissions.length).toFixed(1)
+    : '0';
+
+  const exportQuizCSV = () => {
+    const headers = ['First Name', 'Email', 'Score', 'Tier', 'Revenue Source', 'Brand Perception', 'Content System', 'Growth Ceiling', 'Date'];
+    const csvData = quizSubmissions.map((q) => [
+      q.first_name || '',
+      q.email || '',
+      q.score.toString(),
+      q.score_label,
+      q.answers?.revenue_source || '',
+      q.answers?.brand_perception || '',
+      q.answers?.content_system || '',
+      q.answers?.growth_ceiling || '',
+      format(new Date(q.created_at), 'yyyy-MM-dd HH:mm:ss'),
+    ]);
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map((row) => row.map((cell) => `"${cell}"`).join(',')),
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `quiz_submissions_${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+    toast({ title: 'Exported', description: `${quizSubmissions.length} quiz submissions exported.` });
+  };
+
   // Chart data - clicks over time
   const clicksOverTimeData = useMemo(() => {
     const days = parseInt(ctaDateRange);
