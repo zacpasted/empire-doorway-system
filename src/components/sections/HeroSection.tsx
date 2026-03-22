@@ -5,6 +5,7 @@ import LogoMarquee from "@/components/sections/hero/LogoMarquee";
 import MetricsBar from "@/components/sections/hero/MetricsBar";
 import ServiceTicker from "@/components/sections/hero/ServiceTicker";
 import CalendlySection from "@/components/sections/hero/CalendlySection";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -18,8 +19,13 @@ const HeroSection = () => {
   const textureY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
+  const handleMobileCTA = () => {
+    trackCTAClick({ ctaId: 'hero-instant-cta', ctaText: 'See If You Qualify', section: 'hero-above-fold' });
+    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-10 md:py-24 overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen py-6 md:py-24 overflow-hidden">
       {/* Parallax background layers */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/20"
@@ -35,8 +41,8 @@ const HeroSection = () => {
 
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         {/* Primary Headline */}
-        <motion.div className="text-center mb-4 md:mb-8" style={{ opacity }}>
-          <div className="flex flex-col items-center mb-3 md:mb-6">
+        <motion.div className="text-center mb-3 md:mb-8" style={{ opacity }}>
+          <div className="flex flex-col items-center mb-2 md:mb-6">
             <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
               PASTED
             </span>
@@ -45,7 +51,7 @@ const HeroSection = () => {
             </span>
           </div>
 
-          <h1 className="font-serif text-foreground mb-3 md:mb-5 leading-[1.1] tracking-[-0.01em]">
+          <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
               Where Aesthetic Dentistry's
             </span>
@@ -53,7 +59,7 @@ const HeroSection = () => {
               Leading Practices Are Built
             </span>
             <motion.span
-              className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-2"
+              className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
               initial={{ opacity: 0.7 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -61,6 +67,28 @@ const HeroSection = () => {
               $500K–$1M+ in Annual Growth. The Practice You Actually Want.
             </motion.span>
           </h1>
+
+          {/* Mobile-specific social proof hook — visible immediately */}
+          <div className="md:hidden flex items-center justify-center gap-2 text-[10px] text-muted-foreground/60 mb-3">
+            <span className="text-primary font-semibold">97% retention</span>
+            <span>·</span>
+            <span>$100M+ revenue generated</span>
+            <span>·</span>
+            <span>30 spots/yr</span>
+          </div>
+
+          {/* Mobile instant CTA — above the fold */}
+          <div className="md:hidden mb-3">
+            <button
+              onClick={handleMobileCTA}
+              className="w-full py-3 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
+            >
+              See If You Qualify
+            </button>
+            <p className="text-[9px] text-muted-foreground/40 mt-1.5 tracking-wide">
+              45-min strategy call · Limited availability
+            </p>
+          </div>
 
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
             PASTED is the private, in-house growth infrastructure trusted by elite cosmetic dentists — combining execution, positioning, and direct access to the highest level of the industry.
@@ -77,12 +105,12 @@ const HeroSection = () => {
         <LogoMarquee />
 
         {/* VSL Video */}
-        <div className="mb-4 md:mb-8">
+        <div className="mb-3 md:mb-8">
           <VideoPlayer />
         </div>
 
         {/* Metrics Bar */}
-        <div className="mb-5 md:mb-10">
+        <div className="mb-4 md:mb-10">
           <MetricsBar />
         </div>
 
