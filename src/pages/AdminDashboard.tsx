@@ -22,7 +22,8 @@ import {
   MousePointerClick,
   TrendingUp,
   Users,
-  Calendar
+  Calendar,
+  ClipboardList,
 } from 'lucide-react';
 import { format, subDays, startOfDay, endOfDay, eachDayOfInterval, isSameDay } from 'date-fns';
 import {
@@ -99,6 +100,18 @@ interface CTAStats {
   unique_sessions: number;
 }
 
+interface QuizSubmission {
+  id: string;
+  first_name: string | null;
+  email: string | null;
+  score: number;
+  score_label: string;
+  answers: Record<string, string>;
+  session_id: string | null;
+  viewport_width: number | null;
+  created_at: string;
+}
+
 const ITEMS_PER_PAGE = 10;
 
 const AdminDashboard = () => {
@@ -117,6 +130,12 @@ const AdminDashboard = () => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('submissions');
   
+  // Quiz state
+  const [quizSubmissions, setQuizSubmissions] = useState<QuizSubmission[]>([]);
+  const [quizLoading, setQuizLoading] = useState(false);
+  const [quizPage, setQuizPage] = useState(1);
+  const [selectedQuiz, setSelectedQuiz] = useState<QuizSubmission | null>(null);
+
   // CTA Analytics state
   const [ctaClicks, setCTAClicks] = useState<CTAClick[]>([]);
   const [ctaLoading, setCTALoading] = useState(false);
@@ -132,6 +151,7 @@ const AdminDashboard = () => {
     if (user && isAdmin) {
       fetchSubmissions();
       fetchCTAAnalytics();
+      fetchQuizSubmissions();
     }
   }, [user, isAdmin]);
 
@@ -187,6 +207,27 @@ const AdminDashboard = () => {
       });
     } finally {
       setCTALoading(false);
+    }
+  };
+
+  const fetchQuizSubmissions = async () => {
+    setQuizLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('quiz_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setQuizSubmissions((data as unknown as QuizSubmission[]) || []);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch quiz submissions.',
+        variant: 'destructive',
+      });
+    } finally {
+      setQuizLoading(false);
     }
   };
 
@@ -357,6 +398,48 @@ const AdminDashboard = () => {
   const bookingClicks = ctaClicks.filter((c) => c.cta_id === 'calendly-booking').length;
   const conversionRate = uniqueCTASessions > 0 ? ((bookingClicks / uniqueCTASessions) * 100).toFixed(1) : '0';
 
+  // Quiz computed values
+  const quizTotalPages = Math.ceil(quizSubmissions.length / ITEMS_PER_PAGE);
+  const paginatedQuiz = quizSubmissions.slice(
+    (quizPage - 1) * ITEMS_PER_PAGE,
+    quizPage * ITEMS_PER_PAGE
+  );
+  const quizTierCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    quizSubmissions.forEach((q) => {
+      counts[q.score_label] = (counts[q.score_label] || 0) + 1;
+    });
+    return counts;
+  }, [quizSubmissions]);
+  const avgQuizScore = quizSubmissions.length > 0
+    ? (quizSubmissions.reduce((sum, q) => sum + q.score, 0) / quizSubmissions.length).toFixed(1)
+    : '0';
+
+  const exportQuizCSV = () => {
+    const headers = ['First Name', 'Email', 'Score', 'Tier', 'Revenue Source', 'Brand Perception', 'Content System', 'Growth Ceiling', 'Date'];
+    const csvData = quizSubmissions.map((q) => [
+      q.first_name || '',
+      q.email || '',
+      q.score.toString(),
+      q.score_label,
+      q.answers?.revenue_source || '',
+      q.answers?.brand_perception || '',
+      q.answers?.content_system || '',
+      q.answers?.growth_ceiling || '',
+      format(new Date(q.created_at), 'yyyy-MM-dd HH:mm:ss'),
+    ]);
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map((row) => row.map((cell) => `"${cell}"`).join(',')),
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `quiz_submissions_${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+    toast({ title: 'Exported', description: `${quizSubmissions.length} quiz submissions exported.` });
+  };
+
   // Chart data - clicks over time
   const clicksOverTimeData = useMemo(() => {
     const days = parseInt(ctaDateRange);
@@ -428,10 +511,14 @@ const AdminDashboard = () => {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsList className="grid w-full max-w-lg grid-cols-3">
             <TabsTrigger value="submissions" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
               Submissions
+            </TabsTrigger>
+            <TabsTrigger value="quiz" className="flex items-center gap-2">
+              <ClipboardList className="w-4 h-4" />
+              Quiz
             </TabsTrigger>
             <TabsTrigger value="analytics" className="flex items-center gap-2">
               <MousePointerClick className="w-4 h-4" />
@@ -630,6 +717,140 @@ const AdminDashboard = () => {
                       onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                       disabled={currentPage === totalPages}
                     >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </TabsContent>
+
+          {/* Quiz Submissions Tab */}
+          <TabsContent value="quiz" className="space-y-6">
+            {/* Quiz Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Total Quiz Leads</p>
+                <p className="text-2xl font-bold text-foreground">{quizSubmissions.length}</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Avg Score</p>
+                <p className="text-2xl font-bold text-primary">{avgQuizScore} / 16</p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Top Tier</p>
+                <p className="text-2xl font-bold text-foreground">
+                  {Object.entries(quizTierCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || '—'}
+                </p>
+              </div>
+              <div className="bg-card rounded-lg border border-border p-4">
+                <p className="text-sm text-muted-foreground">Today</p>
+                <p className="text-2xl font-bold text-foreground">
+                  {quizSubmissions.filter((q) => new Date(q.created_at).toDateString() === new Date().toDateString()).length}
+                </p>
+              </div>
+            </div>
+
+            {/* Tier Breakdown */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {['Foundation Stage', 'Growth Stage', 'Acceleration Stage', 'Elite Stage'].map((tier) => (
+                <div key={tier} className="bg-card rounded-lg border border-border p-3 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">{tier}</p>
+                  <p className="text-lg font-bold text-foreground">{quizTierCounts[tier] || 0}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={fetchQuizSubmissions} disabled={quizLoading}>
+                <RefreshCw className={`w-4 h-4 ${quizLoading ? 'animate-spin' : ''}`} />
+              </Button>
+              <Button onClick={exportQuizCSV} disabled={quizSubmissions.length === 0}>
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
+            </div>
+
+            {/* Quiz Table */}
+            <div className="bg-card rounded-lg border border-border overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>Score</TableHead>
+                      <TableHead>Tier</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {quizLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-8">
+                          <div className="flex items-center justify-center">
+                            <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                            Loading...
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ) : paginatedQuiz.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                          No quiz submissions yet
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      paginatedQuiz.map((quiz) => (
+                        <TableRow key={quiz.id}>
+                          <TableCell className="font-medium">{quiz.first_name || '—'}</TableCell>
+                          <TableCell>{quiz.email || '—'}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <div className="w-12 h-2 bg-muted rounded-full overflow-hidden">
+                                <div className="h-full bg-primary" style={{ width: `${(quiz.score / 16) * 100}%` }} />
+                              </div>
+                              <span className="text-sm font-medium">{quiz.score}/16</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={
+                              quiz.score_label === 'Elite Stage' ? 'default' :
+                              quiz.score_label === 'Acceleration Stage' ? 'default' :
+                              quiz.score_label === 'Growth Stage' ? 'secondary' : 'outline'
+                            }>
+                              {quiz.score_label}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-muted-foreground">
+                            {format(new Date(quiz.created_at), 'MMM d, yyyy h:mm a')}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedQuiz(quiz)}>
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {quizTotalPages > 1 && (
+                <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+                  <p className="text-sm text-muted-foreground">
+                    Showing {(quizPage - 1) * ITEMS_PER_PAGE + 1} to{' '}
+                    {Math.min(quizPage * ITEMS_PER_PAGE, quizSubmissions.length)} of{' '}
+                    {quizSubmissions.length} results
+                  </p>
+                  <div className="flex gap-1">
+                    <Button variant="outline" size="sm" onClick={() => setQuizPage((p) => Math.max(1, p - 1))} disabled={quizPage === 1}>
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => setQuizPage((p) => Math.min(quizTotalPages, p + 1))} disabled={quizPage === quizTotalPages}>
                       <ChevronRight className="w-4 h-4" />
                     </Button>
                   </div>
@@ -1013,6 +1234,52 @@ const AdminDashboard = () => {
                 <Badge variant={selectedSubmission.is_partial ? 'secondary' : 'default'}>
                   {selectedSubmission.is_partial ? 'Partial' : 'Complete'}
                 </Badge>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Quiz Detail Dialog */}
+      <Dialog open={!!selectedQuiz} onOpenChange={() => setSelectedQuiz(null)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Quiz Submission Details</DialogTitle>
+            <DialogDescription>
+              {selectedQuiz && (
+                <>
+                  {selectedQuiz.first_name || 'Anonymous'} • Score: {selectedQuiz.score}/16 •{' '}
+                  {format(new Date(selectedQuiz.created_at), 'MMMM d, yyyy h:mm a')}
+                </>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          {selectedQuiz && (
+            <div className="space-y-4 mt-4">
+              <div className="grid grid-cols-2 gap-4">
+                <DetailField label="Name" value={selectedQuiz.first_name} />
+                <DetailField label="Email" value={selectedQuiz.email} />
+                <DetailField label="Score" value={`${selectedQuiz.score} / 16`} />
+                <DetailField label="Tier" value={selectedQuiz.score_label} />
+              </div>
+              <div className="border-t border-border pt-4">
+                <p className="text-sm font-medium text-foreground mb-3">Answers</p>
+                <div className="space-y-2">
+                  {Object.entries(selectedQuiz.answers || {}).map(([key, value]) => (
+                    <div key={key} className="flex justify-between items-start gap-4">
+                      <p className="text-sm text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</p>
+                      <Badge variant="secondary">{String(value)}</Badge>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="border-t border-border pt-4 grid grid-cols-2 gap-4">
+                <DetailField label="Device" value={
+                  selectedQuiz.viewport_width
+                    ? selectedQuiz.viewport_width < 768 ? 'Mobile' : selectedQuiz.viewport_width < 1024 ? 'Tablet' : 'Desktop'
+                    : null
+                } />
+                <DetailField label="Session ID" value={selectedQuiz.session_id?.slice(0, 8) || null} />
               </div>
             </div>
           )}
