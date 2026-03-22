@@ -130,6 +130,12 @@ const AdminDashboard = () => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('submissions');
   
+  // Quiz state
+  const [quizSubmissions, setQuizSubmissions] = useState<QuizSubmission[]>([]);
+  const [quizLoading, setQuizLoading] = useState(false);
+  const [quizPage, setQuizPage] = useState(1);
+  const [selectedQuiz, setSelectedQuiz] = useState<QuizSubmission | null>(null);
+
   // CTA Analytics state
   const [ctaClicks, setCTAClicks] = useState<CTAClick[]>([]);
   const [ctaLoading, setCTALoading] = useState(false);
