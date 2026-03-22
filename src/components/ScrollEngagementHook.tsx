@@ -53,7 +53,7 @@ const ScrollEngagementHook = () => {
           </button>
           
           <p className="text-[11px] tracking-[0.15em] uppercase text-primary/80 font-medium mb-1">
-            Free in 60 seconds
+            Free 2-Minute Diagnostic
           </p>
           <p className="text-sm font-serif font-semibold text-foreground leading-snug mb-3">
             How does your practice compare to the top 1%?
@@ -63,7 +63,7 @@ const ScrollEngagementHook = () => {
             onClick={handleCTA}
             className="w-full py-2.5 bg-primary text-primary-foreground text-xs font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
           >
-            Take the 60-Second Quiz →
+            Take the Growth Diagnostic →
           </button>
         </motion.div>
       )}
