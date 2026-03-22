@@ -206,6 +206,48 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_submissions: {
+        Row: {
+          answers: Json
+          created_at: string
+          email: string | null
+          first_name: string | null
+          id: string
+          page_url: string | null
+          score: number
+          score_label: string
+          session_id: string | null
+          user_agent: string | null
+          viewport_width: number | null
+        }
+        Insert: {
+          answers?: Json
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          page_url?: string | null
+          score: number
+          score_label: string
+          session_id?: string | null
+          user_agent?: string | null
+          viewport_width?: number | null
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          page_url?: string | null
+          score?: number
+          score_label?: string
+          session_id?: string | null
+          user_agent?: string | null
+          viewport_width?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
