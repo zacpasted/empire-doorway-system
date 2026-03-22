@@ -100,6 +100,18 @@ interface CTAStats {
   unique_sessions: number;
 }
 
+interface QuizSubmission {
+  id: string;
+  first_name: string | null;
+  email: string | null;
+  score: number;
+  score_label: string;
+  answers: Record<string, string>;
+  session_id: string | null;
+  viewport_width: number | null;
+  created_at: string;
+}
+
 const ITEMS_PER_PAGE = 10;
 
 const AdminDashboard = () => {
