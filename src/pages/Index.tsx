@@ -135,6 +135,9 @@ const Index = () => {
         {/* 6. CTA Banner */}
         <AnimatedSection><CTABannerSection /></AnimatedSection>
         
+        {/* 6.5. Practice Growth Quiz — Engagement + Lead Capture */}
+        <AnimatedSection><PracticeQuizSection /></AnimatedSection>
+        
         {/* 7. Testimonials — Full Section */}
         <AnimatedSection><TestimonialsSection onApplyClick={scrollToForm} /></AnimatedSection>
         
