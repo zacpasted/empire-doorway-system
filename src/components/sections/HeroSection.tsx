@@ -4,7 +4,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import LogoMarquee from "@/components/sections/hero/LogoMarquee";
 import MetricsBar from "@/components/sections/hero/MetricsBar";
 import ServiceTicker from "@/components/sections/hero/ServiceTicker";
-import CalendlySection from "@/components/sections/hero/CalendlySection";
+
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const HeroSection = () => {
