@@ -53,7 +53,7 @@ const HeroSection = () => {
 
           <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              The gap between your clinical standard and your market position is costing you the practice you've already earned.
+              The practice you want. Built by the team behind the best.
             </span>
             <motion.span
               className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
@@ -61,7 +61,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="not-italic font-medium text-foreground">PASTED</span> is your operating and accountability partner — the <span className="text-primary not-italic">authors of your arc</span>. Brand, content, ads, and patient conversion, built and run in-house, so you can do the dentistry you became a dentist for at the level you've always been capable of.
+              Your clinical excellence deserves a practice that reflects it. <span className="not-italic font-medium text-foreground">PASTED</span> is the <span className="text-primary not-italic">operating partner</span> that builds it — brand, content, ads, and conversion, running in the background while you do the work you love.
             </motion.span>
           </h1>
 
