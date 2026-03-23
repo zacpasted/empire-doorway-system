@@ -528,7 +528,7 @@ const WhatWeDoSection = () => {
           <div className="max-w-3xl mx-auto p-8 md:p-12 border border-border/30 bg-card/20 rounded-2xl">
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-6">The Revenue Math</p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4">
-              Most cosmetic cases range from <span className="text-foreground font-medium">$6K–$15K+</span>.
+              Most cosmetic cases range from <span className="text-foreground font-medium">$6K–$20K+</span>.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
               Adding <span className="text-foreground font-medium">50–100 additional cosmetic cases per year</span> creates{" "}
