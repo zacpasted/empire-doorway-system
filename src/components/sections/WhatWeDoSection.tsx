@@ -260,7 +260,7 @@ const WhatWeDoSection = () => {
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className="text-xs tracking-[0.25em] uppercase text-primary font-semibold">
-              Four Growth Engines
+              The System
             </span>
             <motion.span 
               className="w-2 h-2 rounded-full bg-primary"
