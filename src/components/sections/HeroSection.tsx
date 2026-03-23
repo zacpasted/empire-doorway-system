@@ -87,6 +87,8 @@ const HeroSection = () => {
             <span>·</span>
             <span className="text-primary font-semibold">Dr. Michaela Tozzi</span>
             <span>·</span>
+            <span className="text-primary font-semibold">+ more</span>
+            <span>·</span>
             <span>97% retention</span>
           </div>
 
