@@ -49,7 +49,7 @@ const MidPageCTASection = () => {
             <span className="absolute inset-0 bg-primary/0 group-hover:bg-primary transition-all duration-300" />
             
             <span className="relative z-10 text-primary group-hover:text-primary-foreground transition-colors duration-300">
-              Book Your Strategy Call
+              Apply for Partnership
             </span>
             
             {/* Animated arrow */}
