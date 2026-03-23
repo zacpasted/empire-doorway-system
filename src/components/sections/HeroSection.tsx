@@ -68,8 +68,8 @@ const HeroSection = () => {
             </motion.span>
           </h1>
 
-          {/* Mobile-specific social proof hook — visible immediately */}
-          <div className="md:hidden flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground/60 mb-3 flex-wrap">
+          {/* Social proof names */}
+          <div className="flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 mb-3 flex-wrap">
             <span>Trusted by</span>
             <span className="text-primary font-semibold">Dr. Drew Ballard</span>
             <span>·</span>
@@ -82,15 +82,15 @@ const HeroSection = () => {
             <span>97% retention</span>
           </div>
 
-          {/* Mobile instant CTA — above the fold */}
-          <div className="md:hidden mb-3">
+          {/* CTA button */}
+          <div className="mb-3">
             <button
               onClick={handleMobileCTA}
-              className="w-full py-3 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
+              className="w-full md:w-auto md:px-12 py-3 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
             >
               Apply for Partnership →
             </button>
-            <p className="text-[9px] text-muted-foreground/40 mt-1.5 tracking-wide">
+            <p className="text-[9px] md:text-xs text-muted-foreground/40 mt-1.5 tracking-wide">
               30 practices per year · Reviewed within 48 hours · Not all accepted
             </p>
           </div>
@@ -106,20 +106,20 @@ const HeroSection = () => {
           </p>
         </motion.div>
 
-        {/* Logo Marquee - Above VSL */}
+        {/* Logo Marquee */}
         <LogoMarquee />
-
-        {/* VSL Video */}
-        <div className="mb-3 md:mb-8">
-          <VideoPlayer />
-        </div>
 
         {/* Metrics Bar */}
         <div className="mb-4 md:mb-10">
           <MetricsBar />
         </div>
 
-        {/* Service Ticker - Above Calendly */}
+        {/* VSL Video */}
+        <div className="mb-3 md:mb-8">
+          <VideoPlayer />
+        </div>
+
+        {/* Service Ticker */}
         <ServiceTicker />
 
         {/* Application Section - Calendly Embed */}
