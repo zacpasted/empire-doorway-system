@@ -4,7 +4,7 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 const MidPageCTASection = () => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackCTAClick({ ctaId: 'mid-page-interrupt', ctaText: 'Book Your Strategy Call', section: 'mid-page-cta' });
+    trackCTAClick({ ctaId: 'mid-page-interrupt', ctaText: 'Apply for Partnership', section: 'mid-page-cta' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
