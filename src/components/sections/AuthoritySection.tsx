@@ -13,8 +13,8 @@ const AuthoritySection = () => {
 
         <div className="space-y-10 text-lg md:text-xl text-muted-foreground leading-relaxed">
           <p>
-            <span className="text-primary font-medium">Dr. Drew Ballard. Dr. Alan Clarke. Dr. Jon Marashi. Dr. Brian Harris. Dr. Mark Hughes. Dr. Rhona Eksander. Dr. Sam Saleh.</span>{" "}
-            These are not client logos on a slide deck. These are practices we built from the inside — strategy, brand, content, ads, and conversion systems — over years of real partnership.
+            <span className="text-primary font-medium">Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. SmileTrend.</span>{" "}
+            These are not client logos on a slide deck. These are practices and brands we built from the inside — strategy, brand, content, ads, and conversion systems — over years of real partnership.
           </p>
 
           <p>
