@@ -51,7 +51,7 @@ const services = [
     stat: 50,
     statSuffix: "-100",
     statPrefix: "",
-    statLabel: "Additional cosmetic cases/year",
+    statLabel: "Additional qualified cosmetic cases/year",
     gradient: "from-emerald-500/20 via-teal-500/10 to-cyan-500/5"
   },
   {
