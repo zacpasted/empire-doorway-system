@@ -22,10 +22,10 @@ const PartnerRosterTicker = () => {
       <style>{`
         @keyframes partner-roster {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-25%); }
         }
         .animate-partner-roster {
-          animation: partner-roster 40s linear infinite;
+          animation: partner-roster 30s linear infinite;
         }
       `}</style>
 
@@ -43,7 +43,7 @@ const PartnerRosterTicker = () => {
         className="flex items-center whitespace-nowrap animate-partner-roster pl-32 md:pl-40"
         style={{ animationPlayState: isHovered ? "paused" : "running" }}
       >
-        {[...Array(2)].map((_, setIndex) => (
+        {[...Array(4)].map((_, setIndex) => (
           <div key={setIndex} className="flex items-center">
             {ROSTER_ITEMS.map((item) => (
               <span key={`${setIndex}-${item}`} className="flex items-center mx-4 md:mx-6">
