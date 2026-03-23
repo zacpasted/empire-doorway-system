@@ -127,10 +127,15 @@ const Index = () => {
           variant="accent"
         />
 
+        {/* Compressed Results — Early proof for mobile scrollers */}
+        <AnimatedSection><CompressedResultsSection /></AnimatedSection>
+
         {/* Video Testimonials — Early Social Proof */}
         <AnimatedSection>
           <VideoTestimonialsSection
             videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
+            title="In Their Own Words"
+            subtitle="Unscripted. Unedited. From dentists who've been through it."
           />
         </AnimatedSection>
         
