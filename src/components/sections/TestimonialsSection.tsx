@@ -236,10 +236,10 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
             Testimonials
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6">
-            Voices of Trust
+            What They Say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Hear from dentists who chose substance over noise — and built brands that speak for themselves.
+            From celebrity dentists to early-career associates. Every practice is different. The outcome is consistent.
           </p>
         </div>
 
@@ -310,7 +310,7 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
             onClick={onApplyClick}
             className="rounded-md"
           >
-            Join These Dentists
+            Apply for Partnership →
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
             Build authority, not dependency.

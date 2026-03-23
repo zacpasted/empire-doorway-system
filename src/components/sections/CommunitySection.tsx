@@ -137,7 +137,7 @@ const CommunitySection = ({
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <p className="text-sm text-muted-foreground/50 italic">
-            Where elite practitioners gather. Where standards are set.
+            Where the standards of the profession are set. Not discussed — set.
           </p>
         </motion.div>
       </div>

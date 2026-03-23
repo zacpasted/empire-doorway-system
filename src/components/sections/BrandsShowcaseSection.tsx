@@ -87,10 +87,10 @@ const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => 
             onClick={onApplyClick}
             className="px-8 py-6 text-base"
           >
-            Schedule a Discovery Call
+            Apply for Partnership →
           </Button>
           <p className="text-xs text-muted-foreground mt-4">
-            Only 30 practices accepted per year. Applications reviewed individually.
+            30 practices per year. Applications reviewed within 48 hours. Not all accepted.
           </p>
         </div>
       </div>

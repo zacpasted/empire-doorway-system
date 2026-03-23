@@ -81,7 +81,7 @@ const WhyPathsFailSection = () => {
           className="text-center mb-6"
         >
           <span className="inline-block px-4 py-1.5 text-xs tracking-[0.3em] uppercase text-destructive/80 bg-destructive/10 border border-destructive/20 rounded-full">
-            Why Fragmentation Fails
+            Why Nothing Else Has Worked
           </span>
         </motion.div>
 
@@ -92,7 +92,7 @@ const WhyPathsFailSection = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl md:text-5xl font-serif text-center text-foreground mb-6"
         >
-          Why Most Growth Approaches Don't Work
+          The real reason the last agency, freelancer, or consultant didn't move the needle.
         </motion.h2>
 
         <motion.p
@@ -185,11 +185,10 @@ const WhyPathsFailSection = () => {
                 animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Fragmentation ≠ Growth
+                Coordination Is Everything
               </motion.p>
               <p className="text-muted-foreground max-w-lg mx-auto">
-                The problem isn't that you haven't invested enough.
-                It's that no one has coordinated the system to work together.
+                The problem was never effort or investment. It was coordination. No one was running the whole system — because no one had accountability for the whole result.
               </p>
             </div>
           </div>

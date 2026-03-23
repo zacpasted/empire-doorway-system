@@ -76,15 +76,15 @@ const TransformationNarrativesSection = () => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
-            Compounding Results
+            What Partnership Looks Like
           </span>
           <h2 className="font-playfair text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Three Narrative-Driven
+            Three practices. Three different starting points.
             <br />
-            <span className="italic text-muted-foreground">Transformations</span>
+            <span className="italic text-muted-foreground">One outcome.</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Using a PASTED strategy, we achieved what most believed was impossible.
+            These are not marketing wins. They are identity, narrative, and systems wins. The marketing followed.
           </p>
         </motion.div>
 
@@ -228,11 +228,11 @@ const TransformationNarrativesSection = () => {
           className="text-center mt-20 md:mt-28"
         >
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
-            These weren't marketing wins. They were{" "}
-            <span className="text-foreground font-medium">identity, systems, and narrative wins</span>.
+            These weren't won in the ad account. They were won in the{" "}
+            <span className="text-foreground font-medium">positioning, the narrative, and the structure</span>.
           </p>
           <p className="font-playfair text-2xl md:text-3xl font-bold text-foreground">
-            When positioning is right, everything else follows.
+            The ads simply amplified what was already working.
           </p>
         </motion.div>
       </div>

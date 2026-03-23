@@ -10,6 +10,7 @@ const FilterSection = () => {
     { text: "Those who confuse templates and shortcuts for brand building", icon: "◇" },
   ];
   const isFor = [
+    { text: "Dentists who already know the clinical work is there — and need the infrastructure around it to reflect that.", icon: "▲" },
     { text: "Cosmetic dentists who want to be the undeniable authority in their city", icon: "△" },
     { text: "Doctors who understand that reputation compounds over time", icon: "▲" },
     { text: "Practitioners who want a growth system that reflects their clinical excellence", icon: "△" },
@@ -40,7 +41,7 @@ const FilterSection = () => {
             Not Everyone Gets In.
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            We partner with a limited number of practices each year. Because access matters. Focus matters. Execution matters. This is built for those serious about operating at the highest level.
+            Thirty practices per year. Each one selected because the clinical ambition, the market position, and the readiness for growth are all genuinely there. We are not in the business of collecting clients. We are in the business of transforming practices.
           </p>
         </div>
         

@@ -42,12 +42,12 @@ const JournalSection = () => {
             The PASTED Journal
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4 leading-tight">
-            Insights on Authority, Growth &<br />
-            <span className="text-primary">Cosmetic Practice Strategy.</span>
+            Perspectives on Authority, Brand &<br />
+            <span className="text-primary">What Actually Drives Growth in Aesthetic Dentistry.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-            Not ready to apply? Start here. Strategic perspectives on building a cosmetic practice
-            that attracts the right patients and commands the right case values — delivered to your inbox.
+            Not ready to apply yet? Start here. The PASTED Journal is where we share the thinking, frameworks,
+            and market intelligence that inform everything we build for our partners — delivered to your inbox, free.
           </p>
 
           {isSubmitted ? (

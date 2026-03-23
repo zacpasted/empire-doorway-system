@@ -201,6 +201,9 @@ const AdCaseStudiesSection = () => {
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
             Case Studies
           </h2>
+          <p className="text-sm text-muted-foreground/70 max-w-xl mx-auto">
+            Every number below comes from a real PASTED partner account. No composites. No estimates.
+          </p>
         </div>
 
         {/* Aggregate Metrics Card */}

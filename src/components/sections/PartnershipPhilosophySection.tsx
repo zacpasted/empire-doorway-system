@@ -15,7 +15,7 @@ const PartnershipPhilosophySection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
-            Beyond Marketing
+            The Philosophy
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
             This Is the Only Model<br />
@@ -67,7 +67,7 @@ const PartnershipPhilosophySection = () => {
 
           <p className="text-center text-foreground font-serif text-xl md:text-2xl">
             Most groups help you get busier.<br />
-            <span className="text-primary">PASTED helps you get better — and more valuable.</span>
+            <span className="text-primary">PASTED rebuilds what determines how much each patient spends — and whether they refer.</span>
           </p>
         </motion.div>
       </div>

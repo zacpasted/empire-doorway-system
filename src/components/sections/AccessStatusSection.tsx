@@ -26,8 +26,8 @@ const AccessStatusSection = () => {
             Access + Proximity
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Direct Access to the Top<br />
-            <span className="text-primary">of the Industry.</span>
+            Proximity changes outcomes.<br />
+            <span className="text-primary">Ours is real.</span>
           </h2>
         </motion.div>
 
@@ -38,7 +38,7 @@ const AccessStatusSection = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            PASTED is not built in isolation. It is shaped by the highest-performing aesthetic practices, real production data, and real-world execution at the top level.
+            PASTED is not built in isolation from the industry — it operates inside it. Our partners receive thinking, strategy, and market intelligence drawn from real-world execution at the highest level of aesthetic dentistry, in real time.
           </p>
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />

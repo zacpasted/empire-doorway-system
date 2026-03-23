@@ -5,6 +5,7 @@ import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import ScrollEngagementHook from "@/components/ScrollEngagementHook";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
+import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
 import Footer from "@/components/Footer";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 
@@ -53,6 +54,8 @@ const JournalSection = lazy(() => import("@/components/sections/JournalSection")
 const MembershipSection = lazy(() => import("@/components/sections/MembershipSection"));
 const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
 const PracticeQuizSection = lazy(() => import("@/components/sections/PracticeQuizSection"));
+const CompressedResultsSection = lazy(() => import("@/components/sections/CompressedResultsSection"));
+const FAQSection = lazy(() => import("@/components/sections/FAQSection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
@@ -105,6 +108,9 @@ const Index = () => {
       {/* 1. Hero - Cinematic Entry with VSL + Calendly */}
       <HeroSection />
       
+      {/* Partner Roster Ticker — First social proof element */}
+      <PartnerRosterTicker />
+      
       <Suspense fallback={<SectionLoader />}>
         {/* 2. Philosophy — Problem / Solution */}
         <AnimatedSection><ProblemSolutionSection /></AnimatedSection>
@@ -121,10 +127,15 @@ const Index = () => {
           variant="accent"
         />
 
+        {/* Compressed Results — Early proof for mobile scrollers */}
+        <AnimatedSection><CompressedResultsSection /></AnimatedSection>
+
         {/* Video Testimonials — Early Social Proof */}
         <AnimatedSection>
           <VideoTestimonialsSection
             videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
+            title="In Their Own Words"
+            subtitle="Unscripted. Unedited. From dentists who've been through it."
           />
         </AnimatedSection>
         
@@ -199,8 +210,8 @@ const Index = () => {
         {/* 15. Content Examples — Wistia Videos */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
-            title="How We Build Category-Leading Practices — And Why Most Never Break Through"
-            subtitle="Every piece is scripted, shot, and edited by our in-house team on location — then deployed as both organic storytelling and high-performing ad creative."
+            title="Scripted. Shot. Edited. Deployed. Every piece is ours."
+            subtitle="Every asset below was scripted, shot on-location, edited, and deployed by our in-house team. The same content that builds authority organically becomes the creative that drives paid acquisition. One team. No handoffs."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
           />
         </AnimatedSection>
@@ -283,6 +294,9 @@ const Index = () => {
         
         {/* 35. Membership — Waitlist */}
         <AnimatedSection><MembershipSection /></AnimatedSection>
+
+        {/* FAQ Section */}
+        <AnimatedSection><FAQSection /></AnimatedSection>
       </Suspense>
       
       <Footer />

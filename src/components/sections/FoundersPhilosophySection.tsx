@@ -28,15 +28,16 @@ const FoundersPhilosophySection = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            This Is a Controlled Gateway
+            This Is Not a Funnel.
+            <br className="hidden md:block" />
+            <span className="text-muted-foreground text-2xl md:text-3xl lg:text-4xl"> It is a door — and it only opens for the right practice.</span>
           </h2>
           <p 
             className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            Not a marketing funnel. A private opportunity for cosmetic dentists who are ready to build
-            the practice — and the reputation — they've always envisioned.
+            A private opportunity for cosmetic dentists who are done operating below their ceiling. If the quality of your clinical work and the strength of your market position don't match — this is the conversation that changes that.
           </p>
         </div>
         

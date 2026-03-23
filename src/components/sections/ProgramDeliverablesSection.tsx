@@ -60,10 +60,10 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             PASTED Partnership
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
-            The Complete Growth Infrastructure
+            Everything included. Nothing outsourced.
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            A 12-month private partnership — not a collection of disconnected services. Executed entirely in-house.
+            A 12-month private partnership. Six growth engines, one coordinated team, one point of accountability. Nothing is outsourced. Nothing is templated.
           </p>
         </div>
 
@@ -99,8 +99,8 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             </p>
             <p className="text-5xl font-serif text-primary mb-4">$500K–$1M+</p>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              in additional aesthetic case revenue. Most cosmetic cases range from $6K–$15K+.
-              Adding 50–100 additional cosmetic cases per year creates transformative growth.
+              in additional aesthetic case revenue. Most cosmetic cases range from $6K–$20K+.
+              Adding 50–100 qualified cases per year — cases you actually want to do — creates structural transformation, not just revenue.
             </p>
           </div>
         </div>
@@ -132,11 +132,11 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             onClick={onApplyClick}
             className="inline-flex items-center gap-3 text-sm tracking-[0.2em] uppercase text-background bg-primary px-10 py-5 hover:bg-primary/90 transition-colors duration-300"
           >
-            Schedule a Discovery Call
+            Apply for Partnership →
             <ArrowRight className="w-4 h-4" />
           </button>
           <p className="text-sm text-muted-foreground mt-6">
-            Only 30 practices accepted per year
+            30 practices annually · Applications reviewed within 48 hours · Not all accepted
           </p>
         </div>
       </div>

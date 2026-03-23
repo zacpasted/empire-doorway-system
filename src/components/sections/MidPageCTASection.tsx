@@ -4,7 +4,7 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 const MidPageCTASection = () => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackCTAClick({ ctaId: 'mid-page-interrupt', ctaText: 'Book Your Strategy Call', section: 'mid-page-cta' });
+    trackCTAClick({ ctaId: 'mid-page-interrupt', ctaText: 'Apply for Partnership', section: 'mid-page-cta' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -25,16 +25,16 @@ const MidPageCTASection = () => {
           <div className="w-12 h-px bg-primary/60 mx-auto mb-8" />
 
           <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-primary/70 mb-6 font-medium">
-            Still Reading? Good.
+            Still here?
           </p>
 
           <h3 className="text-2xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.15] tracking-tight mb-6">
-            Most Practices Wait.<br />
-            <span className="text-muted-foreground/60">The Best Ones Act.</span>
+            The practices that dominate this time next year<br />
+            <span className="text-muted-foreground/60">are deciding right now.</span>
           </h3>
 
           <p className="text-base md:text-lg text-muted-foreground/70 max-w-lg mx-auto mb-10 font-light leading-relaxed">
-            You've seen the work. You've seen the results. The only question left is whether this is the year you stop operating below your ceiling.
+            You've read this far because something here is accurate. The clinical excellence is already there. The only question is whether the structure around it finally matches.
           </p>
 
           <motion.a
@@ -49,7 +49,7 @@ const MidPageCTASection = () => {
             <span className="absolute inset-0 bg-primary/0 group-hover:bg-primary transition-all duration-300" />
             
             <span className="relative z-10 text-primary group-hover:text-primary-foreground transition-colors duration-300">
-              Book Your Strategy Call
+              Apply for Partnership
             </span>
             
             {/* Animated arrow */}
@@ -64,7 +64,7 @@ const MidPageCTASection = () => {
           </motion.a>
 
           <p className="mt-8 text-xs text-muted-foreground/40 tracking-wide">
-            45-minute strategic evaluation · Limited to 30 practices per year
+            45-minute strategic evaluation · 30 practices per year · Not all accepted
           </p>
 
           {/* Bottom accent rule */}

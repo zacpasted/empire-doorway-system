@@ -96,7 +96,6 @@ const CalendlySection = () => {
 
   useEffect(() => {
     const handleCalendlyMessage = (e: MessageEvent) => {
-      // Calendly can send data as string or object
       let data = e.data;
       if (typeof data === 'string') {
         try { data = JSON.parse(data); } catch { return; }
@@ -124,11 +123,10 @@ const CalendlySection = () => {
         <>
           <div className="text-center mb-6">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-              If You're Ready to Operate at a Different Level — This Is the Next Step
+              If the gap between your clinical standard and your market position frustrates you — this is where that changes.
             </h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-              We'll assess where your current structure is limiting growth, show you what's separating you from the top tier,
-              and map how the PASTED Partnership would rebuild your practice for long-term dominance.
+              In 45 minutes, we'll map where your current structure is capping growth, what separates you from the top 1% of aesthetic practices, and whether the PASTED Partnership is the right fit. If we're not the right match, we'll tell you directly — and tell you why.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
               <span>Average call: 45 min – 1 hour</span>
@@ -169,11 +167,11 @@ const CalendlySection = () => {
 
       {!bookingConfirmed && (
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
-          <span>This is a strategic evaluation — not a sales call</span>
+          <span>Strategic evaluation only — not a sales call</span>
           <span className="hidden sm:inline">·</span>
-          <span>Serious inquiries only</span>
+          <span>30 practices per year</span>
           <span className="hidden sm:inline">·</span>
-          <span>If we're not a fit, we'll tell you directly</span>
+          <span>If we're not the right fit, we'll say so directly and tell you what would serve you better</span>
         </div>
       )}
     </div>

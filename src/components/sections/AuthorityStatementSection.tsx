@@ -19,7 +19,7 @@ const AuthorityStatementSection = () => {
           </p>
 
           <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-6">
-            Typical Outcome: <span className="text-primary">$500K–$1M+</span> Annual Increase
+            What a PASTED partnership <span className="text-primary">typically delivers in 12 months.</span>
           </h2>
 
           <div className="space-y-4">
@@ -44,7 +44,7 @@ const AuthorityStatementSection = () => {
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
           <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Results require implementation and collaboration — but the system is built for repeatable, measurable growth.
+            Results require commitment and consistency from both sides. When the system runs as designed, growth is not a goal — it's a structural output.
           </p>
         </motion.div>
       </div>

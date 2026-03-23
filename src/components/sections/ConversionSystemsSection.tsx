@@ -26,8 +26,8 @@ const ConversionSystemsSection = () => {
             Differentiation
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Fully In-House. One System.<br />
-            <span className="text-primary">High-Value, Predictable Growth.</span>
+            The entire patient journey —<br />
+            <span className="text-primary">redesigned from the first touchpoint to the consultation room.</span>
           </h2>
         </motion.div>
 

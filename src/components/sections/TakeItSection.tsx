@@ -41,7 +41,7 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            The practices that will dominate in 12 months are making this decision right now.
+            Every month without the right infrastructure is a month your competitors close cases you should have won.
           </motion.p>
 
           <motion.div
@@ -65,7 +65,7 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            30 practices per year. Carefully selected.
+            30 practices per year. Applications reviewed within 48 hours.
           </motion.p>
         </div>
       </div>

@@ -31,7 +31,7 @@ const MonthlyDeliverablesSection = () => {
             Monthly Partnership
           </p>
           <h2 className={`text-2xl md:text-4xl font-serif text-foreground mb-4 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            What's Delivered Every Month
+            What arrives every month, without exception.
           </h2>
           <p className={`text-muted-foreground max-w-xl mx-auto transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             A complete done-for-you growth system — not a disconnected list of services
@@ -59,7 +59,7 @@ const MonthlyDeliverablesSection = () => {
         </div>
 
         <p className={`text-center mt-12 text-sm text-muted-foreground/60 transition-all duration-700 delay-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          Your only requirement: show up and do great dentistry. We handle the storytelling, the ads, and everything in between.
+          Your only requirement: film 15–30 minutes of raw footage each week and do great dentistry. Everything else is ours.
         </p>
       </div>
     </section>

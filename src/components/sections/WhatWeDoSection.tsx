@@ -24,7 +24,7 @@ const services = [
     icon: Eye,
     title: "Visibility Engine",
     tagline: "30+ pieces of creative per month",
-    description: "Full creative from the best teams in aesthetic dentistry — informed by the highest insider knowledge in the world, in real time. From cinematic on-location shoots to done-for-you scripting, editing, and publishing — 30+ assets per month designed to build trust and attract cosmetic patients.",
+    description: "Full creative from the best teams in aesthetic dentistry — informed by the highest insider knowledge in the world, in real time. From cinematic on-location shoots to done-for-you scripting, editing, and publishing — 30+ assets per month — built on the same insider knowledge that powers the most recognised aesthetic brands in the world.",
     features: [
       "30+ creative assets per month — video, storytelling, ad content",
       "On-location production shoots — we fly to your practice",
@@ -51,14 +51,14 @@ const services = [
     stat: 50,
     statSuffix: "-100",
     statPrefix: "",
-    statLabel: "Additional cosmetic cases/year",
+    statLabel: "Additional qualified cosmetic cases/year",
     gradient: "from-emerald-500/20 via-teal-500/10 to-cyan-500/5"
   },
   {
     icon: Settings,
     title: "Conversion Engine",
     tagline: "Turn inquiries into high-value accepted cases",
-    description: "We optimize the entire patient journey — from the first touchpoint to the consultation room. Hospitality-driven communication frameworks, treatment presentation systems, and follow-up workflows ensure every patient interaction reflects the quality of your practice.",
+    description: "We rebuild the entire patient journey — from the first touchpoint to the consultation room — so every interaction reflects the quality of your clinical work.",
     features: [
       "Hospitality-driven consultation optimization",
       "Patient communication & storytelling frameworks",
@@ -260,7 +260,7 @@ const WhatWeDoSection = () => {
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className="text-xs tracking-[0.25em] uppercase text-primary font-semibold">
-              Four Growth Engines
+              The System
             </span>
             <motion.span 
               className="w-2 h-2 rounded-full bg-primary"
@@ -302,7 +302,7 @@ const WhatWeDoSection = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            Most practices try to grow through separate agencies, freelancers, consultants, and disconnected efforts.
+            Most practices grow through disconnected vendors — an agency for ads, a freelancer for content, a consultant for strategy — none of whom talk to each other.
           </motion.p>
           <motion.p 
             className="mt-6 text-2xl md:text-3xl text-foreground font-serif"
@@ -312,7 +312,7 @@ const WhatWeDoSection = () => {
           >
             PASTED replaces that fragmentation with{" "}
             <span className="relative">
-              <span className="text-primary">one coordinated system.</span>
+              <span className="text-primary">one in-house system, coordinated around a single goal: high-value, predictable aesthetic growth.</span>
               <motion.span
                 className="absolute -inset-2 bg-primary/10 rounded-lg -z-10"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -528,10 +528,10 @@ const WhatWeDoSection = () => {
           <div className="max-w-3xl mx-auto p-8 md:p-12 border border-border/30 bg-card/20 rounded-2xl">
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-6">The Revenue Math</p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4">
-              Most cosmetic cases range from <span className="text-foreground font-medium">$6K–$15K+</span>.
+              Most cosmetic cases range from <span className="text-foreground font-medium">$6K–$20K+</span>.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-              Adding <span className="text-foreground font-medium">50–100 additional cosmetic cases per year</span> creates{" "}
+              Adding <span className="text-foreground font-medium">50–100 qualified cases per year</span> — cases you actually want to do — creates{" "}
               <span className="text-primary font-serif text-2xl md:text-3xl">$500K–$1M+</span> in additional revenue.
             </p>
             <p className="text-muted-foreground/70">

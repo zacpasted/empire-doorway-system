@@ -38,7 +38,7 @@ const ProblemSolutionSection = () => {
     "Losing cosmetic cases to louder, less skilled competitors.",
     "Multiple agencies and freelancers that never talk to each other.",
     "Getting leads that are price shoppers, not cosmetic patients.",
-    "Spending on ads without a brand worth amplifying.",
+    "Running ads into a brand that isn't strong enough to close the patients it attracts.",
     "Consultations feel harder than they should — patients aren't pre-sold.",
     "Your reputation doesn't match the quality of your work.",
   ];
@@ -135,15 +135,16 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The System Is Broken
+            Why Nothing Has Worked
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Others Help You Do More.<br />
             <span className="text-muted-foreground italic">PASTED Changes What You Become.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            The industry profits from your plateau — selling more ads, more tactics, more tools.
-            None of it fixes the system. PASTED rebuilds the structure that drives real growth.
+            If you've hired an agency and it underdelivered — that's not bad luck. That's the business model.
+            The industry profits from your plateau by selling more tools, more tactics, more ads.
+            None of it addresses the underlying structure. PASTED rebuilds the system that drives patient perception, case value, and predictable growth.
           </p>
         </motion.div>
 
@@ -435,6 +436,9 @@ const ProblemSolutionSection = () => {
                   We've turned brand and content into patient demand for some of the best aesthetic practices in the world.{" "}
                   <span className="text-foreground font-semibold">This is proven, not theoretical.</span>
                 </p>
+                <p className="text-sm text-foreground/70 mt-3 italic">
+                  This is why our average client stays for 22 months. And why 97% of partners have never left.
+                </p>
               </div>
             </div>
           </div>
@@ -455,17 +459,19 @@ const ProblemSolutionSection = () => {
             whileTap={{ scale: 0.98 }}
             onClick={(e) => {
               e.preventDefault();
-              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'See If You Qualify', section: 'problem-solution' });
+              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'Apply for Partnership', section: 'problem-solution' });
               document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
           >
-            {/* Animated background glow */}
             <span className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
             <span className="absolute inset-0 bg-gradient-to-r from-primary/90 via-red-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
-            <span className="relative z-10">See If You Qualify</span>
+            <span className="relative z-10">Apply for Partnership →</span>
             <ArrowRight className="relative z-10 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
           </motion.a>
+          <p className="text-xs text-muted-foreground/50 mt-4">
+            30 practices per year · Reviewed within 48 hours · Not all accepted
+          </p>
         </motion.div>
       </div>
     </section>

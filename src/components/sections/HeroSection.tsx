@@ -20,7 +20,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const handleMobileCTA = () => {
-    trackCTAClick({ ctaId: 'hero-instant-cta', ctaText: 'See If You Qualify', section: 'hero-above-fold' });
+    trackCTAClick({ ctaId: 'hero-instant-cta', ctaText: 'Apply for Partnership', section: 'hero-above-fold' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -53,10 +53,10 @@ const HeroSection = () => {
 
           <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Where Aesthetic Dentistry's
+              Your clinical work is exceptional.
             </span>
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Leading Practices Are Built
+              Your market position should reflect that.
             </span>
             <motion.span
               className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
@@ -64,17 +64,22 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              $500K–$1M+ in Annual Growth. The Practice You Actually Want.
+              $500K–$1M+ in additional aesthetic production. The practice your skill level was always meant to run.
             </motion.span>
           </h1>
 
           {/* Mobile-specific social proof hook — visible immediately */}
-          <div className="md:hidden flex items-center justify-center gap-2 text-[10px] text-muted-foreground/60 mb-3">
-            <span className="text-primary font-semibold">97% retention</span>
+          <div className="md:hidden flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground/60 mb-3 flex-wrap">
+            <span>Trusted by</span>
+            <span className="text-primary font-semibold">Dr. Drew Ballard</span>
             <span>·</span>
-            <span>$100M+ revenue generated</span>
+            <span className="text-primary font-semibold">Dr. Jon Marashi</span>
             <span>·</span>
-            <span>30 spots/yr</span>
+            <span className="text-primary font-semibold">Dr. Brian Harris</span>
+            <span>·</span>
+            <span className="text-primary font-semibold">Dr. Alan Clarke</span>
+            <span>·</span>
+            <span>97% retention</span>
           </div>
 
           {/* Mobile instant CTA — above the fold */}
@@ -83,21 +88,21 @@ const HeroSection = () => {
               onClick={handleMobileCTA}
               className="w-full py-3 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
             >
-              See If You Qualify
+              Apply for Partnership →
             </button>
             <p className="text-[9px] text-muted-foreground/40 mt-1.5 tracking-wide">
-              45-min strategy call · Limited availability
+              30 practices per year · Reviewed within 48 hours · Not all accepted
             </p>
           </div>
 
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            PASTED is the private, in-house growth infrastructure trusted by elite cosmetic dentists — combining execution, positioning, and direct access to the highest level of the industry.
+            PASTED is the private growth partnership trusted by the world's most recognised cosmetic dentists — integrating brand authority, cinematic content, and high-performance paid media into one in-house system.
           </p>
           <p className="hidden md:block text-xs text-muted-foreground/50 mt-2 tracking-wide italic">
-            Built from real data across the world's top-performing aesthetic practices.
+            Not an agency. Not a retainer. A 12-month partnership built on one premise: your clinical excellence deserves a market position that matches it.
           </p>
           <p className="hidden md:block text-xs text-muted-foreground/40 mt-1 tracking-wide">
-            30 practices per year. Carefully selected.
+            30 practices per year. Not all accepted.
           </p>
         </motion.div>
 
