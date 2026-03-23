@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const SERVICES = [
   "Branding", "Content", "Strategy", "Consulting", "Systems",
-  "Conversion", "Advertising", "Marketing", "Ecosystem", "Global",
+  "Conversion", "Advertising", "Marketing", "Production", "Global",
   "Events", "CE", "Media", "PR", "Editorial",
 ];
 

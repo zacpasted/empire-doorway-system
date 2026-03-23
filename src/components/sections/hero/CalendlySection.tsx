@@ -126,7 +126,7 @@ const CalendlySection = () => {
               Here's what happens next.
             </h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-              In a 45-minute strategy call, we'll cover three things: where your current structure is capping growth, what separates your practice from the top 1%, and whether the PASTED Partnership is the right fit for where you're going. If it's not, we'll tell you directly — and tell you exactly why.
+              A 45-minute strategy call with Zac or Alan. We'll cover where your current structure is capping growth, what separates your practice from the top tier, and whether the partnership is the right fit. If it's not, we'll tell you directly.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
               <span>Average call: 45 min – 1 hour</span>
@@ -169,9 +169,9 @@ const CalendlySection = () => {
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
           <span>Strategic evaluation only — not a sales call</span>
           <span className="hidden sm:inline">·</span>
-          <span>30 practices per year</span>
+          <span>Reviewed personally by Zac and Alan</span>
           <span className="hidden sm:inline">·</span>
-          <span>If we're not the right fit, we'll say so directly and tell you what would serve you better</span>
+          <span>30 practices per year</span>
         </div>
       )}
     </div>

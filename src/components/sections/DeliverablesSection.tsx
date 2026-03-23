@@ -4,27 +4,27 @@ import { motion, useInView } from "framer-motion";
 const deliverables = [
   {
     label: "Brand System",
-    desc: "Your positioning, narrative, visual identity, and content architecture — built once, used everywhere.",
+    desc: "Positioning, narrative, visual identity, content architecture. Built once. Used everywhere.",
   },
   {
     label: "30+ Creative Assets / Month",
-    desc: "Video, storytelling, and ad content — scripted, shot on-location, edited, and published by our team.",
+    desc: "Video, storytelling, ad content. Scripted, shot on-location, edited, published. Every month.",
   },
   {
     label: "Full Ad Management",
-    desc: "Strategy, creative, campaign build, and ongoing optimisation. One team owns the whole system.",
+    desc: "Strategy, creative, campaign build, ongoing optimisation. One team owns it all.",
   },
   {
     label: "On-Location Production",
-    desc: "We fly to your practice. Cinematic shoot days that produce months of content and ad creative.",
+    desc: "We fly to your practice. Cinematic shoot days. Months of content from a single day.",
   },
   {
     label: "Conversion Infrastructure",
-    desc: "Consultation design, patient communication frameworks, CRM workflows, and team training.",
+    desc: "Consultation design, patient communication, CRM workflows, team training.",
   },
   {
     label: "Strategic Partnership",
-    desc: "Direct access to our team. Monthly reviews. Real-time market intelligence from inside the ecosystem.",
+    desc: "Direct access. Monthly reviews. Real-time intelligence from inside the industry.",
   },
 ];
 
@@ -41,7 +41,7 @@ const DeliverablesSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Deliverables</p>
+          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">What's Included</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
             Everything included. Nothing outsourced.
           </h2>
@@ -68,7 +68,7 @@ const DeliverablesSection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          One team. Full ownership. No agencies. No handoffs. No surprises.
+          One partner. Every system. Full accountability. Every day.
         </motion.p>
       </div>
     </section>

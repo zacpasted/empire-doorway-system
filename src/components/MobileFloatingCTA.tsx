@@ -55,7 +55,7 @@ const MobileFloatingCTA = () => {
               Apply for Partnership
             </button>
             <p className="text-center text-xs text-muted-foreground mt-2">
-              30 spots this year · 48hr review · Not all accepted
+              30 spots · 48hr review · Not all accepted
             </p>
           </div>
         </motion.div>

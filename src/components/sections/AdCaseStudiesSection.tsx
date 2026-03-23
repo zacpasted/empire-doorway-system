@@ -199,7 +199,7 @@ const AdCaseStudiesSection = () => {
             Performance
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
-            The numbers behind the system.
+            Real numbers. Real accounts. No composites.
           </h2>
           <p className="text-sm text-muted-foreground/70 max-w-xl mx-auto">
             Every number below comes from a real PASTED partner account. No composites. No estimates.

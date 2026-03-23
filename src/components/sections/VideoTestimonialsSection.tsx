@@ -9,8 +9,8 @@ interface VideoTestimonialsSectionProps {
 
 const VideoTestimonialsSection = ({
   videoIds = [],
-  title = "Hear It From Them",
-  subtitle = "What our partners say — in their own words.",
+  title = "Hear it directly.",
+  subtitle = "Unscripted. From dentists who've been through it.",
 }: VideoTestimonialsSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -76,6 +76,15 @@ const VideoTestimonialsSection = ({
             </div>
           ))}
         </div>
+
+        {/* Bridge quote */}
+        <p
+          className={`text-center text-lg md:text-xl font-serif italic text-foreground/80 mt-10 max-w-2xl mx-auto transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          "If a doctor asks who they should trust with their brand, this is the answer." <span className="text-primary not-italic text-sm">— Dr. Brian Harris</span>
+        </p>
       </div>
     </section>
   );

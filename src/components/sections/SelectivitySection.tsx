@@ -3,11 +3,11 @@ import { motion, useInView } from "framer-motion";
 import { Check, X } from "lucide-react";
 
 const builtFor = [
-  "Cosmetic dentists whose clinical work exceeds their market position",
-  "Practices ready to invest in infrastructure, not just tactics",
-  "Dentists who want to be the undeniable authority in their city",
-  "Those building a legacy, not just running a schedule",
-  "Practices committed to $500K–$1M+ in additional production",
+  "Dentists whose clinical work exceeds their market position",
+  "Those ready for a partner accountable to their outcomes",
+  "Cosmetic dentists committed to $500K–$1M+ in additional production",
+  "Practitioners building a reputation that compounds over time",
+  "Those who refuse to operate below their ceiling",
 ];
 
 const notFor = [
@@ -15,7 +15,7 @@ const notFor = [
   "Dentists who want a vendor, not a partner",
   "Anyone optimising for lowest cost over best outcome",
   "Those not willing to show up as the face of their brand",
-  "Practices not ready to operate at the highest level",
+  "Practices not ready to be held to the highest standard",
 ];
 
 const SelectivitySection = () => {
@@ -36,7 +36,7 @@ const SelectivitySection = () => {
             Not everyone gets in.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Thirty practices per year. Each selected because the clinical ambition, the market position, and the readiness are all genuinely there. We are not in the business of collecting clients.
+            Thirty practices per year. Selected because the clinical ambition, market position, and readiness are all genuinely there. We don't collect clients. We transform practices.
           </p>
         </motion.div>
 

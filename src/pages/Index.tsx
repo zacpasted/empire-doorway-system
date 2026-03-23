@@ -21,7 +21,6 @@ const SelectivitySection = lazy(() => import("@/components/sections/SelectivityS
 const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
 const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
-const MidPageCalendlySection = lazy(() => import("@/components/sections/MidPageCalendlySection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
@@ -80,13 +79,10 @@ const Index = () => {
         {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
-        {/* Mid-page Calendly embed */}
-        <AnimatedSection><MidPageCalendlySection /></AnimatedSection>
-        
         {/* 5. Cost of Everything Else */}
         <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
         
-        {/* 6. Selectivity (Who It's For / Not For) */}
+        {/* 6. Selectivity */}
         <AnimatedSection><SelectivitySection /></AnimatedSection>
         
         {/* 7. Brands Showcase */}
@@ -99,8 +95,8 @@ const Index = () => {
         <AnimatedSection>
           <VideoTestimonialsSection
             videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
-            title="In their own words."
-            subtitle="Unscripted. Unedited. From dentists who've been through it."
+            title="Hear it directly."
+            subtitle="Unscripted. From dentists who've been through it."
           />
         </AnimatedSection>
         
@@ -110,11 +106,11 @@ const Index = () => {
         {/* 11. How It Works */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
         
-        {/* 12. Content Examples / Work Carousel */}
+        {/* 12. Content Examples */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
-            title="Scripted. Shot. Edited. Deployed. Every piece is ours."
-            subtitle="Every asset below was scripted, shot on-location, edited, and deployed by our in-house team. The same content that builds authority organically becomes the creative that drives paid acquisition. One team. No handoffs."
+            title="Scripted. Shot. Edited. Deployed."
+            subtitle="Every asset below was produced by our in-house team and deployed as both organic content and paid ad creative. One team. No handoffs."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
           />
         </AnimatedSection>
@@ -132,7 +128,7 @@ const Index = () => {
         <CalendlySection />
       </Suspense>
       
-      {/* 14. Footer */}
+      {/* 16. Footer */}
       <Footer />
       <MobileFloatingCTA />
     </motion.main>
