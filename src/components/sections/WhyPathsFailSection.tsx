@@ -92,7 +92,7 @@ const WhyPathsFailSection = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl md:text-5xl font-serif text-center text-foreground mb-6"
         >
-          Why Most Growth Approaches Don't Work
+          The real reason the last agency, freelancer, or consultant didn't move the needle.
         </motion.h2>
 
         <motion.p
