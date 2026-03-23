@@ -108,6 +108,9 @@ const Index = () => {
       {/* 1. Hero - Cinematic Entry with VSL + Calendly */}
       <HeroSection />
       
+      {/* Partner Roster Ticker — First social proof element */}
+      <PartnerRosterTicker />
+      
       <Suspense fallback={<SectionLoader />}>
         {/* 2. Philosophy — Problem / Solution */}
         <AnimatedSection><ProblemSolutionSection /></AnimatedSection>
