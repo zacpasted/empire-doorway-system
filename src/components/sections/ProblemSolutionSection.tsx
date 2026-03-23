@@ -135,15 +135,16 @@ const ProblemSolutionSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Sparkles className="w-4 h-4" />
-            The System Is Broken
+            Why Nothing Has Worked
           </motion.span>
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Others Help You Do More.<br />
             <span className="text-muted-foreground italic">PASTED Changes What You Become.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            The industry profits from your plateau — selling more ads, more tactics, more tools.
-            None of it fixes the system. PASTED rebuilds the structure that drives real growth.
+            If you've hired an agency and it underdelivered — that's not bad luck. That's the business model.
+            The industry profits from your plateau by selling more tools, more tactics, more ads.
+            None of it addresses the underlying structure. PASTED rebuilds the system that drives patient perception, case value, and predictable growth.
           </p>
         </motion.div>
 
