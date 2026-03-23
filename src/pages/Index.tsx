@@ -108,6 +108,9 @@ const Index = () => {
         
         {/* 10. Results */}
         <AnimatedSection><ResultsSection /></AnimatedSection>
+
+        {/* Divider: Results → Content Examples */}
+        <div className="section-divider" />
         
         {/* 11. Content Examples (condensed — 3 initial, Show More reveals all 10) */}
         <AnimatedSection>
