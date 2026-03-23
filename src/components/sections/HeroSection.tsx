@@ -94,15 +94,6 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
-            PASTED is the private growth partnership trusted by the world's most recognised cosmetic dentists — integrating brand authority, cinematic content, and high-performance paid media into one in-house system.
-          </p>
-          <p className="hidden md:block text-xs text-muted-foreground/50 mt-2 tracking-wide italic">
-            Not an agency. Not a retainer. A 12-month partnership built on one premise: your clinical excellence deserves a market position that matches it.
-          </p>
-          <p className="hidden md:block text-xs text-muted-foreground/40 mt-1 tracking-wide">
-            30 practices per year. Not all accepted.
-          </p>
         </motion.div>
 
         {/* Logo Marquee */}
@@ -120,12 +111,6 @@ const HeroSection = () => {
 
         {/* Service Ticker */}
         <ServiceTicker />
-
-        {/* Application Section - Calendly Embed */}
-        <CalendlySection />
-
-        {/* Secondary Statement - Below Form */}
-        <div className="text-center mt-14 space-y-1 md:space-y-2" />
       </div>
 
       {/* Scroll indicator */}
