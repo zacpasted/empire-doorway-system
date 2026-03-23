@@ -8,11 +8,15 @@ import Footer from "@/components/Footer";
 
 // Lazy load below-the-fold sections
 const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
+const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsShowcaseSection"));
 const ResultsSection = lazy(() => import("@/components/sections/ResultsSection"));
+const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
 const FourTestimonialsSection = lazy(() => import("@/components/sections/FourTestimonialsSection"));
 const FourStepsSection = lazy(() => import("@/components/sections/FourStepsSection"));
+const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
 const DeliverablesSection = lazy(() => import("@/components/sections/DeliverablesSection"));
 const SelectivitySection = lazy(() => import("@/components/sections/SelectivitySection"));
+const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
 const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
 
@@ -70,29 +74,53 @@ const Index = () => {
         {/* 3. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
-        {/* 4. Results */}
+        {/* 4. Brands Showcase */}
+        <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
+        
+        {/* 5. Results */}
         <AnimatedSection><ResultsSection /></AnimatedSection>
         
-        {/* 5. Testimonials */}
+        {/* 6. Video Testimonials */}
+        <AnimatedSection>
+          <VideoTestimonialsSection
+            videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
+            title="In their own words."
+            subtitle="Unscripted. Unedited. From dentists who've been through it."
+          />
+        </AnimatedSection>
+        
+        {/* 7. Testimonials (written) */}
         <AnimatedSection><FourTestimonialsSection /></AnimatedSection>
         
-        {/* 6. How It Works */}
+        {/* 8. How It Works */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
         
-        {/* 7. What You Get */}
+        {/* 9. Content Examples / Work Carousel */}
+        <AnimatedSection>
+          <WistiaVideoEmbedSection 
+            title="Scripted. Shot. Edited. Deployed. Every piece is ours."
+            subtitle="Every asset below was scripted, shot on-location, edited, and deployed by our in-house team. The same content that builds authority organically becomes the creative that drives paid acquisition. One team. No handoffs."
+            videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
+          />
+        </AnimatedSection>
+        
+        {/* 10. What You Get */}
         <AnimatedSection><DeliverablesSection /></AnimatedSection>
         
-        {/* 8. Who It's For / Not For */}
+        {/* 11. Who It's For / Not For */}
         <AnimatedSection><SelectivitySection /></AnimatedSection>
         
-        {/* 9. Closing CTA */}
+        {/* 12. Ad Case Studies */}
+        <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
+        
+        {/* 13. Closing CTA */}
         <AnimatedSection><ClosingCTASection /></AnimatedSection>
 
         {/* Eligibility Form — CTA target */}
         <CalendlySection />
       </Suspense>
       
-      {/* 10. Footer */}
+      {/* 14. Footer */}
       <Footer />
       <MobileFloatingCTA />
     </motion.main>
