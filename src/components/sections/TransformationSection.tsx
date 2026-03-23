@@ -29,7 +29,7 @@ const TransformationSection = () => {
             The Shift
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            From where you are to where you belong — in 12 months
+            What 12 months inside the partnership changes — structurally, not just visually.
           </p>
         </div>
         

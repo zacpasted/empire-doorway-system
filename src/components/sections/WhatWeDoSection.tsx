@@ -531,7 +531,7 @@ const WhatWeDoSection = () => {
               Most cosmetic cases range from <span className="text-foreground font-medium">$6K–$20K+</span>.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-              Adding <span className="text-foreground font-medium">50–100 additional cosmetic cases per year</span> creates{" "}
+              Adding <span className="text-foreground font-medium">50–100 qualified cases per year</span> — cases you actually want to do — creates{" "}
               <span className="text-primary font-serif text-2xl md:text-3xl">$500K–$1M+</span> in additional revenue.
             </p>
             <p className="text-muted-foreground/70">

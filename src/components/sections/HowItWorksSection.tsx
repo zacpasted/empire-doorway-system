@@ -385,8 +385,8 @@ const HowItWorksSection = () => {
           className="max-w-3xl mx-auto text-center mb-20"
         >
           <p className="text-muted-foreground leading-relaxed text-lg">
-            PASTED is not a content subscription, an agency retainer, or a templated brand package. 
-            It is a <span className="text-foreground font-medium">360-degree growth system</span> — storytelling, ads, on-location shoots, hospitality design, and strategic advisory — coordinated as one partnership to take an aesthetic practice from invisible to category-defining.
+            PASTED is not an agency retainer, a content subscription, or a templated package. 
+            It is a <span className="text-foreground font-medium">12-month private partnership</span> — storytelling, ads, on-location shoots, hospitality design, and strategic advisory, all coordinated as one in-house system. Six phases. One outcome: a practice that competes at the highest level.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <motion.div 

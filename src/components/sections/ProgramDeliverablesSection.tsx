@@ -132,11 +132,11 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             onClick={onApplyClick}
             className="inline-flex items-center gap-3 text-sm tracking-[0.2em] uppercase text-background bg-primary px-10 py-5 hover:bg-primary/90 transition-colors duration-300"
           >
-            Schedule a Discovery Call
+            Apply for Partnership →
             <ArrowRight className="w-4 h-4" />
           </button>
           <p className="text-sm text-muted-foreground mt-6">
-            Only 30 practices accepted per year
+            30 practices annually · Applications reviewed within 48 hours · Not all accepted
           </p>
         </div>
       </div>
