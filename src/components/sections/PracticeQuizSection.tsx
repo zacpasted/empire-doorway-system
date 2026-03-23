@@ -159,6 +159,7 @@ const getCategoryVerdict = (pct: number): { label: string; color: string } => {
 };
 
 const PracticeQuizSection = () => {
+  // Quiz section with diagnostic anchor ID
   const [currentStep, setCurrentStep] = useState<"intro" | number | "capture" | "result">("intro");
   const [answers, setAnswers] = useState<Record<string, { value: string; score: number }>>({});
   const [firstName, setFirstName] = useState("");

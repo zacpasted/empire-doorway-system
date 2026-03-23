@@ -100,6 +100,16 @@ const HeroSection = () => {
             <p className="text-[9px] md:text-xs text-muted-foreground/40 mt-1.5 tracking-wide">
               30 practices per year · Reviewed within 48 hours · Not all accepted
             </p>
+            <a
+              href="#diagnostic"
+              className="block text-[10px] md:text-xs text-muted-foreground/50 mt-2 tracking-wide hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('diagnostic')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
+              Or take the 2-minute diagnostic first →
+            </a>
           </div>
 
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
