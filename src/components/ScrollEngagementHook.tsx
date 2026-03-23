@@ -34,6 +34,7 @@ const ScrollEngagementHook = () => {
   const handleDismiss = () => {
     setDismissed(true);
     setVisible(false);
+    try { sessionStorage.setItem("scroll-hook-dismissed", "1"); } catch {}
   };
 
   return (
