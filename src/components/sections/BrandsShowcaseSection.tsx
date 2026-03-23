@@ -11,20 +11,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-interface BrandsShowcaseSectionProps {
-  onApplyClick?: () => void;
-}
-
-const BrandsShowcaseSection = ({ onApplyClick }: BrandsShowcaseSectionProps) => {
+const BrandsShowcaseSection = () => {
   return (
     <section id="brands-showcase" className="py-20 md:py-28 bg-secondary/20">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
+            The Work
+          </p>
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            Storytelling, Ads & Brand Systems Built for the Best
+            The brands you already recognise. Built by us.
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            The same strategic framework behind the most recognized names in aesthetic dentistry — storytelling, production, ads, and hospitality, all working as one.
+            The same strategic framework — storytelling, production, ads, and conversion systems — behind the most recognised names in aesthetic dentistry.
           </p>
         </div>
 
