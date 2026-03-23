@@ -21,6 +21,7 @@ const SelectivitySection = lazy(() => import("@/components/sections/SelectivityS
 const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
 const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
+const MidPageCalendlySection = lazy(() => import("@/components/sections/MidPageCalendlySection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
