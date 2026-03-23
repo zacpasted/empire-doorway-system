@@ -67,7 +67,7 @@ const PartnershipPhilosophySection = () => {
 
           <p className="text-center text-foreground font-serif text-xl md:text-2xl">
             Most groups help you get busier.<br />
-            <span className="text-primary">PASTED helps you get better — and more valuable.</span>
+            <span className="text-primary">PASTED rebuilds what determines how much each patient spends — and whether they refer.</span>
           </p>
         </motion.div>
       </div>

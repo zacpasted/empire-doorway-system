@@ -63,8 +63,8 @@ const OrganicPaidSection = () => {
           </div>
 
           <p className="text-center text-foreground font-serif text-xl md:text-2xl pt-4">
-            This coordination is why<br />
-            <span className="text-primary">our partners see fundamentally different results.</span>
+            This coordination — one team, one narrative, one system — is the structural reason<br />
+            <span className="text-primary">our partners outperform practices spending twice as much on isolated vendors.</span>
           </p>
         </motion.div>
       </div>

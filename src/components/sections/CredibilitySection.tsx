@@ -52,13 +52,16 @@ const CredibilitySection = () => {
         </div>
 
         <motion.div
-          className="max-w-3xl mx-auto text-center"
+          className="max-w-3xl mx-auto text-center space-y-4"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
           <p className="text-foreground font-serif text-xl md:text-2xl">
             Retention this high doesn't happen without real results.
+          </p>
+          <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl mx-auto">
+            A 97% retention rate since 2019 — in an industry where most agencies churn 62%+ of clients monthly. That difference is structural.
           </p>
         </motion.div>
       </div>

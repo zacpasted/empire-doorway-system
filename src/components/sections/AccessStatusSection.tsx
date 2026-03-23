@@ -38,7 +38,7 @@ const AccessStatusSection = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <p className="text-center text-lg text-muted-foreground leading-relaxed">
-            PASTED is not built in isolation. It is shaped by the highest-performing aesthetic practices, real production data, and real-world execution at the top level.
+            PASTED is not built in isolation from the industry — it operates inside it. Our partners receive thinking, strategy, and market intelligence drawn from real-world execution at the highest level of aesthetic dentistry, in real time.
           </p>
 
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
