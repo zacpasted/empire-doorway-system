@@ -8,6 +8,10 @@ import {
 const FAQSection = () => {
   const faqs = [
     {
+      question: "How is this different from every other dental marketing company I've seen?",
+      answer: "Most dental marketing companies sell you a service and measure success in deliverables — posts, leads, impressions. We measure success in one thing: the growth of your aesthetic practice. That means we're accountable to case revenue, not activity. It also means we're selective about who we work with, because our reputation is built on their results."
+    },
+    {
       question: "Is this just social media management?",
       answer: "No. We don't manage accounts. We engineer identity, narrative, and momentum. Posting is the output—not the goal."
     },
