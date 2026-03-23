@@ -294,6 +294,9 @@ const Index = () => {
         
         {/* 35. Membership — Waitlist */}
         <AnimatedSection><MembershipSection /></AnimatedSection>
+
+        {/* FAQ Section */}
+        <AnimatedSection><FAQSection /></AnimatedSection>
       </Suspense>
       
       <Footer />
