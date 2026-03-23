@@ -90,7 +90,7 @@ const CalendlyEmbedSection = () => {
           {scriptLoaded && (
             <div 
               className={`calendly-inline-widget transition-opacity duration-500 ${widgetReady ? 'opacity-100' : 'opacity-0'}`}
-              data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=ff0000"
+              data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E"
               style={{ minWidth: '320px', height: '700px' }}
             />
           )}
