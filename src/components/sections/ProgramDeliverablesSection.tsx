@@ -99,8 +99,8 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             </p>
             <p className="text-5xl font-serif text-primary mb-4">$500K–$1M+</p>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              in additional aesthetic case revenue. Most cosmetic cases range from $6K–$15K+.
-              Adding 50–100 additional cosmetic cases per year creates transformative growth.
+              in additional aesthetic case revenue. Most cosmetic cases range from $6K–$20K+.
+              Adding 50–100 qualified cases per year — cases you actually want to do — creates structural transformation, not just revenue.
             </p>
           </div>
         </div>
