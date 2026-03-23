@@ -80,6 +80,9 @@ const Index = () => {
         {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
+        {/* Mid-page Calendly embed */}
+        <AnimatedSection><MidPageCalendlySection /></AnimatedSection>
+        
         {/* 5. Cost of Everything Else */}
         <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
         
