@@ -122,11 +122,14 @@ const CalendlySection = () => {
       ) : (
         <>
           <div className="text-center mb-8 md:mb-10">
+            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">
+              Book a Strategy Call
+            </p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-              Here's what happens next.
+              Ready now? Here's what happens next.
             </h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-              A 45-minute strategy call with Zac or Alan. We'll cover where your current structure is capping growth, what separates your practice from the top tier, and whether the partnership is the right fit. If it's not, we'll tell you directly.
+              A 45-minute call with Zac or Alan. We'll map where your practice is leaving money on the table, what separates you from the top tier, and whether the partnership is the right fit. If it's not, we'll tell you directly.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
               <span>Average call: 45 min – 1 hour</span>
@@ -135,9 +138,6 @@ const CalendlySection = () => {
               <span className="hidden sm:inline">·</span>
               <span>30 practices admitted per year</span>
             </div>
-            <p className="text-xs text-muted-foreground/50 italic">
-              This is a selective, fit-based conversation.
-            </p>
           </div>
 
           <div className="relative" style={{ minHeight: "700px" }}>
@@ -166,13 +166,18 @@ const CalendlySection = () => {
       )}
 
       {!bookingConfirmed && (
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
-          <span>Strategic evaluation only — not a sales call</span>
-          <span className="hidden sm:inline">·</span>
-          <span>Reviewed personally by Zac and Alan</span>
-          <span className="hidden sm:inline">·</span>
-          <span>30 practices per year</span>
-        </div>
+        <>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
+            <span>Not a sales call</span>
+            <span className="hidden sm:inline">·</span>
+            <span>Reviewed personally by Zac and Alan</span>
+            <span className="hidden sm:inline">·</span>
+            <span>30 practices per year</span>
+          </div>
+          <p className="text-center text-sm text-muted-foreground/60 mt-6 italic">
+            Not ready to book? Keep scrolling — see the work, hear from partners, then decide.
+          </p>
+        </>
       )}
     </div>
   );

@@ -32,12 +32,9 @@ const SelectivitySection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Selectivity</p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
             Not everyone gets in.
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Thirty practices per year. Selected because the clinical ambition, market position, and readiness are all genuinely there. We don't collect clients. We transform practices.
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-10 mt-14">

@@ -6,25 +6,25 @@ const steps = [
     number: "01",
     title: "Strategy",
     timeline: "Week 1–2",
-    body: "We map your market position, ideal patient, and growth ceiling. You leave knowing exactly what's been holding you back.",
+    body: "We map your market position, ideal patient, and exactly what's been holding you back.",
   },
   {
     number: "02",
     title: "Brand & Identity",
     timeline: "Week 2–4",
-    body: "We build your positioning, narrative, and visual identity. This is the foundation. Everything else is built on it.",
+    body: "We build your positioning, narrative, and visual identity — the foundation everything else runs on.",
   },
   {
     number: "03",
     title: "Content & Ads",
     timeline: "Week 4–6",
-    body: "We script, shoot on-location, edit, and deploy 30+ pieces monthly. Same content runs organically and as paid ad creative.",
+    body: "We script, shoot on-location, edit, and deploy 30+ pieces monthly across organic and paid.",
   },
   {
     number: "04",
     title: "Conversion & Growth",
-    timeline: "Week 6 onwards",
-    body: "We rebuild the patient experience — consultation systems, communication frameworks, CRM workflows — so every inquiry converts.",
+    timeline: "Week 6+",
+    body: "We rebuild your patient journey so every inquiry converts at the level your brand deserves.",
   },
 ];
 
@@ -34,40 +34,41 @@ const FourStepsSection = () => {
 
   return (
     <section ref={ref} className="py-24 md:py-32">
-      <div className="container max-w-4xl mx-auto px-4">
+      <div className="container max-w-5xl mx-auto px-4">
         <motion.div
           className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Your Arc, Built in Four Phases</p>
+          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">The Process</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
             Four phases. Fully managed.
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+        {/* Horizontal strip on desktop, vertical stack on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              className="space-y-3"
+              className="text-center md:text-left space-y-2 md:border-l md:first:border-l-0 md:border-border/30 md:pl-4 md:first:pl-0"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
             >
-              <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline gap-2 justify-center md:justify-start">
                 <span className="text-sm text-primary font-mono">{step.number}</span>
-                <h3 className="text-xl md:text-2xl font-serif text-foreground">{step.title}</h3>
+                <h3 className="text-lg font-serif text-foreground">{step.title}</h3>
               </div>
               <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/50">{step.timeline}</p>
-              <p className="text-muted-foreground leading-relaxed">{step.body}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{step.body}</p>
             </motion.div>
           ))}
         </div>
 
         <motion.p
-          className="text-center text-muted-foreground mt-12 max-w-xl mx-auto italic"
+          className="text-center text-muted-foreground mt-12 max-w-xl mx-auto italic text-sm"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
