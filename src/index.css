@@ -118,6 +118,43 @@
   }
 }
 
+/* Section label gold line */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: rgba(185,146,79,0.6);
+  flex-shrink: 0;
+}
+
+/* Body text editorial spacing */
+p {
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+/* Focus states — gold outline */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Section dividers */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
 /* Animations */
 @keyframes fade-up {
   from {

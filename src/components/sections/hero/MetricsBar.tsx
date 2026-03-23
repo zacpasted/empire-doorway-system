@@ -36,20 +36,20 @@ const MetricsBar = memo(() => {
     <div ref={ref} className="max-w-3xl mx-auto">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {metrics.map((metric, index) => {
-          const count = useCounter(metric.numValue, 1.2, isInView, 0.1 + index * 0.05);
+          const count = useCounter(metric.numValue, 1.8, isInView, 0.15 * index);
           return (
             <motion.div
               key={metric.label}
               className="relative"
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
+              transition={{ duration: 0.3, delay: index * 0.15 }}
             >
               <motion.div
                 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-0.5"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
+                transition={{ duration: 0.4, delay: 0.1 + index * 0.15 }}
               >
                 {metric.prefix}{count}{metric.suffix}
               </motion.div>
@@ -61,7 +61,7 @@ const MetricsBar = memo(() => {
                   className="h-full bg-gradient-to-r from-primary/60 to-primary/30 rounded-full"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: `${metric.barWidth}%` } : {}}
-                  transition={{ duration: 0.8, delay: 0.2 + index * 0.08, ease: [0.22, 1, 0.36, 1] as const }}
+                  transition={{ duration: 1.2, delay: 0.2 + index * 0.15, ease: [0.22, 1, 0.36, 1] as const }}
                 />
               </div>
             </motion.div>

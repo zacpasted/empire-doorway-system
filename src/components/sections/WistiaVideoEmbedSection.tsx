@@ -40,13 +40,13 @@ const WistiaVideoEmbedSection = ({
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-32 bg-background relative overflow-hidden"
+      className="py-28 md:py-36 bg-background relative overflow-hidden"
     >
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
           <p
-            className={`text-xs tracking-[0.4em] uppercase text-muted-foreground/60 mb-4 transition-all duration-700 ${
+            className={`section-label text-xs tracking-[0.4em] uppercase text-muted-foreground/60 mb-4 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -86,7 +86,7 @@ const WistiaVideoEmbedSection = ({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
-                      className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16] group"
+                      className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16] group border border-transparent hover:border-primary/40 transition-all duration-300"
                     >
                       <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
                       {/* @ts-ignore - Wistia custom element */}
@@ -96,7 +96,7 @@ const WistiaVideoEmbedSection = ({
                 </AnimatePresence>
               </div>
 
-              {/* Show More Button */}
+              {/* Show More Button — outlined gold style */}
               {hasMore && !showAll && (
                 <motion.div
                   className="mt-10 flex justify-center"
@@ -106,12 +106,12 @@ const WistiaVideoEmbedSection = ({
                 >
                   <button
                     onClick={() => setShowAll(true)}
-                    className="group flex items-center gap-3 px-8 py-4 rounded-full bg-card/50 border border-border/50 backdrop-blur-sm hover:bg-card/80 hover:border-primary/30 transition-all duration-300"
+                    className="group flex items-center gap-3 px-8 py-4 rounded-sm bg-transparent border border-primary/50 text-primary hover:bg-primary/10 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
                   >
-                    <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors">
-                      Show More Work →
+                    <span className="text-sm font-medium tracking-wide">
+                      Show More Work
                     </span>
-                    <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-y-0.5 transition-all" />
+                    <span className="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </button>
                 </motion.div>
               )}

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const BookingConfirmation = () => (
@@ -83,6 +83,8 @@ const BookingConfirmation = () => (
 const CalendlySection = () => {
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
     const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
@@ -116,69 +118,95 @@ const CalendlySection = () => {
   }, []);
 
   return (
-    <div id="eligibility-form" className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50 p-6 md:p-10">
-      {bookingConfirmed ? (
-        <BookingConfirmation />
-      ) : (
-        <>
-          <div className="text-center mb-8 md:mb-10">
-            <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">
-              Book a Strategy Call
-            </p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-              Ready now? Here's what happens next.
-            </h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-              A 45-minute call with Zac or Alan. We'll map where your practice is leaving money on the table, what separates you from the top tier, and whether the partnership is the right fit. If it's not, we'll tell you directly.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
-              <span>Average call: 45 min – 1 hour</span>
-              <span className="hidden sm:inline">·</span>
-              <span>Applications reviewed within 48 hours</span>
-              <span className="hidden sm:inline">·</span>
-              <span>30 practices admitted per year</span>
-            </div>
-          </div>
-
-          <div className="relative" style={{ minHeight: "700px" }}>
-            {!calendlyLoaded && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a1a1a] rounded-xl border border-border/30">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  <p className="text-sm text-muted-foreground">Loading calendar...</p>
-                </div>
-                <div className="mt-8 space-y-3 w-full max-w-sm px-4">
-                  <div className="h-4 bg-white/10 rounded animate-pulse" />
-                  <div className="h-4 bg-white/8 rounded animate-pulse w-3/4" />
-                  <div className="h-10 bg-white/5 rounded animate-pulse mt-4" />
-                  <div className="h-10 bg-white/5 rounded animate-pulse" />
-                  <div className="h-10 bg-white/5 rounded animate-pulse" />
-                </div>
+    <div
+      ref={ref}
+      id="eligibility-form"
+      className="backdrop-blur-sm rounded-md overflow-hidden"
+      style={{
+        border: '1px solid rgba(185,146,79,0.15)',
+        background: 'rgba(255,255,255,0.02)',
+        padding: '4px',
+      }}
+    >
+      <div className="bg-card/50 rounded-md p-6 md:p-10">
+        {bookingConfirmed ? (
+          <BookingConfirmation />
+        ) : (
+          <>
+            <div className="text-center mb-8 md:mb-10">
+              <motion.p
+                className="section-label text-xs tracking-[0.3em] uppercase text-primary mb-3"
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0 }}
+              >
+                Book a Strategy Call
+              </motion.p>
+              <motion.h2
+                className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3"
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Ready now? Here's what happens next.
+              </motion.h2>
+              <motion.p
+                className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4"
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                A 45-minute call with Zac or Alan. We'll map where your practice is leaving money on the table, what separates you from the top tier, and whether the partnership is the right fit. If it's not, we'll tell you directly.
+              </motion.p>
+              <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
+                <span>Average call: 45 min – 1 hour</span>
+                <span className="hidden sm:inline">·</span>
+                <span>Applications reviewed within 48 hours</span>
+                <span className="hidden sm:inline">·</span>
+                <span>30 practices admitted per year</span>
               </div>
-            )}
-            <div
-              className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
-              data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E"
-              style={{ minWidth: "320px", height: "700px" }}
-            />
-          </div>
-        </>
-      )}
+            </div>
 
-      {!bookingConfirmed && (
-        <>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
-            <span>Not a sales call</span>
-            <span className="hidden sm:inline">·</span>
-            <span>Reviewed personally by Zac and Alan</span>
-            <span className="hidden sm:inline">·</span>
-            <span>30 practices per year</span>
-          </div>
-          <p className="text-center text-sm text-muted-foreground/60 mt-6 italic">
-            Not ready to book? Keep scrolling — see the work, hear from partners, then decide.
-          </p>
-        </>
-      )}
+            <div className="relative" style={{ minHeight: "700px" }}>
+              {!calendlyLoaded && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a1a1a] rounded-xl border border-border/30">
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                    <p className="text-sm text-muted-foreground">Loading calendar...</p>
+                  </div>
+                  <div className="mt-8 space-y-3 w-full max-w-sm px-4">
+                    <div className="h-4 bg-white/10 rounded animate-pulse" />
+                    <div className="h-4 bg-white/8 rounded animate-pulse w-3/4" />
+                    <div className="h-10 bg-white/5 rounded animate-pulse mt-4" />
+                    <div className="h-10 bg-white/5 rounded animate-pulse" />
+                    <div className="h-10 bg-white/5 rounded animate-pulse" />
+                  </div>
+                </div>
+              )}
+              <div
+                className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
+                data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E"
+                style={{ minWidth: "320px", height: "700px" }}
+              />
+            </div>
+          </>
+        )}
+
+        {!bookingConfirmed && (
+          <>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
+              <span>Not a sales call</span>
+              <span className="hidden sm:inline">·</span>
+              <span>Reviewed personally by Zac and Alan</span>
+              <span className="hidden sm:inline">·</span>
+              <span>30 practices per year</span>
+            </div>
+            <p className="text-center text-sm text-muted-foreground/60 mt-6 italic">
+              Not ready to book? Keep scrolling — see the work, hear from partners, then decide.
+            </p>
+          </>
+        )}
+      </div>
     </div>
   );
 };

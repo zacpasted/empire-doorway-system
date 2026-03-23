@@ -91,17 +91,26 @@ const Index = () => {
         {/* 6. Written Testimonials + CTA */}
         <AnimatedSection><FourTestimonialsSection /></AnimatedSection>
         
+        {/* Divider: Written Testimonials → The Offer */}
+        <div className="section-divider" />
+        
         {/* 7. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
         {/* 8. How It Works (condensed) */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
+
+        {/* Divider: How It Works → Brands Showcase */}
+        <div className="section-divider" />
         
         {/* 9. Brands Showcase */}
         <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
         
         {/* 10. Results */}
         <AnimatedSection><ResultsSection /></AnimatedSection>
+
+        {/* Divider: Results → Content Examples */}
+        <div className="section-divider" />
         
         {/* 11. Content Examples (condensed — 3 initial, Show More reveals all 10) */}
         <AnimatedSection>
