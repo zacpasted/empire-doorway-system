@@ -81,7 +81,7 @@ const WhyPathsFailSection = () => {
           className="text-center mb-6"
         >
           <span className="inline-block px-4 py-1.5 text-xs tracking-[0.3em] uppercase text-destructive/80 bg-destructive/10 border border-destructive/20 rounded-full">
-            Why Fragmentation Fails
+            Why Nothing Else Has Worked
           </span>
         </motion.div>
 
