@@ -61,7 +61,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              PASTED closes it. $500K–$1M+ in additional aesthetic production. 30 practices per year.
+              <span className="not-italic font-medium text-foreground">PASTED</span> closes it. $500K–$1M+ in additional aesthetic production. 30 practices per year.
             </motion.span>
           </h1>
 
