@@ -18,6 +18,10 @@ const PartnerRosterTicker = () => {
       className="relative py-4 overflow-hidden border-y border-border/30 bg-card/80"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{
+        maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+      }}
     >
       <style>{`
         @keyframes partner-roster {
@@ -30,14 +34,11 @@ const PartnerRosterTicker = () => {
       `}</style>
 
       {/* Static label */}
-      <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center pl-4 md:pl-6 bg-gradient-to-r from-card/80 via-card/80 to-transparent pr-8">
+      <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center pl-4 md:pl-6 pr-8">
         <span className="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-primary font-semibold whitespace-nowrap">
           Partner Roster
         </span>
       </div>
-
-      {/* Fade edges */}
-      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-card/80 to-transparent z-10 pointer-events-none" />
 
       <div
         className="flex items-center whitespace-nowrap animate-partner-roster pl-32 md:pl-40"
