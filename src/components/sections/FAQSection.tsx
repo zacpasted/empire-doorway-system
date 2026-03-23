@@ -53,7 +53,7 @@ const FAQSection = () => {
             Questions
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-foreground">
-            What Dentists Ask
+            The questions we hear before every partnership.
           </h2>
         </div>
 
