@@ -79,7 +79,10 @@ const Index = () => {
         {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
-        {/* 4. Brands Showcase */}
+        {/* 5. Cost of Everything Else */}
+        <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
+        
+        {/* 6. Brands Showcase */}
         <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
         
         {/* 5. Results */}
