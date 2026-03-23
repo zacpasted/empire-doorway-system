@@ -35,7 +35,7 @@ const FourTestimonialsSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-24 md:py-32">
+    <section ref={ref} className="py-28 md:py-36">
       <div className="container max-w-4xl mx-auto px-4">
         <motion.div
           className="text-center mb-14"
@@ -43,7 +43,7 @@ const FourTestimonialsSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">What They Say</p>
+          <p className="section-label text-xs tracking-[0.4em] uppercase text-primary mb-4">What They Say</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
             From the dentists who've been through it.
           </h2>
@@ -53,15 +53,25 @@ const FourTestimonialsSection = () => {
           {testimonials.map((t, i) => (
             <motion.blockquote
               key={t.name}
-              className="border-l-2 border-primary/30 pl-6 md:pl-8"
-              initial={{ opacity: 0, y: 20 }}
+              className="relative border-l-[3px] border-primary/30 pl-6 md:pl-8"
+              style={{
+                background: 'linear-gradient(to right, rgba(185,146,79,0.04) 0%, transparent 40%)',
+              }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
+              transition={{ duration: 0.65, delay: 0.2 + i * 0.2 }}
             >
-              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed italic mb-4">
+              {/* Decorative quote mark */}
+              <span
+                className="absolute -left-3 -top-2 font-serif text-[72px] leading-none text-primary/15 pointer-events-none select-none"
+                aria-hidden="true"
+              >
+                "
+              </span>
+              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed italic mb-4 py-4">
                 "{t.quote}"
               </p>
-              <footer>
+              <footer className="pb-4">
                 <p className="text-sm font-medium text-foreground">{t.name}</p>
                 <p className="text-xs text-muted-foreground">{t.role}</p>
               </footer>

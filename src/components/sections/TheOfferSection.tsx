@@ -1,23 +1,49 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const TheOfferSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const handleCTA = () => {
     trackCTAClick({ ctaId: 'offer-cta', ctaText: 'Apply for Partnership', section: 'the-offer' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
-    <section className="py-24 md:py-32">
+    <section ref={ref} className="py-28 md:py-36">
+      {/* Visual separator — · · · */}
+      <div className="text-center mb-16">
+        <span className="text-primary/40 text-sm tracking-[0.5em]">· · ·</span>
+        <div className="mt-4 mx-auto w-full h-px bg-primary/20" />
+      </div>
+
       <div className="container max-w-3xl mx-auto px-4">
-        <p className="text-xs tracking-[0.4em] uppercase text-primary text-center mb-6">
+        <motion.p
+          className="section-label text-xs tracking-[0.4em] uppercase text-primary text-center mb-6"
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
           The Partnership <span className="text-muted-foreground/60 text-[10px] tracking-[0.2em]">· 30 Practices / Year</span>
-        </p>
+        </motion.p>
 
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-center leading-tight mb-12">
+        <motion.h2
+          className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-center leading-tight mb-12"
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
           Everything outside the chair. Handled.
-        </h2>
+        </motion.h2>
 
-        <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
+        <motion.div
+          className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.5 }}
+        >
           <p>
             You have a system for every clinical procedure. Veneers. Composites. Implants. You refined it over years. It works because it's specific, coordinated, and repeatable.
           </p>
@@ -27,12 +53,17 @@ const TheOfferSection = () => {
           <p>
             We are your operating partner. We run the growth side of your practice. You do the dentistry. We handle everything it takes to fill your chair with the right patients.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Offer statement — distinct typographic treatment */}
-        <p className="mt-14 text-xl md:text-2xl font-serif text-foreground text-center leading-relaxed max-w-2xl mx-auto">
-          12 months. Brand, content, paid media, and conversion — all in-house. One team. One outcome: <span className="text-primary">$500K–$1M+</span> in additional aesthetic production.
-        </p>
+        {/* Offer statement — pull quote with left border */}
+        <motion.p
+          className="mt-14 text-xl md:text-2xl font-serif italic text-foreground text-left leading-relaxed max-w-2xl mx-auto border-l-2 border-primary/40 pl-6"
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.7 }}
+        >
+          12 months. Brand, content, paid media, and conversion — all in-house. One team. One outcome: <span className="text-primary not-italic">$500K–$1M+</span> in additional aesthetic production.
+        </motion.p>
 
         {/* CTA */}
         <div className="text-center mt-12">

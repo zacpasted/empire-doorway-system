@@ -29,7 +29,7 @@ const PartnerRosterTicker = () => {
           100% { transform: translateX(-25%); }
         }
         .animate-partner-roster {
-          animation: partner-roster 30s linear infinite;
+          animation: partner-roster 50s linear infinite;
         }
       `}</style>
 
@@ -47,9 +47,9 @@ const PartnerRosterTicker = () => {
         {[...Array(4)].map((_, setIndex) => (
           <div key={setIndex} className="flex items-center">
             {ROSTER_ITEMS.map((item) => (
-              <span key={`${setIndex}-${item}`} className="flex items-center mx-4 md:mx-6">
-                <span className="w-1 h-1 rounded-full bg-primary/50 mr-3 flex-shrink-0" />
-                <span className="text-[10px] md:text-xs tracking-wide text-muted-foreground/80 font-medium">
+              <span key={`${setIndex}-${item}`} className="flex items-center mx-5 md:mx-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mr-4 flex-shrink-0" />
+                <span className="text-xs md:text-base tracking-wide text-muted-foreground/80 font-medium">
                   {item}
                 </span>
               </span>
