@@ -53,10 +53,7 @@ const HeroSection = () => {
 
           <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Your clinical work is exceptional.
-            </span>
-            <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Your market position should reflect that.
+              The gap between your clinical standard and your market position is costing you the practice you've already earned.
             </span>
             <motion.span
               className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
@@ -64,7 +61,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              $500K–$1M+ in additional aesthetic production. The practice your skill level was always meant to run.
+              PASTED closes it. $500K–$1M+ in additional aesthetic production. 30 practices per year.
             </motion.span>
           </h1>
 
