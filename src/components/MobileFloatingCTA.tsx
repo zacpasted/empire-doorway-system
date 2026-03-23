@@ -9,13 +9,11 @@ const MobileFloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero
       const heroHeight = window.innerHeight;
       const scrollY = window.scrollY;
       
       setIsVisible(scrollY > heroHeight * 0.5);
       
-      // Hide when near the form (within 200px of it)
       const formElement = document.getElementById('eligibility-form');
       if (formElement) {
         const formRect = formElement.getBoundingClientRect();
@@ -24,17 +22,15 @@ const MobileFloatingCTA = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Check initial state
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Apply Now', section: 'floating' });
+    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Apply for Partnership', section: 'floating' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  // Only show on mobile (md breakpoint and below)
-  // Hide when user is already viewing the form
   const shouldShow = isVisible && !isNearForm;
 
   return (
@@ -47,7 +43,6 @@ const MobileFloatingCTA = () => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
         >
-          {/* Gradient fade background */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-transparent pointer-events-none" 
                style={{ height: '120%', top: '-20%' }} />
           
@@ -60,7 +55,7 @@ const MobileFloatingCTA = () => {
               Apply for Partnership
             </button>
             <p className="text-center text-xs text-muted-foreground mt-2">
-              30 practices per year · Not all accepted
+              30 spots this year · 48hr review · Not all accepted
             </p>
           </div>
         </motion.div>
