@@ -57,44 +57,49 @@ const caseStudies: CaseStudy[] = [
 const AnimatedNumber = ({
   value,
   isVisible,
+  delay = 0,
 }: {
   value: string;
   isVisible: boolean;
+  delay?: number;
 }) => {
   const [displayValue, setDisplayValue] = useState("0");
   useEffect(() => {
     if (!isVisible) return;
-    const numMatch = value.match(/[\d,]+\.?\d*/);
-    if (!numMatch) {
-      setDisplayValue(value);
-      return;
-    }
-    const numStr = numMatch[0].replace(/,/g, "");
-    const targetNum = parseFloat(numStr);
-    const prefix = value.substring(0, value.indexOf(numMatch[0]));
-    const suffix = value.substring(value.indexOf(numMatch[0]) + numMatch[0].length);
-    let startTime: number;
-    const duration = 1200;
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      const current = targetNum * easeOut;
-      let formatted: string;
-      if (numMatch[0].includes(".")) {
-        formatted = current.toLocaleString("en-US", {
-          minimumFractionDigits: numMatch[0].split(".")[1]?.length || 0,
-          maximumFractionDigits: numMatch[0].split(".")[1]?.length || 0,
-        });
-      } else {
-        formatted = Math.round(current).toLocaleString("en-US");
+    const timeout = setTimeout(() => {
+      const numMatch = value.match(/[\d,]+\.?\d*/);
+      if (!numMatch) {
+        setDisplayValue(value);
+        return;
       }
-      setDisplayValue(`${prefix}${formatted}${suffix}`);
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  }, [value, isVisible]);
+      const numStr = numMatch[0].replace(/,/g, "");
+      const targetNum = parseFloat(numStr);
+      const prefix = value.substring(0, value.indexOf(numMatch[0]));
+      const suffix = value.substring(value.indexOf(numMatch[0]) + numMatch[0].length);
+      let startTime: number;
+      const duration = 1500;
+      const animate = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = targetNum * easeOut;
+        let formatted: string;
+        if (numMatch[0].includes(".")) {
+          formatted = current.toLocaleString("en-US", {
+            minimumFractionDigits: numMatch[0].split(".")[1]?.length || 0,
+            maximumFractionDigits: numMatch[0].split(".")[1]?.length || 0,
+          });
+        } else {
+          formatted = Math.round(current).toLocaleString("en-US");
+        }
+        setDisplayValue(`${prefix}${formatted}${suffix}`);
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
+    }, delay);
+    return () => {};
+  }, [value, isVisible, delay]);
   return <span>{displayValue}</span>;
 };
 
@@ -113,11 +118,11 @@ const AdCaseStudiesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-background">
+    <section ref={sectionRef} className="py-28 md:py-36 bg-background">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
+          <p className="section-label text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
             Performance
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
@@ -141,7 +146,7 @@ const AdCaseStudiesSection = () => {
             {aggregateMetrics.map((metric, index) => (
               <div key={index} className="text-center">
                 <p className="text-2xl md:text-3xl font-serif text-foreground mb-1">
-                  <AnimatedNumber value={metric.value} isVisible={isVisible} />
+                  <AnimatedNumber value={metric.value} isVisible={isVisible} delay={index * 100} />
                 </p>
                 <p className="text-xs text-foreground/50">{metric.label}</p>
               </div>
@@ -154,15 +159,19 @@ const AdCaseStudiesSection = () => {
           {caseStudies.map((study, index) => (
             <div
               key={index}
-              className={`p-6 rounded-lg border border-foreground/10 bg-background transition-all duration-700 hover:border-foreground/20 ${
+              className={`p-6 rounded-lg transition-all duration-700 hover:border-primary/30 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
-              style={{ transitionDelay: `${200 + index * 100}ms` }}
+              style={{
+                transitionDelay: `${200 + index * 100}ms`,
+                background: 'rgba(185,146,79,0.04)',
+                border: '1px solid rgba(185,146,79,0.1)',
+              }}
             >
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-lg font-serif text-foreground">{study.title}</h3>
                 {study.roasValue && (
-                  <span className="text-xs px-2 py-1 rounded bg-foreground/10 text-foreground/70">
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-primary text-primary-foreground font-medium">
                     {study.roasValue} ROAS
                   </span>
                 )}
@@ -176,7 +185,7 @@ const AdCaseStudiesSection = () => {
                         metric.highlight ? "text-foreground font-medium" : "text-foreground/70"
                       }`}
                     >
-                      <AnimatedNumber value={metric.value} isVisible={isVisible} />
+                      <AnimatedNumber value={metric.value} isVisible={isVisible} delay={300 + index * 100} />
                     </span>
                   </div>
                 ))}

@@ -12,10 +12,10 @@ import {
 
 const BrandsShowcaseSection = () => {
   return (
-    <section id="brands-showcase" className="py-20 md:py-28 bg-secondary/20">
+    <section id="brands-showcase" className="py-24 md:py-34 bg-secondary/20">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
+          <p className="section-label text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
             The Work
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
@@ -26,7 +26,6 @@ const BrandsShowcaseSection = () => {
           </p>
         </div>
 
-        {/* Swipeable Brand Cards Carousel */}
         <Carousel
           opts={{
             align: "start",
@@ -39,16 +38,16 @@ const BrandsShowcaseSection = () => {
               <CarouselItem key={brand.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
                 <Link
                   to={`/case-study/${brand.slug}`}
-                  className="group block text-left bg-background rounded-xl p-6 border border-border/50 transition-all duration-300 hover:border-primary/40 hover:shadow-lg h-full"
+                  className="group block text-left bg-background rounded-xl p-6 border border-border/50 transition-all duration-250 hover:border-primary/50 hover:scale-[1.015] hover:shadow-lg h-full focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
                 >
-                  {/* Brand thumbnail */}
+                  {/* Brand thumbnail with grayscale treatment */}
                   <div className="aspect-video bg-secondary/50 rounded-lg mb-5 flex items-center justify-center overflow-hidden">
-                  {brand.thumbnail ? (
+                    {brand.thumbnail ? (
                       <OptimizedImage 
                         src={brand.thumbnail} 
                         alt={brand.name}
                         wrapperClassName="w-full h-full"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-400"
                       />
                     ) : (
                       <span className="text-muted-foreground text-sm">
@@ -64,7 +63,6 @@ const BrandsShowcaseSection = () => {
                     {brand.tagline}
                   </p>
 
-                  {/* View case study link */}
                   <div className="flex items-center gap-2 text-sm text-foreground/60 group-hover:text-primary transition-colors">
                     <span>View case study</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -78,7 +76,6 @@ const BrandsShowcaseSection = () => {
             <CarouselNext className="static translate-y-0" />
           </div>
         </Carousel>
-
       </div>
     </section>
   );
