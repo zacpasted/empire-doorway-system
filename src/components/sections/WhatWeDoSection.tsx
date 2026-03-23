@@ -312,7 +312,7 @@ const WhatWeDoSection = () => {
           >
             PASTED replaces that fragmentation with{" "}
             <span className="relative">
-              <span className="text-primary">one coordinated system.</span>
+              <span className="text-primary">one in-house system, coordinated around a single goal: high-value, predictable aesthetic growth.</span>
               <motion.span
                 className="absolute -inset-2 bg-primary/10 rounded-lg -z-10"
                 initial={{ opacity: 0, scale: 0.8 }}
