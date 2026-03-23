@@ -61,9 +61,14 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="not-italic font-medium text-foreground">PASTED</span> is your revenue workflow for building a dominant aesthetic practice. We handle the brand, content, ads, and patient conversion — so you focus on the dentistry.
+              <span className="not-italic font-medium text-foreground">PASTED</span> is your operating and accountability partner — the <span className="text-primary not-italic">authors of your arc</span>. Brand, content, ads, and patient conversion, built and run in-house, so you can do the dentistry you became a dentist for at the level you've always been capable of.
             </motion.span>
           </h1>
+
+          {/* Community significance line */}
+          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground/50 mb-2">
+            The dentists you already follow built their practices through this partnership.
+          </p>
 
           {/* Social proof names */}
           <div className="flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 mb-3 flex-wrap">

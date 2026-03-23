@@ -1,5 +1,3 @@
-import { trackCTAClick } from "@/hooks/useCTAAnalytics";
-
 const TheOfferSection = () => {
   return (
     <section className="py-24 md:py-32">
@@ -24,22 +22,10 @@ const TheOfferSection = () => {
           </p>
         </div>
 
-        <div className="mt-14 flex flex-col items-center">
-          <a
-            href="#eligibility-form"
-            onClick={(e) => {
-              e.preventDefault();
-              trackCTAClick({ ctaId: 'the-offer', ctaText: 'Apply for Partnership', section: 'the-offer' });
-              document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }}
-            className="inline-flex items-center justify-center px-10 py-4 text-sm font-medium tracking-[0.2em] uppercase bg-primary text-primary-foreground rounded-sm transition-all duration-300 hover:opacity-90 active:scale-[0.98]"
-          >
-            Apply for Partnership →
-          </a>
-          <p className="mt-4 text-xs text-muted-foreground/50">
-            30 practices per year · Reviewed within 48 hours · Not all accepted
-          </p>
-        </div>
+        {/* Offer sentence — distinct typographic treatment */}
+        <p className="mt-14 text-xl md:text-2xl font-serif text-foreground text-center leading-relaxed max-w-2xl mx-auto">
+          A private 12-month operating partnership — brand, content, paid media, and conversion systems, built and run in-house by one team, accountable to one outcome: <span className="text-primary">$500K–$1M+</span> in additional aesthetic production.
+        </p>
       </div>
     </section>
   );

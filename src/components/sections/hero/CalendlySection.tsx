@@ -123,10 +123,10 @@ const CalendlySection = () => {
         <>
           <div className="text-center mb-8 md:mb-10">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
-              If the gap between your clinical standard and your market position frustrates you — this is where that changes.
+              Here's what happens next.
             </h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4">
-              In 45 minutes, we'll map where your current structure is capping growth, what separates you from the top 1% of aesthetic practices, and whether the PASTED Partnership is the right fit. If we're not the right match, we'll tell you directly — and tell you why.
+              In a 45-minute strategy call, we'll cover three things: where your current structure is capping growth, what separates your practice from the top 1%, and whether the PASTED Partnership is the right fit for where you're going. If it's not, we'll tell you directly — and tell you exactly why.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
               <span>Average call: 45 min – 1 hour</span>
