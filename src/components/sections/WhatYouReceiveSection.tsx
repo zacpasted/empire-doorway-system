@@ -241,7 +241,7 @@ const WhatYouReceiveSection = () => {
             animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
-            30+ creative assets. Full ads. On-location shoots. One team. No surprises.
+            One team. Full ownership. Real results. No agencies. No handoffs. No surprises.
           </motion.p>
 
           {/* Animated checkmarks */}
