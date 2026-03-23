@@ -196,10 +196,10 @@ const AdCaseStudiesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
-            Performance Data
+            Performance
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-foreground mb-6">
-            Case Studies
+            The numbers behind the system.
           </h2>
           <p className="text-sm text-muted-foreground/70 max-w-xl mx-auto">
             Every number below comes from a real PASTED partner account. No composites. No estimates.
