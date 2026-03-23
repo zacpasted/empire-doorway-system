@@ -1,16 +1,13 @@
 import { useState } from "react";
 
 const ROSTER_ITEMS = [
-  "Dr. Drew Ballard · $0 → $2M in 18 months",
-  "Dr. Alan Clarke · NHS associate → global authority",
   "Dr. Jon Marashi · Celebrity Dentist, LA",
   "Dr. Brian Harris · Smile Virtual & Smile Sculpt",
-  "Dr. Mark Hughes · Harley Street, London",
-  "Dr. Rhona Eksander · Chelsea Dental Clinic",
-  "Dr. Sam Saleh · LA & London",
   "Dr. Marshall Hanson · Founder, Marshall Hanson Method",
-  "Dr. Michael Allen · Smile Trend Institute",
-  "Dr. Serena Wong · Ottawa",
+  "Dr. Sam Saleh · LA & London",
+  "Dr. Rhona Eksander · Chelsea Dental Clinic",
+  "Dr. Patrick McCann · Dublin",
+  "SmileTrend · Global Aesthetic Network",
 ];
 
 const PartnerRosterTicker = () => {
