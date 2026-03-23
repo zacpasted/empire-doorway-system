@@ -158,7 +158,7 @@ const CalendlySection = () => {
             )}
             <div
               className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
-              data-url="https://calendly.com/getpasted/pasted-partner-discovery?data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E""
+              data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E"
               style={{ minWidth: "320px", height: "700px" }}
             />
           </div>
