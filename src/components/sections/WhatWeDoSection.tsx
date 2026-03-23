@@ -302,7 +302,7 @@ const WhatWeDoSection = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            Most practices try to grow through separate agencies, freelancers, consultants, and disconnected efforts.
+            Most practices grow through disconnected vendors — an agency for ads, a freelancer for content, a consultant for strategy — none of whom talk to each other.
           </motion.p>
           <motion.p 
             className="mt-6 text-2xl md:text-3xl text-foreground font-serif"
