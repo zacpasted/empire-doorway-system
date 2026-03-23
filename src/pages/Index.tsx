@@ -7,6 +7,7 @@ import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
 import Footer from "@/components/Footer";
 
 // Lazy load below-the-fold sections
+const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
 const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
 const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsShowcaseSection"));
 const ResultsSection = lazy(() => import("@/components/sections/ResultsSection"));
@@ -71,7 +72,10 @@ const Index = () => {
       <PartnerRosterTicker />
       
       <Suspense fallback={<SectionLoader />}>
-        {/* 3. The Offer */}
+        {/* 3. Authority */}
+        <AnimatedSection><AuthoritySection /></AnimatedSection>
+        
+        {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
         {/* 4. Brands Showcase */}

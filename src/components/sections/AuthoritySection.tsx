@@ -3,35 +3,26 @@ const AuthoritySection = () => {
     <section className="py-24 md:py-32 border-y border-border/30">
       <div className="container max-w-3xl mx-auto px-4">
         <p className="text-primary uppercase tracking-[0.3em] text-sm text-center mb-8">
-          Top-Down Positioning
+          Why PASTED
         </p>
         
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-center mb-12 leading-tight">
-          The International Bridge to<br />
-          <span className="text-primary">Aesthetic Dentistry's Highest Tier.</span>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-center mb-16 leading-tight">
+          We built the brands you already follow.{" "}
+          <span className="block">Now we build yours.</span>
         </h2>
 
-        <div className="space-y-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
-          <p className="text-center">
-            PASTED turns talented clinicians into recognized brands through narrative, identity design, and conversion architecture.
+        <div className="space-y-10 text-lg md:text-xl text-muted-foreground leading-relaxed">
+          <p>
+            <span className="text-primary font-medium">Dr. Drew Ballard. Dr. Alan Clarke. Dr. Jon Marashi. Dr. Brian Harris. Dr. Mark Hughes. Dr. Rhona Eksander. Dr. Sam Saleh.</span>{" "}
+            These are not client logos on a slide deck. These are practices we built from the inside — strategy, brand, content, ads, and conversion systems — over years of real partnership.
           </p>
 
-          <div className="h-px bg-border/50 my-8" />
-
-          <p className="text-center text-foreground/80 py-4">
-            The market does not understand who you are,<br />
-            why you're different, and why it should trust you at a premium.<br />
-            <span className="text-foreground font-medium mt-2 block">That is the cause. Everything else is a symptom.</span>
+          <p>
+            The $100M+ in aesthetic revenue we've driven is not an industry aggregate. It is our number. From our partners. Measured across every case, every campaign, every consultation system we've built and optimised. We own every result on this page.
           </p>
 
-          <div className="h-px bg-border/50 my-8" />
-
-          <p className="text-center italic">
-            Most competitors treat symptoms—traffic, followers, "more leads."
-          </p>
-
-          <p className="text-center text-foreground font-serif text-xl md:text-2xl pt-4">
-            PASTED treats the cause.
+          <p>
+            Thirty practices per year. Not because we can't take more. Because the work requires it. Every partner gets the full team, full access, and full accountability. That is only possible at 30. The selectivity is not a tactic — it is what makes the results real.
           </p>
         </div>
       </div>
