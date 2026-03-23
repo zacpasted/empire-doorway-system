@@ -61,7 +61,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Your clinical excellence deserves a practice that reflects it. <span className="not-italic font-medium text-foreground">PASTED</span> is the <span className="text-primary not-italic">operating partner</span> that builds it.
+              We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
             </motion.span>
           </h1>
 
@@ -92,7 +92,11 @@ const HeroSection = () => {
               Apply for Partnership →
             </button>
             <p className="text-[9px] md:text-xs text-muted-foreground/40 mt-1.5 tracking-wide">
-              30 spots this year · 48hr review · Not all accepted
+              30 practices per year · Reviewed within 48 hours · Not all accepted
+            </p>
+            <p className="text-[10px] md:text-sm italic text-muted-foreground/50 mt-3 max-w-md mx-auto leading-relaxed">
+              "If a doctor asks who they should trust with their brand — this is the answer."
+              <span className="block not-italic font-normal text-muted-foreground/40 mt-0.5">— Dr. Brian Harris, Celebrity Dentist · Gilbert, AZ</span>
             </p>
           </div>
 

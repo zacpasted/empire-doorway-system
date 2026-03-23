@@ -1,6 +1,7 @@
 import { useRef, lazy, Suspense, memo } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
+import StickyBookingTab from "@/components/StickyBookingTab";
 import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
 import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
@@ -65,6 +66,7 @@ const Index = () => {
       <title>PASTED Partnership | $500K–$1M+ Growth for Aesthetic Dentists</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
+      <StickyBookingTab />
       
       {/* 1. Hero */}
       <HeroSection />
