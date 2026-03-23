@@ -57,6 +57,37 @@ import nav08 from "@/assets/brands/nav-atwal/showcase-08.jpeg";
 import nav09 from "@/assets/brands/nav-atwal/showcase-09.jpeg";
 import nav10 from "@/assets/brands/nav-atwal/showcase-10.jpeg";
 
+// Nakul Ratra images
+import nakul01 from "@/assets/brands/nakul-ratra/showcase-01.jpeg";
+import nakul02 from "@/assets/brands/nakul-ratra/showcase-02.jpeg";
+import nakul03 from "@/assets/brands/nakul-ratra/showcase-03.jpeg";
+import nakul04 from "@/assets/brands/nakul-ratra/showcase-04.jpeg";
+import nakul05 from "@/assets/brands/nakul-ratra/showcase-05.jpeg";
+import nakul06 from "@/assets/brands/nakul-ratra/showcase-06.jpeg";
+import nakul07 from "@/assets/brands/nakul-ratra/showcase-07.jpeg";
+import nakul08 from "@/assets/brands/nakul-ratra/showcase-08.jpeg";
+
+// Meg Rascius images
+import meg01 from "@/assets/brands/meg-rascius/showcase-01.jpeg";
+import meg02 from "@/assets/brands/meg-rascius/showcase-02.jpeg";
+import meg03 from "@/assets/brands/meg-rascius/showcase-03.jpeg";
+import meg04 from "@/assets/brands/meg-rascius/showcase-04.jpeg";
+import meg05 from "@/assets/brands/meg-rascius/showcase-05.jpeg";
+import meg06 from "@/assets/brands/meg-rascius/showcase-06.jpeg";
+import meg07 from "@/assets/brands/meg-rascius/showcase-07.jpeg";
+import meg08 from "@/assets/brands/meg-rascius/showcase-08.jpeg";
+import meg09 from "@/assets/brands/meg-rascius/showcase-09.jpeg";
+
+// Jake Bateman images
+import jake01 from "@/assets/brands/jake-bateman/showcase-01.jpeg";
+import jake02 from "@/assets/brands/jake-bateman/showcase-02.jpeg";
+import jake03 from "@/assets/brands/jake-bateman/showcase-03.jpeg";
+import jake04 from "@/assets/brands/jake-bateman/showcase-04.jpeg";
+import jake05 from "@/assets/brands/jake-bateman/showcase-05.jpeg";
+import jake06 from "@/assets/brands/jake-bateman/showcase-06.jpeg";
+import jake07 from "@/assets/brands/jake-bateman/showcase-07.jpeg";
+import jake08 from "@/assets/brands/jake-bateman/showcase-08.jpeg";
+
 
 export interface BrandExample {
   type: "image" | "video";
