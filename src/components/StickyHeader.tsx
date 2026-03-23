@@ -21,7 +21,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Apply to Work With PASTEDWith PASTED', section: 'header' });
+    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Apply for Partnership', section: 'header' });
     if (onApplyClick) {
       onApplyClick();
     } else {
@@ -54,7 +54,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             className="rounded-md"
             onClick={handleClick}
           >
-            Apply Now →
+            Apply for Partnership →
           </Button>
         </div>
       </div>
