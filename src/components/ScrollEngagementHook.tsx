@@ -4,7 +4,9 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const ScrollEngagementHook = () => {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => {
+    try { return sessionStorage.getItem("scroll-hook-dismissed") === "1"; } catch { return false; }
+  });
 
   const handleScroll = useCallback(() => {
     if (dismissed) return;
