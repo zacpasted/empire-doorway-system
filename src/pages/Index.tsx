@@ -66,6 +66,7 @@ const Index = () => {
       <title>PASTED Partnership | $500K–$1M+ Growth for Aesthetic Dentists</title>
       
       <StickyHeader onApplyClick={scrollToForm} />
+      <StickyBookingTab />
       
       {/* 1. Hero */}
       <HeroSection />

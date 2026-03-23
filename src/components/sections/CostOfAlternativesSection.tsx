@@ -4,27 +4,27 @@ const cards = [
   {
     title: "Courses",
     diagnosis: "Theory without implementation.",
-    body: "You buy it. You watch it. You never implement it because you're running a practice. Courses are built to be sold — not to produce results in your specific market.",
+    body: "You watch it. You take notes. You never use it because you're running a practice. Courses are designed to sell — not to produce results in your specific market with your specific patients.",
   },
   {
     title: "Agencies",
-    diagnosis: "Short-term activity. No long-term investment in you.",
-    body: "Their business model depends on your dependency. They run campaigns. They report metrics. When you stop paying, everything stops. Nothing was ever built.",
+    diagnosis: "Active today. Gone tomorrow.",
+    body: "They run campaigns. They report metrics. Their business model depends on you staying dependent. When you stop paying, everything stops. Nothing was ever actually built.",
   },
   {
     title: "Freelancers",
-    diagnosis: "Fragmented execution. No one accountable for the whole.",
-    body: "One edits video. One runs ads. One writes captions. None talk to each other. None own the outcome. Fragmentation doesn't slow growth — it reverses it.",
+    diagnosis: "No one owns the outcome.",
+    body: "One person edits video. Another runs ads. A third writes captions. They don't talk to each other. No one is accountable for the whole result. That's why it doesn't compound.",
   },
   {
     title: "Consultants",
     diagnosis: "Advice without execution.",
-    body: "They tell you what to do. Then they leave. You're still the one who has to do it. Advice without execution is expensive information.",
+    body: "They tell you what to do. Then they leave. You still have to do it. A roadmap you have to drive yourself is just expensive information.",
   },
   {
     title: "Doing It Yourself",
-    diagnosis: "The most expensive option of all.",
-    body: "Every hour on content is an hour not in the chair. Your time has a dollar value. DIY doesn't save money. It costs the most.",
+    diagnosis: "The highest hourly cost on this list.",
+    body: "Every hour on content is an hour not in the chair. Your time has a dollar value — a high one. DIY does not save money. It costs the most.",
   },
 ];
 
@@ -49,7 +49,6 @@ const CostOfAlternativesSection = () => {
   return (
     <section className="py-28 md:py-36 bg-background relative overflow-hidden">
       <div className="container max-w-5xl mx-auto px-4">
-        {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,10 +56,9 @@ const CostOfAlternativesSection = () => {
           transition={{ duration: 0.5 }}
           className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-5 text-center"
         >
-          Why Everything Else Fails
+          Why Everything Else Fails <span className="text-primary/60 text-[10px] tracking-[0.2em]">· Here's the Data</span>
         </motion.p>
 
-        {/* H2 */}
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +69,6 @@ const CostOfAlternativesSection = () => {
           You've already paid for the wrong solutions.
         </motion.h2>
 
-        {/* Intro */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -79,10 +76,9 @@ const CostOfAlternativesSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-muted-foreground text-center max-w-2xl mx-auto mb-16"
         >
-          Every route has a hidden cost beyond the invoice. Here's what each one is actually doing to your practice.
+          Every alternative has a real cost — beyond the invoice. Here is exactly what each one is doing to your practice and your time.
         </motion.p>
 
-        {/* Cards grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -109,7 +105,6 @@ const CostOfAlternativesSection = () => {
           ))}
         </motion.div>
 
-        {/* Closing statement */}
         <motion.blockquote
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +112,7 @@ const CostOfAlternativesSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-xl md:text-2xl font-serif text-foreground text-center max-w-3xl mx-auto leading-relaxed"
         >
-          None of them are accountable to your outcome. None of them sit alongside you every day. That's not a service. That's a partner. That's PASTED.
+          Not one of these is accountable to your revenue. Not one sits alongside you and makes sure your potential is reached. That is what a real partner does. That is PASTED.
         </motion.blockquote>
       </div>
     </section>

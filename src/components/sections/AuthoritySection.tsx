@@ -15,15 +15,15 @@ const AuthoritySection = () => {
             <p className="text-primary font-medium mb-4">
               Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Drew Ballard. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. SmileTrend.
             </p>
-            <p>Not client logos. Practices we built from the inside.</p>
+            <p>We built these practices from the inside. Not as an agency. As a partner.</p>
           </div>
 
           <p>
-            The $100M+ in aesthetic revenue we've driven is our number. From our partners. Measured across every case and campaign we've run. We own every result on this page.
+            The $100M+ in aesthetic revenue we've driven comes from our partner accounts. We track every case, every campaign, every result. We own these numbers.
           </p>
 
           <p>
-            Thirty practices per year. Not because we can't take more. Because a real partnership requires it. The selectivity is what makes the results real.
+            We take 30 practices per year. Not because we can't take more — because real partnership requires full attention. Thirty is what makes the results possible.
           </p>
         </div>
       </div>
