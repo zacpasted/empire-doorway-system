@@ -19,7 +19,7 @@ const AuthorityStatementSection = () => {
           </p>
 
           <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-6">
-            Typical Outcome: <span className="text-primary">$500K–$1M+</span> Annual Increase
+            What a PASTED partnership <span className="text-primary">typically delivers in 12 months.</span>
           </h2>
 
           <div className="space-y-4">
