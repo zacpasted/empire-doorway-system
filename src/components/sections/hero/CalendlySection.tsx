@@ -121,7 +121,7 @@ const CalendlySection = () => {
         <BookingConfirmation />
       ) : (
         <>
-          <div className="text-center mb-6">
+          <div className="text-center mb-8 md:mb-10">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">
               If the gap between your clinical standard and your market position frustrates you — this is where that changes.
             </h2>
