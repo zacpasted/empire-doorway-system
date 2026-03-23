@@ -58,7 +58,7 @@ const services = [
     icon: Settings,
     title: "Conversion Engine",
     tagline: "Turn inquiries into high-value accepted cases",
-    description: "We optimize the entire patient journey — from the first touchpoint to the consultation room. Hospitality-driven communication frameworks, treatment presentation systems, and follow-up workflows ensure every patient interaction reflects the quality of your practice.",
+    description: "We rebuild the entire patient journey — from the first touchpoint to the consultation room — so every interaction reflects the quality of your clinical work.",
     features: [
       "Hospitality-driven consultation optimization",
       "Patient communication & storytelling frameworks",
