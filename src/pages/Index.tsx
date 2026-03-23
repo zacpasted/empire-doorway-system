@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 // Lazy load below-the-fold sections
 const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
 const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
+const CostOfAlternativesSection = lazy(() => import("@/components/sections/CostOfAlternativesSection"));
 const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsShowcaseSection"));
 const ResultsSection = lazy(() => import("@/components/sections/ResultsSection"));
 const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
@@ -78,7 +79,10 @@ const Index = () => {
         {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
-        {/* 4. Brands Showcase */}
+        {/* 5. Cost of Everything Else */}
+        <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
+        
+        {/* 6. Brands Showcase */}
         <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
         
         {/* 5. Results */}
