@@ -54,7 +54,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             className="rounded-md"
             onClick={handleClick}
           >
-            Apply Now →
+            Apply for Partnership →
           </Button>
         </div>
       </div>
