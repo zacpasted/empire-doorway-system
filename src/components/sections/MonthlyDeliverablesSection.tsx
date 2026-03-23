@@ -31,7 +31,7 @@ const MonthlyDeliverablesSection = () => {
             Monthly Partnership
           </p>
           <h2 className={`text-2xl md:text-4xl font-serif text-foreground mb-4 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            What's Delivered Every Month
+            What arrives every month, without exception.
           </h2>
           <p className={`text-muted-foreground max-w-xl mx-auto transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             A complete done-for-you growth system — not a disconnected list of services
