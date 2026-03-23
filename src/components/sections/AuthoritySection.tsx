@@ -3,7 +3,7 @@ const AuthoritySection = () => {
     <section className="py-24 md:py-32 border-y border-border/30">
       <div className="container max-w-3xl mx-auto px-4">
         <p className="text-primary uppercase tracking-[0.3em] text-sm text-center mb-8">
-          The Only Partner Like This
+          The Only Partner Like This <span className="text-muted-foreground/60 text-xs tracking-[0.2em]">· $100M+ Driven</span>
         </p>
         
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-center mb-16 leading-tight">
