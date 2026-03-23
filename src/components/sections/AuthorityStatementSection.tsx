@@ -44,7 +44,7 @@ const AuthorityStatementSection = () => {
           <div className="h-px bg-border/50 max-w-xs mx-auto" />
 
           <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Results require implementation and collaboration — but the system is built for repeatable, measurable growth.
+            Results require commitment and consistency from both sides. When the system runs as designed, growth is not a goal — it's a structural output.
           </p>
         </motion.div>
       </div>

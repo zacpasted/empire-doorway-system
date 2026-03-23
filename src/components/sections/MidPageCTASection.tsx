@@ -64,7 +64,7 @@ const MidPageCTASection = () => {
           </motion.a>
 
           <p className="mt-8 text-xs text-muted-foreground/40 tracking-wide">
-            45-minute strategic evaluation · Limited to 30 practices per year
+            45-minute strategic evaluation · 30 practices per year · Not all accepted
           </p>
 
           {/* Bottom accent rule */}

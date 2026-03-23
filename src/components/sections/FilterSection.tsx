@@ -10,6 +10,7 @@ const FilterSection = () => {
     { text: "Those who confuse templates and shortcuts for brand building", icon: "◇" },
   ];
   const isFor = [
+    { text: "Dentists who already know the clinical work is there — and need the infrastructure around it to reflect that.", icon: "▲" },
     { text: "Cosmetic dentists who want to be the undeniable authority in their city", icon: "△" },
     { text: "Doctors who understand that reputation compounds over time", icon: "▲" },
     { text: "Practitioners who want a growth system that reflects their clinical excellence", icon: "△" },

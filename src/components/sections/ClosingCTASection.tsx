@@ -18,16 +18,16 @@ const ClosingCTASection = () => {
           href="#eligibility-form"
           onClick={(e) => {
             e.preventDefault();
-            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for PASTED Partnership', section: 'closing' });
+            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Partnership', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
           className="inline-block text-sm tracking-[0.3em] uppercase text-background bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
         >
-          Apply for PASTED Partnership
+          Apply for Partnership →
         </a>
         
         <p className="text-sm text-muted-foreground mt-8">
-          Limited to 30 practices annually.
+          30 practices per year · Reviewed within 48 hours · Strategic fit required · Not all accepted
         </p>
       </div>
     </section>

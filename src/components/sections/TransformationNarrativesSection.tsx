@@ -228,11 +228,11 @@ const TransformationNarrativesSection = () => {
           className="text-center mt-20 md:mt-28"
         >
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
-            These weren't marketing wins. They were{" "}
-            <span className="text-foreground font-medium">identity, systems, and narrative wins</span>.
+            These weren't won in the ad account. They were won in the{" "}
+            <span className="text-foreground font-medium">positioning, the narrative, and the structure</span>.
           </p>
           <p className="font-playfair text-2xl md:text-3xl font-bold text-foreground">
-            When positioning is right, everything else follows.
+            The ads simply amplified what was already working.
           </p>
         </motion.div>
       </div>

@@ -53,7 +53,7 @@ const FoundersVibeSection = forwardRef<HTMLElement>((_, ref) => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            We love what we do. We're here to change the world—one brand at a time.
+            We love what we do. We are selective about who we do it with. That selectivity is what makes it work.
           </p>
         </div>
         

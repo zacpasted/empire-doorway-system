@@ -185,11 +185,10 @@ const WhyPathsFailSection = () => {
                 animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Fragmentation ≠ Growth
+                Coordination Is Everything
               </motion.p>
               <p className="text-muted-foreground max-w-lg mx-auto">
-                The problem isn't that you haven't invested enough.
-                It's that no one has coordinated the system to work together.
+                The problem was never effort or investment. It was coordination. No one was running the whole system — because no one had accountability for the whole result.
               </p>
             </div>
           </div>
