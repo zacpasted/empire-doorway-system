@@ -72,7 +72,10 @@ const Index = () => {
       <PartnerRosterTicker />
       
       <Suspense fallback={<SectionLoader />}>
-        {/* 3. The Offer */}
+        {/* 3. Authority */}
+        <AnimatedSection><AuthoritySection /></AnimatedSection>
+        
+        {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
         {/* 4. Brands Showcase */}
