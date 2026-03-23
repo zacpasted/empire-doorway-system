@@ -76,15 +76,15 @@ const TransformationNarrativesSection = () => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
-            Compounding Results
+            What Partnership Looks Like
           </span>
           <h2 className="font-playfair text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Three Narrative-Driven
+            Three practices. Three different starting points.
             <br />
-            <span className="italic text-muted-foreground">Transformations</span>
+            <span className="italic text-muted-foreground">One outcome.</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Using a PASTED strategy, we achieved what most believed was impossible.
+            These are not marketing wins. They are identity, narrative, and systems wins. The marketing followed.
           </p>
         </motion.div>
 
