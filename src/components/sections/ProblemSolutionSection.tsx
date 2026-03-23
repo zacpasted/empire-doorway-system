@@ -38,7 +38,7 @@ const ProblemSolutionSection = () => {
     "Losing cosmetic cases to louder, less skilled competitors.",
     "Multiple agencies and freelancers that never talk to each other.",
     "Getting leads that are price shoppers, not cosmetic patients.",
-    "Spending on ads without a brand worth amplifying.",
+    "Running ads into a brand that isn't strong enough to close the patients it attracts.",
     "Consultations feel harder than they should — patients aren't pre-sold.",
     "Your reputation doesn't match the quality of your work.",
   ];
