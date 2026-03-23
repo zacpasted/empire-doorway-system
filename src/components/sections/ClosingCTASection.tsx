@@ -4,6 +4,10 @@ const ClosingCTASection = () => {
   return (
     <section id="apply" className="py-32 md:py-48 bg-card/50">
       <div className="container max-w-3xl mx-auto px-4 text-center">
+        <p className="text-xs tracking-[0.4em] uppercase text-primary mb-6">
+          This Is Where Your Arc Begins
+        </p>
+
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-foreground leading-tight mb-8">
           The gap between your clinical standard<br />
           and your market position has a name.<br />
@@ -11,7 +15,7 @@ const ClosingCTASection = () => {
         </h2>
         
         <p className="text-lg text-muted-foreground mb-16 max-w-xl mx-auto">
-          If you've read this far and it's accurate — the work is strong, the position doesn't reflect it, and you're done settling for that gap — apply. We review every application personally within 48 hours. If we're not the right fit, we'll tell you directly.
+          Apply now. Every application is reviewed personally within 48 hours by Zac and Alan — not a team member, not an intake form. If we're the right fit, we move fast. If we're not, we'll tell you directly and tell you exactly why.
         </p>
         
         <a

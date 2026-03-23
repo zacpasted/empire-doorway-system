@@ -5,21 +5,25 @@ const steps = [
   {
     number: "01",
     title: "Strategy",
+    timeline: "Week 1–2",
     body: "We map your market position, your ideal patient, and your growth ceiling. You leave with a clear picture of exactly what's been holding you back.",
   },
   {
     number: "02",
     title: "Brand & Identity",
+    timeline: "Week 2–4",
     body: "We build your brand — positioning, narrative, visual identity, content tone. This becomes the foundation everything else is built on.",
   },
   {
     number: "03",
     title: "Content & Ads",
+    timeline: "Week 4–6",
     body: "Our team scripts, shoots on-location, edits, and deploys 30+ pieces of creative per month. The same content runs organically and as paid ad creative.",
   },
   {
     number: "04",
     title: "Conversion & Growth",
+    timeline: "Week 6 onwards",
     body: "We optimise the patient journey — consultation systems, communication frameworks, CRM workflows — so every inquiry converts at the level your brand deserves.",
   },
 ];
@@ -37,7 +41,7 @@ const FourStepsSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">The Process</p>
+          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Your Arc, Authored in Four Phases</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
             Four phases. Fully managed.
           </h2>
@@ -56,6 +60,7 @@ const FourStepsSection = () => {
                 <span className="text-sm text-primary font-mono">{step.number}</span>
                 <h3 className="text-xl md:text-2xl font-serif text-foreground">{step.title}</h3>
               </div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/50">{step.timeline}</p>
               <p className="text-muted-foreground leading-relaxed">{step.body}</p>
             </motion.div>
           ))}

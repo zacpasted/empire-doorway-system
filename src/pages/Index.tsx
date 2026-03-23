@@ -82,13 +82,16 @@ const Index = () => {
         {/* 5. Cost of Everything Else */}
         <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
         
-        {/* 6. Brands Showcase */}
+        {/* 6. Selectivity (Who It's For / Not For) */}
+        <AnimatedSection><SelectivitySection /></AnimatedSection>
+        
+        {/* 7. Brands Showcase */}
         <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
         
-        {/* 5. Results */}
+        {/* 8. Results */}
         <AnimatedSection><ResultsSection /></AnimatedSection>
         
-        {/* 6. Video Testimonials */}
+        {/* 9. Video Testimonials */}
         <AnimatedSection>
           <VideoTestimonialsSection
             videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
@@ -97,13 +100,13 @@ const Index = () => {
           />
         </AnimatedSection>
         
-        {/* 7. Testimonials (written) */}
+        {/* 10. Written Testimonials */}
         <AnimatedSection><FourTestimonialsSection /></AnimatedSection>
         
-        {/* 8. How It Works */}
+        {/* 11. How It Works */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
         
-        {/* 9. Content Examples / Work Carousel */}
+        {/* 12. Content Examples / Work Carousel */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
             title="Scripted. Shot. Edited. Deployed. Every piece is ours."
@@ -112,19 +115,16 @@ const Index = () => {
           />
         </AnimatedSection>
         
-        {/* 10. What You Get */}
+        {/* 13. What You Get */}
         <AnimatedSection><DeliverablesSection /></AnimatedSection>
         
-        {/* 11. Who It's For / Not For */}
-        <AnimatedSection><SelectivitySection /></AnimatedSection>
-        
-        {/* 12. Ad Case Studies */}
+        {/* 14. Ad Case Studies */}
         <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
         
-        {/* 13. Closing CTA */}
+        {/* 15. Closing CTA */}
         <AnimatedSection><ClosingCTASection /></AnimatedSection>
 
-        {/* Eligibility Form — CTA target */}
+        {/* Calendly Booking — CTA target */}
         <CalendlySection />
       </Suspense>
       
