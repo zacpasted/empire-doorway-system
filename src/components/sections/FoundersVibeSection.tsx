@@ -46,7 +46,7 @@ const FoundersVibeSection = forwardRef<HTMLElement>((_, ref) => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            This Is Pasted
+            This Is PASTED.
           </h2>
           <p 
             className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${
