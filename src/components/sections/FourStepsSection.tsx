@@ -24,7 +24,7 @@ const steps = [
     number: "04",
     title: "Conversion & Growth",
     timeline: "Week 6 onwards",
-    body: "We rebuild the patient journey — consultation systems, communication frameworks, CRM workflows — so every inquiry converts.",
+    body: "We rebuild the patient experience — consultation systems, communication frameworks, CRM workflows — so every inquiry converts.",
   },
 ];
 
