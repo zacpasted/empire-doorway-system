@@ -28,10 +28,10 @@ const CredibilitySection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
             Built From the Inside of<br />
             <span className="text-primary">Aesthetic Dentistry's Top Practices.</span>
+            <br /><span className="text-muted-foreground text-2xl md:text-3xl lg:text-4xl font-light">Used by the names you already recognise.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Trusted by leading cosmetic dentists globally. PASTED operates across the entire aesthetic ecosystem —
-            giving our partners a strategic advantage that isolated agencies, freelancers, and consultants cannot replicate.
+            PASTED operates inside the aesthetic ecosystem — not outside it observing. Our partners receive thinking and strategy shaped by real-world execution at the highest level of cosmetic dentistry, in real time. That context is not available anywhere else.
           </p>
         </motion.div>
 
