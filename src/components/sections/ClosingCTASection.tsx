@@ -2,7 +2,7 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const ClosingCTASection = () => {
   return (
-    <section id="apply" className="py-32 md:py-48">
+    <section id="apply" className="py-32 md:py-48 bg-card/50">
       <div className="container max-w-3xl mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-foreground leading-tight mb-8">
           The gap between your clinical standard<br />
@@ -11,7 +11,7 @@ const ClosingCTASection = () => {
         </h2>
         
         <p className="text-lg text-muted-foreground mb-16 max-w-xl mx-auto">
-          If you've read this far and it's accurate — the clinical work is strong, the market position doesn't reflect it, and you're done settling for that gap — this is the next step. Apply. We review every application personally, within 48 hours.
+          If you've read this far and it's accurate — the work is strong, the position doesn't reflect it, and you're done settling for that gap — apply. We review every application personally within 48 hours. If we're not the right fit, we'll tell you directly.
         </p>
         
         <a
@@ -21,7 +21,7 @@ const ClosingCTASection = () => {
             trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Partnership', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
-          className="inline-block text-sm tracking-[0.3em] uppercase text-background bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
+          className="inline-block text-sm tracking-[0.3em] uppercase text-primary-foreground bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
         >
           Apply for Partnership →
         </a>
