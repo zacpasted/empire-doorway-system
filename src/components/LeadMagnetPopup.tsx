@@ -295,7 +295,7 @@ const LeadMagnetPopup = () => {
                         <div 
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                           style={{ 
-                            backgroundImage: `url('https://embed-ssl.wistia.com/deliveries/0e44ade9f3fd6dff22c6a57a7f59cd79.jpg?image_crop_resized=1280x720')`
+                            backgroundImage: `url('https://embed-ssl.wistia.com/deliveries/5e59a156bc135160df057ca8505fe3c8.jpg?image_crop_resized=1280x720')`
                           }}
                         />
                         
