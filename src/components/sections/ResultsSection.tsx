@@ -39,7 +39,7 @@ const ResultsSection = () => {
         >
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Results</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
-            Three practices. Three starting points. One outcome.
+            Three practices. One system. Proof.
           </h2>
         </motion.div>
 
@@ -68,7 +68,7 @@ const ResultsSection = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          The system is the same. The starting point is yours.
+          Different starting points. Same system. Same direction.
         </motion.p>
       </div>
     </section>

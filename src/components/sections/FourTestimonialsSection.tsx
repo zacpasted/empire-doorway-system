@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const testimonials = [
   {
@@ -27,6 +28,11 @@ const testimonials = [
 const FourTestimonialsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const handleCTA = () => {
+    trackCTAClick({ ctaId: 'post-testimonials-cta', ctaText: 'Apply for Partnership', section: 'testimonials' });
+    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   return (
     <section ref={ref} className="py-24 md:py-32">
@@ -62,6 +68,27 @@ const FourTestimonialsSection = () => {
             </motion.blockquote>
           ))}
         </div>
+
+        {/* Post-testimonials CTA */}
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <button
+            onClick={handleCTA}
+            className="inline-block text-sm tracking-[0.3em] uppercase text-primary-foreground bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
+          >
+            Apply for Partnership →
+          </button>
+          <p className="text-sm text-muted-foreground mt-4">
+            30 practices per year · Reviewed within 48 hours · Not all accepted
+          </p>
+          <p className="text-xs text-muted-foreground/50 mt-2 italic">
+            Trusted by 100+ elite cosmetic dentists. 97% client retention since 2019.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

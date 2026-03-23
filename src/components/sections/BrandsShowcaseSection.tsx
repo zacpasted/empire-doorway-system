@@ -19,10 +19,10 @@ const BrandsShowcaseSection = () => {
             The Work
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            The brands you already recognise. Built by us.
+            The work behind the names.
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            The same strategic framework — storytelling, production, ads, and conversion systems — behind the most recognised names in aesthetic dentistry.
+            The strategic framework behind the most recognised practices in aesthetic dentistry.
           </p>
         </div>
 

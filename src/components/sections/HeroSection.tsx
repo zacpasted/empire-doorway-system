@@ -61,29 +61,24 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Your clinical excellence deserves a practice that reflects it. <span className="not-italic font-medium text-foreground">PASTED</span> is the <span className="text-primary not-italic">operating partner</span> that builds it — brand, content, ads, and conversion, running in the background while you do the work you love.
+              Your clinical excellence deserves a practice that reflects it. <span className="not-italic font-medium text-foreground">PASTED</span> is the <span className="text-primary not-italic">operating partner</span> that builds it.
             </motion.span>
           </h1>
 
           {/* Community significance line */}
           <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground/50 mb-2">
-            The dentists you already follow built their practices through this partnership.
+            The dentists you already follow chose PASTED.
           </p>
 
           {/* Social proof names */}
           <div className="flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 mb-3 flex-wrap">
-            <span>Trusted by</span>
-            <span className="text-primary font-semibold">Dr. Drew Ballard</span>
-            <span>·</span>
             <span className="text-primary font-semibold">Dr. Jon Marashi</span>
             <span>·</span>
             <span className="text-primary font-semibold">Dr. Brian Harris</span>
             <span>·</span>
-            <span className="text-primary font-semibold">Dr. Alan Clarke</span>
-            <span>·</span>
             <span className="text-primary font-semibold">Dr. Marshall Hanson</span>
             <span>·</span>
-            <span className="text-primary font-semibold">+ more</span>
+            <span className="text-primary font-semibold">Dr. Drew Ballard</span>
             <span>·</span>
             <span>97% retention</span>
           </div>
@@ -97,7 +92,7 @@ const HeroSection = () => {
               Apply for Partnership →
             </button>
             <p className="text-[9px] md:text-xs text-muted-foreground/40 mt-1.5 tracking-wide">
-              30 practices per year · Reviewed within 48 hours · Not all accepted
+              30 spots this year · 48hr review · Not all accepted
             </p>
           </div>
 

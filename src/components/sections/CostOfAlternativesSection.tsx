@@ -4,27 +4,27 @@ const cards = [
   {
     title: "Courses",
     diagnosis: "Theory without implementation.",
-    body: "You buy the course. You watch the modules. You take notes on frameworks you never find time to use because you're running a practice. The knowledge sits there. The practice stays the same. Courses are designed to be sold — not to ensure the result actually happens in your specific market, with your specific patients, inside your actual life.",
+    body: "You buy it. You watch it. You never implement it because you're running a practice. Courses are built to be sold — not to produce results in your specific market.",
   },
   {
     title: "Agencies",
     diagnosis: "Short-term activity. No long-term investment in you.",
-    body: "An agency's business model depends on you staying dependent — not on you getting so strong that you outgrow them. They run campaigns. They report metrics. They do not sit inside your practice, understand your story, or build the brand architecture that compounds over years. When you stop paying, everything stops. Nothing was ever really built.",
+    body: "Their business model depends on your dependency. They run campaigns. They report metrics. When you stop paying, everything stops. Nothing was ever built.",
   },
   {
     title: "Freelancers",
     diagnosis: "Fragmented execution. No one accountable for the whole.",
-    body: "One person edits your videos. Another runs your ads. A third writes your captions. None of them talk to each other. None of them own the outcome. The content doesn't reflect the brand. The ads don't reflect the content. The patient who clicks doesn't match the patient you want. Fragmentation doesn't just slow growth — it actively works against it.",
+    body: "One edits video. One runs ads. One writes captions. None talk to each other. None own the outcome. Fragmentation doesn't slow growth — it reverses it.",
   },
   {
     title: "Consultants",
     diagnosis: "Advice without execution.",
-    body: "A consultant tells you what to do. Then they leave. The implementation — the hard part, the part that actually determines whether any of it works — is still entirely on you. You pay for a roadmap and then have to drive the car, build the road, and navigate the terrain yourself. Advice without execution is just expensive information.",
+    body: "They tell you what to do. Then they leave. You're still the one who has to do it. Advice without execution is expensive information.",
   },
   {
     title: "Doing It Yourself",
     diagnosis: "The most expensive option of all.",
-    body: "Your time has a value. Every hour spent scripting content, editing videos, managing ad accounts, or trying to figure out brand strategy is an hour not spent on high-value clinical work — and an hour spent doing something you didn't train for, don't want to do, and won't do as well as a team that does nothing else. The DIY route doesn't save money. It costs the most.",
+    body: "Every hour on content is an hour not in the chair. Your time has a dollar value. DIY doesn't save money. It costs the most.",
   },
 ];
 
@@ -68,7 +68,7 @@ const CostOfAlternativesSection = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-3xl md:text-5xl font-serif text-foreground text-center mb-6"
         >
-          You've already paid for the wrong solutions. Here's what they actually cost you.
+          You've already paid for the wrong solutions.
         </motion.h2>
 
         {/* Intro */}
@@ -79,7 +79,7 @@ const CostOfAlternativesSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-muted-foreground text-center max-w-2xl mx-auto mb-16"
         >
-          Every route you've taken — or considered taking — has a hidden cost beyond the invoice. Time. Momentum. Potential that compounds in the wrong direction the longer you stay on the wrong path. Here's what each one is actually doing to your practice.
+          Every route has a hidden cost beyond the invoice. Here's what each one is actually doing to your practice.
         </motion.p>
 
         {/* Cards grid */}
@@ -117,7 +117,7 @@ const CostOfAlternativesSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-xl md:text-2xl font-serif text-foreground text-center max-w-3xl mx-auto leading-relaxed"
         >
-          Every one of these routes has one thing in common: none of them are accountable to your outcome. None of them sit alongside you every day and make sure none of your potential gets wasted. That's not a service. That's a partner. That's PASTED.
+          None of them are accountable to your outcome. None of them sit alongside you every day. That's not a service. That's a partner. That's PASTED.
         </motion.blockquote>
       </div>
     </section>
