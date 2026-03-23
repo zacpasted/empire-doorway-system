@@ -17,18 +17,15 @@ const CTABannerSection = () => {
             The PASTED Partnership
           </p>
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground leading-[1.2] tracking-tight max-w-4xl mx-auto mb-3">
-            A Private, 12-Month Partnership
+            A private, 12-month partnership. One system. One team. One goal:
             <br className="hidden sm:block" />
-            <span className="text-muted-foreground/70 font-normal">Designed to Build a </span>
-            <span className="text-primary font-semibold">Dominant Aesthetic Practice</span>
-            <br className="hidden sm:block" />
-            <span className="text-muted-foreground/70 font-normal">— Structurally, Financially, and Operationally</span>
+            <span className="text-primary font-semibold">the practice your clinical skill was always meant to run.</span>
           </h3>
           <p className="text-base md:text-lg text-muted-foreground/50 font-light tracking-wide mb-2">
-            <span className="text-foreground font-medium">$500,000–$1,000,000+</span> in additional aesthetic production annually.
+            <span className="text-foreground font-medium">$500K–$1M+</span> in additional aesthetic production annually.
           </p>
           <p className="text-sm text-muted-foreground/40 mb-4">
-            Higher-value cases · Stronger patient trust · Consistent monthly production · Less reliance on volume
+            Higher case values · Stronger patient trust · Consistent monthly performance · Less dependence on volume or referrals
           </p>
           <p className="text-sm text-muted-foreground/40 mb-8">
             Executed entirely in-house across positioning, content, paid acquisition, conversion systems, and patient experience.
