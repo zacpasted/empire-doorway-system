@@ -436,6 +436,9 @@ const ProblemSolutionSection = () => {
                   We've turned brand and content into patient demand for some of the best aesthetic practices in the world.{" "}
                   <span className="text-foreground font-semibold">This is proven, not theoretical.</span>
                 </p>
+                <p className="text-sm text-foreground/70 mt-3 italic">
+                  This is why our average client stays for 22 months. And why 97% of partners have never left.
+                </p>
               </div>
             </div>
           </div>
