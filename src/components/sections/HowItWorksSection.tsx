@@ -275,7 +275,7 @@ const HowItWorksSection = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
           >
             <Zap className="w-4 h-4 text-primary" />
-            <span className="text-xs tracking-[0.3em] uppercase text-primary">The Complete System</span>
+            <span className="text-xs tracking-[0.3em] uppercase text-primary">The Blueprint</span>
           </motion.div>
           
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground mb-6">
