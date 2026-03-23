@@ -61,7 +61,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Your clinical excellence deserves a practice that reflects it. <span className="not-italic font-medium text-foreground">PASTED</span> is the <span className="text-primary not-italic">operating partner</span> that builds it.
+              We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
             </motion.span>
           </h1>
 
