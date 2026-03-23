@@ -26,8 +26,8 @@ const AccessStatusSection = () => {
             Access + Proximity
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6 leading-tight">
-            Direct Access to the Top<br />
-            <span className="text-primary">of the Industry.</span>
+            Proximity changes outcomes.<br />
+            <span className="text-primary">Ours is real.</span>
           </h2>
         </motion.div>
 
