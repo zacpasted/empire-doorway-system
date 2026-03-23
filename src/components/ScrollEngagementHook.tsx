@@ -4,7 +4,9 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const ScrollEngagementHook = () => {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => {
+    try { return sessionStorage.getItem("scroll-hook-dismissed") === "1"; } catch { return false; }
+  });
 
   const handleScroll = useCallback(() => {
     if (dismissed) return;
@@ -26,12 +28,14 @@ const ScrollEngagementHook = () => {
     trackCTAClick({ ctaId: "scroll-hook-10pct", ctaText: "Take the Quiz", section: "scroll-engagement" });
     setDismissed(true);
     setVisible(false);
+    try { sessionStorage.setItem("scroll-hook-dismissed", "1"); } catch {}
     document.getElementById("practice-quiz")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const handleDismiss = () => {
     setDismissed(true);
     setVisible(false);
+    try { sessionStorage.setItem("scroll-hook-dismissed", "1"); } catch {}
   };
 
   return (
