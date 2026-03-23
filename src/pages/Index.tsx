@@ -21,6 +21,7 @@ const SelectivitySection = lazy(() => import("@/components/sections/SelectivityS
 const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
 const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
+const MidPageCalendlySection = lazy(() => import("@/components/sections/MidPageCalendlySection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
@@ -78,6 +79,9 @@ const Index = () => {
         
         {/* 4. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
+        
+        {/* Mid-page Calendly embed */}
+        <AnimatedSection><MidPageCalendlySection /></AnimatedSection>
         
         {/* 5. Cost of Everything Else */}
         <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
