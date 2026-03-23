@@ -53,10 +53,7 @@ const HeroSection = () => {
 
           <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Your clinical work is exceptional.
-            </span>
-            <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
-              Your market position should reflect that.
+              The gap between your clinical standard and your market position is costing you the practice you've already earned.
             </span>
             <motion.span
               className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
@@ -64,7 +61,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              $500K–$1M+ in additional aesthetic production. The practice your skill level was always meant to run.
+              PASTED closes it. $500K–$1M+ in additional aesthetic production. 30 practices per year.
             </motion.span>
           </h1>
 
@@ -103,6 +100,16 @@ const HeroSection = () => {
             <p className="text-[9px] md:text-xs text-muted-foreground/40 mt-1.5 tracking-wide">
               30 practices per year · Reviewed within 48 hours · Not all accepted
             </p>
+            <a
+              href="#diagnostic"
+              className="block text-[10px] md:text-xs text-muted-foreground/50 mt-2 tracking-wide hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('diagnostic')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
+              Or take the 2-minute diagnostic first →
+            </a>
           </div>
 
           <p className="hidden md:block text-sm sm:text-base md:text-lg text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed font-sans font-light tracking-wide">
