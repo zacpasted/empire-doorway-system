@@ -25,16 +25,16 @@ const MidPageCTASection = () => {
           <div className="w-12 h-px bg-primary/60 mx-auto mb-8" />
 
           <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-primary/70 mb-6 font-medium">
-            Still Reading? Good.
+            Still here?
           </p>
 
           <h3 className="text-2xl md:text-4xl lg:text-5xl font-serif text-foreground leading-[1.15] tracking-tight mb-6">
-            Most Practices Wait.<br />
-            <span className="text-muted-foreground/60">The Best Ones Act.</span>
+            The practices that dominate this time next year<br />
+            <span className="text-muted-foreground/60">are deciding right now.</span>
           </h3>
 
           <p className="text-base md:text-lg text-muted-foreground/70 max-w-lg mx-auto mb-10 font-light leading-relaxed">
-            You've seen the work. You've seen the results. The only question left is whether this is the year you stop operating below your ceiling.
+            You've read this far because something here is accurate. The clinical excellence is already there. The only question is whether the structure around it finally matches.
           </p>
 
           <motion.a
