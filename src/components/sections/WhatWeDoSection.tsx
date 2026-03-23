@@ -24,7 +24,7 @@ const services = [
     icon: Eye,
     title: "Visibility Engine",
     tagline: "30+ pieces of creative per month",
-    description: "Full creative from the best teams in aesthetic dentistry — informed by the highest insider knowledge in the world, in real time. From cinematic on-location shoots to done-for-you scripting, editing, and publishing — 30+ assets per month designed to build trust and attract cosmetic patients.",
+    description: "Full creative from the best teams in aesthetic dentistry — informed by the highest insider knowledge in the world, in real time. From cinematic on-location shoots to done-for-you scripting, editing, and publishing — 30+ assets per month — built on the same insider knowledge that powers the most recognised aesthetic brands in the world.",
     features: [
       "30+ creative assets per month — video, storytelling, ad content",
       "On-location production shoots — we fly to your practice",
