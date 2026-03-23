@@ -1,4 +1,4 @@
-import { useRef, lazy, Suspense, memo } from "react";
+import { lazy, Suspense, memo } from "react";
 import { motion } from "framer-motion";
 import StickyHeader from "@/components/StickyHeader";
 import StickyBookingTab from "@/components/StickyBookingTab";
@@ -9,19 +9,17 @@ import Footer from "@/components/Footer";
 
 // Lazy load below-the-fold sections
 const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
-const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
-const CostOfAlternativesSection = lazy(() => import("@/components/sections/CostOfAlternativesSection"));
-const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsShowcaseSection"));
-const ResultsSection = lazy(() => import("@/components/sections/ResultsSection"));
+const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
 const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
 const FourTestimonialsSection = lazy(() => import("@/components/sections/FourTestimonialsSection"));
+const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
 const FourStepsSection = lazy(() => import("@/components/sections/FourStepsSection"));
+const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsShowcaseSection"));
+const ResultsSection = lazy(() => import("@/components/sections/ResultsSection"));
 const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
-const DeliverablesSection = lazy(() => import("@/components/sections/DeliverablesSection"));
 const SelectivitySection = lazy(() => import("@/components/sections/SelectivitySection"));
 const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
 const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
-const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
 
 const SectionLoader = memo(() => (
   <div className="min-h-[100px] flex items-center justify-center">
@@ -78,22 +76,10 @@ const Index = () => {
         {/* 3. Authority */}
         <AnimatedSection><AuthoritySection /></AnimatedSection>
         
-        {/* 4. The Offer */}
-        <AnimatedSection><TheOfferSection /></AnimatedSection>
+        {/* 4. Calendly Embed — early booking for warm traffic */}
+        <CalendlySection />
         
-        {/* 5. Cost of Everything Else */}
-        <AnimatedSection><CostOfAlternativesSection /></AnimatedSection>
-        
-        {/* 6. Selectivity */}
-        <AnimatedSection><SelectivitySection /></AnimatedSection>
-        
-        {/* 7. Brands Showcase */}
-        <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
-        
-        {/* 8. Results */}
-        <AnimatedSection><ResultsSection /></AnimatedSection>
-        
-        {/* 9. Video Testimonials */}
+        {/* 5. Video Testimonials */}
         <AnimatedSection>
           <VideoTestimonialsSection
             videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
@@ -102,35 +88,42 @@ const Index = () => {
           />
         </AnimatedSection>
         
-        {/* 10. Written Testimonials */}
+        {/* 6. Written Testimonials + CTA */}
         <AnimatedSection><FourTestimonialsSection /></AnimatedSection>
         
-        {/* 11. How It Works */}
+        {/* 7. The Offer */}
+        <AnimatedSection><TheOfferSection /></AnimatedSection>
+        
+        {/* 8. How It Works (condensed) */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
         
-        {/* 12. Content Examples */}
+        {/* 9. Brands Showcase */}
+        <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
+        
+        {/* 10. Results */}
+        <AnimatedSection><ResultsSection /></AnimatedSection>
+        
+        {/* 11. Content Examples (condensed — 3 initial, Show More reveals all 10) */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
             title="Scripted. Shot. Edited. Deployed."
             subtitle="Every asset below was produced by our in-house team and deployed as both organic content and paid ad creative. One team. No handoffs."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
+            initialVisibleCount={3}
           />
         </AnimatedSection>
         
-        {/* 13. What You Get */}
-        <AnimatedSection><DeliverablesSection /></AnimatedSection>
+        {/* 12. Selectivity (condensed) */}
+        <AnimatedSection><SelectivitySection /></AnimatedSection>
         
-        {/* 14. Ad Case Studies */}
+        {/* 13. Ad Case Studies (3 cards) */}
         <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
         
-        {/* 15. Closing CTA */}
+        {/* 14. Closing CTA */}
         <AnimatedSection><ClosingCTASection /></AnimatedSection>
-
-        {/* Calendly Booking — CTA target */}
-        <CalendlySection />
       </Suspense>
       
-      {/* 16. Footer */}
+      {/* 15. Footer */}
       <Footer />
       <MobileFloatingCTA />
     </motion.main>
