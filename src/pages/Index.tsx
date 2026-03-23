@@ -5,6 +5,7 @@ import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import ScrollEngagementHook from "@/components/ScrollEngagementHook";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import HeroSection from "@/components/sections/HeroSection";
+import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
 import Footer from "@/components/Footer";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 
