@@ -14,7 +14,7 @@ const ClosingCTASection = () => {
       id="apply"
       className="relative overflow-hidden"
       style={{
-        padding: '160px 0',
+        padding: 'clamp(80px, 12vw, 160px) 0',
         background: `
           radial-gradient(ellipse 60% 70% at 50% 50%, rgba(185,146,79,0.07) 0%, transparent 65%),
           #0A0906
@@ -40,7 +40,7 @@ const ClosingCTASection = () => {
           <div className="w-12 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(185,146,79,0.3))' }} />
         </div>
 
-        <h2 className="font-serif leading-tight mb-10" style={{ fontSize: '52px', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}>
+        <h2 className="font-serif leading-tight mb-10" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}>
           The practice you want.<br />
           <span className="text-primary">The partner who builds it.</span>
         </h2>
@@ -56,14 +56,14 @@ const ClosingCTASection = () => {
             trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Partnership', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
-          className="inline-block font-sans uppercase transition-all duration-300"
+          className="inline-block font-sans uppercase transition-all duration-300 w-full sm:w-auto text-center"
           style={{
             fontSize: '12px',
             fontWeight: 500,
-            letterSpacing: '0.2em',
+            letterSpacing: '0.18em',
             background: '#B8924F',
             color: '#0A0906',
-            padding: '18px 56px',
+            padding: '18px 40px',
             border: 'none',
             borderRadius: 0,
             boxShadow: '0 0 40px rgba(185,146,79,0.2)',
@@ -87,16 +87,16 @@ const ClosingCTASection = () => {
         </p>
 
         <motion.div
-          className="mt-12 flex items-center justify-center gap-6"
-          style={{ fontSize: '12px', color: 'var(--color-text-subtle)' }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-4 gap-y-1"
+          style={{ fontSize: '11px', color: 'var(--color-text-subtle)' }}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8, ease: APPLE_EASE }}
         >
           <span>$100M+ generated</span>
-          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(185,146,79,0.3)' }} />
+          <span className="w-1 h-1 rounded-full hidden sm:block" style={{ background: 'rgba(185,146,79,0.3)' }} />
           <span>97% retention</span>
-          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(185,146,79,0.3)' }} />
+          <span className="w-1 h-1 rounded-full hidden sm:block" style={{ background: 'rgba(185,146,79,0.3)' }} />
           <span>41+ at 8 figures</span>
         </motion.div>
       </motion.div>

@@ -32,7 +32,7 @@ const ResultsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="relative overflow-hidden" style={{ padding: '120px 0' }}>
+    <section ref={ref} className="relative overflow-hidden" style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent, rgba(185,146,79,0.02), transparent)' }} />
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
@@ -52,7 +52,7 @@ const ResultsSection = () => {
             />
           </div>
           <p className="section-label text-center justify-center mb-4">Results</p>
-          <h2 className="font-serif" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
+          <h2 className="font-serif" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Three practices. One system. Proof.
           </h2>
         </motion.div>

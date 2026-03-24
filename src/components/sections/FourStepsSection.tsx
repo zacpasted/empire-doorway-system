@@ -37,7 +37,7 @@ const FourStepsSection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section ref={ref} style={{ padding: '120px 0' }}>
+    <section ref={ref} style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-5xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
@@ -55,7 +55,7 @@ const FourStepsSection = () => {
             />
           </div>
           <p className="section-label text-center justify-center mb-4">The Process</p>
-          <h2 className="font-serif" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
+          <h2 className="font-serif" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Four phases. Fully managed.
           </h2>
         </motion.div>

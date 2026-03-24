@@ -125,7 +125,7 @@ const WistiaVideoEmbedSection = ({
   useWistiaLoader(visibleVideoIds, { loadOnMount: isVisible });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ padding: '120px 0' }}>
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-6xl mx-auto px-4">
         <CinematicCredentialStrip />
 
@@ -135,7 +135,7 @@ const WistiaVideoEmbedSection = ({
           </p>
           <h2
             className={`font-serif font-bold mb-4 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-            style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}
+            style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}
           >
             Story first. Always.
           </h2>

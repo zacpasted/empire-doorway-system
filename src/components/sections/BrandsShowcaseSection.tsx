@@ -24,12 +24,12 @@ const stackedLines = [
 
 const BrandsShowcaseSection = () => {
   return (
-    <section id="brands-showcase" style={{ padding: '120px 0', background: 'var(--color-surface)' }}>
+    <section id="brands-showcase" style={{ padding: 'clamp(64px, 10vw, 120px) 0', background: 'var(--color-surface)' }}>
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <p className="section-label text-center justify-center mb-4">The Brand</p>
-          <h2 className="font-serif font-bold mb-4" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
+          <h2 className="font-serif font-bold mb-4" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Brand is not decoration. It's direction.
           </h2>
           <p className="font-serif italic max-w-2xl mx-auto" style={{ fontSize: '20px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>

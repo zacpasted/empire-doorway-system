@@ -94,11 +94,11 @@ const AdCaseStudiesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ padding: '120px 0' }}>
+    <section ref={sectionRef} style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="section-label text-center justify-center mb-4">Performance</p>
-          <h2 className="font-serif mb-6" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
+          <h2 className="font-serif mb-6" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Real numbers. Real accounts. No composites.
           </h2>
           <p className="font-sans max-w-xl mx-auto" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>

@@ -22,7 +22,7 @@ const TheOfferSection = () => {
   };
 
   return (
-    <section ref={ref} style={{ padding: '120px 0' }}>
+    <section ref={ref} style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-3xl mx-auto px-4">
         <motion.p
           className="section-label text-center justify-center mb-4"
@@ -35,7 +35,7 @@ const TheOfferSection = () => {
 
         <motion.h2
           className="font-serif text-center leading-tight mb-10"
-          style={{ fontSize: '52px', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}
+          style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3, ease: APPLE_EASE }}
