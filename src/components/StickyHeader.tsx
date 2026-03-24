@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 interface StickyHeaderProps {
