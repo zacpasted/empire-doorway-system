@@ -171,14 +171,16 @@ const HeroSection = () => {
 
           {/* Credential bar */}
           <p className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase font-sans mb-3 md:mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
-            $100M+ Generated · 97% Retention · 30 Practices / Year
+            $1M+ Avg. Annual Growth · 97% Retention · Custom Operating Partner
           </p>
 
-          {/* H1 — 40px on mobile, staggered on desktop */}
-          <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em]">
+          {/* H1 — all caps, three lines */}
+          <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em] uppercase">
             {isMobile ? (
               <span className="block text-[40px] font-bold leading-[1.08]">
-                The practice you want. Built by the team behind the best.
+                {h1Lines.map((line, i) => (
+                  <span key={i} className="block">{line}</span>
+                ))}
               </span>
             ) : (
               <motion.span
@@ -187,21 +189,11 @@ const HeroSection = () => {
                 initial="hidden"
                 animate="visible"
               >
-                {h1Words.map((word, i) => (
-                  <motion.span key={i} className="inline-block mr-[0.3em]" variants={wordChild}>
-                    {word}
+                {h1Lines.map((line, i) => (
+                  <motion.span key={i} className="block" variants={wordChild}>
+                    {line}
                   </motion.span>
                 ))}
-              </motion.span>
-            )}
-            {!isMobile && (
-              <motion.span
-                className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
-                initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
               </motion.span>
             )}
           </h1>
@@ -233,7 +225,12 @@ const HeroSection = () => {
               Apply for Partnership →
             </button>
             <p className="text-[11px] md:text-xs text-muted-foreground/40 mt-2 tracking-wide">
-              30 practices per year · Reviewed within 48 hours · Not all accepted
+              Reviewed within 48 hours · Strategic fit required · Not all accepted
+            </p>
+
+            {/* Subheadline — below microcopy */}
+            <p className="text-sm md:text-base italic text-muted-foreground/70 mt-4 max-w-md mx-auto leading-relaxed text-center">
+              We handle everything outside the chair. Most partners add $500K–$1M+ in aesthetic production annually — while working fewer hours on the business, and more hours on the dentistry they love.
             </p>
 
             {/* Brian Harris quote — desktop only */}
