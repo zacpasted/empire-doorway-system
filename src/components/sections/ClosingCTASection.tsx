@@ -56,14 +56,14 @@ const ClosingCTASection = () => {
             trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Partnership', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
-          className="inline-block font-sans uppercase transition-all duration-300"
+          className="inline-block font-sans uppercase transition-all duration-300 w-full sm:w-auto text-center"
           style={{
             fontSize: '12px',
             fontWeight: 500,
-            letterSpacing: '0.2em',
+            letterSpacing: '0.18em',
             background: '#B8924F',
             color: '#0A0906',
-            padding: '18px 56px',
+            padding: '18px 40px',
             border: 'none',
             borderRadius: 0,
             boxShadow: '0 0 40px rgba(185,146,79,0.2)',
