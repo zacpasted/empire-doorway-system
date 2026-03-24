@@ -186,6 +186,25 @@ button:focus-visible,
     padding-top: calc(var(--section-py, 6rem) * 0.85);
     padding-bottom: calc(var(--section-py, 6rem) * 0.85);
   }
+
+  /* Global mobile text centering */
+  section h1,
+  section h2,
+  section .section-label,
+  section > div > p,
+  section > div > div > p {
+    text-align: center;
+  }
+
+  /* Exceptions: keep left-aligned */
+  blockquote,
+  blockquote p,
+  .testimonial-quote,
+  li,
+  ol p,
+  ul p {
+    text-align: left !important;
+  }
 }
 
 /* Animations */
