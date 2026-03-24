@@ -38,7 +38,7 @@ const ResultsSection = () => {
           transition={{ duration: 0.7 }}
         >
           <p className="section-label text-xs tracking-[0.4em] uppercase text-primary mb-4">Results</p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
+          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
             Three practices. One system. Proof.
           </h2>
         </motion.div>

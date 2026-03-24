@@ -53,7 +53,7 @@ const WistiaVideoEmbedSection = ({
             The Creative
           </p>
           <h2
-            className={`text-2xl md:text-4xl font-serif text-foreground mb-4 transition-all duration-700 delay-100 ${
+            className={`text-[36px] md:text-4xl font-serif text-foreground mb-4 transition-all duration-700 delay-100 leading-tight ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
