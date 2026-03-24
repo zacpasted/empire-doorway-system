@@ -40,7 +40,7 @@ const ClosingCTASection = () => {
           <div className="w-12 h-px" style={{ background: 'linear-gradient(to left, transparent, rgba(185,146,79,0.3))' }} />
         </div>
 
-        <h2 className="font-serif leading-tight mb-10" style={{ fontSize: '52px', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}>
+        <h2 className="font-serif leading-tight mb-10" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}>
           The practice you want.<br />
           <span className="text-primary">The partner who builds it.</span>
         </h2>
