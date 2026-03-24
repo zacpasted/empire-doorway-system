@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
+
 const steps = [
   {
     number: "01",
@@ -31,28 +33,29 @@ const steps = [
 
 const FourStepsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const isMobile = useIsMobile();
 
   return (
-    <section ref={ref} className="py-32 md:py-40">
+    <section ref={ref} style={{ padding: '120px 0' }}>
       <div className="container max-w-5xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.7, ease: APPLE_EASE }}
         >
           <div className="flex justify-center mb-6">
             <motion.div
-              className="w-[40px] h-px bg-primary/40"
+              className="w-[40px] h-px"
+              style={{ background: 'rgba(185,146,79,0.6)' }}
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: APPLE_EASE }}
             />
           </div>
-          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-primary mb-4">The Process</p>
-          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif leading-tight" style={{ color: '#F5F0E8' }}>
+          <p className="section-label text-center justify-center mb-4">The Process</p>
+          <h2 className="font-serif" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Four phases. Fully managed.
           </h2>
         </motion.div>
@@ -62,10 +65,11 @@ const FourStepsSection = () => {
           {/* Connecting line — desktop only */}
           {!isMobile && (
             <motion.div
-              className="absolute top-[52px] left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+              className="absolute left-0 right-0 h-px"
+              style={{ top: '52px', background: 'linear-gradient(to right, transparent, rgba(185,146,79,0.2), transparent)' }}
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 1.2, delay: 0.4 }}
+              transition={{ duration: 1.2, delay: 0.4, ease: APPLE_EASE }}
             />
           )}
 
@@ -76,30 +80,40 @@ const FourStepsSection = () => {
                 className="relative text-center space-y-3"
                 initial={{ opacity: 0, y: isMobile ? 16 : 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + i * 0.15 }}
+                transition={{ duration: 0.6, delay: 0.3 + i * 0.1, ease: APPLE_EASE }}
               >
-                {/* Step number circle */}
-                <div className="mx-auto w-[52px] h-[52px] rounded-full flex items-center justify-center border border-primary/30 mb-4"
-                  style={{ background: 'rgba(185,146,79,0.06)' }}
-                >
-                  <span className="text-sm font-mono text-primary font-medium">{step.number}</span>
+                {/* Ghost step number */}
+                <div className="relative mx-auto w-[52px] h-[52px] flex items-center justify-center mb-4" style={{ borderRadius: '2px' }}>
+                  <span
+                    className="absolute font-serif italic pointer-events-none select-none"
+                    style={{
+                      fontSize: '72px',
+                      color: 'rgba(185,146,79,0.1)',
+                      lineHeight: 1,
+                      top: '-16px',
+                      left: '-8px',
+                    }}
+                  >
+                    {step.number}
+                  </span>
                 </div>
 
-                <p className="text-[9px] tracking-[0.3em] uppercase text-primary/50 font-sans">
+                <p className="font-sans uppercase" style={{ fontSize: '10px', letterSpacing: '0.25em', color: 'rgba(185,146,79,0.5)' }}>
                   {step.timeline}
                 </p>
-                <h3 className="text-lg font-serif" style={{ color: '#F5F0E8' }}>{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px] mx-auto">{step.body}</p>
+                <h3 className="font-serif" style={{ fontSize: '22px', color: 'var(--color-text)', fontStyle: 'italic' }}>{step.title}</h3>
+                <p className="font-sans max-w-[240px] mx-auto" style={{ fontSize: '14px', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>{step.body}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
         <motion.p
-          className="text-center text-muted-foreground mt-14 max-w-xl mx-auto italic text-sm font-serif"
+          className="text-center mt-14 max-w-xl mx-auto font-serif italic"
+          style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.6, delay: 0.9, ease: APPLE_EASE }}
         >
           Your commitment: 15–30 minutes of raw footage per week. Everything else is ours.
         </motion.p>

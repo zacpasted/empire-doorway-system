@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
+const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
+
 const results = [
   {
     name: "Dr. Drew Ballard",
@@ -27,29 +29,30 @@ const results = [
 
 const ResultsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-32 md:py-40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
+    <section ref={ref} className="relative overflow-hidden" style={{ padding: '120px 0' }}>
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent, rgba(185,146,79,0.02), transparent)' }} />
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.7, ease: APPLE_EASE }}
         >
           <div className="flex justify-center mb-6">
             <motion.div
-              className="w-[40px] h-px bg-primary/40"
+              className="w-[40px] h-px"
+              style={{ background: 'rgba(185,146,79,0.6)' }}
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: APPLE_EASE }}
             />
           </div>
-          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-primary mb-4">Results</p>
-          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif leading-tight" style={{ color: '#F5F0E8' }}>
+          <p className="section-label text-center justify-center mb-4">Results</p>
+          <h2 className="font-serif" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Three practices. One system. Proof.
           </h2>
         </motion.div>
@@ -58,26 +61,35 @@ const ResultsSection = () => {
           {results.map((item, index) => (
             <motion.div
               key={item.name}
-              className="flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-sm p-8 md:p-10 transition-all duration-300 hover:border-primary/30 flex flex-col"
+              className="flex-shrink-0 w-[85vw] md:w-auto snap-center p-8 md:p-10 transition-all duration-300 flex flex-col"
               style={{
-                background: 'rgba(185,146,79,0.04)',
-                border: '1px solid rgba(185,146,79,0.12)',
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '2px',
               }}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1, ease: APPLE_EASE }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.3)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-2)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--color-surface)';
+              }}
             >
               {/* Big stat number */}
-              <p className="text-4xl md:text-5xl font-serif font-bold text-primary mb-2 leading-none">
+              <p className="font-serif text-primary mb-2 leading-none" style={{ fontSize: '48px' }}>
                 {item.stat}
               </p>
-              <p className="text-sm text-muted-foreground mb-6">{item.statLabel}</p>
+              <p className="font-sans mb-6" style={{ fontSize: '11px', color: 'var(--color-text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>{item.statLabel}</p>
 
-              <div className="w-full h-px bg-border/30 mb-6" />
+              <div className="w-full h-px mb-6" style={{ background: 'var(--color-border)' }} />
 
-              <p className="text-sm text-primary font-medium mb-1">{item.name}</p>
-              <p className="text-xs text-muted-foreground mb-3">{item.context}</p>
-              <p className="text-sm font-serif italic text-muted-foreground/70 mt-auto">{item.detail}</p>
+              <p className="font-sans text-primary font-medium mb-1" style={{ fontSize: '14px' }}>{item.name}</p>
+              <p className="font-sans mb-3" style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{item.context}</p>
+              <p className="font-serif italic mt-auto" style={{ fontSize: '14px', color: 'var(--color-text-subtle)' }}>{item.detail}</p>
             </motion.div>
           ))}
         </div>
