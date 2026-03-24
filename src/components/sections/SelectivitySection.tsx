@@ -57,7 +57,7 @@ const SelectivitySection = () => {
             If you want a business-in-a-box or a system copied from someone else — this isn't it. That exists. It just doesn't produce this.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            If you want everything built around your specific vision — you're in the right place.
+            If you want everything built around your specific vision — this is exactly what this is for.
           </p>
         </motion.div>
 
