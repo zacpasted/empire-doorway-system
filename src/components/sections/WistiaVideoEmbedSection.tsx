@@ -89,8 +89,11 @@ const PastedStudioCTA = () => (
     >
       Looking for cinematic production without the full partnership? Our studio team is available for select projects.
     </p>
-    <a
-      href="mailto:studio@pasted.studio"
+    <button
+      onClick={() => {
+        trackCTAClick({ ctaId: "pasted-studio-cta", ctaText: "Book a Studio Consultation", section: "content-examples" });
+        document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }}
       className="inline-block font-sans text-[12px] tracking-[0.15em] uppercase px-7 py-3 rounded-sm transition-all duration-200"
       style={{
         color: 'rgba(185,146,79,0.9)',
@@ -100,8 +103,8 @@ const PastedStudioCTA = () => (
       onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(185,146,79,0.08)')}
       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
     >
-      Inquire About PASTED Studio →
-    </a>
+      Book a Studio Consultation →
+    </button>
   </div>
 );
 
