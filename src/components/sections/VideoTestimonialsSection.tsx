@@ -48,7 +48,7 @@ const VideoTestimonialsSection = ({
             className={`font-serif mb-3 transition-all duration-700 delay-100 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
-            style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}
+            style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}
           >
             {title}
           </h2>

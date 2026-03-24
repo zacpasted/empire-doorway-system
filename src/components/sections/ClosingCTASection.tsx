@@ -87,16 +87,16 @@ const ClosingCTASection = () => {
         </p>
 
         <motion.div
-          className="mt-12 flex items-center justify-center gap-6"
-          style={{ fontSize: '12px', color: 'var(--color-text-subtle)' }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-4 gap-y-1"
+          style={{ fontSize: '11px', color: 'var(--color-text-subtle)' }}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8, ease: APPLE_EASE }}
         >
           <span>$100M+ generated</span>
-          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(185,146,79,0.3)' }} />
+          <span className="w-1 h-1 rounded-full hidden sm:block" style={{ background: 'rgba(185,146,79,0.3)' }} />
           <span>97% retention</span>
-          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(185,146,79,0.3)' }} />
+          <span className="w-1 h-1 rounded-full hidden sm:block" style={{ background: 'rgba(185,146,79,0.3)' }} />
           <span>41+ at 8 figures</span>
         </motion.div>
       </motion.div>

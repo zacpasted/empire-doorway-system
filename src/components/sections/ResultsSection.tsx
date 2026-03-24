@@ -52,7 +52,7 @@ const ResultsSection = () => {
             />
           </div>
           <p className="section-label text-center justify-center mb-4">Results</p>
-          <h2 className="font-serif" style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
+          <h2 className="font-serif" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
             Three practices. One system. Proof.
           </h2>
         </motion.div>
