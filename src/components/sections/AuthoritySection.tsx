@@ -37,27 +37,26 @@ const AuthoritySection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
-            <p className="text-primary font-medium mb-4" style={{ textShadow: '0 0 20px rgba(185,146,79,0.3)' }}>
-              Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Drew Ballard. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. SmileTrend.
-            </p>
-            <p>We built these practices from the inside. Not as an agency. As a partner.</p>
-          </motion.div>
+             <p className="text-primary font-medium mb-4" style={{ textShadow: '0 0 20px rgba(185,146,79,0.3)' }}>
+               Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Drew Ballard. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. Dr. Susan Prater. Dr. Michaela Tozzi. Dr. Todd Snyder. SmileTrend.
+             </p>
+           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.9 }}
-          >
-            The $100M+ in aesthetic revenue we've driven comes from our partner accounts. We track every case, every campaign, every result. We own these numbers.
-          </motion.p>
+           <motion.p
+             initial={{ opacity: 0, y: 12 }}
+             animate={isInView ? { opacity: 1, y: 0 } : {}}
+             transition={{ duration: 0.7, delay: 0.9 }}
+           >
+             These are PASTED partners. What they share isn't just recognition — it's the practice behind the brand. The right patients. The right case values. The freedom to work how they want. Drew Ballard works 3 days a week, 9 months a year. That's what this partnership produces.
+           </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 1.1 }}
-          >
-            We take 30 practices per year. Not because we can't take more — because real partnership requires full attention. Thirty is what makes the results possible.
-          </motion.p>
+           <motion.p
+             initial={{ opacity: 0, y: 12 }}
+             animate={isInView ? { opacity: 1, y: 0 } : {}}
+             transition={{ duration: 0.7, delay: 1.1 }}
+           >
+             $100M+ in aesthetic revenue across our partner ecosystem. 97% of partners never leave. 30 spots per year. One might still be yours.
+           </motion.p>
         </div>
       </div>
     </section>
