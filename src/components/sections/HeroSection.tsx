@@ -77,7 +77,15 @@ const MobileHeroCalendly = () => {
       <p className="text-[13px] text-muted-foreground/60 text-center mb-3 font-sans">
         Ready to book? Select a time below.
       </p>
-      <div className="relative rounded-lg overflow-hidden border border-border/30" style={{ minHeight: "600px" }}>
+      <div
+        className="relative rounded-lg overflow-hidden"
+        style={{
+          minHeight: "600px",
+          background: "#0A0A0A",
+          border: "1px solid rgba(185,146,79,0.15)",
+          borderRadius: "4px",
+        }}
+      >
         {!calendlyLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-card/80">
             <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
