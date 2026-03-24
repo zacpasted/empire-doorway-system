@@ -181,10 +181,10 @@ button:focus-visible,
     font-size: 17px;
   }
 
-  /* Fix 8 — Reduce section padding by 15% on mobile */
+  /* Mobile section spacing — 25% increase for luxury breathing room */
   section {
-    padding-top: calc(var(--section-py, 6rem) * 0.85);
-    padding-bottom: calc(var(--section-py, 6rem) * 0.85);
+    padding-top: calc(var(--section-py, 6rem) * 1.05);
+    padding-bottom: calc(var(--section-py, 6rem) * 1.05);
   }
 
   /* Global mobile text centering */
