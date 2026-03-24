@@ -1,5 +1,6 @@
 import { useRef, useState, useMemo, useEffect, memo } from "react";
 import { motion, useInView } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const useCounter = (end: number, duration: number, isInView: boolean, delay: number) => {
   const [count, setCount] = useState(0);
@@ -21,39 +22,59 @@ const useCounter = (end: number, duration: number, isInView: boolean, delay: num
   return count;
 };
 
+const METRICS = [
+  { label: "Aesthetic Revenue", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
+  { label: "Drew Ballard", numValue: 2, prefix: "$", suffix: "M", barWidth: 100 },
+  { label: "Retention", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
+  { label: "Practices/yr", numValue: 30, prefix: "", suffix: "", barWidth: 88 },
+];
+
 const MetricsBar = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isMobile = useIsMobile();
 
-  const metrics = useMemo(() => [
-    { label: "Aesthetic Revenue Generated", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
-    { label: "Practices Scaled to 8+ Figures", numValue: 41, prefix: "", suffix: "", barWidth: 100 },
-    { label: "Avg Revenue Added / Partner", numValue: 500, prefix: "$", suffix: "K+", barWidth: 88 },
-    { label: "Client Retention Since 2019", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
-  ], []);
+  // Mobile: compact horizontal trust strip
+  if (isMobile) {
+    return (
+      <div ref={ref} className="max-w-md mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-sans">
+          {METRICS.map((m, i) => (
+            <span key={m.label} className="whitespace-nowrap">
+              <span className="text-primary font-bold">{m.prefix}{m.numValue}{m.suffix}</span>
+              <span style={{ color: 'rgba(245,240,232,0.5)' }}> {m.label}</span>
+              {i < METRICS.length - 1 && <span style={{ color: 'rgba(245,240,232,0.2)' }}> ·</span>}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
+  // Desktop: 4-column grid with counters and progress bars
   return (
     <div ref={ref} className="max-w-3xl mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        {metrics.map((metric, index) => {
+      <div className="grid grid-cols-4 gap-6">
+        {METRICS.map((metric, index) => {
           const count = useCounter(metric.numValue, 1.8, isInView, 0.15 * index);
           return (
             <motion.div
               key={metric.label}
-              className="relative py-3 md:py-0"
+              className="relative"
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: index * 0.15 }}
             >
               <motion.div
-                className="text-[40px] md:text-2xl font-serif font-bold text-foreground mb-0.5 leading-none"
+                className="text-2xl font-serif font-bold mb-0.5 leading-none"
+                style={{ color: '#F5F0E8' }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.1 + index * 0.15 }}
               >
                 {metric.prefix}{count}{metric.suffix}
               </motion.div>
-              <p className="text-[11px] md:text-[10px] uppercase tracking-[0.12em] md:tracking-wider text-muted-foreground/60 mb-1.5">
+              <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(245,240,232,0.45)' }}>
                 {metric.label}
               </p>
               <div className="h-0.5 bg-border/30 rounded-full overflow-hidden">

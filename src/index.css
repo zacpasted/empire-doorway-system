@@ -33,10 +33,10 @@
   :root {
     /* Dark luxury palette - matching getpasted.com */
     --background: 0 0% 4%;
-    --foreground: 40 20% 95%;
+    --foreground: 39 33% 94%;
 
     --card: 0 0% 7%;
-    --card-foreground: 40 20% 95%;
+    --card-foreground: 39 33% 94%;
 
     --popover: 0 0% 6%;
     --popover-foreground: 40 20% 95%;
@@ -157,17 +157,17 @@ button:focus-visible,
 
 /* ===== MOBILE TYPOGRAPHY OVERRIDES (max-width 768px) ===== */
 @media (max-width: 768px) {
-  /* Fix 2 — Mobile typography scale */
+  /* Mobile H2 — clear secondary level */
   h2 {
-    font-size: 36px !important;
-    line-height: 1.12;
+    font-size: 34px !important;
+    line-height: 1.15;
   }
 
-  /* Fix 3 — Section labels: larger + more tracking */
+  /* Section labels — whisper level */
   .section-label {
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.28em;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   /* Fix 2 — Body paragraphs */
@@ -181,10 +181,10 @@ button:focus-visible,
     font-size: 17px;
   }
 
-  /* Fix 8 — Reduce section padding by 15% on mobile */
+  /* Mobile section spacing — 25% increase for luxury breathing room */
   section {
-    padding-top: calc(var(--section-py, 6rem) * 0.85);
-    padding-bottom: calc(var(--section-py, 6rem) * 0.85);
+    padding-top: calc(var(--section-py, 6rem) * 1.05);
+    padding-bottom: calc(var(--section-py, 6rem) * 1.05);
   }
 
   /* Global mobile text centering */
