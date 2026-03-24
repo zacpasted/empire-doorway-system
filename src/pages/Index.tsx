@@ -92,8 +92,8 @@ const Index = () => {
         {/* 3. Authority */}
         <AnimatedSection><AuthoritySection /></AnimatedSection>
         
-        {/* Calendly — desktop only */}
-        {!isMobile && <CalendlySection />}
+        {/* 4. Calendly Booking */}
+        <CalendlySection />
 
         <EditorialDivider variant="line" />
         
