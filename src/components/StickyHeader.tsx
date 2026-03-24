@@ -10,7 +10,6 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero (approximately 100vh)
       const heroHeight = window.innerHeight;
       setIsVisible(window.scrollY > heroHeight * 0.8);
     };
@@ -30,30 +29,50 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
         isVisible
           ? "translate-y-0 opacity-100"
           : "-translate-y-full opacity-0 pointer-events-none"
       }`}
+      style={{
+        height: '64px',
+        background: isVisible ? 'rgba(10, 9, 6, 0.92)' : 'transparent',
+        backdropFilter: isVisible ? 'blur(24px)' : 'none',
+        borderBottom: isVisible ? '1px solid var(--color-border)' : '1px solid transparent',
+      }}
     >
-      <div className="bg-background/90 backdrop-blur-xl border-b border-primary/10">
-        <div className="container max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-[13px] tracking-[0.25em] uppercase text-foreground font-semibold font-display">
-              PASTED
-            </span>
-            <span className="hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
-              Private Growth Partnership
-            </span>
-          </div>
-
-           <button
-            onClick={handleClick}
-            className="px-5 py-2 bg-primary text-primary-foreground text-[11px] tracking-[0.2em] uppercase font-semibold rounded-sm transition-all duration-200 hover:bg-primary/90 active:scale-[0.98]"
-          >
-            APPLY FOR PARTNERSHIP →
-          </button>
+      <div className="container max-w-6xl mx-auto px-4 md:px-12 h-full flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <span className="font-display tracking-[0.3em] uppercase" style={{ fontSize: '18px', color: 'var(--color-text)' }}>
+            PASTED
+          </span>
+          <span className="hidden sm:inline font-sans uppercase" style={{ fontSize: '10px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}>
+            Private Growth Partnership
+          </span>
         </div>
+
+        <button
+          onClick={handleClick}
+          className="font-sans uppercase transition-all duration-300"
+          style={{
+            fontSize: '12px',
+            fontWeight: 500,
+            letterSpacing: '0.18em',
+            background: '#B8924F',
+            color: '#0A0906',
+            padding: '10px 24px',
+            border: 'none',
+            borderRadius: 0,
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = '#B8924F';
+          }}
+        >
+          APPLY FOR PARTNERSHIP →
+        </button>
       </div>
     </header>
   );
