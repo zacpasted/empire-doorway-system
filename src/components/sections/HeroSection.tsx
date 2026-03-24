@@ -206,11 +206,6 @@ const HeroSection = () => {
             )}
           </h1>
 
-          {/* Single stat line — 16px gap below H1, 20px before CTA */}
-          <p className="text-[13px] tracking-[0.15em] uppercase text-primary/80 font-medium mb-5 md:hidden">
-            $100M+ in aesthetic revenue generated
-          </p>
-
           {/* Desktop: community significance + names */}
           <div className="hidden md:block">
             <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground/50 mb-2">
