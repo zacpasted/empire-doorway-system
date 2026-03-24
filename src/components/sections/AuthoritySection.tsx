@@ -19,30 +19,33 @@ const AuthoritySection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          The Only Partner Like This <span className="text-muted-foreground/60 text-xs tracking-[0.2em]">· $100M+ Driven</span>
+          The Global Standard
         </motion.p>
         
         <motion.h2
-          className="text-[28px] md:text-4xl lg:text-5xl font-serif text-foreground text-center mb-16 leading-[1.2] md:leading-tight"
+          className="text-[32px] md:text-4xl lg:text-5xl font-serif text-foreground text-center mb-[20px] md:mb-16 leading-[1.2] md:leading-tight"
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          PASTED is the global standard in aesthetic dental branding. The dentists you admire most — they're already here.
+          The dentists you admire most
+          <br />
+          are already here.
         </motion.h2>
 
-        <div className="space-y-5 md:space-y-10 text-lg md:text-xl text-muted-foreground leading-relaxed text-center md:text-left">
+        <div className="space-y-4 md:space-y-10 text-[15px] md:text-xl text-muted-foreground leading-relaxed text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
-             <p className="text-primary font-medium mb-4" style={{ textShadow: '0 0 20px rgba(185,146,79,0.3)' }}>
+             <p className="text-primary font-medium mb-4 md:mb-4" style={{ textShadow: '0 0 20px rgba(185,146,79,0.3)' }}>
                Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Drew Ballard. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. Dr. Susan Prater. Dr. Michaela Tozzi. Dr. Todd Snyder. SmileTrend.
              </p>
            </motion.div>
 
            <motion.p
+             className="max-w-none md:max-w-3xl"
              initial={{ opacity: 0, y: 12 }}
              animate={isInView ? { opacity: 1, y: 0 } : {}}
              transition={{ duration: 0.7, delay: 0.9 }}
@@ -51,6 +54,7 @@ const AuthoritySection = () => {
            </motion.p>
 
            <motion.p
+             className="max-w-none md:max-w-3xl"
              initial={{ opacity: 0, y: 12 }}
              animate={isInView ? { opacity: 1, y: 0 } : {}}
              transition={{ duration: 0.7, delay: 1.1 }}
