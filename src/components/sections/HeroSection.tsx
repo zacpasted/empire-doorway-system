@@ -116,7 +116,7 @@ const HeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden pt-6 pb-8 md:py-24 md:min-h-screen"
+      className="relative overflow-hidden pt-4 pb-8 md:pt-[calc(var(--hero-desktop-pt,6rem)-20px)] md:pb-24 md:min-h-screen"
     >
       {/* Background layers */}
       {isMobile ? (
@@ -159,8 +159,8 @@ const HeroSection = () => {
           className="text-center mb-3 md:mb-8"
           style={isMobile ? undefined : { opacity }}
         >
-          {/* Wordmark — mb-4 (16px) on mobile before H1 */}
-          <div className="flex flex-col items-center mb-4 md:mb-6">
+          {/* Wordmark */}
+          <div className="flex flex-col items-center mb-2 md:mb-3">
             <span className="font-display text-lg md:text-lg tracking-[0.15em] uppercase text-foreground">
               PASTED
             </span>
@@ -168,6 +168,11 @@ const HeroSection = () => {
               Where Ordinary Ends
             </span>
           </div>
+
+          {/* Credential bar */}
+          <p className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase font-sans mb-3 md:mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
+            $100M+ Generated · 97% Retention · 30 Practices / Year
+          </p>
 
           {/* H1 — 40px on mobile, staggered on desktop */}
           <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em]">
@@ -200,11 +205,6 @@ const HeroSection = () => {
               </motion.span>
             )}
           </h1>
-
-          {/* Single stat line — 16px gap below H1, 20px before CTA */}
-          <p className="text-[13px] tracking-[0.15em] uppercase text-primary/80 font-medium mb-5 md:hidden">
-            $100M+ in aesthetic revenue generated
-          </p>
 
           {/* Desktop: community significance + names */}
           <div className="hidden md:block">

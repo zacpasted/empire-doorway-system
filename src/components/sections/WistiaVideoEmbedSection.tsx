@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
-import { ChevronDown, Play } from "lucide-react";
+import { Play } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface WistiaVideoEmbedSectionProps {
   title?: string;
@@ -9,6 +10,100 @@ interface WistiaVideoEmbedSectionProps {
   videoIds?: string[];
   initialVisibleCount?: number;
 }
+
+const credentialBrands = [
+  "DISNEY", "PARAMOUNT", "FOUR SEASONS", "YVES SAINT LAURENT",
+  "ACME HOTELS", "LUXURY HOSPITALITY", "EDITORIAL BRANDS", "GLOBAL CAMPAIGNS"
+];
+
+const CinematicCredentialStrip = () => {
+  const isMobile = useIsMobile();
+
+  return (
+    <div className="mb-8">
+      {/* Credential strip */}
+      <div
+        className="w-full flex items-center justify-center md:justify-start gap-3 overflow-hidden"
+        style={{
+          height: isMobile ? 32 : 36,
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+        }}
+      >
+        <span
+          className="shrink-0 font-sans text-[11px] tracking-[0.18em] uppercase"
+          style={{ color: 'rgba(255,255,255,0.5)' }}
+        >
+          Produced For
+        </span>
+
+        {isMobile ? (
+          <span
+            className="font-sans text-[11px] tracking-[0.18em] uppercase truncate"
+            style={{ color: 'rgba(255,255,255,0.5)' }}
+          >
+            {credentialBrands.slice(0, 4).map((b, i) => (
+              <span key={b}>
+                {i > 0 && <span style={{ color: 'rgba(185,146,79,0.6)' }}> · </span>}
+                {b}
+              </span>
+            ))}
+          </span>
+        ) : (
+          <div className="overflow-hidden flex-1 relative">
+            <div className="animate-marquee-credentials whitespace-nowrap">
+              {[...credentialBrands, ...credentialBrands].map((b, i) => (
+                <span
+                  key={i}
+                  className="font-sans text-[11px] tracking-[0.18em] uppercase"
+                  style={{ color: 'rgba(255,255,255,0.5)' }}
+                >
+                  {i > 0 && <span style={{ color: 'rgba(185,146,79,0.6)' }}> · </span>}
+                  {b}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Cinematic positioning line */}
+      <p
+        className="text-[13px] italic text-center mt-4 max-w-xl mx-auto"
+        style={{ color: 'rgba(255,255,255,0.5)' }}
+      >
+        Our in-house cinematic team produces for the world's most demanding brands. Your practice gets the same standard.
+      </p>
+    </div>
+  );
+};
+
+const PastedStudioCTA = () => (
+  <div className="mt-14 pt-10 text-center" style={{ borderTop: '1px solid rgba(185,146,79,0.2)' }}>
+    <p className="text-xs tracking-[0.28em] uppercase text-muted-foreground/60 mb-3 font-sans">
+      PASTED Studio
+    </p>
+    <p
+      className="text-[14px] mx-auto mb-6 max-w-[400px]"
+      style={{ color: 'rgba(255,255,255,0.55)' }}
+    >
+      Looking for cinematic production without the full partnership? Our studio team is available for select projects.
+    </p>
+    <a
+      href="mailto:studio@pasted.studio"
+      className="inline-block font-sans text-[12px] tracking-[0.15em] uppercase px-7 py-3 rounded-sm transition-all duration-200"
+      style={{
+        color: 'rgba(185,146,79,0.9)',
+        border: '1px solid rgba(185,146,79,0.6)',
+        background: 'transparent',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(185,146,79,0.08)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+    >
+      Inquire About PASTED Studio →
+    </a>
+  </div>
+);
 
 const WistiaVideoEmbedSection = ({ 
   title = "See It In Action",
@@ -43,6 +138,9 @@ const WistiaVideoEmbedSection = ({
       className="py-28 md:py-36 bg-background relative overflow-hidden"
     >
       <div className="container max-w-6xl mx-auto px-4">
+        {/* Cinematic Credential Strip */}
+        <CinematicCredentialStrip />
+
         {/* Header */}
         <div className="text-center mb-16">
           <p
@@ -96,7 +194,7 @@ const WistiaVideoEmbedSection = ({
                 </AnimatePresence>
               </div>
 
-              {/* Show More Button — outlined gold style */}
+              {/* Show More Button */}
               {hasMore && !showAll && (
                 <motion.div
                   className="mt-10 flex justify-center"
@@ -136,6 +234,9 @@ const WistiaVideoEmbedSection = ({
             </div>
           )}
         </div>
+
+        {/* PASTED Studio CTA */}
+        <PastedStudioCTA />
       </div>
     </section>
   );

@@ -186,6 +186,25 @@ button:focus-visible,
     padding-top: calc(var(--section-py, 6rem) * 0.85);
     padding-bottom: calc(var(--section-py, 6rem) * 0.85);
   }
+
+  /* Global mobile text centering */
+  section h1,
+  section h2,
+  section .section-label,
+  section > div > p,
+  section > div > div > p {
+    text-align: center;
+  }
+
+  /* Exceptions: keep left-aligned */
+  blockquote,
+  blockquote p,
+  .testimonial-quote,
+  li,
+  ol p,
+  ul p {
+    text-align: left !important;
+  }
 }
 
 /* Animations */
@@ -241,6 +260,15 @@ button:focus-visible,
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee-credentials {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-credentials {
+  animation: marquee-credentials 25s linear infinite;
 }
 
 /* Staggered animation delays */
