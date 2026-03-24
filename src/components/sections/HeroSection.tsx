@@ -69,8 +69,8 @@ const HeroSection = () => {
           </div>
 
           {/* Element 2 — Credential strip */}
-          <p className="text-[9px] tracking-[0.2em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.65)' }}>
-            $1M+ Avg. Growth · 97% Retention
+          <p className="text-[10px] tracking-[0.22em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.8)' }}>
+            Your Clinical Standard Exceeds Your Market Position.
           </p>
 
           {/* Element 3 — H1 (THE DOMINANT ELEMENT) */}
