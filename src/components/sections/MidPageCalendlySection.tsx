@@ -89,7 +89,7 @@ const MidPageCalendlySection = () => {
             {isInView && (
               <div
                 className={`calendly-inline-widget transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
-                data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E"
+                data-url="https://calendly.com/getpasted/pasted-partner-discovery?background_color=1a1a1a&text_color=ffffff&primary_color=e0c679"
                 style={{ minWidth: "320px", height: "700px" }}
               />
             )}
