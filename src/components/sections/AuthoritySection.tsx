@@ -28,7 +28,7 @@ const AuthoritySection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          We built the brands you already follow.
+          Look at your Instagram right now. The cosmetic dentists you follow, respect, and compare yourself to — many of them are in this partnership. This is where that level gets built.
         </motion.h2>
 
         <div className="space-y-10 text-lg md:text-xl text-muted-foreground leading-relaxed">
