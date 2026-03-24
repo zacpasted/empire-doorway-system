@@ -163,11 +163,11 @@ button:focus-visible,
     line-height: 1.15;
   }
 
-  /* Fix 3 — Section labels: larger + more tracking */
+  /* Section labels — whisper level */
   .section-label {
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.28em;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   /* Fix 2 — Body paragraphs */
