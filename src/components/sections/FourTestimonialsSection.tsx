@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
+const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
+
 const testimonials = [
   {
     name: "Dr. Marshall Hanson",
@@ -27,7 +29,7 @@ const testimonials = [
 
 const FourTestimonialsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
     trackCTAClick({ ctaId: 'post-testimonials-cta', ctaText: 'Apply for Partnership', section: 'testimonials' });
@@ -35,16 +37,16 @@ const FourTestimonialsSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-28 md:py-36">
+    <section ref={ref} style={{ padding: '120px 0' }}>
       <div className="container max-w-4xl mx-auto px-4">
         <motion.div
           className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.7, ease: APPLE_EASE }}
         >
-          <p className="section-label text-xs tracking-[0.4em] uppercase text-primary mb-4">What They Say</p>
-          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
+          <p className="section-label text-center justify-center mb-4">What They Say</p>
+          <h2 className="font-serif leading-tight" style={{ fontSize: '34px', color: 'var(--color-text)' }}>
             From the dentists who've been through it.
           </h2>
         </motion.div>
@@ -53,27 +55,29 @@ const FourTestimonialsSection = () => {
           {testimonials.map((t, i) => (
             <motion.blockquote
               key={t.name}
-              className="relative border-l-[3px] border-primary/30 pl-6 md:pl-8"
+              className="relative pl-6 md:pl-8"
               style={{
+                borderLeft: '3px solid rgba(185,146,79,0.5)',
                 background: 'linear-gradient(to right, rgba(185,146,79,0.04) 0%, transparent 40%)',
               }}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.65, delay: 0.2 + i * 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: APPLE_EASE }}
             >
               {/* Decorative quote mark */}
               <span
-                className="absolute -left-3 -top-2 font-serif text-[72px] leading-none text-primary/15 pointer-events-none select-none"
+                className="absolute -left-3 font-serif italic pointer-events-none select-none"
+                style={{ top: '24px', fontSize: '80px', lineHeight: '0.8', color: 'rgba(185,146,79,0.12)' }}
                 aria-hidden="true"
               >
                 "
               </span>
-              <p className="text-lg md:text-xl text-foreground/90 leading-relaxed italic mb-4 py-4">
+              <p className="font-serif italic py-4" style={{ fontSize: '18px', color: 'var(--color-text)', lineHeight: '1.75', opacity: 0.9 }}>
                 "{t.quote}"
               </p>
               <footer className="pb-4">
-                <p className="text-sm font-medium text-foreground">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.role}</p>
+                <p className="font-sans font-medium" style={{ fontSize: '13px', color: 'var(--color-text)' }}>{t.name}</p>
+                <p className="font-sans" style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{t.role}</p>
               </footer>
             </motion.blockquote>
           ))}
@@ -84,19 +88,34 @@ const FourTestimonialsSection = () => {
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.8, ease: APPLE_EASE }}
         >
           <button
             onClick={handleCTA}
-            className="inline-block text-sm tracking-[0.3em] uppercase text-primary-foreground bg-primary px-12 py-5 hover:bg-primary/90 transition-colors duration-300"
+            className="inline-block font-sans uppercase transition-all duration-300"
+            style={{
+              fontSize: '12px',
+              fontWeight: 500,
+              letterSpacing: '0.2em',
+              background: '#B8924F',
+              color: '#0A0906',
+              padding: '18px 40px',
+              border: 'none',
+              borderRadius: 0,
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
+              (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 40px rgba(185,146,79,0.25)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.background = '#B8924F';
+              (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+            }}
           >
             Apply for Partnership →
           </button>
-          <p className="text-sm text-muted-foreground mt-4">
+          <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
             30 practices per year · Reviewed within 48 hours · Not all accepted
-          </p>
-          <p className="text-xs text-muted-foreground/50 mt-2 italic">
-            Trusted by 100+ elite cosmetic dentists. 97% client retention since 2019.
           </p>
         </motion.div>
       </div>

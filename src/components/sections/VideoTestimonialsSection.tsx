@@ -31,45 +31,51 @@ const VideoTestimonialsSection = ({
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-34 bg-background relative overflow-hidden"
+      className="relative overflow-hidden"
+      style={{ padding: '120px 0' }}
     >
       <div className="container max-w-5xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <p
-            className={`section-label text-xs tracking-[0.4em] uppercase text-muted-foreground/60 mb-3 transition-all duration-700 ${
+            className={`section-label text-center justify-center mb-3 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
             Partner Testimonials
           </p>
           <h2
-            className={`text-[36px] md:text-3xl font-serif text-foreground mb-3 transition-all duration-700 delay-100 leading-tight ${
+            className={`font-serif mb-3 transition-all duration-700 delay-100 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
+            style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}
           >
             {title}
           </h2>
           <p
-            className={`text-muted-foreground max-w-md mx-auto text-sm transition-all duration-700 delay-200 ${
+            className={`font-serif italic max-w-md mx-auto transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
+            style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}
           >
             {subtitle}
           </p>
         </div>
 
-        {/* 3-video grid with staggered entrance and hover */}
+        {/* 3-video grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {videoIds.map((videoId, index) => (
             <div
               key={videoId}
-              className={`relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16] transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 border border-transparent ${
+              className={`relative overflow-hidden aspect-[9/16] transition-all duration-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{
                 transitionDelay: isVisible ? `${index * 150}ms` : '0ms',
                 transitionDuration: '600ms',
+                borderRadius: '2px',
+                border: '1px solid var(--color-border)',
+                background: 'var(--color-surface)',
               }}
             >
               <style>{getWistiaPlaceholderStyles(videoId, "177.78%")}</style>
@@ -79,14 +85,14 @@ const VideoTestimonialsSection = ({
           ))}
         </div>
 
-        {/* Bridge quote — gold em dash */}
+        {/* Bridge quote */}
         <p
-          className={`text-center text-lg md:text-xl font-serif italic text-foreground/80 mt-10 max-w-2xl mx-auto transition-all duration-700 ${
+          className={`text-center font-serif italic mt-10 max-w-2xl mx-auto transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
-          style={{ transitionDelay: isVisible ? '500ms' : '0ms' }}
+          style={{ transitionDelay: isVisible ? '500ms' : '0ms', fontSize: '18px', color: 'var(--color-text)', lineHeight: '1.75', opacity: 0.8 }}
         >
-          "If a doctor asks who they should trust with their brand, this is the answer." <span className="text-primary not-italic text-sm"><span className="text-primary">—</span> Dr. Brian Harris</span>
+          "If a doctor asks who they should trust with their brand, this is the answer." <span className="text-primary not-italic" style={{ fontSize: '13px' }}><span className="text-primary">—</span> Dr. Brian Harris</span>
         </p>
       </div>
     </section>

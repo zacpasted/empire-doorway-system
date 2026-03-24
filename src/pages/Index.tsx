@@ -8,7 +8,12 @@ import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
 import EditorialDivider from "@/components/sections/EditorialDivider";
 import Footer from "@/components/Footer";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
+import GrainOverlay from "@/components/GrainOverlay";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import CustomCursor from "@/components/CustomCursor";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
 // Lazy load below-the-fold sections
 const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
@@ -36,7 +41,7 @@ const sectionVariants = {
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }
+    transition: { duration: 0.7, ease: APPLE_EASE }
   }
 };
 
@@ -44,7 +49,7 @@ const AnimatedSection = memo(({ children }: { children: React.ReactNode }) => (
   <motion.div
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: "-100px" }}
+    viewport={{ once: true, margin: "-80px" }}
     variants={sectionVariants}
   >
     {children}
@@ -61,12 +66,18 @@ const Index = () => {
 
   return (
     <motion.main 
-      className="min-h-screen bg-background text-foreground"
+      className="min-h-screen"
+      style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <title>PASTED Partnership | $500K–$1M+ Growth for Aesthetic Dentists</title>
+      
+      {/* Global overlays */}
+      <GrainOverlay />
+      <ScrollProgressBar />
+      <CustomCursor />
       
       <StickyHeader onApplyClick={scrollToForm} />
       <StickyBookingTab />
@@ -84,7 +95,7 @@ const Index = () => {
         {/* Calendly — desktop only */}
         {!isMobile && <CalendlySection />}
 
-        <EditorialDivider variant="diamond" />
+        <EditorialDivider variant="line" />
         
         {/* 5. Video Testimonials */}
         <AnimatedSection>
@@ -106,7 +117,7 @@ const Index = () => {
         {/* 8. How It Works */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
 
-        <EditorialDivider variant="diamond" />
+        <EditorialDivider variant="line" />
         
         {/* 9. Brands Showcase */}
         <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
@@ -114,7 +125,7 @@ const Index = () => {
         {/* 10. Results */}
         <AnimatedSection><ResultsSection /></AnimatedSection>
 
-        <EditorialDivider variant="rule" />
+        <EditorialDivider variant="line" />
         
         {/* 11. Content Examples */}
         <AnimatedSection>

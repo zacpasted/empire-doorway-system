@@ -7,6 +7,8 @@ import ServiceTicker from "@/components/sections/hero/ServiceTicker";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
+const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
+
 const wordStagger = {
   hidden: {},
   visible: {
@@ -15,12 +17,12 @@ const wordStagger = {
 };
 
 const wordChild = {
-  hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
+    transition: { duration: 0.5, ease: APPLE_EASE },
   },
 };
 
@@ -42,45 +44,43 @@ const HeroSection = () => {
     document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
+  const heroBg = `
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(185,146,79,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 90% 90%, rgba(185,146,79,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 50% at 10% 60%, rgba(185,146,79,0.03) 0%, transparent 50%),
+    #0A0906
+  `;
+
   if (isMobile) {
     return (
       <section ref={sectionRef} className="relative overflow-hidden pt-6 pb-0">
-        {/* Background */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(ellipse 40% 40% at 80% 80%, rgba(185,146,79,0.04) 0%, transparent 60%),
-              radial-gradient(ellipse 80% 60% at 50% 0%, rgba(185,146,79,0.06) 0%, transparent 70%),
-              #0A0A0A
-            `,
-          }}
-        />
+        <div className="absolute inset-0" style={{ background: heroBg }} />
 
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
-
-          {/* Element 3 — H1 (THE DOMINANT ELEMENT) */}
+          {/* H1 */}
           <h1
             className="font-serif font-bold text-center uppercase mb-2"
             style={{
-              fontSize: '40px',
-              lineHeight: '1.05',
+              fontSize: '44px',
+              lineHeight: '1.0',
               letterSpacing: '-0.02em',
+              color: 'var(--color-text)',
             }}
           >
-            <span className="block" style={{ color: '#F5F0E8' }}>THE PRACTICE</span>
+            <span className="block">THE PRACTICE</span>
             <span className="block text-primary">YOU WANT.</span>
-            <span className="block" style={{ color: '#F5F0E8' }}>BUILT BY THE BEST</span>
+            <span className="block">BUILT BY THE BEST</span>
             <span className="block text-primary">IN THE WORLD.</span>
           </h1>
 
-          {/* Element 4 — Subheadline */}
+          {/* Subheadline */}
           <p
             className="font-serif italic text-center mx-auto max-w-[340px]"
             style={{
-              fontSize: '15px',
-              color: 'rgba(245,240,232,0.55)',
+              fontSize: '16px',
+              color: 'var(--color-text-muted)',
               marginBottom: '24px',
+              lineHeight: '1.3',
             }}
           >
             Brand. Content. Ads. Systems.<br />
@@ -88,28 +88,32 @@ const HeroSection = () => {
             30 spots open annually.
           </p>
 
-          {/* Element 5 — CTA button */}
+          {/* CTA button — square corners */}
           <button
             onClick={handleCTA}
-            className="w-full bg-primary text-primary-foreground font-sans uppercase tracking-[0.2em] rounded-sm transition-all duration-200 active:scale-[0.98]"
-            style={{ height: '54px', fontSize: '12px' }}
+            className="w-full font-sans uppercase tracking-[0.2em] transition-all duration-300 active:scale-[0.98]"
+            style={{
+              height: '56px',
+              fontSize: '12px',
+              fontWeight: 500,
+              background: '#B8924F',
+              color: '#0A0906',
+              border: 'none',
+              borderRadius: 0,
+            }}
           >
             Apply for Partnership →
           </button>
 
-          {/* Element 6 — Microcopy */}
-          <p className="text-[10px] text-center mt-2.5 tracking-wide" style={{ color: 'rgba(245,240,232,0.35)', marginBottom: '32px' }}>
+          {/* Microcopy */}
+          <p className="text-[10px] text-center mt-2.5 tracking-wide" style={{ color: 'var(--color-text-subtle)', marginBottom: '32px' }}>
             Reviewed within 48 hours · Strategic fit required · Not all accepted
           </p>
 
-          {/* Below fold: Metrics → Logos → Video → Ticker */}
-          <div className="mb-4 mt-2">
-            <MetricsBar />
-          </div>
+          {/* Below fold */}
+          <div className="mb-4 mt-2"><MetricsBar /></div>
           <LogoMarquee />
-          <div className="mb-3">
-            <VideoPlayer />
-          </div>
+          <div className="mb-3"><VideoPlayer /></div>
           <ServiceTicker />
         </div>
       </section>
@@ -122,18 +126,7 @@ const HeroSection = () => {
       ref={sectionRef}
       className="relative overflow-hidden pt-4 pb-8 md:pt-[calc(var(--hero-desktop-pt,6rem)-20px)] md:pb-24 md:min-h-screen"
     >
-      {/* Background layers */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          y: backgroundY,
-          background: `
-            radial-gradient(ellipse 40% 40% at 80% 80%, rgba(185,146,79,0.04) 0%, transparent 60%),
-            radial-gradient(ellipse 80% 60% at 50% 0%, rgba(185,146,79,0.06) 0%, transparent 70%),
-            #0A0A0A
-          `,
-        }}
-      />
+      <motion.div className="absolute inset-0" style={{ y: backgroundY, background: heroBg }} />
       <motion.div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -144,15 +137,14 @@ const HeroSection = () => {
 
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         <motion.div className="text-center mb-8" style={{ opacity }}>
-
           {/* H1 — 72px desktop */}
           <h1
             className="font-serif font-bold mb-5 uppercase"
             style={{
               fontSize: '72px',
-              lineHeight: '1.05',
+              lineHeight: '1.0',
               letterSpacing: '-0.02em',
-              color: '#F5F0E8',
+              color: 'var(--color-text)',
             }}
           >
             <motion.span className="block" variants={wordStagger} initial="hidden" animate="visible">
@@ -162,11 +154,11 @@ const HeroSection = () => {
             </motion.span>
           </h1>
 
-          {/* Community significance + names */}
-          <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ color: 'rgba(245,240,232,0.4)' }}>
+          {/* Community names */}
+          <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ color: 'var(--color-text-subtle)' }}>
             The dentists you already follow chose PASTED.
           </p>
-          <div className="flex items-center justify-center gap-1.5 text-xs mb-3 flex-wrap" style={{ color: 'rgba(245,240,232,0.5)' }}>
+          <div className="flex items-center justify-center gap-1.5 text-xs mb-3 flex-wrap" style={{ color: 'var(--color-text-muted)' }}>
             <span className="text-primary font-semibold">Dr. Jon Marashi</span>
             <span>·</span>
             <span className="text-primary font-semibold">Dr. Brian Harris</span>
@@ -178,48 +170,56 @@ const HeroSection = () => {
             <span>97% retention</span>
           </div>
 
-          {/* CTA */}
+          {/* CTA — square corners */}
           <div>
             <button
               onClick={handleCTA}
-              className="md:px-12 py-3 bg-primary text-primary-foreground font-sans uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
-              style={{ fontSize: '13px', letterSpacing: '0.2em' }}
+              className="md:px-12 py-3 font-sans uppercase transition-all duration-300 active:scale-[0.98]"
+              style={{
+                fontSize: '12px',
+                fontWeight: 500,
+                letterSpacing: '0.2em',
+                background: '#B8924F',
+                color: '#0A0906',
+                border: 'none',
+                borderRadius: 0,
+                padding: '18px 40px',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 40px rgba(185,146,79,0.25)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = '#B8924F';
+                (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                (e.currentTarget as HTMLElement).style.transform = 'none';
+              }}
             >
               Apply for Partnership →
             </button>
-            <p className="text-xs mt-2 tracking-wide" style={{ color: 'rgba(245,240,232,0.35)' }}>
+            <p className="text-xs mt-2 tracking-wide" style={{ color: 'var(--color-text-subtle)' }}>
               Reviewed within 48 hours · Strategic fit required · Not all accepted
             </p>
 
             {/* Subheadline */}
-            <p className="font-serif italic mt-4 max-w-md mx-auto leading-relaxed text-center" style={{ fontSize: '20px', color: 'rgba(245,240,232,0.55)' }}>
+            <p className="font-serif italic mt-4 max-w-md mx-auto leading-relaxed text-center" style={{ fontSize: '20px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>
               We handle everything outside the chair. Most partners add $500K–$1M+ in aesthetic production annually — while working fewer hours on the business, and more hours on the dentistry they love.
             </p>
 
             {/* Brian Harris quote */}
-            <p className="text-sm italic mt-3 max-w-md mx-auto leading-relaxed" style={{ color: 'rgba(245,240,232,0.4)' }}>
+            <p className="text-sm italic mt-3 max-w-md mx-auto" style={{ color: 'var(--color-text-muted)', lineHeight: '1.75' }}>
               "If a doctor asks who they should trust with their brand, practice growth, systems, demand… all of the questions every provider has; Pasted is the only answer."
-              <span className="block not-italic font-normal mt-0.5" style={{ color: 'rgba(245,240,232,0.3)' }}>
+              <span className="block not-italic font-normal mt-0.5" style={{ color: 'var(--color-text-subtle)' }}>
                 — Dr. Brian Harris
               </span>
             </p>
           </div>
         </motion.div>
 
-        {/* Metrics Bar */}
-        <div className="mb-10">
-          <MetricsBar />
-        </div>
-
-        {/* Logo Marquee */}
+        <div className="mb-10"><MetricsBar /></div>
         <LogoMarquee />
-
-        {/* VSL Video */}
-        <div className="mb-8">
-          <VideoPlayer />
-        </div>
-
-        {/* Service Ticker */}
+        <div className="mb-8"><VideoPlayer /></div>
         <ServiceTicker />
       </div>
 
