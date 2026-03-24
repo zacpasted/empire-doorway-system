@@ -4,6 +4,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import LogoMarquee from "@/components/sections/hero/LogoMarquee";
 import MetricsBar from "@/components/sections/hero/MetricsBar";
 import ServiceTicker from "@/components/sections/hero/ServiceTicker";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
@@ -26,7 +27,9 @@ const wordChild = {
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
+  // Parallax only on desktop — skip scroll tracking on mobile for perf
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -45,29 +48,47 @@ const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen py-6 md:py-24 overflow-hidden">
-      {/* Parallax background layers */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          y: backgroundY,
-          background: `
-            radial-gradient(ellipse 40% 40% at 80% 80%, rgba(185,146,79,0.04) 0%, transparent 60%),
-            radial-gradient(ellipse 80% 60% at 50% 0%, rgba(185,146,79,0.06) 0%, transparent 70%),
-            #0A0A0A
-          `,
-        }}
-      />
-      <motion.div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          y: textureY,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* Background layers — static on mobile, parallax on desktop */}
+      {isMobile ? (
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 40% 40% at 80% 80%, rgba(185,146,79,0.04) 0%, transparent 60%),
+              radial-gradient(ellipse 80% 60% at 50% 0%, rgba(185,146,79,0.06) 0%, transparent 70%),
+              #0A0A0A
+            `,
+          }}
+        />
+      ) : (
+        <>
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              y: backgroundY,
+              background: `
+                radial-gradient(ellipse 40% 40% at 80% 80%, rgba(185,146,79,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(185,146,79,0.06) 0%, transparent 70%),
+                #0A0A0A
+              `,
+            }}
+          />
+          <motion.div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              y: textureY,
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            }}
+          />
+        </>
+      )}
 
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
-        {/* Primary Headline */}
-        <motion.div className="text-center mb-3 md:mb-8" style={{ opacity }}>
+        {/* Primary Headline — instant on mobile, staggered on desktop */}
+        <motion.div
+          className="text-center mb-3 md:mb-8"
+          style={isMobile ? undefined : { opacity }}
+        >
           <div className="flex flex-col items-center mb-2 md:mb-6">
             <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
               PASTED
@@ -78,26 +99,40 @@ const HeroSection = () => {
           </div>
 
           <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
-            <motion.span
-              className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold"
-              variants={wordStagger}
-              initial="hidden"
-              animate="visible"
-            >
-              {h1Words.map((word, i) => (
-                <motion.span key={i} className="inline-block mr-[0.3em]" variants={wordChild}>
-                  {word}
-                </motion.span>
-              ))}
-            </motion.span>
-            <motion.span
-              className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
-              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
-            </motion.span>
+            {isMobile ? (
+              /* Mobile: instant render — no animation delay */
+              <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
+                The practice you want. Built by the team behind the best.
+              </span>
+            ) : (
+              /* Desktop: word-by-word stagger */
+              <motion.span
+                className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold"
+                variants={wordStagger}
+                initial="hidden"
+                animate="visible"
+              >
+                {h1Words.map((word, i) => (
+                  <motion.span key={i} className="inline-block mr-[0.3em]" variants={wordChild}>
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.span>
+            )}
+            {isMobile ? (
+              <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2">
+                We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
+              </span>
+            ) : (
+              <motion.span
+                className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
+                initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
+              </motion.span>
+            )}
           </h1>
 
           {/* Community significance line */}
@@ -154,24 +189,26 @@ const HeroSection = () => {
         <ServiceTicker />
       </div>
 
-      {/* Scroll indicator — thin gold line, pulses once then fades */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-        <div
-          className="w-px h-16"
-          style={{
-            background: 'linear-gradient(to bottom, transparent, rgba(185,146,79,0.5), transparent)',
-            animation: 'scroll-pulse 2s ease-out forwards',
-          }}
-        />
-        <style>{`
-          @keyframes scroll-pulse {
-            0% { opacity: 0; transform: scaleY(0.5); }
-            30% { opacity: 1; transform: scaleY(1); }
-            70% { opacity: 1; transform: scaleY(1); }
-            100% { opacity: 0; transform: scaleY(1); }
-          }
-        `}</style>
-      </div>
+      {/* Scroll indicator — desktop only */}
+      {!isMobile && (
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+          <div
+            className="w-px h-16"
+            style={{
+              background: 'linear-gradient(to bottom, transparent, rgba(185,146,79,0.5), transparent)',
+              animation: 'scroll-pulse 2s ease-out forwards',
+            }}
+          />
+          <style>{`
+            @keyframes scroll-pulse {
+              0% { opacity: 0; transform: scaleY(0.5); }
+              30% { opacity: 1; transform: scaleY(1); }
+              70% { opacity: 1; transform: scaleY(1); }
+              100% { opacity: 0; transform: scaleY(1); }
+            }
+          `}</style>
+        </div>
+      )}
     </section>
   );
 };

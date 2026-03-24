@@ -1,27 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 import { Play } from "lucide-react";
 
 const VideoPlayer = () => {
   const mediaId = "nh7ancshfq";
-  const [isReady, setIsReady] = useState(false);
+  const [activated, setActivated] = useState(false);
   
-  // Use shared Wistia loader for efficient script management
-  useWistiaLoader(mediaId);
+  // Only load Wistia scripts when user taps play — zero cost until interaction
+  useWistiaLoader(mediaId, { loadOnMount: activated });
 
-  // Track when Wistia player is ready
-  useEffect(() => {
-    const checkReady = () => {
-      const player = document.querySelector(`wistia-player[media-id="${mediaId}"]`);
-      if (player) {
-        setIsReady(true);
-      }
-    };
-    
-    checkReady();
-    const timeout = setTimeout(checkReady, 500);
-    
-    return () => clearTimeout(timeout);
+  const handleActivate = useCallback(() => {
+    setActivated(true);
   }, []);
 
   return (
@@ -30,18 +19,23 @@ const VideoPlayer = () => {
         {getWistiaPlaceholderStyles(mediaId, '56.56%')}
       </style>
       
-      {/* Compelling placeholder with social proof */}
-      {!isReady && (
-        <div className="absolute inset-0 z-10 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 flex items-center justify-center">
+      {/* Static placeholder — renders instantly, no JS needed */}
+      {!activated && (
+        <div
+          className="absolute inset-0 z-10 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 flex items-center justify-center"
+          onClick={handleActivate}
+          role="button"
+          aria-label="Play video"
+        >
           {/* Subtle grid pattern */}
           <div className="absolute inset-0 opacity-5" style={{
             backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
             backgroundSize: '20px 20px'
           }} />
 
-          {/* Top badge — builds credibility before play */}
+          {/* Top badge */}
           <div className="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-2.5 py-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-[9px] md:text-[10px] text-white/70 font-medium tracking-wide uppercase">
               How elite practices are built
             </span>
@@ -62,7 +56,7 @@ const VideoPlayer = () => {
             </p>
           </div>
 
-          {/* Bottom social proof strip — mobile only */}
+          {/* Bottom social proof strip */}
           <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 flex items-center justify-center gap-3 text-[8px] md:text-[9px] text-white/40">
             <span>Dr. Brian Harris</span>
             <span>·</span>
@@ -74,8 +68,14 @@ const VideoPlayer = () => {
         </div>
       )}
       
-      {/* @ts-ignore - Wistia custom element */}
-      <wistia-player media-id={mediaId} aspect="1.7679558011049723" autoplay="false" end-video-behavior="default"></wistia-player>
+      {/* @ts-ignore - Wistia custom element — only injected after user taps play */}
+      {activated && (
+        // @ts-ignore
+        <wistia-player media-id={mediaId} aspect="1.7679558011049723" autoplay="true" end-video-behavior="default"></wistia-player>
+      )}
+      
+      {/* Maintain aspect ratio when player not yet loaded */}
+      {!activated && <div style={{ paddingTop: '56.56%' }} />}
     </div>
   );
 };
