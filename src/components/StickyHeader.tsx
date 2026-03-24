@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
-import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 interface StickyHeaderProps {
   onApplyClick?: () => void;
