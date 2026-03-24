@@ -68,12 +68,12 @@ const CinematicCredentialStrip = () => {
         )}
       </div>
 
-      {/* Cinematic positioning line */}
+      {/* Storytelling infrastructure line */}
       <p
-        className="text-[13px] italic text-center mt-4 max-w-xl mx-auto"
-        style={{ color: 'rgba(255,255,255,0.5)' }}
+        className="text-[13px] italic text-center mt-4 max-w-xl mx-auto font-sans"
+        style={{ color: 'rgba(185,146,79,0.7)' }}
       >
-        Our in-house cinematic team produces for the world's most demanding brands. Your practice gets the same standard.
+        This is storytelling as infrastructure. It compounds. It attracts. It closes.
       </p>
     </div>
   );

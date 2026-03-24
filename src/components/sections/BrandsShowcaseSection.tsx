@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { brands } from "@/data/brands";
 import OptimizedImage from "@/components/ui/optimized-image";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import {
   Carousel,
   CarouselContent,
@@ -76,6 +77,41 @@ const BrandsShowcaseSection = () => {
             <CarouselNext className="static translate-y-0" />
           </div>
         </Carousel>
+
+        {/* PASTED Branding CTA */}
+        <div className="mt-14 pt-10 text-center" style={{ borderTop: '1px solid rgba(185,146,79,0.2)' }}>
+          <p className="text-xs tracking-[0.28em] uppercase text-muted-foreground/60 mb-3 font-sans">
+            PASTED Branding
+          </p>
+          <p
+            className="text-[14px] mx-auto mb-6 max-w-[440px]"
+            style={{ color: 'rgba(255,255,255,0.55)' }}
+          >
+            We are the best branding team in the world for aesthetic dental practices. If you want a brand built to the highest standard — not templated, not delegated — this is where that conversation starts.
+          </p>
+          <button
+            onClick={() => {
+              trackCTAClick({ ctaId: "branding_consultation_cta", ctaText: "Book a Branding Consultation", section: "brands-showcase" });
+              document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+            }}
+            className="inline-block font-sans text-[12px] tracking-[0.15em] uppercase px-7 py-3 rounded-sm transition-all duration-200"
+            style={{
+              color: 'rgba(185,146,79,0.9)',
+              border: '1px solid rgba(185,146,79,0.6)',
+              background: 'transparent',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(185,146,79,0.08)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+          >
+            Book a Branding Consultation →
+          </button>
+          <p
+            className="text-[12px] italic text-center mt-4 max-w-sm mx-auto"
+            style={{ color: 'rgba(255,255,255,0.4)' }}
+          >
+            Design, identity, and brand strategy for practices that refuse to look like everyone else.
+          </p>
+        </div>
       </div>
     </section>
   );
