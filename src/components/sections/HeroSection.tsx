@@ -29,7 +29,6 @@ const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
 
-  // Parallax only on desktop — skip scroll tracking on mobile for perf
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -47,7 +46,7 @@ const HeroSection = () => {
   const h1Words = "The practice you want. Built by the team behind the best.".split(" ");
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-6 md:py-24 overflow-hidden">
+    <section ref={sectionRef} className="relative overflow-hidden pt-20 pb-12 md:py-24 md:min-h-screen">
       {/* Background layers — static on mobile, parallax on desktop */}
       {isMobile ? (
         <div
@@ -84,28 +83,28 @@ const HeroSection = () => {
       )}
 
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
-        {/* Primary Headline — instant on mobile, staggered on desktop */}
+        {/* Primary content */}
         <motion.div
           className="text-center mb-3 md:mb-8"
           style={isMobile ? undefined : { opacity }}
         >
+          {/* Wordmark */}
           <div className="flex flex-col items-center mb-2 md:mb-6">
-            <span className="font-display text-base md:text-lg tracking-[0.15em] uppercase text-foreground">
+            <span className="font-display text-lg md:text-lg tracking-[0.15em] uppercase text-foreground">
               PASTED
             </span>
-            <span className="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
+            <span className="text-[11px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
               Private Growth Partnership
             </span>
           </div>
 
-          <h1 className="font-serif text-foreground mb-2 md:mb-5 leading-[1.1] tracking-[-0.01em]">
+          {/* H1 — 48px on mobile, staggered on desktop */}
+          <h1 className="font-serif text-foreground mb-5 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             {isMobile ? (
-              /* Mobile: instant render — no animation delay */
-              <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold">
+              <span className="block text-[48px] font-bold leading-[1.08]">
                 The practice you want. Built by the team behind the best.
               </span>
             ) : (
-              /* Desktop: word-by-word stagger */
               <motion.span
                 className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold"
                 variants={wordStagger}
@@ -119,11 +118,8 @@ const HeroSection = () => {
                 ))}
               </motion.span>
             )}
-            {isMobile ? (
-              <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2">
-                We handle brand, content, ads, and patient conversion for elite cosmetic dentists. You focus on clinical work. We build everything else.
-              </span>
-            ) : (
+            {/* Subheadline — hidden on mobile above fold, visible on desktop */}
+            {!isMobile && (
               <motion.span
                 className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
                 initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
@@ -135,36 +131,43 @@ const HeroSection = () => {
             )}
           </h1>
 
-          {/* Community significance line */}
-          <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground/50 mb-2">
-            The dentists you already follow chose PASTED.
+          {/* Single stat line — mobile only above-fold proof */}
+          <p className="text-[13px] tracking-[0.15em] uppercase text-primary/80 font-medium mb-7 md:hidden">
+            $100M+ in aesthetic revenue generated
           </p>
 
-          {/* Social proof names */}
-          <div className="flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 mb-3 flex-wrap">
-            <span className="text-primary font-semibold">Dr. Jon Marashi</span>
-            <span>·</span>
-            <span className="text-primary font-semibold">Dr. Brian Harris</span>
-            <span>·</span>
-            <span className="text-primary font-semibold">Dr. Marshall Hanson</span>
-            <span>·</span>
-            <span className="text-primary font-semibold">Dr. Drew Ballard</span>
-            <span>·</span>
-            <span>97% retention</span>
+          {/* Desktop: community significance + names */}
+          <div className="hidden md:block">
+            <p className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground/50 mb-2">
+              The dentists you already follow chose PASTED.
+            </p>
+            <div className="flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-muted-foreground/60 mb-3 flex-wrap">
+              <span className="text-primary font-semibold">Dr. Jon Marashi</span>
+              <span>·</span>
+              <span className="text-primary font-semibold">Dr. Brian Harris</span>
+              <span>·</span>
+              <span className="text-primary font-semibold">Dr. Marshall Hanson</span>
+              <span>·</span>
+              <span className="text-primary font-semibold">Dr. Drew Ballard</span>
+              <span>·</span>
+              <span>97% retention</span>
+            </div>
           </div>
 
           {/* CTA button */}
           <div className="mb-3">
             <button
               onClick={handleMobileCTA}
-              className="w-full md:w-auto md:px-12 py-3 bg-primary text-primary-foreground text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
+              className="w-full md:w-auto md:px-12 py-3 bg-primary text-primary-foreground text-sm md:text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
             >
               Apply for Partnership →
             </button>
-            <p className="text-[9px] md:text-xs text-muted-foreground/40 mt-1.5 tracking-wide">
+            <p className="text-[11px] md:text-xs text-muted-foreground/40 mt-2.5 tracking-wide">
               30 practices per year · Reviewed within 48 hours · Not all accepted
             </p>
-            <p className="text-[10px] md:text-sm italic text-muted-foreground/50 mt-3 max-w-md mx-auto leading-relaxed">
+
+            {/* Brian Harris quote — desktop only */}
+            <p className="hidden md:block text-sm italic text-muted-foreground/50 mt-3 max-w-md mx-auto leading-relaxed">
               "If a doctor asks who they should trust with their brand — this is the answer."
               <span className="block not-italic font-normal text-muted-foreground/40 mt-0.5">— Dr. Brian Harris, Celebrity Dentist · Gilbert, AZ</span>
             </p>
@@ -172,13 +175,15 @@ const HeroSection = () => {
 
         </motion.div>
 
-        {/* Logo Marquee */}
-        <LogoMarquee />
-
+        {/* Below-fold mobile content: Metrics → Logo Marquee → VSL → Ticker */}
+        
         {/* Metrics Bar */}
         <div className="mb-4 md:mb-10">
           <MetricsBar />
         </div>
+
+        {/* Logo Marquee */}
+        <LogoMarquee />
 
         {/* VSL Video */}
         <div className="mb-3 md:mb-8">

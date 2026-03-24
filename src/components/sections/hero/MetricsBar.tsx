@@ -40,20 +40,20 @@ const MetricsBar = memo(() => {
           return (
             <motion.div
               key={metric.label}
-              className="relative"
+              className="relative py-3 md:py-0"
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: index * 0.15 }}
             >
               <motion.div
-                className="text-xl md:text-2xl font-serif font-bold text-foreground mb-0.5"
+                className="text-[40px] md:text-2xl font-serif font-bold text-foreground mb-0.5 leading-none"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.1 + index * 0.15 }}
               >
                 {metric.prefix}{count}{metric.suffix}
               </motion.div>
-              <p className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground/60 mb-1.5">
+              <p className="text-[11px] md:text-[10px] uppercase tracking-[0.12em] md:tracking-wider text-muted-foreground/60 mb-1.5">
                 {metric.label}
               </p>
               <div className="h-0.5 bg-border/30 rounded-full overflow-hidden">

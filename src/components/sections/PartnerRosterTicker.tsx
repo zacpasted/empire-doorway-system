@@ -15,7 +15,7 @@ const PartnerRosterTicker = () => {
 
   return (
     <div
-      className="relative py-4 overflow-hidden border-y border-border/30 bg-card/80"
+      className="relative py-4 md:py-4 overflow-hidden border-y border-border/30 bg-card/80"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -35,7 +35,7 @@ const PartnerRosterTicker = () => {
 
       {/* Static label */}
       <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center pl-4 md:pl-6 pr-8">
-        <span className="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-primary font-semibold whitespace-nowrap">
+        <span className="text-[10px] md:text-[10px] tracking-[0.3em] uppercase text-primary font-semibold whitespace-nowrap">
           Partner Roster
         </span>
       </div>
@@ -48,8 +48,8 @@ const PartnerRosterTicker = () => {
           <div key={setIndex} className="flex items-center">
             {ROSTER_ITEMS.map((item) => (
               <span key={`${setIndex}-${item}`} className="flex items-center mx-5 md:mx-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mr-4 flex-shrink-0" />
-                <span className="text-xs md:text-base tracking-wide text-muted-foreground/80 font-medium">
+                <span className="w-2 h-2 md:w-1.5 md:h-1.5 rounded-full bg-primary/50 mr-4 flex-shrink-0" />
+                <span className="text-[15px] md:text-base tracking-wide text-muted-foreground/80 font-medium">
                   {item}
                 </span>
               </span>
