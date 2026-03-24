@@ -29,7 +29,7 @@ const SelectivitySection = () => {
           transition={{ duration: 0.7, ease: APPLE_EASE }}
         >
           <p className="section-label text-center justify-center mb-4">Who This Is For</p>
-          <h2 className="font-serif font-bold leading-tight" style={{ fontSize: '52px', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}>
+          <h2 className="font-serif font-bold leading-tight" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}>
             We start with the life you want.
             <br />
             <span className="text-primary">Then we build the practice to produce it.</span>

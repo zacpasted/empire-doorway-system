@@ -35,7 +35,7 @@ const TheOfferSection = () => {
 
         <motion.h2
           className="font-serif text-center leading-tight mb-10"
-          style={{ fontSize: '52px', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}
+          style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', letterSpacing: '-0.01em', lineHeight: '1.1' }}
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3, ease: APPLE_EASE }}

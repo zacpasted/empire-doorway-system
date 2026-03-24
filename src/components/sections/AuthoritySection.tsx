@@ -21,7 +21,7 @@ const AuthoritySection = () => {
   };
 
   return (
-    <section ref={ref} className="relative overflow-hidden" style={{ padding: '120px 0', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+    <section ref={ref} className="relative overflow-hidden" style={{ padding: 'clamp(64px, 10vw, 120px) 0', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
       <div className="container max-w-3xl mx-auto px-4">
         {/* Gold rule above label */}
         <div className="flex justify-center mb-6">
