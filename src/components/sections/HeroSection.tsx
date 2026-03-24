@@ -224,9 +224,9 @@ const HeroSection = () => {
 
             {/* Brian Harris quote */}
             <p className="text-sm italic mt-3 max-w-md mx-auto leading-relaxed" style={{ color: 'rgba(245,240,232,0.4)' }}>
-              "If a doctor asks who they should trust with their brand — this is the answer."
+              "If a doctor asks who they should trust with their brand, practice growth, systems, demand… all of the questions every provider has; Pasted is the only answer."
               <span className="block not-italic font-normal mt-0.5" style={{ color: 'rgba(245,240,232,0.3)' }}>
-                — Dr. Brian Harris, Celebrity Dentist · Gilbert, AZ
+                — Dr. Brian Harris
               </span>
             </p>
           </div>
