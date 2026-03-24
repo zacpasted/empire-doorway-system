@@ -77,7 +77,7 @@ const HeroSection = () => {
           <h1
             className="font-serif font-bold text-center uppercase mb-2"
             style={{
-              fontSize: '44px',
+              fontSize: '40px',
               lineHeight: '1.05',
               letterSpacing: '-0.02em',
             }}
