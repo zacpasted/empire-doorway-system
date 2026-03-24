@@ -49,12 +49,12 @@ const MobileFloatingCTA = () => {
           <div className="relative px-4 pb-6 pt-4">
             <button
               onClick={handleClick}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary text-primary-foreground font-medium text-base tracking-wide uppercase rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform"
+              className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground font-semibold text-[13px] tracking-[0.2em] uppercase rounded-sm shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform"
             >
               <ArrowUp className="w-4 h-4" />
-              Apply for Partnership
+              APPLY FOR PARTNERSHIP
             </button>
-            <p className="text-center text-xs text-muted-foreground mt-2">
+            <p className="text-center text-[10px] tracking-[0.15em] uppercase text-muted-foreground/50 mt-2">
               30 spots · 48hr review · Not all accepted
             </p>
           </div>

@@ -37,25 +37,23 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
           : "-translate-y-full opacity-0 pointer-events-none"
       }`}
     >
-      <div className="bg-background/80 backdrop-blur-lg border-b border-border/40">
+      <div className="bg-background/90 backdrop-blur-xl border-b border-primary/10">
         <div className="container max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-sm tracking-[0.2em] uppercase text-foreground font-medium">
+            <span className="text-[13px] tracking-[0.25em] uppercase text-foreground font-semibold font-display">
               PASTED
             </span>
-            <span className="hidden sm:inline text-muted-foreground text-sm">
-              Associate to Empire™
+            <span className="hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
+              Private Growth Partnership
             </span>
           </div>
 
-           <Button
-            variant="premium"
-            size="sm"
-            className="rounded-md"
+           <button
             onClick={handleClick}
+            className="px-5 py-2 bg-primary text-primary-foreground text-[11px] tracking-[0.2em] uppercase font-semibold rounded-sm transition-all duration-200 hover:bg-primary/90 active:scale-[0.98]"
           >
-            Apply for Partnership →
-          </Button>
+            APPLY FOR PARTNERSHIP →
+          </button>
         </div>
       </div>
     </header>
