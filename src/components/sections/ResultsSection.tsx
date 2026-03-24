@@ -5,20 +5,23 @@ const results = [
   {
     name: "Dr. Drew Ballard",
     context: "Founder, Halo Veneers · Gilbert, AZ",
-    result: "$0 → $2M in aesthetic case revenue · 18 months",
-    subResult: "Now works 3 days/week, 9 months/year",
+    stat: "$2M",
+    statLabel: "aesthetic revenue · 18 months",
+    detail: "3 days/week · 9 months/year",
   },
   {
     name: "Miami-Based Clinic",
-    context: "Practice overhaul from fragmented growth",
-    result: "$115K → $400K+ monthly revenue · tripled in 12 months",
-    subResult: "Cost per lead fell 80% while lead volume rose 300%",
+    context: "Practice overhaul",
+    stat: "$400K+",
+    statLabel: "monthly revenue · tripled in 12 months",
+    detail: "Cost per lead fell 80%",
   },
   {
     name: "Dr. Alan Clarke",
-    context: "Paste Dental · NHS associate to practice owner",
-    result: "Forbes + NY Post features · Year 1 · O-1 Visa granted",
-    subResult: "From burnout associate to globally recognised authority",
+    context: "Paste Dental · NHS to practice owner",
+    stat: "Forbes",
+    statLabel: "+ NY Post features · Year 1",
+    detail: "O-1 Visa granted",
   },
 ];
 
@@ -27,18 +30,26 @@ const ResultsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 md:py-34 bg-background relative overflow-hidden">
+    <section ref={ref} className="py-32 md:py-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
 
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="section-label text-xs tracking-[0.4em] uppercase text-primary mb-4">Results</p>
-          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
+          <div className="flex justify-center mb-6">
+            <motion.div
+              className="w-[40px] h-px bg-primary/40"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.6 }}
+            />
+          </div>
+          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-primary mb-4">Results</p>
+          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif leading-tight" style={{ color: '#F5F0E8' }}>
             Three practices. One system. Proof.
           </h2>
         </motion.div>
@@ -47,33 +58,29 @@ const ResultsSection = () => {
           {results.map((item, index) => (
             <motion.div
               key={item.name}
-              className="flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl p-6 md:p-8 transition-all duration-300 hover:border-primary/35"
+              className="flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-sm p-8 md:p-10 transition-all duration-300 hover:border-primary/30 flex flex-col"
               style={{
-                background: 'linear-gradient(135deg, rgba(185,146,79,0.05) 0%, transparent 60%)',
+                background: 'rgba(185,146,79,0.04)',
                 border: '1px solid rgba(185,146,79,0.12)',
               }}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
             >
-              <p className="text-sm text-primary font-medium mb-1">{item.name}</p>
-              <p className="text-xs text-muted-foreground mb-4">{item.context}</p>
-              <p className="text-xl md:text-2xl font-serif text-foreground font-bold mb-2 leading-snug">
-                {item.result}
+              {/* Big stat number */}
+              <p className="text-4xl md:text-5xl font-serif font-bold text-primary mb-2 leading-none">
+                {item.stat}
               </p>
-              <p className="text-sm text-muted-foreground/70">{item.subResult}</p>
+              <p className="text-sm text-muted-foreground mb-6">{item.statLabel}</p>
+
+              <div className="w-full h-px bg-border/30 mb-6" />
+
+              <p className="text-sm text-primary font-medium mb-1">{item.name}</p>
+              <p className="text-xs text-muted-foreground mb-3">{item.context}</p>
+              <p className="text-sm font-serif italic text-muted-foreground/70 mt-auto">{item.detail}</p>
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          className="text-center text-muted-foreground mt-10 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-        >
-          Different starting points. Same system. Same direction.
-        </motion.p>
       </div>
     </section>
   );

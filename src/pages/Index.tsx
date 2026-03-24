@@ -5,6 +5,7 @@ import StickyBookingTab from "@/components/StickyBookingTab";
 import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
 import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
+import EditorialDivider from "@/components/sections/EditorialDivider";
 import Footer from "@/components/Footer";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -77,11 +78,13 @@ const Index = () => {
       <PartnerRosterTicker />
       
       <Suspense fallback={<SectionLoader />}>
-        {/* Authority */}
+        {/* 3. Authority */}
         <AnimatedSection><AuthoritySection /></AnimatedSection>
         
-        {/* Calendly — desktop only (mobile has it in the hero) */}
+        {/* Calendly — desktop only */}
         {!isMobile && <CalendlySection />}
+
+        <EditorialDivider variant="diamond" />
         
         {/* 5. Video Testimonials */}
         <AnimatedSection>
@@ -94,18 +97,16 @@ const Index = () => {
         
         {/* 6. Written Testimonials + CTA */}
         <AnimatedSection><FourTestimonialsSection /></AnimatedSection>
-        
-        {/* Divider: Written Testimonials → The Offer */}
-        <div className="section-divider" />
+
+        <EditorialDivider variant="line" />
         
         {/* 7. The Offer */}
         <AnimatedSection><TheOfferSection /></AnimatedSection>
         
-        {/* 8. How It Works (condensed) */}
+        {/* 8. How It Works */}
         <AnimatedSection><FourStepsSection /></AnimatedSection>
 
-        {/* Divider: How It Works → Brands Showcase */}
-        <div className="section-divider" />
+        <EditorialDivider variant="diamond" />
         
         {/* 9. Brands Showcase */}
         <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
@@ -113,8 +114,7 @@ const Index = () => {
         {/* 10. Results */}
         <AnimatedSection><ResultsSection /></AnimatedSection>
 
-        {/* Divider: Results → Content Examples */}
-        <div className="section-divider" />
+        <EditorialDivider variant="rule" />
         
         {/* 11. Content Examples */}
         <AnimatedSection>
@@ -125,6 +125,8 @@ const Index = () => {
             initialVisibleCount={3}
           />
         </AnimatedSection>
+
+        <EditorialDivider variant="line" />
         
         {/* 12. Selectivity */}
         <AnimatedSection><SelectivitySection /></AnimatedSection>
