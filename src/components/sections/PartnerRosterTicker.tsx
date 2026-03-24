@@ -15,7 +15,7 @@ const MOBILE_NAMES = [
   { name: "Dr. Jon Marashi", subtitle: "Celebrity Dentist, LA" },
   { name: "Dr. Brian Harris", subtitle: "Smile Virtual & Smile Sculpt" },
   { name: "Dr. Marshall Hanson", subtitle: "Founder, Marshall Hanson Method" },
-  { name: "Dr. Drew Ballard", subtitle: "Charlotte, NC" },
+  { name: "Dr. Drew Ballard", subtitle: "Gilbert, AZ" },
 ];
 
 const PartnerRosterTicker = () => {
