@@ -23,7 +23,8 @@ const AuthoritySection = () => {
         </motion.p>
         
         <motion.h2
-          className="text-[32px] md:text-4xl lg:text-5xl font-serif text-foreground text-center mb-[20px] md:mb-16 leading-[1.2] md:leading-tight"
+          className="text-[34px] md:text-4xl lg:text-5xl font-serif text-center mb-[20px] md:mb-16 leading-[1.15] md:leading-tight"
+          style={{ color: '#F5F0E8' }}
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
