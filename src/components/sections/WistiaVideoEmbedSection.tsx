@@ -148,25 +148,62 @@ const WistiaVideoEmbedSection = ({
         {/* Header */}
         <div className="text-center mb-16">
           <p
-            className={`section-label text-xs tracking-[0.4em] uppercase text-muted-foreground/60 mb-4 transition-all duration-700 ${
+            className={`font-sans text-[12px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
             The Creative
           </p>
           <h2
-            className={`text-[36px] md:text-4xl font-serif text-foreground mb-4 transition-all duration-700 delay-100 leading-tight ${
+            className={`text-[36px] md:text-[48px] font-serif font-bold text-foreground mb-4 transition-all duration-700 delay-100 leading-tight ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            {title}
+            Story first. Always.
           </h2>
           <p
-            className={`text-muted-foreground max-w-xl mx-auto transition-all duration-700 delay-200 ${
+            className={`font-serif italic text-[18px] md:text-[22px] text-muted-foreground max-w-2xl mx-auto mb-8 transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            {subtitle}
+            Clinical excellence earns respect. Storytelling earns demand.
+          </p>
+
+          {/* Body copy */}
+          <div className="max-w-[680px] mx-auto space-y-6 mb-10 text-center">
+            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+              Aesthetic dentistry is an emotional purchase. Patients aren't comparing prep designs. They're choosing confidence. Identity. Transformation. That decision is shaped long before consultation — through the signals your brand sends.
+            </p>
+            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+              The quality of your content becomes the perceived quality of your work. The way you present becomes the way patients expect to be treated.
+            </p>
+          </div>
+
+          {/* Stacked process lines */}
+          <div className="space-y-3 mb-10">
+            {["Scripted.", "Shot.", "Edited.", "Deployed."].map((line) => (
+              <p key={line} className="font-serif italic text-[20px] md:text-[24px] text-foreground/80 leading-relaxed">
+                {line}
+              </p>
+            ))}
+          </div>
+
+          {/* More body copy */}
+          <div className="max-w-[680px] mx-auto space-y-6 mb-10 text-center">
+            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+              Not as content — but as positioning. Because even a small increase in emotional connection compounds. A one percent increase in trust changes conversion. Conversion changes case value. Case value changes the trajectory of the practice.
+            </p>
+            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+              This is not content production. It's narrative architecture. We don't just show what you do. We show why it matters — and why it's different.
+            </p>
+          </div>
+
+          {/* Closing gold italic line */}
+          <p
+            className="text-[13px] italic text-center max-w-xl mx-auto font-sans"
+            style={{ color: 'rgba(185,146,79,0.7)' }}
+          >
+            When your story elevates, your perceived value follows.
           </p>
         </div>
 
