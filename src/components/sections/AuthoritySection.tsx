@@ -75,8 +75,8 @@ const AuthoritySection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 + i * 0.1, ease: APPLE_EASE }}
             >
-              <p className="font-serif text-primary mb-1" style={{ fontSize: '48px', lineHeight: '1' }}>{stat.value}</p>
-              <p className="font-sans uppercase tracking-[0.15em]" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{stat.label}</p>
+              <p className="font-serif text-primary mb-1" style={{ fontSize: 'clamp(32px, 8vw, 48px)', lineHeight: '1' }}>{stat.value}</p>
+              <p className="font-sans uppercase tracking-[0.15em]" style={{ fontSize: '10px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
