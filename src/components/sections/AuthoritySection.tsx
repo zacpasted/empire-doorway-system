@@ -31,7 +31,7 @@ const AuthoritySection = () => {
           Look at your Instagram right now. The cosmetic dentists you follow, respect, and compare yourself to — many of them are in this partnership. This is where that level gets built.
         </motion.h2>
 
-        <div className="space-y-10 text-lg md:text-xl text-muted-foreground leading-relaxed">
+        <div className="space-y-5 md:space-y-10 text-lg md:text-xl text-muted-foreground leading-relaxed text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
