@@ -165,7 +165,7 @@ const HeroSection = () => {
               PASTED
             </span>
             <span className="text-[11px] md:text-[9px] tracking-[0.4em] uppercase text-muted-foreground/50 mt-0.5 font-sans">
-              Private Growth Partnership
+              Where Ordinary Ends
             </span>
           </div>
 
