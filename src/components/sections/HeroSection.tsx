@@ -90,14 +90,14 @@ const HeroSection = () => {
 
           {/* Element 4 — Subheadline */}
           <p
-            className="font-serif italic text-center mx-auto max-w-[300px]"
+            className="font-serif italic text-center mx-auto max-w-[340px]"
             style={{
               fontSize: '15px',
               color: 'rgba(245,240,232,0.55)',
               marginBottom: '24px',
             }}
           >
-            Built by the team behind the most recognised names in aesthetic dentistry.
+            We run your brand, content, ads, and patient systems — everything outside the chair. Most partners add $500K–$1M+ in the first year. $100M+ in aesthetic case revenue generated. The unrivaled standard in executing growth, demand, systems, and brand in aesthetic dentistry — globally.
           </p>
 
           {/* Element 5 — CTA button */}
