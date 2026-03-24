@@ -6,6 +6,7 @@ import MobileFloatingCTA from "@/components/MobileFloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
 import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
 import Footer from "@/components/Footer";
+import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 
 // Lazy load below-the-fold sections
 const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
@@ -135,6 +136,7 @@ const Index = () => {
       {/* 15. Footer */}
       <Footer />
       <MobileFloatingCTA />
+      <ScrollDepthTracker />
     </motion.main>
   );
 };
