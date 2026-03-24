@@ -30,15 +30,13 @@ const SelectivitySection = () => {
           <p className="font-sans text-[12px] md:text-[11px] tracking-[0.3em] uppercase text-primary mb-4">
             Who This Is For
           </p>
-          <h2 className="text-[36px] md:text-[48px] font-serif font-bold text-foreground leading-tight">
-            Growth is easy.
+          <h2 className="text-[36px] md:text-[48px] font-serif font-bold leading-tight" style={{ color: '#F5F0E8' }}>
+            We start with the life you want.
             <br />
-            Growth with freedom is rare.
+            <span className="text-primary">Then we build the practice to produce it.</span>
           </h2>
           <p className="font-serif italic text-[18px] md:text-[22px] text-muted-foreground max-w-2xl mx-auto mt-5 leading-relaxed">
-            We partner with dentists who want more than revenue.
-            <br />
-            They want leverage, clarity, and time back.
+            Not a copied system. Not a playbook built for someone else. Everything is built around you — specifically.
           </p>
         </motion.div>
 
@@ -50,16 +48,16 @@ const SelectivitySection = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            If you want a business-in-a-box, a templated system, or an agency that stacks clients — this isn't for you. That approach exists. It just doesn't work at the level you're building toward.
+            41+ PASTED partners have crossed 8 figures. Not because we handed them a template. Because we started where most agencies never do — with the life they actually wanted to live.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            This is for the dentist who wants to define the life first. The hours. The cases. The income. The freedom. Then build the practice to produce exactly that.
+            The hours. The cases. The income. The freedom. We define that first. Then the brand, content, systems, and patient acquisition are built to produce exactly that. The business bends to the life. Not the other way around.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            Every partnership is different because every partner is different. The system bends to you. Not the other way around.
+            If you want a business-in-a-box or a system copied from someone else — this isn't it. That exists. It just doesn't produce this.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            That's why 41+ of our partners have crossed 8 figures. Not because we handed them a playbook. Because we built everything around the specific life they wanted to live.
+            If you want everything built around your specific vision — you're in the right place.
           </p>
         </motion.div>
 
@@ -85,13 +83,17 @@ const SelectivitySection = () => {
 
         {/* Closing gold italic line */}
         <motion.p
-          className="text-[13px] italic text-center mt-12 max-w-xl mx-auto font-sans"
+          className="text-[13px] italic text-center mt-12 max-w-xl mx-auto font-sans leading-relaxed"
           style={{ color: 'rgba(185,146,79,0.7)' }}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          More growth. Less dependency. Greater freedom. We build both.
+          Growth is common.
+          <br />
+          Growth with freedom is rare.
+          <br />
+          We build both.
         </motion.p>
       </div>
     </section>
