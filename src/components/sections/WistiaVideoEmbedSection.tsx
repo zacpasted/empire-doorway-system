@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 import { Play } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 interface WistiaVideoEmbedSectionProps {
   title?: string;
