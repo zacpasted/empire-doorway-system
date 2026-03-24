@@ -120,7 +120,7 @@ const Index = () => {
         <AnimatedSection>
           <WistiaVideoEmbedSection 
             title="Scripted. Shot. Edited. Deployed."
-            subtitle="Every asset below was produced by our in-house team and deployed as both organic content and paid ad creative. One team. No handoffs."
+            subtitle="The aesthetic industry runs on emotion, on motion, on the story behind the brand. Patients don't choose on clinical skill alone — they choose based on how a practice makes them feel before they ever walk in. Every asset below was scripted, shot on-location, and deployed by our in-house cinematic team — not as content, but as brand equity built frame by frame."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
             initialVisibleCount={3}
           />

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { brands } from "@/data/brands";
 import OptimizedImage from "@/components/ui/optimized-image";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import {
   Carousel,
   CarouselContent,
