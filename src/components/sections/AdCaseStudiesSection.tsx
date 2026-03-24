@@ -35,12 +35,41 @@ const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    title: "Cold Market Authority",
+    roasValue: "22.4x",
+    metrics: [
+      { label: "Ad spend", value: "$8,500/mo" },
+      { label: "New patient consults", value: "67/mo" },
+      { label: "Avg case value", value: "$12,400" },
+      { label: "Monthly revenue", value: "$380,000", highlight: true },
+    ],
+  },
+  {
     title: "Conversion Infrastructure",
     metrics: [
       { label: "Show rate (before)", value: "44%" },
       { label: "Show rate (after)", value: "69%" },
       { label: "Close rate lift", value: "+95%" },
       { label: "Monthly lift", value: "$110k–$165k", highlight: true },
+    ],
+  },
+  {
+    title: "Education-First Funnel",
+    roasValue: "31.7x",
+    metrics: [
+      { label: "Ad spend", value: "$4,200/mo" },
+      { label: "Webinar registrations", value: "312/mo" },
+      { label: "Consults booked", value: "48" },
+      { label: "Revenue closed", value: "$133,200", highlight: true },
+    ],
+  },
+  {
+    title: "Retargeting System",
+    metrics: [
+      { label: "Retarget pool", value: "28,000+" },
+      { label: "Cost per re-engaged lead", value: "$3.12" },
+      { label: "Recovery rate", value: "18%" },
+      { label: "Recovered revenue/mo", value: "$94,500", highlight: true },
     ],
   },
   {
