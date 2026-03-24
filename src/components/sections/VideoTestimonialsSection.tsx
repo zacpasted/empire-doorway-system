@@ -32,7 +32,7 @@ const VideoTestimonialsSection = ({
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ padding: '120px 0' }}
+      style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}
     >
       <div className="container max-w-5xl mx-auto px-4">
         {/* Header */}
