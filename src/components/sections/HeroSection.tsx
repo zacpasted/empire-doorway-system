@@ -46,7 +46,7 @@ const HeroSection = () => {
   const h1Words = "The practice you want. Built by the team behind the best.".split(" ");
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden pt-20 pb-12 md:py-24 md:min-h-screen">
+    <section ref={sectionRef} className="relative overflow-hidden pt-12 pb-10 md:py-24 md:min-h-screen">
       {/* Background layers — static on mobile, parallax on desktop */}
       {isMobile ? (
         <div
