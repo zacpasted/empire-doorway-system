@@ -109,7 +109,7 @@ const AuthoritySection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 1.4 }}
           >
-            Because real success isn't measured in how busy you become. It's measured in how little the practice needs you to survive.
+            Because real success isn't measured in how busy you become. It's measured in how little the practice needs you to run.
           </motion.p>
 
           {/* Gold doctor names */}
