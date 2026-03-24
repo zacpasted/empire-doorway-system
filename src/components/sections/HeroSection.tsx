@@ -97,7 +97,7 @@ const HeroSection = () => {
               marginBottom: '24px',
             }}
           >
-            We run everything outside the chair. $100M+ in aesthetic revenue generated. The unrivaled standard in dental brand, growth, and demand — globally.
+            We run brand, content, ads, and patient systems for the world's top aesthetic dentists. $100M+ in case revenue generated. 41+ clinics scaled to 8 figures annually.
           </p>
 
           {/* Element 5 — CTA button */}
