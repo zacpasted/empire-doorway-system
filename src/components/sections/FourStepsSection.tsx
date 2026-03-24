@@ -37,7 +37,7 @@ const FourStepsSection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section ref={ref} style={{ padding: '120px 0' }}>
+    <section ref={ref} style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-5xl mx-auto px-4">
         <motion.div
           className="text-center mb-16"
