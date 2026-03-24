@@ -7,6 +7,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
 import Footer from "@/components/Footer";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Lazy load below-the-fold sections
 const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
@@ -51,6 +52,8 @@ const AnimatedSection = memo(({ children }: { children: React.ReactNode }) => (
 AnimatedSection.displayName = 'AnimatedSection';
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   const scrollToForm = () => {
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
@@ -74,11 +77,14 @@ const Index = () => {
       <PartnerRosterTicker />
       
       <Suspense fallback={<SectionLoader />}>
-        {/* 3. Authority */}
+        {/* Mobile: Calendly at position 3 (before Authority) */}
+        {isMobile && <CalendlySection />}
+
+        {/* 3/4. Authority */}
         <AnimatedSection><AuthoritySection /></AnimatedSection>
         
-        {/* 4. Calendly Embed — early booking for warm traffic */}
-        <CalendlySection />
+        {/* Desktop: Calendly at position 4 (after Authority) */}
+        {!isMobile && <CalendlySection />}
         
         {/* 5. Video Testimonials */}
         <AnimatedSection>
@@ -113,7 +119,7 @@ const Index = () => {
         {/* Divider: Results → Content Examples */}
         <div className="section-divider" />
         
-        {/* 11. Content Examples (condensed — 3 initial, Show More reveals all 10) */}
+        {/* 11. Content Examples */}
         <AnimatedSection>
           <WistiaVideoEmbedSection 
             title="Scripted. Shot. Edited. Deployed."
@@ -123,10 +129,10 @@ const Index = () => {
           />
         </AnimatedSection>
         
-        {/* 12. Selectivity (condensed) */}
+        {/* 12. Selectivity */}
         <AnimatedSection><SelectivitySection /></AnimatedSection>
         
-        {/* 13. Ad Case Studies (3 cards) */}
+        {/* 13. Ad Case Studies */}
         <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
         
         {/* 14. Closing CTA */}

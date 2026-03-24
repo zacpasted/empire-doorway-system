@@ -155,6 +155,39 @@ button:focus-visible,
   background: rgba(255,255,255,0.06);
 }
 
+/* ===== MOBILE TYPOGRAPHY OVERRIDES (max-width 768px) ===== */
+@media (max-width: 768px) {
+  /* Fix 2 — Mobile typography scale */
+  h2 {
+    font-size: 36px !important;
+    line-height: 1.12;
+  }
+
+  /* Fix 3 — Section labels: larger + more tracking */
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    margin-bottom: 4px;
+  }
+
+  /* Fix 2 — Body paragraphs */
+  section p {
+    font-size: 16px;
+  }
+
+  /* Fix 2 — Testimonial quotes */
+  blockquote p,
+  .testimonial-quote {
+    font-size: 17px;
+  }
+
+  /* Fix 8 — Reduce section padding by 15% on mobile */
+  section {
+    padding-top: calc(var(--section-py, 6rem) * 0.85);
+    padding-bottom: calc(var(--section-py, 6rem) * 0.85);
+  }
+}
+
 /* Animations */
 @keyframes fade-up {
   from {
