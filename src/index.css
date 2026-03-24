@@ -262,6 +262,15 @@ button:focus-visible,
   animation: marquee 30s linear infinite;
 }
 
+@keyframes marquee-credentials {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-credentials {
+  animation: marquee-credentials 25s linear infinite;
+}
+
 /* Staggered animation delays */
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
