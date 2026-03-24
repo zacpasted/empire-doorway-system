@@ -15,13 +15,9 @@ const PartnerRosterTicker = () => {
 
   return (
     <div
-      className="relative py-4 md:py-4 overflow-hidden border-y border-border/30 bg-card/80"
+      className="relative overflow-hidden border-y border-border/30 bg-card/80"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{
-        maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-      }}
     >
       <style>{`
         @keyframes partner-roster {
@@ -33,29 +29,38 @@ const PartnerRosterTicker = () => {
         }
       `}</style>
 
-      {/* Static label */}
-      <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center pl-4 md:pl-6 pr-8">
+      {/* Static label — sits above ticker on mobile, inline on desktop */}
+      <div className="px-4 pt-3 pb-1 md:absolute md:left-0 md:top-0 md:bottom-0 md:z-20 md:flex md:items-center md:pl-6 md:pr-8 md:pt-0 md:pb-0">
         <span className="text-[10px] md:text-[10px] tracking-[0.3em] uppercase text-primary font-semibold whitespace-nowrap">
           Partner Roster
         </span>
       </div>
 
+      {/* Scrolling ticker */}
       <div
-        className="flex items-center whitespace-nowrap animate-partner-roster pl-32 md:pl-40"
-        style={{ animationPlayState: isHovered ? "paused" : "running" }}
+        className="py-3 md:py-4"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
+        }}
       >
-        {[...Array(4)].map((_, setIndex) => (
-          <div key={setIndex} className="flex items-center">
-            {ROSTER_ITEMS.map((item) => (
-              <span key={`${setIndex}-${item}`} className="flex items-center mx-5 md:mx-8">
-                <span className="w-2 h-2 md:w-1.5 md:h-1.5 rounded-full bg-primary/50 mr-4 flex-shrink-0" />
-                <span className="text-[15px] md:text-base tracking-wide text-muted-foreground/80 font-medium">
-                  {item}
+        <div
+          className="flex items-center whitespace-nowrap animate-partner-roster md:pl-40"
+          style={{ animationPlayState: isHovered ? "paused" : "running" }}
+        >
+          {[...Array(4)].map((_, setIndex) => (
+            <div key={setIndex} className="flex items-center">
+              {ROSTER_ITEMS.map((item) => (
+                <span key={`${setIndex}-${item}`} className="flex items-center mx-5 md:mx-8">
+                  <span className="w-2 h-2 md:w-1.5 md:h-1.5 rounded-full bg-primary/50 mr-3 md:mr-4 flex-shrink-0" />
+                  <span className="text-[15px] md:text-base tracking-wide text-muted-foreground/80 font-medium">
+                    {item}
+                  </span>
                 </span>
-              </span>
-            ))}
-          </div>
-        ))}
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
