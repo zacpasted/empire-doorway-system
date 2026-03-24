@@ -97,7 +97,7 @@ const HeroSection = () => {
               marginBottom: '24px',
             }}
           >
-            We run your brand, content, ads, and patient systems — everything outside the chair. Most partners add $500K–$1M+ in the first year. $100M+ in aesthetic case revenue generated. The unrivaled standard in executing growth, demand, systems, and brand in aesthetic dentistry — globally.
+            We run everything outside the chair. $100M+ in aesthetic revenue generated. The unrivaled standard in dental brand, growth, and demand — globally.
           </p>
 
           {/* Element 5 — CTA button */}
