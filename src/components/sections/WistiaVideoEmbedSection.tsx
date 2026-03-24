@@ -19,30 +19,21 @@ const credentialBrands = [
 
 const CinematicCredentialStrip = () => {
   const isMobile = useIsMobile();
-
   return (
     <div className="mb-8">
-      {/* Credential strip */}
       <div
         className="w-full flex items-center justify-center md:justify-start gap-3 overflow-hidden"
         style={{
           height: isMobile ? 32 : 36,
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          borderTop: '1px solid var(--color-border)',
+          borderBottom: '1px solid var(--color-border)',
         }}
       >
-        <span
-          className="shrink-0 font-sans text-[11px] tracking-[0.18em] uppercase"
-          style={{ color: 'rgba(255,255,255,0.5)' }}
-        >
+        <span className="shrink-0 font-sans uppercase" style={{ fontSize: '11px', letterSpacing: '0.18em', color: 'var(--color-text-muted)' }}>
           Produced For
         </span>
-
         {isMobile ? (
-          <span
-            className="font-sans text-[11px] tracking-[0.18em] uppercase truncate"
-            style={{ color: 'rgba(255,255,255,0.5)' }}
-          >
+          <span className="font-sans uppercase truncate" style={{ fontSize: '11px', letterSpacing: '0.18em', color: 'var(--color-text-muted)' }}>
             {credentialBrands.slice(0, 4).map((b, i) => (
               <span key={b}>
                 {i > 0 && <span style={{ color: 'rgba(185,146,79,0.6)' }}> · </span>}
@@ -54,11 +45,7 @@ const CinematicCredentialStrip = () => {
           <div className="overflow-hidden flex-1 relative">
             <div className="animate-marquee-credentials whitespace-nowrap">
               {[...credentialBrands, ...credentialBrands].map((b, i) => (
-                <span
-                  key={i}
-                  className="font-sans text-[11px] tracking-[0.18em] uppercase"
-                  style={{ color: 'rgba(255,255,255,0.5)' }}
-                >
+                <span key={i} className="font-sans uppercase" style={{ fontSize: '11px', letterSpacing: '0.18em', color: 'var(--color-text-muted)' }}>
                   {i > 0 && <span style={{ color: 'rgba(185,146,79,0.6)' }}> · </span>}
                   {b}
                 </span>
@@ -67,12 +54,7 @@ const CinematicCredentialStrip = () => {
           </div>
         )}
       </div>
-
-      {/* Storytelling infrastructure line */}
-      <p
-        className="text-[13px] italic text-center mt-4 max-w-xl mx-auto font-sans"
-        style={{ color: 'rgba(185,146,79,0.7)' }}
-      >
+      <p className="font-serif italic text-center mt-4 max-w-xl mx-auto" style={{ fontSize: '16px', color: 'rgba(185,146,79,0.7)', lineHeight: '1.3' }}>
         This is storytelling as infrastructure. It compounds. It attracts. It closes.
       </p>
     </div>
@@ -80,14 +62,11 @@ const CinematicCredentialStrip = () => {
 };
 
 const PastedStudioCTA = () => (
-  <div className="mt-14 pt-10 text-center" style={{ borderTop: '1px solid rgba(185,146,79,0.2)' }}>
-    <p className="text-xs tracking-[0.28em] uppercase text-muted-foreground/60 mb-3 font-sans">
+  <div className="mt-14 pt-10 text-center" style={{ borderTop: '1px solid var(--color-border-gold)' }}>
+    <p className="font-sans uppercase mb-3" style={{ fontSize: '11px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}>
       PASTED Studio
     </p>
-    <p
-      className="text-[14px] mx-auto mb-6 max-w-[400px]"
-      style={{ color: 'rgba(255,255,255,0.55)' }}
-    >
+    <p className="font-sans mx-auto mb-6 max-w-[400px]" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
       Looking for cinematic production without the full partnership? Our studio team is available for select projects.
     </p>
     <button
@@ -95,14 +74,25 @@ const PastedStudioCTA = () => (
         trackCTAClick({ ctaId: "pasted-studio-cta", ctaText: "Book a Studio Consultation", section: "content-examples" });
         document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
       }}
-      className="inline-block font-sans text-[12px] tracking-[0.15em] uppercase px-7 py-3 rounded-sm transition-all duration-200"
+      className="inline-block font-sans uppercase transition-all duration-300"
       style={{
-        color: 'rgba(185,146,79,0.9)',
-        border: '1px solid rgba(185,146,79,0.6)',
+        fontSize: '12px',
+        fontWeight: 500,
+        letterSpacing: '0.18em',
+        color: '#B8924F',
+        border: '1px solid rgba(185,146,79,0.5)',
         background: 'transparent',
+        padding: '14px 28px',
+        borderRadius: 0,
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(185,146,79,0.08)')}
-      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.background = 'rgba(185,146,79,0.06)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.8)';
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.background = 'transparent';
+        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.5)';
+      }}
     >
       Book a Studio Consultation →
     </button>
@@ -125,9 +115,7 @@ const WistiaVideoEmbedSection = ({
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
       { threshold: 0.1, rootMargin: '200px' }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -137,82 +125,49 @@ const WistiaVideoEmbedSection = ({
   useWistiaLoader(visibleVideoIds, { loadOnMount: isVisible });
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-28 md:py-36 bg-background relative overflow-hidden"
-    >
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ padding: '120px 0' }}>
       <div className="container max-w-6xl mx-auto px-4">
-        {/* Cinematic Credential Strip */}
         <CinematicCredentialStrip />
 
-        {/* Header */}
         <div className="text-center mb-16">
-          <p
-            className={`font-sans text-[12px] md:text-[11px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
+          <p className={`section-label text-center justify-center mb-4 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             The Creative
           </p>
           <h2
-            className={`text-[36px] md:text-[48px] font-serif font-bold text-foreground mb-4 transition-all duration-700 delay-100 leading-tight ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`font-serif font-bold mb-4 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            style={{ fontSize: '52px', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}
           >
             Story first. Always.
           </h2>
-          <p
-            className={`font-serif italic text-[18px] md:text-[22px] text-muted-foreground max-w-2xl mx-auto mb-8 transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+          <p className={`font-serif italic max-w-2xl mx-auto mb-8 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            style={{ fontSize: '20px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}
           >
             Clinical excellence earns respect. Storytelling earns demand.
           </p>
 
-          {/* Body copy */}
-          <div className="max-w-[680px] mx-auto space-y-6 mb-10 text-center">
-            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-              Aesthetic dentistry is an emotional purchase. Patients aren't comparing prep designs. They're choosing confidence. Identity. Transformation. That decision is shaped long before consultation — through the signals your brand sends.
-            </p>
-            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-              The quality of your content becomes the perceived quality of your work. The way you present becomes the way patients expect to be treated.
-            </p>
+          <div className="max-w-[680px] mx-auto space-y-6 mb-10 text-center" style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
+            <p>Aesthetic dentistry is an emotional purchase. Patients aren't comparing prep designs. They're choosing confidence. Identity. Transformation. That decision is shaped long before consultation — through the signals your brand sends.</p>
+            <p>The quality of your content becomes the perceived quality of your work. The way you present becomes the way patients expect to be treated.</p>
           </div>
 
-          {/* Stacked process lines */}
           <div className="space-y-3 mb-10">
             {["Scripted.", "Shot.", "Edited.", "Deployed."].map((line) => (
-              <p key={line} className="font-serif italic text-[20px] md:text-[24px] text-foreground/80 leading-relaxed">
-                {line}
-              </p>
+              <p key={line} className="font-serif italic" style={{ fontSize: '22px', color: 'var(--color-text)', lineHeight: '1.3', opacity: 0.8 }}>{line}</p>
             ))}
           </div>
 
-          {/* More body copy */}
-          <div className="max-w-[680px] mx-auto space-y-6 mb-10 text-center">
-            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-              Not as content — but as positioning. Because even a small increase in emotional connection compounds. A one percent increase in trust changes conversion. Conversion changes case value. Case value changes the trajectory of the practice.
-            </p>
-            <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-              This is not content production. It's narrative architecture. We don't just show what you do. We show why it matters — and why it's different.
-            </p>
+          <div className="max-w-[680px] mx-auto space-y-6 mb-10 text-center" style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
+            <p>Not as content — but as positioning. Because even a small increase in emotional connection compounds. A one percent increase in trust changes conversion. Conversion changes case value. Case value changes the trajectory of the practice.</p>
+            <p>This is not content production. It's narrative architecture. We don't just show what you do. We show why it matters — and why it's different.</p>
           </div>
 
-          {/* Closing gold italic line */}
-          <p
-            className="text-[13px] italic text-center max-w-xl mx-auto font-sans"
-            style={{ color: 'rgba(185,146,79,0.7)' }}
-          >
+          <p className="font-serif italic text-center max-w-xl mx-auto" style={{ fontSize: '16px', color: 'rgba(185,146,79,0.7)', lineHeight: '1.75' }}>
             When your story elevates, your perceived value follows.
           </p>
         </div>
 
         {/* Video Grid */}
-        <div
-          className={`transition-all duration-700 delay-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div className={`transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           {videoIds.length > 0 ? (
             <>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -225,31 +180,42 @@ const WistiaVideoEmbedSection = ({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
-                      className="relative rounded-xl overflow-hidden shadow-lg bg-card/50 aspect-[9/16] group border border-transparent hover:border-primary/40 transition-all duration-300"
+                      className="relative overflow-hidden aspect-[9/16] group transition-all duration-300"
+                      style={{ border: '1px solid var(--color-border)', borderRadius: '2px', background: 'var(--color-surface)' }}
                     >
                       <style>{getWistiaPlaceholderStyles(videoId, '177.78%')}</style>
-                      {/* @ts-ignore - Wistia custom element */}
+                      {/* @ts-ignore */}
                       <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default"></wistia-player>
                     </motion.div>
                   ))}
                 </AnimatePresence>
               </div>
 
-              {/* Show More Button */}
               {hasMore && !showAll && (
-                <motion.div
-                  className="mt-10 flex justify-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
+                <motion.div className="mt-10 flex justify-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
                   <button
                     onClick={() => setShowAll(true)}
-                    className="group flex items-center gap-3 px-8 py-4 rounded-sm bg-transparent border border-primary/50 text-primary hover:bg-primary/10 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+                    className="group flex items-center gap-3 font-sans uppercase transition-all duration-300"
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 500,
+                      letterSpacing: '0.18em',
+                      color: '#B8924F',
+                      border: '1px solid rgba(185,146,79,0.5)',
+                      background: 'transparent',
+                      padding: '14px 32px',
+                      borderRadius: 0,
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(185,146,79,0.06)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.8)';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.5)';
+                    }}
                   >
-                    <span className="text-sm font-medium tracking-wide">
-                      Show More Work
-                    </span>
+                    <span>Show More Work</span>
                     <span className="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </button>
                 </motion.div>
@@ -258,17 +224,12 @@ const WistiaVideoEmbedSection = ({
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3].map((_, index) => (
-                <div
-                  key={index}
-                  className="relative rounded-xl overflow-hidden bg-card/30 border-2 border-dashed border-border/30 aspect-[9/16] flex items-center justify-center"
-                >
+                <div key={index} className="relative overflow-hidden aspect-[9/16] flex items-center justify-center" style={{ border: '2px dashed var(--color-border)', borderRadius: '2px', background: 'var(--color-surface)' }}>
                   <div className="text-center p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/20 flex items-center justify-center">
-                      <Play className="w-8 h-8 text-muted-foreground/40" />
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--color-surface-2)' }}>
+                      <Play className="w-8 h-8" style={{ color: 'var(--color-text-muted)' }} />
                     </div>
-                    <p className="text-sm text-muted-foreground/50">
-                      Wistia Video {index + 1}
-                    </p>
+                    <p className="font-sans" style={{ fontSize: '14px', color: 'var(--color-text-subtle)' }}>Wistia Video {index + 1}</p>
                   </div>
                 </div>
               ))}
@@ -276,7 +237,6 @@ const WistiaVideoEmbedSection = ({
           )}
         </div>
 
-        {/* PASTED Studio CTA */}
         <PastedStudioCTA />
       </div>
     </section>
