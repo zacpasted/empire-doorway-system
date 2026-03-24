@@ -157,10 +157,10 @@ button:focus-visible,
 
 /* ===== MOBILE TYPOGRAPHY OVERRIDES (max-width 768px) ===== */
 @media (max-width: 768px) {
-  /* Fix 2 — Mobile typography scale */
+  /* Mobile H2 — clear secondary level */
   h2 {
-    font-size: 36px !important;
-    line-height: 1.12;
+    font-size: 34px !important;
+    line-height: 1.15;
   }
 
   /* Fix 3 — Section labels: larger + more tracking */
