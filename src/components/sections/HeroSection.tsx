@@ -116,7 +116,7 @@ const HeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden pt-6 pb-8 md:py-24 md:min-h-screen"
+      className="relative overflow-hidden pt-4 pb-8 md:pt-[calc(var(--hero-desktop-pt,6rem)-20px)] md:pb-24 md:min-h-screen"
     >
       {/* Background layers */}
       {isMobile ? (
