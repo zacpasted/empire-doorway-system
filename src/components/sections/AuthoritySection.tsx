@@ -119,7 +119,7 @@ const AuthoritySection = () => {
             transition={{ duration: 0.7, delay: 1.5 }}
           >
             <p className="text-primary font-medium mb-4 md:mb-4" style={{ textShadow: '0 0 20px rgba(185,146,79,0.3)' }}>
-              Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Drew Ballard. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. Dr. Susan Prater. Dr. Michaela Tozzi. Dr. Todd Snyder. SmileTrend.
+              Dr. Jon Marashi. Dr. Brian Harris. Dr. Marshall Hanson. Dr. Drew Ballard. Dr. Sam Saleh. Dr. Rhona Eksander. Dr. Patrick McCann. Dr. Susan Prater. Dr. Michaela Tozzi. Dr. Todd Snyder. Dr. James Heaton & Dr. Michael Allen (SmileTrend). + more
             </p>
           </motion.div>
         </div>

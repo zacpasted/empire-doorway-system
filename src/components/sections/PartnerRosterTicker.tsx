@@ -8,7 +8,7 @@ const ROSTER_ITEMS = [
   "Dr. Sam Saleh · LA & London",
   "Dr. Rhona Eksander · Chelsea Dental Clinic",
   "Dr. Patrick McCann · Dublin",
-  "SmileTrend · Global Aesthetic Network",
+  "Dr. James Heaton & Dr. Michael Allen · SmileTrend",
 ];
 
 const MOBILE_NAMES = [
