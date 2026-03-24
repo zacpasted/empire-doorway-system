@@ -136,6 +136,7 @@ const Index = () => {
       {/* 15. Footer */}
       <Footer />
       <MobileFloatingCTA />
+      <ScrollDepthTracker />
     </motion.main>
   );
 };
