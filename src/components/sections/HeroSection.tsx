@@ -70,7 +70,7 @@ const HeroSection = () => {
 
           {/* Element 2 — Credential strip */}
           <p className="text-[10px] tracking-[0.22em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.8)' }}>
-            You Didn't Train to Run an Aesthetic Dental Practice. We Did.
+            You Didn't Train to Run a Business. We Did.
           </p>
 
           {/* Element 3 — H1 (THE DOMINANT ELEMENT) */}
