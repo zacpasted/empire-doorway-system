@@ -235,7 +235,9 @@ const HeroSection = () => {
 
             {/* Subheadline — below microcopy */}
             <p className="text-sm md:text-base italic text-muted-foreground/70 mt-4 max-w-md mx-auto leading-relaxed text-center">
-              We handle everything outside the chair. Most partners add $500K–$1M+ in aesthetic production annually — while working fewer hours on the business, and more hours on the dentistry they love.
+              {isMobile
+                ? "We handle everything outside the chair — so you do the dentistry you love, at the level you deserve."
+                : "We handle everything outside the chair. Most partners add $500K–$1M+ in aesthetic production annually — while working fewer hours on the business, and more hours on the dentistry they love."}
             </p>
 
             {/* Brian Harris quote — desktop only */}
