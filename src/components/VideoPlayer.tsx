@@ -49,10 +49,10 @@ const VideoPlayer = () => {
             
             {/* CTA text */}
             <p className="mt-3 md:mt-4 text-[10px] md:text-sm text-white/80 font-medium tracking-wide uppercase">
-              Watch the Full Breakdown
+              Watch the Video
             </p>
             <p className="mt-0.5 text-[8px] md:text-xs text-white/40">
-              12 min · See how top practices generate $500K–$1M+
+              Partners share what PASTED has meant for their practice
             </p>
           </div>
 
