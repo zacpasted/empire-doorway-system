@@ -69,8 +69,8 @@ const HeroSection = () => {
           </div>
 
           {/* Element 2 — Credential strip */}
-          <p className="text-[9px] tracking-[0.2em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.65)' }}>
-            $1M+ Avg. Growth · 97% Retention
+          <p className="text-[10px] tracking-[0.22em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.8)' }}>
+            Your Clinical Standard Exceeds Your Market Position.
           </p>
 
           {/* Element 3 — H1 (THE DOMINANT ELEMENT) */}
@@ -97,7 +97,7 @@ const HeroSection = () => {
               marginBottom: '24px',
             }}
           >
-            We run everything outside the chair. $100M+ in aesthetic revenue generated. The unrivaled standard in dental brand, growth, and demand — globally.
+            We run brand, content, ads, and patient systems for the world's top aesthetic dentists. $100M+ in case revenue generated. 41+ clinics scaled to 8 figures annually.
           </p>
 
           {/* Element 5 — CTA button */}

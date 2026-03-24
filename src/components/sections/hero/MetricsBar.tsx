@@ -24,7 +24,7 @@ const useCounter = (end: number, duration: number, isInView: boolean, delay: num
 
 const METRICS = [
   { label: "Aesthetic Revenue", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
-  { label: "Drew Ballard", numValue: 2, prefix: "$", suffix: "M", barWidth: 100 },
+  { label: "Clinics Scaled to 8 Figures", numValue: 41, prefix: "", suffix: "+", barWidth: 100 },
   { label: "Retention", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
   { label: "Practices/yr", numValue: 30, prefix: "", suffix: "", barWidth: 88 },
 ];
