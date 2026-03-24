@@ -70,7 +70,7 @@ const HeroSection = () => {
 
           {/* Element 2 — Credential strip */}
           <p className="text-[10px] tracking-[0.22em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.8)' }}>
-            You Didn't Train to Run an Aesthetic Dental Practice. We Did.
+            You Didn't Train to Run a Business. We Did.
           </p>
 
           {/* Element 3 — H1 (THE DOMINANT ELEMENT) */}
@@ -97,7 +97,9 @@ const HeroSection = () => {
               marginBottom: '24px',
             }}
           >
-            While you're in the chair, we're building the practice around you. Brand. Content. Ads. Systems. The world's most trusted growth partnership in aesthetic dentistry. $100M+ generated. 41+ clinics at 8 figures. 30 spots open annually.
+            Brand. Content. Ads. Systems.<br />
+            $100M+ generated. 41+ clinics at 8 figures.<br />
+            30 spots open annually.
           </p>
 
           {/* Element 5 — CTA button */}
