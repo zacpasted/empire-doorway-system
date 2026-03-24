@@ -94,7 +94,7 @@ const AdCaseStudiesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ padding: '120px 0' }}>
+    <section ref={sectionRef} style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="section-label text-center justify-center mb-4">Performance</p>
