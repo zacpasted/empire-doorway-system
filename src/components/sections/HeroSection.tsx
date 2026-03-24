@@ -111,7 +111,7 @@ const HeroSection = () => {
     document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
-  const h1Words = "The practice you want. Built by the team behind the best.".split(" ");
+  const h1Lines = ["THE PRACTICE YOU WANT.", "BUILT BY THE TEAM", "BEHIND THE BEST."];
 
   return (
     <section
