@@ -37,7 +37,7 @@ const VideoPlayer = () => {
           <div className="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-2.5 py-1">
             <div className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-[9px] md:text-[10px] text-white/70 font-medium tracking-wide uppercase">
-              How elite practices are built
+              The PASTED Partnership
             </span>
           </div>
           
