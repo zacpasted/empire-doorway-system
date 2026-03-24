@@ -50,9 +50,12 @@ const TheOfferSection = () => {
           <p>
             <span className="not-italic font-medium text-foreground">PASTED</span> is that same thing — but for practice growth. Brand, content, ads, and patient conversion. One team. One system. Runs while you operate.
           </p>
-          <p>
-            We are your operating partner. We run the growth side of your practice. You do the dentistry. We handle everything it takes to fill your chair with the right patients.
-          </p>
+           <p>
+             We are your operating partner. We run the growth side of your practice — brand, content, ads, systems, and conversion — so you can do the dentistry you love, at the pace you want, without carrying the weight of building the business alone.
+           </p>
+           <p>
+             The goal isn't just more revenue. It's making what you're already capable of generating — while working less, living better, and building equity in something that lasts. Most partners add $500K–$1M+ annually. Many do it while seeing fewer patients than before.
+           </p>
         </motion.div>
 
         {/* Offer statement — pull quote with left border */}

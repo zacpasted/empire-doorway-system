@@ -6,7 +6,7 @@ const testimonials = [
   {
     name: "Dr. Marshall Hanson",
     role: "Founder, Marshall Hanson Method · Minnesota",
-    quote: "Since working with PASTED, I've gone from being a well-kept secret to a nationally recognized brand. In one year, I went from doing zero veneer cases to now averaging 15–20 veneer cases per month — with patients flying in from across the country. They didn't just build my brand. They built the infrastructure that made this kind of growth possible. The content, the strategy, the paid acquisition — it all works together. And I never had to think about it. I just had to keep doing what I do best.",
+    quote: "I take profound pride in my clinical work. What PASTED did was take that — the standard I hold myself to, the story behind why I do this, the life I wanted to build around it — and made the world see it the way I see it. They run the growth side of my practice. The brand, the content, the systems, the strategy. I wouldn't trust anyone else with it. Not because of the results — though those are real — but because of how they understand what this work means to me. They've made my practice better, my life easier, and given me back the time to do what I actually trained for. That's what a real partner does.",
   },
   {
     name: "Dr. Jon Marashi",
