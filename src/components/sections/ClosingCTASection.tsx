@@ -14,7 +14,7 @@ const ClosingCTASection = () => {
       id="apply"
       className="relative overflow-hidden"
       style={{
-        padding: '160px 0',
+        padding: 'clamp(80px, 12vw, 160px) 0',
         background: `
           radial-gradient(ellipse 60% 70% at 50% 50%, rgba(185,146,79,0.07) 0%, transparent 65%),
           #0A0906
