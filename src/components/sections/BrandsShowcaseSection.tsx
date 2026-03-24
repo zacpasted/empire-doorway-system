@@ -18,7 +18,7 @@ const BrandsShowcaseSection = () => {
           <p className="section-label text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
             The Work
           </p>
-          <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
+          <h2 className="text-[36px] md:text-4xl font-serif text-foreground mb-4">
             The work behind the names.
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
