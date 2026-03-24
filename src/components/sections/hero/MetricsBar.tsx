@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo, useEffect, memo } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 import { motion, useInView } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -29,12 +29,45 @@ const METRICS = [
   { label: "Practices/yr", numValue: 30, prefix: "", suffix: "", barWidth: 88 },
 ];
 
+const MetricCard = memo(({ metric, index, isInView }: { metric: typeof METRICS[0]; index: number; isInView: boolean }) => {
+  const count = useCounter(metric.numValue, 1.8, isInView, 0.15 * index);
+  return (
+    <motion.div
+      className="relative"
+      initial={{ opacity: 0, y: 15 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.3, delay: index * 0.15 }}
+    >
+      <motion.div
+        className="text-2xl font-serif font-bold mb-0.5 leading-none"
+        style={{ color: '#F5F0E8' }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.1 + index * 0.15 }}
+      >
+        {metric.prefix}{count}{metric.suffix}
+      </motion.div>
+      <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(245,240,232,0.45)' }}>
+        {metric.label}
+      </p>
+      <div className="h-0.5 bg-border/30 rounded-full overflow-hidden">
+        <motion.div
+          className="h-full bg-gradient-to-r from-primary/60 to-primary/30 rounded-full"
+          initial={{ width: 0 }}
+          animate={isInView ? { width: `${metric.barWidth}%` } : {}}
+          transition={{ duration: 1.2, delay: 0.2 + index * 0.15, ease: [0.22, 1, 0.36, 1] as const }}
+        />
+      </div>
+    </motion.div>
+  );
+});
+MetricCard.displayName = "MetricCard";
+
 const MetricsBar = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const isMobile = useIsMobile();
 
-  // Mobile: compact horizontal trust strip
   if (isMobile) {
     return (
       <div ref={ref} className="max-w-md mx-auto">
@@ -51,43 +84,12 @@ const MetricsBar = memo(() => {
     );
   }
 
-  // Desktop: 4-column grid with counters and progress bars
   return (
     <div ref={ref} className="max-w-3xl mx-auto">
       <div className="grid grid-cols-4 gap-6">
-        {METRICS.map((metric, index) => {
-          const count = useCounter(metric.numValue, 1.8, isInView, 0.15 * index);
-          return (
-            <motion.div
-              key={metric.label}
-              className="relative"
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.3, delay: index * 0.15 }}
-            >
-              <motion.div
-                className="text-2xl font-serif font-bold mb-0.5 leading-none"
-                style={{ color: '#F5F0E8' }}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 + index * 0.15 }}
-              >
-                {metric.prefix}{count}{metric.suffix}
-              </motion.div>
-              <p className="text-[10px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(245,240,232,0.45)' }}>
-                {metric.label}
-              </p>
-              <div className="h-0.5 bg-border/30 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-primary/60 to-primary/30 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: `${metric.barWidth}%` } : {}}
-                  transition={{ duration: 1.2, delay: 0.2 + index * 0.15, ease: [0.22, 1, 0.36, 1] as const }}
-                />
-              </div>
-            </motion.div>
-          );
-        })}
+        {METRICS.map((metric, index) => (
+          <MetricCard key={metric.label} metric={metric} index={index} isInView={isInView} />
+        ))}
       </div>
     </div>
   );
