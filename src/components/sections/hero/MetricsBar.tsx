@@ -27,6 +27,7 @@ const MetricsBar = memo(() => {
 
   const metrics = useMemo(() => [
     { label: "Aesthetic Revenue Generated", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
+    { label: "Practices Scaled to 8+ Figures", numValue: 41, prefix: "", suffix: "", barWidth: 100 },
     { label: "Avg Revenue Added / Partner", numValue: 500, prefix: "$", suffix: "K+", barWidth: 88 },
     { label: "Client Retention Since 2019", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
   ], []);
