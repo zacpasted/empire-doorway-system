@@ -35,55 +35,71 @@ const FourStepsSection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section ref={ref} className="py-28 md:py-36">
+    <section ref={ref} className="py-32 md:py-40">
       <div className="container max-w-5xl mx-auto px-4">
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="section-label text-xs tracking-[0.4em] uppercase text-primary mb-4">The Process</p>
-          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif text-foreground leading-tight">
+          <div className="flex justify-center mb-6">
+            <motion.div
+              className="w-[40px] h-px bg-primary/40"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.6 }}
+            />
+          </div>
+          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-primary mb-4">The Process</p>
+          <h2 className="text-[36px] md:text-4xl lg:text-5xl font-serif leading-tight" style={{ color: '#F5F0E8' }}>
             Four phases. Fully managed.
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
-          {steps.map((step, i) => (
+        {/* Timeline visual */}
+        <div className="relative">
+          {/* Connecting line — desktop only */}
+          {!isMobile && (
             <motion.div
-              key={step.number}
-              className="relative text-center md:text-left space-y-2 md:border-l md:first:border-l-0 md:border-border/30 md:pl-4 md:first:pl-0 overflow-hidden"
-              initial={{ opacity: 0, x: isMobile ? 0 : 12, y: isMobile ? 12 : 0 }}
-              animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
-            >
-              {/* Ghost step number */}
-              <span
-                className="absolute -top-2 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 font-serif italic text-[64px] leading-none text-primary/[0.12] pointer-events-none select-none"
-                aria-hidden="true"
-              >
-                {step.number}
-              </span>
+              className="absolute top-[52px] left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 1.2, delay: 0.4 }}
+            />
+          )}
 
-              {/* Timeline label above title */}
-              <p className="text-[10px] tracking-[0.3em] uppercase text-primary/60 font-sans relative z-10">
-                {step.timeline}
-              </p>
-              <div className="flex items-baseline gap-2 justify-center md:justify-start relative z-10">
-                <span className="text-sm text-primary font-mono">{step.number}</span>
-                <h3 className="text-lg font-serif text-foreground">{step.title}</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed relative z-10">{step.body}</p>
-            </motion.div>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                className="relative text-center space-y-3"
+                initial={{ opacity: 0, y: isMobile ? 16 : 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 + i * 0.15 }}
+              >
+                {/* Step number circle */}
+                <div className="mx-auto w-[52px] h-[52px] rounded-full flex items-center justify-center border border-primary/30 mb-4"
+                  style={{ background: 'rgba(185,146,79,0.06)' }}
+                >
+                  <span className="text-sm font-mono text-primary font-medium">{step.number}</span>
+                </div>
+
+                <p className="text-[9px] tracking-[0.3em] uppercase text-primary/50 font-sans">
+                  {step.timeline}
+                </p>
+                <h3 className="text-lg font-serif" style={{ color: '#F5F0E8' }}>{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px] mx-auto">{step.body}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <motion.p
-          className="text-center text-muted-foreground mt-12 max-w-xl mx-auto italic text-sm"
+          className="text-center text-muted-foreground mt-14 max-w-xl mx-auto italic text-sm font-serif"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
         >
           Your commitment: 15–30 minutes of raw footage per week. Everything else is ours.
         </motion.p>
