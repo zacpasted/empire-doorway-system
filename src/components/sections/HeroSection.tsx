@@ -170,17 +170,24 @@ const HeroSection = () => {
           </div>
 
           {/* Credential bar */}
-          <p className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase font-sans mb-3 md:mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
-            $1M+ Avg. Annual Growth · 97% Retention · Custom Operating Partner
-          </p>
+          {isMobile ? (
+            <p className="text-[10px] tracking-[0.2em] uppercase font-sans mb-3" style={{ color: 'rgba(185,146,79,0.7)' }}>
+              $1M+ Avg. Growth · 97% Retention
+            </p>
+          ) : (
+            <p className="text-[11px] tracking-[0.2em] uppercase font-sans mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
+              $1M+ Avg. Annual Growth · 97% Retention · Custom Operating Partner
+            </p>
+          )}
 
-          {/* H1 — all caps, three lines */}
+          {/* H1 — all caps */}
           <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em] uppercase">
             {isMobile ? (
-              <span className="block text-[40px] font-bold leading-[1.08]">
-                <span className="block">THE PRACTICE <span className="text-primary">YOU WANT.</span></span>
-                <span className="block">BUILT BY THE TEAM</span>
-                <span className="block">BEHIND <span className="text-primary">THE BEST.</span></span>
+              <span className="block text-[40px] font-bold leading-[1.05]">
+                <span className="block">THE PRACTICE</span>
+                <span className="block text-primary">YOU WANT.</span>
+                <span className="block">BUILT BY</span>
+                <span className="block text-primary">THE BEST.</span>
               </span>
             ) : (
               <motion.span
