@@ -16,7 +16,7 @@ const testimonials = [
   {
     name: "Dr. Drew Ballard",
     role: "Celebrity Dentist, Phoenix, AZ · Founder, Halo Veneers & Halo Education",
-    quote: "Halo did not scale by accident. The growth, the positioning, the clarity — it all came from a rock-solid foundation. Zac and Alan saw the vision early, protected it, and helped turn it into something far greater than I could have built alone.",
+    quote: "Halo did not scale by accident. The growth, the positioning, the clarity — it all came from a rock-solid foundation. Zac saw the vision early and believed in me when I may not have believed in myself. From a struggling general practice in central Phoenix to my dream clinic — only doing the dentistry I want to do, surpassing all of our revenue goals, working less than 9 months per year, 3 days per week, making more, more time with family, and an international brand and course that sells out. Zac has been my partner for 5 years making it happen, and I could not have gotten here without him and Pasted Partnership.",
   },
   {
     name: "Dr. Brian Harris",
