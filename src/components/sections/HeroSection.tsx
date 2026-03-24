@@ -77,7 +77,15 @@ const MobileHeroCalendly = () => {
       <p className="text-[13px] text-muted-foreground/60 text-center mb-3 font-sans">
         Ready to book? Select a time below.
       </p>
-      <div className="relative rounded-lg overflow-hidden border border-border/30" style={{ minHeight: "600px" }}>
+      <div
+        className="relative rounded-lg overflow-hidden"
+        style={{
+          minHeight: "600px",
+          background: "#0A0A0A",
+          border: "1px solid rgba(185,146,79,0.15)",
+          borderRadius: "4px",
+        }}
+      >
         {!calendlyLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-card/80">
             <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
@@ -170,17 +178,24 @@ const HeroSection = () => {
           </div>
 
           {/* Credential bar */}
-          <p className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase font-sans mb-3 md:mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
-            $1M+ Avg. Annual Growth · 97% Retention · Custom Operating Partner
-          </p>
+          {isMobile ? (
+            <p className="text-[10px] tracking-[0.2em] uppercase font-sans mb-3" style={{ color: 'rgba(185,146,79,0.7)' }}>
+              $1M+ Avg. Growth · 97% Retention
+            </p>
+          ) : (
+            <p className="text-[11px] tracking-[0.2em] uppercase font-sans mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
+              $1M+ Avg. Annual Growth · 97% Retention · Custom Operating Partner
+            </p>
+          )}
 
-          {/* H1 — all caps, three lines */}
+          {/* H1 — all caps */}
           <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em] uppercase">
             {isMobile ? (
-              <span className="block text-[40px] font-bold leading-[1.08]">
-                <span className="block">THE PRACTICE <span className="text-primary">YOU WANT.</span></span>
-                <span className="block">BUILT BY THE TEAM</span>
-                <span className="block">BEHIND <span className="text-primary">THE BEST.</span></span>
+              <span className="block text-[40px] font-bold leading-[1.05]">
+                <span className="block">THE PRACTICE</span>
+                <span className="block text-primary">YOU WANT.</span>
+                <span className="block">BUILT BY</span>
+                <span className="block text-primary">THE BEST.</span>
               </span>
             ) : (
               <motion.span
@@ -228,7 +243,9 @@ const HeroSection = () => {
 
             {/* Subheadline — below microcopy */}
             <p className="text-sm md:text-base italic text-muted-foreground/70 mt-4 max-w-md mx-auto leading-relaxed text-center">
-              We handle everything outside the chair. Most partners add $500K–$1M+ in aesthetic production annually — while working fewer hours on the business, and more hours on the dentistry they love.
+              {isMobile
+                ? "We handle everything outside the chair — so you do the dentistry you love, at the level you deserve."
+                : "We handle everything outside the chair. Most partners add $500K–$1M+ in aesthetic production annually — while working fewer hours on the business, and more hours on the dentistry they love."}
             </p>
 
             {/* Brian Harris quote — desktop only */}
