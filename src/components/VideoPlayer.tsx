@@ -37,7 +37,7 @@ const VideoPlayer = () => {
           <div className="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-2.5 py-1">
             <div className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-[9px] md:text-[10px] text-white/70 font-medium tracking-wide uppercase">
-              How elite practices are built
+              The PASTED Partnership
             </span>
           </div>
           
@@ -49,10 +49,10 @@ const VideoPlayer = () => {
             
             {/* CTA text */}
             <p className="mt-3 md:mt-4 text-[10px] md:text-sm text-white/80 font-medium tracking-wide uppercase">
-              Watch the Full Breakdown
+              Watch the Video
             </p>
             <p className="mt-0.5 text-[8px] md:text-xs text-white/40">
-              12 min · See how top practices generate $500K–$1M+
+              Partners share what PASTED has meant for their practice
             </p>
           </div>
 
