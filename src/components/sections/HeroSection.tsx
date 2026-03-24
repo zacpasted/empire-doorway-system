@@ -1,11 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import LogoMarquee from "@/components/sections/hero/LogoMarquee";
 import MetricsBar from "@/components/sections/hero/MetricsBar";
 import ServiceTicker from "@/components/sections/hero/ServiceTicker";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const wordStagger = {
@@ -25,6 +24,75 @@ const wordChild = {
   },
 };
 
+/** Inline Calendly for mobile hero — loads script once, listens for booking */
+const MobileHeroCalendly = () => {
+  const [calendlyLoaded, setCalendlyLoaded] = useState(false);
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+
+  useEffect(() => {
+    const existing = document.querySelector(
+      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
+    );
+    if (!existing) {
+      const s = document.createElement("script");
+      s.src = "https://assets.calendly.com/assets/external/widget.js";
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handle = (e: MessageEvent) => {
+      let d = e.data;
+      if (typeof d === "string") {
+        try { d = JSON.parse(d); } catch { return; }
+      }
+      if (!d || typeof d !== "object") return;
+      if (d.event === "calendly.event_type_viewed") setCalendlyLoaded(true);
+      if (d.event === "calendly.event_scheduled") {
+        setBookingConfirmed(true);
+        trackCTAClick({ ctaId: "calendly-booking-hero-mobile", ctaText: "Call Booked", section: "hero-calendly-mobile" });
+      }
+    };
+    window.addEventListener("message", handle);
+    return () => window.removeEventListener("message", handle);
+  }, []);
+
+  if (bookingConfirmed) {
+    return (
+      <div className="text-center py-8">
+        <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+          <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-serif font-bold text-foreground mb-1">You're confirmed.</h3>
+        <p className="text-muted-foreground text-sm">Check your inbox for the calendar invite.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-6">
+      <p className="text-[13px] text-muted-foreground/60 text-center mb-3 font-sans">
+        Ready to book? Select a time below.
+      </p>
+      <div className="relative rounded-lg overflow-hidden border border-border/30" style={{ minHeight: "600px" }}>
+        {!calendlyLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-card/80">
+            <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+          </div>
+        )}
+        <div
+          className={`calendly-inline-widget transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
+          data-url="https://calendly.com/getpasted/pasted-partner-discovery?primary_color=C9A96E"
+          style={{ minWidth: "320px", height: "600px" }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
@@ -39,15 +107,18 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const handleMobileCTA = () => {
-    trackCTAClick({ ctaId: 'hero-instant-cta', ctaText: 'Apply for Partnership', section: 'hero-above-fold' });
-    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    trackCTAClick({ ctaId: "hero-instant-cta", ctaText: "Apply for Partnership", section: "hero-above-fold" });
+    document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const h1Words = "The practice you want. Built by the team behind the best.".split(" ");
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden pt-12 pb-10 md:py-24 md:min-h-screen">
-      {/* Background layers — static on mobile, parallax on desktop */}
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden pt-6 pb-8 md:py-24 md:min-h-screen"
+    >
+      {/* Background layers */}
       {isMobile ? (
         <div
           className="absolute inset-0"
@@ -88,8 +159,8 @@ const HeroSection = () => {
           className="text-center mb-3 md:mb-8"
           style={isMobile ? undefined : { opacity }}
         >
-          {/* Wordmark */}
-          <div className="flex flex-col items-center mb-2 md:mb-6">
+          {/* Wordmark — mb-4 (16px) on mobile before H1 */}
+          <div className="flex flex-col items-center mb-4 md:mb-6">
             <span className="font-display text-lg md:text-lg tracking-[0.15em] uppercase text-foreground">
               PASTED
             </span>
@@ -98,10 +169,10 @@ const HeroSection = () => {
             </span>
           </div>
 
-          {/* H1 — 48px on mobile, staggered on desktop */}
-          <h1 className="font-serif text-foreground mb-5 md:mb-5 leading-[1.1] tracking-[-0.01em]">
+          {/* H1 — 40px on mobile, staggered on desktop */}
+          <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em]">
             {isMobile ? (
-              <span className="block text-[48px] font-bold leading-[1.08]">
+              <span className="block text-[40px] font-bold leading-[1.08]">
                 The practice you want. Built by the team behind the best.
               </span>
             ) : (
@@ -118,7 +189,6 @@ const HeroSection = () => {
                 ))}
               </motion.span>
             )}
-            {/* Subheadline — hidden on mobile above fold, visible on desktop */}
             {!isMobile && (
               <motion.span
                 className="block text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic text-muted-foreground/80 mt-1 md:mt-2"
@@ -131,8 +201,8 @@ const HeroSection = () => {
             )}
           </h1>
 
-          {/* Single stat line — mobile only above-fold proof */}
-          <p className="text-[13px] tracking-[0.15em] uppercase text-primary/80 font-medium mb-7 md:hidden">
+          {/* Single stat line — 16px gap below H1, 20px before CTA */}
+          <p className="text-[13px] tracking-[0.15em] uppercase text-primary/80 font-medium mb-5 md:hidden">
             $100M+ in aesthetic revenue generated
           </p>
 
@@ -155,30 +225,32 @@ const HeroSection = () => {
           </div>
 
           {/* CTA button */}
-          <div className="mb-3">
+          <div>
             <button
               onClick={handleMobileCTA}
               className="w-full md:w-auto md:px-12 py-3 bg-primary text-primary-foreground text-sm md:text-sm font-medium tracking-[0.15em] uppercase rounded-sm transition-all duration-200 active:scale-[0.98]"
             >
               Apply for Partnership →
             </button>
-            <p className="text-[11px] md:text-xs text-muted-foreground/40 mt-2.5 tracking-wide">
+            <p className="text-[11px] md:text-xs text-muted-foreground/40 mt-2 tracking-wide">
               30 practices per year · Reviewed within 48 hours · Not all accepted
             </p>
 
             {/* Brian Harris quote — desktop only */}
             <p className="hidden md:block text-sm italic text-muted-foreground/50 mt-3 max-w-md mx-auto leading-relaxed">
               "If a doctor asks who they should trust with their brand — this is the answer."
-              <span className="block not-italic font-normal text-muted-foreground/40 mt-0.5">— Dr. Brian Harris, Celebrity Dentist · Gilbert, AZ</span>
+              <span className="block not-italic font-normal text-muted-foreground/40 mt-0.5">
+                — Dr. Brian Harris, Celebrity Dentist · Gilbert, AZ
+              </span>
             </p>
           </div>
-
         </motion.div>
 
-        {/* Below-fold mobile content: Metrics → Logo Marquee → VSL → Ticker */}
-        
+        {/* FIX 4 — Calendly embed inside hero on mobile only */}
+        {isMobile && <MobileHeroCalendly />}
+
         {/* Metrics Bar */}
-        <div className="mb-4 md:mb-10">
+        <div className="mb-4 md:mb-10 mt-6 md:mt-0">
           <MetricsBar />
         </div>
 
@@ -200,8 +272,8 @@ const HeroSection = () => {
           <div
             className="w-px h-16"
             style={{
-              background: 'linear-gradient(to bottom, transparent, rgba(185,146,79,0.5), transparent)',
-              animation: 'scroll-pulse 2s ease-out forwards',
+              background: "linear-gradient(to bottom, transparent, rgba(185,146,79,0.5), transparent)",
+              animation: "scroll-pulse 2s ease-out forwards",
             }}
           />
           <style>{`
