@@ -24,7 +24,7 @@ const stackedLines = [
 
 const BrandsShowcaseSection = () => {
   return (
-    <section id="brands-showcase" style={{ padding: '120px 0', background: 'var(--color-surface)' }}>
+    <section id="brands-showcase" style={{ padding: 'clamp(64px, 10vw, 120px) 0', background: 'var(--color-surface)' }}>
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
