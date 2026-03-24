@@ -56,6 +56,9 @@ const TheOfferSection = () => {
            <p>
              The goal isn't just more revenue. It's making what you're already capable of generating — while working less, living better, and building equity in something that lasts. Most partners add $500K–$1M+ annually. Many do it while seeing fewer patients than before.
            </p>
+           <p>
+             We start with the life you want. Then we build the business to produce it. Not a copied playbook. Not a system that worked for someone else. Everything — the brand, the content, the patient systems, the growth strategy — is built around you specifically. That's why 41+ of our partners have crossed 8 figures. And why our partnerships are limited to 30 per year.
+           </p>
         </motion.div>
 
         {/* Offer statement — pull quote with left border */}

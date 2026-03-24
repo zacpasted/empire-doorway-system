@@ -50,16 +50,16 @@ const SelectivitySection = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            Yes — our partners often add $500K–$1M+ in additional aesthetic production. But that's not the full story.
+            If you want a business-in-a-box, a templated system, or an agency that stacks clients — this isn't for you. That approach exists. It just doesn't work at the level you're building toward.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            Growth without structure creates more stress. More patients. More complexity. Less freedom. We build systems designed to do the opposite.
+            This is for the dentist who wants to define the life first. The hours. The cases. The income. The freedom. Then build the practice to produce exactly that.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            We build brands that attract. Systems that convert. Infrastructure that runs. So production increases — while your day-to-day involvement decreases.
+            Every partnership is different because every partner is different. The system bends to you. Not the other way around.
           </p>
           <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
-            That's where real leverage begins.
+            That's why 41+ of our partners have crossed 8 figures. Not because we handed them a playbook. Because we built everything around the specific life they wanted to live.
           </p>
         </motion.div>
 
