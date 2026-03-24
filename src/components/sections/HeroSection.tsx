@@ -58,20 +58,6 @@ const HeroSection = () => {
         />
 
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
-          {/* Element 1 — Wordmark */}
-          <div className="flex flex-col items-center mb-3">
-            <span className="font-display text-[16px] tracking-[0.15em] uppercase" style={{ color: '#F5F0E8' }}>
-              PASTED
-            </span>
-            <span className="text-[9px] tracking-[0.3em] uppercase mt-0.5 font-sans" style={{ color: 'rgba(245,240,232,0.4)' }}>
-              Where Ordinary Ends
-            </span>
-          </div>
-
-          {/* Element 2 — Credential strip */}
-          <p className="text-[10px] tracking-[0.22em] uppercase font-sans text-center mb-5" style={{ color: 'rgba(185,146,79,0.8)' }}>
-            You Didn't Train to Run a Business. We Did.
-          </p>
 
           {/* Element 3 — H1 (THE DOMINANT ELEMENT) */}
           <h1
@@ -158,20 +144,6 @@ const HeroSection = () => {
 
       <div className="container relative z-10 max-w-5xl mx-auto px-4">
         <motion.div className="text-center mb-8" style={{ opacity }}>
-          {/* Wordmark */}
-          <div className="flex flex-col items-center mb-3">
-            <span className="font-display text-lg tracking-[0.15em] uppercase" style={{ color: '#F5F0E8' }}>
-              PASTED
-            </span>
-            <span className="text-[9px] tracking-[0.4em] uppercase mt-0.5 font-sans" style={{ color: 'rgba(245,240,232,0.4)' }}>
-              Where Ordinary Ends
-            </span>
-          </div>
-
-          {/* Credential bar */}
-          <p className="text-[11px] tracking-[0.2em] uppercase font-sans mb-4" style={{ color: 'rgba(185,146,79,0.7)' }}>
-            $1M+ Avg. Annual Growth · 97% Retention · Custom Operating Partner
-          </p>
 
           {/* H1 — 72px desktop */}
           <h1
