@@ -97,7 +97,7 @@ const HeroSection = () => {
               marginBottom: '24px',
             }}
           >
-            We run brand, content, ads, and patient systems for the world's top aesthetic dentists. $100M+ in case revenue generated. 41+ clinics scaled to 8 figures annually.
+            While you're in the chair, we're building the practice around you. Brand. Content. Ads. Systems. The world's most trusted growth partnership in aesthetic dentistry. $100M+ generated. 41+ clinics at 8 figures. 30 spots open annually.
           </p>
 
           {/* Element 5 — CTA button */}
