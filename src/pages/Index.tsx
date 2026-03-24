@@ -77,13 +77,10 @@ const Index = () => {
       <PartnerRosterTicker />
       
       <Suspense fallback={<SectionLoader />}>
-        {/* Mobile: Calendly at position 3 (before Authority) */}
-        {isMobile && <CalendlySection />}
-
-        {/* 3/4. Authority */}
+        {/* Authority */}
         <AnimatedSection><AuthoritySection /></AnimatedSection>
         
-        {/* Desktop: Calendly at position 4 (after Authority) */}
+        {/* Calendly — desktop only (mobile has it in the hero) */}
         {!isMobile && <CalendlySection />}
         
         {/* 5. Video Testimonials */}
