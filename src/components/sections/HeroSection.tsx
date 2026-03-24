@@ -178,9 +178,9 @@ const HeroSection = () => {
           <h1 className="font-serif text-foreground mb-4 md:mb-5 leading-[1.1] tracking-[-0.01em] uppercase">
             {isMobile ? (
               <span className="block text-[40px] font-bold leading-[1.08]">
-                {h1Lines.map((line, i) => (
-                  <span key={i} className="block">{line}</span>
-                ))}
+                <span className="block">THE PRACTICE <span className="text-primary">YOU WANT.</span></span>
+                <span className="block">BUILT BY THE TEAM</span>
+                <span className="block">BEHIND <span className="text-primary">THE BEST.</span></span>
               </span>
             ) : (
               <motion.span
@@ -189,11 +189,9 @@ const HeroSection = () => {
                 initial="hidden"
                 animate="visible"
               >
-                {h1Lines.map((line, i) => (
-                  <motion.span key={i} className="block" variants={wordChild}>
-                    {line}
-                  </motion.span>
-                ))}
+                <motion.span className="block" variants={wordChild}>THE PRACTICE <span className="text-primary">YOU WANT.</span></motion.span>
+                <motion.span className="block" variants={wordChild}>BUILT BY THE TEAM</motion.span>
+                <motion.span className="block" variants={wordChild}>BEHIND <span className="text-primary">THE BEST.</span></motion.span>
               </motion.span>
             )}
           </h1>
