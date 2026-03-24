@@ -77,15 +77,15 @@ const HeroSection = () => {
           <h1
             className="font-serif font-bold text-center uppercase mb-2"
             style={{
-              fontSize: '52px',
-              lineHeight: '1.0',
+              fontSize: '44px',
+              lineHeight: '1.05',
               letterSpacing: '-0.02em',
             }}
           >
             <span className="block" style={{ color: '#F5F0E8' }}>THE PRACTICE</span>
             <span className="block text-primary">YOU WANT.</span>
-            <span className="block" style={{ color: '#F5F0E8' }}>BUILT BY THE TEAM</span>
-            <span className="block text-primary">BEHIND THE BEST.</span>
+            <span className="block" style={{ color: '#F5F0E8' }}>BUILT BY THE BEST</span>
+            <span className="block text-primary">IN THE WORLD.</span>
           </h1>
 
           {/* Element 4 — Subheadline */}
