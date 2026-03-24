@@ -22,7 +22,7 @@ const TheOfferSection = () => {
   };
 
   return (
-    <section ref={ref} style={{ padding: '120px 0' }}>
+    <section ref={ref} style={{ padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container max-w-3xl mx-auto px-4">
         <motion.p
           className="section-label text-center justify-center mb-4"
