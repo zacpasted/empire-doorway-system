@@ -11,21 +11,76 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+const stackedLines = [
+  "Your brand is not just graphics.",
+  "It's how your phone is answered.",
+  "How your consultation flows.",
+  "How your photography looks.",
+  "How your space feels.",
+  "How your team speaks.",
+  "How your content moves.",
+  "How your systems operate.",
+];
+
 const BrandsShowcaseSection = () => {
   return (
     <section id="brands-showcase" className="py-24 md:py-34 bg-secondary/20">
       <div className="container max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <p className="section-label text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">
-            The Work
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="font-sans text-[12px] md:text-[11px] tracking-[0.3em] text-foreground/50 uppercase mb-4">
+            The Brand
           </p>
-          <h2 className="text-[36px] md:text-4xl font-serif text-foreground mb-4">
-            The work behind the names.
+          <h2 className="text-[36px] md:text-[48px] font-serif font-bold text-foreground mb-4 leading-tight">
+            Brand is not decoration. It's direction.
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            The strategic framework behind the most recognised practices in aesthetic dentistry.
+          <p className="font-serif italic text-[18px] md:text-[22px] text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            We build identities, systems, and experiences that make practices impossible to compare — and impossible to ignore.
           </p>
         </div>
+
+        {/* Body copy */}
+        <div className="text-center max-w-[680px] mx-auto space-y-6 mb-14">
+          <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+            Most dental branding starts with colours, logos, and typography. We start with belief. Because patients don't choose based on credentials alone. They choose based on how a practice makes them feel — long before they ever walk through the door.
+          </p>
+          <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+            Our branding team is intentionally recruited outside of dentistry. From hospitality. Fashion. Film. Luxury retail. Experience design. We've brought talent from environments like One Hotels, Paramount, Disney, Yves Saint Laurent, Acne Studios, and Rosewood — places where brand is not visual. It's lived.
+          </p>
+          <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+            Because nothing we build should feel dental. It should feel unmistakably you.
+          </p>
+        </div>
+
+        {/* Stacked italic lines */}
+        <div className="text-center mb-14 space-y-3">
+          {stackedLines.map((line) => (
+            <p
+              key={line}
+              className="font-serif italic text-[20px] md:text-[24px] text-foreground/80 leading-relaxed"
+            >
+              {line}
+            </p>
+          ))}
+        </div>
+
+        {/* Remaining body paragraphs */}
+        <div className="text-center max-w-[680px] mx-auto space-y-6 mb-14">
+          <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+            Brand informs systems. Systems reinforce brand. Content amplifies both. When these elements align, differentiation stops being a marketing tactic — and becomes your reality.
+          </p>
+          <p className="font-sans text-[16px] text-muted-foreground leading-relaxed">
+            We don't fit practices into a mould. We design identities that break them. Because the strongest brands don't look like dentistry. They redefine it.
+          </p>
+        </div>
+
+        {/* Closing gold italic line */}
+        <p
+          className="text-[13px] italic text-center mb-16 max-w-xl mx-auto font-sans"
+          style={{ color: 'rgba(185,146,79,0.7)' }}
+        >
+          How you do one thing is how patients assume you do everything.
+        </p>
 
         <Carousel
           opts={{
@@ -41,7 +96,6 @@ const BrandsShowcaseSection = () => {
                   to={`/case-study/${brand.slug}`}
                   className="group block text-left bg-background rounded-xl p-6 border border-border/50 transition-all duration-250 hover:border-primary/50 hover:scale-[1.015] hover:shadow-lg h-full focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
                 >
-                  {/* Brand thumbnail with grayscale treatment */}
                   <div className="aspect-video bg-secondary/50 rounded-lg mb-5 flex items-center justify-center overflow-hidden">
                     {brand.thumbnail ? (
                       <OptimizedImage 
