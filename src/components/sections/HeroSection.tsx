@@ -97,7 +97,7 @@ const HeroSection = () => {
               marginBottom: '24px',
             }}
           >
-            Built by the team behind the best clinics in the world.
+            Built by the team behind the most recognised names in aesthetic dentistry.
           </p>
 
           {/* Element 5 — CTA button */}
