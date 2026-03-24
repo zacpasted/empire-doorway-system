@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 const results = [
   {
     name: "Dr. Drew Ballard",
-    context: "Founder, Halo Veneers · Phoenix, AZ",
+    context: "Founder, Halo Veneers · Gilbert, AZ",
     result: "$0 → $2M in aesthetic case revenue · 18 months",
     subResult: "Now works 3 days/week, 9 months/year",
   },
