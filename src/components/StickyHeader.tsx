@@ -54,12 +54,12 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
           onClick={handleClick}
           className="font-sans uppercase transition-all duration-300"
           style={{
-            fontSize: '12px',
+            fontSize: window.innerWidth < 768 ? '10px' : '12px',
             fontWeight: 500,
-            letterSpacing: '0.18em',
+            letterSpacing: '0.15em',
             background: '#B8924F',
             color: '#0A0906',
-            padding: '10px 24px',
+            padding: window.innerWidth < 768 ? '8px 16px' : '10px 24px',
             border: 'none',
             borderRadius: '10px',
           }}
@@ -70,7 +70,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             (e.currentTarget as HTMLElement).style.background = '#B8924F';
           }}
         >
-          BOOK DISCOVERY CALL →
+          {window.innerWidth < 768 ? 'BOOK CALL →' : 'BOOK DISCOVERY CALL →'}
         </button>
       </div>
     </header>
