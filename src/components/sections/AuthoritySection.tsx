@@ -197,7 +197,7 @@ const AuthoritySection = () => {
             Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-            30 spots annually · Reviewed within 48 hours
+            30 clinics annually · Reviewed within 48 hours
           </p>
         </motion.div>
       </div>
