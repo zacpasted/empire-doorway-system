@@ -1,13 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Index from "./Index";
 
 const Discover = () => {
+  const attempted = useRef(false);
+
   useEffect(() => {
-    // Small delay to ensure the page has rendered before scrolling
-    const timer = setTimeout(() => {
-      document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 500);
-    return () => clearTimeout(timer);
+    if (attempted.current) return;
+    attempted.current = true;
+
+    const scrollToCalendly = () => {
+      const el = document.getElementById("eligibility-form");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        return true;
+      }
+      return false;
+    };
+
+    // Poll until the lazy-loaded section is in the DOM
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      if (scrollToCalendly() || attempts > 20) {
+        clearInterval(interval);
+      }
+    }, 250);
+
+    return () => clearInterval(interval);
   }, []);
 
   return <Index />;
