@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
+import pastedEmblem from "@/assets/pasted-logo-emblem.png";
 
 interface StickyHeaderProps {
   onApplyClick?: () => void;
