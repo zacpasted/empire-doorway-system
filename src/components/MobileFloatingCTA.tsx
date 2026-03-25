@@ -58,7 +58,7 @@ const MobileFloatingCTA = () => {
                 background: '#B8924F',
                 color: '#0A0906',
                 border: 'none',
-                borderRadius: 0,
+                borderRadius: '10px',
               }}
             >
               <ArrowUp className="w-4 h-4" />
