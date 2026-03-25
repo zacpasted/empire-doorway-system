@@ -459,7 +459,7 @@ const ProblemSolutionSection = () => {
             whileTap={{ scale: 0.98 }}
             onClick={(e) => {
               e.preventDefault();
-              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'Apply for Partnership', section: 'problem-solution' });
+              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'Book Discovery Call', section: 'problem-solution' });
               document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
           >
