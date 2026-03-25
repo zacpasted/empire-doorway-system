@@ -18,6 +18,44 @@ const STATS = [
   { value: "30", label: "Clinics / Year" },
 ];
 
+const TESTIMONIAL_VIDEO_IDS = ["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"];
+
+const VideoProofBlock = () => {
+  const blockRef = useRef<HTMLDivElement>(null);
+  const [isVidVisible, setIsVidVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVidVisible(true); },
+      { threshold: 0.1, rootMargin: "200px" }
+    );
+    if (blockRef.current) observer.observe(blockRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useWistiaLoader(TESTIMONIAL_VIDEO_IDS, { loadOnMount: isVidVisible });
+
+  return (
+    <div ref={blockRef} className="space-y-6">
+      <div className="text-center">
+        <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary mb-3">Hear It Directly</p>
+        <p className="text-sm text-muted-foreground">Unscripted. From dentists who've been through it.</p>
+      </div>
+      {isVidVisible && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {TESTIMONIAL_VIDEO_IDS.map((videoId) => (
+            <div key={videoId} className="rounded-lg overflow-hidden border border-border/30 bg-card/20">
+              <style>{getWistiaPlaceholderStyles(videoId, "177.78%")}</style>
+              {/* @ts-ignore */}
+              <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default"></wistia-player>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Discover = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "100px" });
