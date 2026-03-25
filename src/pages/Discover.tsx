@@ -24,7 +24,7 @@ const Discover = () => {
   const [widgetReady, setWidgetReady] = useState(false);
 
   useEffect(() => {
-    const existing = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+    const existing = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]') as HTMLScriptElement | null;
     if (!existing) {
       const script = document.createElement("script");
       script.src = "https://assets.calendly.com/assets/external/widget.js";
@@ -32,7 +32,20 @@ const Discover = () => {
       script.onload = () => setScriptLoaded(true);
       document.body.appendChild(script);
     } else {
-      setScriptLoaded(true);
+      // Script tag exists — check if already loaded or wait for it
+      if ((window as any).Calendly) {
+        setScriptLoaded(true);
+      } else {
+        existing.addEventListener("load", () => setScriptLoaded(true));
+        // Fallback: poll briefly in case load event already fired
+        const timer = setInterval(() => {
+          if ((window as any).Calendly) {
+            setScriptLoaded(true);
+            clearInterval(timer);
+          }
+        }, 200);
+        setTimeout(() => clearInterval(timer), 5000);
+      }
     }
   }, []);
 
