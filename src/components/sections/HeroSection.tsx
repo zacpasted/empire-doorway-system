@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
+import pastedEmblem from "@/assets/pasted-logo-emblem.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import LogoMarquee from "@/components/sections/hero/LogoMarquee";
@@ -59,8 +60,10 @@ const HeroSection = () => {
 
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
           {/* Brand wordmark */}
-          <div className="text-center mb-5">
-            <img src={pastedWordmark} alt="Pasted" className="h-8 mx-auto" />
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <img src={pastedWordmark} alt="Pasted" className="h-7" />
+            <div className="w-px h-5 bg-primary/30" />
+            <img src={pastedEmblem} alt="Pasted emblem" className="h-7" />
           </div>
 
           {/* H1 */}
@@ -150,7 +153,11 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: APPLE_EASE }}
         >
-          <img src={pastedWordmark} alt="Pasted" className="h-10 mx-auto" />
+          <div className="flex items-center justify-center gap-4">
+            <img src={pastedWordmark} alt="Pasted" className="h-9" />
+            <div className="w-px h-6 bg-primary/30" />
+            <img src={pastedEmblem} alt="Pasted emblem" className="h-9" />
+          </div>
         </motion.div>
 
         <motion.div className="text-center mb-8" style={{ opacity }}>
