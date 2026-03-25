@@ -104,7 +104,7 @@ const Discover = () => {
     <div className="min-h-screen bg-background text-foreground">
       {/* Minimal top bar with logo */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
-        <div className="container max-w-4xl mx-auto px-4 py-3 flex items-center justify-center">
+        <div className="container max-w-4xl mx-auto px-4 py-2 flex items-center justify-center">
           <a href="/">
             <img src={pastedWordmark} alt="PASTED" className="h-4 md:h-5 opacity-80 hover:opacity-100 transition-opacity" />
           </a>
