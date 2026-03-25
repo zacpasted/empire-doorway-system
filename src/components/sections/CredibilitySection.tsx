@@ -61,7 +61,7 @@ const CredibilitySection = () => {
             Retention this high doesn't happen without real results.
           </p>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl mx-auto">
-            A 97% retention rate since 2019 — in an industry where most agencies churn 62%+ of clients monthly. That difference is structural.
+            A 97% retention rate since 2022 — in an industry where most agencies churn 62%+ of clients monthly. That difference is structural.
           </p>
         </motion.div>
       </div>

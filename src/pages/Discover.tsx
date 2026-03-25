@@ -298,7 +298,7 @@ const Discover = () => {
               { value: "5+ Years", label: "Average Partnership" },
               { value: "0%", label: "Templated Work" },
               { value: "3.2×", label: "Avg. ROI on Ad Spend" },
-              { value: "Since 2019", label: "Industry Track Record" },
+              { value: "Since 2022", label: "Industry Track Record" },
             ].map((s) => (
               <div
                 key={s.label}
@@ -321,7 +321,7 @@ const Discover = () => {
               Retention this high doesn't happen without real results.
             </p>
             <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
-              97% partner retention since 2019 — in an industry where most agencies churn 62%+ of clients monthly.
+              97% partner retention since 2022 — in an industry where most agencies churn 62%+ of clients monthly.
             </p>
           </motion.div>
         </div>

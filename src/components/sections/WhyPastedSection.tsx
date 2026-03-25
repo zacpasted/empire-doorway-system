@@ -21,7 +21,7 @@ const WhyPastedSection = () => {
           </div>
           <div className="text-center p-8 border border-border/50 rounded-lg bg-card/30">
             <p className="text-4xl md:text-5xl font-serif text-primary mb-3">97%</p>
-            <p className="text-muted-foreground">Client retention rate since 2019</p>
+            <p className="text-muted-foreground">Client retention rate since 2022</p>
           </div>
           <div className="text-center p-8 border border-border/50 rounded-lg bg-card/30">
             <p className="text-4xl md:text-5xl font-serif text-primary mb-3">3+ Years</p>
