@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import { useIsMobile } from "@/hooks/use-mobile";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
 import pastedEmblem from "@/assets/pasted-logo-emblem.png";
 
@@ -9,6 +10,7 @@ interface StickyHeaderProps {
 
 const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,12 +56,12 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
           onClick={handleClick}
           className="font-sans uppercase transition-all duration-300"
           style={{
-            fontSize: window.innerWidth < 768 ? '10px' : '12px',
+            fontSize: isMobile ? '10px' : '12px',
             fontWeight: 500,
             letterSpacing: '0.15em',
             background: '#B8924F',
             color: '#0A0906',
-            padding: window.innerWidth < 768 ? '8px 16px' : '10px 24px',
+            padding: isMobile ? '8px 14px' : '10px 24px',
             border: 'none',
             borderRadius: '10px',
           }}
@@ -70,7 +72,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             (e.currentTarget as HTMLElement).style.background = '#B8924F';
           }}
         >
-          {window.innerWidth < 768 ? 'BOOK CALL →' : 'BOOK DISCOVERY CALL →'}
+          {isMobile ? 'BOOK CALL →' : 'BOOK DISCOVERY CALL →'}
         </button>
       </div>
     </header>
