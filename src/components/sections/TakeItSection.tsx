@@ -65,7 +65,7 @@ const TakeItSection = ({ onApplyClick }: TakeItSectionProps) => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            30 practices per year. Applications reviewed within 48 hours.
+            30 clinics per year. Applications reviewed within 48 hours.
           </motion.p>
         </div>
       </div>
