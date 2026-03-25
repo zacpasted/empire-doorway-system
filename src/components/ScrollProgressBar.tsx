@@ -1,18 +1,12 @@
 import { useEffect } from "react";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
 
 const ScrollProgressBar = () => {
-  useEffect(() => {
-    const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      document.documentElement.style.setProperty("--scroll-progress", `${progress}%`);
-    };
+  const { scrollPercent } = useScrollPosition();
 
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-    return () => window.removeEventListener("scroll", updateProgress);
-  }, []);
+  useEffect(() => {
+    document.documentElement.style.setProperty("--scroll-progress", `${scrollPercent * 100}%`);
+  }, [scrollPercent]);
 
   return <div className="scroll-progress-bar" />;
 };
