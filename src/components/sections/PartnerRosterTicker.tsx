@@ -68,11 +68,6 @@ const PartnerRosterTicker = () => {
         }
       `}</style>
 
-      <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center pl-6 pr-8">
-        <span className="font-sans uppercase text-primary font-semibold whitespace-nowrap" style={{ fontSize: '10px', letterSpacing: '0.22em' }}>
-          Partner Roster
-        </span>
-      </div>
 
       <div
         className="py-0"
