@@ -148,7 +148,7 @@ const CalendlySection = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Ready now? Here's what happens next.
+                The practices that reach the highest level don't wait for the right moment. They make the decision.
               </motion.h2>
               <motion.p
                 className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-4"
@@ -156,7 +156,9 @@ const CalendlySection = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                A 45-minute call with Zac or Alan. We'll map where your practice is leaving money on the table, what separates you from the top tier, and whether the partnership is the right fit. If it's not, we'll tell you directly.
+                45 minutes with Zac or Alan. We'll map exactly where your practice is leaving production on the table, what separates the top aesthetic practices from everyone else, and whether PASTED is the right partner to build that gap into results. We start with the life you want — and work backward to build the practice that produces it.
+                <br /><br />
+                If it's not the right fit, we'll tell you directly. We welcome you to do the same. Success, even when inevitable, requires connection.
               </motion.p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
                 <span>Average call: 45 min – 1 hour</span>
