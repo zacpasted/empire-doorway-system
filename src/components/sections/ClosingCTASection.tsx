@@ -79,7 +79,7 @@ const ClosingCTASection = () => {
             (e.currentTarget as HTMLElement).style.transform = 'none';
           }}
         >
-          Book Discovery Call →
+          Unlock My Dream Practice →
         </a>
         
         <p className="mt-8" style={{ fontSize: '11px', color: 'var(--color-text-muted)', letterSpacing: '0.1em' }}>
