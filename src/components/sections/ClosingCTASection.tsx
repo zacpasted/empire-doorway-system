@@ -53,7 +53,7 @@ const ClosingCTASection = () => {
           href="#eligibility-form"
           onClick={(e) => {
             e.preventDefault();
-            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Partnership', section: 'closing' });
+            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Book Discovery Call', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
           className="inline-block font-sans uppercase transition-all duration-300 w-full sm:w-auto text-center"
@@ -79,7 +79,7 @@ const ClosingCTASection = () => {
             (e.currentTarget as HTMLElement).style.transform = 'none';
           }}
         >
-          Apply for Partnership →
+          Book Discovery Call →
         </a>
         
         <p className="mt-8" style={{ fontSize: '11px', color: 'var(--color-text-muted)', letterSpacing: '0.1em' }}>

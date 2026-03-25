@@ -134,7 +134,7 @@ const getScoreTier = (score: number): ScoreTier => {
     label: "Acceleration Stage",
     headline: "You're Good — But 'Good' Isn't 'Category Leader'",
     description: "You're operating well above average. The question is whether you want to optimize incrementally or dominate your market entirely. The top 1% of aesthetic practices operate with a level of brand infrastructure most never build.",
-    ctaText: "Apply for Partnership",
+    ctaText: "Book Discovery Call",
   };
   return {
     label: "Elite Stage",

@@ -17,7 +17,7 @@ const TheOfferSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: 'offer-cta', ctaText: 'Apply for Partnership', section: 'the-offer' });
+    trackCTAClick({ ctaId: 'offer-cta', ctaText: 'Book Discovery Call', section: 'the-offer' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -130,7 +130,7 @@ const TheOfferSection = () => {
               (e.currentTarget as HTMLElement).style.boxShadow = '0 0 24px rgba(185,146,79,0.15)';
             }}
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
             30 practices per year · Reviewed within 48 hours · Not all accepted

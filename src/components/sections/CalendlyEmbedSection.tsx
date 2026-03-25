@@ -57,7 +57,7 @@ const CalendlyEmbedSection = () => {
             Final Step
           </p>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
-            Apply for Partnership
+            Book Discovery Call
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Schedule a brief alignment conversation with <span className="text-foreground">Zac Orender</span> to confirm strategic fit and discuss your trajectory.

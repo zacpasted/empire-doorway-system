@@ -459,14 +459,14 @@ const ProblemSolutionSection = () => {
             whileTap={{ scale: 0.98 }}
             onClick={(e) => {
               e.preventDefault();
-              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'Apply for Partnership', section: 'problem-solution' });
+              trackCTAClick({ ctaId: 'problem-solution', ctaText: 'Book Discovery Call', section: 'problem-solution' });
               document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
           >
             <span className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
             <span className="absolute inset-0 bg-gradient-to-r from-primary/90 via-red-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
-            <span className="relative z-10">Apply for Partnership →</span>
+            <span className="relative z-10">Book Discovery Call →</span>
             <ArrowRight className="relative z-10 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
           </motion.a>
           <p className="text-xs text-muted-foreground/50 mt-4">

@@ -25,7 +25,7 @@ const MobileFloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Apply for Partnership', section: 'floating' });
+    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Book Discovery Call', section: 'floating' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -62,7 +62,7 @@ const MobileFloatingCTA = () => {
               }}
             >
               <ArrowUp className="w-4 h-4" />
-              APPLY FOR PARTNERSHIP
+              BOOK DISCOVERY CALL
             </button>
             <p className="text-center mt-2 font-sans" style={{ fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-subtle)' }}>
               30 spots · 48hr review · Not all accepted

@@ -20,7 +20,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Apply for Partnership', section: 'header' });
+    trackCTAClick({ ctaId: 'sticky-header', ctaText: 'Book Discovery Call', section: 'header' });
     if (onApplyClick) {
       onApplyClick();
     } else {
@@ -67,7 +67,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             (e.currentTarget as HTMLElement).style.background = '#B8924F';
           }}
         >
-          APPLY FOR PARTNERSHIP →
+          BOOK DISCOVERY CALL →
         </button>
       </div>
     </header>

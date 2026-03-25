@@ -85,14 +85,14 @@ const CompressedResultsSection = () => {
             href="#eligibility-form"
             onClick={(e) => {
               e.preventDefault();
-              trackCTAClick({ ctaId: 'compressed-results', ctaText: 'Apply for Partnership', section: 'compressed-results' });
+              trackCTAClick({ ctaId: 'compressed-results', ctaText: 'Book Discovery Call', section: 'compressed-results' });
               document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
             className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-medium tracking-wide uppercase bg-primary text-primary-foreground rounded-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="relative z-10">Apply for Partnership →</span>
+            <span className="relative z-10">Book Discovery Call →</span>
           </motion.a>
           <p className="mt-4 text-xs text-muted-foreground/50">
             30 practices per year · Reviewed within 48 hours · Not all accepted

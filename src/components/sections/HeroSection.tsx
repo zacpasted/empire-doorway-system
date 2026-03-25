@@ -41,7 +41,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: "hero-instant-cta", ctaText: "Apply for Partnership", section: "hero-above-fold" });
+    trackCTAClick({ ctaId: "hero-instant-cta", ctaText: "Book Discovery Call", section: "hero-above-fold" });
     document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
@@ -109,7 +109,7 @@ const HeroSection = () => {
               borderRadius: 0,
             }}
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </button>
 
           {/* Microcopy */}
@@ -214,7 +214,7 @@ const HeroSection = () => {
                 (e.currentTarget as HTMLElement).style.transform = 'none';
               }}
             >
-              Apply for Partnership →
+              Book Discovery Call →
             </button>
             <p className="text-xs mt-2 tracking-wide" style={{ color: 'var(--color-text-subtle)' }}>
               Reviewed within 48 hours · Strategic fit required · Not all accepted

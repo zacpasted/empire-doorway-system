@@ -16,7 +16,7 @@ const AuthoritySection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: 'authority-cta', ctaText: 'Apply for Partnership', section: 'authority' });
+    trackCTAClick({ ctaId: 'authority-cta', ctaText: 'Book Discovery Call', section: 'authority' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -194,7 +194,7 @@ const AuthoritySection = () => {
               (e.currentTarget as HTMLElement).style.transform = 'none';
             }}
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
             30 spots annually · Reviewed within 48 hours

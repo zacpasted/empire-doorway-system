@@ -4,7 +4,7 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 const MidPageCTASection = () => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackCTAClick({ ctaId: 'mid-page-interrupt', ctaText: 'Apply for Partnership', section: 'mid-page-cta' });
+    trackCTAClick({ ctaId: 'mid-page-interrupt', ctaText: 'Book Discovery Call', section: 'mid-page-cta' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -49,7 +49,7 @@ const MidPageCTASection = () => {
             <span className="absolute inset-0 bg-primary/0 group-hover:bg-primary transition-all duration-300" />
             
             <span className="relative z-10 text-primary group-hover:text-primary-foreground transition-colors duration-300">
-              Apply for Partnership
+              Book Discovery Call
             </span>
             
             {/* Animated arrow */}

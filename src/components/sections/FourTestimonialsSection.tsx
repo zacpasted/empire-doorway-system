@@ -32,7 +32,7 @@ const FourTestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: 'post-testimonials-cta', ctaText: 'Apply for Partnership', section: 'testimonials' });
+    trackCTAClick({ ctaId: 'post-testimonials-cta', ctaText: 'Book Discovery Call', section: 'testimonials' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -112,7 +112,7 @@ const FourTestimonialsSection = () => {
               (e.currentTarget as HTMLElement).style.boxShadow = 'none';
             }}
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
             30 practices per year · Reviewed within 48 hours · Not all accepted

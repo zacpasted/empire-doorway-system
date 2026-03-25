@@ -280,7 +280,7 @@ const TheTruthSection = () => {
               href="#eligibility-form"
               onClick={(e) => {
                 e.preventDefault();
-                trackCTAClick({ ctaId: 'the-truth', ctaText: 'Apply for Partnership', section: 'the-truth' });
+                trackCTAClick({ ctaId: 'the-truth', ctaText: 'Book Discovery Call', section: 'the-truth' });
                 document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }}
               className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-medium tracking-wide uppercase bg-primary text-primary-foreground rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-[1.02]"
@@ -289,7 +289,7 @@ const TheTruthSection = () => {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
               <span className="absolute inset-0 bg-gradient-to-r from-primary/90 via-red-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative z-10">Apply for Partnership →</span>
+              <span className="relative z-10">Book Discovery Call →</span>
             </motion.a>
           </div>
         </motion.div>
