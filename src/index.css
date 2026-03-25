@@ -179,6 +179,13 @@
   width: 100%;
   z-index: 1000;
   pointer-events: none;
+  contain: strict;
+}
+  height: 2px;
+  background: linear-gradient(to right, #B8924F var(--scroll-progress), transparent var(--scroll-progress));
+  width: 100%;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 /* Section label gold line */
