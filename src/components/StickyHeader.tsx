@@ -67,7 +67,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             (e.currentTarget as HTMLElement).style.background = '#B8924F';
           }}
         >
-          APPLY FOR PARTNERSHIP →
+          BOOK DISCOVERY CALL →
         </button>
       </div>
     </header>

@@ -214,7 +214,7 @@ const HeroSection = () => {
                 (e.currentTarget as HTMLElement).style.transform = 'none';
               }}
             >
-              Apply for Partnership →
+              Book Discovery Call →
             </button>
             <p className="text-xs mt-2 tracking-wide" style={{ color: 'var(--color-text-subtle)' }}>
               Reviewed within 48 hours · Strategic fit required · Not all accepted
