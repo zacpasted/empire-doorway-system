@@ -59,8 +59,10 @@ const HeroSection = () => {
 
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
           {/* Brand wordmark */}
-          <div className="text-center mb-5">
-            <img src={pastedWordmark} alt="Pasted" className="h-8 mx-auto" />
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <img src={pastedWordmark} alt="Pasted" className="h-7" />
+            <div className="w-px h-5 bg-primary/30" />
+            <img src={pastedEmblem} alt="Pasted emblem" className="h-7" />
           </div>
 
           {/* H1 */}
