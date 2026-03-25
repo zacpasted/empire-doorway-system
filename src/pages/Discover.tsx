@@ -7,6 +7,7 @@ import logoCocofloss from "@/assets/logos/cocofloss-white.png";
 import logoSolventum from "@/assets/logos/solventum-white.png";
 import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
 import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
+import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
