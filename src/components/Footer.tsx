@@ -1,4 +1,5 @@
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
+import pastedEmblem from "@/assets/pasted-logo-emblem.png";
 
 const Footer = () => {
   return (
