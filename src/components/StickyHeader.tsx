@@ -63,7 +63,7 @@ const StickyHeader = memo(({ onApplyClick }: StickyHeaderProps) => {
                 borderRadius: '10px',
               }}
             >
-              {isMobile ? 'BOOK CALL →' : 'BOOK DISCOVERY CALL →'}
+              {isMobile ? 'DISCOVER →' : 'DISCOVER →'}
             </button>
           </div>
         </motion.header>
