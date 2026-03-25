@@ -94,7 +94,7 @@ const PastedStudioCTA = () => (
         (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.5)';
       }}
     >
-      Book a Studio Consultation →
+      Learn More About Filming with Pasted →
     </button>
   </div>
 );
