@@ -17,7 +17,7 @@ const TheOfferSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: 'offer-cta', ctaText: 'Apply for Partnership', section: 'the-offer' });
+    trackCTAClick({ ctaId: 'offer-cta', ctaText: 'Book Discovery Call', section: 'the-offer' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
