@@ -83,7 +83,7 @@ const PastedStudioCTA = () => (
         border: '1px solid rgba(185,146,79,0.5)',
         background: 'transparent',
         padding: '14px 28px',
-        borderRadius: 0,
+        borderRadius: '6px',
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.background = 'rgba(185,146,79,0.06)';
@@ -204,7 +204,7 @@ const WistiaVideoEmbedSection = ({
                       border: '1px solid rgba(185,146,79,0.5)',
                       background: 'transparent',
                       padding: '14px 32px',
-                      borderRadius: 0,
+                      borderRadius: '6px',
                     }}
                     onMouseEnter={(e) => {
                       (e.currentTarget as HTMLElement).style.background = 'rgba(185,146,79,0.06)';

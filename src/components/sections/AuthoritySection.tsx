@@ -180,7 +180,7 @@ const AuthoritySection = () => {
               color: '#0A0906',
               padding: '18px 40px',
               border: 'none',
-              borderRadius: 0,
+              borderRadius: '6px',
               boxShadow: '0 0 24px rgba(185,146,79,0.15)',
             }}
             onMouseEnter={(e) => {
