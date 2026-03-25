@@ -1,157 +1,376 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { brands } from "@/data/brands";
 import OptimizedImage from "@/components/ui/optimized-image";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { motion, useInView } from "framer-motion";
 
-const stackedLines = [
-  "Your brand is not just graphics.",
-  "It's how your phone is answered.",
-  "How your consultation flows.",
-  "How your photography looks.",
-  "How your space feels.",
-  "How your team speaks.",
-  "How your content moves.",
-  "How your systems operate.",
+const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
+
+// Featured case studies with narrative arcs
+const featuredNarratives = [
+  {
+    slug: "onlyfangs",
+    before: "Viral attention with no structure.",
+    after: "A monetizable brand that scales beyond geography.",
+    pullQuote: "Momentum without architecture is just noise with an expiry date.",
+  },
+  {
+    slug: "dr-michaela-tozzi",
+    before: "Exceptional clinical work, invisible brand.",
+    after: "The definitive authority in luxury cosmetic dentistry.",
+    pullQuote: "Her work was already elite. The brand just hadn't caught up.",
+  },
+  {
+    slug: "dr-serena-wong",
+    before: "Quality without visibility. Demand without alignment.",
+    after: "A unified identity that attracts the right patients effortlessly.",
+    pullQuote: "The brand began to work for her instead of demanding more from her.",
+  },
+  {
+    slug: "dr-vik-ravoory",
+    before: "Young associate. No differentiation. No narrative.",
+    after: "Intentional brand, credible positioning, career control.",
+    pullQuote: "He stopped trying to fit existing molds and began operating from authorship.",
+  },
+  {
+    slug: "dr-nav-atwal",
+    before: "First brand outgrown. Next chapter undefined.",
+    after: "Unavoidable in Miami. Cultural operator, not just clinician.",
+    pullQuote: "He's not just becoming well known — he's becoming unavoidable.",
+  },
+  {
+    slug: "dr-nakul-ratra",
+    before: "Distinctive philosophy, zero brand infrastructure.",
+    after: "An identity rooted in warmth, restraint, and natural sophistication.",
+    pullQuote: "Beauty already exists within structure. His role is to bring it forward.",
+  },
 ];
 
 const BrandsShowcaseSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section id="brands-showcase" style={{ padding: 'clamp(64px, 10vw, 120px) 0', background: 'var(--color-surface)' }}>
+    <section
+      ref={ref}
+      id="brands-showcase"
+      style={{ padding: "clamp(64px, 10vw, 120px) 0", background: "var(--color-surface)" }}
+    >
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: APPLE_EASE }}
+        >
           <p className="section-label text-center justify-center mb-4">The Brand</p>
-          <h2 className="font-serif font-bold mb-4" style={{ fontSize: 'clamp(34px, 6vw, 52px)', color: 'var(--color-text)', lineHeight: '1.1', letterSpacing: '-0.01em' }}>
+          <h2
+            className="font-serif font-bold mb-5"
+            style={{
+              fontSize: "clamp(34px, 6vw, 52px)",
+              color: "var(--color-text)",
+              lineHeight: "1.1",
+              letterSpacing: "-0.01em",
+            }}
+          >
             Brand is not decoration. It's direction.
           </h2>
-          <p className="font-serif italic max-w-2xl mx-auto" style={{ fontSize: '20px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>
-            We build identities, systems, and experiences that make practices impossible to compare — and impossible to ignore.
+          <p
+            className="font-serif italic max-w-2xl mx-auto"
+            style={{ fontSize: "20px", color: "var(--color-text-muted)", lineHeight: "1.3" }}
+          >
+            Every practice below came to us at a different stage. Every one left with something
+            they didn't have before: clarity.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Body copy */}
-        <div className="text-center max-w-[680px] mx-auto space-y-6 mb-14" style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
-          <p>Most dental branding starts with colours, logos, and typography. We start with belief. Because patients don't choose based on credentials alone. They choose based on how a practice makes them feel — long before they ever walk through the door.</p>
-          <p>Our branding team is intentionally recruited outside of dentistry. From hospitality. Fashion. Film. Luxury retail. Experience design. We've brought talent from environments like One Hotels, Paramount, Disney, Yves Saint Laurent, Acne Studios, and Rosewood — places where brand is not visual. It's lived.</p>
-          <p>Because nothing we build should feel dental. It should feel unmistakably you.</p>
-        </div>
+        {/* Body intro */}
+        <motion.div
+          className="text-center max-w-[640px] mx-auto mb-16"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <p
+            className="font-sans"
+            style={{ fontSize: "15px", color: "var(--color-text-muted)", lineHeight: "1.8" }}
+          >
+            We don't run templates. We recruit from fashion, film, and hospitality — then build
+            identities so distinct they redefine the category. These are real transformations.
+          </p>
+        </motion.div>
 
-        {/* Stacked italic lines */}
-        <div className="text-center mb-14 space-y-3">
-          {stackedLines.map((line) => (
-            <p key={line} className="font-serif italic" style={{ fontSize: '22px', color: 'var(--color-text)', lineHeight: '1.3', opacity: 0.8 }}>
-              {line}
-            </p>
-          ))}
-        </div>
+        {/* Featured narrative cards — 2-col grid */}
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-16">
+          {featuredNarratives.map((narrative, index) => {
+            const brand = brands.find((b) => b.slug === narrative.slug);
+            if (!brand) return null;
 
-        {/* Remaining body */}
-        <div className="text-center max-w-[680px] mx-auto space-y-6 mb-14" style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
-          <p>Brand informs systems. Systems reinforce brand. Content amplifies both. When these elements align, differentiation stops being a marketing tactic — and becomes your reality.</p>
-          <p>We don't fit practices into a mould. We design identities that break them. Because the strongest brands don't look like dentistry. They redefine it.</p>
-        </div>
-
-        {/* Closing gold italic line */}
-        <p className="font-serif italic text-center mb-16 max-w-xl mx-auto" style={{ fontSize: '16px', color: 'rgba(185,146,79,0.7)', lineHeight: '1.75' }}>
-          How you do one thing is how patients assume you do everything.
-        </p>
-
-        <Carousel opts={{ align: "start", loop: true }} className="w-full">
-          <CarouselContent className="-ml-4">
-            {brands.map((brand) => (
-              <CarouselItem key={brand.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+            return (
+              <motion.div
+                key={brand.slug}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.15 + index * 0.1, ease: APPLE_EASE }}
+              >
                 <Link
                   to={`/case-study/${brand.slug}`}
-                  className="group block text-left p-6 transition-all duration-300 h-full"
+                  className="group block h-full transition-all duration-400"
                   style={{
-                    background: 'var(--color-bg)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: '2px',
+                    background: "var(--color-bg)",
+                    border: "1px solid var(--color-border)",
+                    borderRadius: "2px",
+                    overflow: "hidden",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.3)';
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(185,146,79,0.4)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)';
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
                   }}
                 >
-                  <div className="aspect-video mb-5 flex items-center justify-center overflow-hidden" style={{ background: 'var(--color-surface)', borderRadius: '2px' }}>
-                    {brand.thumbnail ? (
-                      <OptimizedImage 
-                        src={brand.thumbnail} 
-                        alt={brand.name}
-                        wrapperClassName="w-full h-full"
-                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-400"
-                      />
-                    ) : (
-                      <span className="font-sans" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>Coming Soon</span>
-                    )}
+                  {/* Thumbnail */}
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <OptimizedImage
+                      src={brand.thumbnail}
+                      alt={brand.name}
+                      wrapperClassName="w-full h-full"
+                      className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    />
                   </div>
-                  <h3 className="font-serif mb-2 group-hover:text-primary transition-colors" style={{ fontSize: '18px', color: 'var(--color-text)' }}>
-                    {brand.name}
-                  </h3>
-                  <p className="font-sans mb-4 line-clamp-2" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>{brand.tagline}</p>
-                  <div className="flex items-center gap-2 group-hover:text-primary transition-colors" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
-                    <span>View case study</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+                  {/* Narrative content */}
+                  <div className="p-6 md:p-8">
+                    {/* Name + tagline */}
+                    <div className="flex items-start justify-between mb-5">
+                      <div>
+                        <h3
+                          className="font-serif font-bold group-hover:text-primary transition-colors"
+                          style={{ fontSize: "22px", color: "var(--color-text)" }}
+                        >
+                          {brand.name}
+                        </h3>
+                        <p
+                          className="font-sans mt-1"
+                          style={{ fontSize: "13px", color: "var(--color-text-subtle)" }}
+                        >
+                          {brand.tagline}
+                        </p>
+                      </div>
+                      <ArrowRight
+                        className="w-5 h-5 flex-shrink-0 mt-1 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300"
+                      />
+                    </div>
+
+                    {/* Before → After arc */}
+                    <div
+                      className="mb-5 p-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                        borderRadius: "2px",
+                      }}
+                    >
+                      <div className="flex items-start gap-3 mb-3">
+                        <span
+                          className="font-sans uppercase flex-shrink-0 mt-0.5"
+                          style={{
+                            fontSize: "10px",
+                            letterSpacing: "0.15em",
+                            color: "var(--color-text-subtle)",
+                          }}
+                        >
+                          Before
+                        </span>
+                        <p
+                          className="font-sans"
+                          style={{ fontSize: "14px", color: "var(--color-text-muted)" }}
+                        >
+                          {narrative.before}
+                        </p>
+                      </div>
+                      <div
+                        className="w-full h-px mb-3"
+                        style={{ background: "var(--color-border)" }}
+                      />
+                      <div className="flex items-start gap-3">
+                        <span
+                          className="font-sans uppercase flex-shrink-0 mt-0.5"
+                          style={{
+                            fontSize: "10px",
+                            letterSpacing: "0.15em",
+                            color: "hsl(var(--primary))",
+                          }}
+                        >
+                          After
+                        </span>
+                        <p
+                          className="font-sans font-medium"
+                          style={{ fontSize: "14px", color: "var(--color-text)" }}
+                        >
+                          {narrative.after}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Pull quote */}
+                    <p
+                      className="font-serif italic"
+                      style={{
+                        fontSize: "15px",
+                        color: "var(--color-text-muted)",
+                        lineHeight: "1.5",
+                        borderLeft: "2px solid rgba(185,146,79,0.3)",
+                        paddingLeft: "16px",
+                      }}
+                    >
+                      "{narrative.pullQuote}"
+                    </p>
+
+                    {/* Services */}
+                    <div className="flex flex-wrap gap-2 mt-5">
+                      {brand.services.slice(0, 3).map((service) => (
+                        <span
+                          key={service}
+                          className="font-sans"
+                          style={{
+                            fontSize: "11px",
+                            color: "var(--color-text-subtle)",
+                            border: "1px solid var(--color-border)",
+                            padding: "4px 10px",
+                            borderRadius: "1px",
+                          }}
+                        >
+                          {service}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="flex justify-center gap-4 mt-8">
-            <CarouselPrevious className="static translate-y-0" />
-            <CarouselNext className="static translate-y-0" />
-          </div>
-        </Carousel>
+              </motion.div>
+            );
+          })}
+        </div>
 
-        {/* PASTED Branding CTA */}
-        <div className="mt-14 pt-10 text-center" style={{ borderTop: '1px solid var(--color-border-gold)' }}>
-          <p className="font-sans uppercase mb-3" style={{ fontSize: '11px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}>
-            PASTED Branding
-          </p>
-          <p className="font-sans mx-auto mb-6 max-w-[440px]" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
-            We are the best branding team in the world for aesthetic dental practices. If you want a brand built to the highest standard — not templated, not delegated — this is where that conversation starts.
+        {/* Remaining brands — compact row */}
+        {brands.filter((b) => !featuredNarratives.some((n) => n.slug === b.slug)).length > 0 && (
+          <motion.div
+            className="mb-14"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <p
+              className="font-sans uppercase text-center mb-6"
+              style={{
+                fontSize: "11px",
+                letterSpacing: "0.25em",
+                color: "var(--color-text-subtle)",
+              }}
+            >
+              More case studies
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {brands
+                .filter((b) => !featuredNarratives.some((n) => n.slug === b.slug))
+                .map((brand) => (
+                  <Link
+                    key={brand.slug}
+                    to={`/case-study/${brand.slug}`}
+                    className="group block p-4 transition-all duration-300"
+                    style={{
+                      background: "var(--color-bg)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "2px",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor =
+                        "rgba(185,146,79,0.3)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
+                    }}
+                  >
+                    <div
+                      className="aspect-[4/3] mb-3 overflow-hidden"
+                      style={{ borderRadius: "2px" }}
+                    >
+                      <OptimizedImage
+                        src={brand.thumbnail}
+                        alt={brand.name}
+                        wrapperClassName="w-full h-full"
+                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                      />
+                    </div>
+                    <h3
+                      className="font-serif group-hover:text-primary transition-colors"
+                      style={{ fontSize: "16px", color: "var(--color-text)" }}
+                    >
+                      {brand.name}
+                    </h3>
+                    <p
+                      className="font-sans mt-1"
+                      style={{ fontSize: "12px", color: "var(--color-text-muted)" }}
+                    >
+                      {brand.tagline}
+                    </p>
+                  </Link>
+                ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Closing philosophy */}
+        <motion.div
+          className="text-center pt-10"
+          style={{ borderTop: "1px solid var(--color-border-gold)" }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.9 }}
+        >
+          <p
+            className="font-serif italic max-w-lg mx-auto mb-6"
+            style={{ fontSize: "18px", color: "var(--color-text-muted)", lineHeight: "1.6" }}
+          >
+            How you do one thing is how patients assume you do everything.
           </p>
           <button
             onClick={() => {
-              trackCTAClick({ ctaId: "branding_consultation_cta", ctaText: "Book a Branding Consultation", section: "brands-showcase" });
-              document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+              trackCTAClick({
+                ctaId: "branding_consultation_cta",
+                ctaText: "Book Discovery Call",
+                section: "brands-showcase",
+              });
+              document
+                .getElementById("eligibility-form")
+                ?.scrollIntoView({ behavior: "smooth", block: "center" });
             }}
             className="inline-block font-sans uppercase transition-all duration-300"
             style={{
-              fontSize: '12px',
+              fontSize: "12px",
               fontWeight: 500,
-              letterSpacing: '0.18em',
-              color: '#B8924F',
-              border: '1px solid rgba(185,146,79,0.5)',
-              background: 'transparent',
-              padding: '14px 28px',
+              letterSpacing: "0.18em",
+              color: "#B8924F",
+              border: "1px solid rgba(185,146,79,0.5)",
+              background: "transparent",
+              padding: "14px 28px",
               borderRadius: 0,
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'rgba(185,146,79,0.06)';
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.8)';
+              (e.currentTarget as HTMLElement).style.background = "rgba(185,146,79,0.06)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(185,146,79,0.8)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'transparent';
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.5)';
+              (e.currentTarget as HTMLElement).style.background = "transparent";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(185,146,79,0.5)";
             }}
           >
-            Book a Branding Consultation →
+            Book Discovery Call →
           </button>
-          <p className="font-serif italic text-center mt-4 max-w-sm mx-auto" style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
-            Design, identity, and brand strategy for practices that refuse to look like everyone else.
-          </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
