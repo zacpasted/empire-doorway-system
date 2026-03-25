@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import VideoPlayer from "@/components/VideoPlayer";
 import LogoMarquee from "@/components/sections/hero/LogoMarquee";
