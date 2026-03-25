@@ -53,7 +53,7 @@ const ClosingCTASection = () => {
           href="#eligibility-form"
           onClick={(e) => {
             e.preventDefault();
-            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Apply for Partnership', section: 'closing' });
+            trackCTAClick({ ctaId: 'closing-cta', ctaText: 'Book Discovery Call', section: 'closing' });
             document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }}
           className="inline-block font-sans uppercase transition-all duration-300 w-full sm:w-auto text-center"

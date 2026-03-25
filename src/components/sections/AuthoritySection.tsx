@@ -16,7 +16,7 @@ const AuthoritySection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: 'authority-cta', ctaText: 'Apply for Partnership', section: 'authority' });
+    trackCTAClick({ ctaId: 'authority-cta', ctaText: 'Book Discovery Call', section: 'authority' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
