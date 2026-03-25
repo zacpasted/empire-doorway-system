@@ -116,60 +116,92 @@ const Discover = () => {
 
           {/* Hero authority block */}
           <motion.div
-            className="text-center mb-6 md:mb-12"
+            className="text-center mb-4 md:mb-12"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: APPLE_EASE }}
           >
-            <p className="text-[11px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-2">
+            <p className="text-[11px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-2 md:mb-2">
               The Global Standard in Dental Brand Growth
             </p>
 
             <h1
-              className="text-[36px] md:text-[48px] font-serif font-bold text-foreground mb-3"
-              style={{ lineHeight: "1.06", letterSpacing: "-0.02em" }}
+              className="text-[42px] md:text-[48px] font-serif font-bold text-foreground mb-3"
+              style={{ lineHeight: "1.02", letterSpacing: "-0.025em" }}
             >
               Your Practice Deserves<br />
-              a Partner, Not a Vendor.
+              a Partner,<br className="md:hidden" /> Not a Vendor.
             </h1>
 
-            <p className="text-muted-foreground max-w-lg mx-auto text-[15px] md:text-base leading-relaxed mb-5">
-              PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
+            <p className="text-muted-foreground max-w-lg mx-auto text-[15px] md:text-base leading-relaxed mb-4 md:mb-5">
+              PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out.
             </p>
 
-            {/* Stat pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-3">
-              {STATS.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border border-border/60 bg-card/50"
-                >
-                  <span className="text-[13px] md:text-base font-serif font-bold text-primary">{stat.value}</span>
-                  <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</span>
-                </div>
-              ))}
-            </div>
+            {/* CTA button — mobile: right after body copy, before quote */}
+            <button
+              onClick={() => {
+                document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="w-full md:w-auto font-sans uppercase tracking-[0.18em] transition-all duration-300 active:scale-[0.98] mb-4 md:mb-5"
+              style={{
+                height: '54px',
+                fontSize: '12px',
+                fontWeight: 500,
+                background: '#B8924F',
+                color: '#0A0906',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '0 40px',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 40px rgba(185,146,79,0.25)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = '#B8924F';
+                (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+              }}
+            >
+              Book Discovery Call →
+            </button>
+
+            <p className="text-[10px] text-muted-foreground/60 tracking-wide mb-4 md:mb-5">
+              30 clinics per year · Reviewed within 48 hours · Not all accepted
+            </p>
           </motion.div>
 
-          {/* Social proof quote */}
+          {/* Social proof quote — bottom of above-fold */}
           <motion.blockquote
-            className="text-center mb-8 md:mb-12 px-4"
+            className="text-center mb-5 md:mb-12 px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.25, ease: APPLE_EASE }}
           >
-            <p className="text-sm md:text-base italic text-foreground/80 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[13px] md:text-base italic text-foreground/80 max-w-xl mx-auto leading-relaxed">
               "If a doctor asks who they should trust with their brand, practice growth, systems, demand… all of the questions every provider has — <span className="text-primary font-medium not-italic">Pasted is the only answer.</span>"
             </p>
-            <cite className="block mt-2 text-xs text-muted-foreground not-italic tracking-wide">
+            <cite className="block mt-1.5 text-[10px] md:text-xs text-muted-foreground not-italic tracking-wide">
               — Dr. Brian Harris · Smile Virtual & Smile Sculpt
             </cite>
           </motion.blockquote>
 
-          {/* Divider */}
-          <div className="flex justify-center mb-8 md:mb-12">
-            <div className="w-8 h-px bg-primary/40" />
-          </div>
+          {/* Stat pills — just above Calendly */}
+          <motion.div
+            className="flex flex-wrap items-center justify-center gap-1.5 md:gap-3 mb-5 md:mb-8"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, ease: APPLE_EASE }}
+          >
+            {STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border border-border/60 bg-card/50"
+              >
+                <span className="text-[13px] md:text-base font-serif font-bold text-primary">{stat.value}</span>
+                <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
 
           {/* CTA label above Calendly */}
           <motion.div
