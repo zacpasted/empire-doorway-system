@@ -77,7 +77,7 @@ const HeroSection = () => {
             <span className="block text-primary">YOU WANT.</span>
             <span className="block">BUILT BY THE TEAM</span>
             <span className="block">BEHIND THE BEST</span>
-            <span className="block">CLINICS <span className="text-primary">IN THE WORLD.</span></span>
+            <span className="block">DENTISTS <span className="text-primary">IN THE WORLD.</span></span>
           </h1>
 
           {/* Subheadline */}
@@ -167,7 +167,7 @@ const HeroSection = () => {
             <motion.span className="block" variants={wordStagger} initial="hidden" animate="visible">
               <motion.span className="block" variants={wordChild}>THE PRACTICE <span className="text-primary">YOU WANT.</span></motion.span>
               <motion.span className="block" variants={wordChild}>BUILT BY THE TEAM</motion.span>
-              <motion.span className="block" variants={wordChild}>BEHIND THE BEST CLINICS</motion.span>
+              <motion.span className="block" variants={wordChild}>BEHIND THE BEST DENTISTS</motion.span>
               <motion.span className="block" variants={wordChild}><span className="text-primary">IN THE WORLD.</span></motion.span>
             </motion.span>
           </h1>
