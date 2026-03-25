@@ -41,7 +41,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: "hero-instant-cta", ctaText: "Apply for Partnership", section: "hero-above-fold" });
+    trackCTAClick({ ctaId: "hero-instant-cta", ctaText: "Book Discovery Call", section: "hero-above-fold" });
     document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
