@@ -8,7 +8,7 @@ const statCards = [
   { value: "$100M+", label: "Aesthetic Revenue Generated" },
   { value: "41+", label: "Clinics at 8 Figures" },
   { value: "97%", label: "Partner Retention" },
-  { value: "30", label: "Spots Per Year" },
+  { value: "30", label: "Clinics Per Year" },
 ];
 
 const AuthoritySection = () => {
