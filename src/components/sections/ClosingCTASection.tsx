@@ -46,7 +46,7 @@ const ClosingCTASection = () => {
         </h2>
         
         <p className="font-serif italic mb-16 max-w-lg mx-auto" style={{ fontSize: '20px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>
-          Book your discovery call today. You will be informed after booking regarding capacity restrictions.
+          Book your discovery call today. You will be informed about capacity restrictions after booking is received. What are you waiting for? Get Pasted.
         </p>
         
         <a
