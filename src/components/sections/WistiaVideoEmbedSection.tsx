@@ -71,7 +71,7 @@ const PastedStudioCTA = () => (
     </p>
     <button
       onClick={() => {
-        trackCTAClick({ ctaId: "pasted-studio-cta", ctaText: "Book a Studio Consultation", section: "content-examples" });
+        trackCTAClick({ ctaId: "pasted-studio-cta", ctaText: "Learn More About Filming with Pasted", section: "content-examples" });
         document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
       }}
       className="inline-block font-sans uppercase transition-all duration-300"
@@ -94,7 +94,7 @@ const PastedStudioCTA = () => (
         (e.currentTarget as HTMLElement).style.borderColor = 'rgba(185,146,79,0.5)';
       }}
     >
-      Book a Studio Consultation →
+      Learn More About Filming with Pasted →
     </button>
   </div>
 );
