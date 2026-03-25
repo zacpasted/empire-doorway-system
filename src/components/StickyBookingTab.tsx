@@ -45,7 +45,7 @@ const StickyBookingTab = () => {
             background: '#B8924F',
             color: '#0A0906',
             padding: '20px 12px',
-            borderRadius: 0,
+            borderRadius: '10px 0 0 10px',
             boxShadow: '0 4px 20px rgba(185,146,79,0.2)',
           }}
           title="45-min strategy call · Zac or Alan · 48hr review"
