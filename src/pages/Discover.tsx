@@ -321,7 +321,7 @@ const Discover = () => {
               Retention this high doesn't happen without real results.
             </p>
             <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
-              97% partner retention since 2019 — in an industry where most agencies churn 62%+ of clients monthly.
+              97% partner retention since 2022 — in an industry where most agencies churn 62%+ of clients monthly.
             </p>
           </motion.div>
         </div>
