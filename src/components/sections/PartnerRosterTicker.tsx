@@ -77,7 +77,7 @@ const PartnerRosterTicker = () => {
         }}
       >
         <div
-          className="flex items-center whitespace-nowrap animate-partner-roster pl-40"
+          className="flex items-center whitespace-nowrap animate-partner-roster"
           style={{ animationPlayState: isHovered ? "paused" : "running" }}
         >
           {[...Array(4)].map((_, setIndex) => (
