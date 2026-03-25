@@ -11,7 +11,7 @@ const Discover = () => {
     const scrollToCalendly = () => {
       const el = document.getElementById("eligibility-form");
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
         return true;
       }
       return false;
