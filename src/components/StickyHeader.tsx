@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
 
 interface StickyHeaderProps {
   onApplyClick?: () => void;
@@ -43,12 +44,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
     >
       <div className="container max-w-6xl mx-auto px-4 md:px-12 h-full flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="font-display tracking-[0.3em] uppercase" style={{ fontSize: '18px', color: 'var(--color-text)' }}>
-            PASTED
-          </span>
-          <span className="hidden sm:inline font-sans uppercase" style={{ fontSize: '10px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}>
-            Private Growth Partnership
-          </span>
+          <img src={pastedWordmark} alt="Pasted" className="h-5" />
         </div>
 
         <button

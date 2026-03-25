@@ -1,11 +1,11 @@
+import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
+
 const Footer = () => {
   return (
     <footer className="py-12 border-t border-border">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="text-sm tracking-[0.2em] uppercase text-foreground font-medium">
-            PASTED™
-          </span>
+          <img src={pastedWordmark} alt="Pasted" className="h-4" />
           
           <p className="text-sm text-muted-foreground">
             © 2026 PASTED™. All rights reserved.
