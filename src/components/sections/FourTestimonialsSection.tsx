@@ -32,7 +32,7 @@ const FourTestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleCTA = () => {
-    trackCTAClick({ ctaId: 'post-testimonials-cta', ctaText: 'Apply for Partnership', section: 'testimonials' });
+    trackCTAClick({ ctaId: 'post-testimonials-cta', ctaText: 'Book Discovery Call', section: 'testimonials' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
