@@ -23,22 +23,22 @@ const featuredNarratives = [
     pullQuote: "Her work was already elite. The brand just hadn't caught up.",
   },
   {
+    slug: "dr-meg-rascius",
+    before: "Philosophy of gentle refinement, no visual identity to match.",
+    after: "A timeless brand system spanning digital, print, and clinic design.",
+    pullQuote: "An identity that feels enduring, graceful, and distinctly rooted in care.",
+  },
+  {
+    slug: "dr-jake-bateman",
+    before: "Exceptional skill, no brand presence to match.",
+    after: "Elevated identity projecting established authority and sophistication.",
+    pullQuote: "The system embodies confidence, clarity, and refinement.",
+  },
+  {
     slug: "dr-serena-wong",
     before: "Quality without visibility. Demand without alignment.",
     after: "A unified identity that attracts the right patients effortlessly.",
     pullQuote: "The brand began to work for her instead of demanding more from her.",
-  },
-  {
-    slug: "dr-vik-ravoory",
-    before: "Young associate. No differentiation. No narrative.",
-    after: "Intentional brand, credible positioning, career control.",
-    pullQuote: "He stopped trying to fit existing molds and began operating from authorship.",
-  },
-  {
-    slug: "dr-nav-atwal",
-    before: "First brand outgrown. Next chapter undefined.",
-    after: "Unavoidable in Miami. Cultural operator, not just clinician.",
-    pullQuote: "He's not just becoming well known — he's becoming unavoidable.",
   },
   {
     slug: "dr-nakul-ratra",
