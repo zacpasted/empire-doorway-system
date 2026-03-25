@@ -25,7 +25,7 @@ const MobileFloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
-    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Apply for Partnership', section: 'floating' });
+    trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Book Discovery Call', section: 'floating' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
