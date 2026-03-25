@@ -101,7 +101,7 @@ const FourTestimonialsSection = () => {
               color: '#0A0906',
               padding: '18px 40px',
               border: 'none',
-              borderRadius: '6px',
+              borderRadius: '10px',
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
