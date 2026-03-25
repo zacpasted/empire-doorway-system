@@ -12,7 +12,7 @@ const aggregateMetrics: AggregateMetric[] = [
   { label: "Client Retention", value: "97%" },
   { label: "Avg Engagement", value: "22.4 mo" },
   { label: "Practices at $250k+/mo", value: "41" },
-  { label: "120-Day Revenue Lift", value: "+63%" },
+  { label: "12-Month Profit Margin Lift", value: "+50%" },
 ];
 
 const caseStudies: CaseStudy[] = [
