@@ -109,7 +109,7 @@ const HeroSection = () => {
               background: '#B8924F',
               color: '#0A0906',
               border: 'none',
-              borderRadius: '6px',
+              borderRadius: '10px',
             }}
           >
             Book Discovery Call →
@@ -207,7 +207,7 @@ const HeroSection = () => {
                 background: '#B8924F',
                 color: '#0A0906',
                 border: 'none',
-                borderRadius: '6px',
+                borderRadius: '10px',
                 padding: '18px 40px',
               }}
               onMouseEnter={(e) => {
