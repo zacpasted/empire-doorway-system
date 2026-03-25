@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Footer from "@/components/Footer";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
+import logoFigs from "@/assets/logos/figs-white.png";
+import logoCocofloss from "@/assets/logos/cocofloss-white.png";
+import logoSolventum from "@/assets/logos/solventum-white.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
+import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
