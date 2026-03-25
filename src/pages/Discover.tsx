@@ -7,6 +7,7 @@ import logoCocofloss from "@/assets/logos/cocofloss-white.png";
 import logoSolventum from "@/assets/logos/solventum-white.png";
 import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
 import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
+import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -16,6 +17,44 @@ const STATS = [
   { value: "97%", label: "Retention Rate" },
   { value: "30", label: "Clinics / Year" },
 ];
+
+const TESTIMONIAL_VIDEO_IDS = ["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"];
+
+const VideoProofBlock = () => {
+  const blockRef = useRef<HTMLDivElement>(null);
+  const [isVidVisible, setIsVidVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVidVisible(true); },
+      { threshold: 0.1, rootMargin: "200px" }
+    );
+    if (blockRef.current) observer.observe(blockRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useWistiaLoader(TESTIMONIAL_VIDEO_IDS, { loadOnMount: isVidVisible });
+
+  return (
+    <div ref={blockRef} className="space-y-6">
+      <div className="text-center">
+        <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary mb-3">Hear It Directly</p>
+        <p className="text-sm text-muted-foreground">Unscripted. From dentists who've been through it.</p>
+      </div>
+      {isVidVisible && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {TESTIMONIAL_VIDEO_IDS.map((videoId) => (
+            <div key={videoId} className="rounded-lg overflow-hidden border border-border/30 bg-card/20">
+              <style>{getWistiaPlaceholderStyles(videoId, "177.78%")}</style>
+              {/* @ts-ignore */}
+              <wistia-player media-id={videoId} aspect="0.5625" autoplay="false" end-video-behavior="default"></wistia-player>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Discover = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -335,6 +374,49 @@ const Discover = () => {
             </p>
             <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
               97% partner retention since 2022 — in an industry where most agencies churn 62%+ of clients monthly.
+            </p>
+          </motion.div>
+
+          {/* Video Testimonials */}
+          <VideoProofBlock />
+
+          {/* More Proof CTA */}
+          <motion.div
+            className="text-center pt-4 pb-8"
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.5, ease: APPLE_EASE }}
+          >
+            <a
+              href="https://pasted.studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-sans uppercase transition-all duration-300"
+              style={{
+                fontSize: '12px',
+                fontWeight: 500,
+                letterSpacing: '0.2em',
+                background: 'transparent',
+                color: 'hsl(var(--primary))',
+                padding: '16px 36px',
+                border: '1px solid hsl(var(--primary) / 0.4)',
+                borderRadius: '10px',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--primary))';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 0 24px rgba(185,146,79,0.15)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--primary) / 0.4)';
+                (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                (e.currentTarget as HTMLElement).style.transform = 'none';
+              }}
+            >
+              More Proof →
+            </a>
+            <p className="mt-3 text-[10px] text-muted-foreground tracking-wide">
+              Full case studies, creative work & partner results at pasted.studio
             </p>
           </motion.div>
         </div>
