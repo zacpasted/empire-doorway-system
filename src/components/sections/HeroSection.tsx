@@ -109,7 +109,7 @@ const HeroSection = () => {
               borderRadius: 0,
             }}
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </button>
 
           {/* Microcopy */}
