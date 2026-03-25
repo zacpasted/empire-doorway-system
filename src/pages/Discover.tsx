@@ -71,12 +71,10 @@ const Discover = () => {
       script.onload = () => setScriptLoaded(true);
       document.body.appendChild(script);
     } else {
-      // Script tag exists — check if already loaded or wait for it
       if ((window as any).Calendly) {
         setScriptLoaded(true);
       } else {
         existing.addEventListener("load", () => setScriptLoaded(true));
-        // Fallback: poll briefly in case load event already fired
         const timer = setInterval(() => {
           if ((window as any).Calendly) {
             setScriptLoaded(true);
@@ -102,129 +100,63 @@ const Discover = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Minimal top bar with logo */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
-        <div className="container max-w-4xl mx-auto px-4 py-2 flex items-center justify-center">
-          <a href="/">
-            <img src={pastedWordmark} alt="PASTED" className="h-4 md:h-5 opacity-80 hover:opacity-100 transition-opacity" />
-          </a>
-        </div>
-      </header>
 
-      <main ref={ref} className="pt-10 pb-10 md:pt-28 md:pb-20">
+      <main ref={ref} className="pt-4 pb-10 md:pt-20 md:pb-20">
         <div className="container max-w-3xl mx-auto px-4">
 
-          {/* Hero authority block */}
+          {/* 1. Wordmark + eyebrow */}
           <motion.div
-            className="text-center mb-4 md:mb-12"
-            initial={{ opacity: 0, y: 16 }}
+            className="text-center mb-3 md:mb-6"
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: APPLE_EASE }}
+            transition={{ duration: 0.5, ease: APPLE_EASE }}
           >
-            <p className="text-[11px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-2 md:mb-2">
+            <a href="/">
+              <img src={pastedWordmark} alt="PASTED" className="h-4 md:h-5 mx-auto opacity-70 hover:opacity-100 transition-opacity mb-2" />
+            </a>
+            <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold">
               The Global Standard in Dental Brand Growth
             </p>
-
-            <h1
-              className="text-[42px] md:text-[48px] font-serif font-bold text-foreground text-center mb-3"
-              style={{ lineHeight: "1.02", letterSpacing: "-0.025em" }}
-            >
-              Your Practice Deserves<br />
-              a Partner,<br className="md:hidden" /> Not a Vendor.
-            </h1>
-
-            <p className="text-muted-foreground max-w-lg mx-auto text-[15px] md:text-base leading-relaxed mb-4 md:mb-5">
-              PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out.
-            </p>
-
-            {/* CTA button — mobile: right after body copy, before quote */}
-            <button
-              onClick={() => {
-                document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
-              className="w-full md:w-auto font-sans uppercase tracking-[0.18em] transition-all duration-300 active:scale-[0.98] mb-4 md:mb-5"
-              style={{
-                height: '54px',
-                fontSize: '12px',
-                fontWeight: 500,
-                background: '#B8924F',
-                color: '#0A0906',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '0 40px',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 40px rgba(185,146,79,0.25)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = '#B8924F';
-                (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-              }}
-            >
-              Book Discovery Call →
-            </button>
-
-            <p className="text-[10px] text-muted-foreground/60 tracking-wide mb-4 md:mb-5">
-              30 clinics per year · Reviewed within 48 hours · Not all accepted
-            </p>
           </motion.div>
 
-          {/* Social proof quote — bottom of above-fold */}
-          <motion.blockquote
-            className="text-center mb-5 md:mb-12 px-2"
+          {/* 2. H1 — smaller confirmation-page scale */}
+          <motion.h1
+            className="text-[32px] md:text-[42px] font-serif font-bold text-foreground text-center mb-2 md:mb-3"
+            style={{ lineHeight: "1.08", letterSpacing: "-0.02em" }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: APPLE_EASE }}
+          >
+            Your Practice Deserves<br />
+            a Partner, Not a Vendor.
+          </motion.h1>
+
+          {/* 3. Trust signals — single compact line */}
+          <motion.p
+            className="text-center text-[11px] md:text-xs text-muted-foreground mb-4 md:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.25, ease: APPLE_EASE }}
+            transition={{ duration: 0.4, delay: 0.2, ease: APPLE_EASE }}
           >
-            <p className="text-[13px] md:text-base italic text-foreground/80 max-w-xl mx-auto leading-relaxed">
-              "If a doctor asks who they should trust with their brand, practice growth, systems, demand… all of the questions every provider has — <span className="text-primary font-medium not-italic">Pasted is the only answer.</span>"
-            </p>
-            <cite className="block mt-1.5 text-[10px] md:text-xs text-muted-foreground not-italic tracking-wide">
-              — Dr. Brian Harris · Smile Virtual & Smile Sculpt
-            </cite>
-          </motion.blockquote>
+            <span>45 min with Zac or Alan</span>
+            <span className="text-primary mx-1.5">·</span>
+            <span>$100M+ Generated</span>
+            <span className="text-primary mx-1.5">·</span>
+            <span>97% Retention</span>
+          </motion.p>
 
-          {/* Stat pills — just above Calendly */}
+          {/* 4. Calendly embed — THE HERO */}
           <motion.div
-            className="flex flex-wrap items-center justify-center gap-1.5 md:gap-3 mb-5 md:mb-8"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3, ease: APPLE_EASE }}
-          >
-            {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border border-border/60 bg-card/50"
-              >
-                <span className="text-[13px] md:text-base font-serif font-bold text-primary">{stat.value}</span>
-                <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* CTA label above Calendly */}
-          <motion.div
-            className="text-center mb-6"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35, ease: APPLE_EASE }}
-          >
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-1.5">
-              Book 1:1 PASTED Discovery Call
-            </h2>
-            <p className="text-xs md:text-sm text-muted-foreground">
-              45 minutes with <span className="text-foreground">Zac</span> or <span className="text-foreground">Dr. Alan Clarke</span> · Reviewed within 48 hours
-            </p>
-          </motion.div>
-
-          {/* Calendly embed */}
-          <motion.div id="calendly-embed"
+            id="calendly-embed"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.45, ease: APPLE_EASE }}
-            className="bg-[#1a1a1a] rounded-xl border border-border overflow-hidden shadow-lg relative"
-            style={{ minHeight: "700px" }}
+            transition={{ duration: 0.5, delay: 0.3, ease: APPLE_EASE }}
+            className="rounded-xl overflow-hidden shadow-lg relative"
+            style={{
+              minHeight: "550px",
+              background: '#111',
+              border: '1px solid rgba(185,146,79,0.2)',
+            }}
           >
             {!widgetReady && (
               <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -243,15 +175,57 @@ const Discover = () => {
             )}
           </motion.div>
 
-          {/* Bottom note */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-center text-[10px] md:text-xs text-muted-foreground mt-5"
+          {/* 5. Brian Harris quote — card style with gold left border */}
+          <motion.blockquote
+            className="mt-8 md:mt-10 px-5 py-4 rounded-lg"
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              borderLeft: '3px solid rgba(185,146,79,0.5)',
+            }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: APPLE_EASE }}
           >
-            Only 30 partnerships accepted per year. Availability is intentionally limited.
+            <p className="text-[13px] md:text-base italic text-foreground/80 leading-relaxed font-serif">
+              "If a doctor asks who they should trust with their brand, practice growth, systems, demand… all of the questions every provider has — <span className="text-primary font-medium not-italic">Pasted is the only answer.</span>"
+            </p>
+            <cite className="block mt-2 text-[10px] md:text-xs text-muted-foreground not-italic tracking-wide">
+              — Dr. Brian Harris · Smile Virtual & Smile Sculpt
+            </cite>
+          </motion.blockquote>
+
+          {/* 6. Metrics bar — compact horizontal */}
+          <motion.div
+            className="flex items-center justify-center gap-3 md:gap-5 mt-6 md:mt-8 flex-wrap"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: APPLE_EASE }}
+          >
+            {STATS.map((stat, i) => (
+              <span key={stat.label} className="flex items-center gap-1 text-[11px] md:text-xs text-muted-foreground">
+                <span className="font-serif font-bold text-primary text-[13px] md:text-sm">{stat.value}</span>
+                <span className="uppercase tracking-wider">{stat.label}</span>
+                {i < STATS.length - 1 && <span className="text-primary/30 ml-2 hidden md:inline">·</span>}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* 7. Body copy — bottom reassurance */}
+          <motion.p
+            className="text-center text-muted-foreground max-w-lg mx-auto text-[14px] md:text-base leading-relaxed mt-8 md:mt-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: APPLE_EASE }}
+          >
+            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
           </motion.p>
+
+          <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mt-3">
+            Only 30 partnerships accepted per year. Availability is intentionally limited.
+          </p>
         </div>
 
         {/* Authority proof strip */}
@@ -261,7 +235,8 @@ const Discover = () => {
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: APPLE_EASE }}
           >
             <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary mb-6">
@@ -287,7 +262,8 @@ const Discover = () => {
           <motion.div
             className="overflow-hidden relative py-4"
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15, ease: APPLE_EASE }}
           >
             <style>{`
@@ -332,7 +308,8 @@ const Discover = () => {
           <motion.div
             className="space-y-8"
             initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: APPLE_EASE }}
           >
             {[
@@ -375,7 +352,8 @@ const Discover = () => {
           <motion.div
             className="grid grid-cols-2 gap-4 md:gap-6 max-w-lg mx-auto"
             initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3, ease: APPLE_EASE }}
           >
             {[
@@ -398,7 +376,8 @@ const Discover = () => {
           <motion.div
             className="text-center pb-4"
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4, ease: APPLE_EASE }}
           >
             <p className="text-foreground font-serif text-lg md:text-xl mb-2">
@@ -416,7 +395,8 @@ const Discover = () => {
           <motion.div
             className="text-center pt-4 pb-8"
             initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5, ease: APPLE_EASE }}
           >
             <a
@@ -456,7 +436,8 @@ const Discover = () => {
           <motion.div
             className="text-center pt-12 pb-4"
             initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.6, ease: APPLE_EASE }}
           >
             <div className="flex items-center justify-center gap-3 mb-6">
