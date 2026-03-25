@@ -77,7 +77,7 @@ const HeroSection = () => {
             <span className="block text-primary">YOU WANT.</span>
             <span className="block">BUILT BY THE TEAM</span>
             <span className="block">BEHIND THE BEST</span>
-            <span className="block">CLINICS <span className="text-primary">IN THE WORLD.</span></span>
+            <span className="block">DENTISTS <span className="text-primary">IN THE WORLD.</span></span>
           </h1>
 
           {/* Subheadline */}
