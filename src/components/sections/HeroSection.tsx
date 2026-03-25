@@ -65,12 +65,6 @@ const HeroSection = () => {
             >
               PASTED
             </span>
-            <span
-              className="block font-sans uppercase mt-1"
-              style={{ fontSize: '9px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}
-            >
-              Private Growth Partnership
-            </span>
           </div>
 
           {/* H1 */}
@@ -164,12 +158,6 @@ const HeroSection = () => {
             style={{ fontSize: '20px', color: 'var(--color-text)' }}
           >
             PASTED
-          </span>
-          <span
-            className="block font-sans uppercase mt-1"
-            style={{ fontSize: '10px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}
-          >
-            Private Growth Partnership
           </span>
         </motion.div>
 
