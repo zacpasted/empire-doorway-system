@@ -111,7 +111,7 @@ const Discover = () => {
         </div>
       </header>
 
-      <main ref={ref} className="pt-14 pb-10 md:pt-28 md:pb-20">
+      <main ref={ref} className="pt-10 pb-10 md:pt-28 md:pb-20">
         <div className="container max-w-3xl mx-auto px-4">
 
           {/* Hero authority block */}
