@@ -159,12 +159,6 @@ const HeroSection = () => {
           >
             PASTED
           </span>
-          <span
-            className="block font-sans uppercase mt-1"
-            style={{ fontSize: '10px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}
-          >
-            Private Growth Partnership
-          </span>
         </motion.div>
 
         <motion.div className="text-center mb-8" style={{ opacity }}>
