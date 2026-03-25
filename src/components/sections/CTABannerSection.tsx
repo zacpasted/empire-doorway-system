@@ -35,7 +35,7 @@ const CTABannerSection = () => {
             href="#eligibility-form"
             onClick={(e) => {
               e.preventDefault();
-              trackCTAClick({ ctaId: 'cta-banner', ctaText: 'Apply for Partnership', section: 'cta-banner' });
+              trackCTAClick({ ctaId: 'cta-banner', ctaText: 'Book Discovery Call', section: 'cta-banner' });
               document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
             className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-medium tracking-wide uppercase bg-primary text-primary-foreground rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-[1.02]"
