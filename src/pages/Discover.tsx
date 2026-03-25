@@ -338,6 +338,49 @@ const Discover = () => {
               97% partner retention since 2022 — in an industry where most agencies churn 62%+ of clients monthly.
             </p>
           </motion.div>
+
+          {/* Video Testimonials */}
+          <VideoProofBlock />
+
+          {/* More Proof CTA */}
+          <motion.div
+            className="text-center pt-4 pb-8"
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.5, ease: APPLE_EASE }}
+          >
+            <a
+              href="https://pasted.studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-sans uppercase transition-all duration-300"
+              style={{
+                fontSize: '12px',
+                fontWeight: 500,
+                letterSpacing: '0.2em',
+                background: 'transparent',
+                color: 'hsl(var(--primary))',
+                padding: '16px 36px',
+                border: '1px solid hsl(var(--primary) / 0.4)',
+                borderRadius: '10px',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--primary))';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 0 24px rgba(185,146,79,0.15)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--primary) / 0.4)';
+                (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                (e.currentTarget as HTMLElement).style.transform = 'none';
+              }}
+            >
+              More Proof →
+            </a>
+            <p className="mt-3 text-[10px] text-muted-foreground tracking-wide">
+              Full case studies, creative work & partner results at pasted.studio
+            </p>
+          </motion.div>
         </div>
       </main>
 
