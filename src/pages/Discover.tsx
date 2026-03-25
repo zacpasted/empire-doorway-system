@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Footer from "@/components/Footer";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
+import logoFigs from "@/assets/logos/figs-white.png";
+import logoCocofloss from "@/assets/logos/cocofloss-white.png";
+import logoSolventum from "@/assets/logos/solventum-white.png";
+import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
+import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -192,6 +197,46 @@ const Discover = () => {
             <p className="text-[10px] text-muted-foreground mt-4 tracking-wide">
               & 30+ elite aesthetic practices worldwide
             </p>
+          </motion.div>
+
+          {/* Corporate logo ticker */}
+          <motion.div
+            className="overflow-hidden relative py-4"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.15, ease: APPLE_EASE }}
+          >
+            <style>{`
+              @keyframes discover-logo-marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+              .animate-discover-logo-marquee {
+                animation: discover-logo-marquee 18s linear infinite;
+              }
+              .animate-discover-logo-marquee:hover {
+                animation-play-state: paused;
+              }
+            `}</style>
+            <div className="absolute left-0 top-0 bottom-0 w-8 md:w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 md:w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <div className="flex items-center animate-discover-logo-marquee">
+              {[...Array(2)].map((_, setIdx) => (
+                <div key={setIdx} className="flex items-center">
+                  {[
+                    { src: logoFigs, alt: "FIGS" },
+                    { src: logoCocofloss, alt: "Cocofloss" },
+                    { src: logoSolventum, alt: "Solventum" },
+                    { src: logoMHM, alt: "Marshall Hanson Method" },
+                    { src: logoSmileVirtual, alt: "Smile Virtual" },
+                  ].map((logo, i) => (
+                    <div key={i} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
+                      <img src={logo.src} alt={logo.alt} className="h-4 md:h-5 w-auto max-w-[80px] md:max-w-[100px] object-contain opacity-50 hover:opacity-80 transition-opacity" />
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </motion.div>
 
           {/* Divider */}
