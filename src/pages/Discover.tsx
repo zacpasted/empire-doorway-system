@@ -164,6 +164,122 @@ const Discover = () => {
             Only 30 partnerships accepted per year. Availability is intentionally limited.
           </motion.p>
         </div>
+
+        {/* Authority proof strip */}
+        <div className="container max-w-4xl mx-auto px-4 mt-16 md:mt-24 space-y-16 md:space-y-24">
+
+          {/* Partner names */}
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: APPLE_EASE }}
+          >
+            <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary mb-6">
+              Trusted By
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-2xl mx-auto">
+              {[
+                "Dr. Jon Marashi", "Dr. Brian Harris", "Dr. Sam Saleh",
+                "Dr. Drew Ballard", "Dr. Mark Hughes", "Dr. Marshall Hanson",
+                "Dr. Rhona Eksander", "Dr. Michaela Tozzi", "Dr. Serena Wong",
+              ].map((name) => (
+                <span key={name} className="text-xs md:text-sm text-foreground/70 font-medium whitespace-nowrap">
+                  {name}
+                </span>
+              ))}
+            </div>
+            <p className="text-[10px] text-muted-foreground mt-4 tracking-wide">
+              & 30+ elite aesthetic practices worldwide
+            </p>
+          </motion.div>
+
+          {/* Divider */}
+          <div className="flex justify-center">
+            <div className="w-8 h-px bg-primary/30" />
+          </div>
+
+          {/* Testimonial stack */}
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, ease: APPLE_EASE }}
+          >
+            {[
+              {
+                quote: "At this level, brand is not optional. It is fundamental. Zac and Alan understand this better than anyone I've worked with. Their taste, restraint, and execution are elite.",
+                name: "Dr. Jon Marashi",
+                role: "Celebrity Dentist, Los Angeles",
+              },
+              {
+                quote: "Halo did not scale by accident. From a struggling general practice to my dream clinic — surpassing all revenue goals, working less than 9 months per year, 3 days per week. Zac has been my partner for 5 years making it happen.",
+                name: "Dr. Drew Ballard",
+                role: "Founder, Halo Veneers · Gilbert, AZ",
+              },
+              {
+                quote: "This is world-class work in every sense. The strategy is genius-level, the execution is flawless, and there is zero fluff.",
+                name: "Dr. Sam Saleh",
+                role: "Celebrity Dentist, Los Angeles & London",
+              },
+            ].map((t) => (
+              <blockquote
+                key={t.name}
+                className="border-l-2 border-primary/30 pl-5 py-2"
+              >
+                <p className="text-sm text-foreground/80 leading-relaxed italic mb-2">
+                  "{t.quote}"
+                </p>
+                <cite className="text-xs text-muted-foreground not-italic">
+                  — {t.name} · {t.role}
+                </cite>
+              </blockquote>
+            ))}
+          </motion.div>
+
+          {/* Divider */}
+          <div className="flex justify-center">
+            <div className="w-8 h-px bg-primary/30" />
+          </div>
+
+          {/* Credibility metrics */}
+          <motion.div
+            className="grid grid-cols-2 gap-4 md:gap-6 max-w-lg mx-auto"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3, ease: APPLE_EASE }}
+          >
+            {[
+              { value: "5+ Years", label: "Average Partnership" },
+              { value: "0%", label: "Templated Work" },
+              { value: "8-Figure", label: "Average Partner Revenue" },
+              { value: "Since 2019", label: "Industry Track Record" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="text-center p-4 border border-border/30 bg-card/20 rounded-lg"
+              >
+                <p className="text-lg md:text-xl font-serif text-primary mb-1">{s.value}</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Final reassurance */}
+          <motion.div
+            className="text-center pb-4"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4, ease: APPLE_EASE }}
+          >
+            <p className="text-foreground font-serif text-lg md:text-xl mb-2">
+              Retention this high doesn't happen without real results.
+            </p>
+            <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
+              97% partner retention since 2019 — in an industry where most agencies churn 62%+ of clients monthly.
+            </p>
+          </motion.div>
+        </div>
       </main>
 
       <Footer />
