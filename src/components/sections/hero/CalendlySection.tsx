@@ -199,7 +199,7 @@ const CalendlySection = () => {
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
               <span>Not a sales call</span>
               <span className="hidden sm:inline">·</span>
-              <span>Reviewed personally by Zac and Alan</span>
+              <span>Reviewed personally by Zac and Dr. Alan Clarke</span>
               <span className="hidden sm:inline">·</span>
               <span>30 clinics per year</span>
             </div>
