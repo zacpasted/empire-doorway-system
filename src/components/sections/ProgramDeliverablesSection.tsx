@@ -132,7 +132,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             onClick={onApplyClick}
             className="inline-flex items-center gap-3 text-sm tracking-[0.2em] uppercase text-background bg-primary px-10 py-5 hover:bg-primary/90 transition-colors duration-300"
           >
-            Apply for Partnership →
+            Book Discovery Call →
             <ArrowRight className="w-4 h-4" />
           </button>
           <p className="text-sm text-muted-foreground mt-6">

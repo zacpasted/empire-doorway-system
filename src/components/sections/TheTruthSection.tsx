@@ -289,7 +289,7 @@ const TheTruthSection = () => {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
               <span className="absolute inset-0 bg-gradient-to-r from-primary/90 via-red-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative z-10">Apply for Partnership →</span>
+              <span className="relative z-10">Book Discovery Call →</span>
             </motion.a>
           </div>
         </motion.div>

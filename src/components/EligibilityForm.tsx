@@ -251,7 +251,7 @@ const EligibilityForm = () => {
     <div className="bg-card rounded-lg p-8 md:p-12 shadow-sm max-w-2xl mx-auto">
       <div className="text-center mb-8 pb-6 border-b border-border">
         <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-4">
-          Apply for Partnership
+          Book Discovery Call
         </h2>
         <p className="text-muted-foreground text-sm">
           Associate to Empire by PASTED was built to bring cutting-edge branding and content to dentistry's future stars.

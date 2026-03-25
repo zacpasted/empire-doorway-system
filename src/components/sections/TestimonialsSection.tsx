@@ -310,7 +310,7 @@ const TestimonialsSection = ({ onApplyClick }: TestimonialsSectionProps) => {
             onClick={onApplyClick}
             className="rounded-md"
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
             Build authority, not dependency.
