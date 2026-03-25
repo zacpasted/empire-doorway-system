@@ -45,7 +45,9 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
     >
       <div className="container max-w-6xl mx-auto px-4 md:px-12 h-full flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src={pastedWordmark} alt="Pasted" className="h-7" />
+          <img src={pastedWordmark} alt="Pasted" className="h-6" />
+          <div className="w-px h-4 bg-primary/30" />
+          <img src={pastedEmblem} alt="Pasted emblem" className="h-6" />
         </div>
 
         <button
