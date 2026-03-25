@@ -111,41 +111,41 @@ const Discover = () => {
         </div>
       </header>
 
-      <main ref={ref} className="pt-14 pb-12 md:pt-28 md:pb-20">
+      <main ref={ref} className="pt-14 pb-10 md:pt-28 md:pb-20">
         <div className="container max-w-3xl mx-auto px-4">
 
           {/* Hero authority block */}
           <motion.div
-            className="text-center mb-8 md:mb-12"
+            className="text-center mb-6 md:mb-12"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: APPLE_EASE }}
           >
-            <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-3">
+            <p className="text-[11px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-2">
               The Global Standard in Dental Brand Growth
             </p>
 
             <h1
-              className="text-[28px] md:text-[48px] font-serif font-bold text-foreground mb-4"
-              style={{ lineHeight: "1.08", letterSpacing: "-0.015em" }}
+              className="text-[36px] md:text-[48px] font-serif font-bold text-foreground mb-3"
+              style={{ lineHeight: "1.06", letterSpacing: "-0.02em" }}
             >
               Your Practice Deserves<br />
               a Partner, Not a Vendor.
             </h1>
 
-            <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base leading-relaxed mb-6">
+            <p className="text-muted-foreground max-w-lg mx-auto text-[15px] md:text-base leading-relaxed mb-5">
               PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
             </p>
 
             {/* Stat pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-3">
               {STATS.map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/60 bg-card/50"
+                  className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border border-border/60 bg-card/50"
                 >
-                  <span className="text-sm md:text-base font-serif font-bold text-primary">{stat.value}</span>
-                  <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</span>
+                  <span className="text-[13px] md:text-base font-serif font-bold text-primary">{stat.value}</span>
+                  <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</span>
                 </div>
               ))}
             </div>
