@@ -65,7 +65,7 @@ const AuthoritySection = () => {
           {statCards.map((stat, i) => (
             <motion.div
               key={stat.label}
-              className="text-center py-6 px-3"
+              className="text-center py-6 px-3 cursor-default"
               style={{
                 background: 'var(--color-surface)',
                 border: '1px solid var(--color-border-gold)',
@@ -74,6 +74,8 @@ const AuthoritySection = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 + i * 0.1, ease: APPLE_EASE }}
+              whileHover={{ y: -4, boxShadow: '0 8px 30px rgba(185,146,79,0.15)', borderColor: 'rgba(185,146,79,0.4)', transition: { duration: 0.3, ease: APPLE_EASE } }}
+              whileTap={{ scale: 0.97, transition: { duration: 0.15 } }}
             >
               <p className="font-serif text-primary mb-1" style={{ fontSize: 'clamp(32px, 8vw, 48px)', lineHeight: '1' }}>{stat.value}</p>
               <p className="font-sans uppercase tracking-[0.15em]" style={{ fontSize: '10px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>{stat.label}</p>

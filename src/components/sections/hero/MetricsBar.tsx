@@ -33,10 +33,12 @@ const MetricCard = memo(({ metric, index, isInView }: { metric: typeof METRICS[0
   const count = useCounter(metric.numValue, 1.8, isInView, 0.15 * index);
   return (
     <motion.div
-      className="relative"
+      className="relative cursor-default"
       initial={{ opacity: 0, y: 15 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.3, delay: index * 0.15 }}
+      whileHover={{ y: -3, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+      whileTap={{ scale: 0.97, transition: { duration: 0.15 } }}
     >
       <motion.div
         className="text-2xl font-serif font-bold mb-0.5 leading-none"
