@@ -130,7 +130,7 @@ const TheOfferSection = () => {
               (e.currentTarget as HTMLElement).style.boxShadow = '0 0 24px rgba(185,146,79,0.15)';
             }}
           >
-            Apply for Partnership →
+            Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
             30 practices per year · Reviewed within 48 hours · Not all accepted

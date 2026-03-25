@@ -92,7 +92,7 @@ const CompressedResultsSection = () => {
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="relative z-10">Apply for Partnership →</span>
+            <span className="relative z-10">Book Discovery Call →</span>
           </motion.a>
           <p className="mt-4 text-xs text-muted-foreground/50">
             30 practices per year · Reviewed within 48 hours · Not all accepted
