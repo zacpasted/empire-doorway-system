@@ -109,7 +109,7 @@ const HeroSection = () => {
               background: '#B8924F',
               color: '#0A0906',
               border: 'none',
-              borderRadius: 0,
+              borderRadius: '6px',
             }}
           >
             Book Discovery Call →
