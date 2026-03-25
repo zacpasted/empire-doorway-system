@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
 
 const MILESTONES = [25, 50, 75, 100] as const;
 
@@ -14,33 +15,26 @@ const getSessionId = (): string => {
 
 const ScrollDepthTracker = () => {
   const firedRef = useRef<Set<number>>(new Set());
+  const { scrollPercent } = useScrollPosition();
+  const percent = Math.round(scrollPercent * 100);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight <= 0) return;
-      const percent = Math.round((window.scrollY / scrollHeight) * 100);
-
-      for (const milestone of MILESTONES) {
-        if (percent >= milestone && !firedRef.current.has(milestone)) {
-          firedRef.current.add(milestone);
-          supabase.from("cta_analytics").insert({
-            cta_id: `scroll-depth-${milestone}`,
-            cta_text: `${milestone}% scroll`,
-            section: "scroll-depth",
-            event_type: "scroll_milestone",
-            page_url: window.location.pathname,
-            session_id: getSessionId(),
-            user_agent: navigator.userAgent,
-            viewport_width: window.innerWidth,
-          }).then(() => {});
-        }
+    for (const milestone of MILESTONES) {
+      if (percent >= milestone && !firedRef.current.has(milestone)) {
+        firedRef.current.add(milestone);
+        supabase.from("cta_analytics").insert({
+          cta_id: `scroll-depth-${milestone}`,
+          cta_text: `${milestone}% scroll`,
+          section: "scroll-depth",
+          event_type: "scroll_milestone",
+          page_url: window.location.pathname,
+          session_id: getSessionId(),
+          user_agent: navigator.userAgent,
+          viewport_width: window.innerWidth,
+        }).then(() => {});
       }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    }
+  }, [percent]);
 
   return null;
 };

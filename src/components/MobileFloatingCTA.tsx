@@ -1,35 +1,26 @@
-import { useState, useEffect } from "react";
+import { memo, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
 
-const MobileFloatingCTA = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isNearForm, setIsNearForm] = useState(false);
+const MobileFloatingCTA = memo(() => {
+  const { scrollY, viewportHeight } = useScrollPosition();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const heroHeight = window.innerHeight;
-      setIsVisible(window.scrollY > heroHeight * 0.5);
-      
-      const formElement = document.getElementById('eligibility-form');
-      if (formElement) {
-        const formRect = formElement.getBoundingClientRect();
-        setIsNearForm(formRect.top < window.innerHeight && formRect.bottom > 0);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const shouldShow = useMemo(() => {
+    if (scrollY <= viewportHeight * 0.5) return false;
+    const formElement = document.getElementById('eligibility-form');
+    if (formElement) {
+      const formRect = formElement.getBoundingClientRect();
+      if (formRect.top < viewportHeight && formRect.bottom > 0) return false;
+    }
+    return true;
+  }, [scrollY, viewportHeight]);
 
   const handleClick = () => {
     trackCTAClick({ ctaId: 'mobile-floating', ctaText: 'Book Discovery Call', section: 'floating' });
     document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
-
-  const shouldShow = isVisible && !isNearForm;
 
   return (
     <AnimatePresence>
@@ -44,6 +35,7 @@ const MobileFloatingCTA = () => {
             background: 'rgba(10,9,6,0.96)',
             backdropFilter: 'blur(20px)',
             borderTop: '1px solid var(--color-border-gold)',
+            contain: 'layout style',
           }}
         >
           <div className="relative px-5 pb-6 pt-3" style={{ paddingBottom: 'calc(20px + env(safe-area-inset-bottom))' }}>
@@ -72,6 +64,7 @@ const MobileFloatingCTA = () => {
       )}
     </AnimatePresence>
   );
-};
+});
 
+MobileFloatingCTA.displayName = 'MobileFloatingCTA';
 export default MobileFloatingCTA;
