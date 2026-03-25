@@ -150,7 +150,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: APPLE_EASE }}
         >
-          <img src={pastedWordmark} alt="Pasted" className="h-6 mx-auto" />
+          <img src={pastedWordmark} alt="Pasted" className="h-10 mx-auto" />
         </motion.div>
 
         <motion.div className="text-center mb-8" style={{ opacity }}>
