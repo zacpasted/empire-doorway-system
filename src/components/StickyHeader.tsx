@@ -61,7 +61,7 @@ const StickyHeader = ({ onApplyClick }: StickyHeaderProps) => {
             color: '#0A0906',
             padding: '10px 24px',
             border: 'none',
-            borderRadius: 0,
+            borderRadius: '10px',
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
