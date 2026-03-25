@@ -224,11 +224,11 @@ const Discover = () => {
               {[...Array(2)].map((_, setIdx) => (
                 <div key={setIdx} className="flex items-center">
                   {[
-                    { src: (await import("@/assets/logos/figs-white.png")).default, alt: "FIGS" },
-                    { src: (await import("@/assets/logos/cocofloss-white.png")).default, alt: "Cocofloss" },
-                    { src: (await import("@/assets/logos/solventum-white.png")).default, alt: "Solventum" },
-                    { src: (await import("@/assets/logos/marshall-hanson-method-white.png")).default, alt: "Marshall Hanson Method" },
-                    { src: (await import("@/assets/logos/smile-virtual-white.png")).default, alt: "Smile Virtual" },
+                    { src: logoFigs, alt: "FIGS" },
+                    { src: logoCocofloss, alt: "Cocofloss" },
+                    { src: logoSolventum, alt: "Solventum" },
+                    { src: logoMHM, alt: "Marshall Hanson Method" },
+                    { src: logoSmileVirtual, alt: "Smile Virtual" },
                   ].map((logo, i) => (
                     <div key={i} className="flex-shrink-0 mx-6 md:mx-10 flex items-center justify-center">
                       <img src={logo.src} alt={logo.alt} className="h-4 md:h-5 w-auto max-w-[80px] md:max-w-[100px] object-contain opacity-50 hover:opacity-80 transition-opacity" />
