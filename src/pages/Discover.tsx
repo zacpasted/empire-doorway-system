@@ -126,7 +126,7 @@ const Discover = () => {
             </p>
 
             <h1
-              className="text-[42px] md:text-[48px] font-serif font-bold text-foreground mb-3"
+              className="text-[42px] md:text-[48px] font-serif font-bold text-foreground text-center mb-3"
               style={{ lineHeight: "1.02", letterSpacing: "-0.025em" }}
             >
               Your Practice Deserves<br />
