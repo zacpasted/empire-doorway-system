@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="py-12 border-t border-border">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <img src={pastedWordmark} alt="Pasted" className="h-4" />
+          <img src={pastedWordmark} alt="Pasted" className="h-6" />
           
           <p className="text-sm text-muted-foreground">
             © 2026 PASTED™. All rights reserved.
