@@ -181,7 +181,7 @@ const Discover = () => {
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-2xl mx-auto">
               {[
                 "Dr. Jon Marashi", "Dr. Brian Harris", "Dr. Sam Saleh",
-                "Dr. Drew Ballard", "Dr. Mark Hughes", "Dr. Marshall Hanson",
+                "Dr. Drew Ballard", "Dr. James Heaton", "Dr. Marshall Hanson",
                 "Dr. Rhona Eksander", "Dr. Michaela Tozzi", "Dr. Serena Wong",
               ].map((name) => (
                 <span key={name} className="text-xs md:text-sm text-foreground/70 font-medium whitespace-nowrap">
