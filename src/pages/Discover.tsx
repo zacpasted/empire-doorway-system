@@ -419,6 +419,57 @@ const Discover = () => {
               Full case studies, creative work & partner results at pasted.studio
             </p>
           </motion.div>
+
+          {/* Final Book Call CTA */}
+          <motion.div
+            className="text-center pt-12 pb-4"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.6, ease: APPLE_EASE }}
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-10 h-px bg-primary/20" />
+              <div className="w-1.5 h-1.5 rotate-45 border border-primary/30" />
+              <div className="w-10 h-px bg-primary/20" />
+            </div>
+            <p className="font-serif text-lg md:text-xl text-foreground mb-2">
+              Ready to build something exceptional?
+            </p>
+            <p className="text-xs text-muted-foreground mb-8 max-w-sm mx-auto">
+              One call. No pressure. Just clarity on what's possible.
+            </p>
+            <button
+              onClick={() => {
+                document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+              className="inline-block font-sans uppercase transition-all duration-300"
+              style={{
+                fontSize: '12px',
+                fontWeight: 500,
+                letterSpacing: '0.18em',
+                background: 'hsl(var(--primary))',
+                color: '#0A0906',
+                padding: '18px 40px',
+                border: 'none',
+                borderRadius: '10px',
+                boxShadow: '0 0 40px rgba(185,146,79,0.2)',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 0 56px rgba(185,146,79,0.35)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(185,146,79,0.2)';
+                (e.currentTarget as HTMLElement).style.transform = 'none';
+              }}
+            >
+              Book Discovery Call →
+            </button>
+            <p className="mt-4 text-[10px] text-muted-foreground/60 tracking-wide">
+              30 clinics per year · Reviewed within 48 hours
+            </p>
+          </motion.div>
         </div>
       </main>
 
