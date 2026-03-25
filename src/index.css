@@ -240,8 +240,9 @@ button:focus-visible,
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.1s ease;
   mix-blend-mode: normal;
+  will-change: left, top;
+  contain: layout style;
 }
 
 .cursor-ring {
@@ -253,6 +254,8 @@ button:focus-visible,
   pointer-events: none;
   z-index: 9998;
   transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  will-change: left, top;
+  contain: layout style;
 }
 
 .cursor-ring.hover {
