@@ -57,6 +57,22 @@ const HeroSection = () => {
         <div className="absolute inset-0" style={{ background: heroBg }} />
 
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
+          {/* Brand wordmark */}
+          <div className="text-center mb-5">
+            <span
+              className="font-display tracking-[0.35em] uppercase"
+              style={{ fontSize: '15px', color: 'var(--color-text)' }}
+            >
+              PASTED
+            </span>
+            <span
+              className="block font-sans uppercase mt-1"
+              style={{ fontSize: '9px', letterSpacing: '0.25em', color: 'var(--color-text-subtle)' }}
+            >
+              Private Growth Partnership
+            </span>
+          </div>
+
           {/* H1 */}
           <h1
             className="font-serif font-bold text-center uppercase mb-2"
