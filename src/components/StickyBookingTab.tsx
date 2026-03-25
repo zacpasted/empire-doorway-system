@@ -40,25 +40,20 @@ const StickyBookingTab = () => {
           exit={{ x: 80, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           onClick={handleClick}
-          className="fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-2 transition-all duration-200 group"
+          className="fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-2 group gold-shimmer-hover"
           style={{
             background: '#B8924F',
             color: '#0A0906',
             padding: '20px 12px',
             borderRadius: '10px 0 0 10px',
             boxShadow: '0 4px 20px rgba(185,146,79,0.2)',
+            transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
           title="45-min strategy call · Zac or Alan · 48hr review"
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = '#D4AA6A';
-            (e.currentTarget as HTMLElement).style.paddingLeft = '16px';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = '#B8924F';
-            (e.currentTarget as HTMLElement).style.paddingLeft = '12px';
-          }}
+          whileHover={{ x: -4, boxShadow: '0 8px 32px rgba(185,146,79,0.35)' }}
+          whileTap={{ scale: 0.96 }}
         >
-          <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform" />
+          <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
           <span
             className="font-sans font-medium uppercase whitespace-nowrap"
             style={{ fontSize: '11px', letterSpacing: '0.15em', writingMode: "vertical-rl", textOrientation: "mixed" }}
