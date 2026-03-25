@@ -37,7 +37,7 @@ const FAQSection = () => {
     },
     {
       question: "Why should I trust this?",
-      answer: "Before opening Associate to Empire™, our average client tenure exceeded three years, with a 97% retention rate since 2019. That doesn't happen in dentistry by accident."
+      answer: "Before opening Associate to Empire™, our average client tenure exceeded three years, with a 97% retention rate since 2022. That doesn't happen in dentistry by accident."
     },
     {
       question: "Why are you offering this now?",

@@ -298,7 +298,7 @@ const Discover = () => {
               { value: "5+ Years", label: "Average Partnership" },
               { value: "0%", label: "Templated Work" },
               { value: "3.2×", label: "Avg. ROI on Ad Spend" },
-              { value: "Since 2019", label: "Industry Track Record" },
+              { value: "Since 2022", label: "Industry Track Record" },
             ].map((s) => (
               <div
                 key={s.label}
