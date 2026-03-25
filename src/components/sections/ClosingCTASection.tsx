@@ -46,7 +46,7 @@ const ClosingCTASection = () => {
         </h2>
         
         <p className="font-serif italic mb-16 max-w-lg mx-auto" style={{ fontSize: '20px', color: 'var(--color-text-muted)', lineHeight: '1.3' }}>
-          Apply now. Every application is reviewed personally within 48 hours.
+          Book your discovery call today. You will be informed after booking regarding capacity restrictions.
         </p>
         
         <a
