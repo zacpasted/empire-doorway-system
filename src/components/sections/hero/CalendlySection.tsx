@@ -140,7 +140,7 @@ const CalendlySection = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0 }}
               >
-                Book 1:1 PASTED Strategy Audit
+                Book 1:1 PASTED Discovery Call
               </motion.p>
               <motion.h2
                 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3"
