@@ -156,7 +156,7 @@ const CalendlySection = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                45 minutes with Zac or Alan. We'll map exactly where your practice is leaving production on the table, what separates the top aesthetic practices from everyone else, and whether PASTED is the right partner to build that gap into results. We start with the life you want — and work backward to build the practice that produces it.
+                45 minutes with Zac or Dr. Alan Clarke. We'll map exactly where your practice is leaving production on the table, what separates the top aesthetic practices from everyone else, and whether PASTED is the right partner to build that gap into results. We start with the life you want — and work backward to build the practice that produces it.
                 <br /><br />
                 If it's not the right fit, we'll tell you directly. We welcome you to do the same. Success, even when inevitable, requires connection.
               </motion.p>
@@ -199,7 +199,7 @@ const CalendlySection = () => {
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/50 mt-4 pt-4 border-t border-border/20">
               <span>Not a sales call</span>
               <span className="hidden sm:inline">·</span>
-              <span>Reviewed personally by Zac and Alan</span>
+              <span>Reviewed personally by Zac and Dr. Alan Clarke</span>
               <span className="hidden sm:inline">·</span>
               <span>30 clinics per year</span>
             </div>
