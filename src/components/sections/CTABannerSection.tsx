@@ -50,7 +50,7 @@ const CTABannerSection = () => {
           </motion.a>
           
           <p className="mt-6 text-sm text-muted-foreground/60">
-            30 practices annually · Applications reviewed within 48 hours
+            30 clinics annually · Applications reviewed within 48 hours
           </p>
         </motion.div>
       </div>

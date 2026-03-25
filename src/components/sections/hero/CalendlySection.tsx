@@ -199,7 +199,7 @@ const CalendlySection = () => {
               <span className="hidden sm:inline">·</span>
               <span>Reviewed personally by Zac and Alan</span>
               <span className="hidden sm:inline">·</span>
-              <span>30 practices per year</span>
+              <span>30 clinics per year</span>
             </div>
             <p className="text-center text-sm text-muted-foreground/60 mt-6 italic">
               Not ready to book? Keep scrolling — see the work, hear from partners, then decide.

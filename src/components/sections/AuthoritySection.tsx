@@ -8,7 +8,7 @@ const statCards = [
   { value: "$100M+", label: "Aesthetic Revenue Generated" },
   { value: "41+", label: "Clinics at 8 Figures" },
   { value: "97%", label: "Partner Retention" },
-  { value: "30", label: "Spots Per Year" },
+  { value: "30", label: "Clinics Per Year" },
 ];
 
 const AuthoritySection = () => {
@@ -197,7 +197,7 @@ const AuthoritySection = () => {
             Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-            30 spots annually · Reviewed within 48 hours
+            30 clinics annually · Reviewed within 48 hours
           </p>
         </motion.div>
       </div>

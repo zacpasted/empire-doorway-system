@@ -97,7 +97,7 @@ const MidPageCalendlySection = () => {
         )}
 
         <p className="text-center text-xs text-muted-foreground/50 mt-4">
-          30 practices per year · Reviewed within 48 hours · Strategic fit required
+          30 clinics per year · Reviewed within 48 hours · Strategic fit required
         </p>
       </div>
     </section>

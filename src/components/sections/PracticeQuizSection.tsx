@@ -492,7 +492,7 @@ const PracticeQuizSection = () => {
                     </button>
 
                     <p className="text-[10px] text-muted-foreground/40 mt-4">
-                      Book a 45-min strategy call · 30 practices per year
+                      Book a 45-min strategy call · 30 clinics per year
                     </p>
                   </div>
                 </motion.div>

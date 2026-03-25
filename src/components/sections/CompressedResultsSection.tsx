@@ -292,7 +292,7 @@ const CompressedResultsSection = () => {
             <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </motion.a>
           <p className="mt-4 text-xs text-muted-foreground/50">
-            30 practices per year · Reviewed within 48 hours · Not all accepted
+            30 clinics per year · Reviewed within 48 hours · Not all accepted
           </p>
         </motion.div>
       </div>

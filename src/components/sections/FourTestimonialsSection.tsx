@@ -115,7 +115,7 @@ const FourTestimonialsSection = () => {
             Book Discovery Call →
           </button>
           <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-            30 practices per year · Reviewed within 48 hours · Not all accepted
+            30 clinics per year · Reviewed within 48 hours · Not all accepted
           </p>
         </motion.div>
       </div>

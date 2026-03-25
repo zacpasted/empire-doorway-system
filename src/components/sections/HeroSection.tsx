@@ -95,7 +95,7 @@ const HeroSection = () => {
           >
             Brand. Content. Ads. Systems.<br />
             $100M+ generated. 41+ clinics at 8 figures.<br />
-            30 spots open annually.
+            30 clinics open annually.
           </p>
 
           {/* CTA button — square corners */}

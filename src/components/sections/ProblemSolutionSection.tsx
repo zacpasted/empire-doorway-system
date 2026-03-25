@@ -470,7 +470,7 @@ const ProblemSolutionSection = () => {
             <ArrowRight className="relative z-10 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
           </motion.a>
           <p className="text-xs text-muted-foreground/50 mt-4">
-            30 practices per year · Reviewed within 48 hours · Not all accepted
+            30 clinics per year · Reviewed within 48 hours · Not all accepted
           </p>
         </motion.div>
       </div>

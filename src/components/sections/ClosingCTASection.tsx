@@ -83,7 +83,7 @@ const ClosingCTASection = () => {
         </a>
         
         <p className="mt-8" style={{ fontSize: '11px', color: 'var(--color-text-muted)', letterSpacing: '0.1em' }}>
-          Reviewed personally within 48 hours · Limited to 30 practices annually
+          Reviewed personally within 48 hours · Limited to 30 clinics annually
         </p>
 
         <motion.div

@@ -65,7 +65,7 @@ const MobileFloatingCTA = () => {
               BOOK DISCOVERY CALL
             </button>
             <p className="text-center mt-2 font-sans" style={{ fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-subtle)' }}>
-              30 spots · 48hr review · Not all accepted
+              30 clinics · 48hr review · Not all accepted
             </p>
           </div>
         </motion.div>
