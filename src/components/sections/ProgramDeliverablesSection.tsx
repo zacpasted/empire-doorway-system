@@ -136,7 +136,7 @@ const ProgramDeliverablesSection = ({ onApplyClick }: ProgramDeliverablesSection
             <ArrowRight className="w-4 h-4" />
           </button>
           <p className="text-sm text-muted-foreground mt-6">
-            30 practices annually · Applications reviewed within 48 hours · Not all accepted
+            30 clinics annually · Applications reviewed within 48 hours · Not all accepted
           </p>
         </div>
       </div>
