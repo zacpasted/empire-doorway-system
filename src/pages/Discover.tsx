@@ -131,21 +131,17 @@ const Discover = () => {
             a Partner, Not a Vendor.
           </motion.h1>
 
-          {/* 3. Trust signals — single compact line */}
+          {/* Body copy — above stats */}
           <motion.p
-            className="text-center text-[11px] md:text-xs text-muted-foreground mb-4 md:mb-6"
+            className="text-center text-muted-foreground max-w-lg mx-auto text-[14px] md:text-base leading-relaxed mb-4 md:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.2, ease: APPLE_EASE }}
           >
-            <span>45 min with Zac or Alan</span>
-            <span className="text-primary mx-1.5">·</span>
-            <span>$100M+ Generated</span>
-            <span className="text-primary mx-1.5">·</span>
-            <span>97% Retention</span>
+            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
           </motion.p>
 
-          {/* Metrics bar — moved above Calendly */}
+          {/* Metrics bar */}
           <motion.div
             className="flex items-center justify-center gap-3 md:gap-5 mb-4 md:mb-6 flex-wrap"
             initial={{ opacity: 0 }}
@@ -160,16 +156,6 @@ const Discover = () => {
               </span>
             ))}
           </motion.div>
-
-          {/* Body copy — moved above Calendly */}
-          <motion.p
-            className="text-center text-muted-foreground max-w-lg mx-auto text-[14px] md:text-base leading-relaxed mb-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.28, ease: APPLE_EASE }}
-          >
-            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
-          </motion.p>
 
           <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mb-6 md:mb-8">
             Only 30 partnerships accepted per year. Availability is intentionally limited.
