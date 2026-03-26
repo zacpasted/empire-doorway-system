@@ -145,6 +145,36 @@ const Discover = () => {
             <span>97% Retention</span>
           </motion.p>
 
+          {/* Metrics bar — moved above Calendly */}
+          <motion.div
+            className="flex items-center justify-center gap-3 md:gap-5 mb-4 md:mb-6 flex-wrap"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.25, ease: APPLE_EASE }}
+          >
+            {STATS.map((stat, i) => (
+              <span key={stat.label} className="flex items-center gap-1 text-[11px] md:text-xs text-muted-foreground">
+                <span className="font-serif font-bold text-primary text-[13px] md:text-sm">{stat.value}</span>
+                <span className="uppercase tracking-wider">{stat.label}</span>
+                {i < STATS.length - 1 && <span className="text-primary/30 ml-2 hidden md:inline">·</span>}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* Body copy — moved above Calendly */}
+          <motion.p
+            className="text-center text-muted-foreground max-w-lg mx-auto text-[14px] md:text-base leading-relaxed mb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.28, ease: APPLE_EASE }}
+          >
+            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
+          </motion.p>
+
+          <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mb-6 md:mb-8">
+            Only 30 partnerships accepted per year. Availability is intentionally limited.
+          </p>
+
           {/* 4. Calendly embed — THE HERO */}
           <motion.div
             id="calendly-embed"
@@ -195,37 +225,6 @@ const Discover = () => {
             </cite>
           </motion.blockquote>
 
-          {/* 6. Metrics bar — compact horizontal */}
-          <motion.div
-            className="flex items-center justify-center gap-3 md:gap-5 mt-6 md:mt-8 flex-wrap"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: APPLE_EASE }}
-          >
-            {STATS.map((stat, i) => (
-              <span key={stat.label} className="flex items-center gap-1 text-[11px] md:text-xs text-muted-foreground">
-                <span className="font-serif font-bold text-primary text-[13px] md:text-sm">{stat.value}</span>
-                <span className="uppercase tracking-wider">{stat.label}</span>
-                {i < STATS.length - 1 && <span className="text-primary/30 ml-2 hidden md:inline">·</span>}
-              </span>
-            ))}
-          </motion.div>
-
-          {/* 7. Body copy — bottom reassurance */}
-          <motion.p
-            className="text-center text-muted-foreground max-w-lg mx-auto text-[14px] md:text-base leading-relaxed mt-8 md:mt-10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: APPLE_EASE }}
-          >
-            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
-          </motion.p>
-
-          <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mt-3">
-            Only 30 partnerships accepted per year. Availability is intentionally limited.
-          </p>
         </div>
 
         {/* Authority proof strip */}
