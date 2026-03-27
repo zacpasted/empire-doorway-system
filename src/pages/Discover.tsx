@@ -162,15 +162,6 @@ const Discover = () => {
             Only 30 partnerships accepted per year. Availability is intentionally limited.
           </p>
 
-          <motion.p
-            className="text-center text-muted-foreground/50 max-w-sm mx-auto text-[9px] md:text-[11px] leading-relaxed mb-5 md:mb-6 tracking-wide"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.25, ease: APPLE_EASE }}
-          >
-            Schedule your strategy session with the industry's best. Select a time below to reserve a 45-minute meeting directly with PASTED's Zac or Dr. Alan Clarke. Your appointment will be confirmed within 48 hours.
-          </motion.p>
-
           {/* 4. Calendly embed — THE HERO */}
           <motion.div
             id="calendly-embed"
