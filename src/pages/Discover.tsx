@@ -163,7 +163,7 @@ const Discover = () => {
           </p>
 
           <motion.p
-            className="text-center text-muted-foreground max-w-lg mx-auto text-[13px] md:text-sm leading-relaxed mb-5 md:mb-6"
+            className="text-center text-muted-foreground/70 max-w-md mx-auto text-[11px] md:text-xs leading-relaxed mb-5 md:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.25, ease: APPLE_EASE }}
