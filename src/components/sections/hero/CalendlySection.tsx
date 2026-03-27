@@ -208,9 +208,12 @@ const CalendlySection = () => {
                   </div>
                 </div>
               )}
-              <div
+              <motion.div
                 ref={calendlyRef}
-                className={`rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
+                initial={{ opacity: 0, y: 6 }}
+                animate={calendlyLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-xl overflow-hidden"
                 style={{ minWidth: "320px", height: "700px" }}
               />
             </div>
