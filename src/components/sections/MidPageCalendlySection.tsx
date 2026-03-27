@@ -111,7 +111,7 @@ const MidPageCalendlySection = () => {
             )}
             <div
               ref={calendlyRef}
-              className={`calendly-inline-widget transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
               style={{ minWidth: "320px", height: "700px" }}
             />
           </motion.div>

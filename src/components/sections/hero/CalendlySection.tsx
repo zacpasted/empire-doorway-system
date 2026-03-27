@@ -210,7 +210,7 @@ const CalendlySection = () => {
               )}
               <div
                 ref={calendlyRef}
-                className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
+                className={`rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
                 style={{ minWidth: "320px", height: "700px" }}
               />
             </div>
