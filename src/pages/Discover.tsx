@@ -198,6 +198,16 @@ const Discover = () => {
             />
           </motion.div>
 
+          <motion.p
+            className="text-center text-muted-foreground max-w-lg mx-auto text-[13px] md:text-base leading-relaxed mt-8 md:mt-10"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: APPLE_EASE }}
+          >
+            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
+          </motion.p>
+
           {/* 5. Brian Harris quote — card style with gold left border */}
           <motion.blockquote
             className="mt-8 md:mt-10 px-5 py-4 rounded-lg"
