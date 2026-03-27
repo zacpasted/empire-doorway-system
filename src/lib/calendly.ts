@@ -9,6 +9,7 @@ export const PASTED_CALENDLY_URL =
   "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f";
 
 let calendlyScriptPromise: Promise<CalendlyApi> | null = null;
+let calendlyPrefetched = false;
 
 const getCalendlyApi = (): CalendlyApi | null => {
   if (typeof window === "undefined") return null;
@@ -38,6 +39,23 @@ const waitForCalendlyApi = (timeoutMs = CALENDLY_READY_TIMEOUT_MS) =>
     check();
   });
 
+const prefetchCalendlyBookingPage = () => {
+  if (typeof document === "undefined" || calendlyPrefetched) return;
+  calendlyPrefetched = true;
+
+  const prefetchLink = document.createElement("link");
+  prefetchLink.rel = "prefetch";
+  prefetchLink.as = "document";
+  prefetchLink.href = PASTED_CALENDLY_URL;
+  document.head.appendChild(prefetchLink);
+
+  void fetch(PASTED_CALENDLY_URL, {
+    mode: "no-cors",
+    cache: "force-cache",
+    credentials: "omit",
+  }).catch(() => {});
+};
+
 export const ensureCalendlyScript = async (): Promise<CalendlyApi> => {
   const existingApi = getCalendlyApi();
   if (existingApi) return existingApi;
@@ -52,6 +70,8 @@ export const ensureCalendlyScript = async (): Promise<CalendlyApi> => {
       script.src = CALENDLY_SCRIPT_SRC;
       script.async = true;
       script.defer = true;
+      script.crossOrigin = "anonymous";
+      script.fetchPriority = "high";
       document.head.appendChild(script);
     }
 
@@ -62,6 +82,14 @@ export const ensureCalendlyScript = async (): Promise<CalendlyApi> => {
   }
 
   return calendlyScriptPromise;
+};
+
+export const primeCalendly = () => {
+  void ensureCalendlyScript()
+    .then(() => {
+      prefetchCalendlyBookingPage();
+    })
+    .catch(() => {});
 };
 
 const onCalendlyIframeReady = (container: HTMLElement, onReady: () => void) => {

@@ -2,8 +2,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-// Eagerly start loading Calendly script so embeds render instantly
-import { ensureCalendlyScript } from "./lib/calendly";
-ensureCalendlyScript().catch(() => {});
+// Eagerly warm Calendly for faster first paint on booking embeds
+import { primeCalendly } from "./lib/calendly";
+primeCalendly();
 
 createRoot(document.getElementById("root")!).render(<App />);
