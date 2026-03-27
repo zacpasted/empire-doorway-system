@@ -87,12 +87,32 @@ const CalendlySection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
+    const initWidget = () => {
+      const container = ref.current?.querySelector('.calendly-inline-widget') as HTMLElement | null;
+      if ((window as any).Calendly && container) {
+        (window as any).Calendly.initInlineWidget({
+          url: "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f",
+          parentElement: container,
+        });
+      }
+    };
+
     const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
     if (!existingScript) {
       const script = document.createElement("script");
       script.src = "https://assets.calendly.com/assets/external/widget.js";
       script.async = true;
+      script.onload = () => initWidget();
       document.body.appendChild(script);
+    } else {
+      // Script already exists — poll until Calendly global is ready
+      const timer = setInterval(() => {
+        if ((window as any).Calendly) {
+          clearInterval(timer);
+          initWidget();
+        }
+      }, 200);
+      setTimeout(() => clearInterval(timer), 10000);
     }
   }, []);
 

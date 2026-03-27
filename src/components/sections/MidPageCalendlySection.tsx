@@ -4,18 +4,39 @@ import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const MidPageCalendlySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const calendlyRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "200px" });
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
   useEffect(() => {
     if (!isInView) return;
+
+    const initWidget = () => {
+      if ((window as any).Calendly && calendlyRef.current) {
+        calendlyRef.current.innerHTML = '';
+        (window as any).Calendly.initInlineWidget({
+          url: "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f",
+          parentElement: calendlyRef.current,
+        });
+      }
+    };
+
     const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
     if (!existingScript) {
       const script = document.createElement("script");
       script.src = "https://assets.calendly.com/assets/external/widget.js";
       script.async = true;
+      script.onload = () => initWidget();
       document.body.appendChild(script);
+    } else {
+      const timer = setInterval(() => {
+        if ((window as any).Calendly) {
+          clearInterval(timer);
+          initWidget();
+        }
+      }, 200);
+      setTimeout(() => clearInterval(timer), 10000);
     }
   }, [isInView]);
 
@@ -86,13 +107,11 @@ const MidPageCalendlySection = () => {
                 </div>
               </div>
             )}
-            {isInView && (
-              <div
-                className={`calendly-inline-widget transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
-                data-url="https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f"
-                style={{ minWidth: "320px", height: "700px" }}
-              />
-            )}
+            <div
+              ref={calendlyRef}
+              className={`calendly-inline-widget transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
+              style={{ minWidth: "320px", height: "700px" }}
+            />
           </motion.div>
         )}
 
