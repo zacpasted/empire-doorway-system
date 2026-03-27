@@ -140,15 +140,7 @@ const Discover = () => {
             a Partner, Not a Vendor.
           </motion.h1>
 
-          {/* Body copy — above stats */}
-          <motion.p
-            className="text-center text-muted-foreground max-w-lg mx-auto text-[14px] md:text-base leading-relaxed mb-4 md:mb-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.2, ease: APPLE_EASE }}
-          >
-            PASTED is the in-house growth system behind 41+ eight-figure aesthetic practices. We don't outsource. We don't template. We build from the inside out — one practice at a time.
-          </motion.p>
+
 
           {/* Metrics bar */}
           <motion.div
