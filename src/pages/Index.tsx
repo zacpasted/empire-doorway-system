@@ -11,13 +11,13 @@ import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import GrainOverlay from "@/components/GrainOverlay";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import CustomCursor from "@/components/CustomCursor";
+import CalendlySection from "@/components/sections/hero/CalendlySection";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
 // Lazy load below-the-fold sections
 const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
-const CalendlySection = lazy(() => import("@/components/sections/hero/CalendlySection"));
 const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
 const FourTestimonialsSection = lazy(() => import("@/components/sections/FourTestimonialsSection"));
 const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
@@ -34,15 +34,15 @@ const SectionLoader = memo(() => (
     <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
   </div>
 ));
-SectionLoader.displayName = 'SectionLoader';
+SectionLoader.displayName = "SectionLoader";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: APPLE_EASE }
-  }
+    transition: { duration: 0.7, ease: APPLE_EASE },
+  },
 };
 
 const AnimatedSection = memo(({ children }: { children: React.ReactNode }) => (
@@ -55,48 +55,50 @@ const AnimatedSection = memo(({ children }: { children: React.ReactNode }) => (
     {children}
   </motion.div>
 ));
-AnimatedSection.displayName = 'AnimatedSection';
+AnimatedSection.displayName = "AnimatedSection";
 
 const Index = () => {
   const isMobile = useIsMobile();
 
   const scrollToForm = () => {
-    document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (
-    <motion.main 
+    <motion.main
       className="min-h-screen"
-      style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}
+      style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <title>PASTED Partnership | $500K–$1M+ Growth for Aesthetic Dentists</title>
-      
+
       {/* Global overlays */}
       <GrainOverlay />
       <ScrollProgressBar />
       <CustomCursor />
-      
+
       <StickyHeader onApplyClick={scrollToForm} />
       <StickyBookingTab />
-      
+
       {/* 1. Hero */}
       <HeroSection />
-      
+
       {/* 2. Social Proof Ticker */}
       <PartnerRosterTicker />
-      
-      <Suspense fallback={<SectionLoader />}>
-        {/* 3. Calendly Booking */}
-        <CalendlySection />
 
+      {/* 3. Calendly Booking (eager for faster first conversion interaction) */}
+      <CalendlySection />
+
+      <Suspense fallback={<SectionLoader />}>
         {/* 4. Authority */}
-        <AnimatedSection><AuthoritySection /></AnimatedSection>
+        <AnimatedSection>
+          <AuthoritySection />
+        </AnimatedSection>
 
         <EditorialDivider variant="line" />
-        
+
         {/* 5. Video Testimonials */}
         <AnimatedSection>
           <VideoTestimonialsSection
@@ -105,31 +107,41 @@ const Index = () => {
             subtitle="Unscripted. From dentists who've been through it."
           />
         </AnimatedSection>
-        
+
         {/* 6. Written Testimonials + CTA */}
-        <AnimatedSection><FourTestimonialsSection /></AnimatedSection>
+        <AnimatedSection>
+          <FourTestimonialsSection />
+        </AnimatedSection>
 
         <EditorialDivider variant="line" />
-        
+
         {/* 7. The Offer */}
-        <AnimatedSection><TheOfferSection /></AnimatedSection>
-        
+        <AnimatedSection>
+          <TheOfferSection />
+        </AnimatedSection>
+
         {/* 8. How It Works */}
-        <AnimatedSection><FourStepsSection /></AnimatedSection>
+        <AnimatedSection>
+          <FourStepsSection />
+        </AnimatedSection>
 
         <EditorialDivider variant="line" />
-        
+
         {/* 9. Brands Showcase */}
-        <AnimatedSection><BrandsShowcaseSection /></AnimatedSection>
-        
+        <AnimatedSection>
+          <BrandsShowcaseSection />
+        </AnimatedSection>
+
         {/* 10. Results */}
-        <AnimatedSection><ResultsSection /></AnimatedSection>
+        <AnimatedSection>
+          <ResultsSection />
+        </AnimatedSection>
 
         <EditorialDivider variant="line" />
-        
+
         {/* 11. Content Examples */}
         <AnimatedSection>
-          <WistiaVideoEmbedSection 
+          <WistiaVideoEmbedSection
             title="Scripted. Shot. Edited. Deployed."
             subtitle="The aesthetic industry runs on emotion, on motion, on the story behind the brand. Patients don't choose on clinical skill alone — they choose based on how a practice makes them feel before they ever walk in. Every asset below was scripted, shot on-location, and deployed by our in-house cinematic team — not as content, but as brand equity built frame by frame."
             videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
@@ -138,17 +150,23 @@ const Index = () => {
         </AnimatedSection>
 
         <EditorialDivider variant="line" />
-        
+
         {/* 12. Selectivity */}
-        <AnimatedSection><SelectivitySection /></AnimatedSection>
-        
+        <AnimatedSection>
+          <SelectivitySection />
+        </AnimatedSection>
+
         {/* 13. Ad Case Studies */}
-        <AnimatedSection><AdCaseStudiesSection /></AnimatedSection>
-        
+        <AnimatedSection>
+          <AdCaseStudiesSection />
+        </AnimatedSection>
+
         {/* 14. Closing CTA */}
-        <AnimatedSection><ClosingCTASection /></AnimatedSection>
+        <AnimatedSection>
+          <ClosingCTASection />
+        </AnimatedSection>
       </Suspense>
-      
+
       {/* 15. Footer */}
       <Footer />
       <MobileFloatingCTA />
