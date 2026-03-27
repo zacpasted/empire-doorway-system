@@ -109,11 +109,9 @@ const MidPageCalendlySection = () => {
                 <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
               </div>
             )}
-            <motion.div
+            <div
               ref={calendlyRef}
-              initial={{ opacity: 0, y: 6 }}
-              animate={calendlyLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className={`transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${calendlyLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1.5"}`}
               style={{ minWidth: "320px", height: "700px" }}
             />
           </motion.div>
