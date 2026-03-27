@@ -191,13 +191,11 @@ const Discover = () => {
                 </div>
               </div>
             )}
-            {scriptLoaded && (
-              <div
-                className={`calendly-inline-widget transition-opacity duration-500 ${widgetReady ? "opacity-100" : "opacity-0"}`}
-                data-url="https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f"
-                style={{ minWidth: "320px", height: "700px" }}
-              />
-            )}
+            <div
+              ref={calendlyContainerRef}
+              className={`calendly-inline-widget transition-opacity duration-500 ${widgetReady ? "opacity-100" : "opacity-0"}`}
+              style={{ minWidth: "320px", height: "700px" }}
+            />
           </motion.div>
 
           {/* 5. Brian Harris quote — card style with gold left border */}
