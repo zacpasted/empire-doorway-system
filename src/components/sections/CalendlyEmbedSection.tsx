@@ -105,9 +105,11 @@ const CalendlyEmbedSection = () => {
             </div>
           )}
           
-          <div
+          <motion.div
             ref={calendlyRef}
-            className={`calendly-inline-widget transition-opacity duration-500 ${widgetReady ? 'opacity-100' : 'opacity-0'}`}
+            initial={{ opacity: 0, y: 6 }}
+            animate={widgetReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             style={{ minWidth: '320px', height: '700px' }}
           />
         </motion.div>
