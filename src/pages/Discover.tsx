@@ -16,7 +16,7 @@ const STATS = [
   { value: "$100M+", label: "Revenue Generated" },
   { value: "41+", label: "8-Figure Clinics" },
   { value: "97%", label: "Retention Rate" },
-  { value: "30", label: "Clinics / Year" },
+  { value: "9.7x", label: "Avg ROI on Ad Spend" },
 ];
 
 const TESTIMONIAL_VIDEO_IDS = ["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"];
