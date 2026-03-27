@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import { initCalendlyInlineWidget, PASTED_CALENDLY_URL } from "@/lib/calendly";
 
 const MidPageCalendlySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -12,43 +13,47 @@ const MidPageCalendlySection = () => {
   useEffect(() => {
     if (!isInView) return;
 
-    const initWidget = () => {
-      if ((window as any).Calendly && calendlyRef.current) {
-        calendlyRef.current.innerHTML = '';
-        (window as any).Calendly.initInlineWidget({
-          url: "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f",
-          parentElement: calendlyRef.current,
+    let cancelled = false;
+
+    const setupWidget = async () => {
+      const container = calendlyRef.current;
+      if (!container) return;
+
+      try {
+        await initCalendlyInlineWidget({
+          container,
+          url: PASTED_CALENDLY_URL,
+          onReady: () => {
+            if (!cancelled) setCalendlyLoaded(true);
+          },
         });
+      } catch {
+        if (!cancelled) setCalendlyLoaded(true);
       }
     };
 
-    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-    if (!existingScript) {
-      const script = document.createElement("script");
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      script.onload = () => initWidget();
-      document.body.appendChild(script);
-    } else {
-      const timer = setInterval(() => {
-        if ((window as any).Calendly) {
-          clearInterval(timer);
-          initWidget();
-        }
-      }, 200);
-      setTimeout(() => clearInterval(timer), 10000);
-    }
+    setupWidget();
+
+    return () => {
+      cancelled = true;
+    };
   }, [isInView]);
 
   useEffect(() => {
     const handleCalendlyMessage = (e: MessageEvent) => {
       let data = e.data;
-      if (typeof data === 'string') {
-        try { data = JSON.parse(data); } catch { return; }
+      if (typeof data === "string") {
+        try {
+          data = JSON.parse(data);
+        } catch {
+          return;
+        }
       }
-      if (!data || typeof data !== 'object') return;
-      if (data.event === "calendly.event_type_viewed") setCalendlyLoaded(true);
-      if (data.event === "calendly.event_scheduled") {
+      if (!data || typeof data !== "object") return;
+
+      const eventName = (data as { event?: string }).event;
+      if (eventName === "calendly.event_type_viewed") setCalendlyLoaded(true);
+      if (eventName === "calendly.event_scheduled") {
         setBookingConfirmed(true);
         trackCTAClick({ ctaId: "calendly-booking-mid", ctaText: "Call Booked", section: "mid-page-calendly" });
       }
@@ -101,10 +106,7 @@ const MidPageCalendlySection = () => {
           >
             {!calendlyLoaded && (
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  <p className="text-sm text-muted-foreground">Loading calendar...</p>
-                </div>
+                <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
               </div>
             )}
             <div

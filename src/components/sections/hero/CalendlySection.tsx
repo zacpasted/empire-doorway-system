@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import { initCalendlyInlineWidget, PASTED_CALENDLY_URL } from "@/lib/calendly";
 
 const BookingConfirmation = () => (
   <motion.div
@@ -83,48 +84,50 @@ const BookingConfirmation = () => (
 const CalendlySection = () => {
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const calendlyRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
 
   useEffect(() => {
-    const initWidget = () => {
-      const container = ref.current?.querySelector('.calendly-inline-widget') as HTMLElement | null;
-      if ((window as any).Calendly && container) {
-        (window as any).Calendly.initInlineWidget({
-          url: "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f",
-          parentElement: container,
+    let cancelled = false;
+
+    const setupWidget = async () => {
+      const container = calendlyRef.current;
+      if (!container) return;
+
+      try {
+        await initCalendlyInlineWidget({
+          container,
+          url: PASTED_CALENDLY_URL,
+          onReady: () => {
+            if (!cancelled) setCalendlyLoaded(true);
+          },
         });
+      } catch {
+        if (!cancelled) setCalendlyLoaded(true);
       }
     };
 
-    const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-    if (!existingScript) {
-      const script = document.createElement("script");
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      script.onload = () => initWidget();
-      document.body.appendChild(script);
-    } else {
-      // Script already exists — poll until Calendly global is ready
-      const timer = setInterval(() => {
-        if ((window as any).Calendly) {
-          clearInterval(timer);
-          initWidget();
-        }
-      }, 200);
-      setTimeout(() => clearInterval(timer), 10000);
-    }
+    setupWidget();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
     const handleCalendlyMessage = (e: MessageEvent) => {
       let data = e.data;
-      if (typeof data === 'string') {
-        try { data = JSON.parse(data); } catch { return; }
+      if (typeof data === "string") {
+        try {
+          data = JSON.parse(data);
+        } catch {
+          return;
+        }
       }
-      if (!data || typeof data !== 'object') return;
-      
-      const eventName = data.event;
+      if (!data || typeof data !== "object") return;
+
+      const eventName = (data as { event?: string }).event;
       if (eventName === "calendly.event_type_viewed") {
         setCalendlyLoaded(true);
       }
@@ -139,13 +142,13 @@ const CalendlySection = () => {
 
   return (
     <div
-      ref={ref}
+      ref={sectionRef}
       id="eligibility-form"
       className="backdrop-blur-sm rounded-md overflow-hidden"
       style={{
-        border: '1px solid rgba(185,146,79,0.15)',
-        background: 'rgba(255,255,255,0.02)',
-        padding: '4px',
+        border: "1px solid rgba(185,146,79,0.15)",
+        background: "rgba(255,255,255,0.02)",
+        padding: "4px",
       }}
     >
       <div className="bg-card/50 rounded-md p-6 md:p-10">
@@ -177,7 +180,8 @@ const CalendlySection = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 45 minutes with Zac or Dr. Alan Clarke. We'll map exactly where your practice is leaving production on the table, what separates the top aesthetic practices from everyone else, and whether PASTED is the right partner to build that gap into results. We start with the life you want — and work backward to build the practice that produces it.
-                <br /><br />
+                <br />
+                <br />
                 If it's not the right fit, we'll tell you directly. We welcome you to do the same. Success, even when inevitable, requires connection.
               </motion.p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60 mb-2">
@@ -194,7 +198,6 @@ const CalendlySection = () => {
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1a1a1a] rounded-xl border border-border/30">
                   <div className="flex flex-col items-center gap-4">
                     <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                    <p className="text-sm text-muted-foreground">Loading calendar...</p>
                   </div>
                   <div className="mt-8 space-y-3 w-full max-w-sm px-4">
                     <div className="h-4 bg-white/10 rounded animate-pulse" />
@@ -206,8 +209,8 @@ const CalendlySection = () => {
                 </div>
               )}
               <div
+                ref={calendlyRef}
                 className={`calendly-inline-widget rounded-xl overflow-hidden transition-opacity duration-500 ${calendlyLoaded ? "opacity-100" : "opacity-0"}`}
-                data-url="https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f"
                 style={{ minWidth: "320px", height: "700px" }}
               />
             </div>

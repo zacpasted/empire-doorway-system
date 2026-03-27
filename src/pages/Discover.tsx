@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
 import logoFigs from "@/assets/logos/figs-white.png";
@@ -8,6 +8,7 @@ import logoSolventum from "@/assets/logos/solventum-white.png";
 import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
 import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
 import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
+import { initCalendlyInlineWidget, PASTED_CALENDLY_URL } from "@/lib/calendly";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -26,8 +27,10 @@ const VideoProofBlock = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVidVisible(true); },
-      { threshold: 0.1, rootMargin: "200px" }
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVidVisible(true);
+      },
+      { threshold: 0.1, rootMargin: "200px" },
     );
     if (blockRef.current) observer.observe(blockRef.current);
     return () => observer.disconnect();
@@ -58,50 +61,49 @@ const VideoProofBlock = () => {
 
 const Discover = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
-  const [scriptLoaded, setScriptLoaded] = useState(false);
   const [widgetReady, setWidgetReady] = useState(false);
 
   const calendlyContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const initWidget = () => {
-      if ((window as any).Calendly && calendlyContainerRef.current) {
-        // Clear any prior content so re-init works
-        calendlyContainerRef.current.innerHTML = '';
-        (window as any).Calendly.initInlineWidget({
-          url: "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f",
-          parentElement: calendlyContainerRef.current,
+    let cancelled = false;
+
+    const setupWidget = async () => {
+      const container = calendlyContainerRef.current;
+      if (!container) return;
+
+      try {
+        await initCalendlyInlineWidget({
+          container,
+          url: PASTED_CALENDLY_URL,
+          onReady: () => {
+            if (!cancelled) setWidgetReady(true);
+          },
         });
-        setScriptLoaded(true);
+      } catch {
+        if (!cancelled) setWidgetReady(true);
       }
     };
 
-    const existing = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]') as HTMLScriptElement | null;
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      script.onload = () => initWidget();
-      document.body.appendChild(script);
-    } else {
-      const timer = setInterval(() => {
-        if ((window as any).Calendly) {
-          clearInterval(timer);
-          initWidget();
-        }
-      }, 200);
-      setTimeout(() => clearInterval(timer), 10000);
-    }
+    setupWidget();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
       let data = e.data;
       if (typeof data === "string") {
-        try { data = JSON.parse(data); } catch { return; }
+        try {
+          data = JSON.parse(data);
+        } catch {
+          return;
+        }
       }
-      if (data?.event === "calendly.event_type_viewed") setWidgetReady(true);
+      if (!data || typeof data !== "object") return;
+      if ((data as { event?: string }).event === "calendly.event_type_viewed") setWidgetReady(true);
     };
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
@@ -109,10 +111,8 @@ const Discover = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-
       <main ref={ref} className="pt-4 pb-10 md:pt-20 md:pb-20">
         <div className="container max-w-3xl mx-auto px-4">
-
           {/* 1. Wordmark + eyebrow */}
           <motion.div
             className="text-center mb-3 md:mb-6"
@@ -139,8 +139,6 @@ const Discover = () => {
             Your Practice Deserves<br />
             a Partner, Not a Vendor.
           </motion.h1>
-
-
 
           {/* Metrics bar */}
           <motion.div
@@ -171,16 +169,13 @@ const Discover = () => {
             className="rounded-xl overflow-hidden shadow-lg relative"
             style={{
               minHeight: "550px",
-              background: '#111',
-              border: '1px solid rgba(185,146,79,0.2)',
+              background: "#111",
+              border: "1px solid rgba(185,146,79,0.2)",
             }}
           >
             {!widgetReady && (
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  <p className="text-sm text-muted-foreground">Loading calendar...</p>
-                </div>
+                <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
               </div>
             )}
             <div
