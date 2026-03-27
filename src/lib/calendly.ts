@@ -69,9 +69,6 @@ export const ensureCalendlyScript = async (): Promise<CalendlyApi> => {
       const script = document.createElement("script");
       script.src = CALENDLY_SCRIPT_SRC;
       script.async = true;
-      script.defer = true;
-      script.crossOrigin = "anonymous";
-      script.fetchPriority = "high";
       document.head.appendChild(script);
     }
 
