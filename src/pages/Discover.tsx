@@ -62,27 +62,36 @@ const Discover = () => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [widgetReady, setWidgetReady] = useState(false);
 
+  const calendlyContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    const initWidget = () => {
+      if ((window as any).Calendly && calendlyContainerRef.current) {
+        // Clear any prior content so re-init works
+        calendlyContainerRef.current.innerHTML = '';
+        (window as any).Calendly.initInlineWidget({
+          url: "https://calendly.com/getpasted/pasted-partner-discovery?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=e4ce6f",
+          parentElement: calendlyContainerRef.current,
+        });
+        setScriptLoaded(true);
+      }
+    };
+
     const existing = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]') as HTMLScriptElement | null;
     if (!existing) {
       const script = document.createElement("script");
       script.src = "https://assets.calendly.com/assets/external/widget.js";
       script.async = true;
-      script.onload = () => setScriptLoaded(true);
+      script.onload = () => initWidget();
       document.body.appendChild(script);
     } else {
-      if ((window as any).Calendly) {
-        setScriptLoaded(true);
-      } else {
-        existing.addEventListener("load", () => setScriptLoaded(true));
-        const timer = setInterval(() => {
-          if ((window as any).Calendly) {
-            setScriptLoaded(true);
-            clearInterval(timer);
-          }
-        }, 200);
-        setTimeout(() => clearInterval(timer), 5000);
-      }
+      const timer = setInterval(() => {
+        if ((window as any).Calendly) {
+          clearInterval(timer);
+          initWidget();
+        }
+      }, 200);
+      setTimeout(() => clearInterval(timer), 10000);
     }
   }, []);
 
