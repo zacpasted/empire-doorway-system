@@ -12,7 +12,7 @@ const useCounter = (end: number, duration: number, isInView: boolean, delay: num
         if (!startTime) startTime = currentTime;
         const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        setCount(Math.floor(eased * end));
+        setCount(Math.round(eased * end * 10) / 10);
         if (progress < 1) requestAnimationFrame(animate);
       };
       requestAnimationFrame(animate);
@@ -26,7 +26,7 @@ const METRICS = [
   { label: "Aesthetic Revenue", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
   { label: "Clinics Scaled to 8 Figures", numValue: 41, prefix: "", suffix: "+", barWidth: 100 },
   { label: "Retention", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
-  { label: "Practices/yr", numValue: 30, prefix: "", suffix: "", barWidth: 88 },
+  { label: "Avg ROI on Ad Spend", numValue: 9.7, prefix: "", suffix: "x", barWidth: 88 },
 ];
 
 const MetricCard = memo(({ metric, index, isInView }: { metric: typeof METRICS[0]; index: number; isInView: boolean }) => {
