@@ -12,7 +12,7 @@ const useCounter = (end: number, duration: number, isInView: boolean, delay: num
         if (!startTime) startTime = currentTime;
         const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        setCount(Math.floor(eased * end));
+        setCount(Math.round(eased * end * 10) / 10);
         if (progress < 1) requestAnimationFrame(animate);
       };
       requestAnimationFrame(animate);
