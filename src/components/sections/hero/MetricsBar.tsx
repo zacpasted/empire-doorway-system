@@ -26,7 +26,7 @@ const METRICS = [
   { label: "Aesthetic Revenue", numValue: 100, prefix: "$", suffix: "M+", barWidth: 95 },
   { label: "Clinics Scaled to 8 Figures", numValue: 41, prefix: "", suffix: "+", barWidth: 100 },
   { label: "Retention", numValue: 97, prefix: "", suffix: "%", barWidth: 97 },
-  { label: "Practices/yr", numValue: 30, prefix: "", suffix: "", barWidth: 88 },
+  { label: "Avg ROI on Ad Spend", numValue: 9.7, prefix: "", suffix: "x", barWidth: 88 },
 ];
 
 const MetricCard = memo(({ metric, index, isInView }: { metric: typeof METRICS[0]; index: number; isInView: boolean }) => {
