@@ -9,6 +9,7 @@ import logoMHM from "@/assets/logos/marshall-hanson-method-white.png";
 import logoSmileVirtual from "@/assets/logos/smile-virtual-white.png";
 import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
 import { initCalendlyInlineWidget, PASTED_CALENDLY_URL } from "@/lib/calendly";
+import AvailabilityIndicator from "@/components/AvailabilityIndicator";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
