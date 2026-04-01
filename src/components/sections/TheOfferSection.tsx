@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import AvailabilityIndicator from "@/components/AvailabilityIndicator";
 
 const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
 
