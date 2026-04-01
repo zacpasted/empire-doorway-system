@@ -396,3 +396,14 @@ button:focus-visible,
   background: linear-gradient(90deg, transparent, rgba(185,146,79,0.2), transparent);
   animation: section-breathe 4s ease-in-out infinite;
 }
+
+/* Exit-intent pulse glow on sticky CTA */
+.exit-pulse-glow {
+  animation: exit-glow-border 2.4s ease-out forwards;
+}
+
+@keyframes exit-glow-border {
+  0% { border-color: rgba(185,146,79,0.3); box-shadow: 0 -2px 20px rgba(185,146,79,0.1); }
+  20% { border-color: rgba(185,146,79,0.7); box-shadow: 0 -4px 30px rgba(185,146,79,0.4); }
+  100% { border-color: rgba(185,146,79,0.3); box-shadow: none; }
+}
