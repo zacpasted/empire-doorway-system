@@ -111,26 +111,44 @@ const Discover = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main ref={ref} className="pt-4 pb-10 md:pt-20 md:pb-20">
+      {/* Sticky mobile CTA — always visible */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-md border-t border-border/30 px-4 py-3 safe-area-pb">
+        <button
+          onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+          className="w-full text-center font-sans uppercase text-xs tracking-[0.18em] font-medium py-3.5 rounded-lg transition-all duration-300"
+          style={{
+            background: 'hsl(var(--primary))',
+            color: '#0A0906',
+            boxShadow: '0 -4px 24px rgba(185,146,79,0.25)',
+          }}
+        >
+          Book Your Discovery Call →
+        </button>
+        <p className="text-center text-[9px] text-muted-foreground/50 mt-1.5 tracking-wide">
+          45 min · No obligation · Reviewed within 48 hrs
+        </p>
+      </div>
+
+      <main ref={ref} className="pt-3 pb-24 md:pt-20 md:pb-20">
         <div className="container max-w-3xl mx-auto px-4">
-          {/* 1. Wordmark + eyebrow */}
+          {/* 1. Wordmark + eyebrow — tighter on mobile */}
           <motion.div
-            className="text-center mb-3 md:mb-6"
+            className="text-center mb-2 md:mb-6"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: APPLE_EASE }}
           >
             <a href="/">
-              <img src={pastedWordmark} alt="PASTED" className="h-4 md:h-5 mx-auto opacity-70 hover:opacity-100 transition-opacity mb-2" />
+              <img src={pastedWordmark} alt="PASTED" className="h-3.5 md:h-5 mx-auto opacity-70 hover:opacity-100 transition-opacity mb-1.5" />
             </a>
-            <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold">
+            <p className="text-[9px] md:text-xs tracking-[0.3em] uppercase text-primary font-semibold">
               The Global Standard in Dental Brand Growth
             </p>
           </motion.div>
 
-          {/* 2. H1 — smaller confirmation-page scale */}
+          {/* 2. H1 — tighter mobile */}
           <motion.h1
-            className="text-[32px] md:text-[42px] font-serif font-bold text-foreground text-center mb-2 md:mb-3"
+            className="text-[28px] md:text-[42px] font-serif font-bold text-foreground text-center mb-1.5 md:mb-3"
             style={{ lineHeight: "1.08", letterSpacing: "-0.02em" }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,25 +158,57 @@ const Discover = () => {
             a Partner, Not a Vendor.
           </motion.h1>
 
-          {/* Metrics bar */}
-          <motion.div
-            className="flex items-center justify-center gap-3 md:gap-5 mb-4 md:mb-6 flex-wrap"
+          {/* Inline social proof — one punchy line */}
+          <motion.p
+            className="text-center text-[11px] md:text-xs text-foreground/60 italic mb-2 md:mb-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.25, ease: APPLE_EASE }}
+            transition={{ duration: 0.4, delay: 0.15, ease: APPLE_EASE }}
+          >
+            "The only answer." — Dr. Brian Harris, Smile Virtual
+          </motion.p>
+
+          {/* Metrics bar — compact */}
+          <motion.div
+            className="flex items-center justify-center gap-2 md:gap-5 mb-2 md:mb-4 flex-wrap"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.2, ease: APPLE_EASE }}
           >
             {STATS.map((stat, i) => (
-              <span key={stat.label} className="flex items-center gap-1 text-[11px] md:text-xs text-muted-foreground">
-                <span className="font-serif font-bold text-primary text-[13px] md:text-sm">{stat.value}</span>
+              <span key={stat.label} className="flex items-center gap-1 text-[10px] md:text-xs text-muted-foreground">
+                <span className="font-serif font-bold text-primary text-[12px] md:text-sm">{stat.value}</span>
                 <span className="uppercase tracking-wider">{stat.label}</span>
-                {i < STATS.length - 1 && <span className="text-primary/30 ml-2 hidden md:inline">·</span>}
+                {i < STATS.length - 1 && <span className="text-primary/30 ml-1 hidden md:inline">·</span>}
               </span>
             ))}
           </motion.div>
 
-          <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mb-6 md:mb-8">
-            Only 30 partnerships accepted per year. Availability is intentionally limited.
-          </p>
+          {/* Scarcity + what to expect — combined for density */}
+          <motion.div
+            className="mb-4 md:mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.25, ease: APPLE_EASE }}
+          >
+            <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mb-3">
+              Only 30 partnerships accepted per year. Availability is intentionally limited.
+            </p>
+            <div className="flex items-center justify-center gap-3 md:gap-5 text-[10px] md:text-xs text-muted-foreground/60">
+              <span className="flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-primary/60" />
+                45-min strategy call
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-primary/60" />
+                No obligation
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-primary/60" />
+                With Zac or Dr. Clarke
+              </span>
+            </div>
+          </motion.div>
 
           {/* 4. Calendly embed — THE HERO */}
           <motion.div
