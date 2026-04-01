@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
@@ -63,8 +63,54 @@ const VideoProofBlock = () => {
 const Discover = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [widgetReady, setWidgetReady] = useState(false);
+  const [exitPulse, setExitPulse] = useState(false);
+  const exitFiredRef = useRef(false);
 
   const calendlyContainerRef = useRef<HTMLDivElement>(null);
+
+  // Exit-intent detection
+  const triggerExitPulse = useCallback(() => {
+    if (exitFiredRef.current) return;
+    exitFiredRef.current = true;
+    setExitPulse(true);
+    setTimeout(() => setExitPulse(false), 2400);
+  }, []);
+
+  useEffect(() => {
+    // Desktop: mouse leaves viewport top
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) triggerExitPulse();
+    };
+
+    // Mobile: back button / visibility change (tab switch, app switch)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') triggerExitPulse();
+    };
+
+    // Mobile: rapid scroll up (intent to reach browser chrome / back)
+    let lastScrollY = window.scrollY;
+    let rapidUpCount = 0;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY < lastScrollY && lastScrollY - currentY > 60) {
+        rapidUpCount++;
+        if (rapidUpCount >= 2 && currentY < 100) triggerExitPulse();
+      } else {
+        rapidUpCount = 0;
+      }
+      lastScrollY = currentY;
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [triggerExitPulse]);
 
   useEffect(() => {
     let cancelled = false;
@@ -113,17 +159,21 @@ const Discover = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Sticky mobile CTA — always visible */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-md border-t border-border/30 px-4 py-3 safe-area-pb">
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-md border-t border-border/30 px-4 py-3 safe-area-pb transition-all duration-300 ${exitPulse ? 'exit-pulse-glow' : ''}`}
+      >
         <button
           onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-          className="w-full text-center font-sans uppercase text-xs tracking-[0.18em] font-medium py-3.5 rounded-lg transition-all duration-300"
+          className={`w-full text-center font-sans uppercase text-xs tracking-[0.18em] font-medium py-3.5 rounded-lg transition-all duration-300 ${exitPulse ? 'animate-pulse scale-[1.03]' : ''}`}
           style={{
-            background: 'hsl(var(--primary))',
+            background: exitPulse ? '#D4AA6A' : 'hsl(var(--primary))',
             color: '#0A0906',
-            boxShadow: '0 -4px 24px rgba(185,146,79,0.25)',
+            boxShadow: exitPulse
+              ? '0 0 32px rgba(185,146,79,0.5), 0 -4px 24px rgba(185,146,79,0.35)'
+              : '0 -4px 24px rgba(185,146,79,0.25)',
           }}
         >
-          Book Your Discovery Call →
+          {exitPulse ? "Wait — Your Slot Is Still Open →" : "Book Your Discovery Call →"}
         </button>
         <p className="text-center text-[9px] text-muted-foreground/50 mt-1.5 tracking-wide">
           45 min · No obligation · Reviewed within 48 hrs
