@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
