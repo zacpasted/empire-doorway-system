@@ -133,9 +133,7 @@ const TheOfferSection = () => {
           >
             Book Discovery Call →
           </button>
-          <p className="mt-4" style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-            30 clinics per year · Reviewed within 48 hours · Not all accepted
-          </p>
+          <AvailabilityIndicator variant="card" delay={0.9} className="mt-6" />
         </motion.div>
       </div>
     </section>

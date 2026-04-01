@@ -192,9 +192,7 @@ const Discover = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.25, ease: APPLE_EASE }}
           >
-            <p className="text-center text-[10px] md:text-xs text-muted-foreground/50 mb-3">
-              Only 30 partnerships accepted per year. Availability is intentionally limited.
-            </p>
+            <AvailabilityIndicator variant="inline" delay={0.25} className="mb-2" />
             <div className="flex items-center justify-center gap-3 md:gap-5 text-[10px] md:text-xs text-muted-foreground/60">
               <span className="flex items-center gap-1">
                 <span className="w-1 h-1 rounded-full bg-primary/60" />
