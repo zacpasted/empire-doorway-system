@@ -41,9 +41,9 @@ const PastedEnquire = () => {
             </p>
 
             <div className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-8">
-              <a
-                href="#"
-                className="group inline-flex items-center gap-5 px-10 py-5 border transition-all duration-500"
+              <button
+                onClick={handleRequest}
+                className="group inline-flex items-center gap-5 px-10 py-5 border transition-all duration-500 bg-transparent cursor-pointer"
                 style={{ borderColor: "var(--color-border-gold)" }}
               >
                 <span className="text-[11px] uppercase tracking-[0.28em] text-white">
