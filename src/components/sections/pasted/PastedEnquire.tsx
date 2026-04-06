@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const PastedEnquire = () => {
+  const handleRequest = () => {
+    trackCTAClick({ ctaId: "enquire-request-intro", ctaText: "Request introduction", section: "enquire" });
+    document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   return (
     <section id="enquire" className="relative py-32 lg:py-48 border-t border-white/5 overflow-hidden" style={{ background: "var(--color-bg)" }}>
       {/* Ambient gold glow */}
