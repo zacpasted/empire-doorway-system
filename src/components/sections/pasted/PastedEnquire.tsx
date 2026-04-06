@@ -53,7 +53,7 @@ const PastedEnquire = () => {
                   className="w-8 h-px group-hover:w-14 transition-all duration-500"
                   style={{ background: "var(--color-gold)" }}
                 />
-              </a>
+              </button>
               <a
                 href="mailto:hello@pasted.studio"
                 className="text-[11px] uppercase tracking-[0.28em] text-white/60 hover:text-[var(--color-gold)] transition-colors"
