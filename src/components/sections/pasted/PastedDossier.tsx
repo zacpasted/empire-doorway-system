@@ -1,6 +1,24 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useWistiaLoader, getWistiaPlaceholderStyles } from "@/hooks/use-wistia";
+
+const FOUNDER_VIDEO_ID = "h2xbzknj3f";
 
 const PastedDossier = () => {
+  const videoRef = useRef<HTMLDivElement>(null);
+  const [isVidVisible, setIsVidVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVidVisible(true); },
+      { threshold: 0.1, rootMargin: "200px" }
+    );
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useWistiaLoader(FOUNDER_VIDEO_ID, { loadOnMount: isVidVisible });
+
   return (
     <section id="dossier" className="relative py-32 lg:py-48 border-t border-white/5" style={{ background: "var(--color-bg)" }}>
       <div className="max-w-[1680px] mx-auto px-8 lg:px-12">
@@ -38,6 +56,34 @@ const PastedDossier = () => {
             <p className="mt-10 text-[11px] uppercase tracking-[0.24em] text-white/50">
               &mdash; Zac, Founder
             </p>
+
+            {/* Founder Video */}
+            <div ref={videoRef} className="mt-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="max-w-sm"
+              >
+                <div
+                  className="overflow-hidden"
+                  style={{ borderRadius: '2px', border: '1px solid rgba(255,255,255,0.08)' }}
+                >
+                  <style>{getWistiaPlaceholderStyles(FOUNDER_VIDEO_ID, '176.67%')}</style>
+                  {/* @ts-ignore */}
+                  <wistia-player
+                    media-id={FOUNDER_VIDEO_ID}
+                    aspect="0.5660377358490566"
+                    autoplay="false"
+                    end-video-behavior="default"
+                  />
+                </div>
+                <p className="mt-4 text-[10px] uppercase tracking-[0.24em] text-white/30">
+                  A message from Zac
+                </p>
+              </motion.div>
+            </div>
 
             <div className="mt-20 grid md:grid-cols-2 gap-12 text-white/65 text-[15px] leading-[1.9] font-light max-w-5xl">
               <div className="space-y-6">

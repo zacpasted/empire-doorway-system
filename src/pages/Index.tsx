@@ -7,6 +7,7 @@ import PastedHero from "@/components/sections/pasted/PastedHero";
 import PastedPhilosophy from "@/components/sections/pasted/PastedPhilosophy";
 import PastedLineup from "@/components/sections/pasted/PastedLineup";
 import PastedCraft from "@/components/sections/pasted/PastedCraft";
+import PastedVibe from "@/components/sections/pasted/PastedVibe";
 import PastedProof from "@/components/sections/pasted/PastedProof";
 import PastedDossier from "@/components/sections/pasted/PastedDossier";
 import PastedEnquire from "@/components/sections/pasted/PastedEnquire";
@@ -34,6 +35,7 @@ const Index = () => {
         <PastedPhilosophy />
         <PastedLineup />
         <PastedCraft />
+        <PastedVibe />
         <PastedProof />
         <PastedDossier />
         <PastedEnquire />
