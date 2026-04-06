@@ -1,177 +1,46 @@
-import { lazy, Suspense, memo } from "react";
 import { motion } from "framer-motion";
-import StickyHeader from "@/components/StickyHeader";
-import StickyBookingTab from "@/components/StickyBookingTab";
-import MobileFloatingCTA from "@/components/MobileFloatingCTA";
-import HeroSection from "@/components/sections/HeroSection";
-import PartnerRosterTicker from "@/components/sections/PartnerRosterTicker";
-import EditorialDivider from "@/components/sections/EditorialDivider";
-import Footer from "@/components/Footer";
-import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import GrainOverlay from "@/components/GrainOverlay";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import CustomCursor from "@/components/CustomCursor";
-import CalendlySection from "@/components/sections/hero/CalendlySection";
-import { useIsMobile } from "@/hooks/use-mobile";
-
-const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
-
-// Lazy load below-the-fold sections
-const AuthoritySection = lazy(() => import("@/components/sections/AuthoritySection"));
-const VideoTestimonialsSection = lazy(() => import("@/components/sections/VideoTestimonialsSection"));
-const FourTestimonialsSection = lazy(() => import("@/components/sections/FourTestimonialsSection"));
-const TheOfferSection = lazy(() => import("@/components/sections/TheOfferSection"));
-const FourStepsSection = lazy(() => import("@/components/sections/FourStepsSection"));
-const BrandsShowcaseSection = lazy(() => import("@/components/sections/BrandsShowcaseSection"));
-const ResultsSection = lazy(() => import("@/components/sections/ResultsSection"));
-const WistiaVideoEmbedSection = lazy(() => import("@/components/sections/WistiaVideoEmbedSection"));
-const SelectivitySection = lazy(() => import("@/components/sections/SelectivitySection"));
-const AdCaseStudiesSection = lazy(() => import("@/components/sections/AdCaseStudiesSection"));
-const ClosingCTASection = lazy(() => import("@/components/sections/ClosingCTASection"));
-
-const SectionLoader = memo(() => (
-  <div className="min-h-[100px] flex items-center justify-center">
-    <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-  </div>
-));
-SectionLoader.displayName = "SectionLoader";
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: APPLE_EASE },
-  },
-};
-
-const AnimatedSection = memo(({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: "-80px" }}
-    variants={sectionVariants}
-  >
-    {children}
-  </motion.div>
-));
-AnimatedSection.displayName = "AnimatedSection";
+import PastedNavigation from "@/components/sections/pasted/PastedNavigation";
+import PastedHero from "@/components/sections/pasted/PastedHero";
+import PastedPhilosophy from "@/components/sections/pasted/PastedPhilosophy";
+import PastedLineup from "@/components/sections/pasted/PastedLineup";
+import PastedCraft from "@/components/sections/pasted/PastedCraft";
+import PastedProof from "@/components/sections/pasted/PastedProof";
+import PastedDossier from "@/components/sections/pasted/PastedDossier";
+import PastedEnquire from "@/components/sections/pasted/PastedEnquire";
+import PastedFooter from "@/components/sections/pasted/PastedFooter";
 
 const Index = () => {
-  const isMobile = useIsMobile();
-
-  const scrollToForm = () => {
-    document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
   return (
-    <motion.main
-      className="min-h-screen"
+    <motion.div
+      className="min-h-screen overflow-x-hidden antialiased"
       style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <title>PASTED Partnership | $500K–$1M+ Growth for Aesthetic Dentists</title>
+      <title>PASTED — The Operating Partner Behind the World's Finest Clinics</title>
 
-      {/* Global overlays */}
       <GrainOverlay />
       <ScrollProgressBar />
       <CustomCursor />
 
-      <StickyHeader onApplyClick={scrollToForm} />
-      <StickyBookingTab />
+      <PastedNavigation />
 
-      {/* 1. Hero */}
-      <HeroSection />
+      <main>
+        <PastedHero />
+        <PastedPhilosophy />
+        <PastedLineup />
+        <PastedCraft />
+        <PastedProof />
+        <PastedDossier />
+        <PastedEnquire />
+      </main>
 
-      {/* 2. Social Proof Ticker */}
-      <PartnerRosterTicker />
-
-      {/* 3. Calendly Booking (eager for faster first conversion interaction) */}
-      <CalendlySection />
-
-      <Suspense fallback={<SectionLoader />}>
-        {/* 4. Authority */}
-        <AnimatedSection>
-          <AuthoritySection />
-        </AnimatedSection>
-
-        <EditorialDivider variant="line" />
-
-        {/* 5. Video Testimonials */}
-        <AnimatedSection>
-          <VideoTestimonialsSection
-            videoIds={["5ue7wlj8b6", "af7m87juf2", "wqd6gdwzc8"]}
-            title="Hear it directly."
-            subtitle="Unscripted. From dentists who've been through it."
-          />
-        </AnimatedSection>
-
-        {/* 6. Written Testimonials + CTA */}
-        <AnimatedSection>
-          <FourTestimonialsSection />
-        </AnimatedSection>
-
-        <EditorialDivider variant="line" />
-
-        {/* 7. The Offer */}
-        <AnimatedSection>
-          <TheOfferSection />
-        </AnimatedSection>
-
-        {/* 8. How It Works */}
-        <AnimatedSection>
-          <FourStepsSection />
-        </AnimatedSection>
-
-        <EditorialDivider variant="line" />
-
-        {/* 9. Brands Showcase */}
-        <AnimatedSection>
-          <BrandsShowcaseSection />
-        </AnimatedSection>
-
-        {/* 10. Results */}
-        <AnimatedSection>
-          <ResultsSection />
-        </AnimatedSection>
-
-        <EditorialDivider variant="line" />
-
-        {/* 11. Content Examples */}
-        <AnimatedSection>
-          <WistiaVideoEmbedSection
-            title="Scripted. Shot. Edited. Deployed."
-            subtitle="The aesthetic industry runs on emotion, on motion, on the story behind the brand. Patients don't choose on clinical skill alone — they choose based on how a practice makes them feel before they ever walk in. Every asset below was scripted, shot on-location, and deployed by our in-house cinematic team — not as content, but as brand equity built frame by frame."
-            videoIds={["yie608dzl7", "4hs6xrb5ku", "s91a43lnqr", "8vygnsrycv", "6mg4oi3z42", "lrt1tuadco", "2r987luzuk", "nvo7tlonj5", "e8y5ss5hu9", "00u7mh4ze8"]}
-            initialVisibleCount={3}
-          />
-        </AnimatedSection>
-
-        <EditorialDivider variant="line" />
-
-        {/* 12. Selectivity */}
-        <AnimatedSection>
-          <SelectivitySection />
-        </AnimatedSection>
-
-        {/* 13. Ad Case Studies */}
-        <AnimatedSection>
-          <AdCaseStudiesSection />
-        </AnimatedSection>
-
-        {/* 14. Closing CTA */}
-        <AnimatedSection>
-          <ClosingCTASection />
-        </AnimatedSection>
-      </Suspense>
-
-      {/* 15. Footer */}
-      <Footer />
-      <MobileFloatingCTA />
-      <ScrollDepthTracker />
-    </motion.main>
+      <PastedFooter />
+    </motion.div>
   );
 };
 
