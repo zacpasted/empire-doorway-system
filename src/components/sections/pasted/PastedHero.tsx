@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const PastedHero = () => {
+  const handleCTA = () => {
+    trackCTAClick({ ctaId: "hero-request-intro", ctaText: "Request a private introduction", section: "hero" });
+    document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   return (
     <section className="relative h-screen min-h-[780px] w-full overflow-hidden">
       {/* Video layer */}
@@ -64,9 +69,9 @@ const PastedHero = () => {
           transition={{ duration: 1, delay: 1.2 }}
           className="mt-14 flex flex-wrap items-center gap-8"
         >
-          <a
-            href="#enquire"
-            className="group inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.28em] text-white"
+          <button
+            onClick={handleCTA}
+            className="group inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.28em] text-white bg-transparent border-none cursor-pointer"
           >
             <span className="relative pb-2 border-b border-white/40 group-hover:border-[var(--color-gold)] transition-colors duration-500">
               Request a private introduction
@@ -75,7 +80,7 @@ const PastedHero = () => {
               className="w-10 h-px group-hover:w-16 transition-all duration-500"
               style={{ background: "var(--color-gold)" }}
             />
-          </a>
+          </button>
           <a
             href="#lineup"
             className="text-[11px] uppercase tracking-[0.28em] text-white/60 hover:text-white transition-colors"

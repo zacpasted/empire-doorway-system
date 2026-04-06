@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const PastedEnquire = () => {
+  const handleRequest = () => {
+    trackCTAClick({ ctaId: "enquire-request-intro", ctaText: "Request introduction", section: "enquire" });
+    document.getElementById("eligibility-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   return (
     <section id="enquire" className="relative py-32 lg:py-48 border-t border-white/5 overflow-hidden" style={{ background: "var(--color-bg)" }}>
       {/* Ambient gold glow */}
@@ -36,9 +41,9 @@ const PastedEnquire = () => {
             </p>
 
             <div className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-8">
-              <a
-                href="#"
-                className="group inline-flex items-center gap-5 px-10 py-5 border transition-all duration-500"
+              <button
+                onClick={handleRequest}
+                className="group inline-flex items-center gap-5 px-10 py-5 border transition-all duration-500 bg-transparent cursor-pointer"
                 style={{ borderColor: "var(--color-border-gold)" }}
               >
                 <span className="text-[11px] uppercase tracking-[0.28em] text-white">
@@ -48,7 +53,7 @@ const PastedEnquire = () => {
                   className="w-8 h-px group-hover:w-14 transition-all duration-500"
                   style={{ background: "var(--color-gold)" }}
                 />
-              </a>
+              </button>
               <a
                 href="mailto:hello@pasted.studio"
                 className="text-[11px] uppercase tracking-[0.28em] text-white/60 hover:text-[var(--color-gold)] transition-colors"
