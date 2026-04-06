@@ -4,16 +4,12 @@ const PastedHero = () => {
   return (
     <section className="relative h-screen min-h-[780px] w-full overflow-hidden">
       {/* Video layer */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/hero-poster.jpg"
+      {/* Poster image fallback; replace with <video> when hero.mp4 is available */}
+      <img
+        src="/hero-poster.jpg"
+        alt=""
         className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
+      />
 
       {/* Cinematic gradient scrim */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-[var(--color-bg)]" />
