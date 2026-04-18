@@ -174,6 +174,7 @@ const AdminDashboard = () => {
       fetchSubmissions();
       fetchCTAAnalytics();
       fetchQuizSubmissions();
+      fetchWorkbookSubmissions();
     }
   }, [user, isAdmin]);
 
