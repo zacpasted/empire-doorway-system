@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProper
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 
 const STORAGE_KEY = "pasted-brand-asset-workbook";
 const LEAD_STORAGE_KEY = "pasted-brand-asset-workbook-lead";
@@ -1190,6 +1191,13 @@ const BrandAssetWorkbook = () => {
             href="https://calendly.com/getpasted/pasted-partner-discovery?utm_source=workbook&utm_medium=cta&utm_campaign=brand_asset_workbook&utm_content=architecture_call_top"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => {
+              trackCTAClick({
+                ctaId: "workbook_architecture_call_top",
+                ctaText: "Book a Brand Architecture Call →",
+                section: "workbook_prelude",
+              });
+            }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -1785,6 +1793,13 @@ const BrandAssetWorkbook = () => {
             href="https://calendly.com/getpasted/pasted-partner-discovery?utm_source=workbook&utm_medium=cta&utm_campaign=brand_asset_workbook&utm_content=architecture_call_button"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => {
+              trackCTAClick({
+                ctaId: "workbook_architecture_call_bottom",
+                ctaText: "Book a Brand Architecture Call →",
+                section: "workbook_close",
+              });
+            }}
             style={{
               display: "inline-flex",
               alignItems: "center",
