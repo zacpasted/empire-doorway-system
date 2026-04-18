@@ -1,6 +1,44 @@
 import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
+import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const STORAGE_KEY = "pasted-brand-asset-workbook";
+const LEAD_STORAGE_KEY = "pasted-brand-asset-workbook-lead";
+
+const leadSchema = z.object({
+  first_name: z.string().trim().min(1, "First name is required").max(80),
+  last_name: z.string().trim().max(80).optional().or(z.literal("")),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  practice_name: z.string().trim().max(160).optional().or(z.literal("")),
+});
+
+type Lead = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  practice_name: string;
+};
+
+const emptyLead: Lead = { first_name: "", last_name: "", email: "", practice_name: "" };
+
+const loadLead = (): Lead => {
+  try {
+    const raw = localStorage.getItem(LEAD_STORAGE_KEY);
+    if (!raw) return emptyLead;
+    return { ...emptyLead, ...(JSON.parse(raw) as Partial<Lead>) };
+  } catch {
+    return emptyLead;
+  }
+};
+
+const saveLead = (l: Lead) => {
+  try {
+    localStorage.setItem(LEAD_STORAGE_KEY, JSON.stringify(l));
+  } catch {
+    // ignore
+  }
+};
 
 // ============================================================
 // PASTED Brand Asset Workbook
