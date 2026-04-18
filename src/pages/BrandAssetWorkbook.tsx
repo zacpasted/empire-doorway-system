@@ -693,6 +693,54 @@ const RESPONSIVE_CSS = `
 }
 `;
 
+// ---------- Lead capture field ----------
+type LeadFieldProps = {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+  error?: string;
+  type?: string;
+  autoComplete?: string;
+};
+
+const LeadField = ({ label, value, onChange, required, error, type = "text", autoComplete }: LeadFieldProps) => {
+  const id = `lead-${label.replace(/\s+/g, "-").toLowerCase()}`;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <label
+        htmlFor={id}
+        className="meta-label"
+        style={{ color: "var(--ink-muted)", letterSpacing: "0.2em" }}
+      >
+        {label}{required ? " *" : ""}
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        autoComplete={autoComplete}
+        aria-invalid={!!error}
+        className="wb-input"
+        style={{
+          padding: "12px 14px",
+          fontSize: 15,
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 300,
+          color: "var(--ink)",
+          borderColor: error ? "#9c3a2a" : "var(--rule)",
+        }}
+      />
+      {error && (
+        <div style={{ fontSize: 11, color: "#9c3a2a", fontStyle: "italic", marginTop: 2 }}>
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ---------- Page ----------
 const BrandAssetWorkbook = () => {
   const [values, setValues] = useState<Values>({});
