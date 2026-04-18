@@ -254,6 +254,27 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchWorkbookSubmissions = async () => {
+    setWorkbookLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('brand_workbook_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setWorkbookSubmissions((data as unknown as WorkbookSubmission[]) || []);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch workbook submissions.',
+        variant: 'destructive',
+      });
+    } finally {
+      setWorkbookLoading(false);
+    }
+  };
+
   const filterSubmissions = () => {
     let filtered = [...submissions];
 
