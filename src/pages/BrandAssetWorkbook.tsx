@@ -690,6 +690,7 @@ const RESPONSIVE_CSS = `
   .workbook-root .topbar-subtitle { display: none !important; }
   .workbook-root .topbar-divider { display: none !important; }
   .workbook-root .topbar-save-text { display: none !important; }
+  .workbook-root .wb-lead-grid { grid-template-columns: 1fr !important; }
 }
 `;
 
