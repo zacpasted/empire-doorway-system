@@ -1273,6 +1273,83 @@ const AdminDashboard = () => {
               </div>
             </div>
 
+            {/* Workbook CTA A/B Comparison */}
+            {(() => {
+              const top = ctaStats.find((s) => s.cta_id === 'workbook_architecture_call_top');
+              const bottom = ctaStats.find((s) => s.cta_id === 'workbook_architecture_call_bottom');
+              const topClicks = top?.total_clicks || 0;
+              const bottomClicks = bottom?.total_clicks || 0;
+              const topSessions = top?.unique_sessions || 0;
+              const bottomSessions = bottom?.unique_sessions || 0;
+              const total = topClicks + bottomClicks;
+              const topPct = total > 0 ? (topClicks / total) * 100 : 0;
+              const bottomPct = total > 0 ? (bottomClicks / total) * 100 : 0;
+              const winner = topClicks === bottomClicks ? 'tie' : topClicks > bottomClicks ? 'top' : 'bottom';
+
+              return (
+                <div className="bg-card rounded-lg border border-border overflow-hidden">
+                  <div className="px-4 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium text-foreground">Workbook CTA: Top vs Bottom</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Side-by-side conversion on /yourbrand · {total} total clicks
+                      </p>
+                    </div>
+                    <Badge variant="outline" className="font-mono text-xs">A/B</Badge>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
+                    {/* Top CTA */}
+                    <div className="p-5">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <p className="text-xs uppercase tracking-wider text-muted-foreground">Top (after Prelude)</p>
+                          <p className="font-mono text-xs text-muted-foreground mt-0.5">workbook_architecture_call_top</p>
+                        </div>
+                        {winner === 'top' && (
+                          <Badge className="bg-primary text-primary-foreground">Winner</Badge>
+                        )}
+                      </div>
+                      <p className="text-4xl font-bold text-foreground">{topClicks}</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {topSessions} unique session{topSessions === 1 ? '' : 's'}
+                      </p>
+                      <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-primary transition-all" style={{ width: `${topPct}%` }} />
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">{topPct.toFixed(1)}% of workbook clicks</p>
+                    </div>
+                    {/* Bottom CTA */}
+                    <div className="p-5">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <p className="text-xs uppercase tracking-wider text-muted-foreground">Bottom (Closing)</p>
+                          <p className="font-mono text-xs text-muted-foreground mt-0.5">workbook_architecture_call_bottom</p>
+                        </div>
+                        {winner === 'bottom' && (
+                          <Badge className="bg-primary text-primary-foreground">Winner</Badge>
+                        )}
+                      </div>
+                      <p className="text-4xl font-bold text-foreground">{bottomClicks}</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {bottomSessions} unique session{bottomSessions === 1 ? '' : 's'}
+                      </p>
+                      <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-primary transition-all" style={{ width: `${bottomPct}%` }} />
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">{bottomPct.toFixed(1)}% of workbook clicks</p>
+                    </div>
+                  </div>
+                  {total === 0 && (
+                    <div className="px-5 py-4 border-t border-border bg-muted/30">
+                      <p className="text-sm text-muted-foreground text-center">
+                        No workbook CTA clicks recorded in this date range yet.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+
             {/* CTA Performance Table */}
             <div className="bg-card rounded-lg border border-border overflow-hidden">
               <div className="px-4 py-3 border-b border-border">
