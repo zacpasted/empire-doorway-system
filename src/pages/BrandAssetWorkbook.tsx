@@ -696,8 +696,11 @@ const RESPONSIVE_CSS = `
 // ---------- Page ----------
 const BrandAssetWorkbook = () => {
   const [values, setValues] = useState<Values>({});
+  const [lead, setLead] = useState<Lead>(emptyLead);
   const [saveState, setSaveState] = useState<"saved" | "saving" | "reset">("saved");
   const [scrollPct, setScrollPct] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [leadErrors, setLeadErrors] = useState<Partial<Record<keyof Lead, string>>>({});
   const debounceRef = useRef<number | null>(null);
 
   // Load Google Fonts (idempotent)
