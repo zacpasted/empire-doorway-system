@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import Discover from "./pages/Discover";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import BrandAssetWorkbook from "./pages/BrandAssetWorkbook";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/case-study/:slug" element={<CaseStudy />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
