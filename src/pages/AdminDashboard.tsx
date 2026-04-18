@@ -24,6 +24,7 @@ import {
   Users,
   Calendar,
   ClipboardList,
+  BookOpen,
 } from 'lucide-react';
 import { format, subDays, startOfDay, endOfDay, eachDayOfInterval, isSameDay } from 'date-fns';
 import {
