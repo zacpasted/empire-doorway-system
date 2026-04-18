@@ -1,8 +1,16 @@
-import { useCallback, useEffect, useMemo, useRef, useState, ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
 
 const STORAGE_KEY = "pasted-brand-asset-workbook";
 
-// ---------- Storage hook ----------
+// ============================================================
+// PASTED Brand Asset Workbook
+// Aesthetic: cream-on-ink editorial monograph
+// One Hotels · Aston Martin · Soho House grammar
+// All design tokens scoped to this page via inline CSS variables
+// so the global dark theme of the rest of the site is untouched.
+// ============================================================
+
+// ---------- Storage ----------
 type Values = Record<string, string>;
 
 const loadValues = (): Values => {
@@ -23,57 +31,246 @@ const saveValues = (v: Values) => {
   }
 };
 
+// ---------- Token CSS (scoped via .workbook-root) ----------
+const WORKBOOK_CSS = `
+.workbook-root {
+  --canvas:        #F4F1EA;
+  --canvas-deep:   #EBE6DB;
+  --ink:           #1A1A1A;
+  --ink-soft:      #2E2E2E;
+  --ink-muted:     #6B6661;
+  --ink-dim:       #9A9590;
+  --rule:          #D4CEC2;
+  --rule-soft:     #E2DCD0;
+  --accent:        #7A6F4F;
+  --accent-deep:   #5E5638;
+  --accent-ghost:  rgba(122, 111, 79, 0.08);
+  --accent-line:   rgba(122, 111, 79, 0.24);
+  --ink-ghost:     rgba(26, 26, 26, 0.04);
+
+  background-color: var(--canvas);
+  color: var(--ink-soft);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+
+.workbook-root *::selection {
+  background: var(--accent);
+  color: var(--canvas);
+}
+
+.workbook-root .serif {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+}
+
+.workbook-root h1, .workbook-root h2, .workbook-root h3 {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 300;
+  color: var(--ink);
+  margin: 0;
+}
+
+.workbook-root h1 em, .workbook-root h2 em, .workbook-root h3 em {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.workbook-root .meta-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.workbook-root .meta-label-brass {
+  color: var(--accent);
+}
+
+.workbook-root .mini-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 6px;
+}
+
+.workbook-root a:focus-visible,
+.workbook-root button:focus-visible,
+.workbook-root input:focus-visible,
+.workbook-root textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Workbook input field */
+.workbook-root .wb-input {
+  background: var(--canvas);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  width: 100%;
+  outline: none;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+.workbook-root .wb-input:focus {
+  border-color: var(--accent);
+}
+.workbook-root .wb-input::placeholder {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .workbook-root, .workbook-root * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+  .workbook-progress {
+    transition: none !important;
+  }
+}
+
+/* Print */
+@media print {
+  .workbook-root { background: #fff !important; }
+  .workbook-print-hide { display: none !important; }
+  .workbook-root section { page-break-inside: avoid; }
+  .workbook-root .wb-card { page-break-inside: avoid; }
+  .workbook-root { font-size: 14px; }
+}
+`;
+
 // ---------- Reusable atoms ----------
-const Rule = () => <hr className="my-20 border-0 border-t border-neutral-200" />;
+const Rule = () => (
+  <div className="workbook-root-rule mx-auto" style={{ width: 48, height: 1, background: "var(--rule)", margin: "80px auto" }} />
+);
 
 const Section = ({ num, label, children }: { num: string; label: string; children: ReactNode }) => (
-  <section className="mx-auto w-full max-w-[1120px] px-6 lg:px-10">
-    <div className="mb-10 flex flex-wrap items-center gap-x-4 gap-y-1">
-      <span className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">{num}</span>
-      <span className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">·</span>
-      <span className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">{label}</span>
+  <section className="mx-auto w-full" style={{ maxWidth: 960, padding: "120px 56px" }}>
+    <div className="mb-6 flex flex-wrap items-center gap-x-3" style={{ rowGap: 4 }}>
+      <span className="meta-label meta-label-brass">{num}</span>
+      <span className="meta-label" style={{ color: "var(--ink-dim)" }}>·</span>
+      <span className="meta-label">{label}</span>
     </div>
     {children}
   </section>
 );
 
-const SubLabel = ({ children }: { children: ReactNode }) => (
-  <div className="mb-4 mt-12 text-[11px] uppercase tracking-[0.28em] text-neutral-500">{children}</div>
+const SubLabel = ({ children, brass = false }: { children: ReactNode; brass?: boolean }) => (
+  <div className="mt-12" style={{ marginBottom: 12 }}>
+    <div className={`meta-label ${brass ? "meta-label-brass" : ""}`}>{children}</div>
+    <div style={{ width: 16, height: 1, background: "var(--accent)", marginTop: 8 }} />
+  </div>
 );
 
 const Lead = ({ children }: { children: ReactNode }) => (
-  <p className="max-w-[780px] text-lg leading-relaxed text-neutral-800 md:text-xl">{children}</p>
+  <p
+    className="serif"
+    style={{ maxWidth: 680, fontSize: 22, lineHeight: 1.55, color: "var(--ink)", fontWeight: 300, marginTop: 0 }}
+  >
+    {children}
+  </p>
 );
 
 const Body = ({ children }: { children: ReactNode }) => (
-  <p className="max-w-[780px] text-base leading-[1.75] text-neutral-700">{children}</p>
+  <p style={{ maxWidth: 680, fontSize: 16, lineHeight: 1.8, color: "var(--ink-soft)", fontWeight: 300, margin: 0 }}>
+    {children}
+  </p>
 );
 
-const MutedBody = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
-  <p className={`max-w-[780px] text-sm leading-[1.7] text-neutral-500 ${className}`}>{children}</p>
+const MutedBody = ({ children, italic = false }: { children: ReactNode; italic?: boolean }) => (
+  <p
+    style={{
+      maxWidth: 680,
+      fontSize: 14,
+      lineHeight: 1.7,
+      color: "var(--ink-muted)",
+      fontWeight: 300,
+      fontStyle: italic ? "italic" : "normal",
+      margin: 0,
+    }}
+  >
+    {children}
+  </p>
 );
 
-const H2 = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
-  <h2 className={`mb-6 max-w-[900px] font-serif text-3xl leading-[1.15] text-neutral-900 md:text-4xl lg:text-5xl ${className}`}>
+const H2 = ({ children }: { children: ReactNode }) => (
+  <h2
+    style={{
+      maxWidth: 820,
+      fontSize: "clamp(36px, 5vw, 56px)",
+      lineHeight: 1.05,
+      letterSpacing: "-0.015em",
+      marginTop: 24,
+      marginBottom: 64,
+    }}
+  >
     {children}
   </h2>
 );
 
-const H3 = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
-  <h3 className={`mb-4 mt-12 font-serif text-xl text-neutral-900 md:text-2xl ${className}`}>{children}</h3>
+const H3 = ({ children }: { children: ReactNode }) => (
+  <h3 style={{ fontSize: 26, lineHeight: 1.25, fontWeight: 400, marginTop: 56, marginBottom: 20, color: "var(--ink)" }}>
+    {children}
+  </h3>
 );
 
 const PullQuote = ({ children, cite }: { children: ReactNode; cite: string }) => (
-  <blockquote className="my-10 max-w-[780px] border-l-2 border-neutral-900 pl-6">
-    <p className="font-serif text-xl italic leading-snug text-neutral-900 md:text-2xl">{children}</p>
-    <cite className="mt-3 block text-[11px] uppercase not-italic tracking-[0.24em] text-neutral-500">— {cite}</cite>
+  <blockquote
+    style={{
+      borderLeft: "1px solid var(--accent)",
+      paddingLeft: 32,
+      margin: "64px 0",
+      maxWidth: 640,
+    }}
+  >
+    <p
+      className="serif"
+      style={{ fontSize: 30, lineHeight: 1.3, fontStyle: "italic", color: "var(--ink)", fontWeight: 400, margin: 0 }}
+    >
+      {children}
+    </p>
+    <cite
+      className="meta-label"
+      style={{ display: "block", marginTop: 16, fontStyle: "normal" }}
+    >
+      — {cite}
+    </cite>
   </blockquote>
 );
 
 const Callout = ({ label, children }: { label: string; children: ReactNode }) => (
-  <div className="my-8 max-w-[780px] rounded-sm border border-neutral-300 bg-neutral-50 p-7">
-    <div className="mb-3 text-[10px] uppercase tracking-[0.28em] text-neutral-500">{label}</div>
-    <div className="space-y-2 text-base leading-[1.7] text-neutral-800">{children}</div>
+  <div
+    style={{
+      background: "var(--accent-ghost)",
+      border: "1px solid var(--accent-line)",
+      borderRadius: 2,
+      padding: "28px 32px",
+      maxWidth: 680,
+      margin: "32px 0",
+    }}
+  >
+    <div className="meta-label meta-label-brass" style={{ marginBottom: 12 }}>
+      {label}
+    </div>
+    <div style={{ fontSize: 15, lineHeight: 1.75, color: "var(--ink)", fontWeight: 300 }}>{children}</div>
   </div>
 );
 
@@ -88,45 +285,118 @@ const FrameworkRow = ({
   children: ReactNode;
   last?: boolean;
 }) => (
-  <div className={`grid grid-cols-1 gap-4 py-6 md:grid-cols-[180px_1fr] md:gap-10 ${last ? "" : "border-b border-neutral-200"}`}>
-    <div className="text-[11px] uppercase tracking-[0.24em] text-neutral-500">{label}</div>
-    <div>
-      <div className="mb-2 font-serif text-lg text-neutral-900">{title}</div>
-      <div className="text-[15px] leading-[1.7] text-neutral-700">{children}</div>
+  <div
+    className="grid"
+    style={{
+      gridTemplateColumns: "minmax(0, 1fr)",
+      gap: 16,
+      padding: "24px 0",
+      borderBottom: last ? "none" : "1px solid var(--rule-soft)",
+    }}
+  >
+    <div className="md:!grid md:!gap-10" style={frameworkGridDesktop()}>
+      <div
+        className="serif"
+        style={{ fontSize: 18, fontStyle: "italic", color: "var(--accent)", fontWeight: 300, alignSelf: "baseline" }}
+      >
+        {label}
+      </div>
+      <div>
+        <div className="serif" style={{ fontSize: 20, color: "var(--ink)", fontWeight: 400, marginBottom: 6 }}>
+          {title}
+        </div>
+        <div style={{ fontSize: 16, lineHeight: 1.7, color: "var(--ink-muted)", fontWeight: 300 }}>{children}</div>
+      </div>
     </div>
   </div>
 );
 
+// helper for FrameworkRow desktop layout (avoids inline media query limitations)
+function frameworkGridDesktop(): CSSProperties {
+  return {
+    display: "grid",
+    gridTemplateColumns: "140px 1fr",
+    gap: 40,
+  };
+}
+
 const PillarCard = ({ label, body }: { label: string; body: string }) => (
-  <div className="rounded-sm border border-neutral-200 bg-white p-7">
-    <div className="mb-3 font-serif text-base text-neutral-900">{label}</div>
-    <p className="text-[14px] leading-[1.7] text-neutral-600">{body}</p>
+  <div style={{ background: "var(--canvas)", padding: 32 }}>
+    <div className="mini-label meta-label-brass" style={{ color: "var(--accent)" }}>
+      {label}
+    </div>
+    <p style={{ fontSize: 15, lineHeight: 1.7, color: "var(--ink-muted)", fontWeight: 300, margin: 0 }}>{body}</p>
   </div>
 );
 
 const PillarGrid = ({ cols, children }: { cols: 2 | 3; children: ReactNode }) => (
-  <div className={`my-8 grid grid-cols-1 gap-4 ${cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>{children}</div>
+  <div
+    className={cols === 3 ? "wb-grid wb-grid-3" : "wb-grid wb-grid-2"}
+    style={{
+      maxWidth: 960,
+      margin: "32px 0",
+      border: "1px solid var(--rule)",
+      borderRadius: 2,
+      background: "var(--rule)",
+      gap: 1,
+      display: "grid",
+    }}
+  >
+    {children}
+  </div>
 );
 
 const Row = ({ time, action }: { time: string; action: ReactNode }) => (
-  <div className="grid grid-cols-1 gap-2 border-b border-neutral-200 py-5 last:border-0 md:grid-cols-[160px_1fr] md:gap-8">
-    <div className="text-[11px] uppercase tracking-[0.24em] text-neutral-500">{time}</div>
-    <div className="text-[15px] leading-[1.7] text-neutral-700">{action}</div>
+  <div
+    className="wb-row"
+    style={{
+      display: "grid",
+      gridTemplateColumns: "minmax(0, 1fr)",
+      gap: 8,
+      padding: "20px 0",
+      borderBottom: "1px solid var(--rule-soft)",
+    }}
+  >
+    <div style={{ display: "grid", gap: 32 }} className="md:!grid-cols-[160px_1fr]">
+      <div className="meta-label">{time}</div>
+      <div style={{ fontSize: 15, lineHeight: 1.75, color: "var(--ink-soft)", fontWeight: 300 }}>{action}</div>
+    </div>
   </div>
 );
 
 const DefinitionBlock = ({ children }: { children: ReactNode }) => (
-  <div className="my-10 max-w-[780px] border-y border-neutral-300 py-8">
-    <div className="space-y-3 text-center font-serif text-xl leading-snug text-neutral-900 md:text-2xl">{children}</div>
+  <div style={{ margin: "96px auto", maxWidth: 680, display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 56 }}>{children}</div>
+  </div>
+);
+
+const DefLine = ({ children }: { children: ReactNode }) => (
+  <div className="serif" style={{ fontSize: 28, lineHeight: 1.2, color: "var(--ink)", fontWeight: 400 }}>
+    {children}
   </div>
 );
 
 const OutcomeStrip = ({ items }: { items: { label: string; body: string }[] }) => (
-  <div className="mt-12 grid grid-cols-1 gap-6 border-y border-neutral-300 py-8 md:grid-cols-4 md:gap-4">
+  <div
+    className="wb-outcome"
+    style={{
+      marginTop: 80,
+      display: "grid",
+      gridTemplateColumns: "1fr",
+      gap: 32,
+      borderTop: "1px solid var(--rule)",
+      borderBottom: "1px solid var(--rule)",
+      padding: "32px 0",
+    }}
+  >
     {items.map((it, i) => (
-      <div key={i} className="md:px-3">
-        <div className="mb-2 text-[10px] uppercase tracking-[0.3em] text-neutral-500">{it.label}</div>
-        <div className="text-[15px] font-medium leading-snug text-neutral-900">{it.body}</div>
+      <div key={i} style={{ padding: "0 16px" }}>
+        <div className="meta-label" style={{ marginBottom: 10 }}>
+          {it.label}
+        </div>
+        <div className="serif" style={{ fontSize: 17, lineHeight: 1.35, color: "var(--ink)", fontWeight: 400 }}>
+          {it.body}
+        </div>
       </div>
     ))}
   </div>
@@ -161,26 +431,62 @@ const WorkbookBlock = ({
   const inputId = `wb-${dataKey}`;
   return (
     <div
-      className={`group my-6 max-w-[780px] rounded-sm border p-6 transition-colors focus-within:border-neutral-900 ${
-        accent ? "border-neutral-900 bg-neutral-50" : "border-neutral-200 bg-white"
-      }`}
+      className="wb-card"
+      style={{
+        background: "var(--canvas-deep)",
+        borderRadius: 2,
+        padding: 32,
+        margin: "24px 0",
+        maxWidth: 680,
+        borderTop: accent ? "2px solid var(--accent)" : "none",
+      }}
     >
-      <div className="mb-4 flex items-baseline gap-4">
-        <span className="font-serif text-lg text-neutral-500">{num}</span>
-        <label htmlFor={inputId} className="block flex-1 font-serif text-lg leading-snug text-neutral-900 md:text-xl">
+      <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 16 }}>
+        <span
+          className="serif"
+          style={{
+            fontSize: 22,
+            fontStyle: "italic",
+            color: "var(--accent)",
+            fontWeight: 300,
+            minWidth: 36,
+          }}
+        >
+          {num}
+        </span>
+        <label
+          htmlFor={inputId}
+          className="serif"
+          style={{ fontSize: 20, lineHeight: 1.35, color: "var(--ink)", fontWeight: 400, flex: 1 }}
+        >
           {question}
         </label>
       </div>
-      {hint && <p className="mb-4 pl-9 text-[13px] leading-[1.6] text-neutral-500">{hint}</p>}
-      <div className="pl-9">
+      {hint && (
+        <p
+          style={{
+            fontSize: 13,
+            lineHeight: 1.55,
+            color: "var(--ink-muted)",
+            fontWeight: 300,
+            fontStyle: "italic",
+            marginTop: 10,
+            marginBottom: 16,
+            marginLeft: 48,
+          }}
+        >
+          {hint}
+        </p>
+      )}
+      <div style={{ marginLeft: 0 }}>
         {inputType === "textarea" ? (
           <textarea
             id={inputId}
             value={value}
             onChange={(e) => onChange(dataKey, e.target.value)}
             placeholder={placeholder}
-            style={{ minHeight }}
-            className="w-full resize-y rounded-sm border border-neutral-200 bg-white p-3 font-serif text-[15px] leading-[1.6] text-neutral-900 outline-none transition-colors focus:border-neutral-900"
+            style={{ minHeight, resize: "vertical" }}
+            className="wb-input"
           />
         ) : (
           <input
@@ -189,7 +495,7 @@ const WorkbookBlock = ({
             value={value}
             onChange={(e) => onChange(dataKey, e.target.value)}
             placeholder={placeholder}
-            className="w-full rounded-sm border border-neutral-200 bg-white p-3 font-serif text-[15px] leading-[1.6] text-neutral-900 outline-none transition-colors focus:border-neutral-900"
+            className="wb-input"
           />
         )}
       </div>
@@ -212,21 +518,37 @@ const NumberedStack = ({
   onChange: (k: string, v: string) => void;
   placeholders?: string[];
 }) => (
-  <div className="my-6 max-w-[780px] rounded-sm border border-neutral-200 bg-white p-6">
-    <div className="mb-4 text-[11px] uppercase tracking-[0.24em] text-neutral-500">{label}</div>
-    <div className="space-y-3">
+  <div style={{ maxWidth: 680, margin: "16px 0 24px" }}>
+    <div style={{ marginBottom: 16 }}>
+      <div className="meta-label">{label}</div>
+      <div style={{ width: 16, height: 1, background: "var(--accent)", marginTop: 8 }} />
+    </div>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {Array.from({ length: count }).map((_, i) => {
         const k = `${keyPrefix}_${i + 1}`;
         const ph = placeholders?.[i] ?? `Item ${i + 1}`;
         return (
-          <div key={k} className="flex items-center gap-3">
-            <span className="w-6 font-serif text-sm text-neutral-500">{i + 1}.</span>
+          <div key={k} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span
+              className="serif"
+              style={{
+                width: 32,
+                fontSize: 18,
+                fontStyle: "italic",
+                color: "var(--accent)",
+                fontWeight: 300,
+                textAlign: "center",
+              }}
+            >
+              {i + 1}.
+            </span>
             <input
               type="text"
               value={values[k] || ""}
               onChange={(e) => onChange(k, e.target.value)}
               placeholder={ph}
-              className="w-full rounded-sm border border-neutral-200 bg-white px-3 py-2 font-serif text-[15px] text-neutral-900 outline-none transition-colors focus:border-neutral-900"
+              className="wb-input"
+              style={{ padding: 12 }}
             />
           </div>
         );
@@ -235,7 +557,7 @@ const NumberedStack = ({
   </div>
 );
 
-// ---------- Field manifest (for export ordering) ----------
+// ---------- Field manifest (export ordering) ----------
 type FieldDef = { key: string; label: string };
 const FIELD_MANIFEST: FieldDef[] = [
   { key: "love_1", label: "Ikigai · What part of dentistry makes you lose track of time?" },
@@ -290,6 +612,27 @@ const FIELD_MANIFEST: FieldDef[] = [
   { key: "goal_90d_3", label: "Ninety-Day Goal 3" },
 ];
 
+// Responsive helper styles injected once
+const RESPONSIVE_CSS = `
+@media (min-width: 768px) {
+  .workbook-root .wb-grid-2 { grid-template-columns: 1fr 1fr !important; }
+  .workbook-root .wb-grid-3 { grid-template-columns: 1fr 1fr 1fr !important; }
+  .workbook-root .wb-outcome { grid-template-columns: repeat(4, 1fr) !important; gap: 0 !important; }
+  .workbook-root .wb-outcome > div + div { border-left: 1px solid var(--rule); }
+  .workbook-root .wb-row > div { grid-template-columns: 160px 1fr !important; }
+  .workbook-root section { padding: 120px 56px !important; }
+  .workbook-root .wb-cover { padding: 160px 56px 80px !important; }
+}
+@media (max-width: 767px) {
+  .workbook-root section { padding: 80px 24px !important; }
+  .workbook-root .wb-cover { padding: 120px 24px 80px !important; }
+  .workbook-root .wb-grid-2, .workbook-root .wb-grid-3 { grid-template-columns: 1fr !important; }
+  .workbook-root h2 { font-size: 36px !important; }
+  .workbook-root h1 { font-size: 56px !important; }
+  .workbook-root .wb-card { padding: 24px !important; }
+}
+`;
+
 // ---------- Page ----------
 const BrandAssetWorkbook = () => {
   const [values, setValues] = useState<Values>({});
@@ -297,7 +640,20 @@ const BrandAssetWorkbook = () => {
   const [scrollPct, setScrollPct] = useState(0);
   const debounceRef = useRef<number | null>(null);
 
-  // Restore on mount
+  // Load Google Fonts (idempotent)
+  useEffect(() => {
+    const id = "workbook-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id;
+      l.rel = "stylesheet";
+      l.href =
+        "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  // Restore + meta
   useEffect(() => {
     setValues(loadValues());
     document.title = "The PASTED Brand Asset Workbook";
@@ -372,27 +728,87 @@ const BrandAssetWorkbook = () => {
     <WorkbookBlock {...props} value={v[props.dataKey] || ""} onChange={handleChange} />
   );
 
+  const dotColor =
+    saveState === "saving" ? "var(--accent)" : saveState === "reset" ? "var(--ink-dim)" : "var(--accent)";
+
   return (
-    <div className="min-h-screen bg-white font-sans text-neutral-900" style={{ scrollBehavior: "smooth" }}>
+    <div className="workbook-root">
+      <style>{WORKBOOK_CSS}</style>
+      <style>{RESPONSIVE_CSS}</style>
+
       {/* Top bar */}
-      <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur print:hidden">
-        <div className="mx-auto flex max-w-[1120px] items-center justify-between px-6 py-4 lg:px-10">
-          <div>
-            <div className="font-serif text-lg leading-none tracking-wide text-neutral-900">PASTED</div>
-            <div className="mt-1 text-[10px] uppercase tracking-[0.28em] text-neutral-500">Brand Asset Workbook</div>
+      <header
+        className="workbook-print-hide"
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 40,
+          background: "rgba(244, 241, 234, 0.94)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid var(--rule)",
+        }}
+      >
+        <div
+          className="mx-auto"
+          style={{
+            maxWidth: 960,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "20px 24px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div
+              className="serif"
+              style={{ fontSize: 20, fontWeight: 500, letterSpacing: "0.08em", color: "var(--ink)", lineHeight: 1 }}
+            >
+              PASTED
+            </div>
+            <div style={{ width: 1, height: 18, background: "var(--rule)" }} />
+            <div className="meta-label" style={{ letterSpacing: "0.28em" }}>
+              Brand Asset Workbook
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-neutral-500">
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div className="meta-label" style={{ display: "flex", alignItems: "center", gap: 8, letterSpacing: "0.2em" }}>
               <span
-                className={`inline-block h-2 w-2 rounded-full ${
-                  saveState === "saving" ? "bg-amber-500" : saveState === "reset" ? "bg-neutral-400" : "bg-emerald-500"
-                }`}
+                style={{
+                  display: "inline-block",
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: dotColor,
+                  transition: "background 150ms ease",
+                }}
               />
               <span>{saveState === "saving" ? "Saving…" : saveState === "reset" ? "Reset" : "Saved"}</span>
             </div>
             <button
               onClick={handleReset}
-              className="rounded-sm border border-neutral-300 px-3 py-1.5 text-[11px] uppercase tracking-[0.2em] text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+              style={{
+                background: "transparent",
+                border: "1px solid var(--ink-muted)",
+                borderRadius: 2,
+                padding: "8px 14px",
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 500,
+                fontSize: 10,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--ink-muted)",
+                cursor: "pointer",
+                transition: "border-color 200ms ease, color 200ms ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--accent)";
+                e.currentTarget.style.color = "var(--accent)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--ink-muted)";
+                e.currentTarget.style.color = "var(--ink-muted)";
+              }}
             >
               Reset
             </button>
@@ -401,31 +817,163 @@ const BrandAssetWorkbook = () => {
       </header>
 
       {/* Scroll progress */}
-      <div className="fixed left-0 right-0 top-0 z-50 h-[2px] bg-transparent print:hidden">
-        <div className="h-full bg-neutral-900 transition-[width] duration-150" style={{ width: `${scrollPct}%` }} />
+      <div
+        className="workbook-print-hide"
+        style={{ position: "fixed", left: 0, right: 0, top: 0, height: 1, zIndex: 50, background: "transparent" }}
+      >
+        <div
+          className="workbook-progress"
+          style={{
+            height: "100%",
+            background: "var(--accent)",
+            width: `${scrollPct}%`,
+            transition: "width 100ms ease",
+          }}
+        />
       </div>
 
       {/* COVER */}
-      <div className="mx-auto flex min-h-[90vh] w-full max-w-[1120px] flex-col justify-center px-6 py-24 lg:px-10">
-        <div className="mb-8 text-[10px] uppercase tracking-[0.32em] text-neutral-500">A PASTED FIELD GUIDE</div>
-        <h1 className="max-w-[900px] font-serif text-4xl leading-[1.05] text-neutral-900 md:text-6xl lg:text-7xl">
-          The <em>Brand Asset</em> Workbook.
-        </h1>
-        <p className="mt-8 max-w-[760px] font-serif text-lg italic leading-snug text-neutral-700 md:text-2xl">
-          The five-part framework behind hundreds of millions in aesthetic demand — built to help you figure out what brand actually is, what yours is, what is missing, and how to create real pull.
-        </p>
-        <OutcomeStrip
-          items={[
-            { label: "WHAT", body: "What a brand actually is — and what it isn't" },
-            { label: "WHERE", body: "What yours is, stated in one sentence" },
-            { label: "GAP", body: "What's missing between what you promise and what patients feel" },
-            { label: "PULL", body: "How to build the kind of demand that compounds without more spend" },
-          ]}
-        />
-        <div className="mt-8 text-[10px] uppercase tracking-[0.28em] text-neutral-500">
-          FORMAT · WORKBOOK + FIELD GUIDE · TIME · 90 MINUTES · PASTED · 2026
+      <div
+        className="wb-cover mx-auto"
+        style={{
+          maxWidth: 960,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
+            <div style={{ width: 24, height: 1, background: "var(--accent)" }} />
+            <div className="meta-label meta-label-brass">A PASTED FIELD GUIDE</div>
+          </div>
+          <h1
+            className="serif"
+            style={{
+              fontSize: "clamp(56px, 9vw, 96px)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.02em",
+              fontWeight: 300,
+              color: "var(--ink)",
+              maxWidth: 880,
+              marginTop: 0,
+            }}
+          >
+            The <em>Brand Asset</em> Workbook.
+          </h1>
+          <p
+            className="serif"
+            style={{
+              marginTop: 80,
+              maxWidth: 520,
+              fontSize: 22,
+              fontStyle: "italic",
+              fontWeight: 300,
+              lineHeight: 1.4,
+              color: "var(--ink-muted)",
+            }}
+          >
+            The five-part framework behind hundreds of millions in aesthetic demand — built to help you figure out what brand actually is, what yours is, what is missing, and how to create real pull.
+          </p>
+          <OutcomeStrip
+            items={[
+              { label: "WHAT", body: "What a brand actually is — and what it isn't" },
+              { label: "WHERE", body: "What yours is, stated in one sentence" },
+              { label: "GAP", body: "What's missing between what you promise and what patients feel" },
+              { label: "PULL", body: "How to build the kind of demand that compounds without more spend" },
+            ]}
+          />
+        </div>
+        <div className="meta-label" style={{ marginTop: 80, textAlign: "center" }}>
+          FORMAT · WORKBOOK + FIELD GUIDE &nbsp;·&nbsp; TIME · 90 MINUTES &nbsp;·&nbsp; PASTED · 2026
         </div>
       </div>
+
+      <Rule />
+
+      {/* PRELUDE */}
+      <Section num="PRELUDE" label="Read This First">
+        <H2>
+          This is not a marketing guide. This is the <em>PASTED Bible.</em>
+        </H2>
+        <Lead>
+          What follows is the same architecture we use behind every practice that has built a real asset with us. Not theory. Not trends. The operating system for turning a clinical business into something the market recognizes, remembers, and chooses without negotiation.
+        </Lead>
+        <div style={{ marginTop: 32, display: "flex", flexDirection: "column", gap: 24 }}>
+          <Body>
+            Most dentists live inside a sentence that sounds like this. <em>If we get more reviews. If the economy turns. If the new ads work. If patients see the renovation. If the referrals come back.</em>
+          </Body>
+          <Body>
+            The practices we admire live inside a different sentence. <em>When the next campaign ships. When the content lands. When the consult converts. When the brand compounds.</em>
+          </Body>
+          <Body>The difference between those two sentences is not luck. It is not talent. It is not even spend.</Body>
+          <Body>It is architecture.</Body>
+        </div>
+
+        <PullQuote cite="PASTED House Doctrine">
+          “The iconic practice turns every <em>if</em> into a <em>when.</em>”
+        </PullQuote>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <Body>There is a reason this matters more than it ever has.</Body>
+          <Body>
+            Dentistry is commoditizing in real time. Chains are scaling. Corporates are buying roll-ups. Private equity is indexing quality and flattening price. Patients are comparing your work to a stranger's in the same scroll, at the same traffic light, in the same two seconds.
+          </Body>
+          <Body>In that market, a good dentist with a nice website is not a brand. It is a line item in somebody else's spreadsheet.</Body>
+          <Body>
+            The only dentists who will get to decide their own terms — their own prices, their own patients, their own pace — are the ones who build something that cannot be indexed, cannot be copied, and cannot be replaced by the next practice that opens twelve minutes away.
+          </Body>
+        </div>
+
+        <H3>This is how you decommoditize yourself.</H3>
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <Body>
+            Not through a prettier logo. Not through a nicer chair. Not through a shinier renovation that a competitor can match with a bigger check next quarter.
+          </Body>
+          <Body>
+            You decommoditize yourself by building a brand asset — a living, compounding, unmistakable expression of who you are, who you are for, and what you refuse to be.
+          </Body>
+          <Body>An asset that earns pull instead of chasing attention.</Body>
+          <Body>An asset that raises your price while lowering your cost-per-acquisition.</Body>
+          <Body>
+            An asset that shows up for you in rooms you will never sit in, in conversations you will never hear, in decisions made long before a patient ever fills out your form.
+          </Body>
+        </div>
+
+        <PullQuote cite="The PASTED Long View">
+          “A brand asset is the only thing in your practice that works for you when you are asleep, on holiday, or operating on somebody else.”
+        </PullQuote>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <Body>This workbook is the map.</Body>
+          <Body>
+            Five parts. One foundation. Ninety minutes of honest answers. The same architecture behind eight-figure practices, behind cases that close at six figures without flinching, behind the dentists whose names get whispered in the rooms that matter.
+          </Body>
+          <Body>
+            We are not going to flatter you. We are not going to sell you anything on these pages. We are going to walk you through the exact sequence we use with clients who pay us to help them see it — and then we are going to hand you the same tools, because the work you do here is work no agency can do for you.
+          </Body>
+        </div>
+
+        <H3>A note on how to read this.</H3>
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <Body>
+            Read it once, fast, without writing anything. Let the argument land. Let the resistance surface. Notice where you nod. Notice where you bristle. The parts that bristle are the parts doing the most work.
+          </Body>
+          <Body>
+            Then come back to the start and answer everything. Out of order is fine. Imperfect is fine. Changing your mind is expected. The workbook saves as you go. There is no version of this that is finished on a first pass.
+          </Body>
+          <Body>
+            Some of what you write will be uncomfortable. Some of it will feel obvious the second you see it on the page. Both are signs you are doing it correctly.
+          </Body>
+        </div>
+
+        <div style={{ marginTop: 40 }}>
+          <MutedBody italic>
+            Turn the page. The if-practice stops here. The when-practice begins on the other side.
+          </MutedBody>
+        </div>
+      </Section>
 
       <Rule />
 
@@ -434,7 +982,7 @@ const BrandAssetWorkbook = () => {
         <H2>
           Your new office is not your <em>brand.</em>
         </H2>
-        <div className="space-y-5">
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>And dentistry is full of people selling “brand” who cannot define it without pointing to furniture, TVs, equipment, a logo, or a renovation package.</Body>
           <Body>That should concern you.</Body>
           <Body>
@@ -443,18 +991,12 @@ const BrandAssetWorkbook = () => {
           <Body>They just have a real brand.</Body>
         </div>
         <DefinitionBlock>
-          <div>
-            A clear <em>why.</em>
-          </div>
-          <div>
-            A clear <em>story.</em>
-          </div>
-          <div>
-            A clear <em>position.</em>
-          </div>
-          <div>A consistent way of showing their work, their people, and what they stand for.</div>
+          <DefLine>A clear <em>why.</em></DefLine>
+          <DefLine>A clear <em>story.</em></DefLine>
+          <DefLine>A clear <em>position.</em></DefLine>
+          <DefLine>A consistent way of showing their work, their people, and what they stand for.</DefLine>
         </DefinitionBlock>
-        <div className="space-y-5">
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>That is what creates pull. That is what patients remember. That is what people say about you when you are not in the room.</Body>
           <Body>Meanwhile, some of the practices in the most pain come to us right after a rebuild.</Body>
           <Body>New office. New logo. New everything. Still no demand.</Body>
@@ -463,13 +1005,13 @@ const BrandAssetWorkbook = () => {
         <PullQuote cite="PASTED House Doctrine">
           “That is the difference between buying things and building an asset.”
         </PullQuote>
-        <div className="space-y-5">
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>If your branding strategy starts with aesthetics and ends with a logo, you do not have a brand strategy. You have a spending strategy.</Body>
           <Body>This workbook walks you through the five parts of a real brand asset. Before the parts, there is a foundation — because without it, every part above it wobbles.</Body>
         </div>
-        <MutedBody className="mt-8 italic">
-          The foundation is your ikigai — adapted for the dentist who wants to build something that pulls.
-        </MutedBody>
+        <div style={{ marginTop: 32 }}>
+          <MutedBody italic>The foundation is your ikigai — adapted for the dentist who wants to build something that pulls.</MutedBody>
+        </div>
       </Section>
 
       <Rule />
@@ -482,31 +1024,31 @@ const BrandAssetWorkbook = () => {
         <Lead>
           Ikigai is the Japanese concept for the intersection of four forces: <em>what you love, what the world needs, what you can be paid for, and what you're uniquely excellent at.</em> Where all four overlap is a reason to get up in the morning that doesn't burn out.
         </Lead>
-        <div className="mt-6">
+        <div style={{ marginTop: 24 }}>
           <Body>
             Adapted for a practice owner, the four circles become a positioning instrument. You likely already specialize — cosmetic, implants, full arch, ortho. The ikigai isn't about choosing a specialty. It's about understanding <em>why</em> you're the one people should come to for it.
           </Body>
         </div>
 
         {/* Ikigai SVG */}
-        <div className="my-12 flex justify-center">
-          <svg viewBox="0 0 480 480" className="w-full max-w-[480px]" aria-label="Ikigai diagram">
-            <g fill="none" stroke="#262626" strokeWidth="1">
+        <div style={{ display: "flex", justifyContent: "center", margin: "56px 0" }}>
+          <svg viewBox="0 0 480 480" style={{ width: "100%", maxWidth: 480 }} aria-label="Ikigai diagram">
+            <g fill="none" stroke="#1A1A1A" strokeWidth="1">
               <circle cx="180" cy="180" r="130" />
               <circle cx="300" cy="180" r="130" />
               <circle cx="180" cy="300" r="130" />
               <circle cx="300" cy="300" r="130" />
             </g>
-            <g fontFamily="serif" fontSize="11" fill="#737373" textAnchor="middle" letterSpacing="2">
+            <g fontFamily="Inter, sans-serif" fontSize="9" fontWeight="500" fill="#7A6F4F" textAnchor="middle" letterSpacing="2">
               <text x="110" y="60">WHAT YOU LOVE</text>
               <text x="370" y="60">WORLD-CLASS AT</text>
               <text x="110" y="450">PATIENTS NEED</text>
               <text x="370" y="450">COMMANDS PREMIUM</text>
             </g>
-            <g fontFamily="serif" fontSize="18" fill="#171717" textAnchor="middle">
+            <g fontFamily="Cormorant Garamond, serif" fontSize="20" fontStyle="italic" fill="#1A1A1A" textAnchor="middle">
               <text x="240" y="232">Your</text>
-              <text x="240" y="252">Reason</text>
-              <text x="240" y="272">to Pull</text>
+              <text x="240" y="258">Reason</text>
+              <text x="240" y="284">to Pull</text>
             </g>
           </svg>
         </div>
@@ -547,7 +1089,7 @@ const BrandAssetWorkbook = () => {
           Your <em>Vision.</em> Your <em>Mission.</em>
         </H2>
         <Lead>Before we build the five parts of the brand, lock the two forces that sit above them: where the practice is going, and why it exists in the first place.</Lead>
-        <div className="mt-6">
+        <div style={{ marginTop: 24 }}>
           <Body>These are not marketing statements. These are the lines you read back to yourself on a bad Tuesday to remember what you are actually building.</Body>
         </div>
         {wb({ num: "✦", dataKey: "vision", question: "What is your ten-year vision for the practice?", hint: "What does the practice look like, feel like, and mean to the market at that point. One paragraph. No hedging.", placeholder: "In ten years, my practice is ___", minHeight: 100 })}
@@ -562,27 +1104,41 @@ const BrandAssetWorkbook = () => {
           Five <em>Practice Values.</em>
         </H2>
         <Lead>A brand's values are not poster words. They are the filters that decide which patients you take, which cases you refuse, how your team speaks, and what you say no to when the money is on the table.</Lead>
-        <div className="mt-6">
+        <div style={{ marginTop: 24 }}>
           <Body>Write five. Not ten. Five is a discipline — it forces you to pick. Each value should be one or two words that your team can actually recite and that a patient could feel in five minutes with your practice.</Body>
         </div>
-        <NumberedStack
-          label="Practice Values"
-          count={5}
-          keyPrefix="value"
-          values={v}
-          onChange={handleChange}
-          placeholders={["e.g., Subtlety", "e.g., Craftsmanship", "e.g., No cookie-cutter cases", "e.g., Honest over optimistic", "e.g., Function before aesthetics"]}
-        />
+        <div style={{ marginTop: 32 }}>
+          <NumberedStack
+            label="Practice Values"
+            count={5}
+            keyPrefix="value"
+            values={v}
+            onChange={handleChange}
+            placeholders={["e.g., Subtlety", "e.g., Craftsmanship", "e.g., No cookie-cutter cases", "e.g., Honest over optimistic", "e.g., Function before aesthetics"]}
+          />
+        </div>
       </Section>
 
       <Rule />
 
       {/* TRANSITION */}
-      <div className="mx-auto my-20 max-w-[780px] px-6 text-center lg:px-10">
-        <h2 className="font-serif text-3xl leading-[1.15] text-neutral-900 md:text-4xl">
+      <div className="mx-auto" style={{ maxWidth: 680, padding: "0 24px", textAlign: "center", margin: "80px auto" }}>
+        <h2
+          className="serif"
+          style={{ fontSize: "clamp(28px, 4vw, 40px)", lineHeight: 1.15, color: "var(--ink)", fontWeight: 300 }}
+        >
           A real brand is not a logo. <em>It's five things working together.</em>
         </h2>
-        <p className="mx-auto mt-6 max-w-[600px] text-sm leading-[1.7] text-neutral-500">
+        <p
+          style={{
+            margin: "32px auto 0",
+            maxWidth: 600,
+            fontSize: 14,
+            lineHeight: 1.7,
+            color: "var(--ink-muted)",
+            fontWeight: 300,
+          }}
+        >
           Everything above this line is raw material. Everything below turns it into an asset — something that pulls, compounds, and tells patients who you are before you say a word.
         </p>
       </div>
@@ -593,7 +1149,7 @@ const BrandAssetWorkbook = () => {
       <Section num="01" label="Part One · What You're Known For">
         <H2><em>Positioning.</em></H2>
         <Lead>You already specialize. The question isn't <em>what</em> you do — it's whether the market knows <em>how you own it.</em></Lead>
-        <div className="mt-6 space-y-5">
+        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>Most aesthetic dentists have a specialty on the website and generalist messaging everywhere else. The niche is chosen. The positioning is fuzzy. That gap is where pull leaks.</Body>
           <Body>Positioning is how you describe your specialty in a way that only you could describe it. “Cosmetic” is a category. “The dentist high-profile patients are sent to when nobody can know they had work done” is a position.</Body>
           <Body>This is where the ikigai synthesis lives. Your one-sentence positioning from the foundation <em>is</em> your positioning — if it survives the real-world test. The test is whether a patient can repeat it to a friend at dinner without losing any of it.</Body>
@@ -602,7 +1158,7 @@ const BrandAssetWorkbook = () => {
         <H3>The PASTED Descriptive Call-Out</H3>
         <Body>Don't call out job titles. Call out conditions, states, and self-perceptions. “Executives over 50” is weak. “The woman who hasn't smiled in a photo since her divorce” is strong.</Body>
         <Callout label="WORKING FRAME">
-          <div>Weak: <em>For professionals who want better smiles.</em></div>
+          <div style={{ marginBottom: 8 }}>Weak: <em>For professionals who want better smiles.</em></div>
           <div>Strong: <em>For the founder, surgeon, or executive whose smile hasn't kept up with the life they've built.</em></div>
         </Callout>
 
@@ -613,7 +1169,7 @@ const BrandAssetWorkbook = () => {
 
         {wb({ num: "✦", dataKey: "callouts", question: "Write three descriptive call-outs for your 3%.", hint: "Each should describe a state or self-perception, not a demographic. They should feel like private thoughts, not segments.", placeholder: "1. For the woman who…\n2. For the man who…\n3. For the patient who…", minHeight: 130 })}
 
-        <SubLabel>CAPSTONE · The Practice Marketing System</SubLabel>
+        <SubLabel brass>CAPSTONE · The Practice Marketing System</SubLabel>
         <Body>Four lines that, together, define the commercial engine of your brand. This is the most-used page of the workbook — it's what you'll read back before every shoot, every ad, every team meeting.</Body>
         {wb({ num: "01", dataKey: "ms_patient", question: "Ideal Patient", hint: "Describe the patient you want more of in one vivid sentence. Not a demographic — a person.", placeholder: "The ___ who ___", minHeight: 80, inputType: "input" })}
         {wb({ num: "02", dataKey: "ms_differentiators", question: "Three Differentiators", hint: "What separates you from every other dentist in your specialty, stated in the patient's language — not credentials or equipment.", placeholder: "1. ___\n2. ___\n3. ___", minHeight: 140 })}
@@ -627,12 +1183,28 @@ const BrandAssetWorkbook = () => {
       <Section num="02" label="Part Two · Your Why">
         <H2><em>Point of View.</em></H2>
         <Lead>Strong brands have opinions. Weak brands list services.</Lead>
-        <div className="mt-6 space-y-5">
+        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>This is the part most dental brands are missing — and it's the part that separates a practice from a point of reference.</Body>
           <Body>Point of view is the non-negotiable belief you carry into every case, every consult, every piece of content. It's what makes a patient say “I want <em>him</em> specifically” instead of “I want a dentist.”</Body>
         </div>
 
-        <ul className="my-8 max-w-[780px] space-y-3 border-l border-neutral-300 pl-6 font-serif italic text-neutral-800">
+        <ul
+          className="serif"
+          style={{
+            margin: "40px 0",
+            maxWidth: 680,
+            listStyle: "none",
+            padding: "0 0 0 24px",
+            borderLeft: "1px solid var(--accent-line)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            fontStyle: "italic",
+            fontSize: 19,
+            color: "var(--ink)",
+            fontWeight: 400,
+          }}
+        >
           <li>We don't do cookie-cutter veneers.</li>
           <li>Subtlety over Hollywood.</li>
           <li>Function before aesthetics.</li>
@@ -645,7 +1217,7 @@ const BrandAssetWorkbook = () => {
         <H3>The Signature Story</H3>
         <Body>A point of view becomes unforgettable when it's attached to a story. Every iconic practice has one that is specific, true, and repeatable. Specific enough that it couldn't belong to any other dentist. True enough that you never have to remember it. Repeatable enough that a patient can tell their spouse over dinner.</Body>
 
-        <div className="my-10 max-w-[780px]">
+        <div style={{ margin: "40px 0", maxWidth: 680 }}>
           <FrameworkRow label="Origin" title="Why this practice exists.">
             The reason you opened the doors. The patient, the mentor, the failure, or the frustration that started it.
           </FrameworkRow>
@@ -670,7 +1242,7 @@ const BrandAssetWorkbook = () => {
       <Section num="03" label="Part Three · What It Feels Like">
         <H2><em>Experience.</em></H2>
         <Lead>Your brand isn't what your Instagram says. It's what happens next.</Lead>
-        <div className="mt-6 space-y-5">
+        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>A brand is: your consult flow. Your office vibe. How your team speaks. Your follow-up. Your before-and-after photography. The smell of the space. The music in the waiting room. The way a treatment plan is delivered.</Body>
           <Body>If your Instagram says “luxury” but your consult feels rushed — your brand collapses. If your ads promise bespoke and your follow-up is a templated SMS at 9am — your brand collapses.</Body>
           <Body>Consistency builds credibility. Inconsistency is the fastest way to lose a $60k case.</Body>
@@ -701,31 +1273,15 @@ const BrandAssetWorkbook = () => {
       <Section num="04" label="Part Four · What You Show Publicly">
         <H2><em>Signal.</em></H2>
         <Lead>Signal is content. But content guided by positioning — not content for its own sake.</Lead>
-        <div className="mt-6 space-y-5">
+        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>Most dentists treat content like a chore. They post happy Mondays. Random before-and-afters. Generic dental tips. This is noise. It doesn't reinforce positioning, doesn't carry point of view, doesn't deepen experience. It's just activity.</Body>
           <Body>Strong signal does the opposite. It says the same thing the positioning says, in a different format, every time. That consistency is what creates pull.</Body>
         </div>
 
-        <div className="my-10 grid max-w-[780px] grid-cols-1 gap-0 overflow-hidden rounded-sm border border-neutral-200 md:grid-cols-2">
-          <div className="border-b border-neutral-200 bg-neutral-50 p-6 md:border-b-0 md:border-r">
-            <div className="mb-3 text-[10px] uppercase tracking-[0.28em] text-neutral-500">Weak Signal</div>
-            <ul className="space-y-2 text-[15px] text-neutral-700">
-              <li>Random before/after</li>
-              <li>“Happy Monday”</li>
-              <li>Dental tips anyone could post</li>
-              <li>&nbsp;</li>
-            </ul>
-          </div>
-          <div className="bg-white p-6">
-            <div className="mb-3 text-[10px] uppercase tracking-[0.28em] text-neutral-500">Strong Signal</div>
-            <ul className="space-y-2 text-[15px] text-neutral-900">
-              <li>Philosophy pieces</li>
-              <li>Patient stories</li>
-              <li>Lifestyle transformation</li>
-              <li>Authority commentary on your category</li>
-            </ul>
-          </div>
-        </div>
+        <PillarGrid cols={2}>
+          <PillarCard label="WEAK SIGNAL" body="Random before/after. “Happy Monday.” Dental tips anyone could post." />
+          <PillarCard label="STRONG SIGNAL" body="Philosophy pieces. Patient stories. Lifestyle transformation. Authority commentary on your category." />
+        </PillarGrid>
 
         <H3>The Four Quadrants</H3>
         <Body>At PASTED, signal is organized around four categories. Every piece of content maps to one. Together they cover the full psychology of an in-market buyer.</Body>
@@ -740,8 +1296,8 @@ const BrandAssetWorkbook = () => {
         <H3>The Hammer Cycle</H3>
         <Body>Once a patient has booked, content keeps working. The Hammer Cycle is the pre-call sequence — 5 to 9 pieces of high-signal content delivered between booking and consultation. It's what takes show rates from 40% to 70%+ and turns consults into closes.</Body>
 
-        <Callout label="THE 4-HOUR FLOW BLOCK">
-          <div>Matt Gray's Founder OS principle translates directly: schedule 4 hours per day of protected time for high-leverage creative work. For a practice owner, this is shoot days, thinking time, long-form writing, and patient-story capture. Not chair time. Not email. The brand gets built in the block.</div>
+        <Callout label="THE FLOW BLOCK">
+          <div>Four protected hours. Every day. No exceptions during a brand build. For a practice owner, this is shoot days, thinking time, long-form writing, and patient-story capture. Not chair time. Not email. The brand gets built in the block — or it does not get built at all.</div>
         </Callout>
 
         <H3>The Posting Filter</H3>
@@ -756,7 +1312,7 @@ const BrandAssetWorkbook = () => {
       <Section num="05" label="Part Five · How It All Connects">
         <H2><em>System.</em></H2>
         <Lead>Pull happens when all five parts carry the same signal. This is the piece most dentists miss.</Lead>
-        <div className="mt-6 space-y-5">
+        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 24 }}>
           <Body>A brand must carry through: ads, website, consult, pricing, photography, messaging, follow-up, reviews, referral scripts, even the invoice. If one breaks, trust drops. If trust drops, price drops. If price drops, you're back to competing.</Body>
           <Body>The system is what makes the whole architecture compound instead of leak. It is the difference between a pile of marketing activity and a real asset.</Body>
         </div>
@@ -764,17 +1320,47 @@ const BrandAssetWorkbook = () => {
         <H3>The Patient Journey Map</H3>
         <Body>Walk the journey. End to end. Every message, every screen, every human interaction:</Body>
 
-        <div className="my-8 flex max-w-[1120px] flex-col flex-wrap items-stretch gap-2 md:flex-row md:items-center">
+        <div
+          style={{
+            margin: "32px 0",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 8,
+            alignItems: "center",
+          }}
+        >
           {["Ad", "Website", "Consult", "Treatment Plan", "Follow-up", "Reveal", "Review", "Referral"].map((step, i, arr) => (
-            <div key={step} className="flex items-center gap-2">
-              <div className="rounded-sm border border-neutral-300 px-3 py-2 text-[12px] uppercase tracking-[0.18em] text-neutral-700">{step}</div>
-              {i < arr.length - 1 && <span className="text-neutral-400">→</span>}
+            <div key={step} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div
+                className="meta-label"
+                style={{
+                  border: "1px solid var(--rule)",
+                  padding: "10px 14px",
+                  letterSpacing: "0.18em",
+                  color: "var(--ink-soft)",
+                }}
+              >
+                {step}
+              </div>
+              {i < arr.length - 1 && <span style={{ color: "var(--ink-dim)" }}>→</span>}
             </div>
           ))}
         </div>
 
         <Body>At each step, ask:</Body>
-        <ul className="my-6 max-w-[780px] list-disc space-y-2 pl-6 text-[15px] text-neutral-700">
+        <ul
+          style={{
+            margin: "20px 0",
+            maxWidth: 680,
+            paddingLeft: 24,
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            fontSize: 16,
+            color: "var(--ink-soft)",
+            fontWeight: 300,
+          }}
+        >
           <li>Does the message match the one before it?</li>
           <li>Does the tone match the positioning?</li>
           <li>Does the point of view come through?</li>
@@ -784,7 +1370,7 @@ const BrandAssetWorkbook = () => {
         <H3>The Compounding Effect</H3>
         <Body>When the system holds, three things happen together:</Body>
 
-        <div className="my-10 max-w-[780px]">
+        <div style={{ margin: "40px 0", maxWidth: 680 }}>
           <FrameworkRow label="Recognition" title="The market knows who you are before you speak.">
             Your visuals, voice, and call-outs are distinct enough that a patient recognizes your ad in the scroll without reading a word. Recognition reduces cost-per-acquisition year over year.
           </FrameworkRow>
@@ -813,7 +1399,7 @@ const BrandAssetWorkbook = () => {
         {wb({ num: "01", dataKey: "test_1", question: "Who are we for?", placeholder: "We are for ___", inputType: "input", minHeight: 60 })}
         {wb({ num: "02", dataKey: "test_2", question: "What do we believe?", placeholder: "We believe ___", inputType: "input", minHeight: 60 })}
         {wb({ num: "03", dataKey: "test_3", question: "What experience do we want to be known for?", placeholder: "We want to be known for ___", inputType: "input", minHeight: 60 })}
-        <div className="mt-8 space-y-4">
+        <div style={{ marginTop: 32, display: "flex", flexDirection: "column", gap: 16 }}>
           <MutedBody>If you can't answer those in one sentence each — your logo doesn't matter, and neither does your renovation. You don't need a rebrand. You need clarity.</MutedBody>
           <MutedBody>The logo is just the signature. The brand is the story. The story is what pulls.</MutedBody>
         </div>
@@ -824,16 +1410,18 @@ const BrandAssetWorkbook = () => {
       {/* CADENCE */}
       <Section num="CADENCE" label="The Personal Board Meeting">
         <H2>A weekly rhythm for the <em>iconic operator.</em></H2>
-        <Lead>Matt Gray's Founder OS includes a weekly practice called the Personal Board Meeting — a 30-minute executive check-in with yourself. Translated for a practice owner, it becomes the discipline that keeps the five parts alive long after the initial build.</Lead>
-        <div className="mt-6">
+        <Lead>
+          Iconic operators do not drift. They review. Once a week, for thirty minutes, the best practice owners we work with sit with themselves as if they were their own most important client — and ask the hard questions before the market asks them on their behalf.
+        </Lead>
+        <div style={{ marginTop: 24 }}>
           <Body>Run this every week. Same time. Same 30 minutes. Treat yourself like the most important client on your roster.</Body>
         </div>
 
-        <div className="my-10 rounded-sm border border-neutral-200 bg-white p-2 md:p-6">
-          <Row time="Minute 1–5" action={<><strong>Wins.</strong> Three things that worked. Case, content, referral, review, team moment — anything that reinforced the brand you're building.</>} />
-          <Row time="Minute 6–15" action={<><strong>Friction.</strong> Where is the brand leaking? Misaligned content, patient confusion, price discounting, team drift. Name the friction before it becomes structural.</>} />
-          <Row time="Minute 16–22" action={<><strong>The One Move.</strong> One decision, one removal, one creation that would change the trajectory most in the next 90 days. Not ten things. One.</>} />
-          <Row time="Minute 23–30" action={<><strong>The Flow Block.</strong> Schedule the 4-hour block for the week. Protect it like a surgery. This is where the brand actually gets built.</>} />
+        <div style={{ margin: "40px 0", maxWidth: 680, padding: 24, background: "var(--canvas-deep)" }}>
+          <Row time="Minute 1–5" action={<><strong style={{ color: "var(--ink)" }}>Wins.</strong> Three things that worked. Case, content, referral, review, team moment — anything that reinforced the brand you're building.</>} />
+          <Row time="Minute 6–15" action={<><strong style={{ color: "var(--ink)" }}>Friction.</strong> Where is the brand leaking? Misaligned content, patient confusion, price discounting, team drift. Name the friction before it becomes structural.</>} />
+          <Row time="Minute 16–22" action={<><strong style={{ color: "var(--ink)" }}>The One Move.</strong> One decision, one removal, one creation that would change the trajectory most in the next 90 days. Not ten things. One.</>} />
+          <Row time="Minute 23–30" action={<><strong style={{ color: "var(--ink)" }}>The Flow Block.</strong> Schedule the 4-hour block for the week. Protect it like a surgery. This is where the brand actually gets built.</>} />
         </div>
 
         <H3>This Week's Reflection</H3>
@@ -850,7 +1438,7 @@ const BrandAssetWorkbook = () => {
       <Section num="HORIZON" label="The 10 · 3 · 1 · 90 Vision">
         <H2>Build the ten-year brand by starting with the next <em>ninety days.</em></H2>
         <Lead>Where are you in ten years, in three years, in one year — and what must be true by the end of the next ninety days to make it possible?</Lead>
-        <div className="mt-6">
+        <div style={{ marginTop: 24 }}>
           <Body>For each horizon, write 3 specific goals. Not themes. Not aspirations. Concrete, measurable, or verifiable outcomes a patient, employee, or bank manager could confirm.</Body>
         </div>
 
@@ -884,21 +1472,69 @@ const BrandAssetWorkbook = () => {
       <Section num="NEXT" label="When You're Ready">
         <H2>You don't need a nicer office. You need a real <em>asset.</em></H2>
         <Lead>PASTED works with a small number of aesthetic dental practices each year. We build the signal, produce the creative, run the campaigns, and architect the system — so the brand you've designed in this workbook becomes the brand your market sees. It is the same five-part framework behind hundreds of millions in aesthetic demand.</Lead>
-        <div className="mt-6">
+        <div style={{ marginTop: 24 }}>
           <Body>If the workbook surfaced something, and you'd like to see what the full architecture looks like applied to your practice — book a Brand Architecture Call.</Body>
         </div>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row print:hidden">
+        <div
+          className="workbook-print-hide"
+          style={{ marginTop: 40, display: "flex", flexWrap: "wrap", gap: 12 }}
+        >
           <a
             href="https://calendly.com/pasted/brand-architecture-call"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-sm bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "var(--accent)",
+              color: "var(--canvas)",
+              borderRadius: 999,
+              padding: "18px 36px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 500,
+              fontSize: 14,
+              letterSpacing: "0.04em",
+              textDecoration: "none",
+              transition: "background 200ms ease, transform 200ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--accent-deep)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "var(--accent)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
           >
             Book a Brand Architecture Call →
           </a>
           <button
             onClick={handleExport}
-            className="inline-flex items-center justify-center rounded-sm border border-neutral-900 bg-white px-6 py-3 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-100"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "transparent",
+              color: "var(--ink)",
+              border: "1px solid var(--ink)",
+              borderRadius: 2,
+              padding: "18px 36px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 500,
+              fontSize: 14,
+              letterSpacing: "0.04em",
+              cursor: "pointer",
+              transition: "background 200ms ease, border-color 200ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--canvas-deep)";
+              e.currentTarget.style.borderColor = "var(--accent)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.borderColor = "var(--ink)";
+            }}
           >
             Export My Workbook
           </button>
@@ -906,24 +1542,46 @@ const BrandAssetWorkbook = () => {
       </Section>
 
       {/* FOOTER */}
-      <footer className="mx-auto mt-32 w-full max-w-[1120px] border-t border-neutral-200 px-6 py-10 lg:px-10">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="text-[11px] uppercase tracking-[0.24em] text-neutral-500">PASTED · Brand Asset Workbook</div>
-          <div className="text-[11px] uppercase tracking-[0.24em] text-neutral-500">v1 · PASTED · 2026</div>
+      <footer
+        className="mx-auto"
+        style={{
+          maxWidth: 960,
+          marginTop: 120,
+          padding: "48px 24px",
+          borderTop: "1px solid var(--rule)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 24,
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+          className="md:!flex-row"
+        >
+          <div className="meta-label" style={{ letterSpacing: "0.24em" }}>
+            PASTED · Brand Asset Workbook
+          </div>
+          <div className="meta-label" style={{ letterSpacing: "0.24em" }}>
+            v1 · MMXXVI
+          </div>
         </div>
-        <div className="mt-6 text-center font-serif italic text-neutral-600">Where Dentistry Becomes Iconic.</div>
+        <div
+          className="serif"
+          style={{
+            marginTop: 24,
+            textAlign: "center",
+            fontStyle: "italic",
+            fontSize: 16,
+            color: "var(--ink-muted)",
+            fontWeight: 300,
+          }}
+        >
+          Where Dentistry Becomes Iconic.
+        </div>
       </footer>
-
-      <style>{`
-        @media (prefers-reduced-motion: reduce) {
-          html { scroll-behavior: auto !important; }
-          * { transition: none !important; animation: none !important; }
-        }
-        @media print {
-          .print\\:hidden { display: none !important; }
-          textarea, input { border: 1px solid #aaa !important; }
-        }
-      `}</style>
     </div>
   );
 };
