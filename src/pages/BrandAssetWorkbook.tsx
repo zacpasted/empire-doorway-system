@@ -1,6 +1,44 @@
 import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
+import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const STORAGE_KEY = "pasted-brand-asset-workbook";
+const LEAD_STORAGE_KEY = "pasted-brand-asset-workbook-lead";
+
+const leadSchema = z.object({
+  first_name: z.string().trim().min(1, "First name is required").max(80),
+  last_name: z.string().trim().max(80).optional().or(z.literal("")),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  practice_name: z.string().trim().max(160).optional().or(z.literal("")),
+});
+
+type Lead = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  practice_name: string;
+};
+
+const emptyLead: Lead = { first_name: "", last_name: "", email: "", practice_name: "" };
+
+const loadLead = (): Lead => {
+  try {
+    const raw = localStorage.getItem(LEAD_STORAGE_KEY);
+    if (!raw) return emptyLead;
+    return { ...emptyLead, ...(JSON.parse(raw) as Partial<Lead>) };
+  } catch {
+    return emptyLead;
+  }
+};
+
+const saveLead = (l: Lead) => {
+  try {
+    localStorage.setItem(LEAD_STORAGE_KEY, JSON.stringify(l));
+  } catch {
+    // ignore
+  }
+};
 
 // ============================================================
 // PASTED Brand Asset Workbook
@@ -652,14 +690,66 @@ const RESPONSIVE_CSS = `
   .workbook-root .topbar-subtitle { display: none !important; }
   .workbook-root .topbar-divider { display: none !important; }
   .workbook-root .topbar-save-text { display: none !important; }
+  .workbook-root .wb-lead-grid { grid-template-columns: 1fr !important; }
 }
 `;
+
+// ---------- Lead capture field ----------
+type LeadFieldProps = {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+  error?: string;
+  type?: string;
+  autoComplete?: string;
+};
+
+const LeadField = ({ label, value, onChange, required, error, type = "text", autoComplete }: LeadFieldProps) => {
+  const id = `lead-${label.replace(/\s+/g, "-").toLowerCase()}`;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <label
+        htmlFor={id}
+        className="meta-label"
+        style={{ color: "var(--ink-muted)", letterSpacing: "0.2em" }}
+      >
+        {label}{required ? " *" : ""}
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        autoComplete={autoComplete}
+        aria-invalid={!!error}
+        className="wb-input"
+        style={{
+          padding: "12px 14px",
+          fontSize: 15,
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 300,
+          color: "var(--ink)",
+          borderColor: error ? "#9c3a2a" : "var(--rule)",
+        }}
+      />
+      {error && (
+        <div style={{ fontSize: 11, color: "#9c3a2a", fontStyle: "italic", marginTop: 2 }}>
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
 
 // ---------- Page ----------
 const BrandAssetWorkbook = () => {
   const [values, setValues] = useState<Values>({});
+  const [lead, setLead] = useState<Lead>(emptyLead);
   const [saveState, setSaveState] = useState<"saved" | "saving" | "reset">("saved");
   const [scrollPct, setScrollPct] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [leadErrors, setLeadErrors] = useState<Partial<Record<keyof Lead, string>>>({});
   const debounceRef = useRef<number | null>(null);
 
   // Load Google Fonts (idempotent)
@@ -678,9 +768,19 @@ const BrandAssetWorkbook = () => {
   // Restore + meta
   useEffect(() => {
     setValues(loadValues());
+    setLead(loadLead());
     document.title = "The PASTED Brand Asset Workbook";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", "A five-part field guide for aesthetic dental practice owners — build a brand that pulls.");
+  }, []);
+
+  const handleLeadChange = useCallback((field: keyof Lead, val: string) => {
+    setLead((prev) => {
+      const next = { ...prev, [field]: val };
+      saveLead(next);
+      return next;
+    });
+    setLeadErrors((prev) => ({ ...prev, [field]: undefined }));
   }, []);
 
   // Scroll progress
@@ -719,18 +819,70 @@ const BrandAssetWorkbook = () => {
     window.setTimeout(() => setSaveState("saved"), 800);
   };
 
-  const handleExport = () => {
+  const handleExport = async () => {
+    // Validate lead
+    const parsed = leadSchema.safeParse(lead);
+    if (!parsed.success) {
+      const errs: Partial<Record<keyof Lead, string>> = {};
+      parsed.error.issues.forEach((i) => {
+        const k = i.path[0] as keyof Lead;
+        if (!errs[k]) errs[k] = i.message;
+      });
+      setLeadErrors(errs);
+      // Scroll the lead form into view
+      document.getElementById("workbook-lead-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      toast({
+        title: "A couple of details first",
+        description: "Add your name and email to download the workbook.",
+      });
+      return;
+    }
+
+    setSubmitting(true);
+
+    // Submit to Lovable Cloud (non-blocking for the download UX)
+    try {
+      const { error } = await supabase.from("brand_workbook_submissions").insert({
+        first_name: parsed.data.first_name,
+        last_name: parsed.data.last_name || null,
+        email: parsed.data.email,
+        practice_name: parsed.data.practice_name || null,
+        answers: values,
+        source: "brand_asset_workbook",
+        page_url: typeof window !== "undefined" ? window.location.href : null,
+        user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+      });
+      if (error) {
+        console.error("Workbook submission failed", error);
+        toast({
+          title: "We couldn't save your submission",
+          description: "Your download will continue. Please try again later.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Workbook saved",
+          description: "We've got your details. Your download is starting.",
+        });
+      }
+    } catch (e) {
+      console.error("Workbook submission error", e);
+    }
+
+    // Always deliver the download
     const lines: string[] = [];
     lines.push("THE PASTED BRAND ASSET WORKBOOK");
     lines.push(`Exported: ${new Date().toLocaleString()}`);
+    lines.push(`Prepared for: ${parsed.data.first_name}${parsed.data.last_name ? " " + parsed.data.last_name : ""} · ${parsed.data.email}`);
+    if (parsed.data.practice_name) lines.push(`Practice: ${parsed.data.practice_name}`);
     lines.push("");
     lines.push("");
     FIELD_MANIFEST.forEach(({ key, label }) => {
-      const v = values[key];
+      const val = values[key];
       lines.push("----------------------------------------");
       lines.push(label);
       lines.push("----------------------------------------");
-      lines.push(v && v.trim() ? v : "[blank]");
+      lines.push(val && val.trim() ? val : "[blank]");
       lines.push("");
       lines.push("");
     });
@@ -743,6 +895,8 @@ const BrandAssetWorkbook = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    setSubmitting(false);
   };
 
   const v = useMemo(() => values, [values]);
@@ -1497,9 +1651,66 @@ const BrandAssetWorkbook = () => {
         <div style={{ marginTop: 24 }}>
           <Body>If the workbook surfaced something, and you'd like to see what the full architecture looks like applied to your practice — book a Brand Architecture Call.</Body>
         </div>
+
+        {/* Lead capture form — required to export the workbook */}
+        <div
+          id="workbook-lead-form"
+          className="workbook-print-hide wb-card"
+          style={{
+            marginTop: 56,
+            background: "var(--canvas-deep)",
+            borderRadius: 2,
+            padding: 32,
+          }}
+        >
+          <div className="meta-label" style={{ color: "var(--accent)", marginBottom: 8 }}>
+            Before you export
+          </div>
+          <div className="serif" style={{ fontSize: 22, color: "var(--ink)", lineHeight: 1.35, marginBottom: 6 }}>
+            Where should we send the architecture conversation?
+          </div>
+          <div style={{ fontSize: 13, color: "var(--ink-muted)", fontStyle: "italic", marginBottom: 24, lineHeight: 1.6 }}>
+            We use this only to follow up if your answers suggest a fit. Your workbook download will start immediately.
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="wb-lead-grid">
+            <LeadField
+              label="First name"
+              required
+              value={lead.first_name}
+              onChange={(v) => handleLeadChange("first_name", v)}
+              error={leadErrors.first_name}
+              autoComplete="given-name"
+            />
+            <LeadField
+              label="Last name"
+              value={lead.last_name}
+              onChange={(v) => handleLeadChange("last_name", v)}
+              error={leadErrors.last_name}
+              autoComplete="family-name"
+            />
+            <LeadField
+              label="Email"
+              type="email"
+              required
+              value={lead.email}
+              onChange={(v) => handleLeadChange("email", v)}
+              error={leadErrors.email}
+              autoComplete="email"
+            />
+            <LeadField
+              label="Practice name (optional)"
+              value={lead.practice_name}
+              onChange={(v) => handleLeadChange("practice_name", v)}
+              error={leadErrors.practice_name}
+              autoComplete="organization"
+            />
+          </div>
+        </div>
+
         <div
           className="workbook-print-hide"
-          style={{ marginTop: 40, display: "flex", flexWrap: "wrap", gap: 12 }}
+          style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}
         >
           <a
             href="https://calendly.com/pasted/brand-architecture-call"
@@ -1533,6 +1744,7 @@ const BrandAssetWorkbook = () => {
           </a>
           <button
             onClick={handleExport}
+            disabled={submitting}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -1546,10 +1758,12 @@ const BrandAssetWorkbook = () => {
               fontWeight: 500,
               fontSize: 14,
               letterSpacing: "0.04em",
-              cursor: "pointer",
-              transition: "background 200ms ease, border-color 200ms ease",
+              cursor: submitting ? "wait" : "pointer",
+              opacity: submitting ? 0.6 : 1,
+              transition: "background 200ms ease, border-color 200ms ease, opacity 200ms ease",
             }}
             onMouseEnter={(e) => {
+              if (submitting) return;
               e.currentTarget.style.background = "var(--canvas-deep)";
               e.currentTarget.style.borderColor = "var(--accent)";
             }}
@@ -1558,7 +1772,7 @@ const BrandAssetWorkbook = () => {
               e.currentTarget.style.borderColor = "var(--ink)";
             }}
           >
-            Export My Workbook
+            {submitting ? "Exporting…" : "Export My Workbook"}
           </button>
         </div>
       </Section>
