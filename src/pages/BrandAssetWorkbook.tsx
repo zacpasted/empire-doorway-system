@@ -1149,6 +1149,75 @@ const BrandAssetWorkbook = () => {
             Turn the page. The if-practice stops here. The when-practice begins on the other side.
           </MutedBody>
         </div>
+
+        <div
+          className="workbook-print-hide"
+          style={{
+            marginTop: 56,
+            paddingTop: 40,
+            borderTop: "1px solid var(--rule)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: 16,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: 11,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--ink-muted)",
+              margin: 0,
+            }}
+          >
+            Prefer to walk it through with us?
+          </p>
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: 24,
+              lineHeight: 1.35,
+              color: "var(--ink)",
+              margin: 0,
+              maxWidth: "32em",
+            }}
+          >
+            Book a Brand Architecture Call before you start the workbook — and we'll map your asset together.
+          </p>
+          <a
+            href="https://calendly.com/getpasted/pasted-partner-discovery?utm_source=workbook&utm_medium=cta&utm_campaign=brand_asset_workbook&utm_content=architecture_call_top"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "var(--accent)",
+              color: "var(--canvas)",
+              borderRadius: 999,
+              padding: "16px 32px",
+              marginTop: 8,
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 500,
+              fontSize: 14,
+              letterSpacing: "0.04em",
+              textDecoration: "none",
+              transition: "background 200ms ease, transform 200ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--accent-deep)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "var(--accent)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+          >
+            Book a Brand Architecture Call →
+          </a>
+        </div>
       </Section>
 
       <Rule />
