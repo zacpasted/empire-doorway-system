@@ -719,9 +719,19 @@ const BrandAssetWorkbook = () => {
   // Restore + meta
   useEffect(() => {
     setValues(loadValues());
+    setLead(loadLead());
     document.title = "The PASTED Brand Asset Workbook";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", "A five-part field guide for aesthetic dental practice owners — build a brand that pulls.");
+  }, []);
+
+  const handleLeadChange = useCallback((field: keyof Lead, val: string) => {
+    setLead((prev) => {
+      const next = { ...prev, [field]: val };
+      saveLead(next);
+      return next;
+    });
+    setLeadErrors((prev) => ({ ...prev, [field]: undefined }));
   }, []);
 
   // Scroll progress
