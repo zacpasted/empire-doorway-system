@@ -630,6 +630,9 @@ const RESPONSIVE_CSS = `
   .workbook-root h2 { font-size: 36px !important; }
   .workbook-root h1 { font-size: 56px !important; }
   .workbook-root .wb-card { padding: 24px !important; }
+  .workbook-root .topbar-subtitle { display: none !important; }
+  .workbook-root .topbar-divider { display: none !important; }
+  .workbook-root .topbar-save-text { display: none !important; }
 }
 `;
 
@@ -759,19 +762,19 @@ const BrandAssetWorkbook = () => {
             padding: "20px 24px",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, minWidth: 0 }}>
             <div
               className="serif"
-              style={{ fontSize: 20, fontWeight: 500, letterSpacing: "0.08em", color: "var(--ink)", lineHeight: 1 }}
+              style={{ fontSize: 20, fontWeight: 500, letterSpacing: "0.08em", color: "var(--ink)", lineHeight: 1, whiteSpace: "nowrap" }}
             >
               PASTED
             </div>
-            <div style={{ width: 1, height: 18, background: "var(--rule)" }} />
-            <div className="meta-label" style={{ letterSpacing: "0.28em" }}>
+            <div className="topbar-divider" style={{ width: 1, height: 18, background: "var(--rule)" }} />
+            <div className="meta-label topbar-subtitle" style={{ letterSpacing: "0.28em", whiteSpace: "nowrap" }}>
               Brand Asset Workbook
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div className="meta-label" style={{ display: "flex", alignItems: "center", gap: 8, letterSpacing: "0.2em" }}>
               <span
                 style={{
@@ -783,7 +786,7 @@ const BrandAssetWorkbook = () => {
                   transition: "background 150ms ease",
                 }}
               />
-              <span>{saveState === "saving" ? "Saving…" : saveState === "reset" ? "Reset" : "Saved"}</span>
+              <span className="topbar-save-text" style={{ whiteSpace: "nowrap" }}>{saveState === "saving" ? "Saving…" : saveState === "reset" ? "Reset" : "Saved"}</span>
             </div>
             <button
               onClick={handleReset}
