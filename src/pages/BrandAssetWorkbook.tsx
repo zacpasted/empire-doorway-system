@@ -1713,7 +1713,7 @@ const BrandAssetWorkbook = () => {
           style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}
         >
           <a
-            href="https://calendly.com/pasted/brand-architecture-call"
+            href="https://calendly.com/getpasted/pasted-partner-discovery?utm_source=workbook&utm_medium=cta&utm_campaign=brand_asset_workbook&utm_content=architecture_call_button"
             target="_blank"
             rel="noopener noreferrer"
             style={{
