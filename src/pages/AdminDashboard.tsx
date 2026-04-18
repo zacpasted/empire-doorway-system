@@ -113,6 +113,20 @@ interface QuizSubmission {
   created_at: string;
 }
 
+interface WorkbookSubmission {
+  id: string;
+  first_name: string;
+  last_name: string | null;
+  email: string;
+  phone: string | null;
+  practice_name: string | null;
+  answers: Record<string, string>;
+  source: string | null;
+  page_url: string | null;
+  user_agent: string | null;
+  created_at: string;
+}
+
 const ITEMS_PER_PAGE = 10;
 
 const AdminDashboard = () => {
