@@ -151,6 +151,13 @@ const AdminDashboard = () => {
   const [quizPage, setQuizPage] = useState(1);
   const [selectedQuiz, setSelectedQuiz] = useState<QuizSubmission | null>(null);
 
+  // Workbook state
+  const [workbookSubmissions, setWorkbookSubmissions] = useState<WorkbookSubmission[]>([]);
+  const [workbookLoading, setWorkbookLoading] = useState(false);
+  const [workbookPage, setWorkbookPage] = useState(1);
+  const [workbookSearch, setWorkbookSearch] = useState('');
+  const [selectedWorkbook, setSelectedWorkbook] = useState<WorkbookSubmission | null>(null);
+
   // CTA Analytics state
   const [ctaClicks, setCTAClicks] = useState<CTAClick[]>([]);
   const [ctaLoading, setCTALoading] = useState(false);
