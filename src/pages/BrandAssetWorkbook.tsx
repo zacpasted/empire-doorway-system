@@ -630,6 +630,9 @@ const RESPONSIVE_CSS = `
   .workbook-root h2 { font-size: 36px !important; }
   .workbook-root h1 { font-size: 56px !important; }
   .workbook-root .wb-card { padding: 24px !important; }
+  .workbook-root .topbar-subtitle { display: none !important; }
+  .workbook-root .topbar-divider { display: none !important; }
+  .workbook-root .topbar-save-text { display: none !important; }
 }
 `;
 
