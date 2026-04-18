@@ -1602,9 +1602,66 @@ const BrandAssetWorkbook = () => {
         <div style={{ marginTop: 24 }}>
           <Body>If the workbook surfaced something, and you'd like to see what the full architecture looks like applied to your practice — book a Brand Architecture Call.</Body>
         </div>
+
+        {/* Lead capture form — required to export the workbook */}
+        <div
+          id="workbook-lead-form"
+          className="workbook-print-hide wb-card"
+          style={{
+            marginTop: 56,
+            background: "var(--canvas-deep)",
+            borderRadius: 2,
+            padding: 32,
+          }}
+        >
+          <div className="meta-label" style={{ color: "var(--accent)", marginBottom: 8 }}>
+            Before you export
+          </div>
+          <div className="serif" style={{ fontSize: 22, color: "var(--ink)", lineHeight: 1.35, marginBottom: 6 }}>
+            Where should we send the architecture conversation?
+          </div>
+          <div style={{ fontSize: 13, color: "var(--ink-muted)", fontStyle: "italic", marginBottom: 24, lineHeight: 1.6 }}>
+            We use this only to follow up if your answers suggest a fit. Your workbook download will start immediately.
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="wb-lead-grid">
+            <LeadField
+              label="First name"
+              required
+              value={lead.first_name}
+              onChange={(v) => handleLeadChange("first_name", v)}
+              error={leadErrors.first_name}
+              autoComplete="given-name"
+            />
+            <LeadField
+              label="Last name"
+              value={lead.last_name}
+              onChange={(v) => handleLeadChange("last_name", v)}
+              error={leadErrors.last_name}
+              autoComplete="family-name"
+            />
+            <LeadField
+              label="Email"
+              type="email"
+              required
+              value={lead.email}
+              onChange={(v) => handleLeadChange("email", v)}
+              error={leadErrors.email}
+              autoComplete="email"
+            />
+            <LeadField
+              label="Practice name (optional)"
+              value={lead.practice_name}
+              onChange={(v) => handleLeadChange("practice_name", v)}
+              error={leadErrors.practice_name}
+              autoComplete="organization"
+            />
+          </div>
+        </div>
+
         <div
           className="workbook-print-hide"
-          style={{ marginTop: 40, display: "flex", flexWrap: "wrap", gap: 12 }}
+          style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}
         >
           <a
             href="https://calendly.com/pasted/brand-architecture-call"
@@ -1638,6 +1695,7 @@ const BrandAssetWorkbook = () => {
           </a>
           <button
             onClick={handleExport}
+            disabled={submitting}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -1651,10 +1709,12 @@ const BrandAssetWorkbook = () => {
               fontWeight: 500,
               fontSize: 14,
               letterSpacing: "0.04em",
-              cursor: "pointer",
-              transition: "background 200ms ease, border-color 200ms ease",
+              cursor: submitting ? "wait" : "pointer",
+              opacity: submitting ? 0.6 : 1,
+              transition: "background 200ms ease, border-color 200ms ease, opacity 200ms ease",
             }}
             onMouseEnter={(e) => {
+              if (submitting) return;
               e.currentTarget.style.background = "var(--canvas-deep)";
               e.currentTarget.style.borderColor = "var(--accent)";
             }}
@@ -1663,7 +1723,7 @@ const BrandAssetWorkbook = () => {
               e.currentTarget.style.borderColor = "var(--ink)";
             }}
           >
-            Export My Workbook
+            {submitting ? "Exporting…" : "Export My Workbook"}
           </button>
         </div>
       </Section>
