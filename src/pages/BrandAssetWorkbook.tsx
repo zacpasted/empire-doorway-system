@@ -770,18 +770,70 @@ const BrandAssetWorkbook = () => {
     window.setTimeout(() => setSaveState("saved"), 800);
   };
 
-  const handleExport = () => {
+  const handleExport = async () => {
+    // Validate lead
+    const parsed = leadSchema.safeParse(lead);
+    if (!parsed.success) {
+      const errs: Partial<Record<keyof Lead, string>> = {};
+      parsed.error.issues.forEach((i) => {
+        const k = i.path[0] as keyof Lead;
+        if (!errs[k]) errs[k] = i.message;
+      });
+      setLeadErrors(errs);
+      // Scroll the lead form into view
+      document.getElementById("workbook-lead-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      toast({
+        title: "A couple of details first",
+        description: "Add your name and email to download the workbook.",
+      });
+      return;
+    }
+
+    setSubmitting(true);
+
+    // Submit to Lovable Cloud (non-blocking for the download UX)
+    try {
+      const { error } = await supabase.from("brand_workbook_submissions").insert({
+        first_name: parsed.data.first_name,
+        last_name: parsed.data.last_name || null,
+        email: parsed.data.email,
+        practice_name: parsed.data.practice_name || null,
+        answers: values,
+        source: "brand_asset_workbook",
+        page_url: typeof window !== "undefined" ? window.location.href : null,
+        user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+      });
+      if (error) {
+        console.error("Workbook submission failed", error);
+        toast({
+          title: "We couldn't save your submission",
+          description: "Your download will continue. Please try again later.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Workbook saved",
+          description: "We've got your details. Your download is starting.",
+        });
+      }
+    } catch (e) {
+      console.error("Workbook submission error", e);
+    }
+
+    // Always deliver the download
     const lines: string[] = [];
     lines.push("THE PASTED BRAND ASSET WORKBOOK");
     lines.push(`Exported: ${new Date().toLocaleString()}`);
+    lines.push(`Prepared for: ${parsed.data.first_name}${parsed.data.last_name ? " " + parsed.data.last_name : ""} · ${parsed.data.email}`);
+    if (parsed.data.practice_name) lines.push(`Practice: ${parsed.data.practice_name}`);
     lines.push("");
     lines.push("");
     FIELD_MANIFEST.forEach(({ key, label }) => {
-      const v = values[key];
+      const val = values[key];
       lines.push("----------------------------------------");
       lines.push(label);
       lines.push("----------------------------------------");
-      lines.push(v && v.trim() ? v : "[blank]");
+      lines.push(val && val.trim() ? val : "[blank]");
       lines.push("");
       lines.push("");
     });
@@ -794,6 +846,8 @@ const BrandAssetWorkbook = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    setSubmitting(false);
   };
 
   const v = useMemo(() => values, [values]);
