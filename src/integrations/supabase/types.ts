@@ -35,6 +35,48 @@ export type Database = {
         }
         Relationships: []
       }
+      brand_workbook_submissions: {
+        Row: {
+          answers: Json
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string | null
+          page_url: string | null
+          phone: string | null
+          practice_name: string | null
+          source: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          answers?: Json
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name?: string | null
+          page_url?: string | null
+          phone?: string | null
+          practice_name?: string | null
+          source?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string | null
+          page_url?: string | null
+          phone?: string | null
+          practice_name?: string | null
+          source?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       cta_analytics: {
         Row: {
           created_at: string
