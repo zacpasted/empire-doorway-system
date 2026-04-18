@@ -1507,6 +1507,61 @@ const AdminDashboard = () => {
         </DialogContent>
       </Dialog>
 
+      {/* Workbook Detail Dialog */}
+      <Dialog open={!!selectedWorkbook} onOpenChange={() => setSelectedWorkbook(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Brand Workbook Submission</DialogTitle>
+            <DialogDescription>
+              {selectedWorkbook && (
+                <>
+                  {selectedWorkbook.first_name} {selectedWorkbook.last_name || ''} •{' '}
+                  {format(new Date(selectedWorkbook.created_at), 'MMMM d, yyyy h:mm a')}
+                </>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          {selectedWorkbook && (
+            <div className="space-y-6 mt-4">
+              <div className="grid grid-cols-2 gap-4">
+                <DetailField label="First Name" value={selectedWorkbook.first_name} />
+                <DetailField label="Last Name" value={selectedWorkbook.last_name} />
+                <DetailField label="Email" value={selectedWorkbook.email} />
+                <DetailField label="Phone" value={selectedWorkbook.phone} />
+                <DetailField label="Practice" value={selectedWorkbook.practice_name} />
+                <DetailField label="Source" value={selectedWorkbook.source} />
+              </div>
+              <div className="border-t border-border pt-4">
+                <p className="text-sm font-medium text-foreground mb-3">
+                  Workbook Answers ({Object.values(selectedWorkbook.answers || {}).filter((v) => v && String(v).trim()).length} filled)
+                </p>
+                <div className="space-y-3">
+                  {Object.entries(selectedWorkbook.answers || {}).length === 0 ? (
+                    <p className="text-sm text-muted-foreground">No answers recorded.</p>
+                  ) : (
+                    Object.entries(selectedWorkbook.answers || {}).map(([key, value]) => (
+                      <div key={key} className="border-b border-border/50 pb-2 last:border-0">
+                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">
+                          {key.replace(/_/g, ' ')}
+                        </p>
+                        <p className="text-sm text-foreground whitespace-pre-wrap">
+                          {value && String(value).trim() ? String(value) : <span className="text-muted-foreground italic">— blank —</span>}
+                        </p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+              {selectedWorkbook.page_url && (
+                <div className="border-t border-border pt-4">
+                  <DetailField label="Page URL" value={selectedWorkbook.page_url} />
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
