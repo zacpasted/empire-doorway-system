@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import libraryCoverHero from "@/assets/library-cover-hero.jpg";
 
 /**
  * THE PASTED LIBRARY · COVER
@@ -47,9 +48,8 @@ const ensureFonts = () => {
   document.head.appendChild(link);
 };
 
-// Cover hero image — leave as null to render the bone placeholder state.
-// Swap to an imported asset to publish the cover.
-const coverImageSrc: string | null = null;
+// Cover hero image — swap this import to replace the cover photo.
+const coverImageSrc: string | null = libraryCoverHero;
 
 const LibraryCover = () => {
   const [imgLoaded, setImgLoaded] = useState(false);
