@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
 import { z } from "zod";
 import { toPng } from "html-to-image";
-import { supabase } from "@/integrations/supabase/client";
+import { supedTo: supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+import workbookCoverPortrait from "@/assets/workbook-cover-portrait.jpg";
+import workbookChapterPositioning from "@/assets/workbook-chapter-positioning.jpg";
+import workbookChapterSystem from "@/assets/workbook-chapter-system.jpg";
 
 const INSIDER_KEY = "pasted_insider_email";
 type InsiderRecord = { email: string; submitted_at: string };
