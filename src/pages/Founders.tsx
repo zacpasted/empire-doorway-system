@@ -146,8 +146,8 @@ const Founders = () => {
           .founders-deck { margin-bottom: 48px; }
           .founders-rule { margin-bottom: 40px; }
           .founders-grid { grid-template-columns: 1fr; gap: 48px; }
-          .founder-frame { padding: 12px; }
-          .founder-frame::before { inset: 6px; }
+          .founder-frame { padding: 0; }
+          .founder-frame::before { content: none; }
           .founders-coda { margin-top: 64px; padding-top: 36px; }
         }
       `}</style>
