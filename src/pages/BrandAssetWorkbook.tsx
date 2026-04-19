@@ -1846,41 +1846,37 @@ const BrandAssetWorkbook = () => {
 
         {/* PART IV */}
         <Section id="signal" masthead="§ IV · SIGNAL" ornament={<OrnBeacon />}>
+          <StatusBar active={4} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART IV</div>
           <h2 className="serif"><em>Signal.</em></h2>
-          <p className="lead" style={{ marginTop: 48 }}>Signal is content. But content guided by positioning — not content for its own sake.</p>
-          <div className="reading">
-            <p>Most dentists treat content like a chore. They post happy Mondays. Random before-and-afters. Generic dental tips. This is noise. It does not reinforce positioning, does not carry point of view, does not deepen experience.</p>
-            <p>Strong signal does the opposite. It says the same thing the positioning says, in a different format, every time. That consistency is what creates pull.</p>
-          </div>
+          <p className="lead" style={{ marginTop: 48 }}>Content guided by positioning. Not content for its own sake.</p>
 
-          <div className="pillar-grid cols-2" style={{ marginTop: 48 }}>
-            <div className="pillar-cell">
-              <div className="numeral" style={{ marginBottom: 12, color: "var(--ink-quiet)" }}>WEAK SIGNAL</div>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Random before/after</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>“Happy Monday”</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Dental tips anyone could post</p>
-            </div>
-            <div className="pillar-cell">
-              <div className="numeral" style={{ marginBottom: 12, color: "var(--brass)" }}>STRONG SIGNAL</div>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Philosophy pieces</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Patient stories</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Lifestyle transformation</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Authority commentary on your category</p>
-            </div>
-          </div>
+          <BeforeAfter
+            beforeLabel="Weak signal"
+            afterLabel="Strong signal"
+            before={[
+              "Random before/after",
+              "“Happy Monday”",
+              "Generic dental tips",
+              "Trend-chasing posts",
+            ]}
+            after={[
+              "Philosophy pieces",
+              "Patient stories",
+              "Lifestyle transformation",
+              "Authority commentary on your category",
+            ]}
+          />
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Four Quadrants</h3>
-          <div className="reading">
-            <p>At PASTED, signal is organized around four categories. Every piece of content maps to one. Together they cover the full psychology of an in-market buyer.</p>
-          </div>
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Four Quadrants of Signal</h3>
+          <p style={{ maxWidth: 620 }}>Every piece maps to one. Together they cover the full psychology of an in-market buyer.</p>
 
           <div className="pillar-grid cols-2">
             {[
-              { t: "01 · Questions", b: "What patients ask you directly. Surface-level. High-volume, broad appeal, educational." },
-              { t: "02 · Questions from Questions", b: "Follow-ups patients only ask after the first answer. Deeper. More specific." },
-              { t: "03 · Objections", b: "Reasons patients almost don't book. Price, fear, time, past experience. Address the objection before it becomes a silent no." },
-              { t: "04 · Expectations", b: "What the experience will actually be like. Reduces anxiety, raises perceived value, pre-sells the close." },
+              { t: "01 · Questions", b: "What patients ask you directly. High-volume, broad, educational." },
+              { t: "02 · Questions from Questions", b: "Follow-ups patients only ask after the first answer." },
+              { t: "03 · Objections", b: "Address the silent no before it forms. Price, fear, time, past experience." },
+              { t: "04 · Expectations", b: "What the experience will feel like. Pre-sells the close." },
             ].map((p) => (
               <div key={p.t} className="pillar-cell">
                 <div className="pillar-title">{p.t}</div>
@@ -1889,12 +1885,11 @@ const BrandAssetWorkbook = () => {
             ))}
           </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Posting Filter</h3>
-          <div className="reading">
-            <p>Before you post anything, ask: <em>Does this reinforce what we're known for?</em> If not, don't post.</p>
-          </div>
+          <Outcome label="The Posting Filter">
+            Before posting anything, ask: <em>Does this reinforce what we're known for?</em> If not, don't post.
+          </Outcome>
 
-          <WorkbookBlock num="✦" fieldKey="quadrants" question="Write one content idea in each of the four quadrants." hint="Specific enough to film tomorrow. Every idea must pass the posting filter." placeholder={"Questions:\nQuestions from Questions:\nObjections:\nExpectations:"} minHeight={180} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="quadrants" question="Write one content idea in each of the four quadrants." hint="Specific enough to film tomorrow." placeholder={"Questions:\nQuestions from Questions:\nObjections:\nExpectations:"} minHeight={180} values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
