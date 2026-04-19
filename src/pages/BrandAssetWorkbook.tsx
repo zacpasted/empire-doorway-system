@@ -2409,6 +2409,9 @@ const BrandDoctrine = ({ values, lead }: { values: Values; lead: Lead }) => {
     <div className="doctrine-wrap">
       <div className="doctrine-eyebrow">Single-page summary · suitable for printing</div>
       <article className="doctrine-page" aria-label="Your Brand Doctrine">
+        <div className="doctrine-backdrop" aria-hidden="true">
+          <img src={workbookDoctrineBackdrop} alt="" loading="lazy" decoding="async" />
+        </div>
         <span className="doctrine-corner tl" />
         <span className="doctrine-corner tr" />
         <span className="doctrine-corner bl" />
@@ -3355,7 +3358,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · FOUNDATION */}
-        <ChapterCard roman="—" name="Foundation" tagline="Before architecture, excavation." />
+        <ChapterCard
+          roman="—"
+          name="Foundation"
+          tagline="Before architecture, excavation."
+          portrait={workbookChapterFoundation}
+          portraitAlt="Editorial study — two figures on the salt flats, before the work."
+        />
 
         {/* FOUNDATION · IKIGAI */}
         <Section id="foundation" masthead="§ FOUNDATION · BEFORE THE FIVE PARTS" ornament={<OrnFourCircles />}>
@@ -3527,7 +3536,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · II */}
-        <ChapterCard roman="II" name="Point of View" tagline="Becoming believed." />
+        <ChapterCard
+          roman="II"
+          name="Point of View"
+          tagline="Becoming believed."
+          portrait={workbookChapterPov}
+          portraitAlt="Editorial study — the founder, considering the room."
+        />
 
         {/* PART II */}
         <Section id="pov" masthead="§ II · POINT OF VIEW" ornament={<OrnCompassVariant />}>
@@ -3574,7 +3589,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · III */}
-        <ChapterCard roman="III" name="Experience" tagline="Becoming felt." />
+        <ChapterCard
+          roman="III"
+          name="Experience"
+          tagline="Becoming felt."
+          portrait={workbookChapterExperience}
+          portraitAlt="Editorial study — gesture, attention, presence."
+        />
 
         {/* PART III */}
         <Section id="experience" masthead="§ III · EXPERIENCE" ornament={<OrnThreeRings />}>
@@ -3629,7 +3650,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · IV */}
-        <ChapterCard roman="IV" name="Signal" tagline="Becoming seen." />
+        <ChapterCard
+          roman="IV"
+          name="Signal"
+          tagline="Becoming seen."
+          portrait={workbookChapterSignal}
+          portraitAlt="Editorial study — the work, taken to the street."
+        />
 
         {/* PART IV */}
         <Section id="signal" masthead="§ IV · SIGNAL" ornament={<OrnBeacon />}>
