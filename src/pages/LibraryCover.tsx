@@ -5,8 +5,11 @@ import libraryCoverHero from "@/assets/library-cover-hero.jpg";
  * THE PASTED LIBRARY · COVER
  * Volume I · Dispatch One — frontispiece for "The Private Doctrine on Brand."
  *
+ * Canonical home: /library/doctrine (the cover and document live as one piece).
+ * /library/cover and /library/vol-i are kept as redirect aliases in App.tsx.
+ *
  * Two render modes:
- *  - standalone: full-viewport fixed cover (used at /library/cover)
+ *  - standalone: full-viewport fixed cover (kept for design/QA reference; not routed)
  *  - embedded:   relative-position, 100svh tall, sits in normal scroll flow
  *                (used as the frontispiece of /library/doctrine)
  *
