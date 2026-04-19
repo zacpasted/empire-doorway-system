@@ -476,11 +476,211 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root { background: white !important; color: black !important; font-size: 11pt; }
   .workbook-root .grain, .workbook-root .topbar, .workbook-root .progress,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
-  .workbook-root .lead-gate { display: none !important; }
+  .workbook-root .lead-gate,
+  .workbook-root .insider-card, .workbook-root .insider-links { display: none !important; }
   .workbook-root .wb-textarea, .workbook-root .wb-input { border: 1px solid #999; }
   .workbook-root .chapter-card { page-break-after: always; min-height: auto; padding: 80pt 0; }
+  .workbook-root .brand-brief-card { page-break-before: always; }
+  .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
 }
+
+/* ---------- Brand Brief Card ---------- */
+.workbook-root .brand-brief-card {
+  margin: 64px auto;
+  background: var(--bone-deep);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 48px;
+  max-width: 720px;
+}
+@media (max-width: 720px) {
+  .workbook-root .brand-brief-card { padding: 32px; }
+}
+.workbook-root .bb-header-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-whisper);
+  text-align: center;
+}
+.workbook-root .bb-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: 32px; color: var(--ink); text-align: center;
+  margin: 32px 0 16px 0; line-height: 1.25;
+}
+.workbook-root .bb-prepared {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
+  text-align: center;
+}
+.workbook-root .bb-rule {
+  width: 60px; height: 1px; background: var(--brass); margin: 40px auto;
+}
+.workbook-root .bb-section {
+  border-top: 1px solid var(--rule-ghost);
+  padding: 32px 0;
+}
+.workbook-root .bb-section:first-of-type { border-top: none; }
+.workbook-root .bb-sublabel {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  display: block; margin-bottom: 4px;
+}
+.workbook-root .bb-sublabel-rule {
+  width: 16px; height: 1px; background: var(--brass); margin-bottom: 20px;
+}
+.workbook-root .bb-body {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 18px;
+  line-height: 1.55; color: var(--ink); max-width: 540px; margin: 0;
+  white-space: pre-wrap;
+}
+.workbook-root .bb-empty {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 18px; line-height: 1.55; color: var(--ink-whisper); margin: 0;
+}
+.workbook-root .bb-sub {
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px;
+  color: var(--ink-quiet); font-style: italic;
+}
+.workbook-root .bb-list { margin: 8px 0 0 0; padding-left: 20px; }
+.workbook-root .bb-list li {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  line-height: 1.55; color: var(--ink); margin: 4px 0;
+}
+.workbook-root .bb-block-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-quiet);
+  margin: 20px 0 6px 0;
+}
+.workbook-root .bb-block-label:first-child { margin-top: 0; }
+.workbook-root .bb-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  margin-top: 8px;
+}
+@media (max-width: 720px) {
+  .workbook-root .bb-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+.workbook-root .bb-grid-cell-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  margin-bottom: 12px;
+}
+.workbook-root .bb-footer-rule {
+  width: 60px; height: 1px; background: var(--brass); margin: 48px auto 32px;
+}
+.workbook-root .bb-footer-tag {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 14px; color: var(--ink-quiet); text-align: center; margin: 0 0 16px 0;
+}
+.workbook-root .bb-footer-meta {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-whisper);
+  text-align: center;
+}
+
+/* ---------- Insider Signup ---------- */
+.workbook-root .insider-card {
+  margin: 64px auto 0;
+  max-width: 680px;
+  background: var(--bone-deep);
+  border: 1px solid var(--brass-line);
+  border-radius: 2px;
+  padding: 56px;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .workbook-root .insider-card { padding: 32px; }
+}
+.workbook-root .insider-toplabel {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+}
+.workbook-root .insider-rule {
+  width: 40px; height: 1px; background: var(--brass); margin: 16px auto 40px;
+}
+.workbook-root .insider-headline {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 32px;
+  color: var(--ink); margin: 0 auto 48px; max-width: 440px; line-height: 1.25;
+}
+.workbook-root .insider-headline.success { font-size: 36px; margin-bottom: 32px; }
+.workbook-root .insider-form {
+  display: flex; gap: 12px; max-width: 520px; margin: 0 auto;
+}
+@media (max-width: 560px) {
+  .workbook-root .insider-form { flex-direction: column; gap: 16px; }
+}
+.workbook-root .insider-input {
+  flex: 1;
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 16px;
+  color: var(--ink); background: var(--bone);
+  border: 1px solid var(--rule); border-radius: 2px;
+  padding: 18px 20px;
+  transition: border-color 200ms ease;
+}
+.workbook-root .insider-input::placeholder { color: var(--ink-whisper); }
+.workbook-root .insider-input:focus {
+  border-color: var(--brass);
+  outline: 2px solid var(--brass); outline-offset: 2px;
+}
+.workbook-root .insider-submit {
+  background: var(--brass); color: var(--bone);
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+  letter-spacing: 0.06em;
+  padding: 18px 36px;
+  border: none; border-radius: 999px; cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+}
+.workbook-root .insider-submit:hover {
+  background: var(--brass-deep);
+  transform: translateY(-1px);
+}
+.workbook-root .insider-submit em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  margin-left: 4px;
+}
+.workbook-root .insider-error {
+  margin-top: 12px;
+  font-family: 'Inter', sans-serif; font-style: italic; font-size: 12px;
+  color: var(--oxblood);
+  text-align: center;
+}
+.workbook-root .insider-fineprint {
+  margin-top: 24px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+}
+.workbook-root .insider-success-body {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 18px; line-height: 1.55; color: var(--ink-body);
+  max-width: 480px; margin: 0 auto 40px;
+}
+.workbook-root .insider-success-meta {
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
+  font-style: italic; color: var(--ink-quiet);
+}
+.workbook-root .insider-links {
+  display: flex; gap: 40px; justify-content: center;
+  margin-top: 48px; flex-wrap: wrap;
+}
+@media (max-width: 560px) {
+  .workbook-root .insider-links { flex-direction: column; gap: 20px; align-items: center; }
+}
+.workbook-root .insider-link {
+  background: transparent; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px;
+  color: var(--ink-quiet);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 0 2px 0;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+.workbook-root .insider-link:hover {
+  color: var(--brass); border-bottom-color: var(--brass);
+}
+.workbook-root .insider-link em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  margin-left: 4px;
+}
+.workbook-root .insider-link[disabled] { opacity: 0.5; cursor: wait; }
 
 /* Lead gate overlay */
 .workbook-root .lead-gate {
@@ -770,6 +970,24 @@ const OrnArrow = () => (
     <line x1="6" y1="24" x2="38" y2="24" />
     <path d="M32 18 L 42 24 L 32 30" />
     <line x1="6" y1="20" x2="6" y2="28" />
+  </Ornament>
+);
+const OrnCertificate = () => (
+  <Ornament>
+    <rect x="8" y="10" width="32" height="28" />
+    <line x1="4" y1="22" x2="44" y2="22" />
+    <line x1="4" y1="26" x2="44" y2="26" />
+    <line x1="14" y1="32" x2="34" y2="32" opacity="0.6" />
+  </Ornament>
+);
+const OrnTicks = () => (
+  <Ornament>
+    <line x1="14" y1="10" x2="14" y2="20" />
+    <line x1="14" y1="22" x2="14" y2="32" opacity="0.7" />
+    <line x1="14" y1="34" x2="14" y2="40" opacity="0.4" />
+    <line x1="22" y1="14" x2="38" y2="14" />
+    <line x1="22" y1="26" x2="38" y2="26" opacity="0.7" />
+    <line x1="22" y1="36" x2="38" y2="36" opacity="0.4" />
   </Ornament>
 );
 
@@ -2118,36 +2336,130 @@ const BrandAssetWorkbook = () => {
 
         <Dots />
 
-        {/* CTA */}
-        <Section id="next" masthead="§ NEXT · WHEN YOU'RE READY" ornament={<OrnArrow />}>
-          <div className="numeral" style={{ marginBottom: 12 }}>NEXT</div>
-          <h2 className="serif">This is how the <em>becoming</em> begins. We build the rest together.</h2>
+        {/* BRAND BRIEF — chapter title card */}
+        <div className="chapter-card">
+          <div className="chapter-fleuron">✦</div>
+          <div style={{ fontFamily: "Cormorant Garamond, serif", fontWeight: 300, fontSize: 56, color: "var(--brass)", lineHeight: 1, marginBottom: 24 }}>—</div>
+          <div className="chapter-name">Your Brand Brief</div>
+          <div className="chapter-rule" />
+          <div className="chapter-tagline"><em>The becoming, on paper.</em></div>
+        </div>
+
+        {/* BRAND BRIEF — synthesized */}
+        <Section id="brief" masthead="§ BRIEF · THE BECOMING, ON PAPER" ornament={<OrnCertificate />}>
+          <h2 className="serif">Your <em>Brand Brief.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
-            PASTED works with a small number of aesthetic dental practices each year. We build the signal, produce the creative, run the campaigns, and architect the system — so the brand you have designed in this guide becomes the brand your market sees. It is the same five-part framework behind hundreds of millions in aesthetic demand.
+            Everything you just wrote, assembled into a single document. Screenshot it. Print it. Show it to your team next Monday. This is the living specification of your brand — the reference you return to every time a decision needs making and the answer is not obvious.
           </p>
           <div className="reading">
-            <p>If the guide surfaced something, and you would like to see what the full architecture looks like applied to your practice — book a Brand Architecture Call.</p>
+            <p style={{ color: "var(--ink-quiet)" }}>If a field is blank, it renders as <em>— to complete —</em>. You can return to any section above and fill it in; the Brief updates automatically.</p>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 48 }}>
+          <BrandBrief values={values} />
+
+          <p style={{ marginTop: 32, textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: 14, fontStyle: "italic", color: "var(--ink-quiet)", maxWidth: 520, marginLeft: "auto", marginRight: "auto" }}>
+            Your Brief is live. Return to any section above and it updates in real time.
+          </p>
+        </Section>
+
+        <Dots />
+
+        {/* 30-DAY ACTION PLAN */}
+        <Section id="action" masthead="§ ACTION · THE FIRST THIRTY DAYS" ornament={<OrnTicks />}>
+          <div className="numeral" style={{ marginBottom: 12 }}>ACTION</div>
+          <h2 className="serif">The <em>First Thirty Days.</em></h2>
+          <p className="lead" style={{ marginTop: 48 }}>
+            A Brief that sits in a folder is worth nothing. Here is the sequence we give every practice we work with for the first month after a brand reset. Nothing expensive. Nothing requiring an agency. Just discipline.
+          </p>
+          <div className="reading">
+            <p>Four weeks. Four moves. Each one small enough to start this week.</p>
+          </div>
+
+          <div style={{ marginTop: 48 }}>
+            <div className="framework-row">
+              <div className="framework-key">Week 01</div>
+              <div>
+                <p className="framework-text"><strong>Audit your gap.</strong></p>
+                <p className="framework-sub">Read the “Where your brand collapses” line in your Brief. Walk one of your current consults like a patient — from Instagram scroll to follow-up SMS. Document where the brand breaks. That is where Week Two begins.</p>
+              </div>
+            </div>
+            <div className="framework-row">
+              <div className="framework-key">Week 02</div>
+              <div>
+                <p className="framework-text"><strong>Fix the weakest touchpoint.</strong></p>
+                <p className="framework-sub">Pick the one place the brand collapsed hardest. Rewrite it. If it is the front desk greeting, retrain. If it is the follow-up message, redraft. If it is the consult opener, script it. One touchpoint. Made undeniable.</p>
+              </div>
+            </div>
+            <div className="framework-row">
+              <div className="framework-key">Week 03</div>
+              <div>
+                <p className="framework-text"><strong>Publish four pieces of signal.</strong></p>
+                <p className="framework-sub">One per quadrant (Questions, Questions from Questions, Objections, Expectations). Film or write them in a single four-hour block. Every piece must pass the Posting Filter: <em>Does this reinforce what we’re known for?</em> If not, don’t post.</p>
+              </div>
+            </div>
+            <div className="framework-row last">
+              <div className="framework-key">Week 04</div>
+              <div>
+                <p className="framework-text"><strong>Run your first Brand Review.</strong></p>
+                <p className="framework-sub">60 minutes. Re-read the Brief. Ask three questions: <em>What held up? What leaked? What is next month’s one move?</em> Write the answers in the margin of your Brief. You are now running a practice with a brand, not just a practice with marketing.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="callout">
+            <div className="callout-label">The Compounding Moment</div>
+            <p>Do this for three months and something specific happens. You stop reacting to what competitors post. You start recognizing your own brand in the wild — your voice in your ads, your frame in your photography, your position in the way a patient says your name. That is the becoming, mid-flight.</p>
+          </div>
+        </Section>
+
+        <Dots />
+
+        {/* INSIDER — sole CTA */}
+        <Section id="insider" masthead="§ NEXT · THE PASTED INSIDER" ornament={<OrnArrow />}>
+          <div className="numeral" style={{ marginBottom: 12 }}>NEXT</div>
+          <h2 className="serif">This is how the <em>becoming</em> compounds.</h2>
+          <p className="lead" style={{ marginTop: 48 }}>
+            You have the Brief. You have the plan. The last piece is the weekly signal that keeps the brand alive — which is what The Pasted Insider exists for.
+          </p>
+          <div className="reading">
+            <p>The Pasted Insider is our private broadcast for dentists serious about becoming undeniable. We send dispatches directly to a small list — no algorithm between us — roughly once a week, always short, always usable the same day.</p>
+            <p>It is where we publish the campaign angles, the pull-ready creative concepts, the category commentary, the in-the-wild teardowns, and the early chapters of every future volume in The PASTED Library before they reach anyone else.</p>
+            <p>It is how the practices we quietly admire stay quietly ahead.</p>
+          </div>
+
+          <div className="pillar-grid cols-2">
+            <div className="pillar-cell">
+              <h4 className="pillar-title">What you get</h4>
+              <p className="pillar-body">Weekly dispatches. Early access to future Library volumes. Campaign angles we don’t post publicly. Teardowns of what’s working right now in aesthetic dentistry. Zero pitch-mail.</p>
+            </div>
+            <div className="pillar-cell">
+              <h4 className="pillar-title">What it costs</h4>
+              <p className="pillar-body">Nothing. Your email. Your attention. Your willingness to apply what you read.</p>
+            </div>
+          </div>
+
+          <h3 className="serif" style={{ marginTop: 56, fontSize: 28 }}>Join the broadcast.</h3>
+          <div className="reading">
+            <p>Leave your best email. You will receive the first dispatch within 48 hours, along with a Library-edition PDF of everything you built today.</p>
+          </div>
+
+          <InsiderSignup insider={insider} onSubmit={handleInsiderSubmit} />
+
+          <div className="insider-links">
             <button
-              className="cta-pill"
-              onClick={() => handleCTA("bottom")}
-            >
-              Book a Brand Architecture Call →
-            </button>
-            <button
-              className="cta-secondary"
+              className="insider-link"
               onClick={handleExport}
               disabled={submitting}
             >
-              {submitting ? "Preparing…" : "Export My Guide"}
+              {submitting ? "Preparing…" : <>Download my Brief as a text file <em>→</em></>}
+            </button>
+            <button
+              className="insider-link"
+              onClick={() => window.print()}
+            >
+              Print my Brief <em>→</em>
             </button>
           </div>
-
-          <p style={{ marginTop: 32, fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", color: "var(--ink-quiet)", fontSize: 17 }}>
-            Vol. II · The Art of Building · MMXXVII
-          </p>
         </Section>
 
         {/* FOOTER */}
@@ -2172,7 +2484,15 @@ const BrandAssetWorkbook = () => {
           }}>
             PASTED · 2026
           </div>
+          <div style={{
+            marginTop: 24,
+            fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", fontWeight: 300,
+            fontSize: 12, color: "var(--ink-whisper)",
+          }}>
+            Vol. II · The Art of Building · MMXXVII
+          </div>
         </footer>
+
 
         {/* LEAD GATE — overlays everything until valid */}
         {!gateUnlocked && (
