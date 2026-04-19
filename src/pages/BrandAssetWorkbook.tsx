@@ -283,11 +283,117 @@ html.workbook-html { scroll-behavior: smooth; }
   color: var(--brass); white-space: nowrap; flex-shrink: 0; min-width: 48px;
   text-align: right;
 }
+/* Mobile dropdown (replaces 12-cell strip ≤720px) */
+.workbook-root .mini-strip-mobile { display: none; }
 @media (max-width: 720px) {
-  .workbook-root .mini-strip-inner { padding: 0 16px; height: 36px; gap: 10px; }
-  .workbook-root .mini-strip-label { display: none; }
-  .workbook-root .mini-strip-counter { font-size: 12px; }
+  .workbook-root .mini-strip { display: none; }
+  .workbook-root .mini-strip-mobile {
+    display: block;
+    position: sticky; top: 64px; z-index: 49;
+    background: rgba(237,231,219,0.92);
+    backdrop-filter: blur(16px) saturate(1.1);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
+    border-bottom: 1px solid var(--rule);
+  }
+  .workbook-root .mini-strip-mobile-trigger {
+    width: 100%; height: 40px; padding: 0 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: transparent; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .workbook-root .mini-strip-mobile-trigger:focus-visible {
+    outline: 2px solid var(--brass); outline-offset: -2px;
+  }
+  .workbook-root .mini-strip-mobile-left {
+    display: flex; align-items: baseline; gap: 8px; min-width: 0;
+  }
+  .workbook-root .mini-strip-mobile-eyebrow {
+    font-weight: 500; font-size: 9px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--ink-quiet); flex-shrink: 0;
+  }
+  .workbook-root .mini-strip-mobile-name {
+    font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 15px;
+    color: var(--ink); letter-spacing: -0.01em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .workbook-root .mini-strip-mobile-right {
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
+  .workbook-root .mini-strip-mobile-counter {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+    color: var(--brass);
+  }
+  .workbook-root .mini-strip-mobile-chev {
+    width: 10px; height: 10px;
+    border-right: 1px solid var(--ink-quiet);
+    border-bottom: 1px solid var(--ink-quiet);
+    transform: rotate(45deg) translate(-2px, -2px);
+  }
 }
+
+/* TOC sheet (mobile) */
+.workbook-root .toc-sheet-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(28,27,24,0.55);
+  animation: tocFade 200ms ease;
+}
+.workbook-root .toc-sheet {
+  position: fixed; inset-inline: 0; bottom: 0; z-index: 101;
+  background: var(--bone);
+  border-top: 1px solid var(--rule);
+  max-height: 85vh; display: flex; flex-direction: column;
+  animation: tocSlide 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes tocFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes tocSlide { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .workbook-root .toc-sheet-overlay,
+  .workbook-root .toc-sheet { animation: none; }
+}
+.workbook-root .toc-sheet-handle {
+  width: 36px; height: 3px; background: var(--rule);
+  border-radius: 2px; margin: 10px auto 4px;
+}
+.workbook-root .toc-sheet-header {
+  padding: 12px 24px 16px; border-bottom: 1px solid var(--rule-ghost);
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.workbook-root .toc-sheet-title {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
+}
+.workbook-root .toc-sheet-close {
+  background: none; border: none; padding: 4px 8px; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--brass);
+}
+.workbook-root .toc-sheet-list {
+  list-style: none; margin: 0; padding: 8px 0 32px;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+.workbook-root .toc-sheet-item {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--rule-ghost);
+  text-decoration: none; color: var(--ink);
+}
+.workbook-root .toc-sheet-item:last-child { border-bottom: none; }
+.workbook-root .toc-sheet-item-num {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.28em; color: var(--ink-whisper);
+  flex-shrink: 0; width: 28px;
+}
+.workbook-root .toc-sheet-item-name {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 19px;
+  letter-spacing: -0.01em; flex: 1;
+}
+.workbook-root .toc-sheet-item.done .toc-sheet-item-num { color: var(--brass); }
+.workbook-root .toc-sheet-item.active {
+  background: var(--bone-shadow);
+}
+.workbook-root .toc-sheet-item.active .toc-sheet-item-num { color: var(--brass); }
+.workbook-root .toc-sheet-item.active .toc-sheet-item-name { font-style: italic; }
 
 /* Anchor offset so jumps clear topbar + mini strip */
 .workbook-root .workbook-section,
@@ -1495,6 +1601,7 @@ const TableOfContents = () => (
 const MiniProgressStrip = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [sectionPct, setSectionPct] = useState(0);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   useEffect(() => {
     const els = TOC_ITEMS.map((i) => document.getElementById(i.id)).filter(
@@ -1503,8 +1610,7 @@ const MiniProgressStrip = () => {
     if (els.length === 0) return;
 
     const compute = () => {
-      // Active = the last section whose top has crossed the strip line.
-      const line = 140; // topbar (64) + strip (40) + small buffer
+      const line = 140;
       let idx = 0;
       for (let i = 0; i < els.length; i++) {
         const top = els[i].getBoundingClientRect().top;
@@ -1512,7 +1618,6 @@ const MiniProgressStrip = () => {
       }
       setActiveIdx(idx);
 
-      // Sub-progress: how far through the active section we've scrolled.
       const currTop = els[idx].getBoundingClientRect().top - line;
       const nextEl = els[idx + 1];
       const sectionLength = nextEl
@@ -1547,37 +1652,137 @@ const MiniProgressStrip = () => {
     };
   }, []);
 
+  // Lock body scroll while sheet is open + close on Escape
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSheetOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [sheetOpen]);
+
   const active = TOC_ITEMS[activeIdx];
+  const total = TOC_ITEMS.length;
+  const counter = `${String(activeIdx + 1).padStart(2, "0")} / ${total}`;
+
+  const handleJump = (id: string) => {
+    setSheetOpen(false);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   return (
-    <nav className="mini-strip" aria-label="Section progress">
-      <div className="mini-strip-inner">
-        <span className="mini-strip-label">{active?.name ?? "Cover"}</span>
-        <div className="mini-strip-track">
-          {TOC_ITEMS.map((item, i) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`mini-strip-cell${i === activeIdx ? " active" : i < activeIdx ? " done" : ""}`}
-              aria-label={`Jump to ${item.name}`}
-              aria-current={i === activeIdx ? "true" : undefined}
-            >
-              <span className="mini-strip-tooltip">{item.name}</span>
-              {i === activeIdx && (
-                <span
-                  className="mini-strip-fill"
-                  style={{ width: `${sectionPct}%` }}
-                  aria-hidden="true"
-                />
-              )}
-            </a>
-          ))}
+    <>
+      {/* Desktop strip */}
+      <nav className="mini-strip" aria-label="Section progress">
+        <div className="mini-strip-inner">
+          <span className="mini-strip-label">{active?.name ?? "Cover"}</span>
+          <div className="mini-strip-track">
+            {TOC_ITEMS.map((item, i) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`mini-strip-cell${i === activeIdx ? " active" : i < activeIdx ? " done" : ""}`}
+                aria-label={`Jump to ${item.name}`}
+                aria-current={i === activeIdx ? "true" : undefined}
+              >
+                <span className="mini-strip-tooltip">{item.name}</span>
+                {i === activeIdx && (
+                  <span
+                    className="mini-strip-fill"
+                    style={{ width: `${sectionPct}%` }}
+                    aria-hidden="true"
+                  />
+                )}
+              </a>
+            ))}
+          </div>
+          <span className="mini-strip-counter">{counter}</span>
         </div>
-        <span className="mini-strip-counter">
-          {String(activeIdx + 1).padStart(2, "0")} / {TOC_ITEMS.length}
-        </span>
+      </nav>
+
+      {/* Mobile dropdown trigger */}
+      <div className="mini-strip-mobile" aria-label="Section navigation">
+        <button
+          type="button"
+          className="mini-strip-mobile-trigger"
+          onClick={() => setSheetOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={sheetOpen}
+          aria-label={`Current section: ${active?.name ?? "Cover"}. Tap to open table of contents.`}
+        >
+          <span className="mini-strip-mobile-left">
+            <span className="mini-strip-mobile-eyebrow">§</span>
+            <span className="mini-strip-mobile-name">{active?.name ?? "Cover"}</span>
+          </span>
+          <span className="mini-strip-mobile-right">
+            <span className="mini-strip-mobile-counter">{counter}</span>
+            <span className="mini-strip-mobile-chev" aria-hidden="true" />
+          </span>
+        </button>
       </div>
-    </nav>
+
+      {/* Mobile TOC sheet */}
+      {sheetOpen && (
+        <>
+          <div
+            className="toc-sheet-overlay"
+            onClick={() => setSheetOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="toc-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Table of contents"
+          >
+            <div className="toc-sheet-handle" aria-hidden="true" />
+            <div className="toc-sheet-header">
+              <span className="toc-sheet-title">Contents · {counter}</span>
+              <button
+                type="button"
+                className="toc-sheet-close"
+                onClick={() => setSheetOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+            <ul className="toc-sheet-list">
+              {TOC_ITEMS.map((item, i) => {
+                const cls =
+                  i === activeIdx ? "active" : i < activeIdx ? "done" : "";
+                return (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className={`toc-sheet-item ${cls}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleJump(item.id);
+                      }}
+                      aria-current={i === activeIdx ? "true" : undefined}
+                    >
+                      <span className="toc-sheet-item-num">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="toc-sheet-item-name">{item.name}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
