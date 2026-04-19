@@ -1601,6 +1601,7 @@ const TableOfContents = () => (
 const MiniProgressStrip = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [sectionPct, setSectionPct] = useState(0);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   useEffect(() => {
     const els = TOC_ITEMS.map((i) => document.getElementById(i.id)).filter(
@@ -1609,8 +1610,7 @@ const MiniProgressStrip = () => {
     if (els.length === 0) return;
 
     const compute = () => {
-      // Active = the last section whose top has crossed the strip line.
-      const line = 140; // topbar (64) + strip (40) + small buffer
+      const line = 140;
       let idx = 0;
       for (let i = 0; i < els.length; i++) {
         const top = els[i].getBoundingClientRect().top;
@@ -1618,7 +1618,6 @@ const MiniProgressStrip = () => {
       }
       setActiveIdx(idx);
 
-      // Sub-progress: how far through the active section we've scrolled.
       const currTop = els[idx].getBoundingClientRect().top - line;
       const nextEl = els[idx + 1];
       const sectionLength = nextEl
@@ -1653,37 +1652,137 @@ const MiniProgressStrip = () => {
     };
   }, []);
 
+  // Lock body scroll while sheet is open + close on Escape
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSheetOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [sheetOpen]);
+
   const active = TOC_ITEMS[activeIdx];
+  const total = TOC_ITEMS.length;
+  const counter = `${String(activeIdx + 1).padStart(2, "0")} / ${total}`;
+
+  const handleJump = (id: string) => {
+    setSheetOpen(false);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   return (
-    <nav className="mini-strip" aria-label="Section progress">
-      <div className="mini-strip-inner">
-        <span className="mini-strip-label">{active?.name ?? "Cover"}</span>
-        <div className="mini-strip-track">
-          {TOC_ITEMS.map((item, i) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`mini-strip-cell${i === activeIdx ? " active" : i < activeIdx ? " done" : ""}`}
-              aria-label={`Jump to ${item.name}`}
-              aria-current={i === activeIdx ? "true" : undefined}
-            >
-              <span className="mini-strip-tooltip">{item.name}</span>
-              {i === activeIdx && (
-                <span
-                  className="mini-strip-fill"
-                  style={{ width: `${sectionPct}%` }}
-                  aria-hidden="true"
-                />
-              )}
-            </a>
-          ))}
+    <>
+      {/* Desktop strip */}
+      <nav className="mini-strip" aria-label="Section progress">
+        <div className="mini-strip-inner">
+          <span className="mini-strip-label">{active?.name ?? "Cover"}</span>
+          <div className="mini-strip-track">
+            {TOC_ITEMS.map((item, i) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`mini-strip-cell${i === activeIdx ? " active" : i < activeIdx ? " done" : ""}`}
+                aria-label={`Jump to ${item.name}`}
+                aria-current={i === activeIdx ? "true" : undefined}
+              >
+                <span className="mini-strip-tooltip">{item.name}</span>
+                {i === activeIdx && (
+                  <span
+                    className="mini-strip-fill"
+                    style={{ width: `${sectionPct}%` }}
+                    aria-hidden="true"
+                  />
+                )}
+              </a>
+            ))}
+          </div>
+          <span className="mini-strip-counter">{counter}</span>
         </div>
-        <span className="mini-strip-counter">
-          {String(activeIdx + 1).padStart(2, "0")} / {TOC_ITEMS.length}
-        </span>
+      </nav>
+
+      {/* Mobile dropdown trigger */}
+      <div className="mini-strip-mobile" aria-label="Section navigation">
+        <button
+          type="button"
+          className="mini-strip-mobile-trigger"
+          onClick={() => setSheetOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={sheetOpen}
+          aria-label={`Current section: ${active?.name ?? "Cover"}. Tap to open table of contents.`}
+        >
+          <span className="mini-strip-mobile-left">
+            <span className="mini-strip-mobile-eyebrow">§</span>
+            <span className="mini-strip-mobile-name">{active?.name ?? "Cover"}</span>
+          </span>
+          <span className="mini-strip-mobile-right">
+            <span className="mini-strip-mobile-counter">{counter}</span>
+            <span className="mini-strip-mobile-chev" aria-hidden="true" />
+          </span>
+        </button>
       </div>
-    </nav>
+
+      {/* Mobile TOC sheet */}
+      {sheetOpen && (
+        <>
+          <div
+            className="toc-sheet-overlay"
+            onClick={() => setSheetOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="toc-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Table of contents"
+          >
+            <div className="toc-sheet-handle" aria-hidden="true" />
+            <div className="toc-sheet-header">
+              <span className="toc-sheet-title">Contents · {counter}</span>
+              <button
+                type="button"
+                className="toc-sheet-close"
+                onClick={() => setSheetOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+            <ul className="toc-sheet-list">
+              {TOC_ITEMS.map((item, i) => {
+                const cls =
+                  i === activeIdx ? "active" : i < activeIdx ? "done" : "";
+                return (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className={`toc-sheet-item ${cls}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleJump(item.id);
+                      }}
+                      aria-current={i === activeIdx ? "true" : undefined}
+                    >
+                      <span className="toc-sheet-item-num">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="toc-sheet-item-name">{item.name}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
