@@ -607,6 +607,22 @@ const DoctrineOnBrand = () => {
       {/* ========== LIBRARY CARD CTA ========== */}
       <section className="library-card" aria-labelledby="library-card-heading">
         <div className="library-card-rule" />
+
+        {/* Editorial Card: Continue to Workbook */}
+        <div className="workbook-card">
+          <div className="workbook-card-eyebrow">Volume I · Field Guide</div>
+          <h3 className="workbook-card-title">Continue to the <em>Workbook</em></h3>
+          <p className="workbook-card-lede">
+            The companion to this doctrine — ninety minutes of prompts to turn what you read into your own one-page Brand Brief.
+          </p>
+          <a className="workbook-card-cta" href="/yourbrand">
+            <span>Open the Workbook</span>
+            <span className="workbook-card-cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div className="library-card-rule" style={{ margin: '80px auto 56px' }} />
+
         <div className="library-card-eyebrow">The Pasted Library · Standing Subscription</div>
         <h2 id="library-card-heading" className="library-card-title">
           Hold a <em>Library Card.</em>
@@ -1011,6 +1027,76 @@ const styles = `
     font-family: 'Cormorant Garamond', serif;
     font-size: 13px;
     color: var(--ink-whisper);
+  }
+
+  /* Workbook Card (above Library Card) */
+  .workbook-card {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    border: 1px solid var(--rule);
+    background: var(--bone);
+    text-align: center;
+  }
+  .workbook-card-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 20px;
+  }
+  .workbook-card-title {
+    margin: 0 0 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.1;
+    color: var(--ink-deep);
+  }
+  .workbook-card-title em {
+    font-style: italic;
+    color: var(--brass);
+  }
+  .workbook-card-lede {
+    margin: 0 auto 32px;
+    max-width: 480px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .workbook-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 28px;
+    border: 1px solid var(--brass);
+    background: transparent;
+    color: var(--ink-deep);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 280ms ease, color 280ms ease, letter-spacing 280ms ease;
+  }
+  .workbook-card-cta:hover {
+    background: var(--brass);
+    color: #FAF6EC;
+    letter-spacing: 0.28em;
+  }
+  .workbook-card-cta-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    transition: transform 280ms ease;
+  }
+  .workbook-card-cta:hover .workbook-card-cta-arrow {
+    transform: translateX(4px);
   }
 
   /* Reduced motion */
