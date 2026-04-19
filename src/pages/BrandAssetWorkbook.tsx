@@ -3904,6 +3904,12 @@ const BrandAssetWorkbook = () => {
 
         <Dots />
 
+        {/* Closing editorial plate — atmospheric break before the final CTA */}
+        <figure className="closing-plate" aria-hidden="true">
+          <img src={workbookClosingPlate} alt="" loading="lazy" decoding="async" />
+          <figcaption className="closing-plate-meta">PASTED · FIELD STUDY · CODA</figcaption>
+        </figure>
+
         {/* INSIDER — sole CTA */}
         <Section id="insider" masthead="§ NEXT · THE PASTED INSIDER" ornament={<OrnArrow />}>
           <div className="numeral" style={{ marginBottom: 12 }}>NEXT</div>
