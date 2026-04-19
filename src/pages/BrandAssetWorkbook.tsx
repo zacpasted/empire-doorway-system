@@ -997,6 +997,17 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .doctrine-system-key { display: none; }
   .workbook-root .doctrine-values { grid-template-columns: repeat(2, 1fr); }
 }
+@media (max-width: 480px) {
+  /* Stack the three footer items into a centered column so 'TEST' and the
+     italic tagline don't collide at narrow widths. */
+  .workbook-root .doctrine-foot {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .workbook-root .doctrine-foot em { order: -1; }
+}
 
 /* ---------- Brand Brief Card ---------- */
 .workbook-root .brand-brief-card {
