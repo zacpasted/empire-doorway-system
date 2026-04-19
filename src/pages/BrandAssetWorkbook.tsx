@@ -143,10 +143,12 @@ const WORKBOOK_CSS = `
   font-size: 17px;
   line-height: 1.8;
   letter-spacing: 0;
-  min-height: 100vh;
-  position: relative;
+  /* NOTE: do NOT set min-height/overflow/transform here — those silently
+     break position: sticky on the topbar + mini-strip in mobile WebKit. */
   font-feature-settings: "liga","dlig","kern","tnum";
 }
+/* Ensure no ancestor clips the sticky scroll context on mobile. */
+html.workbook-html, html.workbook-html body { overflow-x: visible; }
 html.workbook-html { scroll-behavior: smooth; }
 
 /* Paper grain */
@@ -220,8 +222,28 @@ html.workbook-html { scroll-behavior: smooth; }
   max-width: 1200px; margin: 0 auto; height: 100%;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 56px;
+  gap: 12px; min-width: 0;
 }
-@media (max-width: 720px) { .workbook-root .topbar-inner { padding: 0 24px; } }
+.workbook-root .topbar-left,
+.workbook-root .topbar-right {
+  display: flex; align-items: center; min-width: 0;
+}
+.workbook-root .topbar-left { gap: 12px; flex-shrink: 1; min-width: 0; }
+.workbook-root .topbar-right { gap: 16px; flex-shrink: 0; }
+
+@media (max-width: 720px) {
+  .workbook-root .topbar { height: 56px; }
+  .workbook-root .topbar-inner { padding: 0 14px; gap: 8px; }
+  .workbook-root .topbar-left { gap: 8px; }
+  .workbook-root .topbar-right { gap: 10px; }
+  /* Hide divider, eyebrow, and "Saved" indicator on mobile —
+     wordmark + answered-pill + reset is the priority. */
+  .workbook-root .topbar-divider,
+  .workbook-root .topbar-eyebrow,
+  .workbook-root .topbar-saved { display: none; }
+  .workbook-root .topbar-wordmark { font-size: 18px !important; letter-spacing: 0.12em !important; }
+  .workbook-root .topbar-reset { font-size: 9px !important; letter-spacing: 0.18em !important; }
+}
 .workbook-root .progress {
   position: fixed; top: 0; left: 0; height: 1px; background: var(--brass);
   z-index: 60; transition: width 80ms linear;
@@ -290,7 +312,7 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .mini-strip { display: none; }
   .workbook-root .mini-strip-mobile {
     display: block;
-    position: sticky; top: 64px; z-index: 49;
+    position: sticky; top: 56px; z-index: 49;
     background: rgba(237,231,219,0.92);
     backdrop-filter: blur(16px) saturate(1.1);
     -webkit-backdrop-filter: blur(16px) saturate(1.1);
@@ -401,7 +423,7 @@ html.workbook-html { scroll-behavior: smooth; }
 .workbook-root section[id] { scroll-margin-top: 112px; }
 @media (max-width: 720px) {
   .workbook-root .workbook-section,
-  .workbook-root section[id] { scroll-margin-top: 104px; }
+  .workbook-root section[id] { scroll-margin-top: 96px; }
 }
 
 /* Completion counter pill (topbar) */
@@ -452,7 +474,7 @@ html.workbook-html { scroll-behavior: smooth; }
   animation: celebrateIn 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 @media (max-width: 720px) {
-  .workbook-root .celebrate-banner { top: 100px; }
+  .workbook-root .celebrate-banner { top: 96px; }
 }
 @keyframes celebrateIn {
   from { opacity: 0; transform: translateY(-8px); }
@@ -2877,16 +2899,16 @@ const BrandAssetWorkbook = () => {
         {/* TOP BAR */}
         <header className="topbar">
           <div className="topbar-inner">
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <span style={{ fontFamily: "Cormorant Garamond, serif", fontWeight: 500, fontSize: 22, letterSpacing: "0.14em", color: "var(--ink)" }}>
+            <div className="topbar-left">
+              <span className="topbar-wordmark" style={{ fontFamily: "Cormorant Garamond, serif", fontWeight: 500, fontSize: 22, letterSpacing: "0.14em", color: "var(--ink)" }}>
                 PASTED
               </span>
-              <span style={{ width: 1, height: 24, background: "var(--rule)" }} />
-              <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "var(--ink-quiet)" }}>
+              <span className="topbar-divider" style={{ width: 1, height: 24, background: "var(--rule)" }} />
+              <span className="topbar-eyebrow" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 10, letterSpacing: "0.32em", textTransform: "uppercase", color: "var(--ink-quiet)", whiteSpace: "nowrap" }}>
                 Library · Vol. I
               </span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+            <div className="topbar-right">
               {/* Completion counter */}
               <div
                 className={`completion-pill${isComplete ? " complete" : ""}`}
@@ -2898,7 +2920,7 @@ const BrandAssetWorkbook = () => {
                 <span className="completion-total">{totalCount}</span>
                 <span className="completion-label">{isComplete ? "complete" : "answered"}</span>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div className="topbar-saved" style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 5, height: 5, borderRadius: 999, background: saveState === "saving" ? "var(--ink-whisper)" : "var(--brass)", display: "inline-block" }} />
                 <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--ink-quiet)" }}>
                   {saveLabel}
@@ -2906,8 +2928,9 @@ const BrandAssetWorkbook = () => {
               </div>
               <button
                 onClick={handleReset}
+                className="topbar-reset"
                 style={{ background: "transparent", border: "none", color: "var(--ink-whisper)", cursor: "pointer",
-                  fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", padding: 0 }}
+                  fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", padding: 0, flexShrink: 0 }}
                 onMouseOver={(e) => (e.currentTarget.style.color = "var(--brass)")}
                 onMouseOut={(e) => (e.currentTarget.style.color = "var(--ink-whisper)")}
               >
