@@ -130,6 +130,9 @@ const FIELD_MANIFEST: FieldDef[] = [
 /* ---------- Scoped CSS ---------- */
 const WORKBOOK_CSS = `
 .workbook-root {
+  /* Clip horizontal overflow from full-bleed bands (100vw) so the
+     vertical scrollbar width never produces a horizontal scrollbar. */
+  overflow-x: clip;
   --bone:         #EDE7DB;
   --bone-deep:    #E5DDCC;
   --bone-shadow:  #DBD2BF;
