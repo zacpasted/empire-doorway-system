@@ -2084,6 +2084,9 @@ const BrandAssetWorkbook = () => {
           </div>
         </header>
 
+        {/* MINI SECTION PROGRESS STRIP */}
+        <MiniProgressStrip />
+
         {/* COVER */}
         <section style={{ position: "relative", minHeight: "100vh", padding: "0 clamp(28px, 8vw, 120px)", maxWidth: 1200, margin: "0 auto" }}>
           <VolumeMark />
