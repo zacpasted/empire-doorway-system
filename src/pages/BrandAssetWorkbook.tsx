@@ -639,7 +639,8 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .mini-strip,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
   .workbook-root .lead-gate,
-  .workbook-root .insider-card, .workbook-root .insider-links { display: none !important; }
+  .workbook-root .insider-card, .workbook-root .insider-links,
+  .workbook-root .celebrate-banner { display: none !important; }
   .workbook-root .wb-textarea, .workbook-root .wb-input { border: 1px solid #999; }
   .workbook-root .chapter-card { page-break-after: always; min-height: auto; padding: 80pt 0; }
   .workbook-root .brand-brief-card { page-break-before: always; }
