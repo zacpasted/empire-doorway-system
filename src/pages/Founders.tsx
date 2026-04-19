@@ -100,7 +100,7 @@ const Founders = () => {
           mask-composite: intersect;
         }
         .founder-caption {
-          margin-top: 28px; padding: 0 4px;
+          margin-top: 32px; padding: 0 4px;
           display: flex; flex-direction: column; gap: 6px;
           text-align: center;
         }
