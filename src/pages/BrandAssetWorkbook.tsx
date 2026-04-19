@@ -1791,30 +1791,39 @@ const BrandAssetWorkbook = () => {
 
         {/* PART III */}
         <Section id="experience" masthead="§ III · EXPERIENCE" ornament={<OrnThreeRings />}>
+          <StatusBar active={3} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART III</div>
           <h2 className="serif"><em>Experience.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
             Your brand is not what your Instagram says. It is what happens next.
           </p>
-          <div className="reading">
-            <p>A brand is your consult flow. Your office vibe. How your team speaks. Your follow-up. Your before-and-after photography. The smell of the space. The music in the waiting room. The way a treatment plan is delivered.</p>
-            <p>If your Instagram says “luxury” but your consult feels rushed — your brand collapses. If your ads promise bespoke and your follow-up is a templated SMS at 9am — your brand collapses.</p>
-            <p>Consistency builds credibility. Inconsistency is the fastest way to lose a $60k case.</p>
-          </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Experience Audit</h3>
-          <div className="reading">
-            <p>Walk your own practice like a patient. Listen to your own front desk call. Re-read your own follow-up sequence. Does the feeling hold from first scroll to final reveal?</p>
-          </div>
+          <BeforeAfter
+            beforeLabel="Brand collapses when…"
+            afterLabel="Brand holds when…"
+            before={[
+              "The ad promises bespoke. The follow-up is a 9am template.",
+              "The website says luxury. The consult feels rushed.",
+              "The photography is gallery. The waiting room is brochure.",
+            ]}
+            after={[
+              "Every touchpoint sounds like the same person.",
+              "Tone, palette, and pace are defended on every channel.",
+              "What you let through matches what you promised.",
+            ]}
+          />
+
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Six-Touchpoint Audit</h3>
+          <p style={{ maxWidth: 620 }}>Walk your own practice like a patient. Score each.</p>
 
           <div className="pillar-grid cols-3">
             {[
-              { t: "Website tone", b: "Does it sound like you, or like your competitor?" },
-              { t: "Front desk tone", b: "Is it the same person the website promised?" },
-              { t: "Consult structure", b: "Does it feel bespoke or processed?" },
-              { t: "Follow-up messaging", b: "Does it carry the brand, or break it?" },
-              { t: "Photography", b: "Does it belong in a gallery, or a brochure?" },
-              { t: "Space", b: "Does the environment match the tier of work?" },
+              { t: "Website tone", b: "Sounds like you, or your competitor?" },
+              { t: "Front desk", b: "Same person the website promised?" },
+              { t: "Consult", b: "Bespoke or processed?" },
+              { t: "Follow-up", b: "Carries the brand or breaks it?" },
+              { t: "Photography", b: "Gallery, or brochure?" },
+              { t: "Space", b: "Matches the tier of work?" },
             ].map((p) => (
               <div key={p.t} className="pillar-cell">
                 <div className="pillar-title">{p.t}</div>
@@ -1823,10 +1832,9 @@ const BrandAssetWorkbook = () => {
             ))}
           </div>
 
-          <div className="callout">
-            <div className="callout-label">Tonal Discipline</div>
-            <p>Pick one palette, one typography system, one lighting convention, one tone of voice — and defend them from every well-meaning intrusion. A brand's experience is the sum of what you <em>don't</em> let through.</p>
-          </div>
+          <Outcome label="The cost of inconsistency">
+            One break in the chain is the fastest way to lose a $60k case.
+          </Outcome>
 
           <WorkbookBlock num="✦" fieldKey="experience_gap" question="Where does your brand currently collapse?" hint="The gap between what you promise publicly and what a patient experiences privately. Be brutal." placeholder="The ad says ___. The consult feels ___." minHeight={120} values={values} onChange={handleChange} />
         </Section>
