@@ -435,7 +435,7 @@ html.workbook-html { scroll-behavior: smooth; }
 .workbook-root section[id] { scroll-margin-top: 112px; }
 @media (max-width: 720px) {
   .workbook-root .workbook-section,
-  .workbook-root section[id] { scroll-margin-top: 96px; }
+  .workbook-root section[id] { scroll-margin-top: 64px; }
 }
 
 /* Completion counter pill (topbar) */
