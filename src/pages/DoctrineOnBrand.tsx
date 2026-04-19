@@ -911,7 +911,7 @@ const styles = `
 
   /* Colophon */
   .colophon {
-    margin: 200px auto 96px; max-width: 720px; text-align: center;
+    margin: 120px auto 96px; max-width: 720px; text-align: center;
     padding: 0 28px;
   }
   .colophon-rule { width: 120px; height: 1px; background: var(--brass); margin: 0 auto 64px; }
