@@ -677,9 +677,6 @@ const Library = () => {
               <WordReveal delay={1.05}>A private canon on</WordReveal>
             </span>
             <span className="lib-hero-line">
-              <WordReveal delay={1.4}>
-                {""}
-              </WordReveal>
               <em className="lib-hero-em">
                 <WordReveal delay={1.4}>becoming</WordReveal>
               </em>{" "}
