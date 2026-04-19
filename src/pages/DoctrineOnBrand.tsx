@@ -553,8 +553,8 @@ const DoctrineOnBrand = () => {
               Interactive field guide. Volume I of The PASTED Library. 90-minute workbook.
               Free.
             </p>
-            <a href="/library/vol-i" className="path-link">
-              Read at pasted.studio/library/vol-i →
+            <a href="/library/doctrine" className="path-link">
+              Read at pasted.studio/library/doctrine →
             </a>
           </div>
           <div className="path-col">
