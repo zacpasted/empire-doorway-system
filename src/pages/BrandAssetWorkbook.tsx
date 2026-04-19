@@ -1864,6 +1864,101 @@ const BrandBrief = ({ values }: { values: Values }) => {
 };
 
 /* ============================================================
+ * Brand Doctrine — one-page printable summary
+ * Pulls the 4 Marketing System lines, POV, and 5 values.
+ * ============================================================ */
+const BrandDoctrine = ({ values, lead }: { values: Values; lead: Lead }) => {
+  const visionWords = (values.vision || "").trim().split(/\s+/).filter(Boolean).slice(0, 6).join(" ");
+  const briefTitle = visionWords || "Your Practice";
+  const today = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+
+  const systemLines: Array<{ key: string; label: string; field: string }> = [
+    { key: "01", label: "Patient", field: "ms_patient" },
+    { key: "02", label: "Differentiators", field: "ms_differentiators" },
+    { key: "03", label: "Experience", field: "ms_experience" },
+    { key: "04", label: "Promise", field: "ms_promise" },
+  ];
+
+  const oneLine = (raw?: string) => {
+    const t = (raw || "").trim();
+    if (!t) return "";
+    return t.split("\n").map((s) => s.trim()).filter(Boolean).join(" · ");
+  };
+
+  const pov = (values.pov_statement || "").trim();
+  const valueItems = [1, 2, 3, 4, 5].map((i) => (values[`value_${i}`] || "").trim());
+
+  return (
+    <div className="doctrine-wrap">
+      <div className="doctrine-eyebrow">Single-page summary · suitable for printing</div>
+      <article className="doctrine-page" aria-label="Your Brand Doctrine">
+        <span className="doctrine-corner tl" />
+        <span className="doctrine-corner tr" />
+        <span className="doctrine-corner bl" />
+        <span className="doctrine-corner br" />
+
+        <header className="doctrine-head">
+          <div className="doctrine-mark">PASTED · Library · Vol. I</div>
+          <div className="doctrine-rule" />
+          <h3 className="doctrine-title">Your Brand <em>Doctrine</em></h3>
+          <div className="doctrine-subtitle">{briefTitle} · {today}</div>
+        </header>
+
+        <div className="doctrine-body">
+          <section className="doctrine-block">
+            <div className="doctrine-block-label">The Marketing System</div>
+            <ol className="doctrine-system">
+              {systemLines.map((line) => {
+                const text = oneLine(values[line.field]);
+                return (
+                  <li key={line.key} className="doctrine-system-line">
+                    <span className="doctrine-system-num">{line.key}</span>
+                    <span className="doctrine-system-key">{line.label}</span>
+                    <span className={`doctrine-system-text${text ? "" : " empty"}`}>
+                      {text || "— to complete —"}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+
+          <section className="doctrine-block">
+            <div className="doctrine-block-label">Point of View</div>
+            <blockquote className="doctrine-pov">
+              <span className="doctrine-pov-prefix">We believe</span>
+              <span className={`doctrine-pov-text${pov ? "" : " empty"}`}>
+                {pov || "— to complete —"}
+              </span>
+            </blockquote>
+          </section>
+
+          <section className="doctrine-block">
+            <div className="doctrine-block-label">Five Values · The Filters We Defend</div>
+            <ul className="doctrine-values">
+              {valueItems.map((v, i) => (
+                <li key={i} className="doctrine-value">
+                  <span className="doctrine-value-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`doctrine-value-text${v ? "" : " empty"}`}>
+                    {v || "—"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <footer className="doctrine-foot">
+          <span>{lead.practice_name?.trim() || (lead.first_name ? `${lead.first_name}${lead.last_name ? " " + lead.last_name : ""}` : "PASTED")}</span>
+          <em>Where Dentistry Becomes Iconic.</em>
+          <span>Vol. I · MMXXVI</span>
+        </footer>
+      </article>
+    </div>
+  );
+};
+
+/* ============================================================
  * Insider Signup
  * ============================================================ */
 const insiderEmailSchema = z.string().trim().email().max(255);
