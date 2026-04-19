@@ -3613,7 +3613,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · V */}
-        <ChapterCard roman="V" name="System" tagline="Becoming undeniable." />
+        <ChapterCard
+          roman="V"
+          name="System"
+          tagline="Becoming undeniable."
+          portrait={workbookChapterSystem}
+          portraitAlt="Editorial study — the work, in front of the room."
+        />
 
         {/* PART V */}
         <Section id="system" masthead="§ V · SYSTEM" ornament={<OrnChain />}>
