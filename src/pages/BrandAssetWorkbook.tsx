@@ -288,7 +288,106 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root section[id] { scroll-margin-top: 104px; }
 }
 
-/* Workbook field */
+/* Completion counter pill (topbar) */
+.workbook-root .completion-pill {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  transition: border-color 250ms ease, background 250ms ease;
+  white-space: nowrap;
+}
+.workbook-root .completion-pill .completion-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 16px; color: var(--brass); line-height: 1;
+}
+.workbook-root .completion-pill .completion-sep,
+.workbook-root .completion-pill .completion-total {
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 10px;
+  letter-spacing: 0.16em; color: var(--ink-quiet); line-height: 1;
+}
+.workbook-root .completion-pill .completion-sep { font-style: italic; }
+.workbook-root .completion-pill .completion-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-quiet);
+  margin-left: 4px;
+}
+.workbook-root .completion-pill.complete {
+  border-color: var(--brass); background: var(--brass-ghost);
+}
+.workbook-root .completion-pill.complete .completion-num,
+.workbook-root .completion-pill.complete .completion-total,
+.workbook-root .completion-pill.complete .completion-sep,
+.workbook-root .completion-pill.complete .completion-label { color: var(--brass); }
+
+@media (max-width: 720px) {
+  .workbook-root .completion-pill { padding: 4px 8px; gap: 4px; }
+  .workbook-root .completion-pill .completion-label { display: none; }
+  .workbook-root .completion-pill .completion-num { font-size: 14px; }
+}
+
+/* Celebration banner */
+.workbook-root .celebrate-banner {
+  position: sticky; top: 104px; z-index: 48;
+  background: var(--bone-deep);
+  border-bottom: 1px solid var(--brass-line);
+  border-top: 1px solid var(--brass-line);
+  animation: celebrateIn 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (max-width: 720px) {
+  .workbook-root .celebrate-banner { top: 100px; }
+}
+@keyframes celebrateIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.workbook-root .celebrate-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 14px 56px;
+  display: flex; align-items: center; gap: 20px;
+}
+@media (max-width: 720px) {
+  .workbook-root .celebrate-inner { padding: 12px 16px; gap: 12px; flex-wrap: wrap; }
+}
+.workbook-root .celebrate-mark {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--brass);
+  flex-shrink: 0;
+}
+.workbook-root .celebrate-text {
+  display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;
+}
+.workbook-root .celebrate-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 18px; color: var(--ink); line-height: 1.2;
+}
+.workbook-root .celebrate-sub {
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px;
+  color: var(--ink-quiet); line-height: 1.4;
+}
+.workbook-root .celebrate-actions {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.workbook-root .celebrate-cta {
+  background: transparent; border: 1px solid var(--brass-line);
+  color: var(--brass); padding: 8px 14px; border-radius: 2px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+.workbook-root .celebrate-cta:hover { background: var(--brass-ghost); border-color: var(--brass); }
+.workbook-root .celebrate-cta.primary {
+  background: var(--brass); color: var(--bone); border-color: var(--brass);
+}
+.workbook-root .celebrate-cta.primary:hover { background: var(--brass-deep); border-color: var(--brass-deep); }
+.workbook-root .celebrate-close {
+  background: transparent; border: none; color: var(--ink-quiet);
+  font-size: 22px; line-height: 1; cursor: pointer; padding: 0 4px;
+}
+.workbook-root .celebrate-close:hover { color: var(--ink); }
+@media (max-width: 720px) {
+  .workbook-root .celebrate-actions { width: 100%; justify-content: flex-end; }
+}
 .workbook-root .wb-card {
   position: relative;
   background: var(--bone-deep);
