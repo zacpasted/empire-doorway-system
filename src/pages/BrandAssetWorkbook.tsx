@@ -1536,36 +1536,35 @@ const BrandAssetWorkbook = () => {
         <Section id="premise" masthead="§ 00 · THE PREMISE" ornament={<OrnRuleDiamond />}>
           <div className="numeral" style={{ marginBottom: 12 }}>00 · THE PREMISE</div>
           <h2 className="serif">Your new office is not your <em>brand.</em></h2>
-          <div className="reading" style={{ marginTop: 48 }}>
-            <p>And dentistry is full of people selling “brand” who cannot define it without pointing to furniture, TVs, equipment, a logo, or a renovation package.</p>
-            <p>That should concern you.</p>
-            <p>Because some of the highest-performing practices we know — including offices doing eight figures under one roof — are not the fanciest or the prettiest.</p>
-            <p>They just have a real brand.</p>
-          </div>
+          <p className="lead" style={{ marginTop: 48 }}>
+            The highest-performing practices we know are rarely the prettiest. They have something else: a real brand.
+          </p>
 
-          <div className="definition">
-            <div className="definition-stack">
-              <div className="definition-line">A clear <em>why.</em></div>
-              <div className="definition-line">A clear <em>story.</em></div>
-              <div className="definition-line">A clear <em>position.</em></div>
-              <div className="definition-line">A consistent way of showing their work, their people, and what they stand for.</div>
-            </div>
-          </div>
+          <BeforeAfter
+            beforeLabel="A spending strategy"
+            afterLabel="A brand asset"
+            before={[
+              "New furniture, TVs, finishes",
+              "A new logo every two years",
+              "Renovation as differentiation",
+              "Aesthetic-first, story-last",
+            ]}
+            after={[
+              "A clear why",
+              "A clear story",
+              "A clear position",
+              "A consistent way of showing work, people, and stance",
+            ]}
+          />
 
-          <div className="reading">
-            <p>That is what creates pull. That is what patients remember. That is what people say about you when you are not in the room.</p>
-            <p>Meanwhile, some of the practices in the most pain come to us right after a rebuild. New office. New logo. New everything. Still no demand.</p>
-            <p>Because a nicer office does not create a stronger signal. A new logo does not create trust. And better finishes do not make people care.</p>
-          </div>
+          <Outcome label="What a brand earns you">
+            Pull. The thing patients remember. The thing people say about you when you are not in the room.
+          </Outcome>
 
           <blockquote className="pullquote">
             “That is the difference between buying things and building an asset.”
             <cite>— PASTED HOUSE DOCTRINE</cite>
           </blockquote>
-
-          <div className="reading">
-            <p>If your branding strategy starts with aesthetics and ends with a logo, you do not have a brand strategy. You have a spending strategy. This guide walks you through the five parts of a real brand asset. Before the parts, there is a foundation.</p>
-          </div>
 
           <p style={{ marginTop: 32, fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", color: "var(--ink-quiet)", fontSize: 19, maxWidth: 620 }}>
             The foundation is your ikigai — the bedrock every undeniable practice is built on.
