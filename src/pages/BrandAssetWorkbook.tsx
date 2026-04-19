@@ -1462,6 +1462,25 @@ const BrandAssetWorkbook = () => {
           </div>
         </section>
 
+        {/* TABLE OF CONTENTS — visual map of the whole volume */}
+        <section className="workbook-section" style={{ paddingTop: 64, paddingBottom: 64 }}>
+          <div style={{ textAlign: "center", marginBottom: 24 }}>
+            <span className="numeral" style={{ color: "var(--ink-quiet)" }}>The Map</span>
+          </div>
+          <h2 className="serif" style={{ textAlign: "center", fontSize: "clamp(32px, 4vw, 44px)", marginBottom: 16 }}>
+            What you'll <em>build</em> in this volume.
+          </h2>
+          <p style={{ textAlign: "center", maxWidth: 560, margin: "0 auto", color: "var(--ink-quiet)", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", fontSize: 19 }}>
+            Twelve sections. Forty answers. One brand asset.
+          </p>
+          <TableOfContents />
+          <StatStrip stats={[
+            { num: "<em>5</em>", cap: "Parts of a real brand asset" },
+            { num: "<em>40</em>", cap: "Answers that become your operating doctrine" },
+            { num: "<em>3%</em>", cap: "Of your market is in-market right now" },
+          ]} />
+        </section>
+
         <Dots />
 
         {/* PRELUDE */}
