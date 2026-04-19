@@ -1239,6 +1239,71 @@ const TableOfContents = () => (
   </div>
 );
 
+const MiniProgressStrip = () => {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    const els = TOC_ITEMS.map((i) => document.getElementById(i.id)).filter(
+      (el): el is HTMLElement => !!el
+    );
+    if (els.length === 0) return;
+
+    const compute = () => {
+      // Active = the last section whose top has crossed the strip line.
+      const line = 140; // topbar (64) + strip (40) + small buffer
+      let idx = 0;
+      for (let i = 0; i < els.length; i++) {
+        const top = els[i].getBoundingClientRect().top;
+        if (top - line <= 0) idx = i;
+      }
+      setActiveIdx(idx);
+    };
+
+    compute();
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        compute();
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", compute);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", compute);
+    };
+  }, []);
+
+  const active = TOC_ITEMS[activeIdx];
+
+  return (
+    <nav className="mini-strip" aria-label="Section progress">
+      <div className="mini-strip-inner">
+        <span className="mini-strip-label">{active?.name ?? "Cover"}</span>
+        <div className="mini-strip-track">
+          {TOC_ITEMS.map((item, i) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`mini-strip-cell${i === activeIdx ? " active" : i < activeIdx ? " done" : ""}`}
+              aria-label={`Jump to ${item.name}`}
+              aria-current={i === activeIdx ? "true" : undefined}
+            >
+              <span className="mini-strip-tooltip">{item.name}</span>
+            </a>
+          ))}
+        </div>
+        <span className="mini-strip-counter">
+          {String(activeIdx + 1).padStart(2, "0")} / {TOC_ITEMS.length}
+        </span>
+      </div>
+    </nav>
+  );
+};
+
 const StatusBar = ({ active }: { active: 1 | 2 | 3 | 4 | 5 }) => {
   const names = ["Positioning", "Point of View", "Experience", "Signal", "System"];
   const romans = ["I", "II", "III", "IV", "V"];
