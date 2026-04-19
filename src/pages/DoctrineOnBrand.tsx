@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
+import { LibraryCoverFrontispiece } from "./LibraryCover";
 
 /**
  * THE PRIVATE DOCTRINE ON BRAND
@@ -271,35 +272,17 @@ const DoctrineOnBrand = () => {
       <div className="grain" aria-hidden="true" />
       <div className="progress-bar" style={{ width: `${scrollPct}%` }} aria-hidden="true" />
 
-      {/* ========== COVER ========== */}
-      <section className="cover">
-        <div className="volume-mark" aria-hidden="true">
-          <div className="vm-box">PL</div>
-          <div className="vm-line vm-brass">DISPATCH</div>
-          <div className="vm-line vm-quiet">THE PASTED LIBRARY</div>
-          <div className="vm-line vm-whisper">MMXXVI</div>
-        </div>
+      {/* ========== COVER · LIBRARY FRONTISPIECE ========== */}
+      <LibraryCoverFrontispiece mode="embedded" showContinueCue />
 
+      {/* ========== TABLE OF CONTENTS ========== */}
+      <section className="cover cover-toc">
         <div className="cover-inner">
           <div className="eyebrow">
             <span className="eyebrow-rule" />
-            <span className="eyebrow-text">A PUBLIC DISPATCH</span>
+            <span className="eyebrow-text">CONTENTS</span>
             <span className="eyebrow-rule" />
           </div>
-
-          <h1 className="cover-h1">
-            <span>THE PRIVATE DOCTRINE</span>
-            <span>
-              ON <em>BRAND.</em>
-            </span>
-          </h1>
-
-          <p className="cover-subhead">
-            <em>
-              A public dispatch from The PASTED Library · On what a brand actually is, what
-              yours is not, and how the practices that compound quietly pulled ahead.
-            </em>
-          </p>
 
           <nav className="toc" aria-label="Table of contents">
             {tocItems.map((t, i) => (
@@ -675,6 +658,14 @@ const styles = `
     padding: 64px clamp(28px, 8vw, 140px);
     display: flex; flex-direction: column; align-items: center;
   }
+  /* TOC-only cover (used after the Library frontispiece) — compact, no min-height */
+  .cover.cover-toc {
+    min-height: auto;
+    padding: 96px clamp(28px, 8vw, 140px) 64px;
+  }
+  .cover.cover-toc .cover-inner { margin-top: 0; }
+  .cover.cover-toc .toc { margin-top: 64px; }
+  .cover.cover-toc .cover-base { margin-top: 80px; padding-top: 0; }
   .volume-mark {
     position: absolute; top: 64px; left: clamp(28px, 8vw, 140px);
     text-align: left;
