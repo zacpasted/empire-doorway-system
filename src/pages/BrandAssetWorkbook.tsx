@@ -312,7 +312,7 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .mini-strip { display: none; }
   .workbook-root .mini-strip-mobile {
     display: block;
-    position: sticky; top: 64px; z-index: 49;
+    position: sticky; top: 56px; z-index: 49;
     background: rgba(237,231,219,0.92);
     backdrop-filter: blur(16px) saturate(1.1);
     -webkit-backdrop-filter: blur(16px) saturate(1.1);
@@ -423,7 +423,7 @@ html.workbook-html { scroll-behavior: smooth; }
 .workbook-root section[id] { scroll-margin-top: 112px; }
 @media (max-width: 720px) {
   .workbook-root .workbook-section,
-  .workbook-root section[id] { scroll-margin-top: 104px; }
+  .workbook-root section[id] { scroll-margin-top: 96px; }
 }
 
 /* Completion counter pill (topbar) */
