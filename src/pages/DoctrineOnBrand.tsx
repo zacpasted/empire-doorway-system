@@ -1029,6 +1029,76 @@ const styles = `
     color: var(--ink-whisper);
   }
 
+  /* Workbook Card (above Library Card) */
+  .workbook-card {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    border: 1px solid var(--rule);
+    background: var(--bone);
+    text-align: center;
+  }
+  .workbook-card-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 20px;
+  }
+  .workbook-card-title {
+    margin: 0 0 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.1;
+    color: var(--ink-deep);
+  }
+  .workbook-card-title em {
+    font-style: italic;
+    color: var(--brass);
+  }
+  .workbook-card-lede {
+    margin: 0 auto 32px;
+    max-width: 480px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .workbook-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 28px;
+    border: 1px solid var(--brass);
+    background: transparent;
+    color: var(--ink-deep);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 280ms ease, color 280ms ease, letter-spacing 280ms ease;
+  }
+  .workbook-card-cta:hover {
+    background: var(--brass);
+    color: #FAF6EC;
+    letter-spacing: 0.28em;
+  }
+  .workbook-card-cta-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    transition: transform 280ms ease;
+  }
+  .workbook-card-cta:hover .workbook-card-cta-arrow {
+    transform: translateX(4px);
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
