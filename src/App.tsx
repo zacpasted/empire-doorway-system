@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
@@ -12,7 +12,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 import BrandAssetWorkbook from "./pages/BrandAssetWorkbook";
 import DoctrineOnBrand from "./pages/DoctrineOnBrand";
 import Founders from "./pages/Founders";
-import LibraryCover from "./pages/LibraryCover";
 
 const queryClient = new QueryClient();
 
@@ -29,10 +28,13 @@ const App = () => (
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
-          <Route path="/library/vol-i" element={<BrandAssetWorkbook />} />
           <Route path="/library/doctrine" element={<DoctrineOnBrand />} />
+          {/* Canonical: cover + doctrine live as one piece at /library/doctrine.
+              These older entry points redirect there so any pasted-studio.com/library/* link still works. */}
+          <Route path="/library" element={<Navigate to="/library/doctrine" replace />} />
+          <Route path="/library/vol-i" element={<Navigate to="/library/doctrine" replace />} />
+          <Route path="/library/cover" element={<Navigate to="/library/doctrine" replace />} />
           <Route path="/founders" element={<Founders />} />
-          <Route path="/library/cover" element={<LibraryCover />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
