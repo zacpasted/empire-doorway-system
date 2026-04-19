@@ -1373,6 +1373,119 @@ const BrandAssetWorkbook = () => {
       lines.push(""); lines.push("");
     });
 
+    /* ---- Brand Brief block ---- */
+    const v = (k: string) => {
+      const raw = values[k];
+      return raw && raw.trim() ? raw.trim() : "— to complete —";
+    };
+    const visionWords = (values.vision || "").trim().split(/\s+/).filter(Boolean).slice(0, 8).join(" ");
+    const briefTitle = visionWords || "— to complete —";
+    const today = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+
+    lines.push("");
+    lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    lines.push("            YOUR BRAND BRIEF");
+    lines.push("          The becoming, on paper");
+    lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    lines.push("");
+    lines.push(`A Brand Brief for ${briefTitle}`);
+    lines.push(`PREPARED · ${today}`);
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("01 · POSITIONING");
+    lines.push(v("niche_synthesis"));
+    lines.push("");
+    lines.push("Three call-outs:");
+    (values.callouts || "").split("\n").map(s => s.trim()).filter(Boolean).forEach(l => lines.push(`  • ${l}`));
+    if (!(values.callouts || "").trim()) lines.push("  — to complete —");
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("02 · IDEAL PATIENT");
+    lines.push(v("ms_patient"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("03 · THREE DIFFERENTIATORS");
+    const diffs = (values.ms_differentiators || "").split("\n").map(s => s.trim()).filter(Boolean);
+    if (diffs.length) diffs.forEach((l, i) => lines.push(`  ${i + 1}. ${l.replace(/^\d+\.\s*/, "")}`));
+    else lines.push("  — to complete —");
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("04 · SIGNATURE EXPERIENCE");
+    lines.push(v("ms_experience"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("05 · THE PROMISE");
+    lines.push(v("ms_promise"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("06 · POINT OF VIEW");
+    lines.push("We believe:");
+    lines.push(v("pov_statement"));
+    lines.push("");
+    lines.push("Signature story:");
+    lines.push(v("story"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("07 · EXPERIENCE");
+    lines.push("Where the brand collapses today:");
+    lines.push(v("experience_gap"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("08 · SIGNAL · FOUR QUADRANTS");
+    lines.push(v("quadrants"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("09 · SYSTEM");
+    lines.push("Patient journey:");
+    lines.push(v("journey_map"));
+    lines.push("");
+    lines.push("Weakest part today:");
+    lines.push(v("weakest_part"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("10 · VISION · MISSION · VALUES");
+    lines.push("Ten-year vision:");
+    lines.push(v("vision"));
+    lines.push("");
+    lines.push("Mission:");
+    lines.push(v("mission"));
+    lines.push("");
+    lines.push("Five practice values:");
+    const vals = [1, 2, 3, 4, 5].map(i => (values[`value_${i}`] || "").trim()).filter(Boolean);
+    lines.push(vals.length ? vals.join(", ") : "— to complete —");
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("11 · THE 10 · 3 · 1 · 90");
+    [
+      ["TEN YEARS", "goal_10y"],
+      ["THREE YEARS", "goal_3y"],
+      ["ONE YEAR", "goal_1y"],
+      ["NINETY DAYS", "goal_90d"],
+    ].forEach(([label, prefix]) => {
+      lines.push(`  ${label}`);
+      [1, 2, 3].forEach(i => {
+        const val = (values[`${prefix}_${i}`] || "").trim();
+        lines.push(`    ${i}. ${val || "— to complete —"}`);
+      });
+      lines.push("");
+    });
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("Where Dentistry Becomes Iconic.");
+    lines.push("PREPARED BY PASTED · VOLUME I · MMXXVI");
+    lines.push("");
+
     const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -1405,13 +1518,6 @@ const BrandAssetWorkbook = () => {
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-              <button
-                onClick={() => handleCTA("top")}
-                className="cta-pill"
-                style={{ padding: "10px 22px", fontSize: 11, letterSpacing: "0.18em" }}
-              >
-                Book a Call →
-              </button>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 5, height: 5, borderRadius: 999, background: saveState === "saving" ? "var(--ink-whisper)" : "var(--brass)", display: "inline-block" }} />
                 <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--ink-quiet)" }}>
