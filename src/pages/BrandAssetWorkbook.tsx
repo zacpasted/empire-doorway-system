@@ -484,6 +484,171 @@ html.workbook-html { scroll-behavior: smooth; }
 @media (max-width: 540px) {
   .workbook-root .lead-gate-card { padding: 40px 28px; }
 }
+
+/* ---------- Table of Contents ---------- */
+.workbook-root .toc {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 48px 0;
+  margin: 96px 0;
+}
+.workbook-root .toc-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
+}
+@media (max-width: 720px) { .workbook-root .toc-grid { grid-template-columns: 1fr; } }
+.workbook-root .toc-row {
+  display: grid; grid-template-columns: 28px 1fr auto;
+  gap: 16px; align-items: baseline; padding: 14px 24px;
+  border-bottom: 1px solid var(--rule-ghost);
+  text-decoration: none; color: inherit;
+  transition: background 200ms ease;
+}
+.workbook-root .toc-row:hover { background: var(--brass-ghost); }
+.workbook-root .toc-roman {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  color: var(--brass); font-size: 14px;
+}
+.workbook-root .toc-name {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 18px; color: var(--ink);
+}
+.workbook-root .toc-mini {
+  display: block; font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: 11px; color: var(--ink-quiet); letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+.workbook-root .toc-min {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+}
+
+/* ---------- Section status badge (top of each Part) ---------- */
+.workbook-root .status-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; margin-bottom: 32px;
+  border-top: 1px solid var(--rule-ghost);
+  border-bottom: 1px solid var(--rule-ghost);
+  font-family: 'Inter', sans-serif; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+}
+.workbook-root .status-pip {
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--rule); border-radius: 999px;
+}
+.workbook-root .status-pip.active { background: var(--brass); }
+.workbook-root .status-name { color: var(--ink-quiet); margin-left: auto; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0; text-transform: none; }
+
+/* ---------- Outcome card (end-of-section reinforcement) ---------- */
+.workbook-root .outcome {
+  display: grid; grid-template-columns: 24px 1fr;
+  gap: 20px; align-items: start;
+  background: var(--bone-deep);
+  border: 1px solid var(--rule); border-left: 2px solid var(--brass);
+  padding: 24px 28px; margin: 56px 0;
+  max-width: 720px;
+}
+.workbook-root .outcome-mark {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  color: var(--brass); font-size: 22px; line-height: 1;
+}
+.workbook-root .outcome-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  margin-bottom: 6px;
+}
+.workbook-root .outcome-text {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 19px; line-height: 1.4; color: var(--ink); margin: 0;
+}
+
+/* ---------- Before / After split ---------- */
+.workbook-root .ba-split {
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  margin: 48px 0; border: 1px solid var(--rule);
+}
+@media (max-width: 720px) {
+  .workbook-root .ba-split { grid-template-columns: 1fr; }
+  .workbook-root .ba-split .ba-divider { width: 100%; height: 1px; }
+}
+.workbook-root .ba-side { padding: 28px; }
+.workbook-root .ba-divider { background: var(--rule); }
+.workbook-root .ba-side h4 {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.36em; text-transform: uppercase;
+  color: var(--ink-whisper); margin: 0 0 16px 0;
+}
+.workbook-root .ba-side.after h4 { color: var(--brass); }
+.workbook-root .ba-side ul { list-style: none; padding: 0; margin: 0; }
+.workbook-root .ba-side li {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 18px; line-height: 1.4; color: var(--ink); padding: 8px 0;
+  border-bottom: 1px solid var(--rule-ghost);
+}
+.workbook-root .ba-side li:last-child { border-bottom: none; }
+.workbook-root .ba-side.before li { color: var(--ink-quiet); text-decoration: line-through; text-decoration-color: var(--rule); }
+
+/* ---------- Stat strip (cover & end metrics) ---------- */
+.workbook-root .stat-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  margin: 48px 0;
+}
+@media (max-width: 720px) { .workbook-root .stat-strip { grid-template-columns: 1fr; } }
+.workbook-root .stat-cell {
+  padding: 32px 24px; text-align: center;
+  border-right: 1px solid var(--rule);
+}
+.workbook-root .stat-cell:last-child { border-right: none; }
+@media (max-width: 720px) {
+  .workbook-root .stat-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+  .workbook-root .stat-cell:last-child { border-bottom: none; }
+}
+.workbook-root .stat-num {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 56px; color: var(--brass); line-height: 1; margin-bottom: 12px;
+}
+.workbook-root .stat-num em { font-style: italic; }
+.workbook-root .stat-cap {
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px;
+  color: var(--ink-quiet); line-height: 1.5; max-width: 200px; margin: 0 auto;
+}
+
+/* ---------- Inline mini diagrams ---------- */
+.workbook-root .mini-fig {
+  display: flex; flex-direction: column; align-items: center;
+  margin: 32px auto; max-width: 480px;
+}
+.workbook-root .mini-fig-cap {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+  margin-top: 16px;
+}
+
+/* ---------- 3% / 97% bar ---------- */
+.workbook-root .market-bar {
+  margin: 40px 0;
+  border: 1px solid var(--rule); padding: 24px;
+}
+.workbook-root .market-bar-track {
+  display: flex; height: 24px; border: 1px solid var(--brass-line);
+  background: var(--bone-shadow); margin-bottom: 16px;
+}
+.workbook-root .market-bar-3 { width: 3%; background: var(--brass); }
+.workbook-root .market-bar-97 { flex: 1; background: transparent; }
+.workbook-root .market-legend {
+  display: flex; justify-content: space-between;
+  font-family: 'Inter', sans-serif; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-quiet);
+}
+.workbook-root .market-legend strong { color: var(--brass); font-weight: 500; }
+
+/* ---------- Compounding sparkline (mini, used inline) ---------- */
+.workbook-root .spark {
+  display: block; margin: 8px 0; max-width: 100%;
+}
+
+/* Tighter reading column spacing in dense sections */
+.workbook-root .reading.tight p { margin-bottom: 14px; }
 `;
 
 /* ============================================================
