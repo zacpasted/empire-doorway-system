@@ -292,15 +292,19 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .mini-strip-fill { transition: none; }
 }
 .workbook-root .mini-strip-tooltip {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  margin-top: 4px; padding: 4px 8px;
+  position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  padding: 6px 10px;
   background: var(--ink); color: var(--bone);
-  font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 0.16em;
-  text-transform: uppercase; white-space: nowrap;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
   opacity: 0; pointer-events: none; transition: opacity 150ms ease;
-  border-radius: 1px;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  z-index: 60;
 }
-.workbook-root .mini-strip-cell:hover .mini-strip-tooltip { opacity: 1; }
+.workbook-root .mini-strip-cell:hover { z-index: 60; }
+.workbook-root .mini-strip-cell:hover .mini-strip-tooltip,
+.workbook-root .mini-strip-cell:focus-visible .mini-strip-tooltip { opacity: 1; }
 .workbook-root .mini-strip-counter {
   font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
   color: var(--brass); white-space: nowrap; flex-shrink: 0; min-width: 48px;
