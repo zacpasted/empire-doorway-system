@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import pastedWordmark from "@/assets/pasted-logo-wordmark.png";
 import pastedEmblem from "@/assets/pasted-logo-emblem.png";
 
@@ -11,10 +12,13 @@ const Footer = () => {
             <div className="w-px h-3.5 bg-primary/30" />
             <img src={pastedEmblem} alt="Pasted emblem" className="h-5" />
           </div>
-          
-          <p className="text-sm text-muted-foreground">
-            © 2026 PASTED™. All rights reserved.
-          </p>
+
+          <div className="flex items-center gap-5 text-sm text-muted-foreground">
+            <Link to="/founders" className="hover:text-foreground transition-colors">
+              Founders
+            </Link>
+            <span>© 2026 PASTED™</span>
+          </div>
 
           <a
             href="mailto:zac@getpasted.com"
