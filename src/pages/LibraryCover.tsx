@@ -81,10 +81,11 @@ const LibraryCover = () => {
           --brass-line: rgba(184, 153, 104, 0.48);
           --bone-quiet: #A59E8E;
 
-          position: relative;
-          width: 100%;
+          position: fixed;
+          inset: 0;
+          width: 100vw;
           height: 100vh;
-          min-height: 100svh;
+          height: 100svh;
           overflow: hidden;
           background: var(--ink);
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -109,15 +110,18 @@ const LibraryCover = () => {
           filter: sepia(0.12) contrast(1.02) brightness(0.96);
         }
         .lc-photo-placeholder {
-          width: 100%; height: 100%;
+          position: absolute; inset: 0;
           background: var(--bone);
-          display: flex; align-items: center; justify-content: center;
         }
         .lc-photo-placeholder span {
+          position: absolute;
+          left: 50%; top: 18px;
+          transform: translateX(-50%);
           font-family: 'Cormorant Garamond', serif;
           font-style: italic; font-weight: 400;
-          font-size: 22px; color: var(--bone-quiet);
-          letter-spacing: 0.02em;
+          font-size: 12px; color: var(--bone-quiet);
+          letter-spacing: 0.18em; text-transform: lowercase;
+          opacity: 0.55;
         }
 
         /* ---- Readability gradient (z 1) ---- */
