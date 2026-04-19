@@ -1240,9 +1240,9 @@ const TableOfContents = () => (
 );
 
 const MiniProgressStrip = () => {
-  const [activeIdx, setActiveIdx] = React.useState(0);
+  const [activeIdx, setActiveIdx] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const els = TOC_ITEMS.map((i) => document.getElementById(i.id)).filter(
       (el): el is HTMLElement => !!el
     );
