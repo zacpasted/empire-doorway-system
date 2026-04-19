@@ -1352,6 +1352,207 @@ const Dots = () => <div className="ornament-dots">· · ·</div>;
 const Fleuron = () => <div className="ornament-fleuron">✦</div>;
 
 /* ============================================================
+ * Brand Brief — synthesized live from workbook values
+ * ============================================================ */
+const BBBody = ({ value }: { value: string }) => {
+  const v = (value || "").trim();
+  if (!v) return <p className="bb-empty">— to complete —</p>;
+  return <p className="bb-body">{v}</p>;
+};
+const BBList = ({ value, ordered = false }: { value: string; ordered?: boolean }) => {
+  const items = (value || "").split("\n").map((s) => s.trim().replace(/^\d+\.\s*/, "").replace(/^[-•]\s*/, "")).filter(Boolean);
+  if (!items.length) return <p className="bb-empty">— to complete —</p>;
+  const ListTag = ordered ? "ol" : "ul";
+  return (
+    <ListTag className="bb-list">
+      {items.map((it, i) => <li key={i}>{it}</li>)}
+    </ListTag>
+  );
+};
+
+const BrandBrief = ({ values }: { values: Values }) => {
+  const visionWords = (values.vision || "").trim().split(/\s+/).filter(Boolean).slice(0, 8).join(" ");
+  const briefTitle = visionWords || "— to complete —";
+  const today = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+  const valuesList = [1, 2, 3, 4, 5].map((i) => (values[`value_${i}`] || "").trim()).filter(Boolean).join(", ");
+
+  return (
+    <div className="brand-brief-card">
+      <div className="bb-header-label">THE PASTED LIBRARY · VOL. I · YOUR BRAND BRIEF</div>
+      <h3 className="bb-title">A Brand Brief for {briefTitle}</h3>
+      <div className="bb-prepared">PREPARED · {today}</div>
+      <div className="bb-rule" />
+
+      <div className="bb-section">
+        <span className="bb-sublabel">01 · Positioning</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.niche_synthesis} />
+        <p className="bb-sub">Three call-outs:</p>
+        <BBList value={values.callouts} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">02 · Ideal Patient</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.ms_patient} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">03 · Three Differentiators</span>
+        <div className="bb-sublabel-rule" />
+        <BBList value={values.ms_differentiators} ordered />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">04 · Signature Experience</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.ms_experience} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">05 · The Promise</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.ms_promise} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">06 · Point of View</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">We believe</div>
+        <BBBody value={values.pov_statement} />
+        <div className="bb-block-label">Signature story</div>
+        <BBBody value={values.story} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">07 · Experience</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">Where the brand collapses today</div>
+        <BBBody value={values.experience_gap} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">08 · Signal · Four Quadrants</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.quadrants} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">09 · System</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">Patient journey</div>
+        <BBBody value={values.journey_map} />
+        <div className="bb-block-label">Weakest part today</div>
+        <BBBody value={values.weakest_part} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">10 · Vision · Mission · Values</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">Ten-year vision</div>
+        <BBBody value={values.vision} />
+        <div className="bb-block-label">Mission</div>
+        <BBBody value={values.mission} />
+        <div className="bb-block-label">Five practice values</div>
+        {valuesList ? <p className="bb-body">{valuesList}</p> : <p className="bb-empty">— to complete —</p>}
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">11 · The 10 · 3 · 1 · 90</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-grid">
+          {[
+            { label: "Ten Years", prefix: "goal_10y" },
+            { label: "Three Years", prefix: "goal_3y" },
+            { label: "One Year", prefix: "goal_1y" },
+            { label: "Ninety Days", prefix: "goal_90d" },
+          ].map((cell) => {
+            const items = [1, 2, 3].map((i) => (values[`${cell.prefix}_${i}`] || "").trim());
+            return (
+              <div key={cell.prefix}>
+                <div className="bb-grid-cell-label">{cell.label}</div>
+                <ol className="bb-list">
+                  {items.map((it, i) => (
+                    <li key={i} style={it ? undefined : { color: "var(--ink-whisper)", fontStyle: "italic" }}>
+                      {it || "— to complete —"}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="bb-footer-rule" />
+      <p className="bb-footer-tag"><em>Where Dentistry Becomes Iconic.</em></p>
+      <div className="bb-footer-meta">PREPARED BY PASTED · VOLUME I · MMXXVI</div>
+    </div>
+  );
+};
+
+/* ============================================================
+ * Insider Signup
+ * ============================================================ */
+const insiderEmailSchema = z.string().trim().email().max(255);
+const InsiderSignup = ({ insider, onSubmit }: {
+  insider: InsiderRecord | null;
+  onSubmit: (email: string) => void;
+}) => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  if (insider) {
+    return (
+      <div className="insider-card">
+        <div className="insider-toplabel">The Pasted Insider · Welcome</div>
+        <div className="insider-rule" />
+        <h3 className="insider-headline success"><em>Welcome to the Insider.</em></h3>
+        <p className="insider-success-body">
+          Your Library-edition PDF and first dispatch are on their way. Watch for them from <code style={{ fontFamily: "Inter, sans-serif", fontSize: 14 }}>insider@pasted.agency</code> within 48 hours.
+        </p>
+        <div className="insider-success-meta">Subscribed as {insider.email}</div>
+      </div>
+    );
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const parsed = insiderEmailSchema.safeParse(email);
+    if (!parsed.success) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    setError(null);
+    onSubmit(parsed.data);
+  };
+
+  return (
+    <div className="insider-card">
+      <div className="insider-toplabel">The Pasted Insider · Private Broadcast</div>
+      <div className="insider-rule" />
+      <h3 className="insider-headline"><em>Where undeniable practices stay quietly ahead.</em></h3>
+      <form className="insider-form" onSubmit={handleSubmit} noValidate>
+        <input
+          type="email"
+          className="insider-input"
+          placeholder="you@practice.com"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); if (error) setError(null); }}
+          aria-label="Email address"
+          aria-invalid={!!error}
+        />
+        <button type="submit" className="insider-submit">
+          Join <em>→</em>
+        </button>
+      </form>
+      {error && <div className="insider-error">{error}</div>}
+      <div className="insider-fineprint">No algorithm · No pitch-mail · Unsubscribe any time</div>
+    </div>
+  );
+};
+
+/* ============================================================
  * Lead Gate
  * ============================================================ */
 const LeadGate = ({ lead, onChange, onSubmit, errors }: {
