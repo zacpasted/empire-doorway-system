@@ -327,39 +327,43 @@ html.workbook-html { scroll-behavior: smooth; }
     z-index: 51;
   }
   .workbook-root .mini-strip-mobile-trigger {
-    width: 100%; height: 40px; padding: 0 16px;
-    display: flex; align-items: center; justify-content: space-between;
+    /* Centered tap target inside the topbar — sits between wordmark and Reset */
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    height: 40px; padding: 0 12px; max-width: calc(100% - 160px);
+    display: inline-flex; align-items: center; gap: 8px;
     background: transparent; border: none; cursor: pointer;
     font-family: 'Inter', sans-serif;
+    pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
   }
   .workbook-root .mini-strip-mobile-trigger:focus-visible {
-    outline: 2px solid var(--brass); outline-offset: -2px;
+    outline: 2px solid var(--brass); outline-offset: 2px;
+    border-radius: 2px;
   }
   .workbook-root .mini-strip-mobile-left {
-    display: flex; align-items: baseline; gap: 8px; min-width: 0;
+    display: inline-flex; align-items: baseline; gap: 6px; min-width: 0;
   }
   .workbook-root .mini-strip-mobile-eyebrow {
-    font-weight: 500; font-size: 9px; letter-spacing: 0.32em;
+    font-weight: 500; font-size: 9px; letter-spacing: 0.28em;
     text-transform: uppercase; color: var(--ink-quiet); flex-shrink: 0;
   }
   .workbook-root .mini-strip-mobile-name {
-    font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 15px;
+    font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 14px;
     color: var(--ink); letter-spacing: -0.01em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .workbook-root .mini-strip-mobile-right {
-    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
   }
   .workbook-root .mini-strip-mobile-counter {
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px;
     color: var(--brass);
   }
   .workbook-root .mini-strip-mobile-chev {
-    width: 10px; height: 10px;
+    width: 6px; height: 6px;
     border-right: 1px solid var(--ink-quiet);
     border-bottom: 1px solid var(--ink-quiet);
-    transform: rotate(45deg) translate(-2px, -2px);
+    transform: rotate(45deg) translate(-1px, -1px);
   }
 }
 
