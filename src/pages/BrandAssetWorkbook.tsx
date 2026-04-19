@@ -813,6 +813,45 @@ html.workbook-html { scroll-behavior: smooth; }
 .workbook-root .doctrine-corner.bl { bottom: 16px; left: 16px; border-bottom: 1px solid; border-left: 1px solid; }
 .workbook-root .doctrine-corner.br { bottom: 16px; right: 16px; border-bottom: 1px solid; border-right: 1px solid; }
 
+/* Center monogram seal — sits behind content like an embossed certificate stamp */
+.workbook-root .doctrine-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 380px;
+  height: 380px;
+  max-width: 60%;
+  max-height: 60%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.07;
+  color: var(--brass);
+  stroke: currentColor;
+  fill: none;
+  z-index: 0;
+}
+.workbook-root .doctrine-seal-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  fill: currentColor;
+  stroke: none;
+  text-transform: uppercase;
+}
+.workbook-root .doctrine-seal-monogram {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 110px;
+  fill: currentColor;
+  stroke: none;
+}
+/* Make sure all real content sits above the seal */
+.workbook-root .doctrine-head,
+.workbook-root .doctrine-body,
+.workbook-root .doctrine-foot { position: relative; z-index: 1; }
+
 .workbook-root .doctrine-head { text-align: center; }
 .workbook-root .doctrine-mark {
   font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 18px;
@@ -2152,6 +2191,57 @@ const BrandDoctrine = ({ values, lead }: { values: Values; lead: Lead }) => {
         <span className="doctrine-corner tr" />
         <span className="doctrine-corner bl" />
         <span className="doctrine-corner br" />
+
+        {/* Centered monogram seal — purely decorative, sits behind content */}
+        <svg
+          className="doctrine-seal"
+          viewBox="0 0 200 200"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <defs>
+            <path
+              id="doctrine-seal-arc-top"
+              d="M 100,100 m -78,0 a 78,78 0 1 1 156,0"
+            />
+            <path
+              id="doctrine-seal-arc-bot"
+              d="M 100,100 m -78,0 a 78,78 0 1 0 156,0"
+            />
+          </defs>
+          <circle cx="100" cy="100" r="86" fill="none" strokeWidth="0.6" />
+          <circle cx="100" cy="100" r="78" fill="none" strokeWidth="0.4" />
+          <circle cx="100" cy="100" r="58" fill="none" strokeWidth="0.4" />
+          {/* Decorative ticks on the outer ring */}
+          {Array.from({ length: 24 }).map((_, i) => {
+            const a = (i * Math.PI * 2) / 24;
+            const x1 = 100 + Math.cos(a) * 80;
+            const y1 = 100 + Math.sin(a) * 80;
+            const x2 = 100 + Math.cos(a) * 84;
+            const y2 = 100 + Math.sin(a) * 84;
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="0.5" />;
+          })}
+          {/* Curved type around the seal */}
+          <text className="doctrine-seal-text">
+            <textPath href="#doctrine-seal-arc-top" startOffset="50%" textAnchor="middle">
+              · THE PASTED LIBRARY ·
+            </textPath>
+          </text>
+          <text className="doctrine-seal-text">
+            <textPath href="#doctrine-seal-arc-bot" startOffset="50%" textAnchor="middle">
+              · MMXXVI · VOL. I ·
+            </textPath>
+          </text>
+          {/* Center monogram */}
+          <text
+            x="100"
+            y="118"
+            textAnchor="middle"
+            className="doctrine-seal-monogram"
+          >
+            P
+          </text>
+        </svg>
 
         <header className="doctrine-head">
           <div className="doctrine-mark">PASTED · Library · Vol. I</div>
