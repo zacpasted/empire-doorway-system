@@ -260,7 +260,8 @@ html.workbook-html { scroll-behavior: smooth; }
 .workbook-root .mini-strip-inner {
   max-width: 1200px; margin: 0 auto; height: 40px;
   padding: 0 56px; display: flex; align-items: center; gap: 16px;
-  overflow: hidden;
+  /* visible so hover tooltips can drop below the strip without being clipped */
+  overflow: visible;
 }
 .workbook-root .mini-strip-label {
   font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
