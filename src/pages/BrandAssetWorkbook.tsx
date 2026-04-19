@@ -143,10 +143,12 @@ const WORKBOOK_CSS = `
   font-size: 17px;
   line-height: 1.8;
   letter-spacing: 0;
-  min-height: 100vh;
-  position: relative;
+  /* NOTE: do NOT set min-height/overflow/transform here — those silently
+     break position: sticky on the topbar + mini-strip in mobile WebKit. */
   font-feature-settings: "liga","dlig","kern","tnum";
 }
+/* Ensure no ancestor clips the sticky scroll context on mobile. */
+html.workbook-html, html.workbook-html body { overflow-x: visible; }
 html.workbook-html { scroll-behavior: smooth; }
 
 /* Paper grain */
