@@ -474,7 +474,7 @@ html.workbook-html { scroll-behavior: smooth; }
   animation: celebrateIn 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 @media (max-width: 720px) {
-  .workbook-root .celebrate-banner { top: 100px; }
+  .workbook-root .celebrate-banner { top: 96px; }
 }
 @keyframes celebrateIn {
   from { opacity: 0; transform: translateY(-8px); }
