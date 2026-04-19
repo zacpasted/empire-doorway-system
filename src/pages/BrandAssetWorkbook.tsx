@@ -748,6 +748,66 @@ html.workbook-html { scroll-behavior: smooth; }
   font-size: 20px; color: var(--ink-quiet); max-width: 420px; line-height: 1.5;
 }
 
+/* Editorial portrait — cover */
+.workbook-root .cover-portrait {
+  position: relative;
+  margin: 64px auto 0;
+  max-width: 360px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--bone-deep);
+  box-shadow: 0 1px 0 rgba(28,27,24,0.04), 0 30px 60px -30px rgba(28,27,24,0.18);
+}
+.workbook-root .cover-portrait img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: contrast(1.02);
+}
+.workbook-root .cover-portrait::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  border: 1px solid rgba(139,122,78,0.28);
+  mix-blend-mode: multiply;
+}
+.workbook-root .cover-portrait-caption {
+  margin-top: 18px; text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
+}
+
+/* Editorial portrait — chapter opener (full-bleed band) */
+.workbook-root .chapter-portrait {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: clamp(360px, 62vh, 620px);
+  overflow: hidden;
+  background: var(--ink);
+}
+.workbook-root .chapter-portrait img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  /* subtle tone shift to keep image weight under typographic chapter card */
+  filter: contrast(1.04);
+}
+.workbook-root .chapter-portrait::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(237,231,219,0.0) 0%, rgba(237,231,219,0.0) 60%, rgba(237,231,219,0.85) 100%);
+  pointer-events: none;
+}
+.workbook-root .chapter-portrait-meta {
+  position: absolute; left: 0; right: 0; bottom: 24px;
+  text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-quiet);
+}
+@media (max-width: 720px) {
+  .workbook-root .chapter-portrait { height: 320px; }
+  .workbook-root .cover-portrait { max-width: 280px; margin-top: 48px; }
+}
+@media print {
+  .workbook-root .chapter-portrait,
+  .workbook-root .cover-portrait { display: none !important; }
+}
+
 /* CTA pill */
 .workbook-root .cta-pill {
   display: inline-flex; align-items: center; justify-content: center;
@@ -2087,14 +2147,25 @@ const Section = ({ id, masthead, ornament, children }: {
   </section>
 );
 
-const ChapterCard = ({ roman, name, tagline }: { roman: string; name: string; tagline: string }) => (
-  <div className="chapter-card">
-    <div className="chapter-fleuron">✦</div>
-    <div className="chapter-roman">{roman}</div>
-    <div className="chapter-name">{name}</div>
-    <div className="chapter-rule" />
-    <div className="chapter-tagline">{tagline}</div>
-  </div>
+const ChapterCard = ({ roman, name, tagline, portrait, portraitAlt }: {
+  roman: string; name: string; tagline: string;
+  portrait?: string; portraitAlt?: string;
+}) => (
+  <>
+    {portrait && (
+      <figure className="chapter-portrait" aria-hidden={portraitAlt ? undefined : true}>
+        <img src={portrait} alt={portraitAlt ?? ""} loading="lazy" decoding="async" />
+        <figcaption className="chapter-portrait-meta">PASTED · FIELD STUDY · {roman}</figcaption>
+      </figure>
+    )}
+    <div className="chapter-card">
+      <div className="chapter-fleuron">✦</div>
+      <div className="chapter-roman">{roman}</div>
+      <div className="chapter-name">{name}</div>
+      <div className="chapter-rule" />
+      <div className="chapter-tagline">{tagline}</div>
+    </div>
+  </>
 );
 
 const Dots = () => <div className="ornament-dots">· · ·</div>;
