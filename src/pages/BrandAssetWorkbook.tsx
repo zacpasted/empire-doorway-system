@@ -13,6 +13,10 @@ import workbookChapterSignal from "@/assets/workbook-chapter-signal.jpg";
 import workbookChapterSystem from "@/assets/workbook-chapter-system.jpg";
 import workbookDoctrineBackdrop from "@/assets/workbook-doctrine-backdrop.jpg";
 import workbookClosingPlate from "@/assets/workbook-closing.jpg";
+import workbookPlateDeparture from "@/assets/workbook-plate-departure.jpg";
+import workbookPlateRoom from "@/assets/workbook-plate-room.jpg";
+import workbookPlateCardA from "@/assets/workbook-plate-card-a.jpg";
+import workbookPlateCardB from "@/assets/workbook-plate-card-b.jpg";
 
 const INSIDER_KEY = "pasted_insider_email";
 type InsiderRecord = { email: string; submitted_at: string };
@@ -845,11 +849,67 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .closing-plate { height: 240px; margin-top: 40px; }
 }
 
+/* Editorial Plates Appendix — 2-column duotone gallery */
+.workbook-root .plates-appendix {
+  margin-top: 96px;
+  padding-top: 56px;
+  border-top: 1px solid var(--rule);
+}
+.workbook-root .plates-masthead {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px;
+  letter-spacing: 0.42em; text-transform: uppercase; color: var(--ink-quiet);
+  text-align: center; margin-bottom: 8px;
+}
+.workbook-root .plates-title {
+  font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+  font-weight: 400; font-style: italic;
+  font-size: clamp(28px, 4vw, 40px);
+  text-align: center; color: var(--ink);
+  margin: 0 0 12px;
+}
+.workbook-root .plates-deck {
+  text-align: center; max-width: 540px; margin: 0 auto 56px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 15px; line-height: 1.6; color: var(--ink-quiet);
+}
+.workbook-root .plates-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px 32px;
+}
+.workbook-root .plate-figure {
+  margin: 0; display: flex; flex-direction: column;
+}
+.workbook-root .plate-frame {
+  position: relative; width: 100%; aspect-ratio: 3 / 4;
+  background: var(--ink); overflow: hidden;
+}
+.workbook-root .plate-frame img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: contrast(1.04);
+}
+.workbook-root .plate-caption {
+  margin-top: 14px; padding: 0 4px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.workbook-root .plate-no {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-quiet);
+}
+.workbook-root .plate-text {
+  font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+  font-style: italic; font-size: 15px; line-height: 1.5; color: var(--ink);
+}
+@media (max-width: 720px) {
+  .workbook-root .plates-appendix { margin-top: 64px; padding-top: 40px; }
+  .workbook-root .plates-grid { grid-template-columns: 1fr; gap: 32px; }
+  .workbook-root .plate-frame { aspect-ratio: 4 / 5; }
+}
+
 @media print {
   .workbook-root .chapter-portrait,
   .workbook-root .cover-portrait,
   .workbook-root .closing-plate,
-  .workbook-root .doctrine-backdrop { display: none !important; }
+  .workbook-root .doctrine-backdrop,
+  .workbook-root .plates-appendix { display: none !important; }
 }
 
 /* CTA pill */
@@ -3906,6 +3966,55 @@ const BrandAssetWorkbook = () => {
         </Section>
 
         <Dots />
+
+        {/* Editorial Plates Appendix — duotone gallery before closing CTA */}
+        <section className="plates-appendix" aria-label="Plates Appendix">
+          <div className="plates-masthead">APPENDIX · PLATES</div>
+          <h2 className="plates-title">Field Notes, in Frame</h2>
+          <p className="plates-deck">A small selection from the year — the rooms we entered, the rooms we built, the work that proved the doctrine.</p>
+
+          <div className="plates-grid">
+            <figure className="plate-figure">
+              <div className="plate-frame">
+                <img src={workbookPlateDeparture} alt="A figure in a tailored grey suit shouldering a leather duffel" loading="lazy" decoding="async" />
+              </div>
+              <figcaption className="plate-caption">
+                <span className="plate-no">Plate VIII · Departure</span>
+                <span className="plate-text">The brand travels well. Tailoring as posture, not costume.</span>
+              </figcaption>
+            </figure>
+
+            <figure className="plate-figure">
+              <div className="plate-frame">
+                <img src={workbookPlateRoom} alt="A formal evening gathering, the founder among peers in black tie" loading="lazy" decoding="async" />
+              </div>
+              <figcaption className="plate-caption">
+                <span className="plate-no">Plate IX · The Room</span>
+                <span className="plate-text">You become known by the rooms you’re willing to enter — and the standard you carry into them.</span>
+              </figcaption>
+            </figure>
+
+            <figure className="plate-figure">
+              <div className="plate-frame">
+                <img src={workbookPlateCardA} alt="A printed brand card, set type, monogram in brass" loading="lazy" decoding="async" />
+              </div>
+              <figcaption className="plate-caption">
+                <span className="plate-no">Plate X · The Card</span>
+                <span className="plate-text">The mark, in the hand. Proof a brand is an object before it is an opinion.</span>
+              </figcaption>
+            </figure>
+
+            <figure className="plate-figure">
+              <div className="plate-frame">
+                <img src={workbookPlateCardB} alt="A second brand card composition, weight and grain visible" loading="lazy" decoding="async" />
+              </div>
+              <figcaption className="plate-caption">
+                <span className="plate-no">Plate XI · The Mark, Held</span>
+                <span className="plate-text">Weight, paper, restraint. The small artifacts that betray the larger discipline.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
 
         {/* Closing editorial plate — atmospheric break before the final CTA */}
         <figure className="closing-plate" aria-hidden="true">
