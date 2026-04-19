@@ -5,8 +5,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import workbookCoverPortrait from "@/assets/workbook-cover-portrait.jpg";
+import workbookChapterFoundation from "@/assets/workbook-chapter-foundation.jpg";
 import workbookChapterPositioning from "@/assets/workbook-chapter-positioning.jpg";
+import workbookChapterPov from "@/assets/workbook-chapter-pov.jpg";
+import workbookChapterExperience from "@/assets/workbook-chapter-experience.jpg";
+import workbookChapterSignal from "@/assets/workbook-chapter-signal.jpg";
 import workbookChapterSystem from "@/assets/workbook-chapter-system.jpg";
+import workbookDoctrineBackdrop from "@/assets/workbook-doctrine-backdrop.jpg";
+import workbookClosingPlate from "@/assets/workbook-closing.jpg";
 
 const INSIDER_KEY = "pasted_insider_email";
 type InsiderRecord = { email: string; submitted_at: string };
@@ -803,9 +809,44 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .chapter-portrait { height: 320px; }
   .workbook-root .cover-portrait { max-width: 280px; margin-top: 48px; }
 }
+
+/* Editorial closing plate — full-bleed band before the final CTA */
+.workbook-root .closing-plate {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: clamp(280px, 48vh, 480px);
+  overflow: hidden;
+  background: var(--ink);
+  margin-top: 64px;
+}
+.workbook-root .closing-plate img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: contrast(1.04);
+}
+.workbook-root .closing-plate::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(237,231,219,0) 0%, rgba(237,231,219,0) 55%, rgba(237,231,219,0.92) 100%),
+    linear-gradient(0deg, rgba(237,231,219,0) 65%, rgba(237,231,219,0.55) 100%);
+  pointer-events: none;
+}
+.workbook-root .closing-plate-meta {
+  position: absolute; left: 0; right: 0; bottom: 22px;
+  text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-quiet);
+}
+@media (max-width: 720px) {
+  .workbook-root .closing-plate { height: 240px; margin-top: 40px; }
+}
+
 @media print {
   .workbook-root .chapter-portrait,
-  .workbook-root .cover-portrait { display: none !important; }
+  .workbook-root .cover-portrait,
+  .workbook-root .closing-plate,
+  .workbook-root .doctrine-backdrop { display: none !important; }
 }
 
 /* CTA pill */
@@ -934,15 +975,43 @@ html.workbook-html { scroll-behavior: smooth; }
   aspect-ratio: 1 / 1.414;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .workbook-root .doctrine-corner {
   position: absolute; width: 18px; height: 18px;
   border-color: var(--brass);
+  z-index: 2;
 }
 .workbook-root .doctrine-corner.tl { top: 16px; left: 16px; border-top: 1px solid; border-left: 1px solid; }
 .workbook-root .doctrine-corner.tr { top: 16px; right: 16px; border-top: 1px solid; border-right: 1px solid; }
 .workbook-root .doctrine-corner.bl { bottom: 16px; left: 16px; border-bottom: 1px solid; border-left: 1px solid; }
 .workbook-root .doctrine-corner.br { bottom: 16px; right: 16px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Faint editorial backdrop inside the doctrine card — sits below seal & content */
+.workbook-root .doctrine-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.workbook-root .doctrine-backdrop img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+  filter: contrast(1.05) saturate(0.85);
+}
+.workbook-root .doctrine-backdrop::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(245,238,221,0) 0%, rgba(245,238,221,0.65) 70%, rgba(245,238,221,0.95) 100%);
+}
+/* Make sure the seal & body sit above the backdrop */
+.workbook-root .doctrine-seal { z-index: 1; }
+.workbook-root .doctrine-page > *:not(.doctrine-backdrop):not(.doctrine-corner):not(.doctrine-seal) {
+  position: relative;
+  z-index: 2;
+}
 
 /* Center monogram seal — sits behind content like an embossed certificate stamp */
 .workbook-root .doctrine-seal {
@@ -2340,6 +2409,9 @@ const BrandDoctrine = ({ values, lead }: { values: Values; lead: Lead }) => {
     <div className="doctrine-wrap">
       <div className="doctrine-eyebrow">Single-page summary · suitable for printing</div>
       <article className="doctrine-page" aria-label="Your Brand Doctrine">
+        <div className="doctrine-backdrop" aria-hidden="true">
+          <img src={workbookDoctrineBackdrop} alt="" loading="lazy" decoding="async" />
+        </div>
         <span className="doctrine-corner tl" />
         <span className="doctrine-corner tr" />
         <span className="doctrine-corner bl" />
@@ -3286,7 +3358,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · FOUNDATION */}
-        <ChapterCard roman="—" name="Foundation" tagline="Before architecture, excavation." />
+        <ChapterCard
+          roman="—"
+          name="Foundation"
+          tagline="Before architecture, excavation."
+          portrait={workbookChapterFoundation}
+          portraitAlt="Editorial study — two figures on the salt flats, before the work."
+        />
 
         {/* FOUNDATION · IKIGAI */}
         <Section id="foundation" masthead="§ FOUNDATION · BEFORE THE FIVE PARTS" ornament={<OrnFourCircles />}>
@@ -3458,7 +3536,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · II */}
-        <ChapterCard roman="II" name="Point of View" tagline="Becoming believed." />
+        <ChapterCard
+          roman="II"
+          name="Point of View"
+          tagline="Becoming believed."
+          portrait={workbookChapterPov}
+          portraitAlt="Editorial study — the founder, considering the room."
+        />
 
         {/* PART II */}
         <Section id="pov" masthead="§ II · POINT OF VIEW" ornament={<OrnCompassVariant />}>
@@ -3505,7 +3589,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · III */}
-        <ChapterCard roman="III" name="Experience" tagline="Becoming felt." />
+        <ChapterCard
+          roman="III"
+          name="Experience"
+          tagline="Becoming felt."
+          portrait={workbookChapterExperience}
+          portraitAlt="Editorial study — gesture, attention, presence."
+        />
 
         {/* PART III */}
         <Section id="experience" masthead="§ III · EXPERIENCE" ornament={<OrnThreeRings />}>
@@ -3560,7 +3650,13 @@ const BrandAssetWorkbook = () => {
         <Dots />
 
         {/* CHAPTER CARD · IV */}
-        <ChapterCard roman="IV" name="Signal" tagline="Becoming seen." />
+        <ChapterCard
+          roman="IV"
+          name="Signal"
+          tagline="Becoming seen."
+          portrait={workbookChapterSignal}
+          portraitAlt="Editorial study — the work, taken to the street."
+        />
 
         {/* PART IV */}
         <Section id="signal" masthead="§ IV · SIGNAL" ornament={<OrnBeacon />}>
@@ -3807,6 +3903,12 @@ const BrandAssetWorkbook = () => {
         </Section>
 
         <Dots />
+
+        {/* Closing editorial plate — atmospheric break before the final CTA */}
+        <figure className="closing-plate" aria-hidden="true">
+          <img src={workbookClosingPlate} alt="" loading="lazy" decoding="async" />
+          <figcaption className="closing-plate-meta">PASTED · FIELD STUDY · CODA</figcaption>
+        </figure>
 
         {/* INSIDER — sole CTA */}
         <Section id="insider" masthead="§ NEXT · THE PASTED INSIDER" ornament={<OrnArrow />}>
