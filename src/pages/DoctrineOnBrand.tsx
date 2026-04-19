@@ -230,13 +230,28 @@ const DoctrineOnBrand = () => {
   }, []);
 
   useEffect(() => {
+    const getCoverHeight = () => {
+      const cover = document.querySelector(".library-cover") as HTMLElement | null;
+      return cover ? cover.offsetHeight : window.innerHeight;
+    };
     const onScroll = () => {
       const h = document.documentElement;
-      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      const coverH = getCoverHeight();
+      // Progress represents distance through the *document* (everything after the cover).
+      // Cover viewport reads as 0%; the bar only begins moving once the reader
+      // crosses into the doctrine itself.
+      const docScroll = Math.max(0, h.scrollTop - coverH);
+      const docHeight = Math.max(1, h.scrollHeight - coverH - h.clientHeight);
+      const pct = Math.min(100, (docScroll / docHeight) * 100);
       setScrollPct(Number.isFinite(pct) ? pct : 0);
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
