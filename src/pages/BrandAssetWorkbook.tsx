@@ -644,8 +644,152 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .wb-textarea, .workbook-root .wb-input { border: 1px solid #999; }
   .workbook-root .chapter-card { page-break-after: always; min-height: auto; padding: 80pt 0; }
   .workbook-root .brand-brief-card { page-break-before: always; }
+  .workbook-root .doctrine-page { page-break-before: always; page-break-after: always; }
   .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
+}
+
+/* ---------- Brand Doctrine (one-page summary) ---------- */
+.workbook-root .doctrine-wrap {
+  margin: 64px auto;
+  max-width: 760px;
+}
+.workbook-root .doctrine-eyebrow {
+  text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-quiet);
+  margin-bottom: 12px;
+}
+.workbook-root .doctrine-page {
+  background: var(--bone-deep);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 56px 56px 48px;
+  position: relative;
+  /* Approximate single A4/letter page proportion */
+  aspect-ratio: 1 / 1.414;
+  display: flex;
+  flex-direction: column;
+}
+.workbook-root .doctrine-corner {
+  position: absolute; width: 18px; height: 18px;
+  border-color: var(--brass);
+}
+.workbook-root .doctrine-corner.tl { top: 16px; left: 16px; border-top: 1px solid; border-left: 1px solid; }
+.workbook-root .doctrine-corner.tr { top: 16px; right: 16px; border-top: 1px solid; border-right: 1px solid; }
+.workbook-root .doctrine-corner.bl { bottom: 16px; left: 16px; border-bottom: 1px solid; border-left: 1px solid; }
+.workbook-root .doctrine-corner.br { bottom: 16px; right: 16px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.workbook-root .doctrine-head { text-align: center; }
+.workbook-root .doctrine-mark {
+  font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 18px;
+  letter-spacing: 0.32em; color: var(--ink); text-transform: uppercase;
+}
+.workbook-root .doctrine-rule { width: 48px; height: 1px; background: var(--brass); margin: 12px auto; }
+.workbook-root .doctrine-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: 40px; line-height: 1.1; color: var(--ink); margin: 8px 0 4px;
+}
+.workbook-root .doctrine-subtitle {
+  font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.36em;
+  text-transform: uppercase; color: var(--ink-whisper);
+}
+
+.workbook-root .doctrine-body { flex: 1; margin-top: 32px; }
+.workbook-root .doctrine-block { margin-top: 28px; }
+.workbook-root .doctrine-block:first-child { margin-top: 0; }
+.workbook-root .doctrine-block-label {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  margin-bottom: 10px;
+}
+.workbook-root .doctrine-block-label::before {
+  content: ""; width: 16px; height: 1px; background: var(--brass); display: inline-block;
+}
+
+/* Marketing System: 4 stacked lines */
+.workbook-root .doctrine-system { margin: 0; padding: 0; list-style: none; }
+.workbook-root .doctrine-system-line {
+  display: grid;
+  grid-template-columns: 28px 88px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid var(--rule-ghost);
+}
+.workbook-root .doctrine-system-line:first-child { border-top: none; padding-top: 0; }
+.workbook-root .doctrine-system-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
+  color: var(--brass);
+}
+.workbook-root .doctrine-system-key {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-quiet);
+}
+.workbook-root .doctrine-system-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.45; color: var(--ink);
+}
+.workbook-root .doctrine-system-text.empty {
+  font-style: italic; color: var(--ink-whisper);
+}
+
+/* POV pull-quote */
+.workbook-root .doctrine-pov {
+  background: var(--bone);
+  border-left: 2px solid var(--brass);
+  padding: 18px 22px;
+  margin: 0;
+}
+.workbook-root .doctrine-pov-prefix {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
+  color: var(--brass); margin-right: 6px;
+}
+.workbook-root .doctrine-pov-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 1.45; color: var(--ink);
+  display: inline;
+}
+.workbook-root .doctrine-pov-text.empty { font-style: italic; color: var(--ink-whisper); }
+
+/* Values: 5 columns */
+.workbook-root .doctrine-values {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 10px; margin: 0; padding: 0; list-style: none;
+}
+.workbook-root .doctrine-value {
+  text-align: center;
+  border: 1px solid var(--rule-ghost);
+  padding: 14px 6px;
+  border-radius: 2px;
+  background: var(--bone);
+}
+.workbook-root .doctrine-value-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px;
+  color: var(--brass); display: block; margin-bottom: 6px;
+}
+.workbook-root .doctrine-value-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 15px; line-height: 1.25; color: var(--ink);
+  display: block;
+}
+.workbook-root .doctrine-value-text.empty { font-style: italic; color: var(--ink-whisper); }
+
+.workbook-root .doctrine-foot {
+  margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--rule-ghost);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--ink-whisper);
+}
+.workbook-root .doctrine-foot em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+  letter-spacing: 0; text-transform: none; color: var(--ink-quiet);
+}
+
+@media (max-width: 720px) {
+  .workbook-root .doctrine-page { padding: 40px 24px 32px; aspect-ratio: auto; }
+  .workbook-root .doctrine-title { font-size: 30px; }
+  .workbook-root .doctrine-system-line { grid-template-columns: 22px 1fr; gap: 8px; }
+  .workbook-root .doctrine-system-key { display: none; }
+  .workbook-root .doctrine-values { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ---------- Brand Brief Card ---------- */
