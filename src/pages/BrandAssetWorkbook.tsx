@@ -537,6 +537,7 @@ html.workbook-html { scroll-behavior: smooth; }
 @media print {
   .workbook-root { background: white !important; color: black !important; font-size: 11pt; }
   .workbook-root .grain, .workbook-root .topbar, .workbook-root .progress,
+  .workbook-root .mini-strip,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
   .workbook-root .lead-gate,
   .workbook-root .insider-card, .workbook-root .insider-links { display: none !important; }
