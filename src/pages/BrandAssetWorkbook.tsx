@@ -226,6 +226,68 @@ html.workbook-html { scroll-behavior: smooth; }
   z-index: 60; transition: width 80ms linear;
 }
 
+/* Mini section progress strip — sits under topbar */
+.workbook-root .mini-strip {
+  position: sticky; top: 64px; z-index: 49;
+  background: rgba(237,231,219,0.92);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border-bottom: 1px solid var(--rule);
+}
+.workbook-root .mini-strip-inner {
+  max-width: 1200px; margin: 0 auto; height: 40px;
+  padding: 0 56px; display: flex; align-items: center; gap: 16px;
+  overflow: hidden;
+}
+.workbook-root .mini-strip-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
+  white-space: nowrap; flex-shrink: 0;
+}
+.workbook-root .mini-strip-track {
+  flex: 1; display: flex; align-items: center; gap: 4px; min-width: 0;
+}
+.workbook-root .mini-strip-cell {
+  flex: 1; height: 16px; position: relative; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; padding: 0;
+}
+.workbook-root .mini-strip-cell::after {
+  content: ""; display: block; width: 100%; height: 2px;
+  background: var(--rule-ghost); transition: background 200ms ease;
+}
+.workbook-root .mini-strip-cell:hover::after { background: var(--rule); }
+.workbook-root .mini-strip-cell.done::after { background: var(--brass-line); }
+.workbook-root .mini-strip-cell.active::after { background: var(--brass); height: 2px; }
+.workbook-root .mini-strip-tooltip {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  margin-top: 4px; padding: 4px 8px;
+  background: var(--ink); color: var(--bone);
+  font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 150ms ease;
+  border-radius: 1px;
+}
+.workbook-root .mini-strip-cell:hover .mini-strip-tooltip { opacity: 1; }
+.workbook-root .mini-strip-counter {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+  color: var(--brass); white-space: nowrap; flex-shrink: 0; min-width: 48px;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .workbook-root .mini-strip-inner { padding: 0 16px; height: 36px; gap: 10px; }
+  .workbook-root .mini-strip-label { display: none; }
+  .workbook-root .mini-strip-counter { font-size: 12px; }
+}
+
+/* Anchor offset so jumps clear topbar + mini strip */
+.workbook-root .workbook-section,
+.workbook-root section[id] { scroll-margin-top: 112px; }
+@media (max-width: 720px) {
+  .workbook-root .workbook-section,
+  .workbook-root section[id] { scroll-margin-top: 104px; }
+}
+
 /* Workbook field */
 .workbook-root .wb-card {
   position: relative;
