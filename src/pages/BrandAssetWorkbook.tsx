@@ -644,8 +644,152 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .wb-textarea, .workbook-root .wb-input { border: 1px solid #999; }
   .workbook-root .chapter-card { page-break-after: always; min-height: auto; padding: 80pt 0; }
   .workbook-root .brand-brief-card { page-break-before: always; }
+  .workbook-root .doctrine-page { page-break-before: always; page-break-after: always; }
   .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
+}
+
+/* ---------- Brand Doctrine (one-page summary) ---------- */
+.workbook-root .doctrine-wrap {
+  margin: 64px auto;
+  max-width: 760px;
+}
+.workbook-root .doctrine-eyebrow {
+  text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-quiet);
+  margin-bottom: 12px;
+}
+.workbook-root .doctrine-page {
+  background: var(--bone-deep);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 56px 56px 48px;
+  position: relative;
+  /* Approximate single A4/letter page proportion */
+  aspect-ratio: 1 / 1.414;
+  display: flex;
+  flex-direction: column;
+}
+.workbook-root .doctrine-corner {
+  position: absolute; width: 18px; height: 18px;
+  border-color: var(--brass);
+}
+.workbook-root .doctrine-corner.tl { top: 16px; left: 16px; border-top: 1px solid; border-left: 1px solid; }
+.workbook-root .doctrine-corner.tr { top: 16px; right: 16px; border-top: 1px solid; border-right: 1px solid; }
+.workbook-root .doctrine-corner.bl { bottom: 16px; left: 16px; border-bottom: 1px solid; border-left: 1px solid; }
+.workbook-root .doctrine-corner.br { bottom: 16px; right: 16px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.workbook-root .doctrine-head { text-align: center; }
+.workbook-root .doctrine-mark {
+  font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 18px;
+  letter-spacing: 0.32em; color: var(--ink); text-transform: uppercase;
+}
+.workbook-root .doctrine-rule { width: 48px; height: 1px; background: var(--brass); margin: 12px auto; }
+.workbook-root .doctrine-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: 40px; line-height: 1.1; color: var(--ink); margin: 8px 0 4px;
+}
+.workbook-root .doctrine-subtitle {
+  font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.36em;
+  text-transform: uppercase; color: var(--ink-whisper);
+}
+
+.workbook-root .doctrine-body { flex: 1; margin-top: 32px; }
+.workbook-root .doctrine-block { margin-top: 28px; }
+.workbook-root .doctrine-block:first-child { margin-top: 0; }
+.workbook-root .doctrine-block-label {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  margin-bottom: 10px;
+}
+.workbook-root .doctrine-block-label::before {
+  content: ""; width: 16px; height: 1px; background: var(--brass); display: inline-block;
+}
+
+/* Marketing System: 4 stacked lines */
+.workbook-root .doctrine-system { margin: 0; padding: 0; list-style: none; }
+.workbook-root .doctrine-system-line {
+  display: grid;
+  grid-template-columns: 28px 88px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid var(--rule-ghost);
+}
+.workbook-root .doctrine-system-line:first-child { border-top: none; padding-top: 0; }
+.workbook-root .doctrine-system-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
+  color: var(--brass);
+}
+.workbook-root .doctrine-system-key {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-quiet);
+}
+.workbook-root .doctrine-system-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.45; color: var(--ink);
+}
+.workbook-root .doctrine-system-text.empty {
+  font-style: italic; color: var(--ink-whisper);
+}
+
+/* POV pull-quote */
+.workbook-root .doctrine-pov {
+  background: var(--bone);
+  border-left: 2px solid var(--brass);
+  padding: 18px 22px;
+  margin: 0;
+}
+.workbook-root .doctrine-pov-prefix {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
+  color: var(--brass); margin-right: 6px;
+}
+.workbook-root .doctrine-pov-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 1.45; color: var(--ink);
+  display: inline;
+}
+.workbook-root .doctrine-pov-text.empty { font-style: italic; color: var(--ink-whisper); }
+
+/* Values: 5 columns */
+.workbook-root .doctrine-values {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 10px; margin: 0; padding: 0; list-style: none;
+}
+.workbook-root .doctrine-value {
+  text-align: center;
+  border: 1px solid var(--rule-ghost);
+  padding: 14px 6px;
+  border-radius: 2px;
+  background: var(--bone);
+}
+.workbook-root .doctrine-value-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px;
+  color: var(--brass); display: block; margin-bottom: 6px;
+}
+.workbook-root .doctrine-value-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 15px; line-height: 1.25; color: var(--ink);
+  display: block;
+}
+.workbook-root .doctrine-value-text.empty { font-style: italic; color: var(--ink-whisper); }
+
+.workbook-root .doctrine-foot {
+  margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--rule-ghost);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--ink-whisper);
+}
+.workbook-root .doctrine-foot em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+  letter-spacing: 0; text-transform: none; color: var(--ink-quiet);
+}
+
+@media (max-width: 720px) {
+  .workbook-root .doctrine-page { padding: 40px 24px 32px; aspect-ratio: auto; }
+  .workbook-root .doctrine-title { font-size: 30px; }
+  .workbook-root .doctrine-system-line { grid-template-columns: 22px 1fr; gap: 8px; }
+  .workbook-root .doctrine-system-key { display: none; }
+  .workbook-root .doctrine-values { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ---------- Brand Brief Card ---------- */
@@ -1720,6 +1864,101 @@ const BrandBrief = ({ values }: { values: Values }) => {
 };
 
 /* ============================================================
+ * Brand Doctrine — one-page printable summary
+ * Pulls the 4 Marketing System lines, POV, and 5 values.
+ * ============================================================ */
+const BrandDoctrine = ({ values, lead }: { values: Values; lead: Lead }) => {
+  const visionWords = (values.vision || "").trim().split(/\s+/).filter(Boolean).slice(0, 6).join(" ");
+  const briefTitle = visionWords || "Your Practice";
+  const today = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+
+  const systemLines: Array<{ key: string; label: string; field: string }> = [
+    { key: "01", label: "Patient", field: "ms_patient" },
+    { key: "02", label: "Differentiators", field: "ms_differentiators" },
+    { key: "03", label: "Experience", field: "ms_experience" },
+    { key: "04", label: "Promise", field: "ms_promise" },
+  ];
+
+  const oneLine = (raw?: string) => {
+    const t = (raw || "").trim();
+    if (!t) return "";
+    return t.split("\n").map((s) => s.trim()).filter(Boolean).join(" · ");
+  };
+
+  const pov = (values.pov_statement || "").trim();
+  const valueItems = [1, 2, 3, 4, 5].map((i) => (values[`value_${i}`] || "").trim());
+
+  return (
+    <div className="doctrine-wrap">
+      <div className="doctrine-eyebrow">Single-page summary · suitable for printing</div>
+      <article className="doctrine-page" aria-label="Your Brand Doctrine">
+        <span className="doctrine-corner tl" />
+        <span className="doctrine-corner tr" />
+        <span className="doctrine-corner bl" />
+        <span className="doctrine-corner br" />
+
+        <header className="doctrine-head">
+          <div className="doctrine-mark">PASTED · Library · Vol. I</div>
+          <div className="doctrine-rule" />
+          <h3 className="doctrine-title">Your Brand <em>Doctrine</em></h3>
+          <div className="doctrine-subtitle">{briefTitle} · {today}</div>
+        </header>
+
+        <div className="doctrine-body">
+          <section className="doctrine-block">
+            <div className="doctrine-block-label">The Marketing System</div>
+            <ol className="doctrine-system">
+              {systemLines.map((line) => {
+                const text = oneLine(values[line.field]);
+                return (
+                  <li key={line.key} className="doctrine-system-line">
+                    <span className="doctrine-system-num">{line.key}</span>
+                    <span className="doctrine-system-key">{line.label}</span>
+                    <span className={`doctrine-system-text${text ? "" : " empty"}`}>
+                      {text || "— to complete —"}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+
+          <section className="doctrine-block">
+            <div className="doctrine-block-label">Point of View</div>
+            <blockquote className="doctrine-pov">
+              <span className="doctrine-pov-prefix">We believe</span>
+              <span className={`doctrine-pov-text${pov ? "" : " empty"}`}>
+                {pov || "— to complete —"}
+              </span>
+            </blockquote>
+          </section>
+
+          <section className="doctrine-block">
+            <div className="doctrine-block-label">Five Values · The Filters We Defend</div>
+            <ul className="doctrine-values">
+              {valueItems.map((v, i) => (
+                <li key={i} className="doctrine-value">
+                  <span className="doctrine-value-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`doctrine-value-text${v ? "" : " empty"}`}>
+                    {v || "—"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <footer className="doctrine-foot">
+          <span>{lead.practice_name?.trim() || (lead.first_name ? `${lead.first_name}${lead.last_name ? " " + lead.last_name : ""}` : "PASTED")}</span>
+          <em>Where Dentistry Becomes Iconic.</em>
+          <span>Vol. I · MMXXVI</span>
+        </footer>
+      </article>
+    </div>
+  );
+};
+
+/* ============================================================
  * Insider Signup
  * ============================================================ */
 const insiderEmailSchema = z.string().trim().email().max(255);
@@ -2127,6 +2366,38 @@ const BrandAssetWorkbook = () => {
       });
       lines.push("");
     });
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+
+    /* ---- Brand Doctrine block (one-page summary) ---- */
+    const oneLineExp = (raw?: string) => {
+      const t = (raw || "").trim();
+      if (!t) return "— to complete —";
+      return t.split("\n").map((s) => s.trim()).filter(Boolean).join(" · ");
+    };
+    lines.push("");
+    lines.push("╔══════════════════════════════════════════╗");
+    lines.push("║          YOUR BRAND DOCTRINE             ║");
+    lines.push("║       One page · Pin it to the wall      ║");
+    lines.push("╚══════════════════════════════════════════╝");
+    lines.push("");
+    lines.push(`${briefTitle} · ${today}`);
+    lines.push("");
+    lines.push("── THE MARKETING SYSTEM ──");
+    lines.push(`  01 · PATIENT          ${oneLineExp(values.ms_patient)}`);
+    lines.push(`  02 · DIFFERENTIATORS  ${oneLineExp(values.ms_differentiators)}`);
+    lines.push(`  03 · EXPERIENCE       ${oneLineExp(values.ms_experience)}`);
+    lines.push(`  04 · PROMISE          ${oneLineExp(values.ms_promise)}`);
+    lines.push("");
+    lines.push("── POINT OF VIEW ──");
+    lines.push(`  We believe ${oneLineExp(values.pov_statement)}`);
+    lines.push("");
+    lines.push("── FIVE VALUES · THE FILTERS WE DEFEND ──");
+    [1, 2, 3, 4, 5].forEach((i) => {
+      const v = (values[`value_${i}`] || "").trim();
+      lines.push(`  0${i}. ${v || "—"}`);
+    });
+    lines.push("");
     lines.push("────────────────────────────────────────────");
     lines.push("");
     lines.push("Where Dentistry Becomes Iconic.");
@@ -2859,6 +3130,21 @@ const BrandAssetWorkbook = () => {
 
           <p style={{ marginTop: 32, textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: 14, fontStyle: "italic", color: "var(--ink-quiet)", maxWidth: 520, marginLeft: "auto", marginRight: "auto" }}>
             Your Brief is live. Return to any section above and it updates in real time.
+          </p>
+
+          {/* DOCTRINE — one-page printable summary */}
+          <div style={{ marginTop: 96, textAlign: "center" }}>
+            <div className="numeral" style={{ marginBottom: 12 }}>DOCTRINE</div>
+            <h3 className="serif" style={{ fontSize: 32, marginBottom: 12 }}>One page. <em>Pin it to the wall.</em></h3>
+            <p style={{ maxWidth: 520, margin: "0 auto", fontFamily: "'Cormorant Garamond', serif", fontSize: 18, lineHeight: 1.5, color: "var(--ink-quiet)" }}>
+              Your Brief is the full reference. Your <em>Doctrine</em> is the single page you print, frame, and put in front of every team meeting — the four System lines, your Point of View, and the five values you defend.
+            </p>
+          </div>
+
+          <BrandDoctrine values={values} lead={lead} />
+
+          <p style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: 14, fontStyle: "italic", color: "var(--ink-quiet)", maxWidth: 520, marginLeft: "auto", marginRight: "auto" }}>
+            Included in your export. Use <em>Print my Brief</em> below to print just this page on letter or A4.
           </p>
         </Section>
 
