@@ -5,8 +5,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import workbookCoverPortrait from "@/assets/workbook-cover-portrait.jpg";
+import workbookChapterFoundation from "@/assets/workbook-chapter-foundation.jpg";
 import workbookChapterPositioning from "@/assets/workbook-chapter-positioning.jpg";
+import workbookChapterPov from "@/assets/workbook-chapter-pov.jpg";
+import workbookChapterExperience from "@/assets/workbook-chapter-experience.jpg";
+import workbookChapterSignal from "@/assets/workbook-chapter-signal.jpg";
 import workbookChapterSystem from "@/assets/workbook-chapter-system.jpg";
+import workbookDoctrineBackdrop from "@/assets/workbook-doctrine-backdrop.jpg";
+import workbookClosingPlate from "@/assets/workbook-closing.jpg";
 
 const INSIDER_KEY = "pasted_insider_email";
 type InsiderRecord = { email: string; submitted_at: string };
@@ -803,9 +809,44 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .chapter-portrait { height: 320px; }
   .workbook-root .cover-portrait { max-width: 280px; margin-top: 48px; }
 }
+
+/* Editorial closing plate — full-bleed band before the final CTA */
+.workbook-root .closing-plate {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: clamp(280px, 48vh, 480px);
+  overflow: hidden;
+  background: var(--ink);
+  margin-top: 64px;
+}
+.workbook-root .closing-plate img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: contrast(1.04);
+}
+.workbook-root .closing-plate::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(237,231,219,0) 0%, rgba(237,231,219,0) 55%, rgba(237,231,219,0.92) 100%),
+    linear-gradient(0deg, rgba(237,231,219,0) 65%, rgba(237,231,219,0.55) 100%);
+  pointer-events: none;
+}
+.workbook-root .closing-plate-meta {
+  position: absolute; left: 0; right: 0; bottom: 22px;
+  text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-quiet);
+}
+@media (max-width: 720px) {
+  .workbook-root .closing-plate { height: 240px; margin-top: 40px; }
+}
+
 @media print {
   .workbook-root .chapter-portrait,
-  .workbook-root .cover-portrait { display: none !important; }
+  .workbook-root .cover-portrait,
+  .workbook-root .closing-plate,
+  .workbook-root .doctrine-backdrop { display: none !important; }
 }
 
 /* CTA pill */
@@ -934,15 +975,43 @@ html.workbook-html { scroll-behavior: smooth; }
   aspect-ratio: 1 / 1.414;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .workbook-root .doctrine-corner {
   position: absolute; width: 18px; height: 18px;
   border-color: var(--brass);
+  z-index: 2;
 }
 .workbook-root .doctrine-corner.tl { top: 16px; left: 16px; border-top: 1px solid; border-left: 1px solid; }
 .workbook-root .doctrine-corner.tr { top: 16px; right: 16px; border-top: 1px solid; border-right: 1px solid; }
 .workbook-root .doctrine-corner.bl { bottom: 16px; left: 16px; border-bottom: 1px solid; border-left: 1px solid; }
 .workbook-root .doctrine-corner.br { bottom: 16px; right: 16px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Faint editorial backdrop inside the doctrine card — sits below seal & content */
+.workbook-root .doctrine-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.workbook-root .doctrine-backdrop img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+  filter: contrast(1.05) saturate(0.85);
+}
+.workbook-root .doctrine-backdrop::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(245,238,221,0) 0%, rgba(245,238,221,0.65) 70%, rgba(245,238,221,0.95) 100%);
+}
+/* Make sure the seal & body sit above the backdrop */
+.workbook-root .doctrine-seal { z-index: 1; }
+.workbook-root .doctrine-page > *:not(.doctrine-backdrop):not(.doctrine-corner):not(.doctrine-seal) {
+  position: relative;
+  z-index: 2;
+}
 
 /* Center monogram seal — sits behind content like an embossed certificate stamp */
 .workbook-root .doctrine-seal {
