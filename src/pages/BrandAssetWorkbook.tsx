@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
 import { z } from "zod";
 import { toPng } from "html-to-image";
-import { supedTo: supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
 import workbookCoverPortrait from "@/assets/workbook-cover-portrait.jpg";
