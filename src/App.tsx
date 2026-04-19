@@ -11,6 +11,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import BrandAssetWorkbook from "./pages/BrandAssetWorkbook";
 import DoctrineOnBrand from "./pages/DoctrineOnBrand";
+import Founders from "./pages/Founders";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
           <Route path="/library/vol-i" element={<BrandAssetWorkbook />} />
           <Route path="/library/doctrine" element={<DoctrineOnBrand />} />
+          <Route path="/founders" element={<Founders />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
