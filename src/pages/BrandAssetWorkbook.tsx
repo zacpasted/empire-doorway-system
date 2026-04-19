@@ -794,7 +794,41 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .wb-textarea, .workbook-root .wb-input { border: 1px solid #999; }
   .workbook-root .chapter-card { page-break-after: always; min-height: auto; padding: 80pt 0; }
   .workbook-root .brand-brief-card { page-break-before: always; }
-  .workbook-root .doctrine-page { page-break-before: always; page-break-after: always; }
+
+  /* Doctrine: own page, no internal splits, no aspect-ratio (let real page govern). */
+  .workbook-root .doctrine-eyebrow { display: none !important; }
+  .workbook-root .doctrine-wrap {
+    margin: 0 auto !important;
+    max-width: none !important;
+    page-break-before: always;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  .workbook-root .doctrine-page {
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 32pt 28pt !important;
+    box-shadow: none !important;
+    background: white !important;
+    border-color: #999 !important;
+    page-break-before: avoid;
+    page-break-after: avoid;
+    break-inside: avoid;
+  }
+  /* Keep every sub-block intact — never split a values cell or a system line. */
+  .workbook-root .doctrine-block,
+  .workbook-root .doctrine-system-line,
+  .workbook-root .doctrine-pov,
+  .workbook-root .doctrine-value,
+  .workbook-root .doctrine-foot { break-inside: avoid; page-break-inside: avoid; }
+  /* Tighten vertical rhythm so the whole doctrine fits on one printed page. */
+  .workbook-root .doctrine-body { margin-top: 18pt !important; }
+  .workbook-root .doctrine-block { margin-top: 16pt !important; }
+  .workbook-root .doctrine-foot { margin-top: 16pt !important; padding-top: 10pt !important; }
+  /* Seal: keep visible but a touch lighter so it doesn't muddy the print. */
+  .workbook-root .doctrine-seal { opacity: 0.05 !important; }
+
   .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
 }
