@@ -74,22 +74,33 @@ const Founders = () => {
         .founder-figure { margin: 0; display: flex; flex-direction: column; }
         .founder-frame {
           position: relative;
-          background: var(--bone);
-          padding: 18px;
-          box-shadow:
-            0 1px 0 var(--rule),
-            0 24px 48px -28px rgba(15,13,10,0.35);
+          background: transparent;
+          padding: 0;
+          box-shadow: none;
         }
         .founder-frame::before {
-          content: ""; position: absolute; inset: 8px;
-          border: 1px solid var(--rule); pointer-events: none;
+          content: none;
         }
         .founder-frame img {
-          width: 100%; height: auto; display: block;
+          width: 100%;
+          aspect-ratio: 3/4;
+          object-fit: contain;
+          display: block;
           position: relative;
+          /* Feathered fade-to-bone edges */
+          -webkit-mask-image: 
+            radial-gradient(ellipse 80% 70% at 50% 50%, black 60%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%),
+            linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          mask-image: 
+            radial-gradient(ellipse 80% 70% at 50% 50%, black 60%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%),
+            linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          -webkit-mask-composite: intersect;
+          mask-composite: intersect;
         }
         .founder-caption {
-          margin-top: 22px; padding: 0 4px;
+          margin-top: 28px; padding: 0 4px;
           display: flex; flex-direction: column; gap: 6px;
           text-align: center;
         }
