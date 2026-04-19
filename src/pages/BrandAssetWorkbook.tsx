@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
 import { z } from "zod";
+import { toPng } from "html-to-image";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
@@ -2492,6 +2493,56 @@ const BrandAssetWorkbook = () => {
     });
   }, []);
 
+  /* Download Doctrine as a high-res PNG image — captures the .doctrine-page card
+     via html-to-image at 2x pixel ratio for sharable, print-quality export. */
+  const [downloadingDoctrine, setDownloadingDoctrine] = useState(false);
+  const handleDownloadDoctrine = useCallback(async () => {
+    const node = document.querySelector(
+      ".workbook-root .doctrine-wrap .doctrine-page"
+    ) as HTMLElement | null;
+    if (!node) {
+      toast({
+        title: "Couldn't find the Doctrine",
+        description: "Please scroll to the Doctrine card and try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setDownloadingDoctrine(true);
+    try {
+      const dataUrl = await toPng(node, {
+        pixelRatio: 2,
+        cacheBust: true,
+        backgroundColor: getComputedStyle(node).backgroundColor || "#F5EDD8",
+      });
+      const stamp = new Date().toISOString().slice(0, 10);
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `pasted-doctrine-${stamp}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      toast({
+        title: "Doctrine downloaded",
+        description: "Your shareable image is ready.",
+      });
+      void trackCTAClick({
+        ctaId: "library_vol_i_download_doctrine_png",
+        ctaText: "Download the Doctrine as an image",
+        section: "library_action",
+      });
+    } catch (e) {
+      console.error("Doctrine PNG export failed", e);
+      toast({
+        title: "Image export failed",
+        description: "Please try again, or use 'Print only the Doctrine'.",
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadingDoctrine(false);
+    }
+  }, []);
+
   /* Export */
   const handleExport = async () => {
     const parsed = leadSchema.safeParse(lead);
@@ -3540,6 +3591,13 @@ const BrandAssetWorkbook = () => {
               onClick={handlePrintDoctrine}
             >
               Print only the Doctrine <em>→</em>
+            </button>
+            <button
+              className="insider-link"
+              onClick={handleDownloadDoctrine}
+              disabled={downloadingDoctrine}
+            >
+              {downloadingDoctrine ? "Rendering image…" : <>Download the Doctrine as an image <em>→</em></>}
             </button>
           </div>
         </Section>
