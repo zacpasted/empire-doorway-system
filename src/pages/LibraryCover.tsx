@@ -81,10 +81,11 @@ const LibraryCover = () => {
           --brass-line: rgba(184, 153, 104, 0.48);
           --bone-quiet: #A59E8E;
 
-          position: relative;
-          width: 100%;
+          position: fixed;
+          inset: 0;
+          width: 100vw;
           height: 100vh;
-          min-height: 100svh;
+          height: 100svh;
           overflow: hidden;
           background: var(--ink);
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
