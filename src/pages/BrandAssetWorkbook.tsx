@@ -1693,43 +1693,48 @@ const BrandAssetWorkbook = () => {
 
         {/* PART I */}
         <Section id="positioning" masthead="§ I · POSITIONING" ornament={<OrnCrosshair />}>
+          <StatusBar active={1} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART I</div>
           <h2 className="serif"><em>Positioning.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
-            You already specialize. The question is not <em>what</em> you do — it is whether the market knows <em>how you own it.</em>
+            You already specialize. The question is whether the market knows <em>how you own it.</em>
           </p>
-          <div className="reading">
-            <p>Most aesthetic dentists have a specialty on the website and generalist messaging everywhere else. The niche is chosen. The positioning is fuzzy. That gap is where pull leaks.</p>
-            <p>Positioning is how you describe your specialty in a way only you could describe it. “Cosmetic” is a category. “The dentist high-profile patients are sent to when nobody can know they had work done” is a position.</p>
-            <p>This is where the ikigai synthesis lives. Your one-sentence positioning from the foundation <em>is</em> your positioning — if it survives the real-world test. The test is whether a patient can repeat it to a friend at dinner without losing any of it.</p>
+          <div className="reading tight">
+            <p>“Cosmetic” is a category. <em>“The dentist high-profile patients are sent to when nobody can know they had work done”</em> is a position.</p>
           </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The PASTED Descriptive Call-Out</h3>
-          <div className="reading">
-            <p>Do not call out job titles. Call out conditions, states, and self-perceptions. “Executives over 50” is weak. “The woman who hasn't smiled in a photo since her divorce” is strong.</p>
-          </div>
-
-          <div className="callout">
-            <div className="callout-label">Working Frame</div>
-            <p>Weak: <em>For professionals who want better smiles.</em></p>
-            <p>Strong: <em>For the founder, surgeon, or executive whose smile hasn't kept up with the life they've built.</em></p>
-          </div>
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>Call out a state, not a job title.</h3>
+          <BeforeAfter
+            beforeLabel="Weak call-out"
+            afterLabel="Strong call-out"
+            before={[
+              "Executives over 50",
+              "Professionals who want better smiles",
+              "Anyone interested in cosmetic dentistry",
+            ]}
+            after={[
+              "The founder whose smile hasn't kept up with the life they've built",
+              "The woman who hasn't smiled in a photo since her divorce",
+              "The patient who has been quoted three times and trusted no one",
+            ]}
+          />
 
           <h3 style={{ marginTop: 56, marginBottom: 16 }}>The 3% In-Market Rule</h3>
-          <div className="reading">
-            <p>At any given moment, only about <strong>3% of your total addressable market is ready to buy.</strong> The other 97% is unaware, passive, or not yet in the window. A good brand speaks only to the 3% — with precision — while conditioning the 97% for their future moment. That is the mechanism of pull.</p>
-          </div>
+          <p style={{ maxWidth: 620 }}>Only 3% of your market is ready to buy today. Speak to them with precision. Condition the other 97% for their moment.</p>
+          <MarketBar />
 
-          <WorkbookBlock num="✦" fieldKey="callouts" question="Write three descriptive call-outs for your 3%." hint="Each should describe a state or self-perception, not a demographic. They should feel like private thoughts, not segments." placeholder={"1. For the woman who…\n2. For the man who…\n3. For the patient who…"} minHeight={130} values={values} onChange={handleChange} />
+          <Outcome label="Why this matters">
+            Pull comes from being unmistakable to the 3% — and unforgettable to the 97% before they ever enter the window.
+          </Outcome>
+
+          <WorkbookBlock num="✦" fieldKey="callouts" question="Write three descriptive call-outs for your 3%." hint="Each should describe a state or self-perception, not a demographic." placeholder={"1. For the woman who…\n2. For the man who…\n3. For the patient who…"} minHeight={130} values={values} onChange={handleChange} />
 
           <span className="sublabel" style={{ marginTop: 72 }}>Capstone · The Practice Marketing System</span>
-          <div className="reading">
-            <p>Four lines that, together, define the commercial engine of your brand. The most-used page of this guide — what you read back before every shoot, every ad, every team meeting.</p>
-          </div>
-          <WorkbookBlock num="01" fieldKey="ms_patient" inputType="input" question="Ideal Patient" hint="Describe the patient you want more of in one vivid sentence. Not a demographic — a person." placeholder="The ___ who ___" values={values} onChange={handleChange} />
-          <WorkbookBlock num="02" fieldKey="ms_differentiators" question="Three Differentiators" hint="What separates you from every other dentist in your specialty, stated in the patient's language — not credentials or equipment." placeholder={"1. ___\n2. ___\n3. ___"} minHeight={140} values={values} onChange={handleChange} />
-          <WorkbookBlock num="03" fieldKey="ms_experience" question="Signature Experience" hint="The 3–5 step process that defines how you deliver the work. Named, repeatable, ownable." placeholder="Step 1 ___. Step 2 ___. Step 3 ___." minHeight={100} values={values} onChange={handleChange} />
-          <WorkbookBlock num="04" fieldKey="ms_promise" inputType="input" question="The Promise" hint="What the patient walks away with. What you guarantee. The outcome your brand stakes its name on." placeholder="Every patient walks away with ___" values={values} onChange={handleChange} />
+          <p style={{ maxWidth: 620, marginBottom: 24 }}>Four lines that define the commercial engine of your brand. The most-used page of this guide.</p>
+          <WorkbookBlock num="01" fieldKey="ms_patient" inputType="input" question="Ideal Patient" hint="One vivid sentence. A person, not a demographic." placeholder="The ___ who ___" values={values} onChange={handleChange} />
+          <WorkbookBlock num="02" fieldKey="ms_differentiators" question="Three Differentiators" hint="In the patient's language. Not credentials or equipment." placeholder={"1. ___\n2. ___\n3. ___"} minHeight={140} values={values} onChange={handleChange} />
+          <WorkbookBlock num="03" fieldKey="ms_experience" question="Signature Experience" hint="The 3–5 step process. Named, repeatable, ownable." placeholder="Step 1 ___. Step 2 ___. Step 3 ___." minHeight={100} values={values} onChange={handleChange} />
+          <WorkbookBlock num="04" fieldKey="ms_promise" inputType="input" question="The Promise" hint="The outcome your brand stakes its name on." placeholder="Every patient walks away with ___" values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
