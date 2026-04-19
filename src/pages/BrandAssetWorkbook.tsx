@@ -1744,16 +1744,13 @@ const BrandAssetWorkbook = () => {
 
         {/* PART II */}
         <Section id="pov" masthead="§ II · POINT OF VIEW" ornament={<OrnCompassVariant />}>
+          <StatusBar active={2} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART II</div>
           <h2 className="serif"><em>Point of View.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>Strong brands have opinions. Weak brands list services.</p>
-          <div className="reading">
-            <p>This is the part most dental brands are missing — and the part that separates a practice from a point of reference.</p>
-            <p>Point of view is the non-negotiable belief you carry into every case, every consult, every piece of content. It is what makes a patient say “I want <em>him</em> specifically” instead of “I want a dentist.”</p>
-          </div>
 
-          <div className="callout">
-            <div className="callout-label">Examples</div>
+          <div className="callout" style={{ marginTop: 32 }}>
+            <div className="callout-label">Five real points of view</div>
             <p><em>We don't do cookie-cutter veneers.</em></p>
             <p><em>Subtlety over Hollywood.</em></p>
             <p><em>Function before aesthetics.</em></p>
@@ -1761,21 +1758,17 @@ const BrandAssetWorkbook = () => {
             <p><em>Age-appropriate or nothing.</em></p>
           </div>
 
-          <div className="reading">
-            <p>Every time we rebuild this — not the logo — case value goes up, price sensitivity drops, and suddenly you are not competing anymore. That is pull. And pull is what an office renovation will never buy you.</p>
-          </div>
+          <Outcome label="What a real POV earns you">
+            Case value rises. Price sensitivity drops. You stop competing.
+          </Outcome>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Signature Story</h3>
-          <div className="reading">
-            <p>A point of view becomes unforgettable when it is attached to a story. Every iconic practice has one that is specific, true, and repeatable. Specific enough that it could not belong to any other dentist. True enough that you never have to remember it. Repeatable enough that a patient can tell their spouse over dinner.</p>
-          </div>
-
-          <div style={{ marginTop: 32, marginBottom: 56 }}>
+          <h3 style={{ marginTop: 56, marginBottom: 24 }}>The Signature Story · four layers</h3>
+          <div style={{ marginBottom: 56 }}>
             {[
-              { k: "Origin", t: "Why this practice exists.", s: "The reason you opened the doors. The patient, the mentor, the failure, or the frustration that started it." },
-              { k: "Continuity", t: "What's been true the whole time.", s: "Three-generation practices, 30-year hygienists, signature techniques. Use specifics, not decades." },
-              { k: "Mechanism", t: "The way you do it that others don't.", s: "Your unique approach — named, explained, owned. The shorthand patients use." },
-              { k: "Promise", t: "What the patient walks away with.", s: "Not the procedure. The outcome. The identity shift.", last: true },
+              { k: "Origin", t: "Why this practice exists.", s: "The reason you opened the doors." },
+              { k: "Continuity", t: "What's been true the whole time.", s: "Specifics, not decades." },
+              { k: "Mechanism", t: "The way you do it that others don't.", s: "Named. Owned. Repeatable." },
+              { k: "Promise", t: "What the patient walks away with.", s: "The identity shift, not the procedure.", last: true },
             ].map((r) => (
               <div key={r.k} className={`framework-row${r.last ? " last" : ""}`}>
                 <div className="framework-key">{r.k}</div>
@@ -1787,8 +1780,8 @@ const BrandAssetWorkbook = () => {
             ))}
           </div>
 
-          <WorkbookBlock num="✦" fieldKey="pov_statement" inputType="input" question='Write one sentence: "We believe ______."' hint="This single sentence drives content, messaging, pricing, and differentiation for the next decade. Do not hedge it." placeholder="We believe ___" values={values} onChange={handleChange} />
-          <WorkbookBlock num="✦" fieldKey="story" question="Draft your signature story in four lines." hint="One line per layer. Short. Specific. Not yet polished." placeholder={"Origin:\nContinuity:\nMechanism:\nPromise:"} minHeight={160} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="pov_statement" inputType="input" question='Write one sentence: "We believe ______."' hint="This sentence drives content, messaging, pricing, and differentiation for the next decade." placeholder="We believe ___" values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="story" question="Draft your signature story in four lines." hint="One line per layer. Short. Specific." placeholder={"Origin:\nContinuity:\nMechanism:\nPromise:"} minHeight={160} values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
