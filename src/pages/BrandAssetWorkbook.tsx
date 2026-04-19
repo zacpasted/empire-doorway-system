@@ -908,6 +908,120 @@ const Figure04Compounding = () => (
 );
 
 /* ============================================================
+ * Visual primitives — for retention & visual density
+ * ============================================================ */
+
+const TOC_ITEMS: Array<{ id: string; roman: string; name: string; mini: string; min: string }> = [
+  { id: "prelude", roman: "—", name: "Prelude", mini: "Why becoming, not rebuilding.", min: "8 min" },
+  { id: "premise", roman: "00", name: "The Premise", mini: "Your office is not your brand.", min: "5 min" },
+  { id: "foundation", roman: "—", name: "Foundation · Ikigai", mini: "Twelve questions. One sentence.", min: "20 min" },
+  { id: "compass", roman: "—", name: "Compass", mini: "Vision & mission.", min: "6 min" },
+  { id: "values", roman: "—", name: "Values", mini: "Five filters you defend.", min: "5 min" },
+  { id: "positioning", roman: "I", name: "Positioning", mini: "Becoming known.", min: "10 min" },
+  { id: "pov", roman: "II", name: "Point of View", mini: "Becoming believed.", min: "8 min" },
+  { id: "experience", roman: "III", name: "Experience", mini: "Becoming felt.", min: "6 min" },
+  { id: "signal", roman: "IV", name: "Signal", mini: "Becoming seen.", min: "8 min" },
+  { id: "system", roman: "V", name: "System", mini: "Becoming undeniable.", min: "10 min" },
+  { id: "diagnostic", roman: "—", name: "Three-Question Test", mini: "Before you spend another dollar.", min: "3 min" },
+  { id: "horizon", roman: "—", name: "Horizon · 10·3·1·90", mini: "Twelve goals. Four horizons.", min: "8 min" },
+];
+
+const TableOfContents = () => (
+  <div className="toc">
+    <div style={{ textAlign: "center", marginBottom: 32 }}>
+      <span className="numeral">The Volume · Twelve Sections · ~90 Minutes</span>
+    </div>
+    <div className="toc-grid">
+      {TOC_ITEMS.map((item) => (
+        <a key={item.id} href={`#${item.id}`} className="toc-row">
+          <span className="toc-roman">{item.roman}</span>
+          <span>
+            <span className="toc-name">{item.name}</span>
+            <span className="toc-mini">{item.mini}</span>
+          </span>
+          <span className="toc-min">{item.min}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
+const StatusBar = ({ active }: { active: 1 | 2 | 3 | 4 | 5 }) => {
+  const names = ["Positioning", "Point of View", "Experience", "Signal", "System"];
+  const romans = ["I", "II", "III", "IV", "V"];
+  return (
+    <div className="status-bar">
+      <span>Architecture</span>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <span key={n} className={`status-pip${n === active ? " active" : ""}`} />
+      ))}
+      <span className="status-name">{`Part ${romans[active - 1]} · ${names[active - 1]}`}</span>
+    </div>
+  );
+};
+
+const Outcome = ({ label = "What this earns you", children }: { label?: string; children: ReactNode }) => (
+  <div className="outcome">
+    <div className="outcome-mark">✦</div>
+    <div>
+      <div className="outcome-label">{label}</div>
+      <p className="outcome-text">{children}</p>
+    </div>
+  </div>
+);
+
+type BeforeAfterProps = { before: string[]; after: string[]; beforeLabel?: string; afterLabel?: string };
+const BeforeAfter = ({ before, after, beforeLabel = "Without", afterLabel = "With" }: BeforeAfterProps) => (
+  <div className="ba-split">
+    <div className="ba-side before">
+      <h4>{beforeLabel}</h4>
+      <ul>{before.map((t) => <li key={t}>{t}</li>)}</ul>
+    </div>
+    <div className="ba-divider" />
+    <div className="ba-side after">
+      <h4>{afterLabel}</h4>
+      <ul>{after.map((t) => <li key={t}>{t}</li>)}</ul>
+    </div>
+  </div>
+);
+
+type Stat = { num: string; cap: string };
+const StatStrip = ({ stats }: { stats: Stat[] }) => (
+  <div className="stat-strip">
+    {stats.map((s, i) => (
+      <div key={i} className="stat-cell">
+        <div className="stat-num" dangerouslySetInnerHTML={{ __html: s.num }} />
+        <div className="stat-cap">{s.cap}</div>
+      </div>
+    ))}
+  </div>
+);
+
+const MarketBar = () => (
+  <div className="market-bar" aria-label="3 percent in-market, 97 percent conditioning">
+    <div className="market-bar-track">
+      <div className="market-bar-3" />
+      <div className="market-bar-97" />
+    </div>
+    <div className="market-legend">
+      <span><strong>3% in-market.</strong> Sell.</span>
+      <span>97% future market. <strong>Condition.</strong></span>
+    </div>
+  </div>
+);
+
+const Sparkline = () => (
+  <svg viewBox="0 0 400 80" className="spark" aria-hidden="true">
+    <line x1="0" y1="60" x2="400" y2="60" stroke="#C7BEA8" strokeWidth="0.5" />
+    <path d="M 0 65 Q 100 64 160 56 T 280 32 T 400 6" fill="none" stroke="#8B7A4E" strokeWidth="1.25" />
+    <circle cx="0" cy="65" r="2" fill="#8B7A4E" />
+    <circle cx="400" cy="6" r="2.5" fill="#8B7A4E" />
+    <text x="6" y="78" fontFamily="Inter, sans-serif" fontSize="8" letterSpacing="2" fill="#A59E8E">YEAR 1</text>
+    <text x="370" y="78" fontFamily="Inter, sans-serif" fontSize="8" letterSpacing="2" fill="#8B7A4E">YEAR 5</text>
+  </svg>
+);
+
+/* ============================================================
  * Workbook field components
  * ============================================================ */
 type WBProps = {
