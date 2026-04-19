@@ -3099,6 +3099,21 @@ const BrandAssetWorkbook = () => {
           <p style={{ marginTop: 32, textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: 14, fontStyle: "italic", color: "var(--ink-quiet)", maxWidth: 520, marginLeft: "auto", marginRight: "auto" }}>
             Your Brief is live. Return to any section above and it updates in real time.
           </p>
+
+          {/* DOCTRINE — one-page printable summary */}
+          <div style={{ marginTop: 96, textAlign: "center" }}>
+            <div className="numeral" style={{ marginBottom: 12 }}>DOCTRINE</div>
+            <h3 className="serif" style={{ fontSize: 32, marginBottom: 12 }}>One page. <em>Pin it to the wall.</em></h3>
+            <p style={{ maxWidth: 520, margin: "0 auto", fontFamily: "'Cormorant Garamond', serif", fontSize: 18, lineHeight: 1.5, color: "var(--ink-quiet)" }}>
+              Your Brief is the full reference. Your <em>Doctrine</em> is the single page you print, frame, and put in front of every team meeting — the four System lines, your Point of View, and the five values you defend.
+            </p>
+          </div>
+
+          <BrandDoctrine values={values} lead={lead} />
+
+          <p style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: 14, fontStyle: "italic", color: "var(--ink-quiet)", maxWidth: 520, marginLeft: "auto", marginRight: "auto" }}>
+            Included in your export. Use <em>Print my Brief</em> below to print just this page on letter or A4.
+          </p>
         </Section>
 
         <Dots />
