@@ -10,6 +10,7 @@ import Discover from "./pages/Discover";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import BrandAssetWorkbook from "./pages/BrandAssetWorkbook";
+import DoctrineOnBrand from "./pages/DoctrineOnBrand";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
           <Route path="/library/vol-i" element={<BrandAssetWorkbook />} />
+          <Route path="/library/doctrine" element={<DoctrineOnBrand />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
