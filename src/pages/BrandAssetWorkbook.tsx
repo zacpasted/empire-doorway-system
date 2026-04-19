@@ -2368,6 +2368,38 @@ const BrandAssetWorkbook = () => {
     });
     lines.push("────────────────────────────────────────────");
     lines.push("");
+
+    /* ---- Brand Doctrine block (one-page summary) ---- */
+    const oneLineExp = (raw?: string) => {
+      const t = (raw || "").trim();
+      if (!t) return "— to complete —";
+      return t.split("\n").map((s) => s.trim()).filter(Boolean).join(" · ");
+    };
+    lines.push("");
+    lines.push("╔══════════════════════════════════════════╗");
+    lines.push("║          YOUR BRAND DOCTRINE             ║");
+    lines.push("║       One page · Pin it to the wall      ║");
+    lines.push("╚══════════════════════════════════════════╝");
+    lines.push("");
+    lines.push(`${briefTitle} · ${today}`);
+    lines.push("");
+    lines.push("── THE MARKETING SYSTEM ──");
+    lines.push(`  01 · PATIENT          ${oneLineExp(values.ms_patient)}`);
+    lines.push(`  02 · DIFFERENTIATORS  ${oneLineExp(values.ms_differentiators)}`);
+    lines.push(`  03 · EXPERIENCE       ${oneLineExp(values.ms_experience)}`);
+    lines.push(`  04 · PROMISE          ${oneLineExp(values.ms_promise)}`);
+    lines.push("");
+    lines.push("── POINT OF VIEW ──");
+    lines.push(`  We believe ${oneLineExp(values.pov_statement)}`);
+    lines.push("");
+    lines.push("── FIVE VALUES · THE FILTERS WE DEFEND ──");
+    [1, 2, 3, 4, 5].forEach((i) => {
+      const v = (values[`value_${i}`] || "").trim();
+      lines.push(`  0${i}. ${v || "—"}`);
+    });
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
     lines.push("Where Dentistry Becomes Iconic.");
     lines.push("PREPARED BY PASTED · VOLUME I · MMXXVI");
     lines.push("");
