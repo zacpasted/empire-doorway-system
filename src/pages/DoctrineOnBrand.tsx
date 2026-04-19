@@ -589,6 +589,32 @@ const DoctrineOnBrand = () => {
         </p>
       </section>
 
+      {/* ========== LIBRARY CARD CTA ========== */}
+      <section className="library-card" aria-labelledby="library-card-heading">
+        <div className="library-card-rule" />
+        <div className="library-card-eyebrow">The Pasted Library · Standing Subscription</div>
+        <h2 id="library-card-heading" className="library-card-title">
+          Hold a <em>Library Card.</em>
+        </h2>
+        <p className="library-card-lede">
+          Each dispatch — essays, doctrines, field notes, and the occasional artifact — is published
+          first to a small private channel. No algorithm. No noise. Future volumes of The Pasted
+          Library arrive there before anywhere else.
+        </p>
+        <a
+          className="library-card-cta"
+          href="https://www.instagram.com/channel/AbYlPHEUILBxYX6k/?igsh=YnF1djc5OGpmbm5n"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Request the Library Card</span>
+          <span className="library-card-cta-arrow" aria-hidden="true">→</span>
+        </a>
+        <p className="library-card-fineprint">
+          <em>Delivered via the private Pasted broadcast channel. Leave at any time.</em>
+        </p>
+      </section>
+
       {/* ========== COLOPHON ========== */}
       <footer className="colophon">
         <div className="colophon-rule" />
