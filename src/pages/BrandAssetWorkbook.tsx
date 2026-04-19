@@ -2457,6 +2457,41 @@ const BrandAssetWorkbook = () => {
     // TODO: wire to broadcast email service
   }, []);
 
+  /* Print only the Doctrine card — clones it into a body-level portal,
+     toggles a body class so print CSS hides everything else, then cleans up. */
+  const handlePrintDoctrine = useCallback(() => {
+    const original = document.querySelector(".workbook-root .doctrine-wrap");
+    if (!original) {
+      window.print();
+      return;
+    }
+    const portal = document.createElement("div");
+    portal.className = "doctrine-print-portal";
+    const clone = original.cloneNode(true) as HTMLElement;
+    portal.appendChild(clone);
+    document.body.appendChild(portal);
+    document.body.classList.add("print-doctrine-only");
+
+    const cleanup = () => {
+      document.body.classList.remove("print-doctrine-only");
+      if (portal.parentNode) portal.parentNode.removeChild(portal);
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+
+    requestAnimationFrame(() => {
+      window.print();
+      // Fallback cleanup for browsers that don't reliably fire afterprint
+      setTimeout(cleanup, 1500);
+    });
+
+    void trackCTAClick({
+      ctaId: "library_vol_i_print_doctrine",
+      ctaText: "Print only the Doctrine",
+      section: "library_action",
+    });
+  }, []);
+
   /* Export */
   const handleExport = async () => {
     const parsed = leadSchema.safeParse(lead);
