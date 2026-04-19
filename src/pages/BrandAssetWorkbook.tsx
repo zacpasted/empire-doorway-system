@@ -3,7 +3,19 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
-import { PASTED_CALENDLY_URL } from "@/lib/calendly";
+
+const INSIDER_KEY = "pasted_insider_email";
+type InsiderRecord = { email: string; submitted_at: string };
+const loadInsider = (): InsiderRecord | null => {
+  try {
+    const raw = localStorage.getItem(INSIDER_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as InsiderRecord;
+  } catch { return null; }
+};
+const saveInsider = (rec: InsiderRecord) => {
+  try { localStorage.setItem(INSIDER_KEY, JSON.stringify(rec)); } catch { /* ignore */ }
+};
 
 /* ============================================================
  * THE ART OF BECOMING — The PASTED Library · Volume I
@@ -464,11 +476,211 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root { background: white !important; color: black !important; font-size: 11pt; }
   .workbook-root .grain, .workbook-root .topbar, .workbook-root .progress,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
-  .workbook-root .lead-gate { display: none !important; }
+  .workbook-root .lead-gate,
+  .workbook-root .insider-card, .workbook-root .insider-links { display: none !important; }
   .workbook-root .wb-textarea, .workbook-root .wb-input { border: 1px solid #999; }
   .workbook-root .chapter-card { page-break-after: always; min-height: auto; padding: 80pt 0; }
+  .workbook-root .brand-brief-card { page-break-before: always; }
+  .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
 }
+
+/* ---------- Brand Brief Card ---------- */
+.workbook-root .brand-brief-card {
+  margin: 64px auto;
+  background: var(--bone-deep);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 48px;
+  max-width: 720px;
+}
+@media (max-width: 720px) {
+  .workbook-root .brand-brief-card { padding: 32px; }
+}
+.workbook-root .bb-header-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-whisper);
+  text-align: center;
+}
+.workbook-root .bb-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: 32px; color: var(--ink); text-align: center;
+  margin: 32px 0 16px 0; line-height: 1.25;
+}
+.workbook-root .bb-prepared {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
+  text-align: center;
+}
+.workbook-root .bb-rule {
+  width: 60px; height: 1px; background: var(--brass); margin: 40px auto;
+}
+.workbook-root .bb-section {
+  border-top: 1px solid var(--rule-ghost);
+  padding: 32px 0;
+}
+.workbook-root .bb-section:first-of-type { border-top: none; }
+.workbook-root .bb-sublabel {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  display: block; margin-bottom: 4px;
+}
+.workbook-root .bb-sublabel-rule {
+  width: 16px; height: 1px; background: var(--brass); margin-bottom: 20px;
+}
+.workbook-root .bb-body {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 18px;
+  line-height: 1.55; color: var(--ink); max-width: 540px; margin: 0;
+  white-space: pre-wrap;
+}
+.workbook-root .bb-empty {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 18px; line-height: 1.55; color: var(--ink-whisper); margin: 0;
+}
+.workbook-root .bb-sub {
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px;
+  color: var(--ink-quiet); font-style: italic;
+}
+.workbook-root .bb-list { margin: 8px 0 0 0; padding-left: 20px; }
+.workbook-root .bb-list li {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  line-height: 1.55; color: var(--ink); margin: 4px 0;
+}
+.workbook-root .bb-block-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-quiet);
+  margin: 20px 0 6px 0;
+}
+.workbook-root .bb-block-label:first-child { margin-top: 0; }
+.workbook-root .bb-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  margin-top: 8px;
+}
+@media (max-width: 720px) {
+  .workbook-root .bb-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+.workbook-root .bb-grid-cell-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  margin-bottom: 12px;
+}
+.workbook-root .bb-footer-rule {
+  width: 60px; height: 1px; background: var(--brass); margin: 48px auto 32px;
+}
+.workbook-root .bb-footer-tag {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 14px; color: var(--ink-quiet); text-align: center; margin: 0 0 16px 0;
+}
+.workbook-root .bb-footer-meta {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-whisper);
+  text-align: center;
+}
+
+/* ---------- Insider Signup ---------- */
+.workbook-root .insider-card {
+  margin: 64px auto 0;
+  max-width: 680px;
+  background: var(--bone-deep);
+  border: 1px solid var(--brass-line);
+  border-radius: 2px;
+  padding: 56px;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .workbook-root .insider-card { padding: 32px; }
+}
+.workbook-root .insider-toplabel {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+}
+.workbook-root .insider-rule {
+  width: 40px; height: 1px; background: var(--brass); margin: 16px auto 40px;
+}
+.workbook-root .insider-headline {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 32px;
+  color: var(--ink); margin: 0 auto 48px; max-width: 440px; line-height: 1.25;
+}
+.workbook-root .insider-headline.success { font-size: 36px; margin-bottom: 32px; }
+.workbook-root .insider-form {
+  display: flex; gap: 12px; max-width: 520px; margin: 0 auto;
+}
+@media (max-width: 560px) {
+  .workbook-root .insider-form { flex-direction: column; gap: 16px; }
+}
+.workbook-root .insider-input {
+  flex: 1;
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 16px;
+  color: var(--ink); background: var(--bone);
+  border: 1px solid var(--rule); border-radius: 2px;
+  padding: 18px 20px;
+  transition: border-color 200ms ease;
+}
+.workbook-root .insider-input::placeholder { color: var(--ink-whisper); }
+.workbook-root .insider-input:focus {
+  border-color: var(--brass);
+  outline: 2px solid var(--brass); outline-offset: 2px;
+}
+.workbook-root .insider-submit {
+  background: var(--brass); color: var(--bone);
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+  letter-spacing: 0.06em;
+  padding: 18px 36px;
+  border: none; border-radius: 999px; cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+}
+.workbook-root .insider-submit:hover {
+  background: var(--brass-deep);
+  transform: translateY(-1px);
+}
+.workbook-root .insider-submit em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  margin-left: 4px;
+}
+.workbook-root .insider-error {
+  margin-top: 12px;
+  font-family: 'Inter', sans-serif; font-style: italic; font-size: 12px;
+  color: var(--oxblood);
+  text-align: center;
+}
+.workbook-root .insider-fineprint {
+  margin-top: 24px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+}
+.workbook-root .insider-success-body {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 18px; line-height: 1.55; color: var(--ink-body);
+  max-width: 480px; margin: 0 auto 40px;
+}
+.workbook-root .insider-success-meta {
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px;
+  font-style: italic; color: var(--ink-quiet);
+}
+.workbook-root .insider-links {
+  display: flex; gap: 40px; justify-content: center;
+  margin-top: 48px; flex-wrap: wrap;
+}
+@media (max-width: 560px) {
+  .workbook-root .insider-links { flex-direction: column; gap: 20px; align-items: center; }
+}
+.workbook-root .insider-link {
+  background: transparent; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px;
+  color: var(--ink-quiet);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 0 2px 0;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+.workbook-root .insider-link:hover {
+  color: var(--brass); border-bottom-color: var(--brass);
+}
+.workbook-root .insider-link em {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  margin-left: 4px;
+}
+.workbook-root .insider-link[disabled] { opacity: 0.5; cursor: wait; }
 
 /* Lead gate overlay */
 .workbook-root .lead-gate {
@@ -758,6 +970,24 @@ const OrnArrow = () => (
     <line x1="6" y1="24" x2="38" y2="24" />
     <path d="M32 18 L 42 24 L 32 30" />
     <line x1="6" y1="20" x2="6" y2="28" />
+  </Ornament>
+);
+const OrnCertificate = () => (
+  <Ornament>
+    <rect x="8" y="10" width="32" height="28" />
+    <line x1="4" y1="22" x2="44" y2="22" />
+    <line x1="4" y1="26" x2="44" y2="26" />
+    <line x1="14" y1="32" x2="34" y2="32" opacity="0.6" />
+  </Ornament>
+);
+const OrnTicks = () => (
+  <Ornament>
+    <line x1="14" y1="10" x2="14" y2="20" />
+    <line x1="14" y1="22" x2="14" y2="32" opacity="0.7" />
+    <line x1="14" y1="34" x2="14" y2="40" opacity="0.4" />
+    <line x1="22" y1="14" x2="38" y2="14" />
+    <line x1="22" y1="26" x2="38" y2="26" opacity="0.7" />
+    <line x1="22" y1="36" x2="38" y2="36" opacity="0.4" />
   </Ornament>
 );
 
@@ -1122,6 +1352,207 @@ const Dots = () => <div className="ornament-dots">· · ·</div>;
 const Fleuron = () => <div className="ornament-fleuron">✦</div>;
 
 /* ============================================================
+ * Brand Brief — synthesized live from workbook values
+ * ============================================================ */
+const BBBody = ({ value }: { value: string }) => {
+  const v = (value || "").trim();
+  if (!v) return <p className="bb-empty">— to complete —</p>;
+  return <p className="bb-body">{v}</p>;
+};
+const BBList = ({ value, ordered = false }: { value: string; ordered?: boolean }) => {
+  const items = (value || "").split("\n").map((s) => s.trim().replace(/^\d+\.\s*/, "").replace(/^[-•]\s*/, "")).filter(Boolean);
+  if (!items.length) return <p className="bb-empty">— to complete —</p>;
+  const ListTag = ordered ? "ol" : "ul";
+  return (
+    <ListTag className="bb-list">
+      {items.map((it, i) => <li key={i}>{it}</li>)}
+    </ListTag>
+  );
+};
+
+const BrandBrief = ({ values }: { values: Values }) => {
+  const visionWords = (values.vision || "").trim().split(/\s+/).filter(Boolean).slice(0, 8).join(" ");
+  const briefTitle = visionWords || "— to complete —";
+  const today = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+  const valuesList = [1, 2, 3, 4, 5].map((i) => (values[`value_${i}`] || "").trim()).filter(Boolean).join(", ");
+
+  return (
+    <div className="brand-brief-card">
+      <div className="bb-header-label">THE PASTED LIBRARY · VOL. I · YOUR BRAND BRIEF</div>
+      <h3 className="bb-title">A Brand Brief for {briefTitle}</h3>
+      <div className="bb-prepared">PREPARED · {today}</div>
+      <div className="bb-rule" />
+
+      <div className="bb-section">
+        <span className="bb-sublabel">01 · Positioning</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.niche_synthesis} />
+        <p className="bb-sub">Three call-outs:</p>
+        <BBList value={values.callouts} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">02 · Ideal Patient</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.ms_patient} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">03 · Three Differentiators</span>
+        <div className="bb-sublabel-rule" />
+        <BBList value={values.ms_differentiators} ordered />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">04 · Signature Experience</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.ms_experience} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">05 · The Promise</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.ms_promise} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">06 · Point of View</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">We believe</div>
+        <BBBody value={values.pov_statement} />
+        <div className="bb-block-label">Signature story</div>
+        <BBBody value={values.story} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">07 · Experience</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">Where the brand collapses today</div>
+        <BBBody value={values.experience_gap} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">08 · Signal · Four Quadrants</span>
+        <div className="bb-sublabel-rule" />
+        <BBBody value={values.quadrants} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">09 · System</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">Patient journey</div>
+        <BBBody value={values.journey_map} />
+        <div className="bb-block-label">Weakest part today</div>
+        <BBBody value={values.weakest_part} />
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">10 · Vision · Mission · Values</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-block-label">Ten-year vision</div>
+        <BBBody value={values.vision} />
+        <div className="bb-block-label">Mission</div>
+        <BBBody value={values.mission} />
+        <div className="bb-block-label">Five practice values</div>
+        {valuesList ? <p className="bb-body">{valuesList}</p> : <p className="bb-empty">— to complete —</p>}
+      </div>
+
+      <div className="bb-section">
+        <span className="bb-sublabel">11 · The 10 · 3 · 1 · 90</span>
+        <div className="bb-sublabel-rule" />
+        <div className="bb-grid">
+          {[
+            { label: "Ten Years", prefix: "goal_10y" },
+            { label: "Three Years", prefix: "goal_3y" },
+            { label: "One Year", prefix: "goal_1y" },
+            { label: "Ninety Days", prefix: "goal_90d" },
+          ].map((cell) => {
+            const items = [1, 2, 3].map((i) => (values[`${cell.prefix}_${i}`] || "").trim());
+            return (
+              <div key={cell.prefix}>
+                <div className="bb-grid-cell-label">{cell.label}</div>
+                <ol className="bb-list">
+                  {items.map((it, i) => (
+                    <li key={i} style={it ? undefined : { color: "var(--ink-whisper)", fontStyle: "italic" }}>
+                      {it || "— to complete —"}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="bb-footer-rule" />
+      <p className="bb-footer-tag"><em>Where Dentistry Becomes Iconic.</em></p>
+      <div className="bb-footer-meta">PREPARED BY PASTED · VOLUME I · MMXXVI</div>
+    </div>
+  );
+};
+
+/* ============================================================
+ * Insider Signup
+ * ============================================================ */
+const insiderEmailSchema = z.string().trim().email().max(255);
+const InsiderSignup = ({ insider, onSubmit }: {
+  insider: InsiderRecord | null;
+  onSubmit: (email: string) => void;
+}) => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  if (insider) {
+    return (
+      <div className="insider-card">
+        <div className="insider-toplabel">The Pasted Insider · Welcome</div>
+        <div className="insider-rule" />
+        <h3 className="insider-headline success"><em>Welcome to the Insider.</em></h3>
+        <p className="insider-success-body">
+          Your Library-edition PDF and first dispatch are on their way. Watch for them from <code style={{ fontFamily: "Inter, sans-serif", fontSize: 14 }}>insider@pasted.agency</code> within 48 hours.
+        </p>
+        <div className="insider-success-meta">Subscribed as {insider.email}</div>
+      </div>
+    );
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const parsed = insiderEmailSchema.safeParse(email);
+    if (!parsed.success) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    setError(null);
+    onSubmit(parsed.data);
+  };
+
+  return (
+    <div className="insider-card">
+      <div className="insider-toplabel">The Pasted Insider · Private Broadcast</div>
+      <div className="insider-rule" />
+      <h3 className="insider-headline"><em>Where undeniable practices stay quietly ahead.</em></h3>
+      <form className="insider-form" onSubmit={handleSubmit} noValidate>
+        <input
+          type="email"
+          className="insider-input"
+          placeholder="you@practice.com"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); if (error) setError(null); }}
+          aria-label="Email address"
+          aria-invalid={!!error}
+        />
+        <button type="submit" className="insider-submit">
+          Join <em>→</em>
+        </button>
+      </form>
+      {error && <div className="insider-error">{error}</div>}
+      <div className="insider-fineprint">No algorithm · No pitch-mail · Unsubscribe any time</div>
+    </div>
+  );
+};
+
+/* ============================================================
  * Lead Gate
  * ============================================================ */
 const LeadGate = ({ lead, onChange, onSubmit, errors }: {
@@ -1279,21 +1710,30 @@ const BrandAssetWorkbook = () => {
   /* Reset */
   const handleReset = () => {
     if (!window.confirm("Clear all answers? This cannot be undone.")) return;
-    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(INSIDER_KEY);
+    } catch { /* ignore */ }
     setValues({});
+    setInsider(null);
     setSaveState("reset");
     window.setTimeout(() => setSaveState("saved"), 800);
   };
 
-  /* CTA tracking helpers */
-  const handleCTA = (placement: "top" | "bottom") => {
+  /* Insider state (rehydrated on mount via existing useEffect below pattern is in render) */
+  const [insider, setInsider] = useState<InsiderRecord | null>(() => loadInsider());
+
+  const handleInsiderSubmit = useCallback((email: string) => {
+    const rec: InsiderRecord = { email, submitted_at: new Date().toISOString() };
+    saveInsider(rec);
+    setInsider(rec);
     void trackCTAClick({
-      ctaId: `library_vol_i_cta_${placement}`,
-      ctaText: "Book a Brand Architecture Call",
-      section: placement === "top" ? "library_topbar" : "library_footer",
+      ctaId: "library_vol_i_insider_signup",
+      ctaText: "Join The Pasted Insider",
+      section: "library_insider",
     });
-    window.open(PASTED_CALENDLY_URL, "_blank", "noopener,noreferrer");
-  };
+    // TODO: wire to broadcast email service
+  }, []);
 
   /* Export */
   const handleExport = async () => {
@@ -1352,6 +1792,119 @@ const BrandAssetWorkbook = () => {
       lines.push(""); lines.push("");
     });
 
+    /* ---- Brand Brief block ---- */
+    const v = (k: string) => {
+      const raw = values[k];
+      return raw && raw.trim() ? raw.trim() : "— to complete —";
+    };
+    const visionWords = (values.vision || "").trim().split(/\s+/).filter(Boolean).slice(0, 8).join(" ");
+    const briefTitle = visionWords || "— to complete —";
+    const today = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+
+    lines.push("");
+    lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    lines.push("            YOUR BRAND BRIEF");
+    lines.push("          The becoming, on paper");
+    lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    lines.push("");
+    lines.push(`A Brand Brief for ${briefTitle}`);
+    lines.push(`PREPARED · ${today}`);
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("01 · POSITIONING");
+    lines.push(v("niche_synthesis"));
+    lines.push("");
+    lines.push("Three call-outs:");
+    (values.callouts || "").split("\n").map(s => s.trim()).filter(Boolean).forEach(l => lines.push(`  • ${l}`));
+    if (!(values.callouts || "").trim()) lines.push("  — to complete —");
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("02 · IDEAL PATIENT");
+    lines.push(v("ms_patient"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("03 · THREE DIFFERENTIATORS");
+    const diffs = (values.ms_differentiators || "").split("\n").map(s => s.trim()).filter(Boolean);
+    if (diffs.length) diffs.forEach((l, i) => lines.push(`  ${i + 1}. ${l.replace(/^\d+\.\s*/, "")}`));
+    else lines.push("  — to complete —");
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("04 · SIGNATURE EXPERIENCE");
+    lines.push(v("ms_experience"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("05 · THE PROMISE");
+    lines.push(v("ms_promise"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("06 · POINT OF VIEW");
+    lines.push("We believe:");
+    lines.push(v("pov_statement"));
+    lines.push("");
+    lines.push("Signature story:");
+    lines.push(v("story"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("07 · EXPERIENCE");
+    lines.push("Where the brand collapses today:");
+    lines.push(v("experience_gap"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("08 · SIGNAL · FOUR QUADRANTS");
+    lines.push(v("quadrants"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("09 · SYSTEM");
+    lines.push("Patient journey:");
+    lines.push(v("journey_map"));
+    lines.push("");
+    lines.push("Weakest part today:");
+    lines.push(v("weakest_part"));
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("10 · VISION · MISSION · VALUES");
+    lines.push("Ten-year vision:");
+    lines.push(v("vision"));
+    lines.push("");
+    lines.push("Mission:");
+    lines.push(v("mission"));
+    lines.push("");
+    lines.push("Five practice values:");
+    const vals = [1, 2, 3, 4, 5].map(i => (values[`value_${i}`] || "").trim()).filter(Boolean);
+    lines.push(vals.length ? vals.join(", ") : "— to complete —");
+    lines.push("");
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("11 · THE 10 · 3 · 1 · 90");
+    [
+      ["TEN YEARS", "goal_10y"],
+      ["THREE YEARS", "goal_3y"],
+      ["ONE YEAR", "goal_1y"],
+      ["NINETY DAYS", "goal_90d"],
+    ].forEach(([label, prefix]) => {
+      lines.push(`  ${label}`);
+      [1, 2, 3].forEach(i => {
+        const val = (values[`${prefix}_${i}`] || "").trim();
+        lines.push(`    ${i}. ${val || "— to complete —"}`);
+      });
+      lines.push("");
+    });
+    lines.push("────────────────────────────────────────────");
+    lines.push("");
+    lines.push("Where Dentistry Becomes Iconic.");
+    lines.push("PREPARED BY PASTED · VOLUME I · MMXXVI");
+    lines.push("");
+
     const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -1384,13 +1937,6 @@ const BrandAssetWorkbook = () => {
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-              <button
-                onClick={() => handleCTA("top")}
-                className="cta-pill"
-                style={{ padding: "10px 22px", fontSize: 11, letterSpacing: "0.18em" }}
-              >
-                Book a Call →
-              </button>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 5, height: 5, borderRadius: 999, background: saveState === "saving" ? "var(--ink-whisper)" : "var(--brass)", display: "inline-block" }} />
                 <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--ink-quiet)" }}>
@@ -1991,36 +2537,130 @@ const BrandAssetWorkbook = () => {
 
         <Dots />
 
-        {/* CTA */}
-        <Section id="next" masthead="§ NEXT · WHEN YOU'RE READY" ornament={<OrnArrow />}>
-          <div className="numeral" style={{ marginBottom: 12 }}>NEXT</div>
-          <h2 className="serif">This is how the <em>becoming</em> begins. We build the rest together.</h2>
+        {/* BRAND BRIEF — chapter title card */}
+        <div className="chapter-card">
+          <div className="chapter-fleuron">✦</div>
+          <div style={{ fontFamily: "Cormorant Garamond, serif", fontWeight: 300, fontSize: 56, color: "var(--brass)", lineHeight: 1, marginBottom: 24 }}>—</div>
+          <div className="chapter-name">Your Brand Brief</div>
+          <div className="chapter-rule" />
+          <div className="chapter-tagline"><em>The becoming, on paper.</em></div>
+        </div>
+
+        {/* BRAND BRIEF — synthesized */}
+        <Section id="brief" masthead="§ BRIEF · THE BECOMING, ON PAPER" ornament={<OrnCertificate />}>
+          <h2 className="serif">Your <em>Brand Brief.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
-            PASTED works with a small number of aesthetic dental practices each year. We build the signal, produce the creative, run the campaigns, and architect the system — so the brand you have designed in this guide becomes the brand your market sees. It is the same five-part framework behind hundreds of millions in aesthetic demand.
+            Everything you just wrote, assembled into a single document. Screenshot it. Print it. Show it to your team next Monday. This is the living specification of your brand — the reference you return to every time a decision needs making and the answer is not obvious.
           </p>
           <div className="reading">
-            <p>If the guide surfaced something, and you would like to see what the full architecture looks like applied to your practice — book a Brand Architecture Call.</p>
+            <p style={{ color: "var(--ink-quiet)" }}>If a field is blank, it renders as <em>— to complete —</em>. You can return to any section above and fill it in; the Brief updates automatically.</p>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 48 }}>
+          <BrandBrief values={values} />
+
+          <p style={{ marginTop: 32, textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: 14, fontStyle: "italic", color: "var(--ink-quiet)", maxWidth: 520, marginLeft: "auto", marginRight: "auto" }}>
+            Your Brief is live. Return to any section above and it updates in real time.
+          </p>
+        </Section>
+
+        <Dots />
+
+        {/* 30-DAY ACTION PLAN */}
+        <Section id="action" masthead="§ ACTION · THE FIRST THIRTY DAYS" ornament={<OrnTicks />}>
+          <div className="numeral" style={{ marginBottom: 12 }}>ACTION</div>
+          <h2 className="serif">The <em>First Thirty Days.</em></h2>
+          <p className="lead" style={{ marginTop: 48 }}>
+            A Brief that sits in a folder is worth nothing. Here is the sequence we give every practice we work with for the first month after a brand reset. Nothing expensive. Nothing requiring an agency. Just discipline.
+          </p>
+          <div className="reading">
+            <p>Four weeks. Four moves. Each one small enough to start this week.</p>
+          </div>
+
+          <div style={{ marginTop: 48 }}>
+            <div className="framework-row">
+              <div className="framework-key">Week 01</div>
+              <div>
+                <p className="framework-text"><strong>Audit your gap.</strong></p>
+                <p className="framework-sub">Read the “Where your brand collapses” line in your Brief. Walk one of your current consults like a patient — from Instagram scroll to follow-up SMS. Document where the brand breaks. That is where Week Two begins.</p>
+              </div>
+            </div>
+            <div className="framework-row">
+              <div className="framework-key">Week 02</div>
+              <div>
+                <p className="framework-text"><strong>Fix the weakest touchpoint.</strong></p>
+                <p className="framework-sub">Pick the one place the brand collapsed hardest. Rewrite it. If it is the front desk greeting, retrain. If it is the follow-up message, redraft. If it is the consult opener, script it. One touchpoint. Made undeniable.</p>
+              </div>
+            </div>
+            <div className="framework-row">
+              <div className="framework-key">Week 03</div>
+              <div>
+                <p className="framework-text"><strong>Publish four pieces of signal.</strong></p>
+                <p className="framework-sub">One per quadrant (Questions, Questions from Questions, Objections, Expectations). Film or write them in a single four-hour block. Every piece must pass the Posting Filter: <em>Does this reinforce what we’re known for?</em> If not, don’t post.</p>
+              </div>
+            </div>
+            <div className="framework-row last">
+              <div className="framework-key">Week 04</div>
+              <div>
+                <p className="framework-text"><strong>Run your first Brand Review.</strong></p>
+                <p className="framework-sub">60 minutes. Re-read the Brief. Ask three questions: <em>What held up? What leaked? What is next month’s one move?</em> Write the answers in the margin of your Brief. You are now running a practice with a brand, not just a practice with marketing.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="callout">
+            <div className="callout-label">The Compounding Moment</div>
+            <p>Do this for three months and something specific happens. You stop reacting to what competitors post. You start recognizing your own brand in the wild — your voice in your ads, your frame in your photography, your position in the way a patient says your name. That is the becoming, mid-flight.</p>
+          </div>
+        </Section>
+
+        <Dots />
+
+        {/* INSIDER — sole CTA */}
+        <Section id="insider" masthead="§ NEXT · THE PASTED INSIDER" ornament={<OrnArrow />}>
+          <div className="numeral" style={{ marginBottom: 12 }}>NEXT</div>
+          <h2 className="serif">This is how the <em>becoming</em> compounds.</h2>
+          <p className="lead" style={{ marginTop: 48 }}>
+            You have the Brief. You have the plan. The last piece is the weekly signal that keeps the brand alive — which is what The Pasted Insider exists for.
+          </p>
+          <div className="reading">
+            <p>The Pasted Insider is our private broadcast for dentists serious about becoming undeniable. We send dispatches directly to a small list — no algorithm between us — roughly once a week, always short, always usable the same day.</p>
+            <p>It is where we publish the campaign angles, the pull-ready creative concepts, the category commentary, the in-the-wild teardowns, and the early chapters of every future volume in The PASTED Library before they reach anyone else.</p>
+            <p>It is how the practices we quietly admire stay quietly ahead.</p>
+          </div>
+
+          <div className="pillar-grid cols-2">
+            <div className="pillar-cell">
+              <h4 className="pillar-title">What you get</h4>
+              <p className="pillar-body">Weekly dispatches. Early access to future Library volumes. Campaign angles we don’t post publicly. Teardowns of what’s working right now in aesthetic dentistry. Zero pitch-mail.</p>
+            </div>
+            <div className="pillar-cell">
+              <h4 className="pillar-title">What it costs</h4>
+              <p className="pillar-body">Nothing. Your email. Your attention. Your willingness to apply what you read.</p>
+            </div>
+          </div>
+
+          <h3 className="serif" style={{ marginTop: 56, fontSize: 28 }}>Join the broadcast.</h3>
+          <div className="reading">
+            <p>Leave your best email. You will receive the first dispatch within 48 hours, along with a Library-edition PDF of everything you built today.</p>
+          </div>
+
+          <InsiderSignup insider={insider} onSubmit={handleInsiderSubmit} />
+
+          <div className="insider-links">
             <button
-              className="cta-pill"
-              onClick={() => handleCTA("bottom")}
-            >
-              Book a Brand Architecture Call →
-            </button>
-            <button
-              className="cta-secondary"
+              className="insider-link"
               onClick={handleExport}
               disabled={submitting}
             >
-              {submitting ? "Preparing…" : "Export My Guide"}
+              {submitting ? "Preparing…" : <>Download my Brief as a text file <em>→</em></>}
+            </button>
+            <button
+              className="insider-link"
+              onClick={() => window.print()}
+            >
+              Print my Brief <em>→</em>
             </button>
           </div>
-
-          <p style={{ marginTop: 32, fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", color: "var(--ink-quiet)", fontSize: 17 }}>
-            Vol. II · The Art of Building · MMXXVII
-          </p>
         </Section>
 
         {/* FOOTER */}
@@ -2045,7 +2685,15 @@ const BrandAssetWorkbook = () => {
           }}>
             PASTED · 2026
           </div>
+          <div style={{
+            marginTop: 24,
+            fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", fontWeight: 300,
+            fontSize: 12, color: "var(--ink-whisper)",
+          }}>
+            Vol. II · The Art of Building · MMXXVII
+          </div>
         </footer>
+
 
         {/* LEAD GATE — overlays everything until valid */}
         {!gateUnlocked && (
