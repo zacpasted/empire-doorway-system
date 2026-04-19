@@ -761,24 +761,28 @@ html.workbook-html { scroll-behavior: smooth; }
   font-size: 20px; color: var(--ink-quiet); max-width: 420px; line-height: 1.5;
 }
 
-/* Editorial portrait — cover */
+/* Editorial portrait — cover (Plate I · Frontispiece)
+   Full-frame, no hard crop: edges feathered into the bone-paper page. */
 .workbook-root .cover-portrait {
   position: relative;
   margin: 64px auto 0;
   max-width: 360px;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  background: var(--bone-deep);
-  box-shadow: 0 1px 0 rgba(28,27,24,0.04), 0 30px 60px -30px rgba(28,27,24,0.18);
+  background: var(--bone);
+  /* No box-shadow — image dissolves into page rather than sitting on it */
 }
 .workbook-root .cover-portrait img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
   filter: contrast(1.02);
+  -webkit-mask-image: radial-gradient(ellipse 88% 92% at center, #000 58%, transparent 100%);
+          mask-image: radial-gradient(ellipse 88% 92% at center, #000 58%, transparent 100%);
 }
 .workbook-root .cover-portrait::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  border: 1px solid rgba(139,122,78,0.28);
-  mix-blend-mode: multiply;
+  background: radial-gradient(ellipse 100% 100% at center, transparent 70%, rgba(237,231,219,0.55) 100%);
 }
 .workbook-root .cover-portrait-caption {
   margin-top: 18px; text-align: center;
@@ -786,7 +790,8 @@ html.workbook-html { scroll-behavior: smooth; }
   letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
 }
 
-/* Editorial portrait — chapter opener (full-bleed band) */
+/* Editorial portrait — chapter opener (full-bleed band)
+   Photo dissolves into bone on all four edges so it reads as a printed plate, not a banner. */
 .workbook-root .chapter-portrait {
   position: relative;
   width: 100vw;
@@ -794,16 +799,23 @@ html.workbook-html { scroll-behavior: smooth; }
   margin-right: calc(50% - 50vw);
   height: clamp(360px, 62vh, 620px);
   overflow: hidden;
-  background: var(--ink);
+  background: var(--bone);
 }
 .workbook-root .chapter-portrait img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  /* subtle tone shift to keep image weight under typographic chapter card */
   filter: contrast(1.04);
+  -webkit-mask-image:
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 78%, transparent 100%),
+    linear-gradient(90deg,  transparent 0%, #000 8%,  #000 92%, transparent 100%);
+          mask-image:
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 78%, transparent 100%),
+    linear-gradient(90deg,  transparent 0%, #000 8%,  #000 92%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
 }
 .workbook-root .chapter-portrait::before {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(237,231,219,0.0) 0%, rgba(237,231,219,0.0) 60%, rgba(237,231,219,0.85) 100%);
+  background: linear-gradient(180deg, rgba(237,231,219,0.08) 0%, rgba(237,231,219,0.0) 30%, rgba(237,231,219,0.0) 70%, rgba(237,231,219,0.55) 100%);
   pointer-events: none;
 }
 .workbook-root .chapter-portrait-meta {
@@ -817,7 +829,8 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .cover-portrait { max-width: 280px; margin-top: 48px; }
 }
 
-/* Editorial closing plate — full-bleed band before the final CTA */
+/* Editorial closing plate — full-bleed band before the final CTA
+   Same fade-to-bone treatment as chapter portraits. */
 .workbook-root .closing-plate {
   position: relative;
   width: 100vw;
@@ -825,18 +838,25 @@ html.workbook-html { scroll-behavior: smooth; }
   margin-right: calc(50% - 50vw);
   height: clamp(280px, 48vh, 480px);
   overflow: hidden;
-  background: var(--ink);
+  background: var(--bone);
   margin-top: 64px;
 }
 .workbook-root .closing-plate img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   filter: contrast(1.04);
+  -webkit-mask-image:
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 76%, transparent 100%),
+    linear-gradient(90deg,  transparent 0%, #000 8%,  #000 92%, transparent 100%);
+          mask-image:
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 76%, transparent 100%),
+    linear-gradient(90deg,  transparent 0%, #000 8%,  #000 92%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
 }
 .workbook-root .closing-plate::before {
   content: ""; position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(237,231,219,0) 0%, rgba(237,231,219,0) 55%, rgba(237,231,219,0.92) 100%),
-    linear-gradient(0deg, rgba(237,231,219,0) 65%, rgba(237,231,219,0.55) 100%);
+    linear-gradient(180deg, rgba(237,231,219,0.08) 0%, rgba(237,231,219,0.0) 30%, rgba(237,231,219,0.0) 70%, rgba(237,231,219,0.55) 100%);
   pointer-events: none;
 }
 .workbook-root .closing-plate-meta {
@@ -880,11 +900,14 @@ html.workbook-html { scroll-behavior: smooth; }
 }
 .workbook-root .plate-frame {
   position: relative; width: 100%; aspect-ratio: 3 / 4;
-  background: var(--ink); overflow: hidden;
+  background: var(--bone); overflow: hidden;
 }
 .workbook-root .plate-frame img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   filter: contrast(1.04);
+  /* feather edges so plates dissolve into the page */
+  -webkit-mask-image: radial-gradient(ellipse 92% 94% at center, #000 62%, transparent 100%);
+          mask-image: radial-gradient(ellipse 92% 94% at center, #000 62%, transparent 100%);
 }
 .workbook-root .plate-caption {
   margin-top: 14px; padding: 0 4px;
