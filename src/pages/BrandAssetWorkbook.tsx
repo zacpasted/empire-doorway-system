@@ -2045,6 +2045,26 @@ const BrandAssetWorkbook = () => {
 
   const saveLabel = saveState === "saving" ? "Saving…" : saveState === "reset" ? "Reset" : "Saved";
 
+  // Completion counter: number of FIELD_MANIFEST entries with non-empty trimmed values
+  const answeredCount = useMemo(
+    () => FIELD_MANIFEST.reduce((n, f) => n + ((values[f.key] || "").trim() ? 1 : 0), 0),
+    [values]
+  );
+  const totalCount = FIELD_MANIFEST.length;
+  const isComplete = answeredCount === totalCount;
+  const [celebrated, setCelebrated] = useState(false);
+  const [showCelebration, setShowCelebration] = useState(false);
+  useEffect(() => {
+    if (isComplete && !celebrated) {
+      setCelebrated(true);
+      setShowCelebration(true);
+    }
+    if (!isComplete && celebrated) {
+      // allow re-trigger if user clears fields then refills
+      setCelebrated(false);
+    }
+  }, [isComplete, celebrated]);
+
   return (
     <>
       <style>{WORKBOOK_CSS}</style>
