@@ -3535,6 +3535,12 @@ const BrandAssetWorkbook = () => {
             >
               Print my Brief <em>→</em>
             </button>
+            <button
+              className="insider-link"
+              onClick={handlePrintDoctrine}
+            >
+              Print only the Doctrine <em>→</em>
+            </button>
           </div>
         </Section>
 
