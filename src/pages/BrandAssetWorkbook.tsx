@@ -311,17 +311,20 @@ html.workbook-html { scroll-behavior: smooth; }
   color: var(--brass); white-space: nowrap; flex-shrink: 0; min-width: 48px;
   text-align: right;
 }
-/* Mobile dropdown (replaces 12-cell strip ≤720px) */
+/* Mobile dropdown (replaces 12-cell strip ≤720px) — rendered inline in the topbar */
 .workbook-root .mini-strip-mobile { display: none; }
 @media (max-width: 720px) {
+  /* Hide both the desktop strip and the answered-pill on mobile.
+     The section label + counter inside the topbar takes their place. */
   .workbook-root .mini-strip { display: none; }
+  .workbook-root .topbar-right .completion-pill { display: none; }
+
+  /* The trigger overlays the topbar's center — no separate sticky bar. */
   .workbook-root .mini-strip-mobile {
     display: block;
-    position: sticky; top: 56px; z-index: 49;
-    background: rgba(237,231,219,0.92);
-    backdrop-filter: blur(16px) saturate(1.1);
-    -webkit-backdrop-filter: blur(16px) saturate(1.1);
-    border-bottom: 1px solid var(--rule);
+    position: absolute; top: 0; left: 0; right: 0; height: 56px;
+    pointer-events: none; /* re-enabled on the button itself */
+    z-index: 51;
   }
   .workbook-root .mini-strip-mobile-trigger {
     width: 100%; height: 40px; padding: 0 16px;
