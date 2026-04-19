@@ -607,6 +607,22 @@ const DoctrineOnBrand = () => {
       {/* ========== LIBRARY CARD CTA ========== */}
       <section className="library-card" aria-labelledby="library-card-heading">
         <div className="library-card-rule" />
+
+        {/* Editorial Card: Continue to Workbook */}
+        <div className="workbook-card">
+          <div className="workbook-card-eyebrow">Volume I · Field Guide</div>
+          <h3 className="workbook-card-title">Continue to the <em>Workbook</em></h3>
+          <p className="workbook-card-lede">
+            The companion to this doctrine — ninety minutes of prompts to turn what you read into your own one-page Brand Brief.
+          </p>
+          <a className="workbook-card-cta" href="/yourbrand">
+            <span>Open the Workbook</span>
+            <span className="workbook-card-cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div className="library-card-rule" style={{ margin: '80px auto 56px' }} />
+
         <div className="library-card-eyebrow">The Pasted Library · Standing Subscription</div>
         <h2 id="library-card-heading" className="library-card-title">
           Hold a <em>Library Card.</em>
