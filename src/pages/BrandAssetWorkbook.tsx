@@ -484,6 +484,171 @@ html.workbook-html { scroll-behavior: smooth; }
 @media (max-width: 540px) {
   .workbook-root .lead-gate-card { padding: 40px 28px; }
 }
+
+/* ---------- Table of Contents ---------- */
+.workbook-root .toc {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 48px 0;
+  margin: 96px 0;
+}
+.workbook-root .toc-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
+}
+@media (max-width: 720px) { .workbook-root .toc-grid { grid-template-columns: 1fr; } }
+.workbook-root .toc-row {
+  display: grid; grid-template-columns: 28px 1fr auto;
+  gap: 16px; align-items: baseline; padding: 14px 24px;
+  border-bottom: 1px solid var(--rule-ghost);
+  text-decoration: none; color: inherit;
+  transition: background 200ms ease;
+}
+.workbook-root .toc-row:hover { background: var(--brass-ghost); }
+.workbook-root .toc-roman {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  color: var(--brass); font-size: 14px;
+}
+.workbook-root .toc-name {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: 18px; color: var(--ink);
+}
+.workbook-root .toc-mini {
+  display: block; font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: 11px; color: var(--ink-quiet); letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+.workbook-root .toc-min {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+}
+
+/* ---------- Section status badge (top of each Part) ---------- */
+.workbook-root .status-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; margin-bottom: 32px;
+  border-top: 1px solid var(--rule-ghost);
+  border-bottom: 1px solid var(--rule-ghost);
+  font-family: 'Inter', sans-serif; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+}
+.workbook-root .status-pip {
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--rule); border-radius: 999px;
+}
+.workbook-root .status-pip.active { background: var(--brass); }
+.workbook-root .status-name { color: var(--ink-quiet); margin-left: auto; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0; text-transform: none; }
+
+/* ---------- Outcome card (end-of-section reinforcement) ---------- */
+.workbook-root .outcome {
+  display: grid; grid-template-columns: 24px 1fr;
+  gap: 20px; align-items: start;
+  background: var(--bone-deep);
+  border: 1px solid var(--rule); border-left: 2px solid var(--brass);
+  padding: 24px 28px; margin: 56px 0;
+  max-width: 720px;
+}
+.workbook-root .outcome-mark {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  color: var(--brass); font-size: 22px; line-height: 1;
+}
+.workbook-root .outcome-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass);
+  margin-bottom: 6px;
+}
+.workbook-root .outcome-text {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 19px; line-height: 1.4; color: var(--ink); margin: 0;
+}
+
+/* ---------- Before / After split ---------- */
+.workbook-root .ba-split {
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  margin: 48px 0; border: 1px solid var(--rule);
+}
+@media (max-width: 720px) {
+  .workbook-root .ba-split { grid-template-columns: 1fr; }
+  .workbook-root .ba-split .ba-divider { width: 100%; height: 1px; }
+}
+.workbook-root .ba-side { padding: 28px; }
+.workbook-root .ba-divider { background: var(--rule); }
+.workbook-root .ba-side h4 {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.36em; text-transform: uppercase;
+  color: var(--ink-whisper); margin: 0 0 16px 0;
+}
+.workbook-root .ba-side.after h4 { color: var(--brass); }
+.workbook-root .ba-side ul { list-style: none; padding: 0; margin: 0; }
+.workbook-root .ba-side li {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 18px; line-height: 1.4; color: var(--ink); padding: 8px 0;
+  border-bottom: 1px solid var(--rule-ghost);
+}
+.workbook-root .ba-side li:last-child { border-bottom: none; }
+.workbook-root .ba-side.before li { color: var(--ink-quiet); text-decoration: line-through; text-decoration-color: var(--rule); }
+
+/* ---------- Stat strip (cover & end metrics) ---------- */
+.workbook-root .stat-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  margin: 48px 0;
+}
+@media (max-width: 720px) { .workbook-root .stat-strip { grid-template-columns: 1fr; } }
+.workbook-root .stat-cell {
+  padding: 32px 24px; text-align: center;
+  border-right: 1px solid var(--rule);
+}
+.workbook-root .stat-cell:last-child { border-right: none; }
+@media (max-width: 720px) {
+  .workbook-root .stat-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+  .workbook-root .stat-cell:last-child { border-bottom: none; }
+}
+.workbook-root .stat-num {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 56px; color: var(--brass); line-height: 1; margin-bottom: 12px;
+}
+.workbook-root .stat-num em { font-style: italic; }
+.workbook-root .stat-cap {
+  font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px;
+  color: var(--ink-quiet); line-height: 1.5; max-width: 200px; margin: 0 auto;
+}
+
+/* ---------- Inline mini diagrams ---------- */
+.workbook-root .mini-fig {
+  display: flex; flex-direction: column; align-items: center;
+  margin: 32px auto; max-width: 480px;
+}
+.workbook-root .mini-fig-cap {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-whisper);
+  margin-top: 16px;
+}
+
+/* ---------- 3% / 97% bar ---------- */
+.workbook-root .market-bar {
+  margin: 40px 0;
+  border: 1px solid var(--rule); padding: 24px;
+}
+.workbook-root .market-bar-track {
+  display: flex; height: 24px; border: 1px solid var(--brass-line);
+  background: var(--bone-shadow); margin-bottom: 16px;
+}
+.workbook-root .market-bar-3 { width: 3%; background: var(--brass); }
+.workbook-root .market-bar-97 { flex: 1; background: transparent; }
+.workbook-root .market-legend {
+  display: flex; justify-content: space-between;
+  font-family: 'Inter', sans-serif; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-quiet);
+}
+.workbook-root .market-legend strong { color: var(--brass); font-weight: 500; }
+
+/* ---------- Compounding sparkline (mini, used inline) ---------- */
+.workbook-root .spark {
+  display: block; margin: 8px 0; max-width: 100%;
+}
+
+/* Tighter reading column spacing in dense sections */
+.workbook-root .reading.tight p { margin-bottom: 14px; }
 `;
 
 /* ============================================================
@@ -740,6 +905,120 @@ const Figure04Compounding = () => (
     </svg>
     <div className="figure-caption">FIGURE 04 · THE COMPOUNDING EFFECT</div>
   </div>
+);
+
+/* ============================================================
+ * Visual primitives — for retention & visual density
+ * ============================================================ */
+
+const TOC_ITEMS: Array<{ id: string; roman: string; name: string; mini: string; min: string }> = [
+  { id: "prelude", roman: "—", name: "Prelude", mini: "Why becoming, not rebuilding.", min: "8 min" },
+  { id: "premise", roman: "00", name: "The Premise", mini: "Your office is not your brand.", min: "5 min" },
+  { id: "foundation", roman: "—", name: "Foundation · Ikigai", mini: "Twelve questions. One sentence.", min: "20 min" },
+  { id: "compass", roman: "—", name: "Compass", mini: "Vision & mission.", min: "6 min" },
+  { id: "values", roman: "—", name: "Values", mini: "Five filters you defend.", min: "5 min" },
+  { id: "positioning", roman: "I", name: "Positioning", mini: "Becoming known.", min: "10 min" },
+  { id: "pov", roman: "II", name: "Point of View", mini: "Becoming believed.", min: "8 min" },
+  { id: "experience", roman: "III", name: "Experience", mini: "Becoming felt.", min: "6 min" },
+  { id: "signal", roman: "IV", name: "Signal", mini: "Becoming seen.", min: "8 min" },
+  { id: "system", roman: "V", name: "System", mini: "Becoming undeniable.", min: "10 min" },
+  { id: "diagnostic", roman: "—", name: "Three-Question Test", mini: "Before you spend another dollar.", min: "3 min" },
+  { id: "horizon", roman: "—", name: "Horizon · 10·3·1·90", mini: "Twelve goals. Four horizons.", min: "8 min" },
+];
+
+const TableOfContents = () => (
+  <div className="toc">
+    <div style={{ textAlign: "center", marginBottom: 32 }}>
+      <span className="numeral">The Volume · Twelve Sections · ~90 Minutes</span>
+    </div>
+    <div className="toc-grid">
+      {TOC_ITEMS.map((item) => (
+        <a key={item.id} href={`#${item.id}`} className="toc-row">
+          <span className="toc-roman">{item.roman}</span>
+          <span>
+            <span className="toc-name">{item.name}</span>
+            <span className="toc-mini">{item.mini}</span>
+          </span>
+          <span className="toc-min">{item.min}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
+const StatusBar = ({ active }: { active: 1 | 2 | 3 | 4 | 5 }) => {
+  const names = ["Positioning", "Point of View", "Experience", "Signal", "System"];
+  const romans = ["I", "II", "III", "IV", "V"];
+  return (
+    <div className="status-bar">
+      <span>Architecture</span>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <span key={n} className={`status-pip${n === active ? " active" : ""}`} />
+      ))}
+      <span className="status-name">{`Part ${romans[active - 1]} · ${names[active - 1]}`}</span>
+    </div>
+  );
+};
+
+const Outcome = ({ label = "What this earns you", children }: { label?: string; children: ReactNode }) => (
+  <div className="outcome">
+    <div className="outcome-mark">✦</div>
+    <div>
+      <div className="outcome-label">{label}</div>
+      <p className="outcome-text">{children}</p>
+    </div>
+  </div>
+);
+
+type BeforeAfterProps = { before: string[]; after: string[]; beforeLabel?: string; afterLabel?: string };
+const BeforeAfter = ({ before, after, beforeLabel = "Without", afterLabel = "With" }: BeforeAfterProps) => (
+  <div className="ba-split">
+    <div className="ba-side before">
+      <h4>{beforeLabel}</h4>
+      <ul>{before.map((t) => <li key={t}>{t}</li>)}</ul>
+    </div>
+    <div className="ba-divider" />
+    <div className="ba-side after">
+      <h4>{afterLabel}</h4>
+      <ul>{after.map((t) => <li key={t}>{t}</li>)}</ul>
+    </div>
+  </div>
+);
+
+type Stat = { num: string; cap: string };
+const StatStrip = ({ stats }: { stats: Stat[] }) => (
+  <div className="stat-strip">
+    {stats.map((s, i) => (
+      <div key={i} className="stat-cell">
+        <div className="stat-num" dangerouslySetInnerHTML={{ __html: s.num }} />
+        <div className="stat-cap">{s.cap}</div>
+      </div>
+    ))}
+  </div>
+);
+
+const MarketBar = () => (
+  <div className="market-bar" aria-label="3 percent in-market, 97 percent conditioning">
+    <div className="market-bar-track">
+      <div className="market-bar-3" />
+      <div className="market-bar-97" />
+    </div>
+    <div className="market-legend">
+      <span><strong>3% in-market.</strong> Sell.</span>
+      <span>97% future market. <strong>Condition.</strong></span>
+    </div>
+  </div>
+);
+
+const Sparkline = () => (
+  <svg viewBox="0 0 400 80" className="spark" aria-hidden="true">
+    <line x1="0" y1="60" x2="400" y2="60" stroke="#C7BEA8" strokeWidth="0.5" />
+    <path d="M 0 65 Q 100 64 160 56 T 280 32 T 400 6" fill="none" stroke="#8B7A4E" strokeWidth="1.25" />
+    <circle cx="0" cy="65" r="2" fill="#8B7A4E" />
+    <circle cx="400" cy="6" r="2.5" fill="#8B7A4E" />
+    <text x="6" y="78" fontFamily="Inter, sans-serif" fontSize="8" letterSpacing="2" fill="#A59E8E">YEAR 1</text>
+    <text x="370" y="78" fontFamily="Inter, sans-serif" fontSize="8" letterSpacing="2" fill="#8B7A4E">YEAR 5</text>
+  </svg>
 );
 
 /* ============================================================
@@ -1183,6 +1462,25 @@ const BrandAssetWorkbook = () => {
           </div>
         </section>
 
+        {/* TABLE OF CONTENTS — visual map of the whole volume */}
+        <section className="workbook-section" style={{ paddingTop: 64, paddingBottom: 64 }}>
+          <div style={{ textAlign: "center", marginBottom: 24 }}>
+            <span className="numeral" style={{ color: "var(--ink-quiet)" }}>The Map</span>
+          </div>
+          <h2 className="serif" style={{ textAlign: "center", fontSize: "clamp(32px, 4vw, 44px)", marginBottom: 16 }}>
+            What you'll <em>build</em> in this volume.
+          </h2>
+          <p style={{ textAlign: "center", maxWidth: 560, margin: "0 auto", color: "var(--ink-quiet)", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", fontSize: 19 }}>
+            Twelve sections. Forty answers. One brand asset.
+          </p>
+          <TableOfContents />
+          <StatStrip stats={[
+            { num: "<em>5</em>", cap: "Parts of a real brand asset" },
+            { num: "<em>40</em>", cap: "Answers that become your operating doctrine" },
+            { num: "<em>3%</em>", cap: "Of your market is in-market right now" },
+          ]} />
+        </section>
+
         <Dots />
 
         {/* PRELUDE */}
@@ -1238,36 +1536,35 @@ const BrandAssetWorkbook = () => {
         <Section id="premise" masthead="§ 00 · THE PREMISE" ornament={<OrnRuleDiamond />}>
           <div className="numeral" style={{ marginBottom: 12 }}>00 · THE PREMISE</div>
           <h2 className="serif">Your new office is not your <em>brand.</em></h2>
-          <div className="reading" style={{ marginTop: 48 }}>
-            <p>And dentistry is full of people selling “brand” who cannot define it without pointing to furniture, TVs, equipment, a logo, or a renovation package.</p>
-            <p>That should concern you.</p>
-            <p>Because some of the highest-performing practices we know — including offices doing eight figures under one roof — are not the fanciest or the prettiest.</p>
-            <p>They just have a real brand.</p>
-          </div>
+          <p className="lead" style={{ marginTop: 48 }}>
+            The highest-performing practices we know are rarely the prettiest. They have something else: a real brand.
+          </p>
 
-          <div className="definition">
-            <div className="definition-stack">
-              <div className="definition-line">A clear <em>why.</em></div>
-              <div className="definition-line">A clear <em>story.</em></div>
-              <div className="definition-line">A clear <em>position.</em></div>
-              <div className="definition-line">A consistent way of showing their work, their people, and what they stand for.</div>
-            </div>
-          </div>
+          <BeforeAfter
+            beforeLabel="A spending strategy"
+            afterLabel="A brand asset"
+            before={[
+              "New furniture, TVs, finishes",
+              "A new logo every two years",
+              "Renovation as differentiation",
+              "Aesthetic-first, story-last",
+            ]}
+            after={[
+              "A clear why",
+              "A clear story",
+              "A clear position",
+              "A consistent way of showing work, people, and stance",
+            ]}
+          />
 
-          <div className="reading">
-            <p>That is what creates pull. That is what patients remember. That is what people say about you when you are not in the room.</p>
-            <p>Meanwhile, some of the practices in the most pain come to us right after a rebuild. New office. New logo. New everything. Still no demand.</p>
-            <p>Because a nicer office does not create a stronger signal. A new logo does not create trust. And better finishes do not make people care.</p>
-          </div>
+          <Outcome label="What a brand earns you">
+            Pull. The thing patients remember. The thing people say about you when you are not in the room.
+          </Outcome>
 
           <blockquote className="pullquote">
             “That is the difference between buying things and building an asset.”
             <cite>— PASTED HOUSE DOCTRINE</cite>
           </blockquote>
-
-          <div className="reading">
-            <p>If your branding strategy starts with aesthetics and ends with a logo, you do not have a brand strategy. You have a spending strategy. This guide walks you through the five parts of a real brand asset. Before the parts, there is a foundation.</p>
-          </div>
 
           <p style={{ marginTop: 32, fontFamily: "Cormorant Garamond, serif", fontStyle: "italic", color: "var(--ink-quiet)", fontSize: 19, maxWidth: 620 }}>
             The foundation is your ikigai — the bedrock every undeniable practice is built on.
@@ -1396,43 +1693,48 @@ const BrandAssetWorkbook = () => {
 
         {/* PART I */}
         <Section id="positioning" masthead="§ I · POSITIONING" ornament={<OrnCrosshair />}>
+          <StatusBar active={1} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART I</div>
           <h2 className="serif"><em>Positioning.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
-            You already specialize. The question is not <em>what</em> you do — it is whether the market knows <em>how you own it.</em>
+            You already specialize. The question is whether the market knows <em>how you own it.</em>
           </p>
-          <div className="reading">
-            <p>Most aesthetic dentists have a specialty on the website and generalist messaging everywhere else. The niche is chosen. The positioning is fuzzy. That gap is where pull leaks.</p>
-            <p>Positioning is how you describe your specialty in a way only you could describe it. “Cosmetic” is a category. “The dentist high-profile patients are sent to when nobody can know they had work done” is a position.</p>
-            <p>This is where the ikigai synthesis lives. Your one-sentence positioning from the foundation <em>is</em> your positioning — if it survives the real-world test. The test is whether a patient can repeat it to a friend at dinner without losing any of it.</p>
+          <div className="reading tight">
+            <p>“Cosmetic” is a category. <em>“The dentist high-profile patients are sent to when nobody can know they had work done”</em> is a position.</p>
           </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The PASTED Descriptive Call-Out</h3>
-          <div className="reading">
-            <p>Do not call out job titles. Call out conditions, states, and self-perceptions. “Executives over 50” is weak. “The woman who hasn't smiled in a photo since her divorce” is strong.</p>
-          </div>
-
-          <div className="callout">
-            <div className="callout-label">Working Frame</div>
-            <p>Weak: <em>For professionals who want better smiles.</em></p>
-            <p>Strong: <em>For the founder, surgeon, or executive whose smile hasn't kept up with the life they've built.</em></p>
-          </div>
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>Call out a state, not a job title.</h3>
+          <BeforeAfter
+            beforeLabel="Weak call-out"
+            afterLabel="Strong call-out"
+            before={[
+              "Executives over 50",
+              "Professionals who want better smiles",
+              "Anyone interested in cosmetic dentistry",
+            ]}
+            after={[
+              "The founder whose smile hasn't kept up with the life they've built",
+              "The woman who hasn't smiled in a photo since her divorce",
+              "The patient who has been quoted three times and trusted no one",
+            ]}
+          />
 
           <h3 style={{ marginTop: 56, marginBottom: 16 }}>The 3% In-Market Rule</h3>
-          <div className="reading">
-            <p>At any given moment, only about <strong>3% of your total addressable market is ready to buy.</strong> The other 97% is unaware, passive, or not yet in the window. A good brand speaks only to the 3% — with precision — while conditioning the 97% for their future moment. That is the mechanism of pull.</p>
-          </div>
+          <p style={{ maxWidth: 620 }}>Only 3% of your market is ready to buy today. Speak to them with precision. Condition the other 97% for their moment.</p>
+          <MarketBar />
 
-          <WorkbookBlock num="✦" fieldKey="callouts" question="Write three descriptive call-outs for your 3%." hint="Each should describe a state or self-perception, not a demographic. They should feel like private thoughts, not segments." placeholder={"1. For the woman who…\n2. For the man who…\n3. For the patient who…"} minHeight={130} values={values} onChange={handleChange} />
+          <Outcome label="Why this matters">
+            Pull comes from being unmistakable to the 3% — and unforgettable to the 97% before they ever enter the window.
+          </Outcome>
+
+          <WorkbookBlock num="✦" fieldKey="callouts" question="Write three descriptive call-outs for your 3%." hint="Each should describe a state or self-perception, not a demographic." placeholder={"1. For the woman who…\n2. For the man who…\n3. For the patient who…"} minHeight={130} values={values} onChange={handleChange} />
 
           <span className="sublabel" style={{ marginTop: 72 }}>Capstone · The Practice Marketing System</span>
-          <div className="reading">
-            <p>Four lines that, together, define the commercial engine of your brand. The most-used page of this guide — what you read back before every shoot, every ad, every team meeting.</p>
-          </div>
-          <WorkbookBlock num="01" fieldKey="ms_patient" inputType="input" question="Ideal Patient" hint="Describe the patient you want more of in one vivid sentence. Not a demographic — a person." placeholder="The ___ who ___" values={values} onChange={handleChange} />
-          <WorkbookBlock num="02" fieldKey="ms_differentiators" question="Three Differentiators" hint="What separates you from every other dentist in your specialty, stated in the patient's language — not credentials or equipment." placeholder={"1. ___\n2. ___\n3. ___"} minHeight={140} values={values} onChange={handleChange} />
-          <WorkbookBlock num="03" fieldKey="ms_experience" question="Signature Experience" hint="The 3–5 step process that defines how you deliver the work. Named, repeatable, ownable." placeholder="Step 1 ___. Step 2 ___. Step 3 ___." minHeight={100} values={values} onChange={handleChange} />
-          <WorkbookBlock num="04" fieldKey="ms_promise" inputType="input" question="The Promise" hint="What the patient walks away with. What you guarantee. The outcome your brand stakes its name on." placeholder="Every patient walks away with ___" values={values} onChange={handleChange} />
+          <p style={{ maxWidth: 620, marginBottom: 24 }}>Four lines that define the commercial engine of your brand. The most-used page of this guide.</p>
+          <WorkbookBlock num="01" fieldKey="ms_patient" inputType="input" question="Ideal Patient" hint="One vivid sentence. A person, not a demographic." placeholder="The ___ who ___" values={values} onChange={handleChange} />
+          <WorkbookBlock num="02" fieldKey="ms_differentiators" question="Three Differentiators" hint="In the patient's language. Not credentials or equipment." placeholder={"1. ___\n2. ___\n3. ___"} minHeight={140} values={values} onChange={handleChange} />
+          <WorkbookBlock num="03" fieldKey="ms_experience" question="Signature Experience" hint="The 3–5 step process. Named, repeatable, ownable." placeholder="Step 1 ___. Step 2 ___. Step 3 ___." minHeight={100} values={values} onChange={handleChange} />
+          <WorkbookBlock num="04" fieldKey="ms_promise" inputType="input" question="The Promise" hint="The outcome your brand stakes its name on." placeholder="Every patient walks away with ___" values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
@@ -1442,16 +1744,13 @@ const BrandAssetWorkbook = () => {
 
         {/* PART II */}
         <Section id="pov" masthead="§ II · POINT OF VIEW" ornament={<OrnCompassVariant />}>
+          <StatusBar active={2} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART II</div>
           <h2 className="serif"><em>Point of View.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>Strong brands have opinions. Weak brands list services.</p>
-          <div className="reading">
-            <p>This is the part most dental brands are missing — and the part that separates a practice from a point of reference.</p>
-            <p>Point of view is the non-negotiable belief you carry into every case, every consult, every piece of content. It is what makes a patient say “I want <em>him</em> specifically” instead of “I want a dentist.”</p>
-          </div>
 
-          <div className="callout">
-            <div className="callout-label">Examples</div>
+          <div className="callout" style={{ marginTop: 32 }}>
+            <div className="callout-label">Five real points of view</div>
             <p><em>We don't do cookie-cutter veneers.</em></p>
             <p><em>Subtlety over Hollywood.</em></p>
             <p><em>Function before aesthetics.</em></p>
@@ -1459,21 +1758,17 @@ const BrandAssetWorkbook = () => {
             <p><em>Age-appropriate or nothing.</em></p>
           </div>
 
-          <div className="reading">
-            <p>Every time we rebuild this — not the logo — case value goes up, price sensitivity drops, and suddenly you are not competing anymore. That is pull. And pull is what an office renovation will never buy you.</p>
-          </div>
+          <Outcome label="What a real POV earns you">
+            Case value rises. Price sensitivity drops. You stop competing.
+          </Outcome>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Signature Story</h3>
-          <div className="reading">
-            <p>A point of view becomes unforgettable when it is attached to a story. Every iconic practice has one that is specific, true, and repeatable. Specific enough that it could not belong to any other dentist. True enough that you never have to remember it. Repeatable enough that a patient can tell their spouse over dinner.</p>
-          </div>
-
-          <div style={{ marginTop: 32, marginBottom: 56 }}>
+          <h3 style={{ marginTop: 56, marginBottom: 24 }}>The Signature Story · four layers</h3>
+          <div style={{ marginBottom: 56 }}>
             {[
-              { k: "Origin", t: "Why this practice exists.", s: "The reason you opened the doors. The patient, the mentor, the failure, or the frustration that started it." },
-              { k: "Continuity", t: "What's been true the whole time.", s: "Three-generation practices, 30-year hygienists, signature techniques. Use specifics, not decades." },
-              { k: "Mechanism", t: "The way you do it that others don't.", s: "Your unique approach — named, explained, owned. The shorthand patients use." },
-              { k: "Promise", t: "What the patient walks away with.", s: "Not the procedure. The outcome. The identity shift.", last: true },
+              { k: "Origin", t: "Why this practice exists.", s: "The reason you opened the doors." },
+              { k: "Continuity", t: "What's been true the whole time.", s: "Specifics, not decades." },
+              { k: "Mechanism", t: "The way you do it that others don't.", s: "Named. Owned. Repeatable." },
+              { k: "Promise", t: "What the patient walks away with.", s: "The identity shift, not the procedure.", last: true },
             ].map((r) => (
               <div key={r.k} className={`framework-row${r.last ? " last" : ""}`}>
                 <div className="framework-key">{r.k}</div>
@@ -1485,8 +1780,8 @@ const BrandAssetWorkbook = () => {
             ))}
           </div>
 
-          <WorkbookBlock num="✦" fieldKey="pov_statement" inputType="input" question='Write one sentence: "We believe ______."' hint="This single sentence drives content, messaging, pricing, and differentiation for the next decade. Do not hedge it." placeholder="We believe ___" values={values} onChange={handleChange} />
-          <WorkbookBlock num="✦" fieldKey="story" question="Draft your signature story in four lines." hint="One line per layer. Short. Specific. Not yet polished." placeholder={"Origin:\nContinuity:\nMechanism:\nPromise:"} minHeight={160} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="pov_statement" inputType="input" question='Write one sentence: "We believe ______."' hint="This sentence drives content, messaging, pricing, and differentiation for the next decade." placeholder="We believe ___" values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="story" question="Draft your signature story in four lines." hint="One line per layer. Short. Specific." placeholder={"Origin:\nContinuity:\nMechanism:\nPromise:"} minHeight={160} values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
@@ -1496,30 +1791,39 @@ const BrandAssetWorkbook = () => {
 
         {/* PART III */}
         <Section id="experience" masthead="§ III · EXPERIENCE" ornament={<OrnThreeRings />}>
+          <StatusBar active={3} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART III</div>
           <h2 className="serif"><em>Experience.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
             Your brand is not what your Instagram says. It is what happens next.
           </p>
-          <div className="reading">
-            <p>A brand is your consult flow. Your office vibe. How your team speaks. Your follow-up. Your before-and-after photography. The smell of the space. The music in the waiting room. The way a treatment plan is delivered.</p>
-            <p>If your Instagram says “luxury” but your consult feels rushed — your brand collapses. If your ads promise bespoke and your follow-up is a templated SMS at 9am — your brand collapses.</p>
-            <p>Consistency builds credibility. Inconsistency is the fastest way to lose a $60k case.</p>
-          </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Experience Audit</h3>
-          <div className="reading">
-            <p>Walk your own practice like a patient. Listen to your own front desk call. Re-read your own follow-up sequence. Does the feeling hold from first scroll to final reveal?</p>
-          </div>
+          <BeforeAfter
+            beforeLabel="Brand collapses when…"
+            afterLabel="Brand holds when…"
+            before={[
+              "The ad promises bespoke. The follow-up is a 9am template.",
+              "The website says luxury. The consult feels rushed.",
+              "The photography is gallery. The waiting room is brochure.",
+            ]}
+            after={[
+              "Every touchpoint sounds like the same person.",
+              "Tone, palette, and pace are defended on every channel.",
+              "What you let through matches what you promised.",
+            ]}
+          />
+
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Six-Touchpoint Audit</h3>
+          <p style={{ maxWidth: 620 }}>Walk your own practice like a patient. Score each.</p>
 
           <div className="pillar-grid cols-3">
             {[
-              { t: "Website tone", b: "Does it sound like you, or like your competitor?" },
-              { t: "Front desk tone", b: "Is it the same person the website promised?" },
-              { t: "Consult structure", b: "Does it feel bespoke or processed?" },
-              { t: "Follow-up messaging", b: "Does it carry the brand, or break it?" },
-              { t: "Photography", b: "Does it belong in a gallery, or a brochure?" },
-              { t: "Space", b: "Does the environment match the tier of work?" },
+              { t: "Website tone", b: "Sounds like you, or your competitor?" },
+              { t: "Front desk", b: "Same person the website promised?" },
+              { t: "Consult", b: "Bespoke or processed?" },
+              { t: "Follow-up", b: "Carries the brand or breaks it?" },
+              { t: "Photography", b: "Gallery, or brochure?" },
+              { t: "Space", b: "Matches the tier of work?" },
             ].map((p) => (
               <div key={p.t} className="pillar-cell">
                 <div className="pillar-title">{p.t}</div>
@@ -1528,10 +1832,9 @@ const BrandAssetWorkbook = () => {
             ))}
           </div>
 
-          <div className="callout">
-            <div className="callout-label">Tonal Discipline</div>
-            <p>Pick one palette, one typography system, one lighting convention, one tone of voice — and defend them from every well-meaning intrusion. A brand's experience is the sum of what you <em>don't</em> let through.</p>
-          </div>
+          <Outcome label="The cost of inconsistency">
+            One break in the chain is the fastest way to lose a $60k case.
+          </Outcome>
 
           <WorkbookBlock num="✦" fieldKey="experience_gap" question="Where does your brand currently collapse?" hint="The gap between what you promise publicly and what a patient experiences privately. Be brutal." placeholder="The ad says ___. The consult feels ___." minHeight={120} values={values} onChange={handleChange} />
         </Section>
@@ -1543,41 +1846,37 @@ const BrandAssetWorkbook = () => {
 
         {/* PART IV */}
         <Section id="signal" masthead="§ IV · SIGNAL" ornament={<OrnBeacon />}>
+          <StatusBar active={4} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART IV</div>
           <h2 className="serif"><em>Signal.</em></h2>
-          <p className="lead" style={{ marginTop: 48 }}>Signal is content. But content guided by positioning — not content for its own sake.</p>
-          <div className="reading">
-            <p>Most dentists treat content like a chore. They post happy Mondays. Random before-and-afters. Generic dental tips. This is noise. It does not reinforce positioning, does not carry point of view, does not deepen experience.</p>
-            <p>Strong signal does the opposite. It says the same thing the positioning says, in a different format, every time. That consistency is what creates pull.</p>
-          </div>
+          <p className="lead" style={{ marginTop: 48 }}>Content guided by positioning. Not content for its own sake.</p>
 
-          <div className="pillar-grid cols-2" style={{ marginTop: 48 }}>
-            <div className="pillar-cell">
-              <div className="numeral" style={{ marginBottom: 12, color: "var(--ink-quiet)" }}>WEAK SIGNAL</div>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Random before/after</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>“Happy Monday”</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Dental tips anyone could post</p>
-            </div>
-            <div className="pillar-cell">
-              <div className="numeral" style={{ marginBottom: 12, color: "var(--brass)" }}>STRONG SIGNAL</div>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Philosophy pieces</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Patient stories</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Lifestyle transformation</p>
-              <p className="pillar-body" style={{ fontSize: 15 }}>Authority commentary on your category</p>
-            </div>
-          </div>
+          <BeforeAfter
+            beforeLabel="Weak signal"
+            afterLabel="Strong signal"
+            before={[
+              "Random before/after",
+              "“Happy Monday”",
+              "Generic dental tips",
+              "Trend-chasing posts",
+            ]}
+            after={[
+              "Philosophy pieces",
+              "Patient stories",
+              "Lifestyle transformation",
+              "Authority commentary on your category",
+            ]}
+          />
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Four Quadrants</h3>
-          <div className="reading">
-            <p>At PASTED, signal is organized around four categories. Every piece of content maps to one. Together they cover the full psychology of an in-market buyer.</p>
-          </div>
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Four Quadrants of Signal</h3>
+          <p style={{ maxWidth: 620 }}>Every piece maps to one. Together they cover the full psychology of an in-market buyer.</p>
 
           <div className="pillar-grid cols-2">
             {[
-              { t: "01 · Questions", b: "What patients ask you directly. Surface-level. High-volume, broad appeal, educational." },
-              { t: "02 · Questions from Questions", b: "Follow-ups patients only ask after the first answer. Deeper. More specific." },
-              { t: "03 · Objections", b: "Reasons patients almost don't book. Price, fear, time, past experience. Address the objection before it becomes a silent no." },
-              { t: "04 · Expectations", b: "What the experience will actually be like. Reduces anxiety, raises perceived value, pre-sells the close." },
+              { t: "01 · Questions", b: "What patients ask you directly. High-volume, broad, educational." },
+              { t: "02 · Questions from Questions", b: "Follow-ups patients only ask after the first answer." },
+              { t: "03 · Objections", b: "Address the silent no before it forms. Price, fear, time, past experience." },
+              { t: "04 · Expectations", b: "What the experience will feel like. Pre-sells the close." },
             ].map((p) => (
               <div key={p.t} className="pillar-cell">
                 <div className="pillar-title">{p.t}</div>
@@ -1586,12 +1885,11 @@ const BrandAssetWorkbook = () => {
             ))}
           </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Posting Filter</h3>
-          <div className="reading">
-            <p>Before you post anything, ask: <em>Does this reinforce what we're known for?</em> If not, don't post.</p>
-          </div>
+          <Outcome label="The Posting Filter">
+            Before posting anything, ask: <em>Does this reinforce what we're known for?</em> If not, don't post.
+          </Outcome>
 
-          <WorkbookBlock num="✦" fieldKey="quadrants" question="Write one content idea in each of the four quadrants." hint="Specific enough to film tomorrow. Every idea must pass the posting filter." placeholder={"Questions:\nQuestions from Questions:\nObjections:\nExpectations:"} minHeight={180} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="quadrants" question="Write one content idea in each of the four quadrants." hint="Specific enough to film tomorrow." placeholder={"Questions:\nQuestions from Questions:\nObjections:\nExpectations:"} minHeight={180} values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
@@ -1601,37 +1899,23 @@ const BrandAssetWorkbook = () => {
 
         {/* PART V */}
         <Section id="system" masthead="§ V · SYSTEM" ornament={<OrnChain />}>
+          <StatusBar active={5} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART V</div>
           <h2 className="serif"><em>System.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
-            Pull happens when all five parts carry the same signal. This is the piece most dentists miss.
+            Pull happens when all five parts carry the same signal. The system is what makes them compound instead of leak.
           </p>
-          <div className="reading">
-            <p>A brand must carry through: ads, website, consult, pricing, photography, messaging, follow-up, reviews, referral scripts, even the invoice. If one breaks, trust drops. If trust drops, price drops. If price drops, you are back to competing.</p>
-            <p>The system is what makes the whole architecture compound instead of leak.</p>
-          </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Patient Journey Map</h3>
-          <div className="reading">
-            <p>Walk the journey. End to end. Every message, every screen, every human interaction.</p>
-          </div>
-
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Patient Journey · end to end</h3>
           <Figure03Journey />
 
-          <div className="reading">
-            <p>At each step, ask: Does the message match the one before it? Does the tone match the positioning? Does the point of view come through? Does the experience hold up?</p>
-          </div>
-
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Compounding Effect</h3>
-          <div className="reading">
-            <p>When the system holds, three things happen together:</p>
-          </div>
-
-          <div style={{ marginTop: 24, marginBottom: 56 }}>
+          <h3 style={{ marginTop: 56, marginBottom: 24 }}>The Compounding Effect</h3>
+          <Sparkline />
+          <div style={{ marginBottom: 56 }}>
             {[
-              { k: "Recognition", t: "The market knows who you are before you speak.", s: "Your visuals, voice, and call-outs are distinct enough that a patient recognizes your ad in the scroll without reading a word." },
-              { k: "Conditioning", t: "The 97% is being trained for their moment.", s: "Every piece of content a non-buyer consumes pre-frames their eventual purchase. When they enter the 3%, you are already the default answer." },
-              { k: "Concentration", t: "Affluent patients tell affluent patients.", s: "Referral quality improves. Pricing power improves. The funnel gets more efficient as the brand matures.", last: true },
+              { k: "Recognition", t: "The market knows you before you speak.", s: "Patients recognize your ad without reading a word." },
+              { k: "Conditioning", t: "The 97% is trained for their moment.", s: "When they enter the 3%, you are already the default answer." },
+              { k: "Concentration", t: "Affluent patients tell affluent patients.", s: "Referral quality compounds. Pricing power compounds.", last: true },
             ].map((r) => (
               <div key={r.k} className={`framework-row${r.last ? " last" : ""}`}>
                 <div className="framework-key">{r.k}</div>
@@ -1645,13 +1929,12 @@ const BrandAssetWorkbook = () => {
 
           <Figure04Compounding />
 
-          <blockquote className="pullquote">
-            “A practice can take 20 years to build. A brand, built correctly, can be built in 24 months and then compound indefinitely.”
-            <cite>— THE PASTED LONG VIEW</cite>
-          </blockquote>
+          <Outcome label="The long view">
+            A practice can take 20 years to build. A brand, built correctly, takes 24 months — then compounds indefinitely.
+          </Outcome>
 
-          <WorkbookBlock num="✦" fieldKey="journey_map" question="Map your patient journey in one line." hint="Ad → Website → Consult → Follow-up. Then circle the weakest link. That is where the brand is leaking." placeholder="Ad → ___ → ___ → ___. Weakest link: ___" minHeight={100} values={values} onChange={handleChange} />
-          <WorkbookBlock num="✦" fieldKey="weakest_part" question="Which of the five parts is weakest in your practice today?" hint="Honest answer. Not the one you want to fix — the one you have been avoiding." placeholder="Part ___. Because ___" minHeight={100} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="journey_map" question="Map your patient journey in one line." hint="Ad → Website → Consult → Follow-up. Circle the weakest link." placeholder="Ad → ___ → ___ → ___. Weakest link: ___" minHeight={100} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="weakest_part" question="Which of the five parts is weakest today?" hint="Honest answer. The one you have been avoiding." placeholder="Part ___. Because ___" minHeight={100} values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
