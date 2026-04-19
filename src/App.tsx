@@ -28,10 +28,13 @@ const App = () => (
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
-          <Route path="/library/vol-i" element={<BrandAssetWorkbook />} />
           <Route path="/library/doctrine" element={<DoctrineOnBrand />} />
+          {/* Canonical: cover + doctrine live as one piece at /library/doctrine.
+              These older entry points redirect there so any pasted-studio.com/library/* link still works. */}
+          <Route path="/library" element={<Navigate to="/library/doctrine" replace />} />
+          <Route path="/library/vol-i" element={<Navigate to="/library/doctrine" replace />} />
+          <Route path="/library/cover" element={<Navigate to="/library/doctrine" replace />} />
           <Route path="/founders" element={<Founders />} />
-          <Route path="/library/cover" element={<LibraryCover />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
