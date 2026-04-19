@@ -3,7 +3,19 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { trackCTAClick } from "@/hooks/useCTAAnalytics";
-import { PASTED_CALENDLY_URL } from "@/lib/calendly";
+
+const INSIDER_KEY = "pasted_insider_email";
+type InsiderRecord = { email: string; submitted_at: string };
+const loadInsider = (): InsiderRecord | null => {
+  try {
+    const raw = localStorage.getItem(INSIDER_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as InsiderRecord;
+  } catch { return null; }
+};
+const saveInsider = (rec: InsiderRecord) => {
+  try { localStorage.setItem(INSIDER_KEY, JSON.stringify(rec)); } catch { /* ignore */ }
+};
 
 /* ============================================================
  * THE ART OF BECOMING — The PASTED Library · Volume I
@@ -1279,21 +1291,30 @@ const BrandAssetWorkbook = () => {
   /* Reset */
   const handleReset = () => {
     if (!window.confirm("Clear all answers? This cannot be undone.")) return;
-    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(INSIDER_KEY);
+    } catch { /* ignore */ }
     setValues({});
+    setInsider(null);
     setSaveState("reset");
     window.setTimeout(() => setSaveState("saved"), 800);
   };
 
-  /* CTA tracking helpers */
-  const handleCTA = (placement: "top" | "bottom") => {
+  /* Insider state (rehydrated on mount via existing useEffect below pattern is in render) */
+  const [insider, setInsider] = useState<InsiderRecord | null>(() => loadInsider());
+
+  const handleInsiderSubmit = useCallback((email: string) => {
+    const rec: InsiderRecord = { email, submitted_at: new Date().toISOString() };
+    saveInsider(rec);
+    setInsider(rec);
     void trackCTAClick({
-      ctaId: `library_vol_i_cta_${placement}`,
-      ctaText: "Book a Brand Architecture Call",
-      section: placement === "top" ? "library_topbar" : "library_footer",
+      ctaId: "library_vol_i_insider_signup",
+      ctaText: "Join The Pasted Insider",
+      section: "library_insider",
     });
-    window.open(PASTED_CALENDLY_URL, "_blank", "noopener,noreferrer");
-  };
+    // TODO: wire to broadcast email service
+  }, []);
 
   /* Export */
   const handleExport = async () => {
