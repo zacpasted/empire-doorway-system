@@ -3154,7 +3154,18 @@ const BrandAssetWorkbook = () => {
             </div>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 120 }}>
+          <figure className="cover-portrait">
+            <img
+              src={workbookCoverPortrait}
+              alt="Editorial portrait — the founder, considered."
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </figure>
+          <div className="cover-portrait-caption">Plate I · Frontispiece</div>
+
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 80 }}>
             <CoverSigil />
           </div>
 
@@ -3390,7 +3401,13 @@ const BrandAssetWorkbook = () => {
         <Fleuron />
 
         {/* CHAPTER CARD · I */}
-        <ChapterCard roman="I" name="Positioning" tagline="Becoming known." />
+        <ChapterCard
+          roman="I"
+          name="Positioning"
+          tagline="Becoming known."
+          portrait={workbookChapterPositioning}
+          portraitAlt="Editorial study — perspective and posture."
+        />
 
         {/* PART I */}
         <Section id="positioning" masthead="§ I · POSITIONING" ornament={<OrnCrosshair />}>
