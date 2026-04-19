@@ -920,6 +920,84 @@ const styles = `
   .colophon-3 { margin-top: 48px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: 14px; color: var(--ink-whisper); }
   .colophon-fleuron { margin-top: 32px; color: var(--brass); font-size: 20px; }
 
+  /* Library Card CTA */
+  .library-card {
+    margin: 200px auto 0;
+    max-width: 720px;
+    text-align: center;
+    padding: 0 28px;
+  }
+  .library-card-rule {
+    width: 120px; height: 1px; background: var(--brass); margin: 0 auto 56px;
+  }
+  .library-card-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-quiet);
+  }
+  .library-card-title {
+    margin: 28px 0 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(38px, 6vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    color: var(--ink-deep);
+  }
+  .library-card-title em {
+    font-style: italic;
+    color: var(--brass);
+  }
+  .library-card-lede {
+    margin: 28px auto 0;
+    max-width: 540px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .library-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 44px;
+    padding: 18px 32px;
+    border: 1px solid var(--brass);
+    background: transparent;
+    color: var(--ink-deep);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 280ms ease, color 280ms ease, letter-spacing 280ms ease;
+  }
+  .library-card-cta:hover {
+    background: var(--brass);
+    color: #FAF6EC;
+    letter-spacing: 0.32em;
+  }
+  .library-card-cta-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    transition: transform 280ms ease;
+  }
+  .library-card-cta:hover .library-card-cta-arrow {
+    transform: translateX(4px);
+  }
+  .library-card-fineprint {
+    margin-top: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--ink-whisper);
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
