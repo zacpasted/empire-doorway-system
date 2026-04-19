@@ -258,7 +258,16 @@ html.workbook-html { scroll-behavior: smooth; }
 }
 .workbook-root .mini-strip-cell:hover::after { background: var(--rule); }
 .workbook-root .mini-strip-cell.done::after { background: var(--brass-line); }
-.workbook-root .mini-strip-cell.active::after { background: var(--brass); height: 2px; }
+.workbook-root .mini-strip-cell.active::after { background: var(--brass-line); height: 2px; }
+.workbook-root .mini-strip-fill {
+  position: absolute; left: 0; bottom: 0; height: 2px;
+  background: var(--brass); width: 0%;
+  transition: width 80ms linear;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .workbook-root .mini-strip-fill { transition: none; }
+}
 .workbook-root .mini-strip-tooltip {
   position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
   margin-top: 4px; padding: 4px 8px;
@@ -1485,6 +1494,7 @@ const TableOfContents = () => (
 
 const MiniProgressStrip = () => {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [sectionPct, setSectionPct] = useState(0);
 
   useEffect(() => {
     const els = TOC_ITEMS.map((i) => document.getElementById(i.id)).filter(
@@ -1501,6 +1511,22 @@ const MiniProgressStrip = () => {
         if (top - line <= 0) idx = i;
       }
       setActiveIdx(idx);
+
+      // Sub-progress: how far through the active section we've scrolled.
+      const currTop = els[idx].getBoundingClientRect().top - line;
+      const nextEl = els[idx + 1];
+      const sectionLength = nextEl
+        ? nextEl.getBoundingClientRect().top - els[idx].getBoundingClientRect().top
+        : document.documentElement.scrollHeight -
+          (els[idx].getBoundingClientRect().top + window.scrollY) -
+          window.innerHeight +
+          line;
+      const traveled = -currTop;
+      const pct =
+        sectionLength > 0
+          ? Math.min(100, Math.max(0, (traveled / sectionLength) * 100))
+          : 0;
+      setSectionPct(pct);
     };
 
     compute();
@@ -1537,6 +1563,13 @@ const MiniProgressStrip = () => {
               aria-current={i === activeIdx ? "true" : undefined}
             >
               <span className="mini-strip-tooltip">{item.name}</span>
+              {i === activeIdx && (
+                <span
+                  className="mini-strip-fill"
+                  style={{ width: `${sectionPct}%` }}
+                  aria-hidden="true"
+                />
+              )}
             </a>
           ))}
         </div>
