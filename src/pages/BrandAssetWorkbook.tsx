@@ -222,8 +222,28 @@ html.workbook-html { scroll-behavior: smooth; }
   max-width: 1200px; margin: 0 auto; height: 100%;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 56px;
+  gap: 12px; min-width: 0;
 }
-@media (max-width: 720px) { .workbook-root .topbar-inner { padding: 0 24px; } }
+.workbook-root .topbar-left,
+.workbook-root .topbar-right {
+  display: flex; align-items: center; min-width: 0;
+}
+.workbook-root .topbar-left { gap: 12px; flex-shrink: 1; min-width: 0; }
+.workbook-root .topbar-right { gap: 16px; flex-shrink: 0; }
+
+@media (max-width: 720px) {
+  .workbook-root .topbar { height: 56px; }
+  .workbook-root .topbar-inner { padding: 0 14px; gap: 8px; }
+  .workbook-root .topbar-left { gap: 8px; }
+  .workbook-root .topbar-right { gap: 10px; }
+  /* Hide divider, eyebrow, and "Saved" indicator on mobile —
+     wordmark + answered-pill + reset is the priority. */
+  .workbook-root .topbar-divider,
+  .workbook-root .topbar-eyebrow,
+  .workbook-root .topbar-saved { display: none; }
+  .workbook-root .topbar-wordmark { font-size: 18px !important; letter-spacing: 0.12em !important; }
+  .workbook-root .topbar-reset { font-size: 9px !important; letter-spacing: 0.18em !important; }
+}
 .workbook-root .progress {
   position: fixed; top: 0; left: 0; height: 1px; background: var(--brass);
   z-index: 60; transition: width 80ms linear;
