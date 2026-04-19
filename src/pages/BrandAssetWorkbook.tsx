@@ -1899,37 +1899,23 @@ const BrandAssetWorkbook = () => {
 
         {/* PART V */}
         <Section id="system" masthead="§ V · SYSTEM" ornament={<OrnChain />}>
+          <StatusBar active={5} />
           <div className="numeral" style={{ marginBottom: 12 }}>PART V</div>
           <h2 className="serif"><em>System.</em></h2>
           <p className="lead" style={{ marginTop: 48 }}>
-            Pull happens when all five parts carry the same signal. This is the piece most dentists miss.
+            Pull happens when all five parts carry the same signal. The system is what makes them compound instead of leak.
           </p>
-          <div className="reading">
-            <p>A brand must carry through: ads, website, consult, pricing, photography, messaging, follow-up, reviews, referral scripts, even the invoice. If one breaks, trust drops. If trust drops, price drops. If price drops, you are back to competing.</p>
-            <p>The system is what makes the whole architecture compound instead of leak.</p>
-          </div>
 
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Patient Journey Map</h3>
-          <div className="reading">
-            <p>Walk the journey. End to end. Every message, every screen, every human interaction.</p>
-          </div>
-
+          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Patient Journey · end to end</h3>
           <Figure03Journey />
 
-          <div className="reading">
-            <p>At each step, ask: Does the message match the one before it? Does the tone match the positioning? Does the point of view come through? Does the experience hold up?</p>
-          </div>
-
-          <h3 style={{ marginTop: 56, marginBottom: 16 }}>The Compounding Effect</h3>
-          <div className="reading">
-            <p>When the system holds, three things happen together:</p>
-          </div>
-
-          <div style={{ marginTop: 24, marginBottom: 56 }}>
+          <h3 style={{ marginTop: 56, marginBottom: 24 }}>The Compounding Effect</h3>
+          <Sparkline />
+          <div style={{ marginBottom: 56 }}>
             {[
-              { k: "Recognition", t: "The market knows who you are before you speak.", s: "Your visuals, voice, and call-outs are distinct enough that a patient recognizes your ad in the scroll without reading a word." },
-              { k: "Conditioning", t: "The 97% is being trained for their moment.", s: "Every piece of content a non-buyer consumes pre-frames their eventual purchase. When they enter the 3%, you are already the default answer." },
-              { k: "Concentration", t: "Affluent patients tell affluent patients.", s: "Referral quality improves. Pricing power improves. The funnel gets more efficient as the brand matures.", last: true },
+              { k: "Recognition", t: "The market knows you before you speak.", s: "Patients recognize your ad without reading a word." },
+              { k: "Conditioning", t: "The 97% is trained for their moment.", s: "When they enter the 3%, you are already the default answer." },
+              { k: "Concentration", t: "Affluent patients tell affluent patients.", s: "Referral quality compounds. Pricing power compounds.", last: true },
             ].map((r) => (
               <div key={r.k} className={`framework-row${r.last ? " last" : ""}`}>
                 <div className="framework-key">{r.k}</div>
@@ -1943,13 +1929,12 @@ const BrandAssetWorkbook = () => {
 
           <Figure04Compounding />
 
-          <blockquote className="pullquote">
-            “A practice can take 20 years to build. A brand, built correctly, can be built in 24 months and then compound indefinitely.”
-            <cite>— THE PASTED LONG VIEW</cite>
-          </blockquote>
+          <Outcome label="The long view">
+            A practice can take 20 years to build. A brand, built correctly, takes 24 months — then compounds indefinitely.
+          </Outcome>
 
-          <WorkbookBlock num="✦" fieldKey="journey_map" question="Map your patient journey in one line." hint="Ad → Website → Consult → Follow-up. Then circle the weakest link. That is where the brand is leaking." placeholder="Ad → ___ → ___ → ___. Weakest link: ___" minHeight={100} values={values} onChange={handleChange} />
-          <WorkbookBlock num="✦" fieldKey="weakest_part" question="Which of the five parts is weakest in your practice today?" hint="Honest answer. Not the one you want to fix — the one you have been avoiding." placeholder="Part ___. Because ___" minHeight={100} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="journey_map" question="Map your patient journey in one line." hint="Ad → Website → Consult → Follow-up. Circle the weakest link." placeholder="Ad → ___ → ___ → ___. Weakest link: ___" minHeight={100} values={values} onChange={handleChange} />
+          <WorkbookBlock num="✦" fieldKey="weakest_part" question="Which of the five parts is weakest today?" hint="Honest answer. The one you have been avoiding." placeholder="Part ___. Because ___" minHeight={100} values={values} onChange={handleChange} />
         </Section>
 
         <Dots />
