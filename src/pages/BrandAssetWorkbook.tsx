@@ -751,7 +751,7 @@ html.workbook-html { scroll-behavior: smooth; }
 @media print {
   .workbook-root { background: white !important; color: black !important; font-size: 11pt; }
   .workbook-root .grain, .workbook-root .topbar, .workbook-root .progress,
-  .workbook-root .mini-strip,
+  .workbook-root .mini-strip, .workbook-root .mini-strip-mobile,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
   .workbook-root .lead-gate,
   .workbook-root .insider-card, .workbook-root .insider-links,
@@ -762,6 +762,23 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .doctrine-page { page-break-before: always; page-break-after: always; }
   .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
+}
+
+/* Print — Doctrine-only mode (toggled by body.print-doctrine-only) */
+.doctrine-print-portal { display: none; }
+@media print {
+  body.print-doctrine-only > *:not(.doctrine-print-portal) { display: none !important; }
+  body.print-doctrine-only .doctrine-print-portal { display: block !important; }
+  body.print-doctrine-only .doctrine-print-portal .doctrine-wrap { margin: 0 auto !important; }
+  body.print-doctrine-only .doctrine-print-portal .doctrine-eyebrow { display: none !important; }
+  body.print-doctrine-only .doctrine-print-portal .doctrine-page {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    break-inside: avoid !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+  }
+  body.print-doctrine-only @page { margin: 10mm; size: letter; }
 }
 
 /* ---------- Brand Doctrine (one-page summary) ---------- */
@@ -2440,6 +2457,41 @@ const BrandAssetWorkbook = () => {
     // TODO: wire to broadcast email service
   }, []);
 
+  /* Print only the Doctrine card — clones it into a body-level portal,
+     toggles a body class so print CSS hides everything else, then cleans up. */
+  const handlePrintDoctrine = useCallback(() => {
+    const original = document.querySelector(".workbook-root .doctrine-wrap");
+    if (!original) {
+      window.print();
+      return;
+    }
+    const portal = document.createElement("div");
+    portal.className = "doctrine-print-portal";
+    const clone = original.cloneNode(true) as HTMLElement;
+    portal.appendChild(clone);
+    document.body.appendChild(portal);
+    document.body.classList.add("print-doctrine-only");
+
+    const cleanup = () => {
+      document.body.classList.remove("print-doctrine-only");
+      if (portal.parentNode) portal.parentNode.removeChild(portal);
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+
+    requestAnimationFrame(() => {
+      window.print();
+      // Fallback cleanup for browsers that don't reliably fire afterprint
+      setTimeout(cleanup, 1500);
+    });
+
+    void trackCTAClick({
+      ctaId: "library_vol_i_print_doctrine",
+      ctaText: "Print only the Doctrine",
+      section: "library_action",
+    });
+  }, []);
+
   /* Export */
   const handleExport = async () => {
     const parsed = leadSchema.safeParse(lead);
@@ -3482,6 +3534,12 @@ const BrandAssetWorkbook = () => {
               onClick={() => window.print()}
             >
               Print my Brief <em>→</em>
+            </button>
+            <button
+              className="insider-link"
+              onClick={handlePrintDoctrine}
+            >
+              Print only the Doctrine <em>→</em>
             </button>
           </div>
         </Section>
