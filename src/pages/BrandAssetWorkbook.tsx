@@ -2085,6 +2085,17 @@ const BrandAssetWorkbook = () => {
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+              {/* Completion counter */}
+              <div
+                className={`completion-pill${isComplete ? " complete" : ""}`}
+                aria-label={`${answeredCount} of ${totalCount} fields answered`}
+                title={isComplete ? "All fields answered — export your Brief" : `${answeredCount} of ${totalCount} answered`}
+              >
+                <span className="completion-num">{String(answeredCount).padStart(2, "0")}</span>
+                <span className="completion-sep">of</span>
+                <span className="completion-total">{totalCount}</span>
+                <span className="completion-label">{isComplete ? "complete" : "answered"}</span>
+              </div>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 5, height: 5, borderRadius: 999, background: saveState === "saving" ? "var(--ink-whisper)" : "var(--brass)", display: "inline-block" }} />
                 <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--ink-quiet)" }}>
@@ -2103,6 +2114,43 @@ const BrandAssetWorkbook = () => {
             </div>
           </div>
         </header>
+
+        {/* CELEBRATION BANNER — appears once when all fields are answered */}
+        {showCelebration && (
+          <div className="celebrate-banner" role="status">
+            <div className="celebrate-inner">
+              <span className="celebrate-mark">✦</span>
+              <div className="celebrate-text">
+                <span className="celebrate-title">The Brief is whole.</span>
+                <span className="celebrate-sub">All {totalCount} answers in. Export your Brand Brief or keep refining.</span>
+              </div>
+              <div className="celebrate-actions">
+                <button
+                  className="celebrate-cta"
+                  onClick={() => {
+                    setShowCelebration(false);
+                    document.getElementById("brief")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  View Brief →
+                </button>
+                <button
+                  className="celebrate-cta primary"
+                  onClick={() => { setShowCelebration(false); handleExport(); }}
+                >
+                  Export →
+                </button>
+                <button
+                  aria-label="Dismiss"
+                  className="celebrate-close"
+                  onClick={() => setShowCelebration(false)}
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* MINI SECTION PROGRESS STRIP */}
         <MiniProgressStrip />
