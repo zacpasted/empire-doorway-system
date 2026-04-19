@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import BrandAssetWorkbook from "./pages/BrandAssetWorkbook";
 import DoctrineOnBrand from "./pages/DoctrineOnBrand";
 import Founders from "./pages/Founders";
+import Library from "./pages/Library";
 
 const queryClient = new QueryClient();
 
@@ -28,10 +29,9 @@ const App = () => (
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
+          <Route path="/library" element={<Library />} />
           <Route path="/library/doctrine" element={<DoctrineOnBrand />} />
-          {/* Canonical: cover + doctrine live as one piece at /library/doctrine.
-              These older entry points redirect there so any pasted-studio.com/library/* link still works. */}
-          <Route path="/library" element={<Navigate to="/library/doctrine" replace />} />
+          {/* Older entry points still resolve to the doctrine document. */}
           <Route path="/library/vol-i" element={<Navigate to="/library/doctrine" replace />} />
           <Route path="/library/cover" element={<Navigate to="/library/doctrine" replace />} />
           <Route path="/founders" element={<Founders />} />
