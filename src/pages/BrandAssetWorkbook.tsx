@@ -751,7 +751,7 @@ html.workbook-html { scroll-behavior: smooth; }
 @media print {
   .workbook-root { background: white !important; color: black !important; font-size: 11pt; }
   .workbook-root .grain, .workbook-root .topbar, .workbook-root .progress,
-  .workbook-root .mini-strip,
+  .workbook-root .mini-strip, .workbook-root .mini-strip-mobile,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
   .workbook-root .lead-gate,
   .workbook-root .insider-card, .workbook-root .insider-links,
@@ -762,6 +762,23 @@ html.workbook-html { scroll-behavior: smooth; }
   .workbook-root .doctrine-page { page-break-before: always; page-break-after: always; }
   .workbook-root #action { page-break-before: always; }
   @page { margin: 18mm 16mm; }
+}
+
+/* Print — Doctrine-only mode (toggled by body.print-doctrine-only) */
+.doctrine-print-portal { display: none; }
+@media print {
+  body.print-doctrine-only > *:not(.doctrine-print-portal) { display: none !important; }
+  body.print-doctrine-only .doctrine-print-portal { display: block !important; }
+  body.print-doctrine-only .doctrine-print-portal .doctrine-wrap { margin: 0 auto !important; }
+  body.print-doctrine-only .doctrine-print-portal .doctrine-eyebrow { display: none !important; }
+  body.print-doctrine-only .doctrine-print-portal .doctrine-page {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    break-inside: avoid !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+  }
+  body.print-doctrine-only @page { margin: 10mm; size: letter; }
 }
 
 /* ---------- Brand Doctrine (one-page summary) ---------- */
