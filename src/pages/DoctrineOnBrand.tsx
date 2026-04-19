@@ -658,6 +658,14 @@ const styles = `
     padding: 64px clamp(28px, 8vw, 140px);
     display: flex; flex-direction: column; align-items: center;
   }
+  /* TOC-only cover (used after the Library frontispiece) — compact, no min-height */
+  .cover.cover-toc {
+    min-height: auto;
+    padding: 96px clamp(28px, 8vw, 140px) 64px;
+  }
+  .cover.cover-toc .cover-inner { margin-top: 0; }
+  .cover.cover-toc .toc { margin-top: 64px; }
+  .cover.cover-toc .cover-base { margin-top: 80px; padding-top: 0; }
   .volume-mark {
     position: absolute; top: 64px; left: clamp(28px, 8vw, 140px);
     text-align: left;
