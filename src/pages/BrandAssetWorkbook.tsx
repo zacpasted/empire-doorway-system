@@ -226,6 +226,68 @@ html.workbook-html { scroll-behavior: smooth; }
   z-index: 60; transition: width 80ms linear;
 }
 
+/* Mini section progress strip — sits under topbar */
+.workbook-root .mini-strip {
+  position: sticky; top: 64px; z-index: 49;
+  background: rgba(237,231,219,0.92);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border-bottom: 1px solid var(--rule);
+}
+.workbook-root .mini-strip-inner {
+  max-width: 1200px; margin: 0 auto; height: 40px;
+  padding: 0 56px; display: flex; align-items: center; gap: 16px;
+  overflow: hidden;
+}
+.workbook-root .mini-strip-label {
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-quiet);
+  white-space: nowrap; flex-shrink: 0;
+}
+.workbook-root .mini-strip-track {
+  flex: 1; display: flex; align-items: center; gap: 4px; min-width: 0;
+}
+.workbook-root .mini-strip-cell {
+  flex: 1; height: 16px; position: relative; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; padding: 0;
+}
+.workbook-root .mini-strip-cell::after {
+  content: ""; display: block; width: 100%; height: 2px;
+  background: var(--rule-ghost); transition: background 200ms ease;
+}
+.workbook-root .mini-strip-cell:hover::after { background: var(--rule); }
+.workbook-root .mini-strip-cell.done::after { background: var(--brass-line); }
+.workbook-root .mini-strip-cell.active::after { background: var(--brass); height: 2px; }
+.workbook-root .mini-strip-tooltip {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  margin-top: 4px; padding: 4px 8px;
+  background: var(--ink); color: var(--bone);
+  font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 150ms ease;
+  border-radius: 1px;
+}
+.workbook-root .mini-strip-cell:hover .mini-strip-tooltip { opacity: 1; }
+.workbook-root .mini-strip-counter {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+  color: var(--brass); white-space: nowrap; flex-shrink: 0; min-width: 48px;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .workbook-root .mini-strip-inner { padding: 0 16px; height: 36px; gap: 10px; }
+  .workbook-root .mini-strip-label { display: none; }
+  .workbook-root .mini-strip-counter { font-size: 12px; }
+}
+
+/* Anchor offset so jumps clear topbar + mini strip */
+.workbook-root .workbook-section,
+.workbook-root section[id] { scroll-margin-top: 112px; }
+@media (max-width: 720px) {
+  .workbook-root .workbook-section,
+  .workbook-root section[id] { scroll-margin-top: 104px; }
+}
+
 /* Workbook field */
 .workbook-root .wb-card {
   position: relative;
@@ -475,6 +537,7 @@ html.workbook-html { scroll-behavior: smooth; }
 @media print {
   .workbook-root { background: white !important; color: black !important; font-size: 11pt; }
   .workbook-root .grain, .workbook-root .topbar, .workbook-root .progress,
+  .workbook-root .mini-strip,
   .workbook-root .cta-pill, .workbook-root .cta-secondary,
   .workbook-root .lead-gate,
   .workbook-root .insider-card, .workbook-root .insider-links { display: none !important; }
@@ -1175,6 +1238,71 @@ const TableOfContents = () => (
     </div>
   </div>
 );
+
+const MiniProgressStrip = () => {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const els = TOC_ITEMS.map((i) => document.getElementById(i.id)).filter(
+      (el): el is HTMLElement => !!el
+    );
+    if (els.length === 0) return;
+
+    const compute = () => {
+      // Active = the last section whose top has crossed the strip line.
+      const line = 140; // topbar (64) + strip (40) + small buffer
+      let idx = 0;
+      for (let i = 0; i < els.length; i++) {
+        const top = els[i].getBoundingClientRect().top;
+        if (top - line <= 0) idx = i;
+      }
+      setActiveIdx(idx);
+    };
+
+    compute();
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        compute();
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", compute);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", compute);
+    };
+  }, []);
+
+  const active = TOC_ITEMS[activeIdx];
+
+  return (
+    <nav className="mini-strip" aria-label="Section progress">
+      <div className="mini-strip-inner">
+        <span className="mini-strip-label">{active?.name ?? "Cover"}</span>
+        <div className="mini-strip-track">
+          {TOC_ITEMS.map((item, i) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`mini-strip-cell${i === activeIdx ? " active" : i < activeIdx ? " done" : ""}`}
+              aria-label={`Jump to ${item.name}`}
+              aria-current={i === activeIdx ? "true" : undefined}
+            >
+              <span className="mini-strip-tooltip">{item.name}</span>
+            </a>
+          ))}
+        </div>
+        <span className="mini-strip-counter">
+          {String(activeIdx + 1).padStart(2, "0")} / {TOC_ITEMS.length}
+        </span>
+      </div>
+    </nav>
+  );
+};
 
 const StatusBar = ({ active }: { active: 1 | 2 | 3 | 4 | 5 }) => {
   const names = ["Positioning", "Point of View", "Experience", "Signal", "System"];
@@ -1955,6 +2083,9 @@ const BrandAssetWorkbook = () => {
             </div>
           </div>
         </header>
+
+        {/* MINI SECTION PROGRESS STRIP */}
+        <MiniProgressStrip />
 
         {/* COVER */}
         <section style={{ position: "relative", minHeight: "100vh", padding: "0 clamp(28px, 8vw, 120px)", maxWidth: 1200, margin: "0 auto" }}>
