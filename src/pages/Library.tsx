@@ -352,7 +352,7 @@ const LibraryCardGraphic = ({ cardNo }: { cardNo: string }) => (
       <span>CARD NO. {cardNo}</span>
     </div>
     <div className="lib-card-mid">
-      <em>"The bearer of this card is an Insider."</em>
+      <em>"The bearer of this card is a member of The Library."</em>
     </div>
     <div className="lib-card-bot">
       <span>VALID MMXXVI — MMXXVII</span>
@@ -627,7 +627,7 @@ const Library = () => {
           <div className="lib-nav-items">
             <a href="#volumes">Volumes</a>
             <a href="#about">On the Library</a>
-            <a href="#insider" className="lib-nav-insider">The Insider</a>
+            <a href="#insider" className="lib-nav-insider">The Library</a>
           </div>
         </div>
       </nav>
@@ -749,7 +749,7 @@ const Library = () => {
           </h2>
           <p className="lib-shelf-lead">
             One volume is live. Four are forthcoming. Each arrives when it is ready — not on a
-            schedule. Readers of The Pasted Insider receive advance chapters before public release.
+            schedule. Members of The Pasted Library receive advance chapters before public release.
           </p>
         </div>
 
@@ -884,13 +884,13 @@ const Library = () => {
       {/* ========== SECTION 05 · INSIDER ========== */}
       <section className="lib-insider" id="insider">
         <div className="lib-insider-inner">
-          <div className="lib-eyebrow-tracked lib-insider-eyebrow">§ V · THE INSIDER</div>
+          <div className="lib-eyebrow-tracked lib-insider-eyebrow">§ V · THE LIBRARY</div>
           <h2 className="lib-h2 lib-insider-h2">
             Take your seat at <em>the library.</em>
           </h2>
           <p className="lib-insider-lead">
             <em>
-              Join The Pasted Insider and receive our weekly broadcast — dispatches, teardowns, and
+              Join The Pasted Library and receive our weekly broadcast — dispatches, teardowns, and
               early chapters of future volumes — delivered direct, without algorithms in the way.
             </em>
           </p>
@@ -917,7 +917,7 @@ const Library = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <div className="lib-insider-card-eyebrow">
-                    THE PASTED INSIDER · PRIVATE BROADCAST
+                    THE PASTED LIBRARY · PRIVATE BROADCAST
                   </div>
                   <div className="lib-insider-card-rule" />
                   <div className="lib-insider-card-line">
@@ -956,7 +956,7 @@ const Library = () => {
                   transition={{ duration: 0.32 }}
                 >
                   <div className="lib-insider-card-eyebrow">
-                    THE PASTED INSIDER · WELCOME
+                    THE PASTED LIBRARY · WELCOME
                   </div>
                   <div className="lib-insider-card-dots">· · ·</div>
                   <h3 className="lib-insider-success-h">
@@ -993,7 +993,7 @@ const Library = () => {
           <span aria-hidden="true">·</span>
           <a href="mailto:hello@pasted.agency">CONTACT</a>
           <span aria-hidden="true">·</span>
-          <a href="#insider">THE INSIDER</a>
+          <a href="#insider">THE LIBRARY</a>
           <span aria-hidden="true">·</span>
           <a href="#colophon">COLOPHON</a>
         </div>
