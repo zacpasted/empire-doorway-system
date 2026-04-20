@@ -409,6 +409,8 @@ const Library = () => {
   const [openVol, setOpenVol] = useState<Volume | null>(null);
   const [insiderEmail, setInsiderEmail] = useState("");
   const [insiderFirstName, setInsiderFirstName] = useState("");
+  const [insiderCity, setInsiderCity] = useState("");
+  const [insiderDream, setInsiderDream] = useState("");
   const [insiderError, setInsiderError] = useState("");
   const [insiderJoined, setInsiderJoined] = useState(false);
   const [insiderSubmitting, setInsiderSubmitting] = useState(false);
@@ -581,6 +583,8 @@ const Library = () => {
       const { error } = await supabase.from("lead_magnet_submissions").insert({
         first_name: trimmedName,
         email: trimmedEmail,
+        city: insiderCity.trim() || null,
+        dream_destination: insiderDream.trim() || null,
         source: "library_card",
       });
 
@@ -611,7 +615,7 @@ const Library = () => {
       setInsiderSubmitting(false);
       setInsiderJoined(true);
     },
-    [insiderEmail, insiderFirstName],
+    [insiderEmail, insiderFirstName, insiderCity, insiderDream],
   );
 
   return (
@@ -965,6 +969,33 @@ const Library = () => {
                       className="lib-insider-input"
                       data-cursor="hover"
                       autoComplete="email"
+                    />
+                    <label htmlFor="insider-city" className="lib-vh">
+                      City you live in
+                    </label>
+                    <input
+                      id="insider-city"
+                      type="text"
+                      maxLength={120}
+                      placeholder="City you live in"
+                      value={insiderCity}
+                      onChange={(e) => setInsiderCity(e.target.value)}
+                      className="lib-insider-input"
+                      data-cursor="hover"
+                      autoComplete="address-level2"
+                    />
+                    <label htmlFor="insider-dream" className="lib-vh">
+                      Dream travel destination
+                    </label>
+                    <input
+                      id="insider-dream"
+                      type="text"
+                      maxLength={160}
+                      placeholder="Dream travel destination"
+                      value={insiderDream}
+                      onChange={(e) => setInsiderDream(e.target.value)}
+                      className="lib-insider-input"
+                      data-cursor="hover"
                     />
                     <button
                       type="submit"
