@@ -583,6 +583,8 @@ const Library = () => {
       const { error } = await supabase.from("lead_magnet_submissions").insert({
         first_name: trimmedName,
         email: trimmedEmail,
+        city: insiderCity.trim() || null,
+        dream_destination: insiderDream.trim() || null,
         source: "library_card",
       });
 
@@ -613,7 +615,7 @@ const Library = () => {
       setInsiderSubmitting(false);
       setInsiderJoined(true);
     },
-    [insiderEmail, insiderFirstName],
+    [insiderEmail, insiderFirstName, insiderCity, insiderDream],
   );
 
   return (
