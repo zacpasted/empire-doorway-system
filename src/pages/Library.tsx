@@ -964,7 +964,7 @@ const Library = () => {
                   </h3>
                   <p className="lib-insider-success-body">
                     Your Library Card is being issued. First dispatch lands within 48 hours from{" "}
-                    <em>insider@pasted.agency</em>.
+                    <em>library@pasted.agency</em>.
                   </p>
                   <LibraryCardGraphic cardNo={cardNo} />
                   <div className="lib-insider-success-meta">Welcomed at {welcomedAt}</div>
