@@ -970,6 +970,33 @@ const Library = () => {
                       data-cursor="hover"
                       autoComplete="email"
                     />
+                    <label htmlFor="insider-city" className="lib-vh">
+                      City you live in
+                    </label>
+                    <input
+                      id="insider-city"
+                      type="text"
+                      maxLength={120}
+                      placeholder="City you live in"
+                      value={insiderCity}
+                      onChange={(e) => setInsiderCity(e.target.value)}
+                      className="lib-insider-input"
+                      data-cursor="hover"
+                      autoComplete="address-level2"
+                    />
+                    <label htmlFor="insider-dream" className="lib-vh">
+                      Dream travel destination
+                    </label>
+                    <input
+                      id="insider-dream"
+                      type="text"
+                      maxLength={160}
+                      placeholder="Dream travel destination"
+                      value={insiderDream}
+                      onChange={(e) => setInsiderDream(e.target.value)}
+                      className="lib-insider-input"
+                      data-cursor="hover"
+                    />
                     <button
                       type="submit"
                       className="lib-insider-btn"
