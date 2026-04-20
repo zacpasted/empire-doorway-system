@@ -4,6 +4,7 @@ import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { supabase } from "@/integrations/supabase/client";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -407,8 +408,10 @@ const Library = () => {
   const reduceMotion = useReducedMotion();
   const [openVol, setOpenVol] = useState<Volume | null>(null);
   const [insiderEmail, setInsiderEmail] = useState("");
+  const [insiderFirstName, setInsiderFirstName] = useState("");
   const [insiderError, setInsiderError] = useState("");
   const [insiderJoined, setInsiderJoined] = useState(false);
+  const [insiderSubmitting, setInsiderSubmitting] = useState(false);
   const [cardNo, setCardNo] = useState("0001");
   const [welcomedAt, setWelcomedAt] = useState("");
   const [scrollPct, setScrollPct] = useState(0);
@@ -556,17 +559,39 @@ const Library = () => {
     return () => ctx.revert();
   }, [reduceMotion]);
 
-  /* Insider submit */
+  /* Library Card submit — joins the PASTED broadcast group */
   const submitInsider = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
-      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(insiderEmail);
+      const trimmedName = insiderFirstName.trim();
+      const trimmedEmail = insiderEmail.trim();
+      if (trimmedName.length < 1) {
+        setInsiderError("Please enter your first name.");
+        return;
+      }
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail);
       if (!ok) {
         setInsiderError("Please enter a valid email address.");
         return;
       }
       setInsiderError("");
-      // Auto-generate sequential card number
+      setInsiderSubmitting(true);
+
+      // Persist to broadcast list
+      const { error } = await supabase.from("lead_magnet_submissions").insert({
+        first_name: trimmedName,
+        email: trimmedEmail,
+        source: "library_card",
+      });
+
+      if (error) {
+        console.error("Library card signup failed", error);
+        setInsiderError("Something went wrong. Please try again in a moment.");
+        setInsiderSubmitting(false);
+        return;
+      }
+
+      // Auto-generate sequential card number (display only)
       let n = 1;
       try {
         const last = parseInt(localStorage.getItem("pasted_library_card_seq") || "0", 10);
@@ -583,23 +608,10 @@ const Library = () => {
           " · " +
           ts.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }),
       );
-      try {
-        localStorage.setItem(
-          "pasted_insider_email",
-          JSON.stringify({
-            email: insiderEmail,
-            ts: ts.toISOString(),
-            cardNo: card,
-            source: "library-home",
-          }),
-        );
-      } catch {
-        /* ignore */
-      }
-      // TODO: wire to broadcast email service
+      setInsiderSubmitting(false);
       setInsiderJoined(true);
     },
-    [insiderEmail],
+    [insiderEmail, insiderFirstName],
   );
 
   return (
@@ -924,6 +936,21 @@ const Library = () => {
                     <em>Where undeniable practices quietly stay ahead.</em>
                   </div>
                   <form className="lib-insider-form" onSubmit={submitInsider} noValidate>
+                    <label htmlFor="insider-name" className="lib-vh">
+                      First name
+                    </label>
+                    <input
+                      id="insider-name"
+                      type="text"
+                      required
+                      maxLength={80}
+                      placeholder="First name"
+                      value={insiderFirstName}
+                      onChange={(e) => setInsiderFirstName(e.target.value)}
+                      className="lib-insider-input"
+                      data-cursor="hover"
+                      autoComplete="given-name"
+                    />
                     <label htmlFor="insider-email" className="lib-vh">
                       Email address
                     </label>
@@ -937,9 +964,15 @@ const Library = () => {
                       onChange={(e) => setInsiderEmail(e.target.value)}
                       className="lib-insider-input"
                       data-cursor="hover"
+                      autoComplete="email"
                     />
-                    <button type="submit" className="lib-insider-btn" data-cursor="hover">
-                      Take your seat <em>→</em>
+                    <button
+                      type="submit"
+                      className="lib-insider-btn"
+                      data-cursor="hover"
+                      disabled={insiderSubmitting}
+                    >
+                      {insiderSubmitting ? "Saving…" : <>Take your seat <em>→</em></>}
                     </button>
                   </form>
                   {insiderError && <div className="lib-insider-error">{insiderError}</div>}
