@@ -190,21 +190,27 @@ export type Database = {
       }
       lead_magnet_submissions: {
         Row: {
+          city: string | null
           created_at: string
+          dream_destination: string | null
           email: string
           first_name: string
           id: string
           source: string | null
         }
         Insert: {
+          city?: string | null
           created_at?: string
+          dream_destination?: string | null
           email: string
           first_name: string
           id?: string
           source?: string | null
         }
         Update: {
+          city?: string | null
           created_at?: string
+          dream_destination?: string | null
           email?: string
           first_name?: string
           id?: string
