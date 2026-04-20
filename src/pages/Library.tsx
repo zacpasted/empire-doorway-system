@@ -409,6 +409,8 @@ const Library = () => {
   const [openVol, setOpenVol] = useState<Volume | null>(null);
   const [insiderEmail, setInsiderEmail] = useState("");
   const [insiderFirstName, setInsiderFirstName] = useState("");
+  const [insiderCity, setInsiderCity] = useState("");
+  const [insiderDream, setInsiderDream] = useState("");
   const [insiderError, setInsiderError] = useState("");
   const [insiderJoined, setInsiderJoined] = useState(false);
   const [insiderSubmitting, setInsiderSubmitting] = useState(false);
