@@ -624,7 +624,10 @@ const Library = () => {
     <main className="lib-root">
       <style>{LIBRARY_STYLES}</style>
 
-      {/* Grain overlay */}
+      {/* Directional vignette — implies candle above-left, dusk-blue in cool corners */}
+      <div className="lib-vignette" aria-hidden="true" />
+
+      {/* Grain overlay — fine paper, multiply at 0.10 */}
       <div className="lib-grain" aria-hidden="true" />
 
       {/* Custom cursor */}
