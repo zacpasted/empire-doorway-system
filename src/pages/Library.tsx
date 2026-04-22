@@ -38,8 +38,10 @@ const ensureFonts = () => {
   const link = document.createElement("link");
   link.id = FONT_LINK_ID;
   link.rel = "stylesheet";
+  // EB Garamond for body/text serif (true text cut, real italics, OFL).
+  // Cormorant Garamond retained ONLY for display sizes 48px+ (mastheads, numerals).
   link.href =
-    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap";
+    "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap";
   document.head.appendChild(link);
 };
 
