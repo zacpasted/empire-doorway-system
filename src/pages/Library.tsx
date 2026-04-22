@@ -1082,33 +1082,40 @@ const Library = () => {
 
 const LIBRARY_STYLES = `
 .lib-root {
-  --bone: #EDE7DB;
-  --bone-deep: #E5DDCC;
-  --bone-shadow: #DBD2BF;
-  --night: #1C1B18;
-  --night-soft: #2D2B26;
-  --ink: #1C1B18;
-  --ink-body: #2D2B26;
-  --ink-quiet: #726B5E;
-  --ink-whisper: #A59E8E;
-  --cream: #F5EFE1;
-  --cream-quiet: rgba(245, 239, 225, 0.72);
-  --cream-whisper: rgba(245, 239, 225, 0.48);
-  --rule: #C7BEA8;
-  --rule-ghost: #D9D1BD;
-  --rule-night: rgba(245, 239, 225, 0.14);
-  --brass: #8B7A4E;
-  --brass-glow: #B89968;
+  /* Actually-lit palette: surfaces sit at different colour temperatures,
+     shadows tinted dusk-blue (Goethe / Impressionist), inks warm-near-black,
+     never #000. Brass amber is "the candle" — used sparingly. */
+  --bone: #F0E4C4;            /* warm ivory midtone — body surface */
+  --bone-deep: #E8D8B4;       /* deeper paper tone for stepped surfaces */
+  --bone-shadow: #D8C9A6;     /* recessed paper, near edges of light */
+  --night: #1A1410;           /* warm near-black ink (never #000) */
+  --night-soft: #2B2218;      /* slightly raised surface on night */
+  --ink: #1A1410;             /* body ink */
+  --ink-body: #2A2218;        /* secondary text on cream */
+  --ink-quiet: #6E6450;       /* tertiary / labels */
+  --ink-whisper: #A89E84;     /* whisper text */
+  --cream: #F5EEDC;           /* paper-cream — dominant surface (~75%) */
+  --cream-quiet: rgba(245, 238, 220, 0.72);
+  --cream-whisper: rgba(245, 238, 220, 0.48);
+  --rule: #C7BB9E;            /* hairline rule on cream */
+  --rule-ghost: #DAD0B5;
+  --rule-night: rgba(245, 238, 220, 0.14);
+  --brass: #B8954C;           /* tarnished gilt — rare emphasis */
+  --brass-glow: #C89B4A;      /* near-light honey amber — the candle */
   --brass-deep: #6A5C36;
-  --brass-line: rgba(139, 122, 78, 0.22);
-  --oxblood: #5C2A2A;
+  --brass-line: rgba(184, 149, 76, 0.22);
+  --oxblood: #5A1F1A;         /* sealing-wax accent (1-2% area max) */
+  --dusk: #3A4555;            /* blue-shadow accent (Goethe) — ≤5% area */
+  --dusk-deep: #2A3140;       /* deepest recess shadow */
+  --rim-warm: rgba(255, 230, 180, 0.08);  /* card top/left rim glint */
+  --rim-cool: rgba(20, 14, 8, 0.25);      /* card bottom/right shadow */
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   background: var(--bone);
   color: var(--ink);
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 300;
-  font-feature-settings: "liga","dlig","kern","tnum";
+  font-family: 'EB Garamond', 'Adobe Garamond Pro', Georgia, serif;
+  font-weight: 400;
+  font-feature-settings: "liga","dlig","kern","tnum","onum";
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
   position: relative;
@@ -1117,11 +1124,25 @@ const LIBRARY_STYLES = `
 html.lib-cursor-on, html.lib-cursor-on body { cursor: none; }
 html.lib-cursor-on a, html.lib-cursor-on button, html.lib-cursor-on input, html.lib-cursor-on textarea { cursor: none; }
 
-/* Grain */
+/* Directional vignette — implies a candle above-left of the reader.
+   Offset 35% from top, steeper falloff toward the cool corners. */
+.lib-vignette {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 70% at 35% 25%,
+      rgba(255, 220, 160, 0.06) 0%,
+      rgba(255, 220, 160, 0.0) 35%,
+      rgba(58, 69, 85, 0.0) 60%,
+      rgba(58, 69, 85, 0.18) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Grain — fine paper, subtle. baseFrequency 0.9, multiply at 0.10.
+   Above 0.20 reads as skeuomorphism; below 0.05 invisible. */
 .lib-grain {
   position: fixed; inset: 0; z-index: 2; pointer-events: none;
-  opacity: 0.22; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+  opacity: 0.10; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' seed='4'/><feColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
 }
 
 /* Cursor */
