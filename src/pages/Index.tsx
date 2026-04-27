@@ -568,10 +568,16 @@ const ExperiencesChapter = () => {
 };
 
 const applicationSchema = z.object({
-  name: z.string().trim().min(2, { message: "Please share your name." }).max(100),
+  firstName: z.string().trim().min(2, { message: "First name, please." }).max(60),
+  lastName: z.string().trim().min(2, { message: "Last name, please." }).max(60),
   email: z.string().trim().email({ message: "That email doesn't look right." }).max(255),
-  practice: z.string().trim().min(2, { message: "Practice name, please." }).max(120),
-  city: z.string().trim().min(2, { message: "City, please." }).max(80),
+  instagram: z.string().trim().max(60).optional().or(z.literal("")),
+  location: z.string().trim().min(2, { message: "City + state, please." }).max(120),
+  role: z.enum(["associate", "owner", "transitioning"], { message: "Select your role." }),
+  years: z.enum(["0-2", "3-5", "6-10", "10+"], { message: "Select years in practice." }),
+  goal: z.enum(["visibility", "patients", "authority", "ownership", "growth"], { message: "Select your current goal." }),
+  whyBrand: z.string().trim().min(20, { message: "A sentence or two, please." }).max(1000),
+  onCamera: z.enum(["yes", "no", "unsure"], { message: "Pick one." }),
 });
 
 type ApplicationFields = z.infer<typeof applicationSchema>;
@@ -579,9 +585,21 @@ type ApplicationErrors = Partial<Record<keyof ApplicationFields, string>>;
 
 const CALENDLY_URL = "https://calendly.com/getpasted/pasted-partner-discovery";
 
+const initialApplication: ApplicationFields = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  instagram: "",
+  location: "",
+  role: "" as ApplicationFields["role"],
+  years: "" as ApplicationFields["years"],
+  goal: "" as ApplicationFields["goal"],
+  whyBrand: "",
+  onCamera: "" as ApplicationFields["onCamera"],
+};
+
 const ApplicationStrip = () => {
-  // Honor deep-links from other pages (e.g. /#apply) by re-running the
-  // offset-aware scroll once mounted, after the layout settles.
+  // Honor deep-links from other pages (e.g. /#apply).
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.location.hash !== `#${APPLY_ID}`) return;
@@ -589,12 +607,12 @@ const ApplicationStrip = () => {
     return () => window.clearTimeout(t);
   }, []);
 
-  const [fields, setFields] = useState<ApplicationFields>({ name: "", email: "", practice: "", city: "" });
+  const [fields, setFields] = useState<ApplicationFields>(initialApplication);
   const [errors, setErrors] = useState<ApplicationErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-  const update = (key: keyof ApplicationFields) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((f) => ({ ...f, [key]: e.target.value }));
+  const setField = <K extends keyof ApplicationFields>(key: K, value: ApplicationFields[K]) => {
+    setFields((f) => ({ ...f, [key]: value }));
     if (errors[key]) setErrors((er) => ({ ...er, [key]: undefined }));
   };
 
@@ -608,19 +626,90 @@ const ApplicationStrip = () => {
         if (!next[k]) next[k] = i.message;
       });
       setErrors(next);
+      // Bring the first error into view.
+      requestAnimationFrame(() => {
+        const firstKey = Object.keys(next)[0];
+        if (firstKey) document.getElementById(`apply-${firstKey}`)?.focus();
+      });
       return;
     }
     setStatus("submitting");
-    // Simulated submission. Wire to Supabase or a webhook when the
+    // Simulated submission. Wire to Supabase / webhook when the
     // applications table is in place.
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, 800));
     setStatus("success");
-    // Smooth-scroll the confirmation into view so the user lands on it.
     requestAnimationFrame(() => scrollToApply());
   };
 
-  const inputClass =
+  const inputBase =
     "w-full bg-transparent border-b py-3 px-1 pst-body text-[15px] focus:outline-none focus:border-[var(--pst-gold)] disabled:opacity-60";
+
+  const fieldBorder = (key: keyof ApplicationFields) => ({
+    borderColor: errors[key] ? "var(--pst-gold)" : "var(--pst-border-dark)",
+    color: "var(--pst-bone)",
+  });
+
+  type SelectOption = { value: string; label: string };
+
+  const FieldLabel = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) => (
+    <label htmlFor={htmlFor} className="pst-mono pst-mono-sm block mb-2" style={{ color: "var(--pst-text-dark-muted)" }}>
+      {children}
+    </label>
+  );
+
+  const FieldError = ({ id, message }: { id: string; message?: string }) => (
+    <div className="h-5 mt-1">
+      {message && (
+        <div id={id} className="pst-mono pst-mono-sm" style={{ color: "var(--pst-gold)" }} role="alert">
+          {message}
+        </div>
+      )}
+    </div>
+  );
+
+  const NativeSelect = ({
+    name,
+    value,
+    onChange,
+    options,
+    placeholder,
+    disabled,
+  }: {
+    name: keyof ApplicationFields;
+    value: string;
+    onChange: (v: string) => void;
+    options: SelectOption[];
+    placeholder: string;
+    disabled?: boolean;
+  }) => (
+    <select
+      id={`apply-${name}`}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      disabled={disabled}
+      aria-invalid={!!errors[name]}
+      aria-describedby={errors[name] ? `apply-${name}-err` : undefined}
+      className={`${inputBase} appearance-none cursor-pointer`}
+      style={{
+        ...fieldBorder(name),
+        backgroundImage:
+          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23B8924F' stroke-width='1.2'><path d='M1 1l5 5 5-5'/></svg>\")",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right 0.25rem center",
+        backgroundSize: "12px 8px",
+        paddingRight: "1.5rem",
+      }}
+    >
+      <option value="" disabled style={{ color: "#1a1a1a" }}>
+        {placeholder}
+      </option>
+      {options.map((o) => (
+        <option key={o.value} value={o.value} style={{ color: "#1a1a1a" }}>
+          {o.label}
+        </option>
+      ))}
+    </select>
+  );
 
   return (
     <section
@@ -646,14 +735,14 @@ const ApplicationStrip = () => {
                 ✓ APPLICATION RECEIVED
               </div>
               <h2 className="pst-display text-[32px] md:text-[52px] mb-6" style={{ color: "var(--pst-bone)" }}>
-                Thanks for applying, {fields.name.split(" ")[0]}.
+                Thanks for applying, {fields.firstName}.
               </h2>
               <p className="pst-body max-w-xl mx-auto mb-4" style={{ color: "var(--pst-text-dark-muted)" }}>
-                We read every application by hand. You'll hear from us within five working days at{" "}
+                Our team reviews every application personally. You'll hear from us within five working days at{" "}
                 <span style={{ color: "var(--pst-bone)" }}>{fields.email}</span>.
               </p>
               <p className="pst-body max-w-xl mx-auto mb-10" style={{ color: "var(--pst-text-dark-muted)" }}>
-                If you'd like to move faster, you can hold a discovery slot now — optional, no commitment.
+                If it's a fit, we'll send next steps by email. If you'd like to move faster, you can hold a discovery slot now — optional, no commitment.
               </p>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <a
@@ -669,7 +758,7 @@ const ApplicationStrip = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setFields({ name: "", email: "", practice: "", city: "" });
+                    setFields(initialApplication);
                     setErrors({});
                     setStatus("idle");
                   }}
@@ -686,68 +775,227 @@ const ApplicationStrip = () => {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-center"
             >
-              <h2
-                id="apply-heading"
-                className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto"
-                style={{ color: "var(--pst-bone)" }}
-              >
-                Twelve seats. Application reviewed monthly.
-              </h2>
-              <p className="pst-body mt-6 max-w-xl mx-auto" style={{ color: "var(--pst-text-dark-muted)" }}>
-                Four short fields. We respond within five working days.
-              </p>
+              <div className="text-center mb-12">
+                <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>APPLY</div>
+                <h2
+                  id="apply-heading"
+                  className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto"
+                  style={{ color: "var(--pst-bone)" }}
+                >
+                  Twelve seats. Application reviewed monthly.
+                </h2>
+                <p className="pst-body mt-6 max-w-xl mx-auto" style={{ color: "var(--pst-text-dark-muted)" }}>
+                  This program is selective. Applications are read by hand. We respond within five working days.
+                </p>
+              </div>
 
-              <form onSubmit={handleSubmit} className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-left" noValidate>
-                {([
-                  { key: "name", label: "Your name", type: "text", autoComplete: "name" },
-                  { key: "email", label: "Email", type: "email", autoComplete: "email" },
-                  { key: "practice", label: "Practice", type: "text", autoComplete: "organization" },
-                  { key: "city", label: "City", type: "text", autoComplete: "address-level2" },
-                ] as const).map((f) => (
-                  <div key={f.key}>
-                    <label
-                      htmlFor={`apply-${f.key}`}
-                      className="pst-mono pst-mono-sm block mb-2"
-                      style={{ color: "var(--pst-text-dark-muted)" }}
-                    >
-                      {f.label}
-                    </label>
+              <form onSubmit={handleSubmit} className="space-y-8" noValidate>
+                {/* Name row */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                  <div>
+                    <FieldLabel htmlFor="apply-firstName">First name</FieldLabel>
                     <input
-                      id={`apply-${f.key}`}
-                      type={f.type}
-                      autoComplete={f.autoComplete}
-                      value={fields[f.key]}
-                      onChange={update(f.key)}
+                      id="apply-firstName"
+                      type="text"
+                      autoComplete="given-name"
+                      value={fields.firstName}
+                      onChange={(e) => setField("firstName", e.target.value)}
                       disabled={status === "submitting"}
-                      maxLength={255}
-                      aria-invalid={!!errors[f.key]}
-                      aria-describedby={errors[f.key] ? `apply-${f.key}-err` : undefined}
-                      className={inputClass}
-                      style={{
-                        borderColor: errors[f.key] ? "var(--pst-gold)" : "var(--pst-border-dark)",
-                        color: "var(--pst-bone)",
-                      }}
+                      maxLength={60}
+                      aria-invalid={!!errors.firstName}
+                      aria-describedby={errors.firstName ? "apply-firstName-err" : undefined}
+                      className={inputBase}
+                      style={fieldBorder("firstName")}
                     />
-                    <div className="h-5 mt-1">
-                      {errors[f.key] && (
-                        <div
-                          id={`apply-${f.key}-err`}
-                          className="pst-mono pst-mono-sm"
-                          style={{ color: "var(--pst-gold)" }}
-                          role="alert"
-                        >
-                          {errors[f.key]}
-                        </div>
-                      )}
-                    </div>
+                    <FieldError id="apply-firstName-err" message={errors.firstName} />
                   </div>
-                ))}
+                  <div>
+                    <FieldLabel htmlFor="apply-lastName">Last name</FieldLabel>
+                    <input
+                      id="apply-lastName"
+                      type="text"
+                      autoComplete="family-name"
+                      value={fields.lastName}
+                      onChange={(e) => setField("lastName", e.target.value)}
+                      disabled={status === "submitting"}
+                      maxLength={60}
+                      aria-invalid={!!errors.lastName}
+                      aria-describedby={errors.lastName ? "apply-lastName-err" : undefined}
+                      className={inputBase}
+                      style={fieldBorder("lastName")}
+                    />
+                    <FieldError id="apply-lastName-err" message={errors.lastName} />
+                  </div>
+                </div>
 
-                <div className="md:col-span-2 flex flex-col md:flex-row items-center justify-between gap-6 mt-6">
+                {/* Email */}
+                <div>
+                  <FieldLabel htmlFor="apply-email">Email</FieldLabel>
+                  <input
+                    id="apply-email"
+                    type="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    value={fields.email}
+                    onChange={(e) => setField("email", e.target.value)}
+                    disabled={status === "submitting"}
+                    maxLength={255}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "apply-email-err" : undefined}
+                    className={inputBase}
+                    style={fieldBorder("email")}
+                  />
+                  <FieldError id="apply-email-err" message={errors.email} />
+                </div>
+
+                {/* Instagram */}
+                <div>
+                  <FieldLabel htmlFor="apply-instagram">Instagram handle <span style={{ opacity: 0.6 }}>(optional)</span></FieldLabel>
+                  <input
+                    id="apply-instagram"
+                    type="text"
+                    placeholder="@handle or 'Not active yet'"
+                    value={fields.instagram ?? ""}
+                    onChange={(e) => setField("instagram", e.target.value)}
+                    disabled={status === "submitting"}
+                    maxLength={60}
+                    className={inputBase}
+                    style={fieldBorder("instagram")}
+                  />
+                  <FieldError id="apply-instagram-err" message={errors.instagram} />
+                </div>
+
+                {/* Location */}
+                <div>
+                  <FieldLabel htmlFor="apply-location">Location (city + state)</FieldLabel>
+                  <input
+                    id="apply-location"
+                    type="text"
+                    autoComplete="address-level2"
+                    placeholder="e.g., Austin, TX"
+                    value={fields.location}
+                    onChange={(e) => setField("location", e.target.value)}
+                    disabled={status === "submitting"}
+                    maxLength={120}
+                    aria-invalid={!!errors.location}
+                    aria-describedby={errors.location ? "apply-location-err" : undefined}
+                    className={inputBase}
+                    style={fieldBorder("location")}
+                  />
+                  <FieldError id="apply-location-err" message={errors.location} />
+                </div>
+
+                {/* Role + Years */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                  <div>
+                    <FieldLabel htmlFor="apply-role">Current role</FieldLabel>
+                    <NativeSelect
+                      name="role"
+                      value={fields.role}
+                      onChange={(v) => setField("role", v as ApplicationFields["role"])}
+                      disabled={status === "submitting"}
+                      placeholder="Select your role"
+                      options={[
+                        { value: "associate", label: "Associate" },
+                        { value: "owner", label: "Owner" },
+                        { value: "transitioning", label: "Transitioning" },
+                      ]}
+                    />
+                    <FieldError id="apply-role-err" message={errors.role} />
+                  </div>
+                  <div>
+                    <FieldLabel htmlFor="apply-years">Years in practice</FieldLabel>
+                    <NativeSelect
+                      name="years"
+                      value={fields.years}
+                      onChange={(v) => setField("years", v as ApplicationFields["years"])}
+                      disabled={status === "submitting"}
+                      placeholder="Select years"
+                      options={[
+                        { value: "0-2", label: "0–2 years" },
+                        { value: "3-5", label: "3–5 years" },
+                        { value: "6-10", label: "6–10 years" },
+                        { value: "10+", label: "10+ years" },
+                      ]}
+                    />
+                    <FieldError id="apply-years-err" message={errors.years} />
+                  </div>
+                </div>
+
+                {/* Goal */}
+                <div>
+                  <FieldLabel htmlFor="apply-goal">What best describes your current goal?</FieldLabel>
+                  <NativeSelect
+                    name="goal"
+                    value={fields.goal}
+                    onChange={(v) => setField("goal", v as ApplicationFields["goal"])}
+                    disabled={status === "submitting"}
+                    placeholder="Select your goal"
+                    options={[
+                      { value: "visibility", label: "Build visibility and recognition" },
+                      { value: "patients", label: "Attract more ideal patients" },
+                      { value: "authority", label: "Position myself as an authority" },
+                      { value: "ownership", label: "Prepare for practice ownership" },
+                      { value: "growth", label: "Grow an existing practice" },
+                    ]}
+                  />
+                  <FieldError id="apply-goal-err" message={errors.goal} />
+                </div>
+
+                {/* Why brand */}
+                <div>
+                  <FieldLabel htmlFor="apply-whyBrand">Why do you want to build a personal brand right now?</FieldLabel>
+                  <textarea
+                    id="apply-whyBrand"
+                    value={fields.whyBrand}
+                    onChange={(e) => setField("whyBrand", e.target.value)}
+                    disabled={status === "submitting"}
+                    maxLength={1000}
+                    rows={4}
+                    aria-invalid={!!errors.whyBrand}
+                    aria-describedby={errors.whyBrand ? "apply-whyBrand-err" : undefined}
+                    className={`${inputBase} resize-none`}
+                    style={fieldBorder("whyBrand")}
+                  />
+                  <FieldError id="apply-whyBrand-err" message={errors.whyBrand} />
+                </div>
+
+                {/* On camera */}
+                <div role="radiogroup" aria-labelledby="apply-onCamera-label" aria-describedby={errors.onCamera ? "apply-onCamera-err" : undefined}>
+                  <div id="apply-onCamera-label" className="pst-mono pst-mono-sm mb-3" style={{ color: "var(--pst-text-dark-muted)" }}>
+                    Are you willing to appear on camera for your content?
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {(["yes", "no", "unsure"] as const).map((opt) => {
+                      const active = fields.onCamera === opt;
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          role="radio"
+                          aria-checked={active}
+                          onClick={() => setField("onCamera", opt)}
+                          disabled={status === "submitting"}
+                          className="pst-mono px-5 py-2 transition-colors"
+                          style={{
+                            border: `1px solid ${active ? "var(--pst-gold)" : "var(--pst-border-dark)"}`,
+                            color: active ? "var(--pst-gold)" : "var(--pst-bone)",
+                            background: active ? "rgba(184,146,79,0.08)" : "transparent",
+                          }}
+                        >
+                          {opt === "yes" ? "Yes" : opt === "no" ? "No" : "Unsure"}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <FieldError id="apply-onCamera-err" message={errors.onCamera} />
+                </div>
+
+                {/* Submit */}
+                <div className="pt-4 border-t flex flex-col md:flex-row items-center justify-between gap-6" style={{ borderColor: "var(--pst-border-dark)" }}>
                   <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-dark-muted)" }}>
-                    By application — twelve seats, twelve cities.
+                    If accepted, you'll receive next steps by email.
                   </div>
                   <button
                     type="submit"
@@ -767,6 +1015,7 @@ const ApplicationStrip = () => {
     </section>
   );
 };
+
 
 const dispatchSchema = z.object({
   email: z
