@@ -104,9 +104,9 @@ const Nav = () => {
             )
           )}
         </nav>
-        <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>
+        <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-gold)" }} ariaLabel="Apply for partnership">
           Apply
-        </a>
+        </ApplyLink>
       </div>
     </header>
   );
