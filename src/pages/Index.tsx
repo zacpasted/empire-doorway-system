@@ -373,90 +373,153 @@ const Iconic = () => (
 
 const StudioChapter = () => {
   const cases = [
-    { clinic: "REVIVE DENTISTRY — WAUKESHA WI", title: "Instagram content system, Vol. 01", img: worldStudio },
-    { clinic: "BECKSTEAD DENTAL — PALO ALTO CA", title: "The Venus Fly Trap, twenty-four scripts", img: heroOperatory },
-    { clinic: "SMILEART — TAYLOR WORKMAN", title: "Forester campaign, Q1", img: worldStudio },
-    { clinic: "LINWOOD — CHARLESTON SC", title: "Identity refresh, Vol. 02", img: worldExperiences },
-    { clinic: "ASHFORD — AUSTIN TX", title: "Video, principal portrait series", img: worldPartnership },
-    { clinic: "ARCHIVE — PASTED STUDIO", title: "Process plates, behind the work", img: iconicVft },
+    { idx: "S—01", clinic: "REVIVE DENTISTRY — WAUKESHA WI", title: "Instagram content system", meta: "Identity, content, video", img: studioCase01 },
+    { idx: "S—02", clinic: "BECKSTEAD DENTAL — PALO ALTO CA", title: "Venus Fly Trap, twenty-four scripts", meta: "Performance creative", img: worldStudio },
+    { idx: "S—03", clinic: "SMILEART — TAYLOR WORKMAN UT", title: "Forester campaign, Q1", meta: "Long-form brand film", img: studioCase03 },
+    { idx: "S—04", clinic: "LINWOOD — CHARLESTON SC", title: "Identity refresh, Vol. 02", meta: "Mark, system, application", img: studioCase02 },
+    { idx: "S—05", clinic: "ASHFORD — AUSTIN TX", title: "Principal portrait series", meta: "Editorial photography", img: heroOperatory },
+    { idx: "S—06", clinic: "ARCHIVE — PASTED STUDIO", title: "Process plates, behind the work", meta: "Studio archive", img: iconicVft },
   ];
   return (
     <section id="studio" className="pst-surface-charcoal py-24 md:py-40">
       <div className="max-w-[1680px] mx-auto px-6 md:px-12 mb-12 md:mb-20">
-        <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>03 — THE STUDIO</div>
-        <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-bone)" }}>Made visible.</h2>
-        <p className="pst-body mt-6 max-w-xl" style={{ color: "var(--pst-text-dark-muted)" }}>
-          The creative work that comes out of the partnership.
-        </p>
+        <div className="flex items-end justify-between gap-8 flex-wrap">
+          <div>
+            <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>03 — THE STUDIO</div>
+            <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-bone)" }}>Made visible.</h2>
+            <p className="pst-body mt-6 max-w-xl" style={{ color: "var(--pst-text-dark-muted)" }}>
+              The creative production arm. Identity, content systems, video, design — built to leave the room.
+            </p>
+          </div>
+          <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-dark-muted)" }}>
+            VOL. 01 — SIX OF TWENTY-FOUR
+          </div>
+        </div>
       </div>
 
       <div className="overflow-x-auto snap-x snap-mandatory pb-8">
-        <div className="flex gap-6 px-6 md:px-12">
+        <div className="flex gap-8 px-6 md:px-12">
           {cases.map((c) => (
-            <div key={c.clinic} className="snap-start flex-shrink-0 w-[80vw] md:w-[520px]">
-              <div className="aspect-[4/5] overflow-hidden mb-4" style={{ background: "var(--pst-paper)" }}>
-                <img src={c.img} alt="" className="w-full h-full object-cover hover:opacity-90 transition-opacity" loading="lazy" />
+            <article key={c.idx} className="snap-start flex-shrink-0 w-[80vw] md:w-[480px]">
+              <div className="aspect-[4/5] overflow-hidden mb-5 group" style={{ background: "var(--pst-paper)" }}>
+                <img
+                  src={c.img}
+                  alt={`${c.clinic} — ${c.title}`}
+                  className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+                  loading="lazy"
+                  width={1280}
+                  height={1600}
+                />
               </div>
-              <div className="pst-mono pst-mono-sm mb-2" style={{ color: "var(--pst-gold)" }}>{c.clinic}</div>
-              <div className="pst-display text-[20px] md:text-[24px]" style={{ color: "var(--pst-bone)" }}>{c.title}</div>
-            </div>
+              <div className="flex items-baseline justify-between gap-4 mb-2">
+                <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-gold)" }}>{c.clinic}</div>
+                <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-dark-muted)" }}>{c.idx}</div>
+              </div>
+              <div className="pst-display text-[20px] md:text-[24px] mb-2" style={{ color: "var(--pst-bone)" }}>{c.title}</div>
+              <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-dark-muted)" }}>{c.meta}</div>
+            </article>
           ))}
         </div>
       </div>
 
       <div className="text-center mt-12">
-        <a href="#studio" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>See the studio →</a>
+        <a href="#studio" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>See the full studio →</a>
       </div>
     </section>
   );
 };
 
-const ExperiencesChapter = () => (
-  <section id="experiences" className="pst-surface-bone py-24 md:py-40 px-6 md:px-12">
-    <div className="max-w-[1480px] mx-auto">
-      <div className="mb-16">
-        <div className="pst-mono mb-6" style={{ color: "var(--pst-charcoal)" }}>04 — THE EXPERIENCES</div>
-        <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-charcoal)" }}>In person. Few times a year.</h2>
-        <p className="pst-body mt-6 max-w-xl" style={{ color: "var(--pst-text-light-muted)" }}>
-          Masterclasses, dinners, and gatherings for the practices we partner with — and the practices we are watching.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-px" style={{ background: "var(--pst-border-light)" }}>
-        <div className="md:col-span-3 pst-surface-bone">
-          <div className="aspect-[16/10] overflow-hidden mb-6">
-            <img src={worldExperiences} alt="" className="w-full h-full object-cover" loading="lazy" />
+const ExperiencesChapter = () => {
+  const tiles = [
+    {
+      idx: "E—01",
+      meta: "SEPTEMBER 2026 — CHARLESTON, SC",
+      title: "The Invisible to Inevitable Dinner.",
+      body: "Twelve seats. One table. A long evening on the work it takes to become the practice the city names first.",
+      cta: "Request a seat",
+      img: expDinner,
+      span: "md:col-span-3",
+      ratio: "aspect-[16/10]",
+    },
+    {
+      idx: "E—02",
+      meta: "STANDING PROGRAM",
+      title: "Associate to Empire.",
+      body: "A program for the next ten years of aesthetic dentistry. Run live, four times a year, in person.",
+      cta: "Read the program",
+      img: expMasterclass,
+      span: "md:col-span-2",
+      ratio: "aspect-[4/5]",
+    },
+    {
+      idx: "E—03",
+      meta: "BY INVITATION — QUARTERLY",
+      title: "The Reading Room.",
+      body: "A closed gathering for the roster — and the practices we are watching. Off-record, off-camera.",
+      cta: "Enquire",
+      img: expClub,
+      span: "md:col-span-2",
+      ratio: "aspect-[4/5]",
+    },
+    {
+      idx: "E—04",
+      meta: "SPRING 2027 — LISBON, PT",
+      title: "The Forester Retreat.",
+      body: "Three days. The long-game brand allocation framework, run against your next ten-year plan.",
+      cta: "Request a seat",
+      img: worldExperiences,
+      span: "md:col-span-3",
+      ratio: "aspect-[16/10]",
+    },
+  ];
+  return (
+    <section id="experiences" className="pst-surface-bone py-24 md:py-40 px-6 md:px-12">
+      <div className="max-w-[1480px] mx-auto">
+        <div className="flex items-end justify-between gap-8 flex-wrap mb-16 md:mb-20">
+          <div className="max-w-2xl">
+            <div className="pst-mono mb-6" style={{ color: "var(--pst-charcoal)" }}>04 — THE EXPERIENCES</div>
+            <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-charcoal)" }}>In person.<br />Few times a year.</h2>
+            <p className="pst-body mt-6" style={{ color: "var(--pst-text-light-muted)" }}>
+              Masterclasses, dinners, and gatherings for the practices we partner with — and the practices we are watching.
+            </p>
           </div>
-          <div className="pb-2">
-            <div className="pst-mono mb-3" style={{ color: "var(--pst-text-light-muted)" }}>SEPTEMBER 2026 — CHARLESTON, SC</div>
-            <div className="pst-display text-[28px] md:text-[40px] mb-4" style={{ color: "var(--pst-charcoal)" }}>
-              The Invisible to Inevitable Dinner.
-            </div>
-            <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Request a seat →</a>
+          <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-light-muted)" }}>
+            FOUR GATHERINGS — 2026 / 2027
           </div>
         </div>
 
-        <div className="md:col-span-2 pst-surface-bone md:pl-8">
-          <div className="aspect-[4/5] overflow-hidden mb-6">
-            <img src={worldPartnership} alt="" className="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <div>
-            <div className="pst-mono mb-3" style={{ color: "var(--pst-text-light-muted)" }}>STANDING PROGRAM</div>
-            <div className="pst-display text-[24px] md:text-[28px] mb-4" style={{ color: "var(--pst-charcoal)" }}>
-              Associate to Empire — A program for the next ten years of aesthetic dentistry.
-            </div>
-            <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Read the program →</a>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-x-8 gap-y-16">
+          {tiles.map((t) => (
+            <article key={t.idx} className={`${t.span}`}>
+              <div className={`${t.ratio} overflow-hidden mb-6 group`}>
+                <img
+                  src={t.img}
+                  alt={t.title}
+                  className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+                  loading="lazy"
+                  width={1280}
+                  height={1600}
+                />
+              </div>
+              <div className="flex items-baseline justify-between gap-4 mb-3">
+                <div className="pst-mono" style={{ color: "var(--pst-text-light-muted)" }}>{t.meta}</div>
+                <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-light-muted)" }}>{t.idx}</div>
+              </div>
+              <div className="pst-display text-[26px] md:text-[36px] mb-4" style={{ color: "var(--pst-charcoal)" }}>{t.title}</div>
+              <p className="pst-body text-[15px] mb-5 max-w-md" style={{ color: "var(--pst-text-light-muted)" }}>{t.body}</p>
+              <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>{t.cta} →</a>
+            </article>
+          ))}
+        </div>
+
+        <div className="text-center mt-20 pt-12 border-t" style={{ borderColor: "var(--pst-border-light)" }}>
+          <div className="pst-mono mb-6" style={{ color: "var(--pst-text-light-muted)" }}>By invitation. Limited capacity.</div>
+          <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Enter Experiences →</a>
         </div>
       </div>
-
-      <div className="text-center mt-16">
-        <div className="pst-mono mb-6" style={{ color: "var(--pst-text-light-muted)" }}>By invitation. Limited capacity.</div>
-        <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Enter Experiences →</a>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const ApplicationStrip = () => (
   <section id="apply" className="pst-surface-charcoal py-32 md:py-48 px-6 text-center">
