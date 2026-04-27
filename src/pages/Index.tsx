@@ -553,7 +553,7 @@ const ExperiencesChapter = () => {
               </div>
               <div className="pst-display text-[26px] md:text-[36px] mb-4" style={{ color: "var(--pst-charcoal)" }}>{t.title}</div>
               <p className="pst-body text-[15px] mb-5 max-w-md" style={{ color: "var(--pst-text-light-muted)" }}>{t.body}</p>
-              <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>{t.cta} →</a>
+              <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>{t.cta} →</ApplyLink>
             </article>
           ))}
         </div>
