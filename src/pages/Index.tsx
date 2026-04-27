@@ -20,6 +20,51 @@ import expClub from "@/assets/pasted/exp-club.jpg";
    A house of four worlds. Editorial. Restraint as signal.
    ────────────────────────────────────────────────────────── */
 
+// Reliable smooth-scroll to the application section. Accounts for
+// fixed nav height on desktop and mobile. Updates the URL hash so
+// the link is shareable and back/forward works.
+const APPLY_ID = "apply";
+const getNavOffset = () => (typeof window !== "undefined" && window.innerWidth >= 1024 ? 80 : 64);
+
+const scrollToApply = (e?: React.MouseEvent) => {
+  if (e) e.preventDefault();
+  if (typeof window === "undefined") return;
+  const el = document.getElementById(APPLY_ID);
+  if (!el) {
+    // Fallback: route arrived from another page — set hash and let the
+    // hash-listener on mount handle the scroll once mounted.
+    window.location.hash = APPLY_ID;
+    return;
+  }
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = el.getBoundingClientRect().top + window.scrollY - getNavOffset();
+  window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+  if (window.history.replaceState) {
+    window.history.replaceState(null, "", `#${APPLY_ID}`);
+  }
+};
+
+type ApplyCTAProps = {
+  className?: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+  ariaLabel?: string;
+};
+
+const ApplyLink = ({ className, style, children, ariaLabel }: ApplyCTAProps) => (
+  <a
+    href={`#${APPLY_ID}`}
+    onClick={scrollToApply}
+    className={className}
+    style={style}
+    aria-label={ariaLabel}
+    data-cta="apply"
+  >
+    {children}
+  </a>
+);
+
+
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
