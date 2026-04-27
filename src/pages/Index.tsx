@@ -7,6 +7,12 @@ import worldLibrary from "@/assets/pasted/world-library.jpg";
 import worldStudio from "@/assets/pasted/world-studio.jpg";
 import worldExperiences from "@/assets/pasted/world-experiences.jpg";
 import iconicVft from "@/assets/pasted/iconic-vft.jpg";
+import studioCase01 from "@/assets/pasted/studio-case-01.jpg";
+import studioCase02 from "@/assets/pasted/studio-case-02.jpg";
+import studioCase03 from "@/assets/pasted/studio-case-03.jpg";
+import expDinner from "@/assets/pasted/exp-dinner.jpg";
+import expMasterclass from "@/assets/pasted/exp-masterclass.jpg";
+import expClub from "@/assets/pasted/exp-club.jpg";
 
 /* ──────────────────────────────────────────────────────────
    PASTED — Homepage v2
