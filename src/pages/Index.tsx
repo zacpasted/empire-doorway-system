@@ -539,36 +539,136 @@ const ApplicationStrip = () => (
   </section>
 );
 
+const dispatchSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "Please enter your email." })
+    .email({ message: "That email doesn't look right." })
+    .max(255, { message: "Email is too long." }),
+});
+
 const Dispatch = () => {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+    const result = dispatchSchema.safeParse({ email });
+    if (!result.success) {
+      setError(result.error.issues[0]?.message ?? "Invalid email.");
+      return;
+    }
+    setStatus("submitting");
+    // Simulated dispatch — wire to provider when ready.
+    await new Promise((r) => setTimeout(r, 600));
+    setStatus("success");
+  };
+
   return (
-    <section className="pst-surface-charcoal py-24 md:py-32 px-6 border-t" style={{ borderColor: "var(--pst-border-dark)" }}>
+    <section
+      className="pst-surface-charcoal py-24 md:py-32 px-6 border-t"
+      style={{ borderColor: "var(--pst-border-dark)" }}
+      aria-labelledby="dispatch-heading"
+    >
       <div className="max-w-2xl mx-auto text-center">
         <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>DISPATCH</div>
-        <h3 className="pst-display text-[28px] md:text-[40px] mb-10" style={{ color: "var(--pst-bone)" }}>
+        <h3
+          id="dispatch-heading"
+          className="pst-display text-[28px] md:text-[40px] mb-10"
+          style={{ color: "var(--pst-bone)" }}
+        >
           One letter a month. Operating notes only.
         </h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (email) setSubmitted(true);
-          }}
-          className="flex items-center justify-center gap-6 max-w-md mx-auto"
-        >
-          <input
-            type="email"
-            required
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 bg-transparent border-b py-3 px-1 pst-body text-[15px] focus:outline-none focus:border-[var(--pst-gold)]"
-            style={{ borderColor: "var(--pst-border-dark)", color: "var(--pst-bone)" }}
-          />
-          <button type="submit" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>
-            {submitted ? "Subscribed" : "Subscribe"}
-          </button>
-        </form>
+
+        <AnimatePresence mode="wait">
+          {status === "success" ? (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="border-t border-b py-10 max-w-md mx-auto"
+              style={{ borderColor: "var(--pst-gold)" }}
+              role="status"
+              aria-live="polite"
+            >
+              <div className="pst-mono mb-4" style={{ color: "var(--pst-gold)" }}>
+                ✓ ON THE LIST
+              </div>
+              <div className="pst-display text-[22px] md:text-[26px] mb-3" style={{ color: "var(--pst-bone)" }}>
+                Thank you. The next letter ships on the first Monday of the month.
+              </div>
+              <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-dark-muted)" }}>
+                {email}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              onSubmit={handleSubmit}
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-md mx-auto"
+              noValidate
+            >
+              <div className="flex items-center justify-center gap-6">
+                <label htmlFor="dispatch-email" className="sr-only">Email address</label>
+                <input
+                  id="dispatch-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  inputMode="email"
+                  maxLength={255}
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError(null);
+                  }}
+                  disabled={status === "submitting"}
+                  aria-invalid={!!error}
+                  aria-describedby={error ? "dispatch-error" : undefined}
+                  className="flex-1 bg-transparent border-b py-3 px-1 pst-body text-[15px] focus:outline-none focus:border-[var(--pst-gold)] disabled:opacity-60"
+                  style={{
+                    borderColor: error ? "var(--pst-gold)" : "var(--pst-border-dark)",
+                    color: "var(--pst-bone)",
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="pst-link-mono disabled:opacity-60"
+                  style={{ color: "var(--pst-gold)" }}
+                >
+                  {status === "submitting" ? "Sending…" : "Subscribe"}
+                </button>
+              </div>
+              <div className="h-6 mt-3 text-left">
+                {error && (
+                  <motion.div
+                    id="dispatch-error"
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="pst-mono pst-mono-sm"
+                    style={{ color: "var(--pst-gold)" }}
+                    role="alert"
+                  >
+                    {error}
+                  </motion.div>
+                )}
+              </div>
+              <div className="pst-mono pst-mono-sm mt-4" style={{ color: "var(--pst-text-dark-muted)" }}>
+                No noise. Unsubscribe in one click.
+              </div>
+            </motion.form>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
