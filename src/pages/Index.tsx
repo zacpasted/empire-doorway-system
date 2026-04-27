@@ -567,22 +567,39 @@ const ExperiencesChapter = () => {
   );
 };
 
-const ApplicationStrip = () => (
-  <section id="apply" className="pst-surface-charcoal py-32 md:py-48 px-6 text-center">
-    <h2 className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto" style={{ color: "var(--pst-bone)" }}>
-      Twelve seats. Application reviewed monthly.
-    </h2>
-    <a
-      href="https://calendly.com/getpasted/pasted-partner-discovery"
-      target="_blank"
-      rel="noopener"
-      className="pst-link-mono inline-block mt-12"
-      style={{ color: "var(--pst-gold)" }}
+const ApplicationStrip = () => {
+  // Honor deep-links from other pages (e.g. /#apply) by re-running the
+  // offset-aware scroll once mounted, after the layout settles.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== `#${APPLY_ID}`) return;
+    const t = window.setTimeout(() => scrollToApply(), 80);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  return (
+    <section
+      id={APPLY_ID}
+      className="pst-surface-charcoal py-32 md:py-48 px-6 text-center scroll-mt-20 lg:scroll-mt-24"
+      aria-labelledby="apply-heading"
     >
-      Apply →
-    </a>
-  </section>
-);
+      <h2 id="apply-heading" className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto" style={{ color: "var(--pst-bone)" }}>
+        Twelve seats. Application reviewed monthly.
+      </h2>
+      <a
+        href="https://calendly.com/getpasted/pasted-partner-discovery"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pst-link-mono inline-block mt-12"
+        style={{ color: "var(--pst-gold)" }}
+        data-cta="apply-calendly"
+        aria-label="Book a partnership discovery call"
+      >
+        Apply →
+      </a>
+    </section>
+  );
+};
 
 const dispatchSchema = z.object({
   email: z
