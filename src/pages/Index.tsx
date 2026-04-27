@@ -317,7 +317,7 @@ const PartnershipChapter = () => {
 
         <div className="text-center">
           <div className="pst-mono mb-6" style={{ color: "var(--pst-text-dark-muted)" }}>By application — twelve seats, twelve cities</div>
-          <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>See the full operation →</a>
+          <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>See the full operation →</ApplyLink>
         </div>
       </div>
     </section>
