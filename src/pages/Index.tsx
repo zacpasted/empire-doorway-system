@@ -567,6 +567,18 @@ const ExperiencesChapter = () => {
   );
 };
 
+const applicationSchema = z.object({
+  name: z.string().trim().min(2, { message: "Please share your name." }).max(100),
+  email: z.string().trim().email({ message: "That email doesn't look right." }).max(255),
+  practice: z.string().trim().min(2, { message: "Practice name, please." }).max(120),
+  city: z.string().trim().min(2, { message: "City, please." }).max(80),
+});
+
+type ApplicationFields = z.infer<typeof applicationSchema>;
+type ApplicationErrors = Partial<Record<keyof ApplicationFields, string>>;
+
+const CALENDLY_URL = "https://calendly.com/getpasted/pasted-partner-discovery";
+
 const ApplicationStrip = () => {
   // Honor deep-links from other pages (e.g. /#apply) by re-running the
   // offset-aware scroll once mounted, after the layout settles.
@@ -577,26 +589,181 @@ const ApplicationStrip = () => {
     return () => window.clearTimeout(t);
   }, []);
 
+  const [fields, setFields] = useState<ApplicationFields>({ name: "", email: "", practice: "", city: "" });
+  const [errors, setErrors] = useState<ApplicationErrors>({});
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const update = (key: keyof ApplicationFields) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFields((f) => ({ ...f, [key]: e.target.value }));
+    if (errors[key]) setErrors((er) => ({ ...er, [key]: undefined }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const result = applicationSchema.safeParse(fields);
+    if (!result.success) {
+      const next: ApplicationErrors = {};
+      result.error.issues.forEach((i) => {
+        const k = i.path[0] as keyof ApplicationFields;
+        if (!next[k]) next[k] = i.message;
+      });
+      setErrors(next);
+      return;
+    }
+    setStatus("submitting");
+    // Simulated submission. Wire to Supabase or a webhook when the
+    // applications table is in place.
+    await new Promise((r) => setTimeout(r, 700));
+    setStatus("success");
+    // Smooth-scroll the confirmation into view so the user lands on it.
+    requestAnimationFrame(() => scrollToApply());
+  };
+
+  const inputClass =
+    "w-full bg-transparent border-b py-3 px-1 pst-body text-[15px] focus:outline-none focus:border-[var(--pst-gold)] disabled:opacity-60";
+
   return (
     <section
       id={APPLY_ID}
-      className="pst-surface-charcoal py-32 md:py-48 px-6 text-center scroll-mt-20 lg:scroll-mt-24"
+      className="pst-surface-charcoal py-32 md:py-48 px-6 scroll-mt-20 lg:scroll-mt-24"
       aria-labelledby="apply-heading"
     >
-      <h2 id="apply-heading" className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto" style={{ color: "var(--pst-bone)" }}>
-        Twelve seats. Application reviewed monthly.
-      </h2>
-      <a
-        href="https://calendly.com/getpasted/pasted-partner-discovery"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="pst-link-mono inline-block mt-12"
-        style={{ color: "var(--pst-gold)" }}
-        data-cta="apply-calendly"
-        aria-label="Book a partnership discovery call"
-      >
-        Apply →
-      </a>
+      <div className="max-w-2xl mx-auto">
+        <AnimatePresence mode="wait">
+          {status === "success" ? (
+            <motion.div
+              key="apply-success"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center border-t border-b py-14"
+              style={{ borderColor: "var(--pst-gold)" }}
+              role="status"
+              aria-live="polite"
+            >
+              <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>
+                ✓ APPLICATION RECEIVED
+              </div>
+              <h2 className="pst-display text-[32px] md:text-[52px] mb-6" style={{ color: "var(--pst-bone)" }}>
+                Thanks for applying, {fields.name.split(" ")[0]}.
+              </h2>
+              <p className="pst-body max-w-xl mx-auto mb-4" style={{ color: "var(--pst-text-dark-muted)" }}>
+                We read every application by hand. You'll hear from us within five working days at{" "}
+                <span style={{ color: "var(--pst-bone)" }}>{fields.email}</span>.
+              </p>
+              <p className="pst-body max-w-xl mx-auto mb-10" style={{ color: "var(--pst-text-dark-muted)" }}>
+                If you'd like to move faster, you can hold a discovery slot now — optional, no commitment.
+              </p>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pst-link-mono"
+                  style={{ color: "var(--pst-gold)" }}
+                  data-cta="apply-calendly-postsubmit"
+                >
+                  Hold a discovery slot →
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFields({ name: "", email: "", practice: "", city: "" });
+                    setErrors({});
+                    setStatus("idle");
+                  }}
+                  className="pst-link-mono"
+                  style={{ color: "var(--pst-text-dark-muted)" }}
+                >
+                  Submit another application
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="apply-form"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-center"
+            >
+              <h2
+                id="apply-heading"
+                className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto"
+                style={{ color: "var(--pst-bone)" }}
+              >
+                Twelve seats. Application reviewed monthly.
+              </h2>
+              <p className="pst-body mt-6 max-w-xl mx-auto" style={{ color: "var(--pst-text-dark-muted)" }}>
+                Four short fields. We respond within five working days.
+              </p>
+
+              <form onSubmit={handleSubmit} className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-left" noValidate>
+                {([
+                  { key: "name", label: "Your name", type: "text", autoComplete: "name" },
+                  { key: "email", label: "Email", type: "email", autoComplete: "email" },
+                  { key: "practice", label: "Practice", type: "text", autoComplete: "organization" },
+                  { key: "city", label: "City", type: "text", autoComplete: "address-level2" },
+                ] as const).map((f) => (
+                  <div key={f.key}>
+                    <label
+                      htmlFor={`apply-${f.key}`}
+                      className="pst-mono pst-mono-sm block mb-2"
+                      style={{ color: "var(--pst-text-dark-muted)" }}
+                    >
+                      {f.label}
+                    </label>
+                    <input
+                      id={`apply-${f.key}`}
+                      type={f.type}
+                      autoComplete={f.autoComplete}
+                      value={fields[f.key]}
+                      onChange={update(f.key)}
+                      disabled={status === "submitting"}
+                      maxLength={255}
+                      aria-invalid={!!errors[f.key]}
+                      aria-describedby={errors[f.key] ? `apply-${f.key}-err` : undefined}
+                      className={inputClass}
+                      style={{
+                        borderColor: errors[f.key] ? "var(--pst-gold)" : "var(--pst-border-dark)",
+                        color: "var(--pst-bone)",
+                      }}
+                    />
+                    <div className="h-5 mt-1">
+                      {errors[f.key] && (
+                        <div
+                          id={`apply-${f.key}-err`}
+                          className="pst-mono pst-mono-sm"
+                          style={{ color: "var(--pst-gold)" }}
+                          role="alert"
+                        >
+                          {errors[f.key]}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                <div className="md:col-span-2 flex flex-col md:flex-row items-center justify-between gap-6 mt-6">
+                  <div className="pst-mono pst-mono-sm" style={{ color: "var(--pst-text-dark-muted)" }}>
+                    By application — twelve seats, twelve cities.
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className="pst-link-mono disabled:opacity-60"
+                    style={{ color: "var(--pst-gold)" }}
+                    data-cta="apply-submit"
+                  >
+                    {status === "submitting" ? "Submitting…" : "Submit application →"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 };
