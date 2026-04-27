@@ -20,6 +20,51 @@ import expClub from "@/assets/pasted/exp-club.jpg";
    A house of four worlds. Editorial. Restraint as signal.
    ────────────────────────────────────────────────────────── */
 
+// Reliable smooth-scroll to the application section. Accounts for
+// fixed nav height on desktop and mobile. Updates the URL hash so
+// the link is shareable and back/forward works.
+const APPLY_ID = "apply";
+const getNavOffset = () => (typeof window !== "undefined" && window.innerWidth >= 1024 ? 80 : 64);
+
+const scrollToApply = (e?: React.MouseEvent) => {
+  if (e) e.preventDefault();
+  if (typeof window === "undefined") return;
+  const el = document.getElementById(APPLY_ID);
+  if (!el) {
+    // Fallback: route arrived from another page — set hash and let the
+    // hash-listener on mount handle the scroll once mounted.
+    window.location.hash = APPLY_ID;
+    return;
+  }
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = el.getBoundingClientRect().top + window.scrollY - getNavOffset();
+  window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+  if (window.history.replaceState) {
+    window.history.replaceState(null, "", `#${APPLY_ID}`);
+  }
+};
+
+type ApplyCTAProps = {
+  className?: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+  ariaLabel?: string;
+};
+
+const ApplyLink = ({ className, style, children, ariaLabel }: ApplyCTAProps) => (
+  <a
+    href={`#${APPLY_ID}`}
+    onClick={scrollToApply}
+    className={className}
+    style={style}
+    aria-label={ariaLabel}
+    data-cta="apply"
+  >
+    {children}
+  </a>
+);
+
+
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -59,9 +104,9 @@ const Nav = () => {
             )
           )}
         </nav>
-        <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>
+        <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-gold)" }} ariaLabel="Apply for partnership">
           Apply
-        </a>
+        </ApplyLink>
       </div>
     </header>
   );
@@ -96,7 +141,7 @@ const Hero = () => (
       </div>
 
       <div className="flex items-end justify-between gap-6 flex-wrap">
-        <a href="#apply" className="flex items-center gap-4 group">
+        <ApplyLink className="flex items-center gap-4 group" ariaLabel="Enter the partnership — by application">
           <div className="w-16 h-16 md:w-20 md:h-20 overflow-hidden border" style={{ borderColor: "var(--pst-border-dark)" }}>
             <img src={worldPartnership} alt="" className="w-full h-full object-cover" loading="lazy" />
           </div>
@@ -105,7 +150,7 @@ const Hero = () => (
             <br />
             <span style={{ color: "var(--pst-gold)" }}>By application →</span>
           </div>
-        </a>
+        </ApplyLink>
 
         <div className="hidden md:flex flex-col items-center gap-2 mx-auto">
           <span className="pst-mono" style={{ color: "var(--pst-text-dark-muted)" }}>Scroll</span>
@@ -272,7 +317,7 @@ const PartnershipChapter = () => {
 
         <div className="text-center">
           <div className="pst-mono mb-6" style={{ color: "var(--pst-text-dark-muted)" }}>By application — twelve seats, twelve cities</div>
-          <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>See the full operation →</a>
+          <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-gold)" }}>See the full operation →</ApplyLink>
         </div>
       </div>
     </section>
@@ -508,36 +553,53 @@ const ExperiencesChapter = () => {
               </div>
               <div className="pst-display text-[26px] md:text-[36px] mb-4" style={{ color: "var(--pst-charcoal)" }}>{t.title}</div>
               <p className="pst-body text-[15px] mb-5 max-w-md" style={{ color: "var(--pst-text-light-muted)" }}>{t.body}</p>
-              <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>{t.cta} →</a>
+              <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>{t.cta} →</ApplyLink>
             </article>
           ))}
         </div>
 
         <div className="text-center mt-20 pt-12 border-t" style={{ borderColor: "var(--pst-border-light)" }}>
           <div className="pst-mono mb-6" style={{ color: "var(--pst-text-light-muted)" }}>By invitation. Limited capacity.</div>
-          <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Enter Experiences →</a>
+          <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Enter Experiences →</ApplyLink>
         </div>
       </div>
     </section>
   );
 };
 
-const ApplicationStrip = () => (
-  <section id="apply" className="pst-surface-charcoal py-32 md:py-48 px-6 text-center">
-    <h2 className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto" style={{ color: "var(--pst-bone)" }}>
-      Twelve seats. Application reviewed monthly.
-    </h2>
-    <a
-      href="https://calendly.com/getpasted/pasted-partner-discovery"
-      target="_blank"
-      rel="noopener"
-      className="pst-link-mono inline-block mt-12"
-      style={{ color: "var(--pst-gold)" }}
+const ApplicationStrip = () => {
+  // Honor deep-links from other pages (e.g. /#apply) by re-running the
+  // offset-aware scroll once mounted, after the layout settles.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== `#${APPLY_ID}`) return;
+    const t = window.setTimeout(() => scrollToApply(), 80);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  return (
+    <section
+      id={APPLY_ID}
+      className="pst-surface-charcoal py-32 md:py-48 px-6 text-center scroll-mt-20 lg:scroll-mt-24"
+      aria-labelledby="apply-heading"
     >
-      Apply →
-    </a>
-  </section>
-);
+      <h2 id="apply-heading" className="pst-display text-[36px] md:text-[64px] max-w-3xl mx-auto" style={{ color: "var(--pst-bone)" }}>
+        Twelve seats. Application reviewed monthly.
+      </h2>
+      <a
+        href="https://calendly.com/getpasted/pasted-partner-discovery"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pst-link-mono inline-block mt-12"
+        style={{ color: "var(--pst-gold)" }}
+        data-cta="apply-calendly"
+        aria-label="Book a partnership discovery call"
+      >
+        Apply →
+      </a>
+    </section>
+  );
+};
 
 const dispatchSchema = z.object({
   email: z
