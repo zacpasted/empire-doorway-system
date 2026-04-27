@@ -560,7 +560,7 @@ const ExperiencesChapter = () => {
 
         <div className="text-center mt-20 pt-12 border-t" style={{ borderColor: "var(--pst-border-light)" }}>
           <div className="pst-mono mb-6" style={{ color: "var(--pst-text-light-muted)" }}>By invitation. Limited capacity.</div>
-          <a href="#apply" className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Enter Experiences →</a>
+          <ApplyLink className="pst-link-mono" style={{ color: "var(--pst-charcoal)" }}>Enter Experiences →</ApplyLink>
         </div>
       </div>
     </section>
