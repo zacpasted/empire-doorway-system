@@ -108,8 +108,60 @@
 
     /* Scroll progress */
     --scroll-progress: 0%;
+
+    /* === PASTED v2 — Four Worlds tokens === */
+    --pst-charcoal: #0A0A0A;
+    --pst-gold: #C9A96E;
+    --pst-bone: #F4F1EC;
+    --pst-paper: #FFFFFF;
+    --pst-border-dark: rgba(255,255,255,0.08);
+    --pst-border-light: rgba(10,10,10,0.08);
+    --pst-text-dark-muted: rgba(244,241,236,0.55);
+    --pst-text-light-muted: rgba(10,10,10,0.55);
   }
 }
+
+/* === PASTED v2 — utility classes for the four worlds === */
+.pst-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  font-weight: 400;
+}
+.pst-mono-sm { font-size: 10px; letter-spacing: 0.22em; }
+.pst-display {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.pst-body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.pst-rule-gold { height: 1px; background: var(--pst-gold); opacity: 0.55; }
+.pst-link-mono {
+  font-family: "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  transition: color 200ms ease-out, opacity 200ms ease-out;
+}
+.pst-link-mono:hover { color: var(--pst-gold); }
+.pst-surface-charcoal { background: var(--pst-charcoal); color: var(--pst-bone); }
+.pst-surface-bone { background: var(--pst-bone); color: var(--pst-charcoal); }
+.pst-tile-swap > .pst-tile-img-b { opacity: 0; transition: opacity 400ms ease-out; }
+.pst-tile-swap:hover > .pst-tile-img-b { opacity: 1; }
+@keyframes pst-pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(4px); opacity: 1; }
+}
+.pst-pulse { animation: pst-pulse 1.4s ease-in-out infinite; }
 
 @layer base {
   * {
