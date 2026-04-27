@@ -141,7 +141,7 @@ const Hero = () => (
       </div>
 
       <div className="flex items-end justify-between gap-6 flex-wrap">
-        <a href="#apply" className="flex items-center gap-4 group">
+        <ApplyLink className="flex items-center gap-4 group" ariaLabel="Enter the partnership — by application">
           <div className="w-16 h-16 md:w-20 md:h-20 overflow-hidden border" style={{ borderColor: "var(--pst-border-dark)" }}>
             <img src={worldPartnership} alt="" className="w-full h-full object-cover" loading="lazy" />
           </div>
@@ -150,7 +150,7 @@ const Hero = () => (
             <br />
             <span style={{ color: "var(--pst-gold)" }}>By application →</span>
           </div>
-        </a>
+        </ApplyLink>
 
         <div className="hidden md:flex flex-col items-center gap-2 mx-auto">
           <span className="pst-mono" style={{ color: "var(--pst-text-dark-muted)" }}>Scroll</span>
