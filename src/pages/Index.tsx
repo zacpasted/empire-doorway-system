@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { z } from "zod";
 import heroOperatory from "@/assets/pasted/hero-operatory.jpg";
 import worldPartnership from "@/assets/pasted/world-partnership.jpg";
 import worldLibrary from "@/assets/pasted/world-library.jpg";
