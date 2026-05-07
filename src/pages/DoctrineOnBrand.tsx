@@ -566,7 +566,7 @@ const DoctrineOnBrand = () => {
               Private dispatches. Weekly. No algorithm. No pitch-mail. Unsubscribe any time.
             </p>
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="insider-form">
+              <form id="library-card-intake" onSubmit={handleSubmit} className="insider-form">
                 <label htmlFor="insider-email" className="visually-hidden">
                   Email address
                 </label>
