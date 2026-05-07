@@ -566,7 +566,7 @@ const DoctrineOnBrand = () => {
               Private dispatches. Weekly. No algorithm. No pitch-mail. Unsubscribe any time.
             </p>
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="insider-form">
+              <form id="library-card-intake" onSubmit={handleSubmit} className="insider-form">
                 <label htmlFor="insider-email" className="visually-hidden">
                   Email address
                 </label>
@@ -634,9 +634,17 @@ const DoctrineOnBrand = () => {
         </p>
         <a
           className="library-card-cta"
-          href="https://www.instagram.com/channel/AbYlPHEUILBxYX6k/?igsh=YnF1djc5OGpmbm5n"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#library-card-intake"
+          onClick={(e) => {
+            e.preventDefault();
+            const form = document.getElementById("library-card-intake");
+            const target = form ?? document.querySelector(".insider-form") as HTMLElement | null;
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "center" });
+              const input = (target.querySelector("input") as HTMLInputElement | null);
+              setTimeout(() => input?.focus({ preventScroll: true }), 600);
+            }
+          }}
         >
           <span>Request the Library Card</span>
           <span className="library-card-cta-arrow" aria-hidden="true">→</span>
