@@ -200,6 +200,8 @@ const Manifesto = () => (
 type WorldTile = {
   num: string;
   name: string;
+  eyebrow: string;
+  script: string;
   title: string;
   sub: string;
   img: string;
@@ -211,82 +213,122 @@ const worlds: WorldTile[] = [
   {
     num: "01",
     name: "PARTNERSHIP",
-    title: "Operate at authority.",
-    sub: "A done operation for a finite roster. Brand, performance, content, operations — run end-to-end.",
+    eyebrow: "SPECIAL EDITION",
+    script: "Partnership",
+    title: "The done operation, in twelve seats.",
+    sub: "Brand, performance, content, operations — run end-to-end inside a finite roster of aesthetic clinics.",
     img: worldPartnership,
     hoverImg: heroOperatory,
     href: "#partnership",
   },
   {
     num: "02",
-    name: "LIBRARY",
-    title: "Read freely.",
-    sub: "Field Notes, framework documentation, and archive. Open. No gate.",
+    name: "REFLECTIONS",
+    script: "Library",
+    eyebrow: "REFLECTIONS",
+    title: "Field Notes & frameworks.",
+    sub: "Open archive of the writing, the documentation, the long view. No gate.",
     img: worldLibrary,
     hoverImg: iconicVft,
     href: "/library",
   },
   {
     num: "03",
-    name: "STUDIO",
+    name: "GETAWAYS",
+    script: "Studio",
+    eyebrow: "FRESHTAKE",
     title: "Made visible.",
-    sub: "The creative production arm. Identity, content systems, video, design.",
+    sub: "Identity, content systems, video and design — the creative production arm of the house.",
     img: worldStudio,
     hoverImg: iconicVft,
     href: "#studio",
   },
   {
     num: "04",
-    name: "EXPERIENCES",
-    title: "In person. Few times a year.",
-    sub: "Masterclasses, dinners, and gatherings. By invitation. Limited capacity.",
+    name: "WHATS NEW",
+    script: "Experiences",
+    eyebrow: "WHATS NEW",
+    title: "In person, a few times a year.",
+    sub: "Masterclasses, dinners, gatherings — by invitation, capped capacity.",
     img: worldExperiences,
     hoverImg: heroOperatory,
     href: "#experiences",
   },
 ];
 
-const FourWorlds = () => (
-  <section className="pst-surface-charcoal py-24 md:py-40 px-6 md:px-12">
-    <div className="max-w-[1680px] mx-auto">
-      <div className="text-center mb-16 md:mb-24">
-        <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>THE HOUSE</div>
-        <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-bone)" }}>
-          Four worlds. One umbrella.
-        </h2>
+const FourWorlds = () => {
+  const feature = worlds[0];
+  const trio = worlds.slice(1);
+  const FeatureInner = (
+    <div className="pst-tile-swap relative aspect-[16/8] md:aspect-[21/9] overflow-hidden cursor-pointer group" style={{ background: "var(--pst-charcoal)" }}>
+      <img src={feature.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={feature.hoverImg} alt="" className="pst-tile-img-b absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.45) 55%, rgba(10,10,10,0.1) 100%)" }} />
+      <div className="absolute top-6 left-6 md:top-10 md:left-10 pst-mono" style={{ color: "var(--pst-gold)" }}>
+        {feature.eyebrow}
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "var(--pst-border-dark)" }}>
-        {worlds.map((w) => {
-          const Inner = (
-            <div className="pst-tile-swap relative aspect-[16/10] overflow-hidden cursor-pointer group" style={{ background: "var(--pst-charcoal)" }}>
-              <img src={w.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-              <img src={w.hoverImg} alt="" className="pst-tile-img-b absolute inset-0 w-full h-full object-cover" loading="lazy" />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0) 40%, rgba(10,10,10,0.85) 100%)" }} />
-              <div className="absolute top-6 left-6 pst-mono" style={{ color: "var(--pst-bone)" }}>
-                {w.num} — {w.name}
-              </div>
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-6">
-                <div className="max-w-md">
-                  <div className="pst-display text-[28px] md:text-[40px]" style={{ color: "var(--pst-bone)" }}>{w.title}</div>
-                  <p className="pst-body mt-3 text-[15px]" style={{ color: "var(--pst-text-dark-muted)" }}>{w.sub}</p>
-                </div>
-                <div className="pst-mono whitespace-nowrap group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
-                  Enter →
-                </div>
-              </div>
-            </div>
-          );
-          return w.href.startsWith("/") ? (
-            <Link key={w.num} to={w.href}>{Inner}</Link>
-          ) : (
-            <a key={w.num} href={w.href}>{Inner}</a>
-          );
-        })}
+      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-10 right-6 max-w-xl">
+        <div className="pst-script text-[56px] md:text-[96px] mb-2 leading-none" style={{ color: "var(--pst-gold)" }}>
+          {feature.script}
+        </div>
+        <div className="pst-display text-[24px] md:text-[36px]" style={{ color: "var(--pst-bone)" }}>{feature.title}</div>
+        <p className="pst-body mt-3 text-[15px]" style={{ color: "var(--pst-text-dark-muted)" }}>{feature.sub}</p>
+        <div className="pst-mono mt-5 group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
+          Enter →
+        </div>
       </div>
     </div>
-  </section>
-);
+  );
+
+  return (
+    <section className="pst-surface-charcoal py-24 md:py-40 px-6 md:px-12">
+      <div className="max-w-[1680px] mx-auto">
+        <div className="text-center mb-16 md:mb-24">
+          <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>THE HOUSE</div>
+          <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-bone)" }}>
+            Four worlds. <span className="pst-script" style={{ color: "var(--pst-gold)" }}>One</span> umbrella.
+          </h2>
+        </div>
+
+        {/* Pulse-style three-up tile row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-16 md:mb-20">
+          {trio.map((w) => {
+            const Inner = (
+              <div className="group cursor-pointer">
+                <div className="pst-tile-swap relative aspect-[4/5] overflow-hidden mb-5" style={{ background: "var(--pst-charcoal)" }}>
+                  <img src={w.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <img src={w.hoverImg} alt="" className="pst-tile-img-b absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0.85) 100%)" }} />
+                  <div className="absolute top-5 left-5 pst-mono" style={{ color: "var(--pst-gold)" }}>
+                    {w.eyebrow}
+                  </div>
+                  <div className="absolute bottom-5 left-5 right-5">
+                    <div className="pst-script text-[44px] md:text-[60px] leading-none" style={{ color: "var(--pst-gold)" }}>
+                      {w.script}
+                    </div>
+                  </div>
+                </div>
+                <div className="pst-display text-[22px] md:text-[26px] mb-2" style={{ color: "var(--pst-bone)" }}>{w.title}</div>
+                <p className="pst-body text-[15px] mb-4" style={{ color: "var(--pst-text-dark-muted)" }}>{w.sub}</p>
+                <span className="pst-mono group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
+                  Enter →
+                </span>
+              </div>
+            );
+            return w.href.startsWith("/") ? (
+              <Link key={w.num} to={w.href}>{Inner}</Link>
+            ) : (
+              <a key={w.num} href={w.href}>{Inner}</a>
+            );
+          })}
+        </div>
+
+        {/* Featured "SPECIAL EDITION" — Partnership */}
+        <a href={feature.href}>{FeatureInner}</a>
+      </div>
+    </section>
+  );
+};
 
 const PartnershipChapter = () => {
   const pillars = [
