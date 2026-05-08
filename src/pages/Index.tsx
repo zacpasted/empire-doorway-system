@@ -1085,7 +1085,45 @@ const dispatchSchema = z.object({
     .max(255, { message: "Email is too long." }),
 });
 
+const newstrack = [
+  { title: "Dr. Workman opens second location in Salt Lake City", meta: "ROSTER — MAR 2026" },
+  { title: "Venus Fly Trap, Vol. 02 — twenty-four new scripts shipped", meta: "STUDIO — FEB 2026" },
+  { title: "PASTED Field Notes named to LHJ's editorial shortlist", meta: "LIBRARY — JAN 2026" },
+  { title: "Spring Masterclass: Charleston, by invitation", meta: "EXPERIENCES — APR 2026" },
+];
+
+const Newstrack = () => (
+  <section className="pst-surface-charcoal py-20 md:py-32 px-6 md:px-12 border-t" style={{ borderColor: "var(--pst-border-dark)" }}>
+    <div className="max-w-[1480px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-start">
+      <div>
+        <div className="pst-mono mb-8 flex items-center gap-3" style={{ color: "var(--pst-gold)" }}>
+          <span className="inline-block w-8 h-px" style={{ background: "var(--pst-gold)" }} />
+          NEWSTRACK
+        </div>
+        <ul className="divide-y" style={{ borderColor: "var(--pst-border-dark)" }}>
+          {newstrack.map((n) => (
+            <li key={n.title} className="py-5 flex items-baseline gap-5 group cursor-pointer" style={{ borderColor: "var(--pst-border-dark)" }}>
+              <span className="pst-script text-[22px] flex-shrink-0" style={{ color: "var(--pst-gold)" }}>✦</span>
+              <div className="flex-1">
+                <div className="pst-display text-[20px] md:text-[24px] group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
+                  {n.title}
+                </div>
+                <div className="pst-mono pst-mono-sm mt-2" style={{ color: "var(--pst-text-dark-muted)" }}>{n.meta}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex md:flex-col gap-6 md:gap-8 md:text-right md:pt-12">
+        <div className="pst-script text-[44px] md:text-[64px] leading-none" style={{ color: "var(--pst-gold)" }}>Pressroom</div>
+        <div className="pst-script text-[44px] md:text-[64px] leading-none" style={{ color: "var(--pst-gold)", opacity: 0.6 }}>Archive</div>
+      </div>
+    </div>
+  </section>
+);
+
 const Dispatch = () => {
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
