@@ -124,19 +124,36 @@ const Hero = () => (
       width={1920}
       height={1080}
     />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.85) 100%)" }} />
+    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.25) 35%, rgba(10,10,10,0.92) 100%)" }} />
 
     <div className="relative z-10 min-h-screen flex flex-col px-6 md:px-12 pt-28 pb-16">
-      <div className="pst-mono" style={{ color: "var(--pst-gold)" }}>
-        PASTED — VOL. 01
+      {/* Pulse-style masthead */}
+      <div className="flex items-end justify-between gap-6 pb-6 border-b" style={{ borderColor: "rgba(244,241,236,0.18)" }}>
+        <div>
+          <div className="pst-display text-[44px] md:text-[64px] leading-none flex items-baseline gap-3" style={{ color: "var(--pst-bone)" }}>
+            <span className="tracking-[0.18em] text-[18px] md:text-[20px]" style={{ color: "var(--pst-gold)" }}>PASTED</span>
+            <span className="pst-script text-[56px] md:text-[88px]">Pulse</span>
+          </div>
+          <div className="pst-mono mt-2" style={{ color: "var(--pst-text-dark-muted)" }}>
+            A Quarterly Letter from the House of Pasted
+          </div>
+        </div>
+        <div className="hidden md:block pst-mono text-right" style={{ color: "var(--pst-gold)" }}>
+          MAY 2026<br />
+          <span style={{ color: "var(--pst-text-dark-muted)" }}>VOL. 01 — NO. 01</span>
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center text-center">
-        <h1 className="pst-display text-[44px] md:text-[88px] lg:text-[112px]" style={{ color: "var(--pst-bone)" }}>
-          A house of four worlds.
+        <div className="pst-script text-[80px] md:text-[160px] lg:text-[200px] mb-2" style={{ color: "var(--pst-gold)" }}>
+          the
+        </div>
+        <h1 className="pst-display text-[44px] md:text-[88px] lg:text-[112px] -mt-4 md:-mt-8" style={{ color: "var(--pst-bone)" }}>
+          House <span className="pst-script" style={{ color: "var(--pst-gold)" }}>of</span> Four Worlds
         </h1>
-        <p className="pst-body mt-6" style={{ color: "var(--pst-text-dark-muted)" }}>
-          Partnership. Library. Studio. Experiences.
+        <p className="pst-body mt-8 max-w-xl" style={{ color: "var(--pst-text-dark-muted)" }}>
+          Partnership, Library, Studio, and Experiences — a finite operation
+          for the practices that refuse the commodity comparison.
         </p>
       </div>
 
