@@ -1303,6 +1303,7 @@ const Index = () => (
       <StudioChapter />
       <ExperiencesChapter />
       <ApplicationStrip />
+      <Newstrack />
       <Dispatch />
     </main>
     <Footer />
