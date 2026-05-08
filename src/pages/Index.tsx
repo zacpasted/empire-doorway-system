@@ -124,19 +124,36 @@ const Hero = () => (
       width={1920}
       height={1080}
     />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.85) 100%)" }} />
+    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.25) 35%, rgba(10,10,10,0.92) 100%)" }} />
 
     <div className="relative z-10 min-h-screen flex flex-col px-6 md:px-12 pt-28 pb-16">
-      <div className="pst-mono" style={{ color: "var(--pst-gold)" }}>
-        PASTED — VOL. 01
+      {/* Pulse-style masthead */}
+      <div className="flex items-end justify-between gap-6 pb-6 border-b" style={{ borderColor: "rgba(244,241,236,0.18)" }}>
+        <div>
+          <div className="pst-display text-[44px] md:text-[64px] leading-none flex items-baseline gap-3" style={{ color: "var(--pst-bone)" }}>
+            <span className="tracking-[0.18em] text-[18px] md:text-[20px]" style={{ color: "var(--pst-gold)" }}>PASTED</span>
+            <span className="pst-script text-[56px] md:text-[88px]">Pulse</span>
+          </div>
+          <div className="pst-mono mt-2" style={{ color: "var(--pst-text-dark-muted)" }}>
+            A Quarterly Letter from the House of Pasted
+          </div>
+        </div>
+        <div className="hidden md:block pst-mono text-right" style={{ color: "var(--pst-gold)" }}>
+          MAY 2026<br />
+          <span style={{ color: "var(--pst-text-dark-muted)" }}>VOL. 01 — NO. 01</span>
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center text-center">
-        <h1 className="pst-display text-[44px] md:text-[88px] lg:text-[112px]" style={{ color: "var(--pst-bone)" }}>
-          A house of four worlds.
+        <div className="pst-script text-[80px] md:text-[160px] lg:text-[200px] mb-2" style={{ color: "var(--pst-gold)" }}>
+          the
+        </div>
+        <h1 className="pst-display text-[44px] md:text-[88px] lg:text-[112px] -mt-4 md:-mt-8" style={{ color: "var(--pst-bone)" }}>
+          House <span className="pst-script" style={{ color: "var(--pst-gold)" }}>of</span> Four Worlds
         </h1>
-        <p className="pst-body mt-6" style={{ color: "var(--pst-text-dark-muted)" }}>
-          Partnership. Library. Studio. Experiences.
+        <p className="pst-body mt-8 max-w-xl" style={{ color: "var(--pst-text-dark-muted)" }}>
+          Partnership, Library, Studio, and Experiences — a finite operation
+          for the practices that refuse the commodity comparison.
         </p>
       </div>
 
@@ -183,6 +200,8 @@ const Manifesto = () => (
 type WorldTile = {
   num: string;
   name: string;
+  eyebrow: string;
+  script: string;
   title: string;
   sub: string;
   img: string;
@@ -194,82 +213,122 @@ const worlds: WorldTile[] = [
   {
     num: "01",
     name: "PARTNERSHIP",
-    title: "Operate at authority.",
-    sub: "A done operation for a finite roster. Brand, performance, content, operations — run end-to-end.",
+    eyebrow: "SPECIAL EDITION",
+    script: "Partnership",
+    title: "The done operation, in twelve seats.",
+    sub: "Brand, performance, content, operations — run end-to-end inside a finite roster of aesthetic clinics.",
     img: worldPartnership,
     hoverImg: heroOperatory,
     href: "#partnership",
   },
   {
     num: "02",
-    name: "LIBRARY",
-    title: "Read freely.",
-    sub: "Field Notes, framework documentation, and archive. Open. No gate.",
+    name: "REFLECTIONS",
+    script: "Library",
+    eyebrow: "REFLECTIONS",
+    title: "Field Notes & frameworks.",
+    sub: "Open archive of the writing, the documentation, the long view. No gate.",
     img: worldLibrary,
     hoverImg: iconicVft,
     href: "/library",
   },
   {
     num: "03",
-    name: "STUDIO",
+    name: "GETAWAYS",
+    script: "Studio",
+    eyebrow: "FRESHTAKE",
     title: "Made visible.",
-    sub: "The creative production arm. Identity, content systems, video, design.",
+    sub: "Identity, content systems, video and design — the creative production arm of the house.",
     img: worldStudio,
     hoverImg: iconicVft,
     href: "#studio",
   },
   {
     num: "04",
-    name: "EXPERIENCES",
-    title: "In person. Few times a year.",
-    sub: "Masterclasses, dinners, and gatherings. By invitation. Limited capacity.",
+    name: "WHATS NEW",
+    script: "Experiences",
+    eyebrow: "WHATS NEW",
+    title: "In person, a few times a year.",
+    sub: "Masterclasses, dinners, gatherings — by invitation, capped capacity.",
     img: worldExperiences,
     hoverImg: heroOperatory,
     href: "#experiences",
   },
 ];
 
-const FourWorlds = () => (
-  <section className="pst-surface-charcoal py-24 md:py-40 px-6 md:px-12">
-    <div className="max-w-[1680px] mx-auto">
-      <div className="text-center mb-16 md:mb-24">
-        <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>THE HOUSE</div>
-        <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-bone)" }}>
-          Four worlds. One umbrella.
-        </h2>
+const FourWorlds = () => {
+  const feature = worlds[0];
+  const trio = worlds.slice(1);
+  const FeatureInner = (
+    <div className="pst-tile-swap relative aspect-[16/8] md:aspect-[21/9] overflow-hidden cursor-pointer group" style={{ background: "var(--pst-charcoal)" }}>
+      <img src={feature.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src={feature.hoverImg} alt="" className="pst-tile-img-b absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.45) 55%, rgba(10,10,10,0.1) 100%)" }} />
+      <div className="absolute top-6 left-6 md:top-10 md:left-10 pst-mono" style={{ color: "var(--pst-gold)" }}>
+        {feature.eyebrow}
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: "var(--pst-border-dark)" }}>
-        {worlds.map((w) => {
-          const Inner = (
-            <div className="pst-tile-swap relative aspect-[16/10] overflow-hidden cursor-pointer group" style={{ background: "var(--pst-charcoal)" }}>
-              <img src={w.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-              <img src={w.hoverImg} alt="" className="pst-tile-img-b absolute inset-0 w-full h-full object-cover" loading="lazy" />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0) 40%, rgba(10,10,10,0.85) 100%)" }} />
-              <div className="absolute top-6 left-6 pst-mono" style={{ color: "var(--pst-bone)" }}>
-                {w.num} — {w.name}
-              </div>
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-6">
-                <div className="max-w-md">
-                  <div className="pst-display text-[28px] md:text-[40px]" style={{ color: "var(--pst-bone)" }}>{w.title}</div>
-                  <p className="pst-body mt-3 text-[15px]" style={{ color: "var(--pst-text-dark-muted)" }}>{w.sub}</p>
-                </div>
-                <div className="pst-mono whitespace-nowrap group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
-                  Enter →
-                </div>
-              </div>
-            </div>
-          );
-          return w.href.startsWith("/") ? (
-            <Link key={w.num} to={w.href}>{Inner}</Link>
-          ) : (
-            <a key={w.num} href={w.href}>{Inner}</a>
-          );
-        })}
+      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-10 right-6 max-w-xl">
+        <div className="pst-script text-[56px] md:text-[96px] mb-2 leading-none" style={{ color: "var(--pst-gold)" }}>
+          {feature.script}
+        </div>
+        <div className="pst-display text-[24px] md:text-[36px]" style={{ color: "var(--pst-bone)" }}>{feature.title}</div>
+        <p className="pst-body mt-3 text-[15px]" style={{ color: "var(--pst-text-dark-muted)" }}>{feature.sub}</p>
+        <div className="pst-mono mt-5 group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
+          Enter →
+        </div>
       </div>
     </div>
-  </section>
-);
+  );
+
+  return (
+    <section className="pst-surface-charcoal py-24 md:py-40 px-6 md:px-12">
+      <div className="max-w-[1680px] mx-auto">
+        <div className="text-center mb-16 md:mb-24">
+          <div className="pst-mono mb-6" style={{ color: "var(--pst-gold)" }}>THE HOUSE</div>
+          <h2 className="pst-display text-[40px] md:text-[72px]" style={{ color: "var(--pst-bone)" }}>
+            Four worlds. <span className="pst-script" style={{ color: "var(--pst-gold)" }}>One</span> umbrella.
+          </h2>
+        </div>
+
+        {/* Pulse-style three-up tile row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-16 md:mb-20">
+          {trio.map((w) => {
+            const Inner = (
+              <div className="group cursor-pointer">
+                <div className="pst-tile-swap relative aspect-[4/5] overflow-hidden mb-5" style={{ background: "var(--pst-charcoal)" }}>
+                  <img src={w.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <img src={w.hoverImg} alt="" className="pst-tile-img-b absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0.85) 100%)" }} />
+                  <div className="absolute top-5 left-5 pst-mono" style={{ color: "var(--pst-gold)" }}>
+                    {w.eyebrow}
+                  </div>
+                  <div className="absolute bottom-5 left-5 right-5">
+                    <div className="pst-script text-[44px] md:text-[60px] leading-none" style={{ color: "var(--pst-gold)" }}>
+                      {w.script}
+                    </div>
+                  </div>
+                </div>
+                <div className="pst-display text-[22px] md:text-[26px] mb-2" style={{ color: "var(--pst-bone)" }}>{w.title}</div>
+                <p className="pst-body text-[15px] mb-4" style={{ color: "var(--pst-text-dark-muted)" }}>{w.sub}</p>
+                <span className="pst-mono group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
+                  Enter →
+                </span>
+              </div>
+            );
+            return w.href.startsWith("/") ? (
+              <Link key={w.num} to={w.href}>{Inner}</Link>
+            ) : (
+              <a key={w.num} href={w.href}>{Inner}</a>
+            );
+          })}
+        </div>
+
+        {/* Featured "SPECIAL EDITION" — Partnership */}
+        <a href={feature.href}>{FeatureInner}</a>
+      </div>
+    </section>
+  );
+};
 
 const PartnershipChapter = () => {
   const pillars = [
@@ -1026,7 +1085,45 @@ const dispatchSchema = z.object({
     .max(255, { message: "Email is too long." }),
 });
 
+const newstrack = [
+  { title: "Dr. Workman opens second location in Salt Lake City", meta: "ROSTER — MAR 2026" },
+  { title: "Venus Fly Trap, Vol. 02 — twenty-four new scripts shipped", meta: "STUDIO — FEB 2026" },
+  { title: "PASTED Field Notes named to LHJ's editorial shortlist", meta: "LIBRARY — JAN 2026" },
+  { title: "Spring Masterclass: Charleston, by invitation", meta: "EXPERIENCES — APR 2026" },
+];
+
+const Newstrack = () => (
+  <section className="pst-surface-charcoal py-20 md:py-32 px-6 md:px-12 border-t" style={{ borderColor: "var(--pst-border-dark)" }}>
+    <div className="max-w-[1480px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-start">
+      <div>
+        <div className="pst-mono mb-8 flex items-center gap-3" style={{ color: "var(--pst-gold)" }}>
+          <span className="inline-block w-8 h-px" style={{ background: "var(--pst-gold)" }} />
+          NEWSTRACK
+        </div>
+        <ul className="divide-y" style={{ borderColor: "var(--pst-border-dark)" }}>
+          {newstrack.map((n) => (
+            <li key={n.title} className="py-5 flex items-baseline gap-5 group cursor-pointer" style={{ borderColor: "var(--pst-border-dark)" }}>
+              <span className="pst-script text-[22px] flex-shrink-0" style={{ color: "var(--pst-gold)" }}>✦</span>
+              <div className="flex-1">
+                <div className="pst-display text-[20px] md:text-[24px] group-hover:text-[var(--pst-gold)] transition-colors" style={{ color: "var(--pst-bone)" }}>
+                  {n.title}
+                </div>
+                <div className="pst-mono pst-mono-sm mt-2" style={{ color: "var(--pst-text-dark-muted)" }}>{n.meta}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex md:flex-col gap-6 md:gap-8 md:text-right md:pt-12">
+        <div className="pst-script text-[44px] md:text-[64px] leading-none" style={{ color: "var(--pst-gold)" }}>Pressroom</div>
+        <div className="pst-script text-[44px] md:text-[64px] leading-none" style={{ color: "var(--pst-gold)", opacity: 0.6 }}>Archive</div>
+      </div>
+    </div>
+  </section>
+);
+
 const Dispatch = () => {
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -1206,6 +1303,7 @@ const Index = () => (
       <StudioChapter />
       <ExperiencesChapter />
       <ApplicationStrip />
+      <Newstrack />
       <Dispatch />
     </main>
     <Footer />
