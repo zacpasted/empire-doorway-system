@@ -143,6 +143,14 @@
   line-height: 1.6;
 }
 .pst-rule-gold { height: 1px; background: var(--pst-gold); opacity: 0.55; }
+.pst-script {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--pst-gold);
+}
 .pst-link-mono {
   font-family: "JetBrains Mono", monospace;
   text-transform: uppercase;
