@@ -22,7 +22,6 @@ const LibraryHome = () => {
   const [, force] = useState(0);
 
   useEffect(() => { document.title = "The Library — PASTED"; }, []);
-  useEffect(() => { if (!loading && !session) navigate("/login", { replace: true }); }, [loading, session, navigate]);
   useEffect(() => { const t = setTimeout(() => setHintVisible(true), 2000); return () => clearTimeout(t); }, []);
 
   // Track cursor X for candle proximity boost on volumes
