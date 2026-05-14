@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Monogram } from "@/components/library/Monogram";
-import { Briefcase } from "@/components/library/Briefcase";
+import briefcaseClosed from "@/assets/briefcase-closed.jpg";
 
 const Welcome = () => {
   useEffect(() => { document.title = "Check your email — The PASTED Library"; }, []);
@@ -15,8 +15,8 @@ const Welcome = () => {
         <p className="lib-body mt-6 max-w-md text-lib-charcoal/75">
           A sign-in link is on the way. Open it from any device — the Library will recognise you.
         </p>
-        <div className="mt-14 max-w-[360px] w-full opacity-90 lib-grain relative">
-          <Briefcase className="w-full h-auto" />
+        <div className="mt-14 max-w-[360px] w-full relative lib-grain">
+          <img src={briefcaseClosed} alt="" loading="lazy" className="w-full h-auto" />
         </div>
       </main>
       <footer className="py-8" />
