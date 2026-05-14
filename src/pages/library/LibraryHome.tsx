@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Volume, type VolumeData } from "@/components/library/Volume";
-import { CursorCandle } from "@/components/library/CursorCandle";
+import { useEffect, useMemo, useState } from "react";
 import { DustMotes } from "@/components/library/DustMotes";
 import { ReadingPanel, type ReadingContent } from "@/components/library/ReadingPanel";
-import { CATALOGUE, HERO_VOLUMES, FILTERS, getReadingContent } from "@/data/volumes";
+import { Bookshelf } from "@/components/library/Bookshelf";
+import { BOOKS, FILTERS, getReadingFor, type Book } from "@/data/books";
 
 const NAV = [
   { label: "Partnership", href: "#" },
@@ -14,54 +13,22 @@ const NAV = [
 
 const LibraryHome = () => {
   const [reading, setReading] = useState<ReadingContent | null>(null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("ALL");
   const [hintVisible, setHintVisible] = useState(false);
-  const shelfRef = useRef<HTMLDivElement>(null);
-  const cursorX = useRef(0);
-  const [, force] = useState(0);
 
   useEffect(() => { document.title = "The Library — PASTED"; }, []);
   useEffect(() => { const t = setTimeout(() => setHintVisible(true), 2000); return () => clearTimeout(t); }, []);
 
-  // Track cursor X for candle proximity boost on volumes
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => { cursorX.current = e.clientX; force((n) => (n + 1) % 1000); };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
-
-  // Keyboard navigation across hero shelf
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (reading) return;
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      const idx = HERO_VOLUMES.findIndex((v) => v.id === hoveredId);
-      const next = e.key === "ArrowRight" ? Math.min(HERO_VOLUMES.length - 1, idx + 1) : Math.max(0, idx - 1);
-      if (next >= 0) setHoveredId(HERO_VOLUMES[Math.max(0, next)].id);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [hoveredId, reading]);
-
-  const openVolume = (v: VolumeData) => setReading(getReadingContent(v.id));
-
-  const filteredCatalogue = useMemo(
-    () => CATALOGUE.filter((c) => filter === "ALL" || c.category === filter),
-    [filter],
-  );
-
-  // Compute candle proximity boost for each hero volume by element rect
-  const proximity = (id: string): number => {
-    const el = shelfRef.current?.querySelector<HTMLButtonElement>(`[data-volume-id="${id}"]`);
-    if (!el) return 0;
-    const r = el.getBoundingClientRect();
-    const cx = r.left + r.width / 2;
-    const dist = Math.abs(cx - cursorX.current);
-    return Math.max(0, 1 - dist / 220);
+  const openBook = (b: Book) => {
+    const content = getReadingFor(b.id);
+    if (content) setReading(content);
   };
 
-  
+  const filteredCatalogue = useMemo(
+    () => BOOKS.filter((b) => filter === "ALL" || b.category === filter),
+    [filter],
+  );
 
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
@@ -97,81 +64,70 @@ const LibraryHome = () => {
       {/* 2. HERO — THE READING ROOM */}
       <section
         className="relative overflow-hidden"
-        style={{ background: "#0A0A0A", color: "#F4F1EC", height: "100vh", minHeight: 720 }}
+        style={{ background: "#0A0A0A", color: "#F4F1EC", height: "100vh", minHeight: 760 }}
       >
-        <CursorCandle />
+        {/* The shelf is the centrepiece */}
+        <Bookshelf onOpen={openBook} focusedId={focusedId} onFocusChange={setFocusedId} />
+
+        {/* Drifting dust */}
         <DustMotes />
 
-        {/* Title block */}
-        <div className="relative z-10 max-w-[1400px] mx-auto px-8 pt-20 md:pt-28">
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "#C9A96E" }}>
-            VOLUME ARCHIVE / 2025
-          </div>
-          <h1
-            className="mt-6"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 300, fontSize: "clamp(40px, 6vw, 64px)", lineHeight: 1.0, letterSpacing: "-0.02em" }}
-          >
-            The library.
-          </h1>
-          <h2
-            className="mt-1"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 300, fontStyle: "italic", fontSize: "clamp(40px, 6vw, 64px)", lineHeight: 1.0, letterSpacing: "-0.02em", color: "rgba(244,241,236,0.85)" }}
-          >
-            What we know, written down<span style={{ color: "#C9A96E" }}>.</span>
-          </h2>
-        </div>
-
-        {/* The shelf */}
-        <div className="absolute left-0 right-0 z-10" style={{ bottom: 120 }}>
-          <div
-            ref={shelfRef}
-            className="overflow-x-auto lib-shelf-scroll px-8 md:px-16"
-            style={{ scrollSnapType: "none" }}
-          >
-            <div className="flex items-end gap-5 pb-6" style={{ minWidth: "max-content" }}>
-              {HERO_VOLUMES.map((v, i) => {
-                const isHovered = hoveredId === v.id;
-                const lean = isHovered ? 0 : hoveredId
-                  ? (HERO_VOLUMES.findIndex((x) => x.id === hoveredId) === i - 1
-                      ? 1
-                      : HERO_VOLUMES.findIndex((x) => x.id === hoveredId) === i + 1
-                      ? -1
-                      : 0)
-                  : 0;
-                return (
-                  <Volume
-                    key={v.id}
-                    v={v}
-                    active={false}
-                    dimmed={false}
-                    leanDir={lean as 0 | -1 | 1}
-                    hovered={isHovered}
-                    candleBoost={proximity(v.id)}
-                    onHover={(vol) => setHoveredId(vol?.id ?? null)}
-                    onClick={openVolume}
-                  />
-                );
-              })}
+        {/* Title overlay — sits above the shelf, top-left, generous margin */}
+        <div className="absolute top-0 left-0 right-0 z-40 pointer-events-none">
+          <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-10 md:pt-14">
+            <div
+              className="lib-fade-in"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.22em", color: "#C9A96E" }}
+            >
+              VOLUME ARCHIVE / 2025
             </div>
+            <h1
+              className="mt-4 lib-fade-in"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontWeight: 300,
+                fontSize: "clamp(40px, 5.2vw, 56px)",
+                lineHeight: 1.0,
+                letterSpacing: "-0.02em",
+                color: "#F4F1EC",
+                textShadow: "0 2px 18px rgba(0,0,0,0.6)",
+              }}
+            >
+              The library.
+            </h1>
+            <h2
+              className="mt-1 lib-fade-in"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontWeight: 300,
+                fontStyle: "italic",
+                fontSize: "clamp(36px, 5vw, 56px)",
+                lineHeight: 1.0,
+                letterSpacing: "-0.02em",
+                color: "rgba(244,241,236,0.88)",
+                textShadow: "0 2px 18px rgba(0,0,0,0.6)",
+              }}
+            >
+              What we know, written down<span style={{ color: "#C9A96E" }}>.</span>
+            </h2>
           </div>
-          {/* Shelf line */}
-          <div className="mx-8 md:mx-16" style={{ height: 1, background: "rgba(201,169,110,0.5)" }} />
         </div>
 
         {/* Hint */}
         <div
-          className="absolute left-0 right-0 z-10 text-center"
+          className="absolute left-0 right-0 z-40 text-center pointer-events-none"
           style={{
-            bottom: 40,
+            bottom: 24,
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11,
             letterSpacing: "0.22em",
             color: "rgba(244,241,236,0.5)",
             opacity: hintVisible ? 1 : 0,
             transition: "opacity 1200ms ease",
+            textShadow: "0 1px 6px rgba(0,0,0,0.6)",
           }}
         >
-          USE ARROW KEYS, OR SCROLL.
+          DRAG, OR USE ARROW KEYS.
         </div>
       </section>
 
@@ -232,28 +188,31 @@ const LibraryHome = () => {
 
           {/* Rows */}
           <div>
-            {filteredCatalogue.map((c) => {
-              const isOpen = reading?.volume.id === c.volume.id;
+            {filteredCatalogue.map((b) => {
+              const isOpen = reading?.volume.id === b.id;
+              const hasContent = !!b.pages;
               return (
                 <button
-                  key={c.volume.id}
-                  onClick={() => setReading(getReadingContent(c.volume.id))}
-                  className="group grid items-center w-full text-left relative"
+                  key={b.id}
+                  onClick={() => { if (hasContent) setReading(getReadingFor(b.id)); }}
+                  disabled={!hasContent}
+                  className="group grid items-center w-full text-left relative disabled:cursor-default"
                   style={{
                     gridTemplateColumns: "80px 1fr 100px 160px",
                     padding: "20px 12px",
                     borderBottom: "1px solid rgba(10,10,10,0.06)",
                     transition: "background-color 300ms ease",
+                    opacity: hasContent ? 1 : 0.55,
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(10,10,10,0.04)")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                 >
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.18em", color: "#0A0A0A" }}>
-                    {c.volume.number}
+                    {b.vol}
                   </div>
                   <div className="relative pr-8">
                     <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 300, fontSize: 22, color: "#0A0A0A", letterSpacing: "-0.005em" }}>
-                      {c.volume.title}
+                      {b.title}
                     </span>
                     <span
                       className="absolute left-0 -bottom-1 h-px transition-all duration-500"
@@ -268,10 +227,10 @@ const LibraryHome = () => {
                     />
                   </div>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.18em", color: "rgba(10,10,10,0.7)" }}>
-                    {c.volume.year}
+                    {b.year}
                   </div>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.18em", color: "#C9A96E" }}>
-                    {c.category}
+                    {b.category}
                   </div>
                 </button>
               );
