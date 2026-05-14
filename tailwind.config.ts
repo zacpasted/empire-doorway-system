@@ -76,6 +76,15 @@ export default {
           glow: "hsl(var(--bronze-glow))",
         },
         "warm-white": "hsl(var(--warm-white))",
+        // The PASTED Library palette
+        bone: "#F4F1EC",
+        oxblood: {
+          DEFAULT: "#7A1F1F",
+          dark: "#5C1414",
+        },
+        smoke: "#1F1A17",
+        "lib-gold": "#C9A96E",
+        "lib-charcoal": "#0A0A0A",
       },
       borderRadius: {
         lg: "var(--radius)",

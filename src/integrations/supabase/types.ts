@@ -35,6 +35,57 @@ export type Database = {
         }
         Relationships: []
       }
+      assets: {
+        Row: {
+          case_number: number
+          created_at: string
+          description: string
+          file_format: string | null
+          file_meta: string | null
+          file_url: string | null
+          hero_image_url: string | null
+          id: string
+          is_live: boolean
+          published_at: string | null
+          section: Database["public"]["Enums"]["asset_section"]
+          slug: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          case_number: number
+          created_at?: string
+          description?: string
+          file_format?: string | null
+          file_meta?: string | null
+          file_url?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_live?: boolean
+          published_at?: string | null
+          section: Database["public"]["Enums"]["asset_section"]
+          slug: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          case_number?: number
+          created_at?: string
+          description?: string
+          file_format?: string | null
+          file_meta?: string | null
+          file_url?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_live?: boolean
+          published_at?: string | null
+          section?: Database["public"]["Enums"]["asset_section"]
+          slug?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
       brand_workbook_submissions: {
         Row: {
           answers: Json
@@ -76,6 +127,42 @@ export type Database = {
           user_agent?: string | null
         }
         Relationships: []
+      }
+      checkouts: {
+        Row: {
+          asset_id: string
+          checked_out_at: string
+          id: string
+          member_id: string
+        }
+        Insert: {
+          asset_id: string
+          checked_out_at?: string
+          id?: string
+          member_id: string
+        }
+        Update: {
+          asset_id?: string
+          checked_out_at?: string
+          id?: string
+          member_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "checkouts_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "checkouts_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       cta_analytics: {
         Row: {
@@ -218,6 +305,33 @@ export type Database = {
         }
         Relationships: []
       }
+      members: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_signed_in_at: string
+          member_number: number
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name?: string
+          id: string
+          last_signed_in_at?: string
+          member_number?: number
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_signed_in_at?: string
+          member_number?: number
+        }
+        Relationships: []
+      }
       popup_analytics: {
         Row: {
           created_at: string
@@ -301,10 +415,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      touch_member_signed_in: { Args: never; Returns: undefined }
     }
     Enums: {
-      [_ in never]: never
+      asset_section: "frameworks" | "scripts" | "playbooks" | "decks" | "tools"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -431,6 +545,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      asset_section: ["frameworks", "scripts", "playbooks", "decks", "tools"],
+    },
   },
 } as const
