@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useMember } from "@/hooks/useMember";
 import { Masthead } from "@/components/library/Masthead";
-import { Briefcase } from "@/components/library/Briefcase";
+import briefcaseOpen from "@/assets/briefcase-open.jpg";
 
 type Asset = {
   id: string;
@@ -66,11 +66,12 @@ const AssetDetail = () => {
       <Masthead memberName={member?.first_name} memberNumber={member?.member_number} />
       <article className="max-w-[1240px] mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
         <div className="relative" style={{ transform: "rotate(-2deg)" }}>
-          {asset.hero_image_url ? (
-            <img src={asset.hero_image_url} alt="" className="w-full h-auto" loading="lazy" />
-          ) : (
-            <Briefcase className="w-full h-auto" open />
-          )}
+          <img
+            src={asset.hero_image_url || briefcaseOpen}
+            alt=""
+            className="w-full h-auto"
+            loading="lazy"
+          />
         </div>
         <div>
           <h1 className="lib-display text-4xl md:text-6xl leading-tight">{asset.title}</h1>
