@@ -61,7 +61,7 @@ const LibraryHome = () => {
     return Math.max(0, 1 - dist / 220);
   };
 
-  if (loading || !session) return <div className="min-h-screen bg-bone" />;
+  
 
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
