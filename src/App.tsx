@@ -14,6 +14,7 @@ import LibraryLogin from "./pages/library/Login";
 import LibraryHome from "./pages/library/LibraryHome";
 import AssetDetail from "./pages/library/AssetDetail";
 import LibraryCardPage from "./pages/library/Card";
+import Gate from "./pages/library/Gate";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/" element={<Vault />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/login" element={<LibraryLogin />} />
+          <Route path="/gate" element={<Gate />} />
           <Route path="/library" element={<LibraryHome />} />
           <Route path="/library/:slug" element={<AssetDetail />} />
           <Route path="/card" element={<LibraryCardPage />} />
