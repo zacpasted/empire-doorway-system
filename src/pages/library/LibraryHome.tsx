@@ -1,7 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { useMember } from "@/hooks/useMember";
 import { Volume, type VolumeData } from "@/components/library/Volume";
 import { CursorCandle } from "@/components/library/CursorCandle";
 import { DustMotes } from "@/components/library/DustMotes";
