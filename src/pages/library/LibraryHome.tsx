@@ -13,8 +13,6 @@ const NAV = [
 ];
 
 const LibraryHome = () => {
-  const { session, loading } = useMember();
-  const navigate = useNavigate();
   const [reading, setReading] = useState<ReadingContent | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("ALL");
