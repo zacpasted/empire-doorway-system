@@ -300,13 +300,6 @@ const LibraryHome = () => {
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "rgba(10,10,10,0.55)" }}>
             THE PASTED LIBRARY — MMXXV
           </div>
-          <button
-            onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "rgba(10,10,10,0.55)" }}
-            className="hover:text-lib-charcoal transition-colors"
-          >
-            SIGN OUT
-          </button>
         </div>
       </footer>
 
