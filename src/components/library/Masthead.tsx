@@ -18,9 +18,14 @@ export const Masthead = ({ surface = "bone", memberName, memberNumber }: Props) 
     <header className={`w-full ${isDark ? "bg-lib-charcoal" : "bg-bone"}`}>
       <div className="max-w-[1240px] mx-auto px-6 py-5 flex items-center justify-between">
         <Link to="/" aria-label="The PASTED Library — home" className="flex-shrink-0">
-          <Monogram size={36} variant={variant} />
+          <Monogram size={28} variant={variant} />
         </Link>
-        <div className={`lib-mono ${text} hidden md:block`}>THE LIBRARY</div>
+        <div
+          className={`hidden md:block ${text}`}
+          style={{ fontFamily: "'Playfair Display', Georgia, serif", fontVariantCaps: "small-caps", letterSpacing: "0.18em", fontSize: 14 }}
+        >
+          The Library
+        </div>
         <div className={`lib-mono ${text} text-right`}>
           {memberName ? (
             <>
