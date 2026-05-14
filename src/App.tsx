@@ -3,16 +3,17 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Index from "./pages/Index";
-import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
-import Discover from "./pages/Discover";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
-import BrandAssetWorkbook from "./pages/BrandAssetWorkbook";
-import DoctrineOnBrand from "./pages/DoctrineOnBrand";
-import Founders from "./pages/Founders";
-import Library from "./pages/Library";
+
+// The PASTED Library
+import Vault from "./pages/library/Vault";
+import Welcome from "./pages/library/Welcome";
+import LibraryLogin from "./pages/library/Login";
+import LibraryHome from "./pages/library/LibraryHome";
+import AssetDetail from "./pages/library/AssetDetail";
+import LibraryCardPage from "./pages/library/Card";
 
 const queryClient = new QueryClient();
 
@@ -23,18 +24,27 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/case-study/:slug" element={<CaseStudy />} />
+          {/* The PASTED Library */}
+          <Route path="/" element={<Vault />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/login" element={<LibraryLogin />} />
+          <Route path="/library" element={<LibraryHome />} />
+          <Route path="/library/:slug" element={<AssetDetail />} />
+          <Route path="/card" element={<LibraryCardPage />} />
+
+          {/* Admin (kept) */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/yourbrand" element={<BrandAssetWorkbook />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/library/doctrine" element={<DoctrineOnBrand />} />
-          {/* Older entry points still resolve to the doctrine document. */}
-          <Route path="/library/vol-i" element={<Navigate to="/library/doctrine" replace />} />
-          <Route path="/library/cover" element={<Navigate to="/library/doctrine" replace />} />
-          <Route path="/founders" element={<Founders />} />
+
+          {/* Archived legacy routes — redirect to the Vault */}
+          <Route path="/discover" element={<Navigate to="/" replace />} />
+          <Route path="/case-study/:slug" element={<Navigate to="/" replace />} />
+          <Route path="/yourbrand" element={<Navigate to="/" replace />} />
+          <Route path="/library/doctrine" element={<Navigate to="/library" replace />} />
+          <Route path="/library/vol-i" element={<Navigate to="/library" replace />} />
+          <Route path="/library/cover" element={<Navigate to="/library" replace />} />
+          <Route path="/founders" element={<Navigate to="/" replace />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
