@@ -22,23 +22,13 @@ const Login = () => {
         <div className="absolute inset-0 lib-grain pointer-events-none" />
 
         <div className="relative max-w-[1240px] mx-auto px-6 py-14 md:py-20 min-h-[inherit] flex items-center justify-center" style={{ minHeight: "min(820px, 92vh)" }}>
-          <div className="w-[300px] md:w-[440px] relative">
-            <div
-              className="absolute inset-0"
-              style={{
-                background: "#F4F1EC",
-                clipPath:
-                  "path('M 30,60 C 70,42 130,40 176,56 L 176,440 C 130,422 70,420 30,438 Z M 184,56 C 230,40 290,42 330,60 L 330,438 C 290,420 230,422 184,440 Z')",
-              }}
-            />
-            <div className="relative bg-bone px-8 md:px-14 py-12 md:py-16 text-center" style={{ borderRadius: 2 }}>
-              <div className="lib-display text-lib-charcoal text-xl md:text-2xl">Welcome back.</div>
-              <div className="my-3 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
-              <p className="lib-editorial text-lib-charcoal text-base md:text-lg mb-8">
-                A sign-in link, sent to your email.
-              </p>
-              <MagicLinkForm mode="login" />
-            </div>
+          <div className="w-[320px] md:w-[460px] bg-bone px-8 md:px-12 py-12 md:py-16 text-center" style={{ borderRadius: 2, boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}>
+            <div className="lib-display text-lib-charcoal text-xl md:text-2xl">Welcome back.</div>
+            <div className="my-3 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
+            <p className="lib-editorial text-lib-charcoal text-base md:text-lg mb-8">
+              A sign-in link, sent to your email.
+            </p>
+            <MagicLinkForm mode="login" />
           </div>
         </div>
       </section>
