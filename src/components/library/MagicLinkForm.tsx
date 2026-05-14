@@ -41,7 +41,7 @@ export const MagicLinkForm = ({ mode }: Props) => {
     }
 
     setSubmitting(true);
-    const redirectTo = `${window.location.origin}/library`;
+    const redirectTo = `${window.location.origin}/gate`;
     const data =
       mode === "claim" ? { first_name: firstName.trim() } : undefined;
 
