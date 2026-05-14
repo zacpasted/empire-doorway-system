@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Briefcase } from "./Briefcase";
+import briefcaseClosed from "@/assets/briefcase-closed.jpg";
 
 type Props = {
   slug: string;
@@ -25,8 +25,22 @@ export const BriefcaseCard = ({ slug, caseNumber, section, title, fileFormat, fi
 
   return (
     <Link to={`/library/${slug}`} onClick={onClick} className="group flex-shrink-0 w-[240px] md:w-[280px] cursor-pointer">
-      <div className={`relative w-full aspect-[7/5] overflow-hidden transition-transform duration-200 ease-out group-hover:-translate-y-1 ${animating ? "lib-checkout-anim" : ""}`}>
-        <Briefcase className="w-full h-full" />
+      <div
+        className={`relative w-full aspect-[7/5] overflow-hidden transition-transform duration-200 ease-out group-hover:-translate-y-1 ${animating ? "lib-checkout-anim" : ""}`}
+        style={{ background: "#0A0A0A" }}
+      >
+        <img
+          src={briefcaseClosed}
+          alt=""
+          loading="lazy"
+          className="w-full h-full object-cover"
+          draggable={false}
+        />
+        {/* P monogram overlay on the case face */}
+        <svg viewBox="0 0 100 100" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[22%] h-auto opacity-90" aria-hidden="true">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#C9A96E" strokeWidth="1.4" />
+          <text x="50" y="64" textAnchor="middle" fontFamily="'Playfair Display', Georgia, serif" fontStyle="italic" fontSize="48" fill="#C9A96E">P</text>
+        </svg>
       </div>
       <div className="h-px w-full bg-lib-gold/0 group-hover:bg-lib-gold/60 transition-colors duration-200 mt-2" />
       <div className="pt-3 space-y-2">
