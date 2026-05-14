@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useMember } from "@/hooks/useMember";
 import { Masthead } from "@/components/library/Masthead";
@@ -23,17 +23,12 @@ const pad3 = (n: number) => n.toString().padStart(3, "0");
 
 const AssetDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { session, member, loading } = useMember();
-  const navigate = useNavigate();
+  const { member, loading } = useMember();
   const [asset, setAsset] = useState<Asset | null>(null);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!loading && !session) navigate("/login", { replace: true });
-  }, [loading, session, navigate]);
-
-  useEffect(() => {
-    if (!session || !slug) return;
+    if (!slug) return;
     (async () => {
       const { data } = await supabase.from("assets").select("*").eq("slug", slug).eq("is_live", true).maybeSingle();
       if (!data) { setNotFound(true); return; }
@@ -43,9 +38,9 @@ const AssetDetail = () => {
         await supabase.from("checkouts").insert({ member_id: member.id, asset_id: (data as Asset).id });
       }
     })();
-  }, [session, slug, member]);
+  }, [slug, member]);
 
-  if (loading || !session) return <div className="min-h-screen bg-bone" />;
+  if (loading) return <div className="min-h-screen bg-bone" />;
 
   if (notFound) {
     return (

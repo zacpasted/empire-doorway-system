@@ -1,7 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { useMember } from "@/hooks/useMember";
 import { Volume, type VolumeData } from "@/components/library/Volume";
 import { CursorCandle } from "@/components/library/CursorCandle";
 import { DustMotes } from "@/components/library/DustMotes";
@@ -16,8 +13,6 @@ const NAV = [
 ];
 
 const LibraryHome = () => {
-  const { session, loading } = useMember();
-  const navigate = useNavigate();
   const [reading, setReading] = useState<ReadingContent | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("ALL");
@@ -27,7 +22,6 @@ const LibraryHome = () => {
   const [, force] = useState(0);
 
   useEffect(() => { document.title = "The Library — PASTED"; }, []);
-  useEffect(() => { if (!loading && !session) navigate("/login", { replace: true }); }, [loading, session, navigate]);
   useEffect(() => { const t = setTimeout(() => setHintVisible(true), 2000); return () => clearTimeout(t); }, []);
 
   // Track cursor X for candle proximity boost on volumes
@@ -67,7 +61,7 @@ const LibraryHome = () => {
     return Math.max(0, 1 - dist / 220);
   };
 
-  if (loading || !session) return <div className="min-h-screen bg-bone" />;
+  
 
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
@@ -306,13 +300,6 @@ const LibraryHome = () => {
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "rgba(10,10,10,0.55)" }}>
             THE PASTED LIBRARY — MMXXV
           </div>
-          <button
-            onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "rgba(10,10,10,0.55)" }}
-            className="hover:text-lib-charcoal transition-colors"
-          >
-            SIGN OUT
-          </button>
         </div>
       </footer>
 
