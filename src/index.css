@@ -231,6 +231,30 @@
 .lib-shelf-scroll::-webkit-scrollbar { display: none; }
 .lib-shelf-scroll > * { scroll-snap-align: start; }
 
+/* Keyhole hover glow — applied to nested .kh-glow inside SVG */
+.lib-keyhole .kh-glow { opacity: 0; transition: opacity 320ms ease-out; }
+.lib-keyhole:hover .kh-glow,
+.lib-keyhole:focus-visible .kh-glow { opacity: 1; }
+
+/* Velvet door cross-fade out (used on /gate when entering) */
+@keyframes lib-door-fade { from { opacity: 1; } to { opacity: 0; } }
+.lib-door-fade-out { animation: lib-door-fade 600ms ease-out forwards; }
+
+/* Embossed gold text — subtle bevel via text-shadow */
+.lib-emboss-gold {
+  color: #C9A96E;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.55),
+    0 -1px 0 rgba(255,225,170,0.18);
+}
+
+/* Cloth texture for the Library Card surface */
+.lib-cloth {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(-45deg, rgba(0,0,0,0.05) 0 1px, transparent 1px 3px);
+}
+
 @layer base {
   * {
     @apply border-border;
