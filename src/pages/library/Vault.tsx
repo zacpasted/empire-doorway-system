@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { Monogram } from "@/components/library/Monogram";
 import { MagicLinkForm } from "@/components/library/MagicLinkForm";
@@ -18,6 +17,10 @@ const Vault = () => {
   const [rotVisible, setRotVisible] = useState(true);
 
   useEffect(() => {
+    document.title = "The PASTED Library — A vault of work, given freely";
+  }, []);
+
+  useEffect(() => {
     if (!loading && session) navigate("/library", { replace: true });
   }, [loading, session, navigate]);
 
@@ -34,14 +37,6 @@ const Vault = () => {
 
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
-      <Helmet>
-        <title>The PASTED Library — A vault of work, given freely</title>
-        <meta
-          name="description"
-          content="Frameworks, scripts, decks, playbooks. The same instruments we use inside PASTED, placed on a shelf and made open. Always free."
-        />
-      </Helmet>
-
       {/* Hero */}
       <section className="relative w-full h-[68vh] min-h-[460px] overflow-hidden bg-smoke">
         <div
