@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Monogram } from "@/components/library/Monogram";
+import { useNavigate } from "react-router-dom";
 import { MagicLinkForm } from "@/components/library/MagicLinkForm";
+import { OpenBookFrame } from "@/components/library/OpenBookFrame";
 import { useMember } from "@/hooks/useMember";
+import heroImg from "@/assets/library-hero.jpg";
 
 const ROTATING_MEMBERS = [
   "MEMBER 0001 — DR DREW BALLARD",
   "MEMBER 0002 — DR JON MARASHI",
   "MEMBER 0003 — DR RHONA ESKANDER",
+  "MEMBER 0004 — DR SAM SALEH",
 ];
 
 const Vault = () => {
@@ -37,45 +39,40 @@ const Vault = () => {
 
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
-      {/* Hero */}
-      <section className="relative w-full h-[68vh] min-h-[460px] overflow-hidden bg-smoke">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 30% 60%, rgba(201,169,110,0.18) 0%, transparent 55%), linear-gradient(180deg, #1F1A17 0%, #0A0A0A 100%)",
-          }}
+      {/* Hero — antique bookshelf scene with open-book die-cut frame */}
+      <section className="relative w-full overflow-hidden" style={{ minHeight: "min(820px, 92vh)" }}>
+        <img
+          src={heroImg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          fetchPriority="high"
         />
-        {/* keyhole illusion */}
+        {/* warm vignette */}
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full opacity-40"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(201,169,110,0.35) 0%, rgba(122,31,31,0.1) 35%, transparent 70%)",
-          }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ boxShadow: "inset 0 0 360px 80px rgba(0,0,0,0.75)" }}
         />
-        <div className="absolute inset-0 lib-grain" />
-        <div className="absolute inset-0 max-w-[1240px] mx-auto px-6 md:px-12 flex flex-col justify-between py-8 md:py-12">
-          <Link to="/" className="inline-flex">
-            <Monogram size={44} variant="gold-on-charcoal" />
-          </Link>
-          <div className="max-w-xl">
-            <h1 className="lib-display text-bone text-5xl md:text-7xl">
-              The PASTED Library.
-            </h1>
-            <p className="lib-editorial text-bone/85 text-2xl md:text-3xl mt-3">
-              A vault of work, given freely.
-            </p>
-          </div>
+        <div className="absolute inset-0 lib-grain pointer-events-none" />
+
+        <div className="relative max-w-[1240px] mx-auto px-6 py-14 md:py-20 min-h-[inherit] flex items-center justify-center" style={{ minHeight: "min(820px, 92vh)" }}>
+          <OpenBookFrame className="w-[260px] md:w-[380px]">
+            <div className="lib-display text-lib-charcoal text-xl md:text-2xl leading-tight">
+              The PASTED Library
+            </div>
+            <div className="my-3 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
+            <div className="lib-editorial text-lib-charcoal text-lg md:text-2xl">
+              A vault of work,<br />given freely.
+            </div>
+          </OpenBookFrame>
         </div>
       </section>
 
       {/* Body */}
       <section className="max-w-[720px] mx-auto px-6 py-20 md:py-28 text-center">
-        <p className="lib-body text-lib-charcoal/85">
+        <p className="lib-body text-lib-charcoal/85" style={{ maxWidth: 640, margin: "0 auto" }}>
           Frameworks. Scripts. Decks. Playbooks. The same instruments we use
-          inside PASTED, placed on a shelf and made open. Claim a Card. Check
-          out what is useful. The Library is always free.
+          inside PASTED, placed on a shelf and made open. Claim a Card. Walk the
+          shelves. Take what is useful.
         </p>
 
         <div className="mt-14">
