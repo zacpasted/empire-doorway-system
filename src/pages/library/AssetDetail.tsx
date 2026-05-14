@@ -23,8 +23,7 @@ const pad3 = (n: number) => n.toString().padStart(3, "0");
 
 const AssetDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { session, member, loading } = useMember();
-  const navigate = useNavigate();
+  const { member } = useMember();
   const [asset, setAsset] = useState<Asset | null>(null);
   const [notFound, setNotFound] = useState(false);
 
