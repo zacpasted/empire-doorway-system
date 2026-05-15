@@ -541,8 +541,8 @@ const SceneRequest = () => {
 
   return (
     <section id="request" className="relative w-full overflow-hidden" style={{ background: WALNUT_DEEP }}>
-      <img src={librarianDeskImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.32 }} loading="lazy" />
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.7), rgba(20,16,12,0.92))" }} />
+      <img src={courierImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.28, objectPosition: "center 30%" }} loading="lazy" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.78), rgba(20,16,12,0.94))" }} />
       <Sconce x="15%" y="20%" size={260} opacity={0.4} />
       <Sconce x="85%" y="20%" size={260} opacity={0.4} />
 
