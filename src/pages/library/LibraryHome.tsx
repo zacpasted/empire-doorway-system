@@ -1,14 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ReadingPanel, type ReadingContent } from "@/components/library/ReadingPanel";
 import { BOOKS, getReadingFor } from "@/data/books";
 import corridorImg from "@/assets/library-v8-corridor.jpg";
 import plaqueImg from "@/assets/library-v8-plaque.jpg";
-import doorImg from "@/assets/library-v8-door.jpg";
-import shelfWallImg from "@/assets/library-v8-shelfwall.jpg";
-import volumeImg from "@/assets/library-v8-volume.jpg";
 import deskNightImg from "@/assets/library-v8-desk-night.jpg";
-import chamberImg from "@/assets/library-v8-chamber.jpg";
 import librarianDeskImg from "@/assets/library-v8-librarian-desk.jpg";
+import shelfWallImg from "@/assets/library-v8-shelfwall.jpg";
 import keyholeImg from "@/assets/library-v9-keyhole.png";
 import courtyardImg from "@/assets/library-v9-courtyard.webp";
 import aceImg from "@/assets/library-v9-ace.png";
@@ -21,75 +18,55 @@ const WALNUT_DEEP = "#14100C";
 const BRASS = "#B8862B";
 const BRASS_BRIGHT = "#D4A04F";
 const IVORY = "#F4F1EC";
+const BONE = "#E8DFD2";
 const OXBLOOD = "#5C1A1F";
+const OXBLOOD_HI = "#6E1E26";
 const CHARCOAL = "#0A0A0A";
 
-const PLAYFAIR = "'Quaria Display', Georgia, serif";
+const PLAYFAIR = "'Playfair Display', Georgia, serif";
 const DM = "'DM Sans', system-ui, sans-serif";
-const MONO_S: React.CSSProperties = {
-  fontFamily: "'DM Sans', system-ui, sans-serif",
+const MONO: React.CSSProperties = {
+  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
   fontSize: 11,
-  letterSpacing: "0.22em",
+  letterSpacing: "0.18em",
   textTransform: "uppercase",
   fontWeight: 500,
 };
 
 const EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
+const EASE_CARD = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-// === SCENES ===
 const SCENES = [
-  { id: "corridor",   numeral: "I",   label: "The Corridor" },
-  { id: "threshold",  numeral: "II",  label: "The Threshold" },
-  { id: "wings",      numeral: "III", label: "The Wings" },
-  { id: "archive",    numeral: "IV",  label: "The Archive" },
-  { id: "reading",    numeral: "V",   label: "The Reading Room" },
-  { id: "ethos",      numeral: "VI",  label: "On the Library" },
-  { id: "request",    numeral: "VII", label: "Request Access" },
+  { id: "corridor", numeral: "I",   label: "Corridor" },
+  { id: "mark",     numeral: "II",  label: "The Mark" },
+  { id: "wings",    numeral: "III", label: "The Four Wings" },
+  { id: "dispatches", numeral: "IV", label: "Dispatches" },
+  { id: "reading",  numeral: "V",   label: "The Reading Room" },
+  { id: "ethos",    numeral: "VI",  label: "On the Library" },
+  { id: "request",  numeral: "VII", label: "Request Access" },
 ];
 
 const WINGS = [
-  { roman: "I",   name: "NOTES",       title: "Notes",       desc: "Short observations, kept on file." },
-  { roman: "II",  name: "CASES",       title: "Cases",       desc: "Field reports from work in progress." },
-  { roman: "III", name: "PRINCIPLES",  title: "Principles",  desc: "What we will and won't do." },
-  { roman: "IV",  name: "TRANSCRIPTS", title: "Transcripts", desc: "Conversations kept on record." },
+  { roman: "I",   name: "NOTES",       title: "Notes",       desc: "Short observations, kept on file.",   img: librarianDeskImg },
+  { roman: "II",  name: "CASES",       title: "Cases",       desc: "Field reports from work in progress.", img: courierImg },
+  { roman: "III", name: "PRINCIPLES",  title: "Principles",  desc: "What we will and won't do.",           img: pawnImg },
+  { roman: "IV",  name: "TRANSCRIPTS", title: "Transcripts", desc: "Conversations kept on record.",        img: deskNightImg },
 ];
 
-const VOLUMES = BOOKS.slice(0, 12);
-
-const PHASES = [
-  { phase: "Phase I — MMXXIV",  title: "First volumes",          desc: "The methods, written down." },
-  { phase: "Phase II — MMXXV",  title: "Cases on record",        desc: "Field reports, added quarterly." },
-  { phase: "Phase III — MMXXVI", title: "The reading room opens", desc: "Transcripts, live sessions." },
+const DISPATCHES = [
+  { tag: "ON METHOD",    title: "On showing up.",            deck: "Practice over performance. The work is the proof.",                        img: aceImg },
+  { tag: "FIELD REPORT", title: "Inside the room.",          deck: "Notes from a quarter spent rebuilding a clinic from the inside.",          img: courierImg },
+  { tag: "INTERVIEW",    title: "What the librarian keeps.", deck: "A conversation about archives, restraint, and the closed door.",           img: keyholeImg },
+  { tag: "OBSERVATION",  title: "The first read.",           deck: "On the moment a brand stops looking like a brand and starts looking like a house.", img: courtyardImg },
+  { tag: "ON PRINCIPLE", title: "Why we close the door.",    deck: "Membership is a constraint, not a privilege.",                              img: pawnImg },
+  { tag: "DISPATCH",     title: "Letters, sent later.",      deck: "Six pieces of mail held back, then released together.",                     img: deskNightImg },
 ];
 
-// === Walnut wood texture (SVG, very subtle) ===
-const walnutBg = (deep = false): React.CSSProperties => ({
-  background: `
-    radial-gradient(1200px 600px at 50% 0%, rgba(184,134,43,0.06), transparent 60%),
-    linear-gradient(180deg, ${deep ? WALNUT_DEEP : WALNUT} 0%, ${WALNUT_DEEP} 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.012 0.6' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.03  0 0 0 0 0.02  0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23w)' opacity='0.4'/%3E%3C/svg%3E")
-  `,
-  backgroundBlendMode: "normal, normal, multiply",
-});
-
-// === Sconce — small radial brass glow that pulses ===
-const Sconce = ({ x, y, size = 220, opacity = 0.75 }: { x: string; y: string; size?: number; opacity?: number }) => (
-  <div
-    aria-hidden
-    className="absolute pointer-events-none"
-    style={{
-      left: x,
-      top: y,
-      width: size,
-      height: size,
-      transform: "translate(-50%, -50%)",
-      background: `radial-gradient(circle, rgba(232,180,122,${opacity}) 0%, rgba(184,134,43,${opacity * 0.5}) 25%, transparent 65%)`,
-      animation: `v8-sconce-pulse 4s ${EASE} infinite`,
-      mixBlendMode: "screen",
-      filter: "blur(6px)",
-    }}
-  />
-);
+// Random small lean angles, deterministic per index
+const lean = (i: number, range = 1) => {
+  const seq = [-0.8, 0.6, -0.4, 0.9, -0.7, 0.5, -0.5, 0.8];
+  return (seq[i % seq.length] / 1) * range;
+};
 
 // === Scene counter (fixed top-right) ===
 const SceneCounter = ({ active }: { active: number }) => (
@@ -98,10 +75,9 @@ const SceneCounter = ({ active }: { active: number }) => (
       <div
         key={s.id}
         style={{
-          ...MONO_S,
+          ...MONO,
           fontSize: 10,
-          letterSpacing: "0.22em",
-          color: i === active ? IVORY : "rgba(184,134,43,0.4)",
+          color: i === active ? IVORY : "rgba(184,134,43,0.42)",
           transition: `color 600ms ${EASE}`,
           textAlign: "right",
         }}
@@ -109,44 +85,6 @@ const SceneCounter = ({ active }: { active: number }) => (
         {s.numeral} — {s.label}
       </div>
     ))}
-  </div>
-);
-
-// === Brass plaque (small, mounted) ===
-const BrassPlaque = ({ children, width = 280 }: { children: React.ReactNode; width?: number }) => (
-  <div
-    style={{
-      width,
-      padding: "16px 28px",
-      background: `linear-gradient(135deg, ${BRASS_BRIGHT} 0%, ${BRASS} 50%, #8a6420 100%)`,
-      border: "1px solid rgba(0,0,0,0.3)",
-      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.45)",
-      position: "relative",
-    }}
-  >
-    {/* corner screws */}
-    {[
-      { top: 5, left: 6 }, { top: 5, right: 6 }, { bottom: 5, left: 6 }, { bottom: 5, right: 6 },
-    ].map((p, i) => (
-      <span
-        key={i}
-        className="absolute"
-        style={{ ...p, width: 5, height: 5, borderRadius: "50%", background: "radial-gradient(circle at 30% 30%, #d4a04f, #5a3f0e)" }}
-      />
-    ))}
-    <div
-      style={{
-        fontFamily: PLAYFAIR,
-        textAlign: "center",
-        color: "#2a1a08",
-        textShadow: "0 1px 0 rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.4)",
-        letterSpacing: "0.12em",
-        fontSize: 13,
-        textTransform: "uppercase",
-      }}
-    >
-      {children}
-    </div>
   </div>
 );
 
@@ -161,310 +99,304 @@ const Header = ({ scrolled }: { scrolled: boolean }) => (
       transition: `all 600ms ${EASE}`,
     }}
   >
-    <a href="/" style={{ ...MONO_S, color: IVORY, opacity: 0.85 }}>
-      ← Pasted
-    </a>
-    <div style={{ ...MONO_S, color: BRASS_BRIGHT, fontSize: 10 }}>
-      The Pasted Library · Est. MMXXIV
+    <a href="/" style={{ ...MONO, color: IVORY, opacity: 0.85 }}>← Pasted</a>
+    <div className="hidden md:block" style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10 }}>
+      Pasted Society · Vol. III — The Library
     </div>
-    <a
-      href="#request"
-      style={{ ...MONO_S, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}` }}
-    >
+    <a href="#request" style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}` }}>
       Request Access
     </a>
   </header>
+);
+
+// === Pasted P-in-oval mark ===
+const PMark = ({ size = 64, color = IVORY, strokeWidth = 1.2 }: { size?: number; color?: string; strokeWidth?: number }) => (
+  <svg width={size} height={size * 1.28} viewBox="0 0 28 36" aria-label="Pasted">
+    <ellipse cx="14" cy="18" rx="12" ry="16" fill="none" stroke={color} strokeWidth={strokeWidth} />
+    <text x="14" y="24" textAnchor="middle" fontFamily={PLAYFAIR} fontStyle="italic" fontSize="18" fill={color}>P</text>
+  </svg>
 );
 
 // === SCENE 1 — Corridor ===
 const SceneCorridor = () => (
   <section id="corridor" className="relative w-full" style={{ height: "100vh", background: WALNUT_DEEP }}>
     <img
-      src={keyholeImg}
-      alt="A view through a keyhole into a private chamber: a man in a chair, lamp lit, smoke rising."
-      className="absolute inset-0 w-full h-full object-contain md:object-cover"
-      style={{ animation: `v8-kenburns 24s ease-in-out infinite alternate` }}
+      src={corridorImg}
+      alt="A walnut-panelled corridor leading to the Pasted Library."
+      className="absolute inset-0 w-full h-full object-cover"
+      style={{ animation: `v9-kenburns 28s ease-in-out infinite alternate` }}
     />
     <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,8,6,0.55) 0%, rgba(10,8,6,0.05) 45%, rgba(10,8,6,0.85) 100%)" }} />
 
-    {/* Overlay copy — left wall */}
-    <div className="absolute z-10 px-6 md:px-16 max-w-[480px]" style={{ left: "4%", top: "32%" }}>
-      <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 24 }}>
-        Volume Archive · MMXXVI
+    {/* top-left overlay */}
+    <div className="absolute z-10 px-6 md:px-16" style={{ left: "4%", top: "22%", maxWidth: 880 }}>
+      <div style={{ ...MONO, color: BRASS_BRIGHT, marginBottom: 28 }}>
+        Pasted Society / Vol. III — The Library
       </div>
       <h1
         style={{
           fontFamily: PLAYFAIR,
           fontStyle: "italic",
-          fontWeight: 300,
+          fontWeight: 400,
           fontSize: "clamp(56px, 11vw, 140px)",
-          lineHeight: 0.95,
+          lineHeight: 0.92,
           color: IVORY,
           letterSpacing: "-0.02em",
           margin: 0,
         }}
       >
-        Through the<br/>keyhole.
+        What we<br />wrote down.
       </h1>
-      <div style={{ height: 1, width: 60, background: BRASS, opacity: 0.55, margin: "32px 0 24px" }} />
-      <p style={{ fontFamily: DM, fontSize: 16, lineHeight: 1.6, color: "rgba(244,241,236,0.78)", margin: 0 }}>
-        What the team has written down. Kept for the people we work with.
-      </p>
     </div>
 
-    {/* Scroll hint */}
-    <div className="absolute bottom-8 right-8 flex flex-col items-end gap-3 z-10">
-      <div style={{ ...MONO_S, color: "rgba(244,241,236,0.55)" }}>Scroll to enter</div>
+    <div className="absolute bottom-8 right-8 z-10" style={{ ...MONO, color: "rgba(244,241,236,0.5)" }}>
+      ENTER →
+    </div>
+  </section>
+);
+
+// === SCENE 2 — The Mark (oxblood) ===
+const SceneMark = () => (
+  <section
+    id="mark"
+    className="relative w-full flex items-center justify-center"
+    style={{
+      minHeight: "100vh",
+      background: `linear-gradient(135deg, ${OXBLOOD_HI} 0%, ${OXBLOOD} 55%, #3e1014 100%)`,
+    }}
+  >
+    {/* repeating P monogram pattern at low opacity */}
+    <div
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        opacity: 0.08,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='150' viewBox='0 0 120 150'%3E%3Cg fill='none' stroke='%23F4F1EC' stroke-width='1'%3E%3Cellipse cx='60' cy='75' rx='22' ry='30'/%3E%3C/g%3E%3Ctext x='60' y='86' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-style='italic' font-size='34' fill='%23F4F1EC'%3EP%3C/text%3E%3C/svg%3E")`,
+        backgroundSize: "120px 150px",
+      }}
+    />
+    {/* upper-left tungsten light wash */}
+    <div
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background: `radial-gradient(ellipse at 20% 10%, rgba(232,180,122,0.22) 0%, transparent 55%)`,
+      }}
+    />
+
+    <div className="relative text-center px-6 flex flex-col items-center">
+      {/* embossed mark */}
       <div
         style={{
-          width: 1,
-          height: 28,
-          background: `linear-gradient(180deg, ${BRASS_BRIGHT}, transparent)`,
-          animation: "lib-scroll-pulse 2.4s ease-in-out infinite",
+          filter: "drop-shadow(0 2px 0 rgba(0,0,0,0.4)) drop-shadow(0 -1px 0 rgba(255,255,255,0.18))",
+          marginBottom: 56,
         }}
-      />
-    </div>
-  </section>
-);
-
-// === SCENE 2 — Threshold (Plaque) ===
-const SceneThreshold = () => (
-  <section id="threshold" className="relative w-full" style={{ minHeight: "100vh", ...walnutBg(true) }}>
-    <Sconce x="6%" y="20%" size={300} opacity={0.5} />
-    <Sconce x="94%" y="22%" size={260} opacity={0.4} />
-
-    <div className="relative max-w-[1200px] mx-auto px-6 md:px-10 py-32 md:py-40">
-      <div className="grid md:grid-cols-2 gap-16 items-center">
-        <div className="relative">
-          <img
-            src={courtyardImg}
-            alt="Three figures in monogrammed robes outside a stone palace — the house gathered."
-            className="w-full h-auto"
-            style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.6)" }}
-            loading="lazy"
-          />
-        </div>
-        <div>
-          <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 24 }}>II — The Threshold</div>
-          <h2
-            style={{
-              fontFamily: PLAYFAIR,
-              fontStyle: "italic",
-              fontWeight: 300,
-              fontSize: "clamp(36px, 5vw, 56px)",
-              color: IVORY,
-              lineHeight: 1.05,
-              margin: 0,
-            }}
-          >
-            The house,<br/>gathered.
-          </h2>
-          <div style={{ height: 1, width: 48, background: BRASS, opacity: 0.5, margin: "28px 0" }} />
-          <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(244,241,236,0.6)", lineHeight: 1.7, maxWidth: 380, margin: 0 }}>
-            If you are reading this, you have been let in.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-// === SCENE 3 — Wings ===
-const SceneWings = () => (
-  <section id="wings" className="relative w-full overflow-hidden" style={walnutBg()}>
-    <Sconce x="10%" y="15%" size={240} opacity={0.45} />
-    <Sconce x="90%" y="15%" size={240} opacity={0.45} />
-
-    <div className="relative max-w-[1400px] mx-auto px-6 md:px-10 py-28 md:py-40">
-      <div className="flex justify-center mb-16">
-        <BrassPlaque width={360}>The Four Wings</BrassPlaque>
+      >
+        <PMark size={140} color={IVORY} strokeWidth={1.4} />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-        {WINGS.map((w) => (
-          <div key={w.name} className="group cursor-pointer">
-            <div
-              className="relative overflow-hidden"
-              style={{
-                aspectRatio: "3 / 4",
-                background: WALNUT_DEEP,
-                boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-                perspective: "1200px",
-              }}
-            >
-              <img
-                src={doorImg}
-                alt={`Door to the ${w.title} wing.`}
-                className="w-full h-full object-cover"
-                loading="lazy"
-                style={{
-                  transformOrigin: "left center",
-                  transition: `transform 800ms ${EASE}, filter 800ms ${EASE}`,
-                }}
-              />
-              <style>{`
-                .group:hover img[alt="Door to the ${w.title} wing."] {
-                  transform: rotateY(-6deg);
-                  filter: brightness(1.15);
-                }
-              `}</style>
-              {/* Oval brass nameplate overlay */}
-              <div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  width: "55%",
-                  padding: "10px 14px",
-                  borderRadius: "999px",
-                  background: `linear-gradient(135deg, ${BRASS_BRIGHT}, ${BRASS} 60%, #8a6420)`,
-                  border: "1px solid rgba(0,0,0,0.4)",
-                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.6)",
-                  textAlign: "center",
-                  fontFamily: PLAYFAIR,
-                  color: "#2a1a08",
-                  letterSpacing: "0.15em",
-                  fontSize: 11,
-                  textShadow: "0 1px 0 rgba(255,255,255,0.25)",
-                }}
-              >
-                {w.roman}. {w.name}
-              </div>
-            </div>
-            <div className="mt-5">
-              <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 6 }}>{w.roman}</div>
-              <div style={{ fontFamily: PLAYFAIR, fontSize: 22, color: IVORY, marginBottom: 6 }}>{w.title}</div>
-              <div style={{ fontFamily: DM, fontSize: 13, color: "rgba(244,241,236,0.6)", lineHeight: 1.5 }}>{w.desc}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// === SCENE 4 — Archive ===
-const SceneArchive = ({ onOpen }: { onOpen: (b: typeof BOOKS[0]) => void }) => (
-  <section id="archive" className="relative w-full overflow-hidden" style={{ background: WALNUT_DEEP }}>
-    <img src={shelfWallImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.42 }} loading="lazy" />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.85) 0%, rgba(20,16,12,0.55) 50%, rgba(20,16,12,0.95) 100%)" }} />
-    <Sconce x="15%" y="30%" size={300} opacity={0.45} />
-    <Sconce x="85%" y="60%" size={300} opacity={0.4} />
-
-    <div className="relative max-w-[1500px] mx-auto px-6 md:px-10 py-28 md:py-40">
-      <div className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <BrassPlaque width={380}>The Archive — Volumes in Rotation</BrassPlaque>
-        <div style={{ ...MONO_S, color: BRASS_BRIGHT, opacity: 0.7 }}>
-          Drag or arrow keys · {VOLUMES.length} volumes currently open
-        </div>
-      </div>
-
-      <div className="lib-shelf-scroll flex gap-6 md:gap-8 overflow-x-auto pb-8 -mx-6 md:-mx-10 px-6 md:px-10">
-        {VOLUMES.map((b) => (
-          <button
-            key={b.id}
-            onClick={() => onOpen(b)}
-            className="group relative flex-shrink-0 text-left"
-            style={{ width: "min(78vw, 280px)" }}
-          >
-            <div
-              className="relative overflow-hidden"
-              style={{
-                aspectRatio: "2 / 3",
-                background: WALNUT_DEEP,
-                boxShadow: "0 18px 50px rgba(0,0,0,0.55)",
-                transition: `transform 900ms ${EASE}, box-shadow 900ms ${EASE}`,
-              }}
-            >
-              <img
-                src={volumeImg}
-                alt=""
-                aria-hidden
-                className="w-full h-full object-cover"
-                style={{
-                  transition: `transform 900ms ${EASE}, filter 900ms ${EASE}`,
-                  filter: "brightness(0.85) saturate(0.95)",
-                }}
-                loading="lazy"
-              />
-              {/* spine tint per category */}
-              <div
-                className="absolute inset-0 mix-blend-color"
-                style={{
-                  background:
-                    b.category === "NOTES" ? "rgba(20,33,61,0.35)" :
-                    b.category === "CASES" ? "rgba(90,47,24,0.35)" :
-                    b.category === "PRINCIPLES" ? "rgba(58,74,42,0.35)" :
-                    b.category === "TRANSCRIPTS" ? "rgba(74,31,31,0.35)" :
-                    "rgba(0,0,0,0)",
-                }}
-              />
-            </div>
-            <style>{`
-              button.group:hover > div:first-child { transform: translateY(-6px) rotate(-1.2deg); box-shadow: 0 32px 70px rgba(0,0,0,0.7), 0 0 80px rgba(232,180,122,0.18); }
-              button.group:hover img { filter: brightness(1.05) saturate(1.05); }
-            `}</style>
-            <div className="mt-5">
-              <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 6 }}>Vol. {b.vol} · {b.year}</div>
-              <div style={{ fontFamily: PLAYFAIR, fontSize: 19, color: IVORY, lineHeight: 1.2, marginBottom: 6 }}>{b.title}</div>
-              <div style={{ ...MONO_S, color: OXBLOOD, fontSize: 10 }}>{b.category}</div>
-            </div>
-          </button>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// === SCENE 5 — Reading Room (cinematic interlude) ===
-const SceneReadingRoom = () => (
-  <section id="reading" className="relative w-full" style={{ minHeight: "100vh", background: CHARCOAL }}>
-    <img src={aceImg} alt="Ace of spades portrait — the operator at the table." className="absolute inset-0 w-full h-full object-cover opacity-70" loading="lazy" />
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.92) 80%)" }} />
-
-    <div className="relative max-w-[900px] mx-auto px-6 py-32 md:py-44 text-center flex flex-col items-center">
-      <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 28 }}>On the Library</div>
       <h2
         style={{
           fontFamily: PLAYFAIR,
           fontStyle: "italic",
-          fontWeight: 300,
-          fontSize: "clamp(48px, 8vw, 96px)",
+          fontWeight: 400,
+          fontSize: "clamp(36px, 5.6vw, 56px)",
           color: IVORY,
-          lineHeight: 1.0,
+          margin: 0,
+          letterSpacing: "-0.01em",
+        }}
+      >
+        The Pasted Library.
+      </h2>
+      <p style={{ fontFamily: DM, fontSize: 14, color: "rgba(244,241,236,0.7)", lineHeight: 1.7, maxWidth: 380, margin: "24px auto 0" }}>
+        Volume III in the Society Record. By invitation, kept on record, closed by default.
+      </p>
+    </div>
+  </section>
+);
+
+// === SCENE 3 — Four Wings ===
+const SceneWings = () => (
+  <section id="wings" className="relative w-full" style={{ background: WALNUT_DEEP }}>
+    <img src={shelfWallImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.18 }} loading="lazy" />
+    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${WALNUT_DEEP} 0%, rgba(20,16,12,0.85) 50%, ${WALNUT_DEEP} 100%)` }} />
+
+    <div className="relative max-w-[1400px] mx-auto px-6 md:px-10 py-28 md:py-40 grid md:grid-cols-12 gap-12 md:gap-16">
+      {/* opener 5/12 */}
+      <div className="md:col-span-5 md:sticky md:top-32 md:self-start">
+        <div style={{ ...MONO, color: BRASS_BRIGHT, marginBottom: 24 }}>The Four Wings</div>
+        <h2
+          style={{
+            fontFamily: PLAYFAIR,
+            fontStyle: "italic",
+            fontWeight: 400,
+            fontSize: "clamp(40px, 6vw, 72px)",
+            color: IVORY,
+            lineHeight: 0.95,
+            margin: 0,
+          }}
+        >
+          What the library<br />holds.
+        </h2>
+      </div>
+
+      {/* 7/12 grid */}
+      <div className="md:col-span-7 grid grid-cols-2 gap-5 md:gap-7">
+        {WINGS.map((w, i) => (
+          <a
+            key={w.name}
+            href={`/library?wing=${w.name.toLowerCase()}`}
+            className="group block relative overflow-hidden"
+            style={{
+              aspectRatio: "3 / 4",
+              background: WALNUT_DEEP,
+              boxShadow: "0 24px 60px rgba(0,0,0,0.55)",
+              transform: `rotate(${lean(i)}deg)`,
+              transition: `transform 700ms ${EASE_CARD}`,
+            }}
+          >
+            <img
+              src={w.img}
+              alt={w.title}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ transition: `transform 700ms ${EASE_CARD}, filter 700ms ${EASE_CARD}`, filter: "brightness(0.78)" }}
+            />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(10,8,6,0.85) 100%)" }} />
+            <div className="absolute left-5 right-5 bottom-5">
+              <div style={{ ...MONO, color: "rgba(244,241,236,0.7)", marginBottom: 6 }}>{w.roman}</div>
+              <div style={{ fontFamily: PLAYFAIR, fontStyle: "italic", fontSize: 26, color: IVORY, lineHeight: 1.05, marginBottom: 6 }}>{w.title}</div>
+              <div style={{ fontFamily: DM, fontSize: 13, color: "rgba(244,241,236,0.65)", lineHeight: 1.45 }}>{w.desc}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+    <style>{`
+      #wings a.group:hover { transform: rotate(0deg) !important; }
+      #wings a.group:hover img { transform: scale(1.04); filter: brightness(0.92); }
+    `}</style>
+  </section>
+);
+
+// === SCENE 4 — Dispatches (bone) ===
+const SceneDispatches = () => (
+  <section id="dispatches" className="relative w-full" style={{ background: BONE }}>
+    <div className="relative max-w-[1500px] mx-auto px-6 md:px-10 py-28 md:py-40">
+      <div className="grid md:grid-cols-12 gap-12 md:gap-16 mb-16 md:mb-20">
+        <div className="md:col-span-5">
+          <div style={{ ...MONO, color: OXBLOOD, marginBottom: 24 }}>Dispatches</div>
+          <h2
+            style={{
+              fontFamily: PLAYFAIR,
+              fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: "clamp(40px, 5.5vw, 64px)",
+              color: CHARCOAL,
+              lineHeight: 1.0,
+              margin: 0,
+            }}
+          >
+            Reading.
+          </h2>
+        </div>
+        <div className="md:col-span-6 md:col-start-7 flex md:items-end">
+          <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(10,10,10,0.65)", lineHeight: 1.7, maxWidth: 420, margin: 0 }}>
+            Essays, field notes, conversations. Published when there's something worth saying. Read in any order.
+          </p>
+        </div>
+      </div>
+
+      {/* horizontal carousel */}
+      <div className="lib-shelf-scroll flex gap-6 md:gap-8 overflow-x-auto pb-6 -mx-6 md:-mx-10 px-6 md:px-10" style={{ scrollSnapType: "x mandatory" }}>
+        {DISPATCHES.map((d, i) => (
+          <a
+            key={d.title}
+            href={`/library?dispatch=${i}`}
+            className="group block flex-shrink-0"
+            style={{
+              width: "min(78vw, 320px)",
+              transform: `rotate(${lean(i, 0.5)}deg)`,
+              transition: `transform 700ms ${EASE_CARD}`,
+              scrollSnapAlign: "start",
+            }}
+          >
+            <div className="relative overflow-hidden" style={{ aspectRatio: "3 / 4", background: WALNUT_DEEP, boxShadow: "0 14px 40px rgba(0,0,0,0.18)" }}>
+              <img
+                src={d.img}
+                alt={d.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ transition: `transform 700ms ${EASE_CARD}` }}
+              />
+            </div>
+            <div className="pt-5">
+              <div style={{ ...MONO, color: OXBLOOD, marginBottom: 8 }}>{d.tag}</div>
+              <div style={{ fontFamily: PLAYFAIR, fontStyle: "italic", fontSize: 24, color: CHARCOAL, lineHeight: 1.1, marginBottom: 10 }}>{d.title}</div>
+              <div style={{ fontFamily: DM, fontSize: 13, color: "rgba(10,10,10,0.65)", lineHeight: 1.55, marginBottom: 16 }}>{d.deck}</div>
+              <div style={{ width: 40, height: 1, background: "rgba(10,10,10,0.35)", marginBottom: 14 }} />
+              <div className="dispatch-read inline-block relative" style={{ ...MONO, color: CHARCOAL }}>
+                READ →
+                <span className="absolute left-0 -bottom-1 h-px bg-[var(--ox)]" style={{ ["--ox" as never]: OXBLOOD, width: 0, transition: `width 500ms ${EASE_CARD}` } as React.CSSProperties} />
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div className="mt-10" style={{ ...MONO, color: OXBLOOD }}>
+        Drag / 06 in rotation — Vol. III
+      </div>
+    </div>
+    <style>{`
+      #dispatches a.group:hover { transform: rotate(0deg) !important; }
+      #dispatches a.group:hover img { transform: scale(1.04); }
+      #dispatches a.group:hover .dispatch-read span { width: 100% !important; }
+    `}</style>
+  </section>
+);
+
+// === SCENE 5 — Reading Room (keyhole) ===
+const SceneReadingRoom = () => (
+  <section id="reading" className="relative w-full overflow-hidden" style={{ minHeight: "100vh", background: CHARCOAL }}>
+    <img src={keyholeImg} alt="A view through a keyhole into a private chamber." className="absolute inset-0 w-full h-full object-contain md:object-cover opacity-90" loading="lazy" />
+    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.95) 100%)" }} />
+
+    <div className="relative max-w-[900px] mx-auto px-6 pt-28 md:pt-32 text-center flex flex-col items-center">
+      <div style={{ ...MONO, color: BRASS_BRIGHT, marginBottom: 24 }}>On the Library</div>
+      <h2
+        style={{
+          fontFamily: PLAYFAIR,
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: "clamp(48px, 8vw, 88px)",
+          color: IVORY,
+          lineHeight: 0.98,
           margin: 0,
           letterSpacing: "-0.02em",
         }}
       >
-        Read by<br />those who built it.
+        Read by those<br />who built it.
       </h2>
-      <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(244,241,236,0.7)", lineHeight: 1.7, maxWidth: 400, margin: "32px 0" }}>
+    </div>
+
+    <div className="absolute left-1/2 -translate-x-1/2 bottom-12 md:bottom-16 z-10 flex flex-col items-center px-6">
+      <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(244,241,236,0.7)", lineHeight: 1.7, maxWidth: 380, margin: 0, textAlign: "center" }}>
         A short film. Twelve minutes inside the room.
       </p>
-
-      {/* Play button */}
+      <div style={{ height: 24 }} />
       <button
-        className="relative group"
         aria-label="Play short film"
+        className="relative group"
         style={{
-          width: 72,
-          height: 72,
-          borderRadius: "50%",
-          border: `1px solid ${IVORY}`,
-          background: "transparent",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: 56, height: 56, borderRadius: "50%",
+          border: `1px solid ${IVORY}`, background: "transparent",
+          display: "flex", alignItems: "center", justifyContent: "center",
           transition: `background 400ms ${EASE}, border-color 400ms ${EASE}`,
         }}
       >
-        <span
-          aria-hidden
-          className="absolute inset-0 rounded-full pointer-events-none"
-          style={{
-            border: `1px solid ${BRASS_BRIGHT}`,
-            animation: "v8-play-ring 1.8s ease-out infinite",
-          }}
-        />
-        <svg width="20" height="22" viewBox="0 0 20 22" fill="none">
+        <span aria-hidden className="absolute inset-0 rounded-full pointer-events-none" style={{ border: `1px solid ${OXBLOOD_HI}`, animation: "v9-play-ring 1.6s ease-out infinite" }} />
+        <svg width="16" height="18" viewBox="0 0 20 22" fill="none">
           <path d="M2 2 L18 11 L2 20 Z" fill={IVORY} />
         </svg>
         <style>{`button[aria-label="Play short film"]:hover { background: ${OXBLOOD}; border-color: ${OXBLOOD}; }`}</style>
@@ -473,62 +405,52 @@ const SceneReadingRoom = () => (
   </section>
 );
 
-// === SCENE 6 — Ethos / On the Library ===
+// === SCENE 6 — Ethos ===
 const SceneEthos = () => (
-  <section id="ethos" className="relative w-full overflow-hidden" style={walnutBg()}>
-    <img src={pawnImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.38, objectPosition: "center" }} loading="lazy" />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.85), rgba(20,16,12,0.95))" }} />
-    <Sconce x="20%" y="40%" size={280} opacity={0.4} />
-
-    <div className="relative max-w-[1400px] mx-auto px-6 md:px-10 py-28 md:py-40 grid md:grid-cols-12 gap-10 md:gap-20">
+  <section id="ethos" className="relative w-full" style={{ background: WALNUT_DEEP }}>
+    <div className="relative max-w-[1400px] mx-auto px-6 md:px-10 py-28 md:py-40 grid md:grid-cols-12 gap-12 md:gap-16 items-center">
       {/* LEFT 5/12 */}
       <div className="md:col-span-5">
-        <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 28 }}>VI — On the Library</div>
+        <div style={{ ...MONO, color: BRASS_BRIGHT, marginBottom: 24 }}>VI — On the Library</div>
         <h2
           style={{
             fontFamily: PLAYFAIR,
-            fontWeight: 300,
-            fontSize: "clamp(36px, 5vw, 56px)",
+            fontStyle: "italic",
+            fontWeight: 400,
+            fontSize: "clamp(40px, 5vw, 56px)",
             color: IVORY,
-            lineHeight: 1.05,
+            lineHeight: 1.0,
             margin: 0,
           }}
         >
-          Not a content hub.<br />
-          <span style={{ fontStyle: "italic", color: "#c47a7e" }}>A record.</span>
+          Not a<br />content hub.
         </h2>
-        <div className="mt-10 space-y-5" style={{ fontFamily: DM, fontSize: 16, lineHeight: 1.75, color: "rgba(244,241,236,0.78)" }}>
+        <div style={{ height: 32 }} />
+        <div
+          style={{
+            fontFamily: PLAYFAIR,
+            fontStyle: "italic",
+            fontWeight: 400,
+            fontSize: "clamp(28px, 3.4vw, 36px)",
+            color: "#c47a7e",
+            lineHeight: 1.0,
+          }}
+        >
+          A record.
+        </div>
+        <div className="mt-8 space-y-5" style={{ fontFamily: DM, fontSize: 16, lineHeight: 1.7, color: "rgba(244,241,236,0.75)" }}>
           <p>The library is closed by default.</p>
-          <p>Inside, you'll find what we've written down for our partners — methods we deploy, principles we defend, conversations we keep on record.</p>
-          <p>It is not designed to be discovered. It is designed to be useful to those who already know why they are here.</p>
+          <p>Inside, you'll find what we have written down for our partners — methods we deploy, principles we defend, conversations kept on record.</p>
+          <p>Not designed to be discovered. Designed to be useful to those who already know why they are here.</p>
         </div>
       </div>
 
-      {/* RIGHT 6/12 — phase tiles */}
-      <div className="md:col-span-6 md:col-start-7 space-y-6">
-        {PHASES.map((p, i) => (
-          <div
-            key={i}
-            className="group relative overflow-hidden"
-            style={{
-              minHeight: 140,
-              padding: 28,
-              border: `1px solid rgba(184,134,43,0.18)`,
-              background: `linear-gradient(90deg, rgba(20,16,12,0.92), rgba(58,36,24,0.6))`,
-              transition: `border-color 600ms ${EASE}, transform 600ms ${EASE}`,
-            }}
-          >
-            <img src={shelfWallImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.18 }} loading="lazy" />
-            <div className="relative">
-              <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 12 }}>{p.phase}</div>
-              <div style={{ fontFamily: PLAYFAIR, fontSize: 22, color: IVORY, marginBottom: 6 }}>{p.title}</div>
-              <div style={{ fontFamily: DM, fontSize: 13, color: "rgba(244,241,236,0.65)" }}>{p.desc}</div>
-            </div>
-            <style>{`
-              .group:hover { border-color: rgba(184,134,43,0.45) !important; transform: translateY(-3px); }
-            `}</style>
-          </div>
-        ))}
+      {/* RIGHT 6/12 — courtyard photograph */}
+      <div className="md:col-span-6 md:col-start-7">
+        <div className="relative overflow-hidden" style={{ aspectRatio: "4 / 5", boxShadow: "0 30px 80px rgba(0,0,0,0.6)" }}>
+          <img src={courtyardImg} alt="Three robed members in a stone courtyard." loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: "rgba(10,8,6,0.10)" }} />
+        </div>
       </div>
     </div>
   </section>
@@ -541,109 +463,102 @@ const SceneRequest = () => {
 
   return (
     <section id="request" className="relative w-full overflow-hidden" style={{ background: WALNUT_DEEP }}>
-      <img src={courierImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.28, objectPosition: "center 30%" }} loading="lazy" />
+      <img src={librarianDeskImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.30 }} loading="lazy" />
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.78), rgba(20,16,12,0.94))" }} />
-      <Sconce x="15%" y="20%" size={260} opacity={0.4} />
-      <Sconce x="85%" y="20%" size={260} opacity={0.4} />
 
       <div className="relative max-w-[1100px] mx-auto px-6 md:px-10 py-28 md:py-40">
         <div
           className="relative mx-auto"
           style={{
-            background: IVORY,
-            padding: "64px 48px",
+            background: BONE,
+            padding: "56px 40px",
             border: `1px solid ${BRASS}`,
             boxShadow: "0 40px 100px rgba(0,0,0,0.55)",
           }}
         >
-          {/* P-in-oval seal */}
+          {/* librarian's seal */}
           <div className="absolute" style={{ top: 18, right: 18 }}>
-            <svg width="28" height="36" viewBox="0 0 28 36">
-              <ellipse cx="14" cy="18" rx="12" ry="16" fill="none" stroke={OXBLOOD} strokeWidth="1.2" />
-              <text x="14" y="23" textAnchor="middle" style={{ fontFamily: PLAYFAIR }} fontSize="16" fill={OXBLOOD}>P</text>
-            </svg>
+            <PMark size={24} color={OXBLOOD} strokeWidth={1.2} />
           </div>
 
           <div className="grid md:grid-cols-12 gap-10 md:gap-16">
-            <div className="md:col-span-6">
-              <div style={{ ...MONO_S, color: OXBLOOD, marginBottom: 24 }}>Request Access</div>
+            <div className="md:col-span-7">
+              <div style={{ ...MONO, color: OXBLOOD, marginBottom: 22 }}>Request Access</div>
               <h2
                 style={{
                   fontFamily: PLAYFAIR,
-                  fontWeight: 300,
-                  fontSize: "clamp(36px, 5vw, 56px)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  fontSize: "clamp(40px, 5.4vw, 64px)",
                   color: CHARCOAL,
-                  lineHeight: 1.05,
+                  lineHeight: 1.0,
                   margin: 0,
                 }}
               >
-                Want a key?<br />
-                <span style={{ fontStyle: "italic" }}>Leave a note.</span>
+                Want a key?
               </h2>
+              <div
+                style={{
+                  fontFamily: PLAYFAIR,
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  fontSize: "clamp(28px, 3.4vw, 40px)",
+                  color: OXBLOOD,
+                  lineHeight: 1.0,
+                  marginTop: 14,
+                }}
+              >
+                Leave a note.
+              </div>
               <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(10,10,10,0.7)", lineHeight: 1.7, maxWidth: 380, marginTop: 28 }}>
-                Access is by invitation. If we don't know you yet, write to us. We read everything that comes in.
+                Access is by invitation. If we don't know you yet, write to us. Everything is read.
               </p>
             </div>
 
-            <div className="md:col-span-6">
+            <div className="md:col-span-5">
               {sent ? (
                 <div style={{ fontFamily: PLAYFAIR, fontStyle: "italic", fontSize: 28, color: CHARCOAL }}>
                   Received. We'll write back.
                 </div>
               ) : (
-                <form
-                  onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-                  className="space-y-8"
-                >
+                <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-7">
                   {[
                     { k: "name", label: "Your name", type: "text" },
                     { k: "email", label: "Your email", type: "email" },
                   ].map((f) => (
                     <div key={f.k}>
-                      <div style={{ ...MONO_S, color: OXBLOOD, marginBottom: 8 }}>{f.label}</div>
+                      <div style={{ ...MONO, color: OXBLOOD, marginBottom: 8 }}>{f.label}</div>
                       <input
                         required
                         type={f.type}
-                        value={(form as any)[f.k]}
+                        value={(form as Record<string, string>)[f.k]}
                         onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
                         className="w-full bg-transparent outline-none"
-                        style={{
-                          fontFamily: DM,
-                          fontSize: 16,
-                          color: CHARCOAL,
-                          paddingBottom: 8,
-                          borderBottom: "1px solid rgba(10,10,10,0.18)",
-                        }}
+                        style={{ fontFamily: DM, fontSize: 16, color: CHARCOAL, paddingBottom: 8, borderBottom: "1px solid rgba(10,10,10,0.18)" }}
                       />
                     </div>
                   ))}
                   <div>
-                    <div style={{ ...MONO_S, color: OXBLOOD, marginBottom: 8 }}>Why are you here?</div>
+                    <div style={{ ...MONO, color: OXBLOOD, marginBottom: 8 }}>Why are you here?</div>
                     <textarea
                       required
                       rows={3}
                       value={form.reason}
                       onChange={(e) => setForm({ ...form, reason: e.target.value })}
                       className="w-full bg-transparent outline-none resize-none"
-                      style={{
-                        fontFamily: DM,
-                        fontSize: 16,
-                        color: CHARCOAL,
-                        paddingBottom: 8,
-                        borderBottom: "1px solid rgba(10,10,10,0.18)",
-                      }}
+                      style={{ fontFamily: DM, fontSize: 16, color: CHARCOAL, paddingBottom: 8, borderBottom: "1px solid rgba(10,10,10,0.18)" }}
                     />
                   </div>
                   <button
                     type="submit"
                     className="group relative"
                     style={{
-                      ...MONO_S,
+                      ...MONO,
                       color: IVORY,
                       background: OXBLOOD,
                       padding: "18px 36px",
                       border: "1px solid transparent",
-                      transition: `border-color 300ms ${EASE}, padding 300ms ${EASE}`,
+                      transition: `border-color 300ms ${EASE}`,
                     }}
                   >
                     <span style={{ display: "inline-block", transition: `transform 300ms ${EASE}` }}>SEND →</span>
@@ -662,34 +577,33 @@ const SceneRequest = () => {
   );
 };
 
-// === SCENE 8 — Footer (herringbone) ===
+// === SCENE 8 — Footer ===
 const SceneFooter = () => (
-  <footer className="relative w-full" style={{ ...walnutBg(true), borderTop: `1px solid rgba(184,134,43,0.25)` }}>
-    {/* Herringbone subtle */}
+  <footer className="relative w-full" style={{ background: WALNUT_DEEP, borderTop: `1px solid rgba(184,134,43,0.25)` }}>
     <div
       aria-hidden
       className="absolute inset-0 pointer-events-none"
       style={{
-        opacity: 0.12,
+        opacity: 0.10,
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23B8862B' stroke-width='0.5'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40 Z'/%3E%3Cpath d='M0 0 L20 20 L0 40'/%3E%3Cpath d='M40 0 L20 20 L40 40'/%3E%3C/g%3E%3C/svg%3E")`,
       }}
     />
     <div className="relative max-w-[1400px] mx-auto px-6 md:px-10 py-16">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center">
-        <div style={{ ...MONO_S, color: IVORY }}>Pasted Library<br /><span style={{ opacity: 0.5 }}>Est. MMXXIV</span></div>
-        <div className="hidden md:flex justify-center">
-          <svg width="40" height="50" viewBox="0 0 28 36">
-            <ellipse cx="14" cy="18" rx="12" ry="16" fill="none" stroke={BRASS_BRIGHT} strokeWidth="1.2" />
-            <text x="14" y="24" textAnchor="middle" style={{ fontFamily: PLAYFAIR }} fontSize="18" fill={BRASS_BRIGHT}>P</text>
-          </svg>
+        <div style={{ ...MONO, color: IVORY }}>
+          Pasted Society / Est. MMXXIV<br />
+          <span style={{ opacity: 0.5 }}>Vol. III — Library</span>
         </div>
-        <div className="text-right space-y-1.5" style={{ ...MONO_S, color: IVORY }}>
+        <div className="hidden md:flex justify-center">
+          <PMark size={36} color={BRASS_BRIGHT} />
+        </div>
+        <div className="text-right space-y-1.5" style={{ ...MONO, color: IVORY }}>
           {["Partnership", "Studio", "Library", "Experiences"].map((l) => (
             <div key={l} style={{ opacity: 0.75 }}>{l}</div>
           ))}
         </div>
       </div>
-      <div className="mt-12 pt-6" style={{ borderTop: "1px solid rgba(184,134,43,0.15)", ...MONO_S, color: "rgba(244,241,236,0.35)", fontSize: 9, textAlign: "center" }}>
+      <div className="mt-12 pt-6 text-center" style={{ borderTop: "1px solid rgba(184,134,43,0.15)", ...MONO, color: "rgba(244,241,236,0.35)", fontSize: 9 }}>
         © Pasted MMXXVI. By invitation.
       </div>
     </div>
@@ -705,7 +619,6 @@ const LibraryHome = () => {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > window.innerHeight * 0.6);
-      // Determine active scene by position
       const els = SCENES.map((s) => document.getElementById(s.id));
       const mid = window.scrollY + window.innerHeight * 0.4;
       let idx = 0;
@@ -717,10 +630,8 @@ const LibraryHome = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const openReading = (b: typeof BOOKS[0]) => {
-    const content = getReadingFor(b.id);
-    if (content) setReading(content);
-  };
+  // keep BOOKS / reading panel wired up for future use even if not surfaced on landing
+  void plaqueImg; void BOOKS; void getReadingFor;
 
   return (
     <div style={{ background: WALNUT_DEEP, color: IVORY, minHeight: "100vh" }}>
@@ -728,9 +639,9 @@ const LibraryHome = () => {
       <SceneCounter active={activeScene} />
 
       <SceneCorridor />
-      <SceneThreshold />
+      <SceneMark />
       <SceneWings />
-      <SceneArchive onOpen={openReading} />
+      <SceneDispatches />
       <SceneReadingRoom />
       <SceneEthos />
       <SceneRequest />
@@ -739,15 +650,11 @@ const LibraryHome = () => {
       <ReadingPanel content={reading} onClose={() => setReading(null)} />
 
       <style>{`
-        @keyframes v8-sconce-pulse {
-          0%, 100% { opacity: 0.85; transform: translate(-50%, -50%) scale(0.96); }
-          50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.04); }
-        }
-        @keyframes v8-kenburns {
+        @keyframes v9-kenburns {
           0%   { transform: scale(1.06); }
           100% { transform: scale(1.00); }
         }
-        @keyframes v8-play-ring {
+        @keyframes v9-play-ring {
           0%   { transform: scale(1);   opacity: 0.9; }
           100% { transform: scale(1.4); opacity: 0;   }
         }
