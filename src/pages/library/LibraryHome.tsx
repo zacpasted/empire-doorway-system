@@ -9,6 +9,11 @@ import volumeImg from "@/assets/library-v8-volume.jpg";
 import deskNightImg from "@/assets/library-v8-desk-night.jpg";
 import chamberImg from "@/assets/library-v8-chamber.jpg";
 import librarianDeskImg from "@/assets/library-v8-librarian-desk.jpg";
+import keyholeImg from "@/assets/library-v9-keyhole.png";
+import courtyardImg from "@/assets/library-v9-courtyard.webp";
+import aceImg from "@/assets/library-v9-ace.png";
+import pawnImg from "@/assets/library-v9-pawn.webp";
+import courierImg from "@/assets/library-v9-courier.png";
 
 // === PALETTE ===
 const WALNUT = "#3A2418";
@@ -175,12 +180,12 @@ const Header = ({ scrolled }: { scrolled: boolean }) => (
 const SceneCorridor = () => (
   <section id="corridor" className="relative w-full" style={{ height: "100vh", background: WALNUT_DEEP }}>
     <img
-      src={corridorImg}
-      alt="A wood-panelled corridor leading to the Pasted Library."
-      className="absolute inset-0 w-full h-full object-cover"
+      src={keyholeImg}
+      alt="A view through a keyhole into a private chamber: a man in a chair, lamp lit, smoke rising."
+      className="absolute inset-0 w-full h-full object-contain md:object-cover"
       style={{ animation: `v8-kenburns 24s ease-in-out infinite alternate` }}
     />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.55) 0%, rgba(20,16,12,0.15) 40%, rgba(20,16,12,0.7) 100%)" }} />
+    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,8,6,0.55) 0%, rgba(10,8,6,0.05) 45%, rgba(10,8,6,0.85) 100%)" }} />
 
     {/* Overlay copy — left wall */}
     <div className="absolute z-10 px-6 md:px-16 max-w-[480px]" style={{ left: "4%", top: "32%" }}>
@@ -199,7 +204,7 @@ const SceneCorridor = () => (
           margin: 0,
         }}
       >
-        Come in.
+        Through the<br/>keyhole.
       </h1>
       <div style={{ height: 1, width: 60, background: BRASS, opacity: 0.55, margin: "32px 0 24px" }} />
       <p style={{ fontFamily: DM, fontSize: 16, lineHeight: 1.6, color: "rgba(244,241,236,0.78)", margin: 0 }}>
@@ -232,8 +237,8 @@ const SceneThreshold = () => (
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <img
-            src={plaqueImg}
-            alt="An engraved brass plaque on a walnut door reads The Pasted Library."
+            src={courtyardImg}
+            alt="Three figures in monogrammed robes outside a stone palace — the house gathered."
             className="w-full h-auto"
             style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.6)" }}
             loading="lazy"
@@ -252,7 +257,7 @@ const SceneThreshold = () => (
               margin: 0,
             }}
           >
-            By invitation.
+            The house,<br/>gathered.
           </h2>
           <div style={{ height: 1, width: 48, background: BRASS, opacity: 0.5, margin: "28px 0" }} />
           <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(244,241,236,0.6)", lineHeight: 1.7, maxWidth: 380, margin: 0 }}>
@@ -412,8 +417,8 @@ const SceneArchive = ({ onOpen }: { onOpen: (b: typeof BOOKS[0]) => void }) => (
 // === SCENE 5 — Reading Room (cinematic interlude) ===
 const SceneReadingRoom = () => (
   <section id="reading" className="relative w-full" style={{ minHeight: "100vh", background: CHARCOAL }}>
-    <img src={deskNightImg} alt="A reading desk lit by a single brass lamp." className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 80%)" }} />
+    <img src={aceImg} alt="Ace of spades portrait — the operator at the table." className="absolute inset-0 w-full h-full object-cover opacity-70" loading="lazy" />
+    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.92) 80%)" }} />
 
     <div className="relative max-w-[900px] mx-auto px-6 py-32 md:py-44 text-center flex flex-col items-center">
       <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 28 }}>On the Library</div>
@@ -471,7 +476,7 @@ const SceneReadingRoom = () => (
 // === SCENE 6 — Ethos / On the Library ===
 const SceneEthos = () => (
   <section id="ethos" className="relative w-full overflow-hidden" style={walnutBg()}>
-    <img src={chamberImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.32 }} loading="lazy" />
+    <img src={pawnImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.38, objectPosition: "center" }} loading="lazy" />
     <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.85), rgba(20,16,12,0.95))" }} />
     <Sconce x="20%" y="40%" size={280} opacity={0.4} />
 
@@ -536,8 +541,8 @@ const SceneRequest = () => {
 
   return (
     <section id="request" className="relative w-full overflow-hidden" style={{ background: WALNUT_DEEP }}>
-      <img src={librarianDeskImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.32 }} loading="lazy" />
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.7), rgba(20,16,12,0.92))" }} />
+      <img src={courierImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.28, objectPosition: "center 30%" }} loading="lazy" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.78), rgba(20,16,12,0.94))" }} />
       <Sconce x="15%" y="20%" size={260} opacity={0.4} />
       <Sconce x="85%" y="20%" size={260} opacity={0.4} />
 
