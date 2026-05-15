@@ -9,6 +9,11 @@ import volumeImg from "@/assets/library-v8-volume.jpg";
 import deskNightImg from "@/assets/library-v8-desk-night.jpg";
 import chamberImg from "@/assets/library-v8-chamber.jpg";
 import librarianDeskImg from "@/assets/library-v8-librarian-desk.jpg";
+import keyholeImg from "@/assets/library-v9-keyhole.png";
+import courtyardImg from "@/assets/library-v9-courtyard.webp";
+import aceImg from "@/assets/library-v9-ace.png";
+import pawnImg from "@/assets/library-v9-pawn.webp";
+import courierImg from "@/assets/library-v9-courier.png";
 
 // === PALETTE ===
 const WALNUT = "#3A2418";
