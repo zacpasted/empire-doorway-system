@@ -237,8 +237,8 @@ const SceneThreshold = () => (
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <img
-            src={plaqueImg}
-            alt="An engraved brass plaque on a walnut door reads The Pasted Library."
+            src={courtyardImg}
+            alt="Three figures in monogrammed robes outside a stone palace — the house gathered."
             className="w-full h-auto"
             style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.6)" }}
             loading="lazy"
@@ -257,7 +257,7 @@ const SceneThreshold = () => (
               margin: 0,
             }}
           >
-            By invitation.
+            The house,<br/>gathered.
           </h2>
           <div style={{ height: 1, width: 48, background: BRASS, opacity: 0.5, margin: "28px 0" }} />
           <p style={{ fontFamily: DM, fontSize: 15, color: "rgba(244,241,236,0.6)", lineHeight: 1.7, maxWidth: 380, margin: 0 }}>
