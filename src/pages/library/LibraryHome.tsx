@@ -30,13 +30,6 @@ const IVORY = "#F4F1EC";
 
 const EASE_CONFIDENT = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-const SPINE_VARIANTS: { key: string; from: string; to: string }[] = [
-  { key: "oxblood", from: "#5C1A1F", to: "#2E0E11" },
-  { key: "forest", from: "#1F3A2E", to: "#0F2017" },
-  { key: "midnight", from: "#1B2A48", deep: undefined as never, to: "#0A1226" } as any,
-  { key: "tan", from: "#8B6F47", to: "#4F3E26" },
-];
-
 const FEATURED: { vol: string; title: string; subtitle: string; spine: number; bookId: string }[] = [
   { vol: "Vol. I",   title: "On Saying Less",         subtitle: "A note on restraint.",          spine: 0, bookId: "L01" },
   { vol: "Vol. II",  title: "The Soft Open",          subtitle: "An opening without an opening.", spine: 1, bookId: "L02" },
