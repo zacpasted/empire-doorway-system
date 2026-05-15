@@ -476,7 +476,7 @@ const SceneReadingRoom = () => (
 // === SCENE 6 — Ethos / On the Library ===
 const SceneEthos = () => (
   <section id="ethos" className="relative w-full overflow-hidden" style={walnutBg()}>
-    <img src={chamberImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.32 }} loading="lazy" />
+    <img src={pawnImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.38, objectPosition: "center" }} loading="lazy" />
     <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.85), rgba(20,16,12,0.95))" }} />
     <Sconce x="20%" y="40%" size={280} opacity={0.4} />
 
