@@ -712,7 +712,7 @@ const LibraryHome = () => {
   }, []);
 
   const openReading = (b: typeof BOOKS[0]) => {
-    const content = getReadingFor(b);
+    const content = getReadingFor(b.id);
     if (content) setReading(content);
   };
 
