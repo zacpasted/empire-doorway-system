@@ -179,98 +179,126 @@ const LibraryHome = () => {
         </div>
       </header>
 
-      {/* 2. HERO */}
-      <section className="relative w-full overflow-hidden" style={{ height: "100vh", minHeight: 640, background: CHARCOAL }}>
+      {/* 2. HERO — full-bleed photo, massive headline, 3 caption columns at foot, page-number stack on the right */}
+      <section className="relative w-full overflow-hidden" style={{ background: CHARCOAL, color: IVORY, minHeight: "100vh" }}>
         <div className="absolute inset-0 lib-kenburns">
-          <img src={heroCover} alt="The Pasted Library — embossed cream cartouche on antique bookshelves" className="w-full h-full object-cover" />
+          <img src={heroCover} alt="The Pasted Library — antique reading room" className="w-full h-full object-cover" />
         </div>
-        <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.22)" }} />
-        <div aria-hidden className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse at top left, rgba(10,10,10,0.22) 0%, transparent 32%), radial-gradient(ellipse at bottom right, rgba(10,10,10,0.28) 0%, transparent 36%)",
-        }} />
-        <div className="absolute" style={{ left: 80, bottom: 80 }}>
-          <div style={{ ...MONO, color: "rgba(244,241,236,0.7)" }}>VOLUME ARCHIVE / 2026</div>
-          <div style={{ width: 40, height: 1, background: OXBLOOD, marginTop: 12 }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 35%, rgba(10,10,10,0.78) 100%)" }} />
+
+        {/* Massive title — sits left, mid-hero */}
+        <div className="relative max-w-[1400px] mx-auto px-8" style={{ paddingTop: 180 }}>
+          <h1 style={{
+            fontFamily: PLAYFAIR, fontWeight: 300, color: IVORY,
+            fontSize: "clamp(64px, 11vw, 168px)", lineHeight: 0.92, letterSpacing: "-0.02em",
+            margin: 0,
+          }}>
+            THE<br />LIBRARY
+          </h1>
+          <div style={{ width: 56, height: 1, background: OXBLOOD, marginTop: 28 }} />
         </div>
-        <div className="absolute" style={{
-          right: 80, bottom: 80, opacity: scrollHintVisible ? 1 : 0,
-          transition: "opacity 1200ms ease", textAlign: "right",
-        }}>
-          <div style={{ ...MONO, color: "rgba(244,241,236,0.5)" }}>SCROLL</div>
-          <div className="lib-scroll-pulse" style={{ width: 1, height: 24, background: "rgba(244,241,236,0.4)", marginTop: 10, marginLeft: "auto" }} />
+
+        {/* Right-side page-number stack */}
+        <div className="hidden md:flex absolute flex-col items-end gap-3" style={{ right: 80, top: "38%" }}>
+          {["01", "02", "03"].map((n, i) => (
+            <div key={n} style={{
+              fontFamily: PLAYFAIR,
+              fontWeight: i === 1 ? 400 : 300,
+              fontSize: i === 1 ? 56 : 14,
+              color: i === 1 ? IVORY : "rgba(244,241,236,0.45)",
+              lineHeight: 1,
+              letterSpacing: "0.04em",
+            }}>{n}</div>
+          ))}
+        </div>
+
+        {/* Bottom caption row — 3 columns, oxblood underline accent on the active one */}
+        <div className="relative max-w-[1400px] mx-auto px-8" style={{ paddingTop: 120, paddingBottom: 64 }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
+            {[
+              { i: 0, body: "What the library holds. Working notes, refusals, principles we keep returning to." },
+              { i: 1, body: "Volumes from inside live engagements. Field reports with the names removed." },
+              { i: 2, body: "Conversations and letters, kept on record. Read by the people who already know." },
+            ].map((c) => (
+              <a key={c.i} href="#featured" className="group block">
+                <p style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: 13, lineHeight: 1.6,
+                  color: "rgba(244,241,236,0.78)",
+                  maxWidth: 320,
+                }}>{c.body}</p>
+                <div className="mt-5 relative inline-block pb-2">
+                  <span style={{ ...MONO, color: IVORY }}>READ MORE →</span>
+                  <span className="absolute left-0 right-0 -bottom-0 h-px" style={{ background: c.i === 0 ? OXBLOOD : "rgba(244,241,236,0.25)" }} />
+                  <span className="absolute left-0 -bottom-0 h-px transition-all duration-500" style={{
+                    width: c.i === 0 ? "100%" : 0, background: OXBLOOD,
+                  }} />
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-16" style={{ height: 1, background: "rgba(244,241,236,0.18)" }} />
         </div>
       </section>
 
-      {/* 3. INTRO TILES */}
-      <section style={{ paddingTop: 120, paddingBottom: 100 }}>
+      {/* 3. FEATURED VOLUMES — bone register, centered eyebrow + 4 image cards (mirrors "POPULAR TOURS") */}
+      <section id="featured" style={{ background: BONE, paddingTop: 140, paddingBottom: 140 }}>
         <div className="max-w-[1400px] mx-auto px-8">
           <div className="text-center">
-            <div style={{ ...MONO, color: OXBLOOD }}>WHAT THE LIBRARY HOLDS</div>
-            <div className="mx-auto" style={{ width: 32, height: 1, background: OXBLOOD, marginTop: 28 }} />
+            <div style={{
+              fontFamily: "'DM Sans', sans-serif", fontStyle: "italic",
+              fontSize: 14, color: "rgba(10,10,10,0.55)",
+            }}>and what we keep returning to</div>
+            <h2 className="mt-4" style={{
+              ...MONO, fontSize: 13, color: CHARCOAL, letterSpacing: "0.36em",
+            }}>FEATURED VOLUMES</h2>
+            <div className="mx-auto mt-6" style={{ width: 28, height: 1, background: OXBLOOD }} />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
-            {TILES.map((t) => (
-              <button key={t.num} className="group text-left" style={{ background: "transparent" }}>
-                <div className="relative overflow-hidden aspect-square">
-                  <img src={t.img} alt="" className="w-full h-full object-cover transition-transform" style={{ transition: `transform 500ms ${EASE_CONFIDENT}` }} />
-                  <div className="absolute inset-0 transition-opacity"
-                    style={{ background: "rgba(10,10,10,0.25)", transition: "opacity 500ms ease" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.4")}
-                  />
-                </div>
-                <div className="pt-5">
-                  <div style={{ ...MONO, color: OXBLOOD }}>{t.num}</div>
-                  <div className="mt-2" style={{ fontFamily: PLAYFAIR, fontWeight: 400, fontSize: 22, color: CHARCOAL }}>{t.title}</div>
-                  <p className="mt-2" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.55, color: "rgba(10,10,10,0.7)" }}>{t.body}</p>
-                  <div className="mt-4 inline-block relative pb-1">
-                    <span style={{ ...MONO, color: CHARCOAL }}>READ →</span>
-                    <span className="absolute left-0 -bottom-0 h-px transition-all duration-500 group-hover:w-full" style={{ width: 0, background: OXBLOOD }} />
-                    <span className="absolute left-0 -bottom-0 h-px" style={{ width: "100%", background: CHARCOAL, opacity: 0.4 }} />
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* 4. FEATURED VOLUMES — charcoal */}
-      <section style={{ background: CHARCOAL, color: IVORY, paddingTop: 140, paddingBottom: 140 }}>
-        <div className="max-w-[1400px] mx-auto px-8">
-          <div className="text-center">
-            <div style={{ ...MONO, color: OXBLOOD_DEEP === OXBLOOD_DEEP ? "#B85059" : OXBLOOD }}>FEATURED VOLUMES</div>
-            <h2 className="mt-5" style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 44, lineHeight: 1.05, letterSpacing: "-0.01em" }}>Recently read.</h2>
-            <h2 style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontStyle: "italic", fontSize: 44, lineHeight: 1.05, letterSpacing: "-0.01em" }}>What we keep returning to.</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mt-20">
-            {FEATURED.map((v) => (
-              <button
-                key={v.bookId}
-                onClick={() => open(v.bookId)}
-                className="group text-left"
-                onMouseEnter={(e) => {
-                  const sp = e.currentTarget.querySelector<HTMLDivElement>("[data-spine]");
-                  if (sp) sp.style.transform = "perspective(800px) rotateY(-3deg)";
-                }}
-                onMouseLeave={(e) => {
-                  const sp = e.currentTarget.querySelector<HTMLDivElement>("[data-spine]");
-                  if (sp) sp.style.transform = "perspective(800px) rotateY(0deg)";
-                }}
-              >
-                <div data-spine>
-                  <Spine variant={v.spine} title={v.title} vol={v.vol} />
-                </div>
-                <div className="pt-5">
-                  <div style={{ ...MONO, color: "#B85059" }}>{v.vol}</div>
-                  <div className="mt-2 relative inline-block pb-1" style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 20 }}>
-                    {v.title}
-                    <span className="absolute left-0 -bottom-0 h-px transition-all duration-600 group-hover:w-full" style={{ width: 0, background: IVORY }} />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-16">
+            {FEATURED.map((v, i) => {
+              const imgs = [tile1, tile2, tile3, tile4];
+              return (
+                <button
+                  key={v.bookId}
+                  onClick={() => open(v.bookId)}
+                  className="group block text-left"
+                >
+                  <div className="relative overflow-hidden" style={{ aspectRatio: "3 / 4" }}>
+                    <img
+                      src={imgs[i % imgs.length]}
+                      alt=""
+                      className="w-full h-full object-cover"
+                      style={{ transition: `transform 700ms ${EASE_CONFIDENT}` }}
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.04)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1.0)")}
+                    />
+                    <div className="absolute inset-0" style={{
+                      background: "linear-gradient(180deg, rgba(10,10,10,0) 50%, rgba(10,10,10,0.55) 100%)",
+                    }} />
+                    <div className="absolute left-4 right-4" style={{ bottom: 14 }}>
+                      <div style={{
+                        fontFamily: PLAYFAIR, fontWeight: 400, fontStyle: "italic",
+                        fontSize: 18, color: IVORY,
+                      }}>VOL № {["I","II","III","IV"][i]}</div>
+                    </div>
                   </div>
-                  <div className="mt-1" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(244,241,236,0.6)" }}>{v.subtitle}</div>
-                </div>
-              </button>
-            ))}
+                  <div className="mt-4 text-center">
+                    <div style={{
+                      fontFamily: PLAYFAIR, fontWeight: 400, fontSize: 17, color: CHARCOAL,
+                    }}>{v.title}</div>
+                    <div className="mt-1" style={{
+                      fontFamily: "'DM Sans', sans-serif", fontStyle: "italic",
+                      fontSize: 12, color: "rgba(10,10,10,0.55)",
+                    }}>{v.subtitle}</div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
+
+          <div className="mx-auto mt-20" style={{ width: 320, maxWidth: "60%", height: 1, background: "rgba(10,10,10,0.12)" }} />
         </div>
       </section>
 
@@ -351,27 +379,69 @@ const LibraryHome = () => {
         </div>
       </section>
 
-      {/* 7. SECONDARY CINEMATIC */}
-      <section className="relative overflow-hidden" style={{ background: CHARCOAL, height: "90vh", minHeight: 560 }}>
+      {/* 7. SECONDARY CINEMATIC — full-bleed photo, big left-aligned title, play button, two video thumbnails bottom-right
+              (mirrors the "TRAVEL AND INSPIRE YOUR LIFE" panel of the reference) */}
+      <section className="relative overflow-hidden" style={{ background: CHARCOAL, minHeight: "100vh" }}>
         <div className="absolute inset-0">
-          <img src={readingRoom} alt="" className="w-full h-full object-cover" style={{ opacity: 0.55 }} />
+          <img src={readingRoom} alt="" className="w-full h-full object-cover" style={{ opacity: 0.45 }} />
         </div>
-        <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.55)" }} />
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-8">
-          <div style={{ ...MONO, color: "#B85059" }}>ON THE LIBRARY</div>
-          <h2 className="mt-6" style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 56, lineHeight: 1.05, color: IVORY, letterSpacing: "-0.01em" }}>What we know,</h2>
-          <h2 style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontStyle: "italic", fontSize: 56, lineHeight: 1.05, color: IVORY, letterSpacing: "-0.01em" }}>written down.</h2>
-          <div className="mt-12 flex items-center gap-5">
-            <button
-              className="flex items-center justify-center rounded-full transition-colors"
-              style={{ width: 48, height: 48, border: `1px solid ${IVORY}`, background: "transparent" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = OXBLOOD; e.currentTarget.style.borderColor = OXBLOOD; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = IVORY; }}
-              aria-label="Play film"
-            >
-              <svg width="12" height="14" viewBox="0 0 12 14" fill={IVORY}><path d="M0 0v14l12-7L0 0z"/></svg>
-            </button>
-            <span style={{ ...MONO, color: "rgba(244,241,236,0.7)" }}>FILM 01 — INSIDE THE LIBRARY</span>
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 50%, rgba(10,10,10,0.85) 100%)",
+        }} />
+
+        <div className="relative max-w-[1400px] mx-auto px-8 grid grid-cols-12 gap-8" style={{ paddingTop: 160, paddingBottom: 80 }}>
+          <div className="col-span-12 md:col-span-7">
+            <h2 style={{
+              fontFamily: PLAYFAIR, fontWeight: 300, color: IVORY,
+              fontSize: "clamp(48px, 7vw, 96px)", lineHeight: 0.96, letterSpacing: "-0.02em",
+              margin: 0,
+            }}>
+              WHAT WE<br />KNOW, <em style={{ fontStyle: "italic" }}>written</em><br /><em style={{ fontStyle: "italic" }}>down.</em>
+            </h2>
+
+            <div className="mt-12 flex items-center gap-5">
+              <button
+                className="flex items-center justify-center rounded-full transition-colors"
+                style={{ width: 64, height: 64, border: `1px solid ${IVORY}`, background: "transparent" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = OXBLOOD; e.currentTarget.style.borderColor = OXBLOOD; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = IVORY; }}
+                aria-label="Play film"
+              >
+                <svg width="14" height="16" viewBox="0 0 12 14" fill={IVORY}><path d="M0 0v14l12-7L0 0z"/></svg>
+              </button>
+              <span style={{ ...MONO, color: "rgba(244,241,236,0.7)" }}>WATCH THE FILM</span>
+            </div>
+
+            <p className="mt-12" style={{
+              fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.65,
+              color: "rgba(244,241,236,0.7)", maxWidth: 380,
+            }}>
+              A short film from inside the room. Three minutes, no narration. The library, the desks, the shelves we walked past on the way to writing this down.
+            </p>
+          </div>
+
+          <div className="col-span-12 md:col-span-5 self-end">
+            <div className="grid grid-cols-2 gap-4 md:gap-5">
+              {[tile2, tile3].map((src, i) => (
+                <button
+                  key={i}
+                  className="group relative overflow-hidden block"
+                  style={{ aspectRatio: "4 / 3" }}
+                  aria-label={`Film clip ${i + 2}`}
+                >
+                  <img src={src} alt="" className="w-full h-full object-cover" style={{ transition: `transform 700ms ${EASE_CONFIDENT}` }} />
+                  <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.30)" }} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, border: `1px solid ${IVORY}`, background: "rgba(10,10,10,0.35)" }}>
+                      <svg width="9" height="11" viewBox="0 0 12 14" fill={IVORY}><path d="M0 0v14l12-7L0 0z"/></svg>
+                    </span>
+                  </div>
+                  <div className="absolute left-3 bottom-3" style={{ ...MONO, fontSize: 9, color: IVORY }}>
+                    FILM 0{i + 2}
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
