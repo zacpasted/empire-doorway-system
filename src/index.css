@@ -222,6 +222,18 @@
 }
 .lib-fade-in { animation: lib-fade-in 400ms ease-out forwards; }
 
+@keyframes lib-kenburns {
+  0%   { transform: scale(1.05); }
+  100% { transform: scale(1.00); }
+}
+.lib-kenburns { animation: lib-kenburns 18s ease-in-out infinite alternate; will-change: transform; }
+
+@keyframes lib-scroll-pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+.lib-scroll-pulse { animation: lib-scroll-pulse 2.4s ease-in-out infinite; }
+
 /* Horizontal shelf scroll: fade right edge as overflow indicator */
 .lib-shelf-scroll {
   scroll-snap-type: x mandatory;

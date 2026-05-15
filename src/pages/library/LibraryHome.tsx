@@ -3,6 +3,7 @@ import { DustMotes } from "@/components/library/DustMotes";
 import { ReadingPanel, type ReadingContent } from "@/components/library/ReadingPanel";
 import { Bookshelf } from "@/components/library/Bookshelf";
 import { BOOKS, FILTERS, getReadingFor, type Book } from "@/data/books";
+import readingRoom from "@/assets/library-reading-room.jpg";
 
 const NAV = [
   { label: "Partnership", href: "#" },
@@ -11,14 +12,28 @@ const NAV = [
   { label: "Experiences", href: "#" },
 ];
 
+const MONO: React.CSSProperties = {
+  fontFamily: "'JetBrains Mono', monospace",
+  fontSize: 11,
+  letterSpacing: "0.18em",
+  textTransform: "uppercase",
+};
+const PLAYFAIR = "'Playfair Display', Georgia, serif";
+
 const LibraryHome = () => {
   const [reading, setReading] = useState<ReadingContent | null>(null);
   const [focusedId, setFocusedId] = useState<string | null>(null);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("ALL");
-  const [hintVisible, setHintVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollHintVisible, setScrollHintVisible] = useState(false);
 
   useEffect(() => { document.title = "The Library — PASTED"; }, []);
-  useEffect(() => { const t = setTimeout(() => setHintVisible(true), 2000); return () => clearTimeout(t); }, []);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  useEffect(() => { const t = setTimeout(() => setScrollHintVisible(true), 3000); return () => clearTimeout(t); }, []);
 
   const openBook = (b: Book) => {
     const content = getReadingFor(b.id);
@@ -30,26 +45,50 @@ const LibraryHome = () => {
     [filter],
   );
 
+  // Derive "recent additions" from live volumes (most recent five with content)
+  const recent = useMemo(
+    () => BOOKS.filter((b) => b.pages).slice(0, 5),
+    [],
+  );
+
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
-      {/* 1. HEADER */}
-      <header className="sticky top-0 z-50 bg-bone">
+      {/* 1. HEADER — transparent over hero, bone on scroll */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          background: scrolled ? "#F4F1EC" : "transparent",
+          borderBottom: scrolled ? "1px solid rgba(10,10,10,0.08)" : "1px solid transparent",
+          transition: "background-color 240ms ease, border-color 240ms ease",
+        }}
+      >
         <div className="max-w-[1400px] mx-auto px-8 h-14 flex items-center justify-between">
-          <a href="/library" className="select-none" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 300, fontSize: 18, letterSpacing: "0.04em" }}>
+          <a
+            href="/library"
+            className="select-none"
+            style={{
+              fontFamily: PLAYFAIR,
+              fontWeight: 300,
+              fontSize: 18,
+              letterSpacing: "0.04em",
+              color: scrolled ? "#0A0A0A" : "#F4F1EC",
+              transition: "color 240ms ease",
+            }}
+          >
             PASTED
           </a>
-          <nav className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             {NAV.map((n) => (
               <a
                 key={n.label}
                 href={n.href}
                 className="relative pb-1"
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: n.active ? "#0A0A0A" : "rgba(10,10,10,0.55)",
+                  ...MONO,
+                  color: scrolled
+                    ? (n.active ? "#0A0A0A" : "rgba(10,10,10,0.55)")
+                    : (n.active ? "#F4F1EC" : "rgba(244,241,236,0.65)"),
+                  transition: "color 240ms ease",
                 }}
               >
                 {n.label}
@@ -58,105 +97,147 @@ const LibraryHome = () => {
             ))}
           </nav>
         </div>
-        <div style={{ height: 1, background: "rgba(10,10,10,0.08)" }} />
       </header>
 
-      {/* 2. HERO — THE READING ROOM */}
-      <section
-        className="relative overflow-hidden"
-        style={{ background: "#0A0A0A", color: "#F4F1EC", height: "100vh", minHeight: 760 }}
-      >
-        {/* The shelf is the centrepiece */}
-        <Bookshelf onOpen={openBook} focusedId={focusedId} onFocusChange={setFocusedId} />
-
-        {/* Drifting dust */}
-        <DustMotes />
-
-        {/* Title overlay — sits above the shelf, top-left, generous margin */}
-        <div className="absolute top-0 left-0 right-0 z-40 pointer-events-none">
-          <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-10 md:pt-14">
-            <div
-              className="lib-fade-in"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.22em", color: "#C9A96E" }}
-            >
-              VOLUME ARCHIVE / 2025
-            </div>
-            <h1
-              className="mt-4 lib-fade-in"
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontWeight: 300,
-                fontSize: "clamp(40px, 5.2vw, 56px)",
-                lineHeight: 1.0,
-                letterSpacing: "-0.02em",
-                color: "#F4F1EC",
-                textShadow: "0 2px 18px rgba(0,0,0,0.6)",
-              }}
-            >
-              The library.
-            </h1>
-            <h2
-              className="mt-1 lib-fade-in"
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontWeight: 300,
-                fontStyle: "italic",
-                fontSize: "clamp(36px, 5vw, 56px)",
-                lineHeight: 1.0,
-                letterSpacing: "-0.02em",
-                color: "rgba(244,241,236,0.88)",
-                textShadow: "0 2px 18px rgba(0,0,0,0.6)",
-              }}
-            >
-              What we know, written down<span style={{ color: "#C9A96E" }}>.</span>
-            </h2>
-          </div>
+      {/* 2. HERO IMAGE — full viewport */}
+      <section className="relative w-full overflow-hidden" style={{ height: "100vh", minHeight: 640, background: "#0A0A0A" }}>
+        <div className="absolute inset-0 lib-kenburns">
+          <img
+            src={readingRoom}
+            alt="An antique reading room — leather-bound volumes, wooden ladder, warm directional light"
+            className="w-full h-full object-cover"
+            style={{ display: "block" }}
+          />
         </div>
-
-        {/* Hint */}
+        {/* Charcoal scrim */}
+        <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.25)" }} />
+        {/* Corner vignette */}
         <div
-          className="absolute left-0 right-0 z-40 text-center pointer-events-none"
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
           style={{
-            bottom: 24,
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 11,
-            letterSpacing: "0.22em",
-            color: "rgba(244,241,236,0.5)",
-            opacity: hintVisible ? 1 : 0,
+            background:
+              "radial-gradient(ellipse at top left, rgba(10,10,10,0.20) 0%, transparent 30%), radial-gradient(ellipse at top right, rgba(10,10,10,0.20) 0%, transparent 30%), radial-gradient(ellipse at bottom left, rgba(10,10,10,0.20) 0%, transparent 30%), radial-gradient(ellipse at bottom right, rgba(10,10,10,0.20) 0%, transparent 30%)",
+          }}
+        />
+        {/* Bottom-left chrome */}
+        <div className="absolute" style={{ left: 80, bottom: 80 }}>
+          <div style={{ ...MONO, color: "#C9A96E" }}>VOLUME ARCHIVE / 2025</div>
+          <div style={{ width: 40, height: 1, background: "#C9A96E", marginTop: 12 }} />
+        </div>
+        {/* Bottom-right scroll hint */}
+        <div
+          className="absolute"
+          style={{
+            right: 80,
+            bottom: 80,
+            opacity: scrollHintVisible ? 1 : 0,
             transition: "opacity 1200ms ease",
-            textShadow: "0 1px 6px rgba(0,0,0,0.6)",
+            textAlign: "right",
           }}
         >
-          DRAG, OR USE ARROW KEYS.
+          <div style={{ ...MONO, color: "rgba(244,241,236,0.5)" }}>SCROLL</div>
+          <div className="lib-scroll-pulse" style={{ width: 1, height: 24, background: "rgba(244,241,236,0.4)", marginTop: 10, marginLeft: "auto" }} />
         </div>
       </section>
 
-      {/* 4. ETHOS */}
-      <section className="bg-bone" style={{ paddingTop: 200, paddingBottom: 160 }}>
+      {/* 3. TITLE BLOCK */}
+      <section className="bg-bone" style={{ paddingTop: 160, paddingBottom: 120 }}>
+        <div className="mx-auto px-8 text-center" style={{ maxWidth: 880 }}>
+          <div style={{ ...MONO, color: "rgba(10,10,10,0.6)" }}>THE LIBRARY</div>
+          <h1
+            className="mt-6"
+            style={{
+              fontFamily: PLAYFAIR,
+              fontWeight: 300,
+              fontSize: "clamp(48px, 7vw, 88px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+              color: "#0A0A0A",
+            }}
+          >
+            What we know,
+          </h1>
+          <h1
+            style={{
+              fontFamily: PLAYFAIR,
+              fontWeight: 300,
+              fontStyle: "italic",
+              fontSize: "clamp(48px, 7vw, 88px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+              color: "#0A0A0A",
+            }}
+          >
+            written down<span style={{ color: "#C9A96E" }}>.</span>
+          </h1>
+          <div className="mx-auto" style={{ width: 60, height: 1, background: "#C9A96E", marginTop: 48 }} />
+          <p
+            className="mx-auto"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 17,
+              lineHeight: 1.7,
+              color: "rgba(10,10,10,0.7)",
+              marginTop: 48,
+              maxWidth: 520,
+            }}
+          >
+            A working archive of what we have learned, written for the people we work with. Read what is open. The rest stays inside the room.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. THE SHELF */}
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "#0A0A0A", color: "#F4F1EC", height: "90vh", minHeight: 640 }}
+      >
+        <Bookshelf onOpen={openBook} focusedId={focusedId} onFocusChange={setFocusedId} />
+        <DustMotes />
+      </section>
+
+      {/* 6. ETHOS */}
+      <section className="bg-bone" style={{ paddingTop: 180, paddingBottom: 140 }}>
         <div className="max-w-[1400px] mx-auto px-8 grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-4" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "rgba(10,10,10,0.6)" }}>
+          <div className="col-span-12 md:col-span-4" style={{ ...MONO, color: "rgba(10,10,10,0.6)" }}>
             ON THE LIBRARY
           </div>
-          <div className="col-span-12 md:col-span-7" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 300, fontSize: 28, lineHeight: 1.4, color: "#0A0A0A", letterSpacing: "-0.005em" }}>
+          <div
+            className="col-span-12 md:col-span-7"
+            style={{
+              fontFamily: PLAYFAIR,
+              fontWeight: 300,
+              fontSize: 28,
+              lineHeight: 1.4,
+              color: "#0A0A0A",
+              letterSpacing: "-0.005em",
+            }}
+          >
             The library is not content. It is a record. We keep it so we do not have to explain ourselves twice.
           </div>
         </div>
       </section>
 
-      {/* 5. CATALOGUE */}
-      <section className="bg-bone pb-32">
+      {/* 7. CATALOGUE */}
+      <section className="bg-bone" style={{ paddingTop: 160, paddingBottom: 120 }}>
         <div className="max-w-[1400px] mx-auto px-8">
+          <div className="text-center" style={{ marginBottom: 56 }}>
+            <div style={{ ...MONO, color: "#C9A96E" }}>INDEX</div>
+            <h2 className="mt-4" style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 36, color: "#0A0A0A", letterSpacing: "-0.01em" }}>
+              Every volume.
+            </h2>
+          </div>
+
           {/* Filter row */}
-          <div className="flex items-center gap-8 border-b" style={{ borderColor: "rgba(10,10,10,0.12)", paddingBottom: 20, marginBottom: 28 }}>
+          <div className="flex flex-wrap items-center gap-8 border-b" style={{ borderColor: "rgba(10,10,10,0.12)", paddingBottom: 20, marginBottom: 28 }}>
             {FILTERS.map((f) => (
               <button
                 key={f.key}
                 onClick={() => setFilter(f.key)}
                 className="relative pb-2"
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11,
-                  letterSpacing: "0.18em",
+                  ...MONO,
                   color: filter === f.key ? "#0A0A0A" : "rgba(10,10,10,0.5)",
                 }}
               >
@@ -174,9 +255,7 @@ const LibraryHome = () => {
             style={{
               gridTemplateColumns: "80px 1fr 100px 160px",
               borderColor: "rgba(201,169,110,0.55)",
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 11,
-              letterSpacing: "0.2em",
+              ...MONO,
               color: "#C9A96E",
             }}
           >
@@ -207,31 +286,22 @@ const LibraryHome = () => {
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(10,10,10,0.04)")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                 >
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.18em", color: "#0A0A0A" }}>
-                    {b.vol}
-                  </div>
+                  <div style={{ ...MONO, color: "#0A0A0A" }}>{b.vol}</div>
                   <div className="relative pr-8">
-                    <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 300, fontSize: 22, color: "#0A0A0A", letterSpacing: "-0.005em" }}>
+                    <span style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 22, color: "#0A0A0A", letterSpacing: "-0.005em" }}>
                       {b.title}
                     </span>
                     <span
                       className="absolute left-0 -bottom-1 h-px transition-all duration-500"
-                      style={{
-                        background: "#C9A96E",
-                        width: isOpen ? "100%" : 0,
-                      }}
+                      style={{ background: "#C9A96E", width: isOpen ? "100%" : 0 }}
                     />
                     <span
                       className="absolute left-0 -bottom-1 h-px transition-all duration-500 group-hover:w-full"
                       style={{ background: "#C9A96E", width: 0 }}
                     />
                   </div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.18em", color: "rgba(10,10,10,0.7)" }}>
-                    {b.year}
-                  </div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.18em", color: "#C9A96E" }}>
-                    {b.category}
-                  </div>
+                  <div style={{ ...MONO, color: "rgba(10,10,10,0.7)" }}>{b.year}</div>
+                  <div style={{ ...MONO, color: "#C9A96E" }}>{b.category}</div>
                 </button>
               );
             })}
@@ -239,25 +309,82 @@ const LibraryHome = () => {
         </div>
       </section>
 
-      {/* 6. MEDIA WING */}
-      <section className="relative overflow-hidden" style={{ background: "#0A0A0A" }}>
-        <DustMotes />
-        <div className="grid grid-cols-1 md:grid-cols-3">
-          {[
-            { label: "FILM 01 / OPENING THE ROOM", kind: "video" as const, src: "" },
-            { label: "STILL 02 / THE LONG ROOM", kind: "image" as const, src: "" },
-            { label: "MOTION 03 / SPINE STUDY", kind: "video" as const, src: "" },
-          ].map((tile, i) => (
-            <MediaTile key={i} {...tile} />
-          ))}
+      {/* 8. MEDIA WING */}
+      <section className="bg-bone" style={{ paddingTop: 160 }}>
+        <div className="max-w-[1400px] mx-auto px-8" style={{ paddingBottom: 80 }}>
+          <div style={{ ...MONO, color: "#C9A96E" }}>GALLERY</div>
+          <h2 className="mt-3" style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 36, color: "#0A0A0A", letterSpacing: "-0.01em" }}>
+            Film and frames.
+          </h2>
+        </div>
+        <div className="relative overflow-hidden" style={{ background: "#0A0A0A" }}>
+          <DustMotes />
+          <div className="grid grid-cols-1 md:grid-cols-3">
+            {[
+              { label: "FILM 01 / 2025 — OPENING THE ROOM", kind: "video" as const },
+              { label: "STILL 02 / 2025 — THE LONG ROOM", kind: "image" as const },
+              { label: "MOTION 03 / 2025 — SPINE STUDY", kind: "video" as const },
+            ].map((tile, i) => (
+              <MediaTile key={i} {...tile} />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Foot */}
-      <footer className="bg-bone py-16">
-        <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between">
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.2em", color: "rgba(10,10,10,0.55)" }}>
-            THE PASTED LIBRARY — MMXXV
+      {/* 9. RECENT ADDITIONS */}
+      <section className="bg-bone" style={{ paddingTop: 140, paddingBottom: 120 }}>
+        <div className="max-w-[1400px] mx-auto px-8">
+          <div style={{ marginBottom: 48 }}>
+            <div style={{ ...MONO, color: "#C9A96E" }}>LATEST</div>
+            <h2 className="mt-3" style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 36, color: "#0A0A0A", letterSpacing: "-0.01em" }}>
+              Recently added.
+            </h2>
+          </div>
+          <div>
+            {recent.map((b) => (
+              <button
+                key={b.id}
+                onClick={() => setReading(getReadingFor(b.id))}
+                className="group grid items-center w-full text-left relative"
+                style={{
+                  gridTemplateColumns: "140px 1fr 160px",
+                  padding: "24px 12px",
+                  borderBottom: "1px solid rgba(10,10,10,0.06)",
+                  transition: "background-color 300ms ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(10,10,10,0.04)")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+              >
+                <div style={{ ...MONO, color: "rgba(10,10,10,0.6)" }}>{b.year}</div>
+                <div className="relative text-center px-4">
+                  <span style={{ fontFamily: PLAYFAIR, fontWeight: 300, fontSize: 24, color: "#0A0A0A", letterSpacing: "-0.005em" }}>
+                    {b.title}
+                  </span>
+                  <span
+                    className="absolute left-1/2 -translate-x-1/2 -bottom-1 h-px transition-all duration-500 group-hover:w-1/2"
+                    style={{ background: "#C9A96E", width: 0 }}
+                  />
+                </div>
+                <div className="text-right" style={{ ...MONO, color: "#C9A96E" }}>{b.category}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 10. FOOTER */}
+      <footer style={{ paddingTop: 120 }}>
+        <div className="max-w-[1400px] mx-auto px-8" style={{ borderTop: "1px solid rgba(10,10,10,0.12)", paddingTop: 32, paddingBottom: 32 }}>
+          <div className="grid grid-cols-3 items-center">
+            <div style={{ ...MONO, color: "rgba(10,10,10,0.55)" }}>PASTED LIBRARY / EST. 2024</div>
+            <div />
+            <div className="flex justify-end gap-6">
+              {NAV.map((n) => (
+                <a key={n.label} href={n.href} style={{ ...MONO, color: "rgba(10,10,10,0.55)" }}>
+                  {n.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
@@ -267,7 +394,7 @@ const LibraryHome = () => {
   );
 };
 
-const MediaTile = ({ label, kind }: { label: string; kind: "video" | "image"; src: string }) => {
+const MediaTile = ({ label, kind }: { label: string; kind: "video" | "image" }) => {
   const [hover, setHover] = useState(false);
   return (
     <div
@@ -276,7 +403,6 @@ const MediaTile = ({ label, kind }: { label: string; kind: "video" | "image"; sr
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* Placeholder visual: subtle warm gradient + grain */}
       <div
         className="absolute inset-0"
         style={{
@@ -285,7 +411,6 @@ const MediaTile = ({ label, kind }: { label: string; kind: "video" | "image"; sr
             : "radial-gradient(ellipse at 70% 60%, rgba(201,169,110,0.14) 0%, rgba(10,10,10,1) 65%)",
         }}
       />
-      {/* Scrim */}
       <div
         className="absolute inset-0"
         style={{
@@ -294,13 +419,13 @@ const MediaTile = ({ label, kind }: { label: string; kind: "video" | "image"; sr
           transition: "opacity 700ms ease",
         }}
       />
-      {/* Caption */}
       <div
         className="absolute left-6 bottom-6"
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 11,
           letterSpacing: "0.22em",
+          textTransform: "uppercase",
           color: "rgba(244,241,236,0.85)",
           opacity: hover ? 1 : 0.6,
           transition: "opacity 600ms ease",
