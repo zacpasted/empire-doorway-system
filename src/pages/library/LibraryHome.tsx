@@ -417,8 +417,8 @@ const SceneArchive = ({ onOpen }: { onOpen: (b: typeof BOOKS[0]) => void }) => (
 // === SCENE 5 — Reading Room (cinematic interlude) ===
 const SceneReadingRoom = () => (
   <section id="reading" className="relative w-full" style={{ minHeight: "100vh", background: CHARCOAL }}>
-    <img src={deskNightImg} alt="A reading desk lit by a single brass lamp." className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 80%)" }} />
+    <img src={aceImg} alt="Ace of spades portrait — the operator at the table." className="absolute inset-0 w-full h-full object-cover opacity-70" loading="lazy" />
+    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.92) 80%)" }} />
 
     <div className="relative max-w-[900px] mx-auto px-6 py-32 md:py-44 text-center flex flex-col items-center">
       <div style={{ ...MONO_S, color: BRASS_BRIGHT, marginBottom: 28 }}>On the Library</div>
