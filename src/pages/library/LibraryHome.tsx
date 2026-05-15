@@ -19,13 +19,14 @@ const IVORY = "#F4F1EC";
 const OXBLOOD = "#5C1A1F";
 const CHARCOAL = "#0A0A0A";
 
-const PLAYFAIR = "'Playfair Display', Georgia, serif";
+const PLAYFAIR = "'Quaria Display', Georgia, serif";
 const DM = "'DM Sans', system-ui, sans-serif";
 const MONO_S: React.CSSProperties = {
-  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+  fontFamily: "'DM Sans', system-ui, sans-serif",
   fontSize: 11,
-  letterSpacing: "0.18em",
+  letterSpacing: "0.22em",
   textTransform: "uppercase",
+  fontWeight: 500,
 };
 
 const EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
