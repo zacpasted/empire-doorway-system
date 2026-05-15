@@ -180,12 +180,12 @@ const Header = ({ scrolled }: { scrolled: boolean }) => (
 const SceneCorridor = () => (
   <section id="corridor" className="relative w-full" style={{ height: "100vh", background: WALNUT_DEEP }}>
     <img
-      src={corridorImg}
-      alt="A wood-panelled corridor leading to the Pasted Library."
-      className="absolute inset-0 w-full h-full object-cover"
+      src={keyholeImg}
+      alt="A view through a keyhole into a private chamber: a man in a chair, lamp lit, smoke rising."
+      className="absolute inset-0 w-full h-full object-contain md:object-cover"
       style={{ animation: `v8-kenburns 24s ease-in-out infinite alternate` }}
     />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,12,0.55) 0%, rgba(20,16,12,0.15) 40%, rgba(20,16,12,0.7) 100%)" }} />
+    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,8,6,0.55) 0%, rgba(10,8,6,0.05) 45%, rgba(10,8,6,0.85) 100%)" }} />
 
     {/* Overlay copy — left wall */}
     <div className="absolute z-10 px-6 md:px-16 max-w-[480px]" style={{ left: "4%", top: "32%" }}>
@@ -204,7 +204,7 @@ const SceneCorridor = () => (
           margin: 0,
         }}
       >
-        Come in.
+        Through the<br/>keyhole.
       </h1>
       <div style={{ height: 1, width: 60, background: BRASS, opacity: 0.55, margin: "32px 0 24px" }} />
       <p style={{ fontFamily: DM, fontSize: 16, lineHeight: 1.6, color: "rgba(244,241,236,0.78)", margin: 0 }}>
