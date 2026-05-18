@@ -31,6 +31,7 @@ const Vault = () => {
   const navigate = useNavigate();
   const [rotIdx, setRotIdx] = useState(0);
   const [rotVisible, setRotVisible] = useState(true);
+  const [introPlaying, setIntroPlaying] = useState(true);
 
   // Determine reduced motion + returning member up-front (sync) to avoid flicker
   const { initialBeat, reducedMotion, returning } = useMemo(() => {
@@ -71,6 +72,10 @@ const Vault = () => {
       // mark entered already, nothing to do
       return;
     }
+    if (introPlaying) {
+      // wait for intro video to finish (or be skipped) before running beats
+      return;
+    }
 
     const schedule = (delay: number, fn: () => void) => {
       const id = window.setTimeout(fn, delay);
@@ -94,11 +99,12 @@ const Vault = () => {
     schedule(T.end, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
-  }, [returning, reducedMotion]);
+  }, [returning, reducedMotion, introPlaying]);
 
   const skipToCard = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
+    setIntroPlaying(false);
     setBeat(6);
     localStorage.setItem(ENTERED_KEY, "1");
   };
