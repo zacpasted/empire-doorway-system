@@ -91,12 +91,10 @@ const Vault = () => {
     }
 
     schedule(500, () => setSkipVisible(true));
-    schedule(T.beat2, () => setBeat(2));
-    schedule(T.beat3, () => setBeat(3));
-    schedule(T.beat4, () => setBeat(4));
-    schedule(T.beat5, () => setBeat(5));
-    schedule(T.beat6, () => setBeat(6));
-    schedule(T.end, () => localStorage.setItem(ENTERED_KEY, "1"));
+    schedule(0,    () => setBeat(4));
+    schedule(1200, () => setBeat(5));
+    schedule(2000, () => setBeat(6));
+    schedule(2500, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
   }, [returning, reducedMotion, introPlaying]);
