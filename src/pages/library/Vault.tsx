@@ -256,7 +256,7 @@ const Vault = () => {
           style={{
             opacity: apertureOpen ? 1 : 0,
             background:
-              "radial-gradient(ellipse at center, #1a1410 0%, #0F0D0A 45%, #050403 100%)",
+              "radial-gradient(ellipse at center, #8A2424 0%, #7A1F1F 55%, #5A1515 100%)",
           }}
         >
           <div className="absolute inset-0 lib-grain pointer-events-none" />
@@ -273,7 +273,7 @@ const Vault = () => {
               height: "min(900px, 110vw)",
               transform: "translate(-50%, -50%)",
               background:
-                "radial-gradient(circle, rgba(201,169,110,0.13) 0%, rgba(201,169,110,0.05) 30%, transparent 65%)",
+                "radial-gradient(circle, rgba(201,169,110,0.18) 0%, rgba(201,169,110,0.06) 30%, transparent 65%)",
               filter: "blur(20px)",
               zIndex: 1,
             }}
@@ -286,7 +286,7 @@ const Vault = () => {
             className="v-ambient absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%)",
+                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.45) 100%)",
               zIndex: 1,
             }}
           />
