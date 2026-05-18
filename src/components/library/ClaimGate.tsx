@@ -361,13 +361,13 @@ export const ClaimGate = () => {
         {/* Closing italic line */}
         <p
           className="lib-body italic leading-relaxed text-center"
-          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 18 }}
+          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 14 }}
         >
           The Card is the threshold. The Library is the first room. There are others.
         </p>
 
         {/* Wax seal — signature at the foot of a letter */}
-        <div className="relative flex justify-center" style={{ marginTop: 16, height: 56 }}>
+        <div className="relative flex justify-center" style={{ marginTop: 12, height: 48 }}>
           {phase !== "idle" && (
             <div
               className="absolute lib-seal-glow pointer-events-none"
@@ -384,12 +384,12 @@ export const ClaimGate = () => {
           <img
             src={waxSeal}
             alt=""
-            width={52}
-            height={52}
+            width={44}
+            height={44}
             className={phase === "pressing" || phase === "out" ? "lib-seal-press" : ""}
             style={{
-              width: 52,
-              height: 52,
+              width: 44,
+              height: 44,
               objectFit: "contain",
               filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.35))",
               transformOrigin: "center",
@@ -401,7 +401,7 @@ export const ClaimGate = () => {
         <p
           className="lib-mono text-center"
           style={{
-            marginTop: 16,
+            marginTop: 10,
             fontSize: "9px",
             letterSpacing: "0.2em",
             color: "rgba(10,10,10,0.45)",
