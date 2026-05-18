@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClaimGate } from "@/components/library/ClaimGate";
 import { useMember } from "@/hooks/useMember";
+import lockTransitionAsset from "/public/library-lock-transition.mp4.asset.json";
 
 const ROTATING_MEMBERS = [
   "MEMBER 0001 — DR DREW BALLARD",
@@ -16,6 +17,7 @@ const Vault = () => {
   const [rotIdx, setRotIdx] = useState(0);
   const [rotVisible, setRotVisible] = useState(true);
   const [gateOpen, setGateOpen] = useState(false);
+  const [phase, setPhase] = useState<"entry" | "transition" | "gate">("entry");
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -37,22 +39,48 @@ const Vault = () => {
     return () => clearInterval(t);
   }, []);
 
-  const handleEnded = () => setGateOpen(true);
-  const handleSkip = () => setGateOpen(true);
+  const handleEntryEnded = () => setPhase("transition");
+  const handleTransitionTime = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const v = e.currentTarget;
+    if (v.duration && v.currentTime / v.duration > 0.8 && !gateOpen) {
+      setGateOpen(true);
+    }
+  };
+  const handleTransitionEnded = () => {
+    setPhase("gate");
+    setGateOpen(true);
+  };
+  const handleSkip = () => {
+    setPhase("gate");
+    setGateOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
       {/* Cinematic intro — full-screen video, transitions to gate on end */}
       <section className="fixed inset-0 w-full h-full overflow-hidden bg-black">
-        <video
-          ref={videoRef}
-          src="/library-gate-intro.mp4"
-          autoPlay
-          muted
-          playsInline
-          onEnded={handleEnded}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${gateOpen ? "opacity-30" : "opacity-100"}`}
-        />
+        {phase === "entry" && (
+          <video
+            ref={videoRef}
+            src="/library-gate-intro.mp4"
+            autoPlay
+            muted
+            playsInline
+            onEnded={handleEntryEnded}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        {phase !== "entry" && (
+          <video
+            src={lockTransitionAsset.url}
+            autoPlay
+            muted
+            playsInline
+            onTimeUpdate={handleTransitionTime}
+            onEnded={handleTransitionEnded}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${gateOpen ? "opacity-40" : "opacity-100"}`}
+          />
+        )}
         <div className="absolute inset-0 pointer-events-none" style={{ background: gateOpen ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.15)", transition: "background 1s ease" }} />
         <div className="absolute inset-0 lib-grain pointer-events-none" />
 
