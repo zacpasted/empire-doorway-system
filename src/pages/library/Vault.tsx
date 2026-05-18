@@ -104,16 +104,16 @@ const Vault = () => {
       return () => { timers.current.forEach(clearTimeout); timers.current = []; };
     }
 
-    // Aligned with the 800ms video → form crossfade (see <video> transition).
+    // Aligned with the 800ms video → form crossfade and the 800ms wordmark foil-sheen.
     // 0ms       — video begins fading out (onEnded sets videoFading=true)
     // ~80ms     — aperture (beat 4) starts unmasking the background
     // ~420ms    — wordmark sets (beat 5) at the crossfade midpoint
-    // ~860ms    — card lands (beat 6) just as the video reaches 0 opacity
+    // ~1220ms   — wordmark sheen finishes → card (beat 6) begins its fade/slide-in
     schedule(500, () => setSkipVisible(true));
     schedule(80,   () => setBeat(4));
     schedule(420,  () => setBeat(5));
-    schedule(860,  () => setBeat(6));
-    schedule(1400, () => localStorage.setItem(ENTERED_KEY, "1"));
+    schedule(1220, () => setBeat(6));
+    schedule(1800, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
   }, [returning, reducedMotion, introPlaying]);
