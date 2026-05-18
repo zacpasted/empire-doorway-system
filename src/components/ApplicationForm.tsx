@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,19 +11,98 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { trackCTAClick } from "@/hooks/useCTAAnalytics";
+
+const FORM_SECTION = "application_form";
+const REQUIRED_FIELDS = [
+  "firstName",
+  "lastName",
+  "email",
+  "role",
+  "yearsInPractice",
+  "currentGoal",
+  "whyBrand",
+];
 
 const ApplicationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasStartedRef = useRef(false);
+  const focusedFieldsRef = useRef<Set<string>>(new Set());
+  const completedFieldsRef = useRef<Set<string>>(new Set());
+  const completionFiredRef = useRef(false);
+  const startTimeRef = useRef<number | null>(null);
+
+  const handleFormStart = () => {
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+    startTimeRef.current = Date.now();
+    trackCTAClick({
+      ctaId: "application_form_start",
+      ctaText: "Form Start",
+      section: FORM_SECTION,
+    });
+  };
+
+  const handleFieldFocus = (fieldId: string) => {
+    handleFormStart();
+    if (focusedFieldsRef.current.has(fieldId)) return;
+    focusedFieldsRef.current.add(fieldId);
+    trackCTAClick({
+      ctaId: `application_form_focus_${fieldId}`,
+      ctaText: `Focus: ${fieldId}`,
+      section: FORM_SECTION,
+    });
+  };
+
+  const handleFieldComplete = (fieldId: string, value: string) => {
+    if (!value || value.trim() === "") return;
+    if (completedFieldsRef.current.has(fieldId)) return;
+    completedFieldsRef.current.add(fieldId);
+    trackCTAClick({
+      ctaId: `application_form_complete_${fieldId}`,
+      ctaText: `Complete: ${fieldId}`,
+      section: FORM_SECTION,
+    });
+
+    // Fire all-required-complete event once
+    if (
+      !completionFiredRef.current &&
+      REQUIRED_FIELDS.every((f) => completedFieldsRef.current.has(f))
+    ) {
+      completionFiredRef.current = true;
+      trackCTAClick({
+        ctaId: "application_form_all_fields_complete",
+        ctaText: "All Required Fields Complete",
+        section: FORM_SECTION,
+      });
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
+    const durationMs = startTimeRef.current
+      ? Date.now() - startTimeRef.current
+      : null;
+    trackCTAClick({
+      ctaId: "application_form_submit",
+      ctaText: durationMs
+        ? `Submit (${Math.round(durationMs / 1000)}s)`
+        : "Submit",
+      section: FORM_SECTION,
+    });
+
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
+      trackCTAClick({
+        ctaId: "application_form_submit_success",
+        ctaText: "Submit Success",
+        section: FORM_SECTION,
+      });
     }, 1500);
   };
 
@@ -77,6 +156,8 @@ const ApplicationForm = () => {
               placeholder="First name"
               required
               className="bg-background"
+              onFocus={() => handleFieldFocus("firstName")}
+              onBlur={(e) => handleFieldComplete("firstName", e.target.value)}
             />
           </div>
           <div className="space-y-2">
@@ -86,6 +167,8 @@ const ApplicationForm = () => {
               placeholder="Last name"
               required
               className="bg-background"
+              onFocus={() => handleFieldFocus("lastName")}
+              onBlur={(e) => handleFieldComplete("lastName", e.target.value)}
             />
           </div>
         </div>
@@ -100,6 +183,8 @@ const ApplicationForm = () => {
               placeholder="you@example.com"
               required
               className="bg-background"
+              onFocus={() => handleFieldFocus("email")}
+              onBlur={(e) => handleFieldComplete("email", e.target.value)}
             />
           </div>
           <div className="space-y-2">
@@ -108,6 +193,8 @@ const ApplicationForm = () => {
               id="instagram"
               placeholder="@handle or 'Not active yet'"
               className="bg-background"
+              onFocus={() => handleFieldFocus("instagram")}
+              onBlur={(e) => handleFieldComplete("instagram", e.target.value)}
             />
           </div>
         </div>
@@ -120,11 +207,19 @@ const ApplicationForm = () => {
               id="location"
               placeholder="e.g., Austin, TX"
               className="bg-background"
+              onFocus={() => handleFieldFocus("location")}
+              onBlur={(e) => handleFieldComplete("location", e.target.value)}
             />
           </div>
           <div className="space-y-2">
             <Label>Current Role</Label>
-            <Select required>
+            <Select
+              required
+              onValueChange={(v) => {
+                handleFieldFocus("role");
+                handleFieldComplete("role", v);
+              }}
+            >
               <SelectTrigger className="bg-background">
                 <SelectValue placeholder="Select your role" />
               </SelectTrigger>
@@ -141,7 +236,13 @@ const ApplicationForm = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label>Years in Practice</Label>
-            <Select required>
+            <Select
+              required
+              onValueChange={(v) => {
+                handleFieldFocus("yearsInPractice");
+                handleFieldComplete("yearsInPractice", v);
+              }}
+            >
               <SelectTrigger className="bg-background">
                 <SelectValue placeholder="Select years" />
               </SelectTrigger>
@@ -155,7 +256,13 @@ const ApplicationForm = () => {
           </div>
           <div className="space-y-2">
             <Label>What best describes your current goal?</Label>
-            <Select required>
+            <Select
+              required
+              onValueChange={(v) => {
+                handleFieldFocus("currentGoal");
+                handleFieldComplete("currentGoal", v);
+              }}
+            >
               <SelectTrigger className="bg-background">
                 <SelectValue placeholder="Select your goal" />
               </SelectTrigger>
@@ -180,13 +287,22 @@ const ApplicationForm = () => {
             placeholder="Share your thoughts..."
             className="bg-background min-h-[100px] resize-none"
             required
+            onFocus={() => handleFieldFocus("whyBrand")}
+            onBlur={(e) => handleFieldComplete("whyBrand", e.target.value)}
           />
         </div>
 
         {/* On Camera */}
         <div className="space-y-3">
           <Label>Are you willing to appear on camera for your content?</Label>
-          <RadioGroup defaultValue="yes" className="flex flex-wrap gap-4">
+          <RadioGroup
+            defaultValue="yes"
+            className="flex flex-wrap gap-4"
+            onValueChange={(v) => {
+              handleFieldFocus("onCamera");
+              handleFieldComplete("onCamera", v);
+            }}
+          >
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="yes" id="camera-yes" />
               <Label htmlFor="camera-yes" className="font-normal cursor-pointer">
