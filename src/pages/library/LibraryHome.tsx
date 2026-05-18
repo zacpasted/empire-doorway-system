@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import useMember from "@/hooks/useMember";
 import { ReadingPanel, type ReadingContent } from "@/components/library/ReadingPanel";
 import { BOOKS, getReadingFor } from "@/data/books";
 import corridorImg from "@/assets/library-v8-corridor.jpg";
@@ -44,7 +47,6 @@ const SCENES = [
   { id: "dispatches", numeral: "IV", label: "Dispatches" },
   { id: "reading",  numeral: "V",   label: "The Reading Room" },
   { id: "ethos",    numeral: "VI",  label: "On the Library" },
-  { id: "request",  numeral: "VII", label: "Request Access" },
 ];
 
 const WINGS = [
@@ -104,9 +106,12 @@ const Header = ({ scrolled }: { scrolled: boolean }) => (
     <div className="hidden md:block" style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10 }}>
       Pasted Society · Vol. III — The Library
     </div>
-    <a href="#request" style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}` }}>
-      Request Access
-    </a>
+    <button
+      onClick={() => supabase.auth.signOut().then(() => { window.location.href = "/"; })}
+      style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}`, background: "transparent" }}
+    >
+      Sign Out
+    </button>
   </header>
 );
 
