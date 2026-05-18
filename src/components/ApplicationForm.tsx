@@ -69,7 +69,7 @@ const ApplicationForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="firstName">First Name</Label>
             <Input
@@ -90,84 +90,84 @@ const ApplicationForm = () => {
           </div>
         </div>
 
-        {/* Email */}
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="you@example.com"
-            required
-            className="bg-background"
-          />
+        {/* Email + Instagram */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              required
+              className="bg-background"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="instagram">Instagram Handle</Label>
+            <Input
+              id="instagram"
+              placeholder="@handle or 'Not active yet'"
+              className="bg-background"
+            />
+          </div>
         </div>
 
-        {/* Instagram */}
-        <div className="space-y-2">
-          <Label htmlFor="instagram">Instagram Handle</Label>
-          <Input
-            id="instagram"
-            placeholder="@handle or 'Not active yet'"
-            className="bg-background"
-          />
+        {/* Location + Current Role */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="location">Location (City + State)</Label>
+            <Input
+              id="location"
+              placeholder="e.g., Austin, TX"
+              className="bg-background"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Current Role</Label>
+            <Select required>
+              <SelectTrigger className="bg-background">
+                <SelectValue placeholder="Select your role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="associate">Associate</SelectItem>
+                <SelectItem value="owner">Owner</SelectItem>
+                <SelectItem value="transitioning">Transitioning</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
-        {/* Location */}
-        <div className="space-y-2">
-          <Label htmlFor="location">Location (City + State)</Label>
-          <Input
-            id="location"
-            placeholder="e.g., Austin, TX"
-            className="bg-background"
-          />
-        </div>
-
-        {/* Current Role */}
-        <div className="space-y-2">
-          <Label>Current Role</Label>
-          <Select required>
-            <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Select your role" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="associate">Associate</SelectItem>
-              <SelectItem value="owner">Owner</SelectItem>
-              <SelectItem value="transitioning">Transitioning</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Years in Practice */}
-        <div className="space-y-2">
-          <Label>Years in Practice</Label>
-          <Select required>
-            <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Select years" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="0-2">0–2 years</SelectItem>
-              <SelectItem value="3-5">3–5 years</SelectItem>
-              <SelectItem value="6-10">6–10 years</SelectItem>
-              <SelectItem value="10+">10+ years</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Current Goal */}
-        <div className="space-y-2">
-          <Label>What best describes your current goal?</Label>
-          <Select required>
-            <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Select your goal" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="visibility">Build visibility and recognition</SelectItem>
-              <SelectItem value="patients">Attract more ideal patients</SelectItem>
-              <SelectItem value="authority">Position myself as an authority</SelectItem>
-              <SelectItem value="ownership">Prepare for practice ownership</SelectItem>
-              <SelectItem value="growth">Grow an existing practice</SelectItem>
-            </SelectContent>
-          </Select>
+        {/* Years in Practice + Current Goal */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label>Years in Practice</Label>
+            <Select required>
+              <SelectTrigger className="bg-background">
+                <SelectValue placeholder="Select years" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="0-2">0–2 years</SelectItem>
+                <SelectItem value="3-5">3–5 years</SelectItem>
+                <SelectItem value="6-10">6–10 years</SelectItem>
+                <SelectItem value="10+">10+ years</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label>What best describes your current goal?</Label>
+            <Select required>
+              <SelectTrigger className="bg-background">
+                <SelectValue placeholder="Select your goal" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="visibility">Build visibility and recognition</SelectItem>
+                <SelectItem value="patients">Attract more ideal patients</SelectItem>
+                <SelectItem value="authority">Position myself as an authority</SelectItem>
+                <SelectItem value="ownership">Prepare for practice ownership</SelectItem>
+                <SelectItem value="growth">Grow an existing practice</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* Why Personal Brand */}
