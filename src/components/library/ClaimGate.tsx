@@ -5,7 +5,10 @@ import { supabase } from "@/integrations/supabase/client";
 import waxSeal from "@/assets/library-wax-seal.png";
 
 const schema = z.object({
-  first_name: z.string().trim().min(1, "Required").max(60),
+  full_name: z.string().trim().min(2, "Required").max(120).refine(
+    (v) => v.split(/\s+/).filter(Boolean).length >= 2,
+    "Enter your full name"
+  ),
   email: z.string().trim().email("Enter a valid email").max(255),
 });
 
@@ -117,7 +120,7 @@ const Monogram56 = () => (
 
 export const ClaimGate = () => {
   const navigate = useNavigate();
-  const [firstName, setFirstName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
@@ -126,12 +129,16 @@ export const ClaimGate = () => {
 
   const runSupabase = async () => {
     const redirectTo = `${window.location.origin}/gate`;
+    const trimmed = fullName.trim().replace(/\s+/g, " ");
+    const parts = trimmed.split(" ");
+    const first_name = parts[0] ?? "";
+    const last_name = parts.slice(1).join(" ");
     const { error: authError } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: {
         emailRedirectTo: redirectTo,
         shouldCreateUser: true,
-        data: { first_name: firstName.trim() },
+        data: { first_name, last_name, full_name: trimmed },
       },
     });
     return authError;
@@ -140,7 +147,7 @@ export const ClaimGate = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    const parsed = schema.safeParse({ first_name: firstName, email });
+    const parsed = schema.safeParse({ full_name: fullName, email });
     if (!parsed.success) {
       const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
       setError(first ?? "Check the form.");
@@ -162,7 +169,9 @@ export const ClaimGate = () => {
 
     setPhase("out");
     try {
-      sessionStorage.setItem("pasted_first_name", firstName.trim());
+      const first = fullName.trim().split(/\s+/)[0] ?? "";
+      sessionStorage.setItem("pasted_first_name", first);
+      sessionStorage.setItem("pasted_full_name", fullName.trim().replace(/\s+/g, " "));
     } catch { /* noop */ }
     setTimeout(() => navigate("/welcome"), 320);
   };
@@ -216,13 +225,13 @@ export const ClaimGate = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 text-left">
           <div>
-            <label htmlFor="first_name" className="lib-mono block mb-2 text-charcoal/70">First name</label>
+            <label htmlFor="full_name" className="lib-mono block mb-2 text-charcoal/70">Full name</label>
             <input
-              id="first_name"
+              id="full_name"
               type="text"
-              autoComplete="given-name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              autoComplete="name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               disabled={submitting}
               className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
             />
