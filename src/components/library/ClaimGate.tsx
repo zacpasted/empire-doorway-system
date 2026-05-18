@@ -203,16 +203,28 @@ export const ClaimGate = () => {
         borderRadius: 2,
         boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
         padding: "28px 20px 18px",
+        background:
+          "linear-gradient(135deg, #F5EFE0 0%, #EFE6D2 50%, #E8DCC2 100%)",
       }}
     >
-      {/* Cotton-paper fibre overlay (4%, multiply) */}
+      {/* Linen / papyrus fibre overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          opacity: 0.04,
+          opacity: 0.18,
           mixBlendMode: "multiply",
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.8 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E\")",
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.32  0 0 0 0 0.18  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E\")",
+        }}
+      />
+      {/* Horizontal linen fibres */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: 0.08,
+          mixBlendMode: "multiply",
+          backgroundImage:
+            "repeating-linear-gradient(90deg, rgba(120,90,50,0.35) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(120,90,50,0.2) 0 1px, transparent 1px 4px)",
         }}
       />
 
@@ -310,22 +322,36 @@ export const ClaimGate = () => {
             className="relative w-full py-3 px-6 lib-mono cursor-pointer overflow-hidden group mt-1"
             style={{
               borderRadius: 10,
-              background: "#7A1F1F",
+              background:
+                "linear-gradient(135deg, #8A2626 0%, #7A1F1F 50%, #5C1414 100%)",
               color: "#F4F1EC",
               transition: "filter 220ms ease",
               transform: phase === "pressing" ? "translateY(2px)" : undefined,
               filter: phase === "pressing" ? "brightness(0.85)" : undefined,
+              boxShadow:
+                "inset 0 1px 0 rgba(255,220,180,0.18), inset 0 -1px 0 rgba(0,0,0,0.35), 0 6px 14px rgba(60,10,10,0.35)",
             }}
           >
-            {/* leather grain overlay (2%) */}
+            {/* papyrus fibre overlay on red */}
             <span
               aria-hidden="true"
-              className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-[0.035]"
+              className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-50"
               style={{
-                opacity: 0.02,
+                opacity: 0.35,
                 mixBlendMode: "overlay",
                 backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E\")",
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' seed='11'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E\")",
+              }}
+            />
+            {/* horizontal fibre striations */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                opacity: 0.18,
+                mixBlendMode: "multiply",
+                backgroundImage:
+                  "repeating-linear-gradient(90deg, rgba(40,5,5,0.6) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(40,5,5,0.35) 0 1px, transparent 1px 5px)",
               }}
             />
             <span className="relative">CLAIM MY CARD</span>
