@@ -230,21 +230,6 @@ const Vault = () => {
         {/* Beat 1 — darkness breath */}
         {beat === 1 && !reducedMotion && <div className="v-breath" />}
 
-        {/* Beats 2–3 — the key, revealed by light, then turning. Uses the lock-turn video. */}
-        {beat >= 2 && beat <= 3 && !reducedMotion && (
-          <video
-            src={lockTransitionAsset.url}
-            autoPlay
-            muted
-            playsInline
-            className={`v-keyclip ${beat === 3 ? "v-keyclip-fade" : ""}`}
-            style={{ objectFit: "cover" }}
-          />
-        )}
-
-        {/* Beat 3 — gold bloom behind the key as the bolt seats */}
-        {beat === 3 && !reducedMotion && <div className="v-bloom" />}
-
         {/* Beat 4 — aperture dilation: a keyhole-shaped reveal of the background */}
         {beat === 4 && !reducedMotion && (
           <div className="v-aperture-stage" style={{ background: "#0A0A0A" }}>
