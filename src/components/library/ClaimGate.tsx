@@ -10,6 +10,10 @@ const schema = z.object({
     "Enter your full name"
   ),
   email: z.string().trim().email("Enter a valid email").max(255),
+  location: z.string().trim().min(2, "Required").max(120),
+  career_stage: z.enum(["student", "associate", "owner"], {
+    errorMap: () => ({ message: "Choose a stage" }),
+  }),
 });
 
 type Phase = "idle" | "pressing" | "out";
@@ -122,6 +126,8 @@ export const ClaimGate = () => {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [careerStage, setCareerStage] = useState<"" | "student" | "associate" | "owner">("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
 
@@ -138,7 +144,13 @@ export const ClaimGate = () => {
       options: {
         emailRedirectTo: redirectTo,
         shouldCreateUser: true,
-        data: { first_name, last_name, full_name: trimmed },
+        data: {
+          first_name,
+          last_name,
+          full_name: trimmed,
+          location: location.trim(),
+          career_stage: careerStage,
+        },
       },
     });
     return authError;
@@ -147,7 +159,12 @@ export const ClaimGate = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    const parsed = schema.safeParse({ full_name: fullName, email });
+    const parsed = schema.safeParse({
+      full_name: fullName,
+      email,
+      location,
+      career_stage: careerStage,
+    });
     if (!parsed.success) {
       const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
       setError(first ?? "Check the form.");
@@ -247,6 +264,43 @@ export const ClaimGate = () => {
               disabled={submitting}
               className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
             />
+          </div>
+          <div>
+            <label htmlFor="location" className="lib-mono block mb-2 text-charcoal/70">Location</label>
+            <input
+              id="location"
+              type="text"
+              autoComplete="address-level2"
+              placeholder="City, Country"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              disabled={submitting}
+              className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
+            />
+          </div>
+          <div>
+            <label className="lib-mono block mb-2 text-charcoal/70">Career stage</label>
+            <div className="grid grid-cols-3 gap-2">
+              {(["student", "associate", "owner"] as const).map((stage) => {
+                const active = careerStage === stage;
+                return (
+                  <button
+                    key={stage}
+                    type="button"
+                    disabled={submitting}
+                    onClick={() => setCareerStage(stage)}
+                    className={`lib-mono py-2 px-2 border transition-colors ${
+                      active
+                        ? "bg-oxblood text-bone border-oxblood"
+                        : "bg-transparent text-charcoal/70 border-charcoal/25 hover:border-charcoal/60"
+                    }`}
+                    style={{ borderRadius: 2, fontSize: "10px", letterSpacing: "0.18em" }}
+                  >
+                    {stage.toUpperCase()}
+                  </button>
+                );
+              })}
+            </div>
           </div>
           {error && <p className="lib-mono text-oxblood">{error}</p>}
 

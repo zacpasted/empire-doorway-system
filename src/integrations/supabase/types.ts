@@ -307,27 +307,36 @@ export type Database = {
       }
       members: {
         Row: {
+          career_stage: string
           created_at: string
           email: string
           first_name: string
           id: string
+          last_name: string
           last_signed_in_at: string
+          location: string
           member_number: number
         }
         Insert: {
+          career_stage?: string
           created_at?: string
           email: string
           first_name?: string
           id: string
+          last_name?: string
           last_signed_in_at?: string
+          location?: string
           member_number?: number
         }
         Update: {
+          career_stage?: string
           created_at?: string
           email?: string
           first_name?: string
           id?: string
+          last_name?: string
           last_signed_in_at?: string
+          location?: string
           member_number?: number
         }
         Relationships: []
