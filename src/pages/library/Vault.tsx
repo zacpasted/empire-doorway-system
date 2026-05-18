@@ -12,16 +12,34 @@ const ROTATING_MEMBERS = [
 
 const ENTERED_KEY = "pasted_library_entered";
 
-// Beat timings in ms (single source of truth)
-const T = {
-  beat1: 0,      // darkness holds
-  beat2: 800,    // key revealed by light
-  beat3: 2600,   // key turns
-  beat4: 4000,   // aperture opens
-  beat5: 5200,   // wordmark sets
-  beat6: 6000,   // card arrives
-  end:   6500,
-};
+/**
+ * TIMING — single source of truth for the Vault intro choreography.
+ * All values in milliseconds. Tweak here; everything downstream stays in sync.
+ *
+ * Sequence (clock starts when the intro video ends / is skipped):
+ *   0ms     video begins fading out (videoCrossfadeMs)
+ *   beat4   aperture unmasks the background
+ *   beat5   wordmark sets at the crossfade midpoint
+ *   beat6   card begins its fade/slide-in (lines up with wordmark sheen end)
+ *   markEntered  persist the "entered" flag in localStorage
+ */
+const TIMING = {
+  // Crossfades
+  videoCrossfadeMs: 800,   // <video> opacity transition + skeleton fade
+  videoUnmountMs: 900,     // delay before unmounting the <video> after crossfade
+  wordmarkSheenMs: 800,    // CSS: .v-wordmark.lit foil-sheen duration (keep in sync)
+
+  // Post-video beat schedule (ms after the video ends/skip)
+  beat4: 80,               // aperture opens
+  beat5: 420,              // wordmark sets (≈ crossfade midpoint)
+  beat6: 1220,             // card lands (= beat5 + wordmarkSheenMs)
+  markEntered: 1800,
+  skipRevealMs: 500,
+
+  // Reduced-motion shortcut
+  reducedJumpMs: 400,
+  reducedMarkMs: 500,
+} as const;
 
 type Beat = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -97,23 +115,18 @@ const Vault = () => {
     };
 
     if (reducedMotion) {
-      // Dignified short: hold 400ms, then jump to beat 6
-      schedule(400, () => setBeat(6));
-      schedule(450, () => setSkipVisible(false));
-      schedule(500, () => localStorage.setItem(ENTERED_KEY, "1"));
+      // Dignified short: hold briefly, then jump to beat 6
+      schedule(TIMING.reducedJumpMs, () => setBeat(6));
+      schedule(TIMING.reducedJumpMs + 50, () => setSkipVisible(false));
+      schedule(TIMING.reducedMarkMs, () => localStorage.setItem(ENTERED_KEY, "1"));
       return () => { timers.current.forEach(clearTimeout); timers.current = []; };
     }
 
-    // Aligned with the 800ms video → form crossfade and the 800ms wordmark foil-sheen.
-    // 0ms       — video begins fading out (onEnded sets videoFading=true)
-    // ~80ms     — aperture (beat 4) starts unmasking the background
-    // ~420ms    — wordmark sets (beat 5) at the crossfade midpoint
-    // ~1220ms   — wordmark sheen finishes → card (beat 6) begins its fade/slide-in
-    schedule(500, () => setSkipVisible(true));
-    schedule(80,   () => setBeat(4));
-    schedule(420,  () => setBeat(5));
-    schedule(1220, () => setBeat(6));
-    schedule(1800, () => localStorage.setItem(ENTERED_KEY, "1"));
+    schedule(TIMING.skipRevealMs, () => setSkipVisible(true));
+    schedule(TIMING.beat4, () => setBeat(4));
+    schedule(TIMING.beat5, () => setBeat(5));
+    schedule(TIMING.beat6, () => setBeat(6));
+    schedule(TIMING.markEntered, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
   }, [returning, reducedMotion, introPlaying]);
@@ -333,14 +346,14 @@ const Vault = () => {
               setIntroPlaying(false);
               setSkipVisible(true);
               // unmount after the crossfade completes
-              window.setTimeout(() => setVideoFading(false), 900);
+              window.setTimeout(() => setVideoFading(false), TIMING.videoUnmountMs);
             }}
             className="absolute inset-0 w-full h-full"
             style={{
               objectFit: "cover",
               zIndex: 5,
               opacity: introPlaying ? 1 : 0,
-              transition: "opacity 800ms cubic-bezier(0.22, 1, 0.36, 1)",
+              transition: `opacity ${TIMING.videoCrossfadeMs}ms cubic-bezier(0.22, 1, 0.36, 1)`,
               pointerEvents: "none",
             }}
           />
