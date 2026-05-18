@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MagicLinkForm } from "@/components/library/MagicLinkForm";
+import { ClaimGate } from "@/components/library/ClaimGate";
 import { useMember } from "@/hooks/useMember";
 
 const ROTATING_MEMBERS = [
@@ -73,27 +73,12 @@ const Vault = () => {
             gateOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
           }`}
         >
-          <div
-            className="w-[340px] md:w-[460px] bg-bone px-8 md:px-12 py-12 md:py-14 text-center"
-            style={{ borderRadius: 2, boxShadow: "0 30px 80px rgba(0,0,0,0.5)" }}
-          >
-            <div className="lib-mono lib-emboss-gold" style={{ letterSpacing: "0.28em", fontSize: "10px" }}>
-              THE PASTED LIBRARY
-            </div>
-            <div className="my-4 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
-            <div className="lib-editorial text-lib-charcoal text-2xl md:text-3xl leading-tight">
-              A vault of work,<br />given freely.
-            </div>
-            <p className="lib-body text-lib-charcoal/70 mt-5 text-sm">
-              Claim a Card. Walk the shelves. Take what is useful.
-            </p>
-            <div className="mt-8">
-              <MagicLinkForm mode="claim" />
-            </div>
+          <div className="flex flex-col items-center">
+            <ClaimGate />
             <div className="mt-6">
               <div
                 className={`lib-mono text-lib-charcoal/45 transition-opacity duration-500 ${rotVisible ? "opacity-100" : "opacity-0"}`}
-                style={{ fontSize: "10px", letterSpacing: "0.22em" }}
+                style={{ fontSize: "10px", letterSpacing: "0.22em", color: "rgba(244,241,236,0.5)" }}
               >
                 {ROTATING_MEMBERS[rotIdx]}
               </div>
