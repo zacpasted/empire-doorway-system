@@ -320,12 +320,13 @@ const Vault = () => {
           )}
         </div>
 
-        {/* Skip control — present from 0.5s, always available, never auto-hides */}
-        {skipVisible && !gateOpen && (
+        {/* Skip control — available during intro and beats, hides once card lands */}
+        {(introPlaying || skipVisible) && !gateOpen && (
           <button
             type="button"
             onClick={skipToCard}
-            className="absolute bottom-6 right-6 z-20"
+            className="absolute bottom-6 right-6"
+            style={{ zIndex: 30 }}
             style={{
               fontFamily: '"JetBrains Mono", ui-monospace, monospace',
               fontSize: "12px",
