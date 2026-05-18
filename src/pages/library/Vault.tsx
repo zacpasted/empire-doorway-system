@@ -326,8 +326,8 @@ const Vault = () => {
             type="button"
             onClick={skipToCard}
             className="absolute bottom-6 right-6"
-            style={{ zIndex: 30 }}
             style={{
+              zIndex: 30,
               fontFamily: '"JetBrains Mono", ui-monospace, monospace',
               fontSize: "12px",
               letterSpacing: "0.22em",
