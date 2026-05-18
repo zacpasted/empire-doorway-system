@@ -212,6 +212,28 @@ const Vault = () => {
         }
 
         .v-card { animation: lib-card-rise 500ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* Threshold chrome — appears with the card */
+        @keyframes lib-rule-draw {
+          from { transform: scaleX(0); opacity: 0; }
+          to   { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes lib-chrome-in {
+          from { opacity: 0; transform: translateY(-4px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes lib-glow-in {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .v-rule {
+          height: 1px;
+          background: linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.55) 50%, transparent 100%);
+          transform-origin: center;
+          animation: lib-rule-draw 900ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+        }
+        .v-chrome  { animation: lib-chrome-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both; }
+        .v-ambient { animation: lib-glow-in 1200ms ease-out 100ms both; }
       `}</style>
 
       <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
@@ -240,6 +262,36 @@ const Vault = () => {
           <div className="absolute inset-0 lib-grain pointer-events-none" />
         </div>
 
+        {/* Ambient candle-glow behind the card — only once the gate opens */}
+        {gateOpen && (
+          <div
+            className="v-ambient absolute pointer-events-none"
+            style={{
+              top: "50%",
+              left: "50%",
+              width: "min(900px, 110vw)",
+              height: "min(900px, 110vw)",
+              transform: "translate(-50%, -50%)",
+              background:
+                "radial-gradient(circle, rgba(201,169,110,0.13) 0%, rgba(201,169,110,0.05) 30%, transparent 65%)",
+              filter: "blur(20px)",
+              zIndex: 1,
+            }}
+          />
+        )}
+
+        {/* Heavy edge vignette to frame the threshold */}
+        {gateOpen && (
+          <div
+            className="v-ambient absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%)",
+              zIndex: 1,
+            }}
+          />
+        )}
+
         {/* Beat 1 — darkness breath */}
         {beat === 1 && !reducedMotion && <div className="v-breath" />}
 
@@ -267,15 +319,28 @@ const Vault = () => {
 
         {/* Beats 5–6 — wordmark and card */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center px-6"
+          className="absolute inset-0 flex flex-col items-center justify-center px-6 py-10"
           style={{
             opacity: beat >= 5 ? 1 : 0,
             transition: "opacity 400ms ease-out",
             pointerEvents: gateOpen ? "auto" : "none",
+            zIndex: 2,
           }}
         >
           {/* Monogram + wordmark */}
-          <div className="flex flex-col items-center" style={{ marginBottom: gateOpen ? 36 : 0 }}>
+          <div className="flex flex-col items-center" style={{ marginBottom: gateOpen ? 28 : 0 }}>
+            {gateOpen && (
+              <div
+                className="v-chrome lib-mono mb-3"
+                style={{
+                  fontSize: "9px",
+                  letterSpacing: "0.42em",
+                  color: "rgba(201,169,110,0.55)",
+                }}
+              >
+                EST. MMXXIV · VOLUME I
+              </div>
+            )}
             <div
               className={`v-wordmark lit-mono ${wordmarkLit ? "lit" : ""}`}
               style={{
@@ -287,22 +352,40 @@ const Vault = () => {
             >
               ⬭ P ⬭
             </div>
-            <div
-              className={`v-wordmark ${wordmarkLit ? "lit" : ""}`}
-              style={{
-                fontFamily: '"JetBrains Mono", ui-monospace, monospace',
-                fontSize: "13px",
-                letterSpacing: "0.32em",
-                textTransform: "uppercase",
-              }}
-            >
-              THE PASTED LIBRARY
-            </div>
+            {gateOpen ? (
+              <div className="flex items-center gap-4" style={{ width: "min(520px, 86vw)" }}>
+                <div className="v-rule flex-1" />
+                <div
+                  className={`v-wordmark ${wordmarkLit ? "lit" : ""} whitespace-nowrap`}
+                  style={{
+                    fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+                    fontSize: "13px",
+                    letterSpacing: "0.32em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  THE PASTED LIBRARY
+                </div>
+                <div className="v-rule flex-1" />
+              </div>
+            ) : (
+              <div
+                className={`v-wordmark ${wordmarkLit ? "lit" : ""}`}
+                style={{
+                  fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+                  fontSize: "13px",
+                  letterSpacing: "0.32em",
+                  textTransform: "uppercase",
+                }}
+              >
+                THE PASTED LIBRARY
+              </div>
+            )}
           </div>
 
           {/* The card */}
           {gateOpen && (
-            <div className="v-card flex flex-col items-center mt-8">
+            <div className="v-card flex flex-col items-center mt-6 relative">
               <ClaimGate />
               <div className="mt-6">
                 <div
@@ -312,6 +395,27 @@ const Vault = () => {
                   {ROTATING_MEMBERS[rotIdx]}
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Footer threshold mark */}
+          {gateOpen && (
+            <div
+              className="v-chrome flex items-center gap-4 mt-8"
+              style={{ width: "min(520px, 86vw)" }}
+            >
+              <div className="v-rule flex-1" />
+              <div
+                className="lib-mono whitespace-nowrap"
+                style={{
+                  fontSize: "9px",
+                  letterSpacing: "0.32em",
+                  color: "rgba(201,169,110,0.5)",
+                }}
+              >
+                BY INVITATION · NO. 0001 — 0500
+              </div>
+              <div className="v-rule flex-1" />
             </div>
           )}
         </div>
