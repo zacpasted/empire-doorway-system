@@ -31,6 +31,7 @@ const Vault = () => {
   const navigate = useNavigate();
   const [rotIdx, setRotIdx] = useState(0);
   const [rotVisible, setRotVisible] = useState(true);
+  const [introPlaying, setIntroPlaying] = useState(true);
 
   // Determine reduced motion + returning member up-front (sync) to avoid flicker
   const { initialBeat, reducedMotion, returning } = useMemo(() => {
@@ -71,6 +72,10 @@ const Vault = () => {
       // mark entered already, nothing to do
       return;
     }
+    if (introPlaying) {
+      // wait for intro video to finish (or be skipped) before running beats
+      return;
+    }
 
     const schedule = (delay: number, fn: () => void) => {
       const id = window.setTimeout(fn, delay);
@@ -94,11 +99,12 @@ const Vault = () => {
     schedule(T.end, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
-  }, [returning, reducedMotion]);
+  }, [returning, reducedMotion, introPlaying]);
 
   const skipToCard = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
+    setIntroPlaying(false);
     setBeat(6);
     localStorage.setItem(ENTERED_KEY, "1");
   };
@@ -198,6 +204,19 @@ const Vault = () => {
       `}</style>
 
       <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
+        {/* Beat 0 — entry intro video (keyhole onto Zac). Plays as load-in. */}
+        {!returning && introPlaying && !reducedMotion && (
+          <video
+            src="/library-gate-intro.mp4"
+            autoPlay
+            muted
+            playsInline
+            onEnded={() => { setIntroPlaying(false); setSkipVisible(true); }}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "cover", zIndex: 5 }}
+          />
+        )}
+
         {/* Background freeze-frame revealed by the aperture (beat 4+) */}
         <div
           className="absolute inset-0 transition-opacity duration-700"
@@ -301,13 +320,14 @@ const Vault = () => {
           )}
         </div>
 
-        {/* Skip control — present from 0.5s, always available, never auto-hides */}
-        {skipVisible && !gateOpen && (
+        {/* Skip control — available during intro and beats, hides once card lands */}
+        {(introPlaying || skipVisible) && !gateOpen && (
           <button
             type="button"
             onClick={skipToCard}
-            className="absolute bottom-6 right-6 z-20"
+            className="absolute bottom-6 right-6"
             style={{
+              zIndex: 30,
               fontFamily: '"JetBrains Mono", ui-monospace, monospace',
               fontSize: "12px",
               letterSpacing: "0.22em",
