@@ -195,8 +195,22 @@ export const ClaimGate = () => {
   );
 
   return (
+    <>
+    <style>{`
+      @keyframes lib-card-enter {
+        0% { opacity: 0; transform: translateY(14px) scale(0.985); filter: blur(2px); }
+        100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+      }
+      .lib-card-enter {
+        animation: lib-card-enter 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        will-change: opacity, transform, filter;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lib-card-enter { animation: none; }
+      }
+    `}</style>
     <div
-      className={`relative w-[300px] md:w-[440px] lib-paper lib-deboss ${
+      className={`relative w-[300px] md:w-[440px] lib-paper lib-deboss lib-card-enter ${
         phase === "pressing" ? "lib-card-press" : ""
       } ${phase === "out" ? "lib-card-out" : ""}`}
       style={{
@@ -411,6 +425,7 @@ export const ClaimGate = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
