@@ -11,6 +11,7 @@ import courtyardImg from "@/assets/library-v9-courtyard.webp";
 import aceImg from "@/assets/library-v9-ace.png";
 import pawnImg from "@/assets/library-v9-pawn.webp";
 import courierImg from "@/assets/library-v9-courier.png";
+import waxSeal from "@/assets/library-wax-seal.png";
 
 // === PALETTE ===
 const WALNUT = "#3A2418";
@@ -468,20 +469,89 @@ const SceneRequest = () => {
 
       <div className="relative max-w-[1100px] mx-auto px-6 md:px-10 py-28 md:py-40">
         <div
-          className="relative mx-auto"
+          className="relative mx-auto overflow-hidden"
           style={{
-            background: BONE,
+            background:
+              "linear-gradient(135deg, #F5EFE0 0%, #EFE6D2 50%, #E8DCC2 100%)",
             padding: "56px 40px",
             border: `1px solid ${BRASS}`,
+            borderRadius: 2,
             boxShadow: "0 40px 100px rgba(0,0,0,0.55)",
           }}
         >
+          {/* Papyrus fibre overlay — lifted from the signup gate */}
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              opacity: 0.18,
+              mixBlendMode: "multiply",
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='lf'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.32  0 0 0 0 0.18  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23lf)'/%3E%3C/svg%3E\")",
+            }}
+          />
+          {/* Horizontal linen fibres */}
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              opacity: 0.08,
+              mixBlendMode: "multiply",
+              backgroundImage:
+                "repeating-linear-gradient(90deg, rgba(120,90,50,0.35) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(120,90,50,0.2) 0 1px, transparent 1px 4px)",
+            }}
+          />
+          {/* Debossed inner border */}
+          <div
+            aria-hidden
+            className="absolute pointer-events-none"
+            style={{
+              inset: 20,
+              border: "1px solid rgba(10,10,10,0.08)",
+              boxShadow: "0 1px 0 rgba(255,255,255,0.4)",
+            }}
+          />
+          {/* Corner filigree */}
+          {([
+            { top: 24, left: 24, r: 0 },
+            { top: 24, right: 24, r: 90 },
+            { bottom: 24, right: 24, r: 180 },
+            { bottom: 24, left: 24, r: 270 },
+          ] as const).map((pos, i) => (
+            <svg
+              key={i}
+              width="36" height="36" viewBox="0 0 40 40"
+              aria-hidden
+              className="absolute pointer-events-none"
+              style={{ ...pos, transform: `rotate(${pos.r}deg)`, opacity: 0.32 }}
+            >
+              <path
+                d="M2 14 Q2 2 14 2 M2 14 Q6 10 10 10 M14 2 Q10 6 10 10 M10 10 L14 14 M6 6 Q8 8 10 10"
+                fill="none" stroke={BRASS} strokeWidth="0.9" strokeLinecap="round"
+              />
+              <circle cx="10" cy="10" r="0.9" fill={BRASS} />
+            </svg>
+          ))}
+          {/* Ex-Libris watermark */}
+          <svg
+            aria-hidden
+            viewBox="0 0 380 380"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{ width: 420, height: 420, opacity: 0.04 }}
+          >
+            <circle cx="190" cy="190" r="180" fill="none" stroke="#0A0A0A" strokeWidth="1.5" />
+            <circle cx="190" cy="190" r="160" fill="none" stroke="#0A0A0A" strokeWidth="0.8" />
+            <text x="190" y="120" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" letterSpacing="6" fill="#0A0A0A">EX LIBRIS</text>
+            <text x="190" y="220" textAnchor="middle" fontFamily="Playfair Display, Georgia, serif" fontStyle="italic" fontSize="160" fill="#0A0A0A">P</text>
+            <text x="190" y="280" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="5" fill="#0A0A0A">THE PASTED LIBRARY</text>
+          </svg>
+
           {/* librarian's seal */}
           <div className="absolute" style={{ top: 18, right: 18 }}>
             <PMark size={24} color={OXBLOOD} strokeWidth={1.2} />
           </div>
 
-          <div className="grid md:grid-cols-12 gap-10 md:gap-16">
+          <div className="relative grid md:grid-cols-12 gap-10 md:gap-16">
             <div className="md:col-span-7">
               <div style={{ ...MONO, color: OXBLOOD, marginBottom: 22 }}>Request Access</div>
               <h2
@@ -517,8 +587,17 @@ const SceneRequest = () => {
 
             <div className="md:col-span-5">
               {sent ? (
-                <div style={{ fontFamily: PLAYFAIR, fontStyle: "italic", fontSize: 28, color: CHARCOAL }}>
-                  Received. We'll write back.
+                <div className="flex flex-col items-start gap-6">
+                  <div style={{ fontFamily: PLAYFAIR, fontStyle: "italic", fontSize: 28, color: CHARCOAL }}>
+                    Received. We'll write back.
+                  </div>
+                  <img
+                    src={waxSeal}
+                    alt=""
+                    width={48}
+                    height={48}
+                    style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.35))" }}
+                  />
                 </div>
               ) : (
                 <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-7">
@@ -549,22 +628,47 @@ const SceneRequest = () => {
                       style={{ fontFamily: DM, fontSize: 16, color: CHARCOAL, paddingBottom: 8, borderBottom: "1px solid rgba(10,10,10,0.18)" }}
                     />
                   </div>
+                  {/* Oxblood papyrus CTA — matches signup gate */}
                   <button
                     type="submit"
-                    className="group relative"
+                    className="group relative overflow-hidden"
                     style={{
                       ...MONO,
                       color: IVORY,
-                      background: OXBLOOD,
+                      background:
+                        "linear-gradient(135deg, #8A2626 0%, #7A1F1F 50%, #5C1414 100%)",
                       padding: "18px 36px",
+                      borderRadius: 10,
                       border: "1px solid transparent",
-                      transition: `border-color 300ms ${EASE}`,
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,220,180,0.18), inset 0 -1px 0 rgba(0,0,0,0.35), 0 6px 14px rgba(60,10,10,0.35)",
+                      transition: `border-color 300ms ${EASE}, filter 220ms ${EASE}`,
                     }}
                   >
-                    <span style={{ display: "inline-block", transition: `transform 300ms ${EASE}` }}>SEND →</span>
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-50"
+                      style={{
+                        opacity: 0.35,
+                        mixBlendMode: "overlay",
+                        backgroundImage:
+                          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='lg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' seed='11'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23lg)'/%3E%3C/svg%3E\")",
+                      }}
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        opacity: 0.18,
+                        mixBlendMode: "multiply",
+                        backgroundImage:
+                          "repeating-linear-gradient(90deg, rgba(40,5,5,0.6) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(40,5,5,0.35) 0 1px, transparent 1px 5px)",
+                      }}
+                    />
+                    <span className="lib-send-label relative inline-block" style={{ transition: `transform 300ms ${EASE}` }}>SEND →</span>
                     <style>{`
                       button[type="submit"]:hover { border-color: ${BRASS} !important; }
-                      button[type="submit"]:hover span { transform: translateX(4px); }
+                      button[type="submit"]:hover .lib-send-label { transform: translateX(4px); }
                     `}</style>
                   </button>
                 </form>
