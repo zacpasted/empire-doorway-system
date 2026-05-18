@@ -31,6 +31,7 @@ const Vault = () => {
   const [rotIdx, setRotIdx] = useState(0);
   const [rotVisible, setRotVisible] = useState(true);
   const [introPlaying, setIntroPlaying] = useState(true);
+  const [videoFading, setVideoFading] = useState(false);
 
   // Determine reduced motion + returning member up-front (sync) to avoid flicker
   const { initialBeat, reducedMotion, returning } = useMemo(() => {
@@ -104,10 +105,10 @@ const Vault = () => {
     }
 
     schedule(500, () => setSkipVisible(true));
-    schedule(0,    () => setBeat(4));
-    schedule(1200, () => setBeat(5));
-    schedule(2000, () => setBeat(6));
-    schedule(2500, () => localStorage.setItem(ENTERED_KEY, "1"));
+    schedule(200,  () => setBeat(4));
+    schedule(1500, () => setBeat(5));
+    schedule(2400, () => setBeat(6));
+    schedule(2900, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
   }, [returning, reducedMotion, introPlaying]);
@@ -115,6 +116,7 @@ const Vault = () => {
   const skipToCard = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
+    setVideoFading(true);
     setIntroPlaying(false);
     setBeat(6);
     localStorage.setItem(ENTERED_KEY, "1");
@@ -238,23 +240,36 @@ const Vault = () => {
 
       <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
         {/* Beat 0 — entry intro video (keyhole onto Zac). Plays as load-in. */}
-        {!returning && introPlaying && !reducedMotion && (
+        {!returning && !reducedMotion && (introPlaying || videoFading) && (
           <video
             src="/library-gate-intro.mp4"
             autoPlay
             muted
             playsInline
-            onEnded={() => { setIntroPlaying(false); setSkipVisible(true); }}
+            onEnded={() => {
+              setVideoFading(true);
+              setIntroPlaying(false);
+              setSkipVisible(true);
+              // unmount after the crossfade completes
+              window.setTimeout(() => setVideoFading(false), 900);
+            }}
             className="absolute inset-0 w-full h-full"
-            style={{ objectFit: "cover", zIndex: 5 }}
+            style={{
+              objectFit: "cover",
+              zIndex: 5,
+              opacity: introPlaying ? 1 : 0,
+              transition: "opacity 800ms cubic-bezier(0.22, 1, 0.36, 1)",
+              pointerEvents: "none",
+            }}
           />
         )}
 
         {/* Background freeze-frame revealed by the aperture (beat 4+) */}
         <div
-          className="absolute inset-0 transition-opacity duration-700"
+          className="absolute inset-0"
           style={{
             opacity: apertureOpen ? 1 : 0,
+            transition: "opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1)",
             background:
               "radial-gradient(ellipse at center, #8A2424 0%, #7A1F1F 55%, #5A1515 100%)",
           }}
