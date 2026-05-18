@@ -100,6 +100,7 @@ export const ClaimGate = () => {
   const [careerStage, setCareerStage] = useState<Stage>("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const submitting = phase !== "idle";
 
@@ -162,8 +163,7 @@ export const ClaimGate = () => {
     setTimeout(() => navigate("/welcome"), 320);
   };
 
-  // Field underline with focus-gold rule
-  const Field = (props: {
+  const renderField = (props: {
     id: string;
     type: string;
     label: string;
@@ -171,32 +171,28 @@ export const ClaimGate = () => {
     onChange: (v: string) => void;
     autoComplete?: string;
     placeholder?: string;
-  }) => {
-    const [focused, setFocused] = useState(false);
-    return (
-      <div>
-        <label htmlFor={props.id} style={labelStyle} className="block mb-2">{props.label}</label>
-        <input
-          id={props.id}
-          type={props.type}
-          autoComplete={props.autoComplete}
-          placeholder={props.placeholder}
-          value={props.value}
-          onChange={(e) => props.onChange(e.target.value)}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          disabled={submitting}
-          className="w-full bg-transparent px-0 py-2 text-charcoal placeholder:text-charcoal/25 focus:outline-none"
-          style={{
-            ...inputStyle,
-            borderBottomColor: focused
-              ? "rgba(201,169,110,0.6)"
-              : "rgba(10,10,10,0.18)",
-          }}
-        />
-      </div>
-    );
-  };
+  }) => (
+    <div key={props.id}>
+      <label htmlFor={props.id} style={labelStyle} className="block mb-2">{props.label}</label>
+      <input
+        id={props.id}
+        type={props.type}
+        autoComplete={props.autoComplete}
+        placeholder={props.placeholder}
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
+        onFocus={() => setFocusedField(props.id)}
+        onBlur={() => setFocusedField((f) => (f === props.id ? null : f))}
+        disabled={submitting}
+        className="w-full bg-transparent px-0 py-2 text-charcoal placeholder:text-charcoal/25 focus:outline-none"
+        style={{
+          ...inputStyle,
+          borderBottomColor:
+            focusedField === props.id ? "rgba(201,169,110,0.6)" : "rgba(10,10,10,0.18)",
+        }}
+      />
+    </div>
+  );
 
   return (
     <div
@@ -255,8 +251,8 @@ export const ClaimGate = () => {
         <div className="my-6"><KeyDivider /></div>
 
         <form onSubmit={handleSubmit} className="space-y-5 text-left">
-          <Field id="full_name" type="text" label="NAME" value={fullName} onChange={setFullName} autoComplete="name" />
-          <Field id="email" type="email" label="EMAIL" value={email} onChange={setEmail} autoComplete="email" />
+          {renderField({ id: "full_name", type: "text", label: "NAME", value: fullName, onChange: setFullName, autoComplete: "name" })}
+          {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
 
           {/* YOUR CHAPTER — stamp-style selector, no boxes */}
           <div>
@@ -303,7 +299,7 @@ export const ClaimGate = () => {
             </div>
           </div>
 
-          <Field id="location" type="text" label="CITY" value={location} onChange={setLocation} autoComplete="address-level2" placeholder="City, Country" />
+          {renderField({ id: "location", type: "text", label: "CITY", value: location, onChange: setLocation, autoComplete: "address-level2", placeholder: "City, Country" })}
 
           {error && <p className="lib-mono" style={{ color: "#7A1F1F" }}>{error}</p>}
 
