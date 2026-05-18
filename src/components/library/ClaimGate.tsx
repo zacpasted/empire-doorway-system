@@ -11,19 +11,20 @@ const schema = z.object({
   ),
   email: z.string().trim().email("Enter a valid email").max(255),
   location: z.string().trim().min(2, "Required").max(120),
-  career_stage: z.enum(["student", "associate", "owner"], {
-    errorMap: () => ({ message: "Choose a stage" }),
+  career_stage: z.enum(["student", "associate", "principal"], {
+    errorMap: () => ({ message: "Choose a chapter" }),
   }),
 });
 
 type Phase = "idle" | "pressing" | "out";
+type Stage = "" | "student" | "associate" | "principal";
 
 const CornerFiligree = ({ rotate = 0 }: { rotate?: number }) => (
   <svg
-    width="40"
-    height="40"
+    width="36"
+    height="36"
     viewBox="0 0 40 40"
-    style={{ transform: `rotate(${rotate}deg)`, opacity: 0.3 }}
+    style={{ transform: `rotate(${rotate}deg)`, opacity: 0.28 }}
     aria-hidden="true"
   >
     <path
@@ -46,15 +47,11 @@ const KeyDivider = () => (
     style={{ opacity: 0.5 }}
     className="mx-auto"
   >
-    {/* Bow (left) */}
     <circle cx="14" cy="9" r="6" fill="none" stroke="#C9A96E" strokeWidth="0.9" />
     <circle cx="14" cy="9" r="2.5" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-    {/* Shaft */}
     <line x1="20" y1="9" x2="150" y2="9" stroke="#C9A96E" strokeWidth="0.9" />
-    {/* Decorative collar */}
     <line x1="60" y1="6" x2="60" y2="12" stroke="#C9A96E" strokeWidth="0.8" />
     <line x1="64" y1="6" x2="64" y2="12" stroke="#C9A96E" strokeWidth="0.8" />
-    {/* Bit (right) */}
     <path d="M150 9 L168 9 L168 14 L162 14 L162 11 L156 11 L156 13 L150 13 Z" fill="none" stroke="#C9A96E" strokeWidth="0.9" strokeLinejoin="round" />
   </svg>
 );
@@ -68,66 +65,39 @@ const ExLibrisWatermark = () => (
   >
     <circle cx="190" cy="190" r="180" fill="none" stroke="#0A0A0A" strokeWidth="1.5" />
     <circle cx="190" cy="190" r="160" fill="none" stroke="#0A0A0A" strokeWidth="0.8" />
-    <text
-      x="190"
-      y="120"
-      textAnchor="middle"
-      fontFamily="JetBrains Mono, monospace"
-      fontSize="11"
-      letterSpacing="6"
-      fill="#0A0A0A"
-    >
-      EX LIBRIS
-    </text>
-    <text
-      x="190"
-      y="220"
-      textAnchor="middle"
-      fontFamily="Playfair Display, Georgia, serif"
-      fontStyle="italic"
-      fontSize="160"
-      fill="#0A0A0A"
-    >
-      P
-    </text>
-    <text
-      x="190"
-      y="280"
-      textAnchor="middle"
-      fontFamily="JetBrains Mono, monospace"
-      fontSize="9"
-      letterSpacing="5"
-      fill="#0A0A0A"
-    >
-      THE PASTED LIBRARY
-    </text>
+    <text x="190" y="120" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" letterSpacing="6" fill="#0A0A0A">EX LIBRIS</text>
+    <text x="190" y="220" textAnchor="middle" fontFamily="Playfair Display, Georgia, serif" fontStyle="italic" fontSize="160" fill="#0A0A0A">P</text>
+    <text x="190" y="280" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="5" fill="#0A0A0A">THE PASTED LIBRARY</text>
   </svg>
 );
 
 const Monogram56 = () => (
   <svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true">
     <ellipse cx="32" cy="32" rx="20" ry="28" fill="none" stroke="#C9A96E" strokeWidth="1.2" />
-    <text
-      x="32"
-      y="46"
-      textAnchor="middle"
-      fontFamily="Playfair Display, Georgia, serif"
-      fontStyle="italic"
-      fontWeight="500"
-      fontSize="40"
-      fill="#C9A96E"
-    >
-      P
-    </text>
+    <text x="32" y="46" textAnchor="middle" fontFamily="Playfair Display, Georgia, serif" fontStyle="italic" fontWeight="500" fontSize="40" fill="#C9A96E">P</text>
   </svg>
 );
+
+// Shared label styles per spec
+const labelStyle: React.CSSProperties = {
+  fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+  fontSize: "11px",
+  letterSpacing: "0.14em",
+  textTransform: "uppercase",
+  color: "rgba(10,10,10,0.5)",
+};
+
+const inputStyle: React.CSSProperties = {
+  borderBottom: "1px solid rgba(10,10,10,0.18)",
+  transition: "border-color 200ms ease",
+};
 
 export const ClaimGate = () => {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
-  const [careerStage, setCareerStage] = useState<"" | "student" | "associate" | "owner">("");
+  const [careerStage, setCareerStage] = useState<Stage>("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
 
@@ -171,7 +141,6 @@ export const ClaimGate = () => {
       return;
     }
 
-    // Kick off network + ritual in parallel
     setPhase("pressing");
     const [authError] = await Promise.all([
       runSupabase(),
@@ -193,6 +162,42 @@ export const ClaimGate = () => {
     setTimeout(() => navigate("/welcome"), 320);
   };
 
+  // Field underline with focus-gold rule
+  const Field = (props: {
+    id: string;
+    type: string;
+    label: string;
+    value: string;
+    onChange: (v: string) => void;
+    autoComplete?: string;
+    placeholder?: string;
+  }) => {
+    const [focused, setFocused] = useState(false);
+    return (
+      <div>
+        <label htmlFor={props.id} style={labelStyle} className="block mb-2">{props.label}</label>
+        <input
+          id={props.id}
+          type={props.type}
+          autoComplete={props.autoComplete}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={(e) => props.onChange(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          disabled={submitting}
+          className="w-full bg-transparent px-0 py-2 text-charcoal placeholder:text-charcoal/25 focus:outline-none"
+          style={{
+            ...inputStyle,
+            borderBottomColor: focused
+              ? "rgba(201,169,110,0.6)"
+              : "rgba(10,10,10,0.18)",
+          }}
+        />
+      </div>
+    );
+  };
+
   return (
     <div
       className={`relative w-[340px] md:w-[460px] lib-paper lib-deboss ${
@@ -204,7 +209,18 @@ export const ClaimGate = () => {
         padding: "48px 36px 28px",
       }}
     >
-      {/* Inner debossed border outline */}
+      {/* Cotton-paper fibre overlay (4%, multiply) */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: 0.04,
+          mixBlendMode: "multiply",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.8 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E\")",
+        }}
+      />
+
+      {/* Debossed inner border — 20px inside */}
       <div
         className="absolute pointer-events-none"
         style={{
@@ -214,13 +230,12 @@ export const ClaimGate = () => {
         }}
       />
 
-      {/* Corner filigree */}
-      <div className="absolute" style={{ top: 14, left: 14 }}><CornerFiligree rotate={0} /></div>
-      <div className="absolute" style={{ top: 14, right: 14 }}><CornerFiligree rotate={90} /></div>
-      <div className="absolute" style={{ bottom: 14, right: 14 }}><CornerFiligree rotate={180} /></div>
-      <div className="absolute" style={{ bottom: 14, left: 14 }}><CornerFiligree rotate={270} /></div>
+      {/* Corner filigree — just inside the deboss border */}
+      <div className="absolute" style={{ top: 22, left: 22 }}><CornerFiligree rotate={0} /></div>
+      <div className="absolute" style={{ top: 22, right: 22 }}><CornerFiligree rotate={90} /></div>
+      <div className="absolute" style={{ bottom: 22, right: 22 }}><CornerFiligree rotate={180} /></div>
+      <div className="absolute" style={{ bottom: 22, left: 22 }}><CornerFiligree rotate={270} /></div>
 
-      {/* Ex Libris watermark */}
       <ExLibrisWatermark />
 
       <div className="relative text-center">
@@ -237,38 +252,17 @@ export const ClaimGate = () => {
           Claim a Card. Walk the shelves. Take what is useful.
         </p>
 
-        {/* Key divider replaces the hr */}
         <div className="my-6"><KeyDivider /></div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-left">
+        <form onSubmit={handleSubmit} className="space-y-5 text-left">
+          <Field id="full_name" type="text" label="NAME" value={fullName} onChange={setFullName} autoComplete="name" />
+          <Field id="email" type="email" label="EMAIL" value={email} onChange={setEmail} autoComplete="email" />
+
+          {/* YOUR CHAPTER — stamp-style selector, no boxes */}
           <div>
-            <label htmlFor="full_name" className="lib-mono block mb-2 text-charcoal/70">Full name</label>
-            <input
-              id="full_name"
-              type="text"
-              autoComplete="name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              disabled={submitting}
-              className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="lib-mono block mb-2 text-charcoal/70">Email</label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={submitting}
-              className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
-            />
-          </div>
-          <div>
-            <label className="lib-mono block mb-2 text-charcoal/70">Career stage</label>
-            <div className="grid grid-cols-3 gap-2">
-              {(["student", "associate", "owner"] as const).map((stage) => {
+            <label style={labelStyle} className="block mb-3">YOUR CHAPTER</label>
+            <div className="flex items-center gap-6">
+              {(["student", "associate", "principal"] as const).map((stage) => {
                 const active = careerStage === stage;
                 return (
                   <button
@@ -276,55 +270,82 @@ export const ClaimGate = () => {
                     type="button"
                     disabled={submitting}
                     onClick={() => setCareerStage(stage)}
-                    className={`lib-mono py-2 px-2 border transition-colors ${
-                      active
-                        ? "bg-oxblood text-bone border-oxblood"
-                        : "bg-transparent text-charcoal/70 border-charcoal/25 hover:border-charcoal/60"
-                    }`}
-                    style={{ borderRadius: 2, fontSize: "10px", letterSpacing: "0.18em" }}
+                    className="relative pb-1 cursor-pointer"
+                    style={{
+                      fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+                      fontSize: "11px",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: active ? "#7A1F1F" : "rgba(10,10,10,0.55)",
+                      background: "transparent",
+                      border: "none",
+                      transition: "color 200ms ease",
+                    }}
                   >
-                    {stage.toUpperCase()}
+                    {stage}
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        bottom: -2,
+                        height: 1,
+                        width: "100%",
+                        background: "#C9A96E",
+                        transformOrigin: "left center",
+                        transform: active ? "scaleX(1)" : "scaleX(0)",
+                        transition: "transform 240ms cubic-bezier(0.22, 1, 0.36, 1)",
+                      }}
+                    />
                   </button>
                 );
               })}
             </div>
           </div>
-          <div>
-            <label htmlFor="location" className="lib-mono block mb-2 text-charcoal/70">Location</label>
-            <input
-              id="location"
-              type="text"
-              autoComplete="address-level2"
-              placeholder="City, Country"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              disabled={submitting}
-              className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
-            />
-          </div>
-          {error && <p className="lib-mono text-oxblood">{error}</p>}
 
+          <Field id="location" type="text" label="CITY" value={location} onChange={setLocation} autoComplete="address-level2" placeholder="City, Country" />
+
+          {error && <p className="lib-mono" style={{ color: "#7A1F1F" }}>{error}</p>}
+
+          {/* Grained oxblood CTA */}
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-oxblood text-bone py-3 px-6 lib-mono hover:bg-charcoal transition-all duration-200 disabled:opacity-90 cursor-pointer"
+            className="relative w-full py-3 px-6 lib-mono cursor-pointer overflow-hidden group"
             style={{
               borderRadius: 2,
+              background: "#7A1F1F",
+              color: "#F4F1EC",
+              transition: "filter 220ms ease",
               transform: phase === "pressing" ? "translateY(2px)" : undefined,
               filter: phase === "pressing" ? "brightness(0.85)" : undefined,
             }}
           >
-            APPLY FOR MY LIBRARY CARD
+            {/* leather grain overlay (2%) */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-[0.035]"
+              style={{
+                opacity: 0.02,
+                mixBlendMode: "overlay",
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E\")",
+              }}
+            />
+            <span className="relative">CLAIM MY CARD</span>
           </button>
-
-          <p className="lib-body text-charcoal/55 text-center pt-2 italic leading-relaxed" style={{ fontSize: "12px" }}>
-            Your card is the threshold to the wider PASTED universe — the library, the society, the rooms beyond it.
-          </p>
         </form>
 
-        {/* Wax seal — centerpiece */}
-        <div className="relative mt-6 flex justify-center" style={{ height: 72 }}>
-          {/* gold glow */}
+        {/* Closing italic line */}
+        <p
+          className="lib-body italic leading-relaxed text-center"
+          style={{ color: "rgba(10,10,10,0.55)", fontSize: "12px", marginTop: 32 }}
+        >
+          The Card is the threshold. The Library is the first room. There are others.
+        </p>
+
+        {/* Wax seal — signature at the foot of a letter */}
+        <div className="relative flex justify-center" style={{ marginTop: 32, height: 72 }}>
           {phase !== "idle" && (
             <div
               className="absolute lib-seal-glow pointer-events-none"
@@ -334,8 +355,7 @@ export const ClaimGate = () => {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                background:
-                  "radial-gradient(circle, rgba(201,169,110,0.35) 0%, rgba(201,169,110,0) 60%)",
+                background: "radial-gradient(circle, rgba(201,169,110,0.35) 0%, rgba(201,169,110,0) 60%)",
               }}
             />
           )}
@@ -354,6 +374,19 @@ export const ClaimGate = () => {
             }}
           />
         </div>
+
+        {/* Fine print */}
+        <p
+          className="lib-mono text-center"
+          style={{
+            marginTop: 32,
+            fontSize: "10px",
+            letterSpacing: "0.22em",
+            color: "rgba(10,10,10,0.45)",
+          }}
+        >
+          ONE EMAIL. NO SPAM. UNSUBSCRIBE AT ANY LINE.
+        </p>
       </div>
     </div>
   );
