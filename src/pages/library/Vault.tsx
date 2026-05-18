@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClaimGate } from "@/components/library/ClaimGate";
 import { useMember } from "@/hooks/useMember";
-const lockTransitionAsset = { url: "/library-lock-transition.mp4" };
+const lockTransitionAsset = { url: "/__l5e/assets-v1/c986dd84-3893-4ebf-8b3f-a090697f8855/library-lock-transition.mp4" };
 
 const ROTATING_MEMBERS = [
   "MEMBER 0001 — DR DREW BALLARD",
