@@ -1,25 +1,45 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Monogram } from "@/components/library/Monogram";
-import briefcaseClosed from "@/assets/briefcase-closed.jpg";
+import { useEffect, useState } from "react";
+import envelopeReceived from "@/assets/library-envelope-received.jpg";
 
 const Welcome = () => {
-  useEffect(() => { document.title = "Check your email — The PASTED Library"; }, []);
+  const [firstName, setFirstName] = useState("");
+
+  useEffect(() => {
+    document.title = "You are received — The PASTED Library";
+    try {
+      const n = sessionStorage.getItem("pasted_first_name") || "";
+      setFirstName(n);
+    } catch { /* noop */ }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-bone text-lib-charcoal flex flex-col">
-      <header className="max-w-[1240px] w-full mx-auto px-6 py-6">
-        <Link to="/"><Monogram size={36} variant="charcoal-on-bone" /></Link>
-      </header>
-      <main className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-        <h1 className="lib-editorial text-5xl md:text-7xl">Check your email.</h1>
-        <p className="lib-body mt-6 max-w-md text-lib-charcoal/75">
-          A sign-in link is on the way. Open it from any device — the Library will recognise you.
-        </p>
-        <div className="mt-14 max-w-[360px] w-full relative lib-grain">
-          <img src={briefcaseClosed} alt="" loading="lazy" className="w-full h-auto" />
+    <div className="min-h-screen relative overflow-hidden bg-black text-bone flex items-center justify-center px-6">
+      <img
+        src={envelopeReceived}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover lib-fade-in"
+        style={{ opacity: 0.55 }}
+      />
+      <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.55)" }} />
+      <div className="absolute inset-0 lib-grain pointer-events-none" />
+
+      <div className="relative z-10 text-center max-w-[560px] lib-fade-in">
+        <h1
+          className="lib-editorial text-bone"
+          style={{ fontSize: "clamp(36px, 6vw, 64px)", lineHeight: 1.1 }}
+        >
+          {firstName ? `${firstName}, you are received.` : "You are received."}
+        </h1>
+        <div className="mt-10 lib-mono lib-emboss-gold" style={{ letterSpacing: "0.28em", fontSize: "11px" }}>
+          YOUR CARD IS ON ITS WAY. CHECK YOUR EMAIL.
         </div>
-      </main>
-      <footer className="py-8" />
+        <div
+          className="mt-3 lib-mono"
+          style={{ letterSpacing: "0.22em", fontSize: "10px", color: "rgba(244,241,236,0.5)" }}
+        >
+          OPEN IT FROM ANY DEVICE — THE LIBRARY WILL RECOGNISE YOU.
+        </div>
+      </div>
     </div>
   );
 };
