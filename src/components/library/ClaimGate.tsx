@@ -173,7 +173,7 @@ export const ClaimGate = () => {
     placeholder?: string;
   }) => (
     <div key={props.id}>
-      <label htmlFor={props.id} style={labelStyle} className="block mb-2">{props.label}</label>
+      <label htmlFor={props.id} style={labelStyle} className="block mb-1.5">{props.label}</label>
       <input
         id={props.id}
         type={props.type}
@@ -184,7 +184,7 @@ export const ClaimGate = () => {
         onFocus={() => setFocusedField(props.id)}
         onBlur={() => setFocusedField((f) => (f === props.id ? null : f))}
         disabled={submitting}
-        className="w-full bg-transparent px-0 py-2 text-charcoal placeholder:text-charcoal/25 focus:outline-none"
+        className="w-full bg-transparent px-0 py-1.5 text-sm text-charcoal placeholder:text-charcoal/25 focus:outline-none"
         style={{
           ...inputStyle,
           borderBottomColor:
@@ -202,7 +202,7 @@ export const ClaimGate = () => {
       style={{
         borderRadius: 2,
         boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
-        padding: "28px 20px 18px",
+        padding: "24px 22px 16px",
         background:
           "linear-gradient(135deg, #F5EFE0 0%, #EFE6D2 50%, #E8DCC2 100%)",
       }}
@@ -247,22 +247,22 @@ export const ClaimGate = () => {
       <ExLibrisWatermark />
 
       <div className="relative text-center">
-        <div className="flex justify-center mb-3"><Monogram56 /></div>
+        <div className="flex justify-center mb-2"><Monogram56 /></div>
         <div className="lib-mono lib-emboss-gold" style={{ letterSpacing: "0.28em", fontSize: "10px" }}>
           THE PASTED LIBRARY
         </div>
-        <div className="mt-3 mx-auto" style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }} />
+        <div className="mt-2.5 mx-auto" style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }} />
 
-        <div className="lib-editorial text-lib-charcoal text-xl md:text-3xl leading-tight mt-5">
+        <div className="lib-editorial text-lib-charcoal text-xl md:text-3xl leading-tight mt-4">
           A vault of work,<br />given freely.
         </div>
-        <p className="lib-body text-lib-charcoal/70 mt-3 text-xs md:text-sm">
+        <p className="lib-body text-lib-charcoal/70 mt-2 text-xs md:text-sm">
           Claim a Card. Walk the shelves. Take what is useful.
         </p>
 
-        <div className="my-4"><KeyDivider /></div>
+        <div className="my-3"><KeyDivider /></div>
 
-        <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
+        <form onSubmit={handleSubmit} className="space-y-3 text-left">
           {renderField({ id: "full_name", type: "text", label: "NAME", value: fullName, onChange: setFullName, autoComplete: "name" })}
           {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
 
@@ -361,13 +361,13 @@ export const ClaimGate = () => {
         {/* Closing italic line */}
         <p
           className="lib-body italic leading-relaxed text-center"
-          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 18 }}
+          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 14 }}
         >
           The Card is the threshold. The Library is the first room. There are others.
         </p>
 
         {/* Wax seal — signature at the foot of a letter */}
-        <div className="relative flex justify-center" style={{ marginTop: 16, height: 56 }}>
+        <div className="relative flex justify-center" style={{ marginTop: 12, height: 48 }}>
           {phase !== "idle" && (
             <div
               className="absolute lib-seal-glow pointer-events-none"
@@ -384,12 +384,12 @@ export const ClaimGate = () => {
           <img
             src={waxSeal}
             alt=""
-            width={52}
-            height={52}
+            width={44}
+            height={44}
             className={phase === "pressing" || phase === "out" ? "lib-seal-press" : ""}
             style={{
-              width: 52,
-              height: 52,
+              width: 44,
+              height: 44,
               objectFit: "contain",
               filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.35))",
               transformOrigin: "center",
@@ -401,7 +401,7 @@ export const ClaimGate = () => {
         <p
           className="lib-mono text-center"
           style={{
-            marginTop: 16,
+            marginTop: 10,
             fontSize: "9px",
             letterSpacing: "0.2em",
             color: "rgba(10,10,10,0.45)",
