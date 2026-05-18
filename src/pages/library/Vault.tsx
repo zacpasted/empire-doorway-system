@@ -237,6 +237,39 @@ const Vault = () => {
         .v-chrome  { animation: lib-chrome-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both; }
         .v-ambient { animation: lib-glow-in 1200ms ease-out 100ms both; }
 
+        /* Skeleton — anchors the card + VSL footprint so nothing reflows on mount */
+        @keyframes lib-skeleton-shimmer {
+          0%   { background-position: -120% 0; }
+          100% { background-position: 220% 0; }
+        }
+        .v-skel {
+          position: absolute;
+          inset: 0;
+          border-radius: 2px;
+          background:
+            linear-gradient(
+              100deg,
+              rgba(245,239,224,0.04) 0%,
+              rgba(245,239,224,0.09) 45%,
+              rgba(245,239,224,0.14) 50%,
+              rgba(245,239,224,0.09) 55%,
+              rgba(245,239,224,0.04) 100%
+            ),
+            rgba(10,10,10,0.35);
+          background-size: 220% 100%, 100% 100%;
+          background-position: -120% 0, 0 0;
+          animation: lib-skeleton-shimmer 2200ms cubic-bezier(0.4,0,0.2,1) infinite;
+          box-shadow: inset 0 0 0 1px rgba(201,169,110,0.06);
+          pointer-events: none;
+        }
+        .v-skel-vsl {
+          position: absolute; inset: 0;
+          background:
+            radial-gradient(ellipse at center, rgba(245,239,224,0.04) 0%, rgba(0,0,0,0) 55%),
+            #0A0A0A;
+          pointer-events: none;
+        }
+
         /* Reduced motion: keep the same reserved-space layout, drop all motion.
            Elements still occupy their final positions so nothing shifts. */
         @media (prefers-reduced-motion: reduce) {
@@ -249,7 +282,8 @@ const Vault = () => {
           .v-card,
           .v-rule,
           .v-chrome,
-          .v-ambient {
+          .v-ambient,
+          .v-skel {
             animation: none !important;
           }
           .v-aperture-mask {
@@ -270,6 +304,18 @@ const Vault = () => {
       `}</style>
 
       <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
+        {/* VSL skeleton — sits behind the intro video so first paint is never empty */}
+        {!returning && !reducedMotion && (introPlaying || videoFading) && (
+          <div
+            className="v-skel-vsl"
+            aria-hidden="true"
+            style={{
+              zIndex: 4,
+              opacity: introPlaying ? 1 : 0,
+              transition: "opacity 600ms ease-out",
+            }}
+          />
+        )}
         {/* Beat 0 — entry intro video (keyhole onto Zac). Plays as load-in. */}
         {!returning && !reducedMotion && (introPlaying || videoFading) && (
           <video
