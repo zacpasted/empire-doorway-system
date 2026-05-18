@@ -721,6 +721,7 @@ const SceneFooter = () => (
 
 // === MAIN ===
 const LibraryHome = () => {
+  const { session, loading } = useMember();
   const [scrolled, setScrolled] = useState(false);
   const [activeScene, setActiveScene] = useState(0);
   const [reading, setReading] = useState<ReadingContent | null>(null);
@@ -742,6 +743,13 @@ const LibraryHome = () => {
   // keep BOOKS / reading panel wired up for future use even if not surfaced on landing
   void plaqueImg; void BOOKS; void getReadingFor;
 
+  if (loading) {
+    return <div style={{ background: WALNUT_DEEP, minHeight: "100vh" }} />;
+  }
+  if (!session) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div style={{ background: WALNUT_DEEP, color: IVORY, minHeight: "100vh" }}>
       <Header scrolled={scrolled} />
@@ -753,7 +761,6 @@ const LibraryHome = () => {
       <SceneDispatches />
       <SceneReadingRoom />
       <SceneEthos />
-      <SceneRequest />
       <SceneFooter />
 
       <ReadingPanel content={reading} onClose={() => setReading(null)} />
