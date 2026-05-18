@@ -283,7 +283,7 @@ export const ClaimGate = () => {
           {/* YOUR CHAPTER — stamp-style selector, no boxes */}
           <div>
             <label style={labelStyle} className="block mb-2.5">YOUR CHAPTER</label>
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
               {(["student", "associate", "principal"] as const).map((stage) => {
                 const active = careerStage === stage;
                 return (
@@ -292,37 +292,53 @@ export const ClaimGate = () => {
                     type="button"
                     disabled={submitting}
                     onClick={() => setCareerStage(stage)}
-                    className="relative pb-1 cursor-pointer"
+                    className="cg-chip relative cursor-pointer overflow-hidden flex-1"
                     style={{
                       fontFamily: '"JetBrains Mono", ui-monospace, monospace',
                       fontSize: "10px",
                       letterSpacing: "0.16em",
                       textTransform: "uppercase",
-                      color: active ? "#7A1F1F" : "rgba(10,10,10,0.55)",
-                      background: "transparent",
-                      border: "none",
-                      transition: "color 200ms ease",
+                      color: active ? "#7A1F1F" : "rgba(10,10,10,0.65)",
+                      background: active
+                        ? "linear-gradient(180deg, rgba(201,169,110,0.18) 0%, rgba(201,169,110,0.08) 100%)"
+                        : "linear-gradient(180deg, rgba(201,169,110,0.06) 0%, rgba(201,169,110,0.02) 100%)",
+                      border: `1px solid ${active ? "rgba(122,31,31,0.55)" : "rgba(201,169,110,0.45)"}`,
+                      borderRadius: 10,
+                      padding: "9px 12px",
+                      boxShadow: active
+                        ? "inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 0 rgba(122,31,31,0.08)"
+                        : "inset 0 1px 0 rgba(255,255,255,0.45)",
+                      transition: "color 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease",
                     }}
                   >
-                    {stage}
-                    <span
-                      aria-hidden="true"
-                      style={{
-                        position: "absolute",
-                        left: 0,
-                        bottom: -2,
-                        height: 1,
-                        width: "100%",
-                        background: "#C9A96E",
-                        transformOrigin: "left center",
-                        transform: active ? "scaleX(1)" : "scaleX(0)",
-                        transition: "transform 240ms cubic-bezier(0.22, 1, 0.36, 1)",
-                      }}
-                    />
+                    <span className="relative z-10">{stage}</span>
+                    <span aria-hidden className="cg-chip-shimmer" />
                   </button>
                 );
               })}
             </div>
+            <style>{`
+              .cg-chip { position: relative; }
+              .cg-chip-shimmer {
+                position: absolute;
+                top: 0; left: -120%;
+                width: 60%; height: 100%;
+                background: linear-gradient(110deg, transparent 0%, rgba(255,236,196,0) 35%, rgba(255,236,196,0.45) 50%, rgba(255,236,196,0) 65%, transparent 100%);
+                pointer-events: none;
+                animation: cg-chip-shimmer 4.2s cubic-bezier(0.22,1,0.36,1) infinite;
+              }
+              .cg-chip:nth-child(2) .cg-chip-shimmer { animation-delay: 1.4s; }
+              .cg-chip:nth-child(3) .cg-chip-shimmer { animation-delay: 2.8s; }
+              .cg-chip:hover { border-color: rgba(122,31,31,0.45) !important; }
+              @keyframes cg-chip-shimmer {
+                0%   { left: -120%; }
+                55%  { left: 160%; }
+                100% { left: 160%; }
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .cg-chip-shimmer { animation: none; display: none; }
+              }
+            `}</style>
           </div>
 
           {renderField({ id: "location", type: "text", label: "CITY", value: location, onChange: setLocation, autoComplete: "address-level2", placeholder: "City, Country" })}
