@@ -266,19 +266,6 @@ export const ClaimGate = () => {
             />
           </div>
           <div>
-            <label htmlFor="location" className="lib-mono block mb-2 text-charcoal/70">Location</label>
-            <input
-              id="location"
-              type="text"
-              autoComplete="address-level2"
-              placeholder="City, Country"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              disabled={submitting}
-              className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
-            />
-          </div>
-          <div>
             <label className="lib-mono block mb-2 text-charcoal/70">Career stage</label>
             <div className="grid grid-cols-3 gap-2">
               {(["student", "associate", "owner"] as const).map((stage) => {
@@ -302,6 +289,19 @@ export const ClaimGate = () => {
               })}
             </div>
           </div>
+          <div>
+            <label htmlFor="location" className="lib-mono block mb-2 text-charcoal/70">Location</label>
+            <input
+              id="location"
+              type="text"
+              autoComplete="address-level2"
+              placeholder="City, Country"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              disabled={submitting}
+              className="w-full bg-transparent border-b border-charcoal/30 px-0 py-2 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-oxblood transition-colors"
+            />
+          </div>
           {error && <p className="lib-mono text-oxblood">{error}</p>}
 
           <button
@@ -314,11 +314,11 @@ export const ClaimGate = () => {
               filter: phase === "pressing" ? "brightness(0.85)" : undefined,
             }}
           >
-            CLAIM A CARD
+            APPLY FOR MY LIBRARY CARD
           </button>
 
-          <p className="lib-mono text-charcoal/40 text-center pt-1" style={{ fontSize: "10px" }}>
-            ONE EMAIL. NO SPAM. UNSUBSCRIBE AT ANY LINE.
+          <p className="lib-body text-charcoal/55 text-center pt-2 italic leading-relaxed" style={{ fontSize: "12px" }}>
+            Your card is the threshold to the wider PASTED universe — the library, the society, the rooms beyond it.
           </p>
         </form>
 
