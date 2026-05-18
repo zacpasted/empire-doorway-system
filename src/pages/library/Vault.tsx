@@ -105,10 +105,10 @@ const Vault = () => {
     }
 
     schedule(500, () => setSkipVisible(true));
-    schedule(200,  () => setBeat(4));
-    schedule(1500, () => setBeat(5));
-    schedule(2400, () => setBeat(6));
-    schedule(2900, () => localStorage.setItem(ENTERED_KEY, "1"));
+    schedule(100,  () => setBeat(4));
+    schedule(900,  () => setBeat(5));
+    schedule(1800, () => setBeat(6));
+    schedule(2300, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
   }, [returning, reducedMotion, introPlaying]);
