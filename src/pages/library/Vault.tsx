@@ -36,8 +36,6 @@ const Vault = () => {
   const { initialBeat, reducedMotion, returning } = useMemo(() => {
     if (typeof window === "undefined") return { initialBeat: 1 as Beat, reducedMotion: false, returning: false };
     const rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const ret = localStorage.getItem(ENTERED_KEY) === "1";
-    if (ret) return { initialBeat: 6 as Beat, reducedMotion: rm, returning: true };
     return { initialBeat: 1 as Beat, reducedMotion: rm, returning: false };
   }, []);
 
