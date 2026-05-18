@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MagicLinkForm } from "@/components/library/MagicLinkForm";
-import { OpenBookFrame } from "@/components/library/OpenBookFrame";
 import { useMember } from "@/hooks/useMember";
-import heroImg from "@/assets/library-hero.jpg";
 
 const ROTATING_MEMBERS = [
   "MEMBER 0001 — DR DREW BALLARD",
@@ -17,6 +15,8 @@ const Vault = () => {
   const navigate = useNavigate();
   const [rotIdx, setRotIdx] = useState(0);
   const [rotVisible, setRotVisible] = useState(true);
+  const [gateOpen, setGateOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     document.title = "The PASTED Library — A vault of work, given freely";
@@ -37,55 +37,67 @@ const Vault = () => {
     return () => clearInterval(t);
   }, []);
 
+  const handleEnded = () => setGateOpen(true);
+  const handleSkip = () => setGateOpen(true);
+
   return (
     <div className="min-h-screen bg-bone text-lib-charcoal">
-      {/* Hero — antique bookshelf scene with open-book die-cut frame */}
-      <section className="relative w-full overflow-hidden" style={{ minHeight: "min(820px, 92vh)" }}>
-        <img
-          src={heroImg}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          fetchPriority="high"
+      {/* Cinematic intro — full-screen video, transitions to gate on end */}
+      <section className="fixed inset-0 w-full h-full overflow-hidden bg-black">
+        <video
+          ref={videoRef}
+          src="/library-gate-intro.mp4"
+          autoPlay
+          muted
+          playsInline
+          onEnded={handleEnded}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${gateOpen ? "opacity-30" : "opacity-100"}`}
         />
-        {/* warm vignette */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ boxShadow: "inset 0 0 360px 80px rgba(0,0,0,0.75)" }}
-        />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: gateOpen ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.15)", transition: "background 1s ease" }} />
         <div className="absolute inset-0 lib-grain pointer-events-none" />
 
-        <div className="relative max-w-[1240px] mx-auto px-6 py-14 md:py-20 min-h-[inherit] flex items-center justify-center" style={{ minHeight: "min(820px, 92vh)" }}>
-          <OpenBookFrame className="w-[260px] md:w-[380px]">
-            <div className="lib-display text-lib-charcoal text-xl md:text-2xl leading-tight">
-              The PASTED Library
+        {!gateOpen && (
+          <button
+            type="button"
+            onClick={handleSkip}
+            className="absolute top-6 right-6 lib-mono text-bone/60 hover:text-bone transition-colors z-10"
+            style={{ letterSpacing: "0.22em", fontSize: "10px" }}
+          >
+            SKIP →
+          </button>
+        )}
+
+        {/* Gate panel — reveals after video ends */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center px-6 transition-all duration-1000 ${
+            gateOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+          }`}
+        >
+          <div
+            className="w-[340px] md:w-[460px] bg-bone px-8 md:px-12 py-12 md:py-14 text-center"
+            style={{ borderRadius: 2, boxShadow: "0 30px 80px rgba(0,0,0,0.5)" }}
+          >
+            <div className="lib-mono lib-emboss-gold" style={{ letterSpacing: "0.28em", fontSize: "10px" }}>
+              THE PASTED LIBRARY
             </div>
-            <div className="my-3 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
-            <div className="lib-editorial text-lib-charcoal text-lg md:text-2xl">
+            <div className="my-4 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
+            <div className="lib-editorial text-lib-charcoal text-2xl md:text-3xl leading-tight">
               A vault of work,<br />given freely.
             </div>
-          </OpenBookFrame>
-        </div>
-      </section>
-
-      {/* Body */}
-      <section className="max-w-[720px] mx-auto px-6 py-20 md:py-28 text-center">
-        <p className="lib-body text-lib-charcoal/85" style={{ maxWidth: 640, margin: "0 auto" }}>
-          Frameworks. Scripts. Decks. Playbooks. The same instruments we use
-          inside PASTED, placed on a shelf and made open. Claim a Card. Walk the
-          shelves. Take what is useful.
-        </p>
-
-        <div className="mt-14">
-          <MagicLinkForm mode="claim" />
-        </div>
-
-        <div className="mt-20">
-          <div
-            className={`lib-mono text-lib-charcoal/55 transition-opacity duration-400 ${
-              rotVisible ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {ROTATING_MEMBERS[rotIdx]}
+            <p className="lib-body text-lib-charcoal/70 mt-5 text-sm">
+              Claim a Card. Walk the shelves. Take what is useful.
+            </p>
+            <div className="mt-8">
+              <MagicLinkForm mode="claim" />
+            </div>
+            <div className="mt-6">
+              <div
+                className={`lib-mono text-lib-charcoal/45 transition-opacity duration-500 ${rotVisible ? "opacity-100" : "opacity-0"}`}
+                style={{ fontSize: "10px", letterSpacing: "0.22em" }}
+              >
+                {ROTATING_MEMBERS[rotIdx]}
+              </div>
+            </div>
           </div>
         </div>
       </section>
