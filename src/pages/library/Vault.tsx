@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClaimGate } from "@/components/library/ClaimGate";
 import { useMember } from "@/hooks/useMember";
-const lockTransitionAsset = { url: "/__l5e/assets-v1/c986dd84-3893-4ebf-8b3f-a090697f8855/library-lock-transition.mp4" };
 
 const ROTATING_MEMBERS = [
   "MEMBER 0001 — DR DREW BALLARD",
@@ -91,12 +90,10 @@ const Vault = () => {
     }
 
     schedule(500, () => setSkipVisible(true));
-    schedule(0,    () => setBeat(2));
-    schedule(800,  () => setBeat(3));
-    schedule(2600, () => setBeat(4));
-    schedule(3800, () => setBeat(5));
-    schedule(4600, () => setBeat(6));
-    schedule(5100, () => localStorage.setItem(ENTERED_KEY, "1"));
+    schedule(0,    () => setBeat(4));
+    schedule(1200, () => setBeat(5));
+    schedule(2000, () => setBeat(6));
+    schedule(2500, () => localStorage.setItem(ENTERED_KEY, "1"));
 
     return () => { timers.current.forEach(clearTimeout); timers.current = []; };
   }, [returning, reducedMotion, introPlaying]);
@@ -231,21 +228,6 @@ const Vault = () => {
 
         {/* Beat 1 — darkness breath */}
         {beat === 1 && !reducedMotion && <div className="v-breath" />}
-
-        {/* Beats 2–3 — key revealed and turning */}
-        {(beat === 2 || beat === 3) && !reducedMotion && (
-          <>
-            <video
-              src={lockTransitionAsset.url}
-              autoPlay
-              muted
-              playsInline
-              className={`v-keyclip ${beat === 3 ? "v-keyclip-fade" : ""}`}
-              style={{ zIndex: 6 }}
-            />
-            {beat === 3 && <div className="v-bloom" />}
-          </>
-        )}
 
         {/* Beat 4 — aperture dilation: a keyhole-shaped reveal of the background */}
         {beat === 4 && !reducedMotion && (
