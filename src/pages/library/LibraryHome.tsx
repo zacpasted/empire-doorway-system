@@ -741,7 +741,7 @@ const LibraryHome = () => {
   }, []);
 
   // keep BOOKS / reading panel wired up for future use even if not surfaced on landing
-  void plaqueImg; void BOOKS; void getReadingFor;
+  void plaqueImg; void BOOKS; void getReadingFor; void SceneRequest; void waxSeal;
 
   if (loading) {
     return <div style={{ background: WALNUT_DEEP, minHeight: "100vh" }} />;
