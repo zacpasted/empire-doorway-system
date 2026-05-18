@@ -204,6 +204,19 @@ const Vault = () => {
       `}</style>
 
       <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
+        {/* Beat 0 — entry intro video (keyhole onto Zac). Plays as load-in. */}
+        {!returning && introPlaying && !reducedMotion && (
+          <video
+            src="/library-gate-intro.mp4"
+            autoPlay
+            muted
+            playsInline
+            onEnded={() => { setIntroPlaying(false); setSkipVisible(true); }}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "cover", zIndex: 5 }}
+          />
+        )}
+
         {/* Background freeze-frame revealed by the aperture (beat 4+) */}
         <div
           className="absolute inset-0 transition-opacity duration-700"
