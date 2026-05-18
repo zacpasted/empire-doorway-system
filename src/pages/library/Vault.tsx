@@ -236,6 +236,37 @@ const Vault = () => {
         }
         .v-chrome  { animation: lib-chrome-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both; }
         .v-ambient { animation: lib-glow-in 1200ms ease-out 100ms both; }
+
+        /* Reduced motion: keep the same reserved-space layout, drop all motion.
+           Elements still occupy their final positions so nothing shifts. */
+        @media (prefers-reduced-motion: reduce) {
+          .v-breath,
+          .v-bloom,
+          .v-keyclip-fade,
+          .v-aperture-mask,
+          .v-wordmark.lit,
+          .v-wordmark.lit-mono,
+          .v-card,
+          .v-rule,
+          .v-chrome,
+          .v-ambient {
+            animation: none !important;
+          }
+          .v-aperture-mask {
+            transform: translate(-50%, -50%) scale(14) !important;
+            filter: none !important;
+          }
+          .v-rule { transform: scaleX(1) !important; opacity: 1 !important; }
+          .v-chrome,
+          .v-ambient { opacity: 1 !important; transform: none !important; }
+          .v-card { opacity: 1 !important; transform: none !important; }
+          .v-wordmark.lit,
+          .v-wordmark.lit-mono {
+            background: none !important;
+            -webkit-text-fill-color: #C9A96E !important;
+            color: #C9A96E !important;
+          }
+        }
       `}</style>
 
       <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
