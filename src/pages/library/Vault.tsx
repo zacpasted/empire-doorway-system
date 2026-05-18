@@ -291,6 +291,18 @@ const Vault = () => {
         /* Reduced motion: keep the same reserved-space layout, drop all motion.
            Elements still occupy their final positions so nothing shifts. */
         @media (prefers-reduced-motion: reduce) {
+          /* Neutralize every animation + inline transition inside the Vault stage.
+             Inline `transition:` styles win on specificity, so target them with [style*]. */
+          .v-stage *,
+          .v-stage *::before,
+          .v-stage *::after {
+            animation-duration: 0.001ms !important;
+            animation-delay: 0ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            transition-delay: 0ms !important;
+            scroll-behavior: auto !important;
+          }
           .v-breath,
           .v-bloom,
           .v-keyclip-fade,
@@ -321,7 +333,7 @@ const Vault = () => {
         }
       `}</style>
 
-      <section className="fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
+      <section className="v-stage fixed inset-0 w-full h-full overflow-hidden" style={{ background: "#0A0A0A" }}>
         {/* VSL skeleton — sits behind the intro video so first paint is never empty */}
         {!returning && !reducedMotion && (introPlaying || videoFading) && (
           <div
