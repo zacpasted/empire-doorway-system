@@ -292,7 +292,7 @@ const Vault = () => {
            Elements still occupy their final positions so nothing shifts. */
         @media (prefers-reduced-motion: reduce) {
           /* Neutralize every animation + inline transition inside the Vault stage.
-             Inline `transition:` styles win on specificity, so target them with [style*]. */
+             Inline transition styles win on specificity, so we lower their duration globally. */
           .v-stage *,
           .v-stage *::before,
           .v-stage *::after {
