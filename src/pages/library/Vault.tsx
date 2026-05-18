@@ -481,11 +481,28 @@ const Vault = () => {
             className="v-card flex flex-col items-center mt-6 relative"
             style={{
               width: "min(440px, 92vw)",
-              visibility: gateOpen ? "visible" : "hidden",
             }}
             aria-hidden={!gateOpen}
           >
-            {gateOpen && <ClaimGate />}
+            {/* Skeleton anchor — same footprint as ClaimGate, fades out as the card lands */}
+            <div
+              className="relative w-full"
+              style={{ minHeight: 620 }}
+            >
+              <div
+                aria-hidden="true"
+                className="v-skel"
+                style={{
+                  opacity: gateOpen ? 0 : 0.9,
+                  transition: "opacity 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
+              />
+              {gateOpen && (
+                <div className="relative flex justify-center">
+                  <ClaimGate />
+                </div>
+              )}
+            </div>
             <div className="mt-6" style={{ minHeight: "1em" }}>
               <div
                 className={`lib-mono transition-opacity duration-500 ${rotVisible && gateOpen ? "opacity-100" : "opacity-0"}`}
