@@ -248,16 +248,16 @@ export const ClaimGate = () => {
           Claim a Card. Walk the shelves. Take what is useful.
         </p>
 
-        <div className="my-5"><KeyDivider /></div>
+        <div className="my-4"><KeyDivider /></div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-left">
+        <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
           {renderField({ id: "full_name", type: "text", label: "NAME", value: fullName, onChange: setFullName, autoComplete: "name" })}
           {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
 
           {/* YOUR CHAPTER — stamp-style selector, no boxes */}
           <div>
-            <label style={labelStyle} className="block mb-3">YOUR CHAPTER</label>
-            <div className="flex items-center gap-6">
+            <label style={labelStyle} className="block mb-2.5">YOUR CHAPTER</label>
+            <div className="flex items-center justify-between gap-2">
               {(["student", "associate", "principal"] as const).map((stage) => {
                 const active = careerStage === stage;
                 return (
@@ -269,8 +269,8 @@ export const ClaimGate = () => {
                     className="relative pb-1 cursor-pointer"
                     style={{
                       fontFamily: '"JetBrains Mono", ui-monospace, monospace',
-                      fontSize: "11px",
-                      letterSpacing: "0.18em",
+                      fontSize: "10px",
+                      letterSpacing: "0.16em",
                       textTransform: "uppercase",
                       color: active ? "#7A1F1F" : "rgba(10,10,10,0.55)",
                       background: "transparent",
@@ -307,9 +307,9 @@ export const ClaimGate = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="relative w-full py-3 px-6 lib-mono cursor-pointer overflow-hidden group"
+            className="relative w-full py-3 px-6 lib-mono cursor-pointer overflow-hidden group mt-1"
             style={{
-              borderRadius: 2,
+              borderRadius: 10,
               background: "#7A1F1F",
               color: "#F4F1EC",
               transition: "filter 220ms ease",
@@ -335,13 +335,13 @@ export const ClaimGate = () => {
         {/* Closing italic line */}
         <p
           className="lib-body italic leading-relaxed text-center"
-          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 22 }}
+          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 18 }}
         >
           The Card is the threshold. The Library is the first room. There are others.
         </p>
 
         {/* Wax seal — signature at the foot of a letter */}
-        <div className="relative flex justify-center" style={{ marginTop: 22, height: 60 }}>
+        <div className="relative flex justify-center" style={{ marginTop: 16, height: 56 }}>
           {phase !== "idle" && (
             <div
               className="absolute lib-seal-glow pointer-events-none"
@@ -375,7 +375,7 @@ export const ClaimGate = () => {
         <p
           className="lib-mono text-center"
           style={{
-            marginTop: 22,
+            marginTop: 16,
             fontSize: "9px",
             letterSpacing: "0.2em",
             color: "rgba(10,10,10,0.45)",
