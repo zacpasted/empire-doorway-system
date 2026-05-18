@@ -343,19 +343,21 @@ const Vault = () => {
           }}
         >
           {/* Monogram + wordmark */}
-          <div className="flex flex-col items-center" style={{ marginBottom: gateOpen ? 28 : 0 }}>
-            {gateOpen && (
-              <div
-                className="v-chrome lib-mono mb-3"
-                style={{
-                  fontSize: "9px",
-                  letterSpacing: "0.42em",
-                  color: "rgba(201,169,110,0.55)",
-                }}
-              >
-                EST. MMXXIV · VOLUME I
-              </div>
-            )}
+          <div className="flex flex-col items-center" style={{ marginBottom: 28 }}>
+            {/* Always reserve the EST. line slot to prevent vertical shift when it appears */}
+            <div
+              className="v-chrome lib-mono mb-3"
+              style={{
+                fontSize: "9px",
+                letterSpacing: "0.42em",
+                color: "rgba(201,169,110,0.55)",
+                opacity: gateOpen ? 1 : 0,
+                transition: "opacity 500ms ease-out",
+                minHeight: "1em",
+              }}
+            >
+              EST. MMXXIV · VOLUME I
+            </div>
             <div
               className={`v-wordmark lit-mono ${wordmarkLit ? "lit" : ""}`}
               style={{
@@ -367,25 +369,17 @@ const Vault = () => {
             >
               ⬭ P ⬭
             </div>
-            {gateOpen ? (
-              <div className="flex items-center gap-4" style={{ width: "min(520px, 86vw)" }}>
-                <div className="v-rule flex-1" />
-                <div
-                  className={`v-wordmark ${wordmarkLit ? "lit" : ""} whitespace-nowrap`}
-                  style={{
-                    fontFamily: '"JetBrains Mono", ui-monospace, monospace',
-                    fontSize: "13px",
-                    letterSpacing: "0.32em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  THE PASTED LIBRARY
-                </div>
-                <div className="v-rule flex-1" />
-              </div>
-            ) : (
+            {/* Stable wordmark row — flanking rules fade in once the gate opens; layout never reflows */}
+            <div className="flex items-center gap-4" style={{ width: "min(520px, 86vw)" }}>
               <div
-                className={`v-wordmark ${wordmarkLit ? "lit" : ""}`}
+                className="v-rule flex-1"
+                style={{
+                  opacity: gateOpen ? 1 : 0,
+                  transition: "opacity 600ms ease-out",
+                }}
+              />
+              <div
+                className={`v-wordmark ${wordmarkLit ? "lit" : ""} whitespace-nowrap`}
                 style={{
                   fontFamily: '"JetBrains Mono", ui-monospace, monospace',
                   fontSize: "13px",
@@ -395,23 +389,35 @@ const Vault = () => {
               >
                 THE PASTED LIBRARY
               </div>
-            )}
+              <div
+                className="v-rule flex-1"
+                style={{
+                  opacity: gateOpen ? 1 : 0,
+                  transition: "opacity 600ms ease-out",
+                }}
+              />
+            </div>
           </div>
 
-          {/* The card */}
-          {gateOpen && (
-            <div className="v-card flex flex-col items-center mt-6 relative">
-              <ClaimGate />
-              <div className="mt-6">
-                <div
-                  className={`lib-mono transition-opacity duration-500 ${rotVisible ? "opacity-100" : "opacity-0"}`}
-                  style={{ fontSize: "10px", letterSpacing: "0.22em", color: "rgba(244,241,236,0.5)" }}
-                >
-                  {ROTATING_MEMBERS[rotIdx]}
-                </div>
+          {/* The card — slot is always present so the flex column doesn't recentre when ClaimGate mounts */}
+          <div
+            className="v-card flex flex-col items-center mt-6 relative"
+            style={{
+              width: "min(440px, 92vw)",
+              visibility: gateOpen ? "visible" : "hidden",
+            }}
+            aria-hidden={!gateOpen}
+          >
+            {gateOpen && <ClaimGate />}
+            <div className="mt-6" style={{ minHeight: "1em" }}>
+              <div
+                className={`lib-mono transition-opacity duration-500 ${rotVisible && gateOpen ? "opacity-100" : "opacity-0"}`}
+                style={{ fontSize: "10px", letterSpacing: "0.22em", color: "rgba(244,241,236,0.5)" }}
+              >
+                {ROTATING_MEMBERS[rotIdx]}
               </div>
             </div>
-          )}
+          </div>
 
           {/* Footer threshold mark */}
           {gateOpen && (
