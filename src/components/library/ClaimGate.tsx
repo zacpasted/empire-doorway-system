@@ -196,13 +196,13 @@ export const ClaimGate = () => {
 
   return (
     <div
-      className={`relative w-[340px] md:w-[460px] lib-paper lib-deboss ${
+      className={`relative w-[300px] md:w-[440px] lib-paper lib-deboss ${
         phase === "pressing" ? "lib-card-press" : ""
       } ${phase === "out" ? "lib-card-out" : ""}`}
       style={{
         borderRadius: 2,
         boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
-        padding: "32px 22px 20px",
+        padding: "28px 20px 18px",
       }}
     >
       {/* Cotton-paper fibre overlay (4%, multiply) */}
@@ -241,16 +241,16 @@ export const ClaimGate = () => {
         </div>
         <div className="mt-3 mx-auto" style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }} />
 
-        <div className="lib-editorial text-lib-charcoal text-2xl md:text-3xl leading-tight mt-6">
+        <div className="lib-editorial text-lib-charcoal text-xl md:text-3xl leading-tight mt-5">
           A vault of work,<br />given freely.
         </div>
-        <p className="lib-body text-lib-charcoal/70 mt-4 text-sm">
+        <p className="lib-body text-lib-charcoal/70 mt-3 text-xs md:text-sm">
           Claim a Card. Walk the shelves. Take what is useful.
         </p>
 
-        <div className="my-6"><KeyDivider /></div>
+        <div className="my-5"><KeyDivider /></div>
 
-        <form onSubmit={handleSubmit} className="space-y-5 text-left">
+        <form onSubmit={handleSubmit} className="space-y-4 text-left">
           {renderField({ id: "full_name", type: "text", label: "NAME", value: fullName, onChange: setFullName, autoComplete: "name" })}
           {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
 
@@ -335,13 +335,13 @@ export const ClaimGate = () => {
         {/* Closing italic line */}
         <p
           className="lib-body italic leading-relaxed text-center"
-          style={{ color: "rgba(10,10,10,0.55)", fontSize: "12px", marginTop: 32 }}
+          style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 22 }}
         >
           The Card is the threshold. The Library is the first room. There are others.
         </p>
 
         {/* Wax seal — signature at the foot of a letter */}
-        <div className="relative flex justify-center" style={{ marginTop: 32, height: 72 }}>
+        <div className="relative flex justify-center" style={{ marginTop: 22, height: 60 }}>
           {phase !== "idle" && (
             <div
               className="absolute lib-seal-glow pointer-events-none"
@@ -358,12 +358,12 @@ export const ClaimGate = () => {
           <img
             src={waxSeal}
             alt=""
-            width={64}
-            height={64}
+            width={52}
+            height={52}
             className={phase === "pressing" || phase === "out" ? "lib-seal-press" : ""}
             style={{
-              width: 64,
-              height: 64,
+              width: 52,
+              height: 52,
               objectFit: "contain",
               filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.35))",
               transformOrigin: "center",
@@ -375,9 +375,9 @@ export const ClaimGate = () => {
         <p
           className="lib-mono text-center"
           style={{
-            marginTop: 32,
-            fontSize: "10px",
-            letterSpacing: "0.22em",
+            marginTop: 22,
+            fontSize: "9px",
+            letterSpacing: "0.2em",
             color: "rgba(10,10,10,0.45)",
           }}
         >
