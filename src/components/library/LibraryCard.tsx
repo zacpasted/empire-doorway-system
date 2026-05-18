@@ -3,24 +3,20 @@ import { toPng } from "html-to-image";
 
 type Props = { firstName: string; memberNumber: number; joinedAt: string | Date };
 
-const formatDate = (d: string | Date) => {
-  const date = typeof d === "string" ? new Date(d) : d;
-  const dd = String(date.getDate()).padStart(2, "0");
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  return `${dd}.${mm}.${date.getFullYear()}`;
-};
 const pad4 = (n: number) => n.toString().padStart(4, "0");
 
 /**
- * The Library Card — rendered like a slim hardback book cover (portrait).
- * Charcoal cloth, gold embossed type, P monogram in oval, bookmark ribbon.
+ * The Library Card — oxblood leather, landscape format.
+ * Gold embossed: P monogram in oval (top-right), italic serif name (left),
+ * MEMBER № below, vertical "THE PASTED LIBRARY · MADRID · MMXXVI" on right edge.
  */
 export const LibraryCard = ({ firstName, memberNumber, joinedAt }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
+  void joinedAt;
   const handleDownload = async () => {
     if (!ref.current) return;
     try {
-      const dataUrl = await toPng(ref.current, { cacheBust: true, pixelRatio: 2, backgroundColor: "#0A0A0A" });
+      const dataUrl = await toPng(ref.current, { cacheBust: true, pixelRatio: 3, backgroundColor: "#2a0e10" });
       const link = document.createElement("a");
       link.download = `pasted-library-card-${pad4(memberNumber)}.png`;
       link.href = dataUrl;
@@ -34,53 +30,109 @@ export const LibraryCard = ({ firstName, memberNumber, joinedAt }: Props) => {
     <div className="flex flex-col items-center gap-10">
       <div
         ref={ref}
-        className="relative w-full max-w-[360px] md:max-w-[480px] text-bone overflow-hidden lib-cloth lib-grain"
+        className="relative w-full max-w-[420px] md:max-w-[640px] overflow-hidden lib-grain"
         style={{
-          aspectRatio: "480 / 680",
+          aspectRatio: "1.585 / 1",
           background:
-            "radial-gradient(ellipse at 50% 35%, #1a1715 0%, #0E0C0A 70%, #060504 100%)",
-          borderRadius: "2px",
+            "radial-gradient(ellipse at 35% 30%, #6a1e22 0%, #4d1417 55%, #2e0a0d 100%)",
+          borderRadius: "14px",
           boxShadow:
-            "inset 0 1px 0 rgba(255,225,170,0.06), inset 0 0 60px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.04)",
+            "inset 0 1px 0 rgba(255,200,160,0.10), inset 0 0 80px rgba(0,0,0,0.55), 0 30px 60px -20px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.4)",
+          color: "#D4AF6A",
         }}
       >
-        {/* gold ribbon bookmark */}
+        {/* subtle leather grain */}
         <div
-          className="absolute top-0"
+          className="absolute inset-0 pointer-events-none mix-blend-overlay"
           style={{
-            left: "12%",
-            width: "20px",
-            height: "64px",
-            background: "linear-gradient(180deg, #C9A96E 0%, #8C7340 100%)",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.4)",
+            opacity: 0.35,
+            backgroundImage:
+              "radial-gradient(circle at 20% 30%, rgba(255,180,140,0.08) 0px, transparent 2px), radial-gradient(circle at 70% 60%, rgba(0,0,0,0.25) 0px, transparent 2px), radial-gradient(circle at 40% 80%, rgba(255,180,140,0.06) 0px, transparent 2px)",
+            backgroundSize: "7px 7px, 11px 11px, 9px 9px",
           }}
         />
-        {/* embossed gold inner border */}
+        {/* edge sheen */}
         <div
-          className="absolute pointer-events-none"
-          style={{ inset: "16px", border: "1px solid rgba(201,169,110,0.45)", borderRadius: "1px" }}
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(255,210,170,0.10) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.25) 100%)",
+          }}
         />
 
-        <div className="relative h-full flex flex-col items-center px-8 md:px-10 py-14 md:py-16">
-          {/* P monogram inside oval */}
-          <svg viewBox="0 0 80 100" width={64} height={80} aria-hidden="true">
-            <ellipse cx="40" cy="50" rx="30" ry="42" fill="none" stroke="#C9A96E" strokeWidth="1.1" />
-            <text x="40" y="66" textAnchor="middle" fontFamily="'Playfair Display', Georgia, serif" fontStyle="italic" fontSize="56" fill="#C9A96E">P</text>
-          </svg>
-
-          <div className="lib-mono lib-emboss-gold mt-6 md:mt-8" style={{ letterSpacing: "0.22em" }}>
-            THE PASTED LIBRARY
+        <div className="relative h-full flex p-6 md:p-9">
+          {/* LEFT — name + member */}
+          <div className="flex-1 flex flex-col justify-end pr-4">
+            <div
+              className="leading-[0.95]"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 500,
+                fontSize: "clamp(28px, 6.2vw, 52px)",
+                color: "#E2BE7A",
+                textShadow: "0 1px 0 rgba(0,0,0,0.45), 0 0 8px rgba(226,190,122,0.15)",
+              }}
+            >
+              {firstName}
+            </div>
+            <div
+              className="mt-4 lib-mono"
+              style={{
+                letterSpacing: "0.22em",
+                color: "#C9A266",
+                fontSize: "clamp(9px, 1.4vw, 11px)",
+              }}
+            >
+              MEMBER № {pad4(memberNumber)}
+            </div>
           </div>
-          <div className="my-6 w-16" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
 
-          {/* Member name engraved */}
-          <div className="flex-1 flex items-center">
-            <div className="lib-editorial text-bone text-3xl md:text-5xl leading-none text-center">{firstName}</div>
-          </div>
+          {/* RIGHT — monogram + divider + vertical legend */}
+          <div className="flex items-stretch gap-3 md:gap-4">
+            <div className="flex flex-col items-center justify-between">
+              {/* P monogram in oval */}
+              <svg viewBox="0 0 80 100" width="100%" style={{ width: "clamp(48px, 9vw, 72px)" }} aria-hidden="true">
+                <ellipse cx="40" cy="50" rx="30" ry="40" fill="none" stroke="#D4AF6A" strokeWidth="1.4" />
+                <text
+                  x="40"
+                  y="68"
+                  textAnchor="middle"
+                  fontFamily="'Playfair Display', Georgia, serif"
+                  fontStyle="italic"
+                  fontSize="58"
+                  fontWeight="500"
+                  fill="#E2BE7A"
+                >
+                  P
+                </text>
+              </svg>
+              <div />
+            </div>
 
-          <div className="lib-mono text-center space-y-1 lib-emboss-gold pb-4">
-            <div>MEMBER № {pad4(memberNumber)}</div>
-            <div style={{ opacity: 0.85 }}>JOINED {formatDate(joinedAt)}</div>
+            {/* vertical thin gold rule */}
+            <div className="w-px self-stretch" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(212,175,106,0.7) 15%, rgba(212,175,106,0.7) 85%, transparent 100%)" }} />
+
+            {/* vertical engraved legend */}
+            <div className="flex flex-col items-center justify-between py-1">
+              <div
+                className="lib-mono"
+                style={{
+                  writingMode: "vertical-rl",
+                  transform: "rotate(180deg)",
+                  letterSpacing: "0.34em",
+                  color: "#C9A266",
+                  fontSize: "clamp(8px, 1.1vw, 10px)",
+                }}
+              >
+                THE PASTED LIBRARY · MADRID · MMXXVI
+              </div>
+              {/* diamond mark */}
+              <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" style={{ marginTop: 8 }}>
+                <rect x="1.5" y="1.5" width="7" height="7" transform="rotate(45 5 5)" fill="none" stroke="#D4AF6A" strokeWidth="0.8" />
+                <rect x="3.5" y="3.5" width="3" height="3" transform="rotate(45 5 5)" fill="#D4AF6A" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
