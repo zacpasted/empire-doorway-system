@@ -202,7 +202,7 @@ export const ClaimGate = () => {
       style={{
         borderRadius: 2,
         boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
-        padding: "48px 36px 28px",
+        padding: "32px 22px 20px",
       }}
     >
       {/* Cotton-paper fibre overlay (4%, multiply) */}
