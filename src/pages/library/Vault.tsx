@@ -47,6 +47,22 @@ const Vault = () => {
     document.title = "The PASTED Library — A vault of work, given freely";
   }, []);
 
+  // Lightweight preload of the intro video — skip when reduced-motion or already cached.
+  useEffect(() => {
+    if (reducedMotion) return;
+    const href = "/library-gate-intro.mp4";
+    if (document.head.querySelector(`link[rel="preload"][href="${href}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "video";
+    link.href = href;
+    link.type = "video/mp4";
+    // fetchpriority is honored by Chromium; harmless elsewhere
+    (link as HTMLLinkElement & { fetchPriority?: string }).fetchPriority = "high";
+    document.head.appendChild(link);
+    return () => { try { document.head.removeChild(link); } catch {} };
+  }, [reducedMotion]);
+
   useEffect(() => {
     if (!loading && session) navigate("/library", { replace: true });
   }, [loading, session, navigate]);
