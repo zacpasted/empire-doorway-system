@@ -442,7 +442,32 @@ export const ClaimGate = () => {
 
           {renderField({ id: "location", type: "text", label: "CITY", value: location, onChange: setLocation, autoComplete: "address-level2", placeholder: "City, Country" })}
 
-          {error && <p className="lib-mono" style={{ color: "#7A1F1F" }}>{error}</p>}
+          {error && (
+            <div className="flex items-center justify-between gap-3">
+              <p className="lib-mono" style={{ color: "#7A1F1F" }}>{error}</p>
+              <button
+                type="button"
+                onClick={handleRetry}
+                disabled={submitting}
+                className="lib-mono shrink-0 cursor-pointer"
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#7A1F1F",
+                  border: "1px solid rgba(122,31,31,0.55)",
+                  borderRadius: 10,
+                  padding: "6px 10px",
+                  background:
+                    "linear-gradient(180deg, rgba(201,169,110,0.12) 0%, rgba(201,169,110,0.04) 100%)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.45)",
+                  transition: "background 200ms ease, border-color 200ms ease",
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
 
           {/* Grained oxblood CTA */}
           <button
