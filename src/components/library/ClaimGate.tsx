@@ -144,12 +144,10 @@ export const ClaimGate = () => {
 
     setPhase("pressing");
     // Short press beat, then transition to "reviewing application" status card
+    // that stays visible until the submission request fully resolves.
     await new Promise((r) => setTimeout(r, 600));
     setPhase("reviewing");
-    const [authError] = await Promise.all([
-      runSupabase(),
-      new Promise((r) => setTimeout(r, 1600)),
-    ]);
+    const authError = await runSupabase();
 
     if (authError) {
       setPhase("idle");
