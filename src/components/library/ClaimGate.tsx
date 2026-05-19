@@ -16,7 +16,7 @@ const schema = z.object({
   }),
 });
 
-type Phase = "idle" | "pressing" | "out";
+type Phase = "idle" | "pressing" | "reviewing" | "out";
 type Stage = "" | "student" | "associate" | "principal";
 
 const CornerFiligree = ({ rotate = 0 }: { rotate?: number }) => (
@@ -143,9 +143,12 @@ export const ClaimGate = () => {
     }
 
     setPhase("pressing");
+    // Short press beat, then transition to "reviewing application" status card
+    await new Promise((r) => setTimeout(r, 600));
+    setPhase("reviewing");
     const [authError] = await Promise.all([
       runSupabase(),
-      new Promise((r) => setTimeout(r, 900)),
+      new Promise((r) => setTimeout(r, 1600)),
     ]);
 
     if (authError) {
@@ -251,6 +254,40 @@ export const ClaimGate = () => {
       @media (prefers-reduced-motion: reduce) {
         .lib-card-enter,
         .lib-card-enter::after { animation: none; }
+      }
+      /* Reviewing-application overlay */
+      @keyframes lib-review-in {
+        0%   { opacity: 0; transform: translateY(8px) scale(0.985); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes lib-review-pulse {
+        0%, 100% { opacity: 0.55; transform: scale(1); }
+        50%      { opacity: 1;    transform: scale(1.04); }
+      }
+      @keyframes lib-review-dot {
+        0%, 100% { opacity: 0.2; }
+        50%      { opacity: 1; }
+      }
+      @keyframes lib-review-bar {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(260%); }
+      }
+      .lib-review-overlay {
+        animation: lib-review-in 420ms cubic-bezier(0.22,1,0.36,1) both;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+      .lib-review-seal { animation: lib-review-pulse 1800ms ease-in-out infinite; }
+      .lib-review-dot { animation: lib-review-dot 1400ms ease-in-out infinite; }
+      .lib-review-dot:nth-child(2) { animation-delay: 200ms; }
+      .lib-review-dot:nth-child(3) { animation-delay: 400ms; }
+      .lib-review-bar-fill {
+        position: absolute; top: 0; left: 0; height: 100%; width: 40%;
+        background: linear-gradient(90deg, transparent, rgba(122,31,31,0.7), transparent);
+        animation: lib-review-bar 1600ms cubic-bezier(0.45,0,0.55,1) infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lib-review-seal, .lib-review-dot, .lib-review-bar-fill { animation: none; }
       }
     `}</style>
     <div
@@ -484,6 +521,68 @@ export const ClaimGate = () => {
           ONE EMAIL. NO SPAM. UNSUBSCRIBE AT ANY LINE.
         </p>
       </div>
+
+      {phase === "reviewing" && (
+        <div
+          className="lib-review-overlay absolute inset-0 z-20 flex items-center justify-center"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(245,239,224,0.92) 0%, rgba(232,220,194,0.94) 100%)",
+            borderRadius: 2,
+          }}
+          role="status"
+          aria-live="polite"
+        >
+          <div className="relative text-center px-8" style={{ maxWidth: 320 }}>
+            <div className="flex justify-center mb-3">
+              <div className="lib-review-seal">
+                <Monogram56 />
+              </div>
+            </div>
+            <div
+              className="lib-mono lib-emboss-gold"
+              style={{ letterSpacing: "0.28em", fontSize: "10px" }}
+            >
+              REVIEWING APPLICATION
+            </div>
+            <div
+              className="mt-2 mx-auto"
+              style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }}
+            />
+            <p
+              className="lib-editorial text-lib-charcoal text-base md:text-lg leading-snug mt-3"
+              style={{ fontStyle: "italic" }}
+            >
+              The librarian is examining your card
+              <span className="lib-review-dot">.</span>
+              <span className="lib-review-dot">.</span>
+              <span className="lib-review-dot">.</span>
+            </p>
+            <div
+              className="relative mx-auto mt-4 overflow-hidden"
+              style={{
+                width: 160,
+                height: 2,
+                background: "rgba(122,31,31,0.12)",
+                borderRadius: 1,
+              }}
+            >
+              <span className="lib-review-bar-fill" />
+            </div>
+            <p
+              className="lib-mono"
+              style={{
+                marginTop: 14,
+                fontSize: "9px",
+                letterSpacing: "0.2em",
+                color: "rgba(10,10,10,0.5)",
+              }}
+            >
+              A MOMENT, PLEASE
+            </p>
+          </div>
+        </div>
+      )}
     </div>
     </>
   );
