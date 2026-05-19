@@ -127,25 +127,12 @@ export const ClaimGate = () => {
     return authError;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const runSubmission = async (skipPressBeat = false) => {
     setError(null);
-    const parsed = schema.safeParse({
-      full_name: fullName,
-      email,
-      location,
-      career_stage: careerStage,
-    });
-    if (!parsed.success) {
-      const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
-      setError(first ?? "Check the form.");
-      return;
+    if (!skipPressBeat) {
+      setPhase("pressing");
+      await new Promise((r) => setTimeout(r, 600));
     }
-
-    setPhase("pressing");
-    // Short press beat, then transition to "reviewing application" status card
-    // that stays visible until the submission request fully resolves.
-    await new Promise((r) => setTimeout(r, 600));
     setPhase("reviewing");
     const authError = await runSupabase();
 
@@ -162,6 +149,39 @@ export const ClaimGate = () => {
       sessionStorage.setItem("pasted_full_name", fullName.trim().replace(/\s+/g, " "));
     } catch { /* noop */ }
     setTimeout(() => navigate("/welcome"), 320);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const parsed = schema.safeParse({
+      full_name: fullName,
+      email,
+      location,
+      career_stage: careerStage,
+    });
+    if (!parsed.success) {
+      const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
+      setError(first ?? "Check the form.");
+      return;
+    }
+    await runSubmission();
+  };
+
+  const handleRetry = async () => {
+    // Re-validate in case the user edited fields after the error.
+    const parsed = schema.safeParse({
+      full_name: fullName,
+      email,
+      location,
+      career_stage: careerStage,
+    });
+    if (!parsed.success) {
+      const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
+      setError(first ?? "Check the form.");
+      return;
+    }
+    await runSubmission(true);
   };
 
   const renderField = (props: {
