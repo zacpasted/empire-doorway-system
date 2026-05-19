@@ -521,6 +521,68 @@ export const ClaimGate = () => {
           ONE EMAIL. NO SPAM. UNSUBSCRIBE AT ANY LINE.
         </p>
       </div>
+
+      {phase === "reviewing" && (
+        <div
+          className="lib-review-overlay absolute inset-0 z-20 flex items-center justify-center"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(245,239,224,0.92) 0%, rgba(232,220,194,0.94) 100%)",
+            borderRadius: 2,
+          }}
+          role="status"
+          aria-live="polite"
+        >
+          <div className="relative text-center px-8" style={{ maxWidth: 320 }}>
+            <div className="flex justify-center mb-3">
+              <div className="lib-review-seal">
+                <Monogram56 />
+              </div>
+            </div>
+            <div
+              className="lib-mono lib-emboss-gold"
+              style={{ letterSpacing: "0.28em", fontSize: "10px" }}
+            >
+              REVIEWING APPLICATION
+            </div>
+            <div
+              className="mt-2 mx-auto"
+              style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }}
+            />
+            <p
+              className="lib-editorial text-lib-charcoal text-base md:text-lg leading-snug mt-3"
+              style={{ fontStyle: "italic" }}
+            >
+              The librarian is examining your card
+              <span className="lib-review-dot">.</span>
+              <span className="lib-review-dot">.</span>
+              <span className="lib-review-dot">.</span>
+            </p>
+            <div
+              className="relative mx-auto mt-4 overflow-hidden"
+              style={{
+                width: 160,
+                height: 2,
+                background: "rgba(122,31,31,0.12)",
+                borderRadius: 1,
+              }}
+            >
+              <span className="lib-review-bar-fill" />
+            </div>
+            <p
+              className="lib-mono"
+              style={{
+                marginTop: 14,
+                fontSize: "9px",
+                letterSpacing: "0.2em",
+                color: "rgba(10,10,10,0.5)",
+              }}
+            >
+              A MOMENT, PLEASE
+            </p>
+          </div>
+        </div>
+      )}
     </div>
     </>
   );
