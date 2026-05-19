@@ -743,12 +743,8 @@ const LibraryHome = () => {
   // keep BOOKS / reading panel wired up for future use even if not surfaced on landing
   void plaqueImg; void BOOKS; void getReadingFor; void SceneRequest; void waxSeal;
 
-  if (loading) {
-    return <div style={{ background: WALNUT_DEEP, minHeight: "100vh" }} />;
-  }
-  if (!session) {
-    return <Navigate to="/" replace />;
-  }
+  // Public preview: /library is viewable without an active session.
+  void session; void loading;
 
   return (
     <div style={{ background: WALNUT_DEEP, color: IVORY, minHeight: "100vh" }}>
