@@ -197,16 +197,60 @@ export const ClaimGate = () => {
   return (
     <>
     <style>{`
-      @keyframes lib-card-enter {
-        0% { opacity: 0; transform: translateY(14px) scale(0.985); filter: blur(2px); }
-        100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+      /* Storybook page-open: hinges from the left like a turning leaf,
+         settles flat with a soft paper-weight bounce. */
+      @keyframes lib-card-open {
+        0% {
+          opacity: 0;
+          transform: perspective(1600px) rotateY(-58deg) translateZ(-40px) translateY(6px);
+          filter: blur(3px) brightness(0.9);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        45% {
+          opacity: 1;
+          filter: blur(0.4px) brightness(0.98);
+        }
+        72% {
+          transform: perspective(1600px) rotateY(2.4deg) translateZ(0) translateY(0);
+          filter: blur(0) brightness(1);
+        }
+        100% {
+          opacity: 1;
+          transform: perspective(1600px) rotateY(0deg) translateZ(0) translateY(0);
+          filter: blur(0) brightness(1);
+          box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+        }
+      }
+      /* Sweeping highlight as the page opens — like light catching paper */
+      @keyframes lib-card-gloss {
+        0%   { opacity: 0; transform: translateX(-120%) skewX(-12deg); }
+        25%  { opacity: 0.55; }
+        100% { opacity: 0; transform: translateX(160%) skewX(-12deg); }
       }
       .lib-card-enter {
-        animation: lib-card-enter 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        transform-origin: left center;
+        backface-visibility: hidden;
+        animation: lib-card-open 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
         will-change: opacity, transform, filter;
       }
+      .lib-card-enter::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(110deg,
+          transparent 0%,
+          rgba(255,244,214,0) 35%,
+          rgba(255,244,214,0.55) 50%,
+          rgba(255,244,214,0) 65%,
+          transparent 100%);
+        mix-blend-mode: screen;
+        animation: lib-card-gloss 1200ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+        border-radius: inherit;
+      }
       @media (prefers-reduced-motion: reduce) {
-        .lib-card-enter { animation: none; }
+        .lib-card-enter,
+        .lib-card-enter::after { animation: none; }
       }
     `}</style>
     <div
