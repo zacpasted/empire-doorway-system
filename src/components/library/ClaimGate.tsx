@@ -127,25 +127,12 @@ export const ClaimGate = () => {
     return authError;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const runSubmission = async (skipPressBeat = false) => {
     setError(null);
-    const parsed = schema.safeParse({
-      full_name: fullName,
-      email,
-      location,
-      career_stage: careerStage,
-    });
-    if (!parsed.success) {
-      const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
-      setError(first ?? "Check the form.");
-      return;
+    if (!skipPressBeat) {
+      setPhase("pressing");
+      await new Promise((r) => setTimeout(r, 600));
     }
-
-    setPhase("pressing");
-    // Short press beat, then transition to "reviewing application" status card
-    // that stays visible until the submission request fully resolves.
-    await new Promise((r) => setTimeout(r, 600));
     setPhase("reviewing");
     const authError = await runSupabase();
 
@@ -162,6 +149,39 @@ export const ClaimGate = () => {
       sessionStorage.setItem("pasted_full_name", fullName.trim().replace(/\s+/g, " "));
     } catch { /* noop */ }
     setTimeout(() => navigate("/welcome"), 320);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const parsed = schema.safeParse({
+      full_name: fullName,
+      email,
+      location,
+      career_stage: careerStage,
+    });
+    if (!parsed.success) {
+      const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
+      setError(first ?? "Check the form.");
+      return;
+    }
+    await runSubmission();
+  };
+
+  const handleRetry = async () => {
+    // Re-validate in case the user edited fields after the error.
+    const parsed = schema.safeParse({
+      full_name: fullName,
+      email,
+      location,
+      career_stage: careerStage,
+    });
+    if (!parsed.success) {
+      const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
+      setError(first ?? "Check the form.");
+      return;
+    }
+    await runSubmission(true);
   };
 
   const renderField = (props: {
@@ -422,7 +442,32 @@ export const ClaimGate = () => {
 
           {renderField({ id: "location", type: "text", label: "CITY", value: location, onChange: setLocation, autoComplete: "address-level2", placeholder: "City, Country" })}
 
-          {error && <p className="lib-mono" style={{ color: "#7A1F1F" }}>{error}</p>}
+          {error && (
+            <div className="flex items-center justify-between gap-3">
+              <p className="lib-mono" style={{ color: "#7A1F1F" }}>{error}</p>
+              <button
+                type="button"
+                onClick={handleRetry}
+                disabled={submitting}
+                className="lib-mono shrink-0 cursor-pointer"
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#7A1F1F",
+                  border: "1px solid rgba(122,31,31,0.55)",
+                  borderRadius: 10,
+                  padding: "6px 10px",
+                  background:
+                    "linear-gradient(180deg, rgba(201,169,110,0.12) 0%, rgba(201,169,110,0.04) 100%)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.45)",
+                  transition: "background 200ms ease, border-color 200ms ease",
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
 
           {/* Grained oxblood CTA */}
           <button
