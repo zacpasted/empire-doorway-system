@@ -16,7 +16,7 @@ const schema = z.object({
   }),
 });
 
-type Phase = "idle" | "pressing" | "out";
+type Phase = "idle" | "pressing" | "reviewing" | "out";
 type Stage = "" | "student" | "associate" | "principal";
 
 const CornerFiligree = ({ rotate = 0 }: { rotate?: number }) => (
@@ -143,9 +143,12 @@ export const ClaimGate = () => {
     }
 
     setPhase("pressing");
+    // Short press beat, then transition to "reviewing application" status card
+    await new Promise((r) => setTimeout(r, 600));
+    setPhase("reviewing");
     const [authError] = await Promise.all([
       runSupabase(),
-      new Promise((r) => setTimeout(r, 900)),
+      new Promise((r) => setTimeout(r, 1600)),
     ]);
 
     if (authError) {
@@ -251,6 +254,40 @@ export const ClaimGate = () => {
       @media (prefers-reduced-motion: reduce) {
         .lib-card-enter,
         .lib-card-enter::after { animation: none; }
+      }
+      /* Reviewing-application overlay */
+      @keyframes lib-review-in {
+        0%   { opacity: 0; transform: translateY(8px) scale(0.985); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes lib-review-pulse {
+        0%, 100% { opacity: 0.55; transform: scale(1); }
+        50%      { opacity: 1;    transform: scale(1.04); }
+      }
+      @keyframes lib-review-dot {
+        0%, 100% { opacity: 0.2; }
+        50%      { opacity: 1; }
+      }
+      @keyframes lib-review-bar {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(260%); }
+      }
+      .lib-review-overlay {
+        animation: lib-review-in 420ms cubic-bezier(0.22,1,0.36,1) both;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+      .lib-review-seal { animation: lib-review-pulse 1800ms ease-in-out infinite; }
+      .lib-review-dot { animation: lib-review-dot 1400ms ease-in-out infinite; }
+      .lib-review-dot:nth-child(2) { animation-delay: 200ms; }
+      .lib-review-dot:nth-child(3) { animation-delay: 400ms; }
+      .lib-review-bar-fill {
+        position: absolute; top: 0; left: 0; height: 100%; width: 40%;
+        background: linear-gradient(90deg, transparent, rgba(122,31,31,0.7), transparent);
+        animation: lib-review-bar 1600ms cubic-bezier(0.45,0,0.55,1) infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lib-review-seal, .lib-review-dot, .lib-review-bar-fill { animation: none; }
       }
     `}</style>
     <div
