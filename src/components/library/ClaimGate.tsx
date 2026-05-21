@@ -89,10 +89,12 @@ const inputStyle: React.CSSProperties = {
 
 export const ClaimGate = () => {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [location, setLocation] = useState("");
-  const [careerStage, setCareerStage] = useState<Stage>("");
+  const [practiceName, setPracticeName] = useState("");
+  const [role, setRole] = useState<Role>("");
+  const [whyNow, setWhyNow] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -100,19 +102,13 @@ export const ClaimGate = () => {
   const submitting = phase !== "idle";
 
   const runSupabase = async () => {
-    const trimmed = fullName.trim().replace(/\s+/g, " ");
-    const parts = trimmed.split(" ");
-    const first_name = parts[0] ?? "";
-    const last_name = parts.slice(1).join(" ");
-    const roleMap = { student: "building", associate: "associate", principal: "owner" } as const;
-    const role = roleMap[careerStage as "student" | "associate" | "principal"];
     const { error: insertError } = await supabase.from("applications").insert({
-      first_name: first_name.slice(0, 60),
-      last_name: (last_name || first_name).slice(0, 60),
+      first_name: firstName.trim().slice(0, 60),
+      last_name: lastName.trim().slice(0, 60),
       email: email.trim().toLowerCase(),
-      practice_name: location.trim().slice(0, 160),
-      role,
-      why_now: null,
+      practice_name: practiceName.trim().slice(0, 160),
+      role: role as "owner" | "associate" | "building",
+      why_now: whyNow.trim().slice(0, 200) || null,
     });
     return insertError;
   };
@@ -134,9 +130,11 @@ export const ClaimGate = () => {
 
     setPhase("out");
     try {
-      const first = fullName.trim().split(/\s+/)[0] ?? "";
-      sessionStorage.setItem("pasted_first_name", first);
-      sessionStorage.setItem("pasted_full_name", fullName.trim().replace(/\s+/g, " "));
+      sessionStorage.setItem("pasted_first_name", firstName.trim());
+      sessionStorage.setItem(
+        "pasted_full_name",
+        `${firstName.trim()} ${lastName.trim()}`.trim()
+      );
     } catch { /* noop */ }
     setTimeout(() => navigate("/library/pending"), 320);
   };
@@ -145,10 +143,12 @@ export const ClaimGate = () => {
     e.preventDefault();
     setError(null);
     const parsed = schema.safeParse({
-      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
       email,
-      location,
-      career_stage: careerStage,
+      practice_name: practiceName,
+      role,
+      why_now: whyNow,
     });
     if (!parsed.success) {
       const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
@@ -161,10 +161,12 @@ export const ClaimGate = () => {
   const handleRetry = async () => {
     // Re-validate in case the user edited fields after the error.
     const parsed = schema.safeParse({
-      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
       email,
-      location,
-      career_stage: careerStage,
+      practice_name: practiceName,
+      role,
+      why_now: whyNow,
     });
     if (!parsed.success) {
       const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
