@@ -125,11 +125,11 @@ const Hero = ({ firstName }: { firstName: string }) => (
 );
 
 // ===================== Editorial Status Pills =====================
-const PILLS = [
+const PILLS: { key: string; label: string; count?: number }[] = [
   { key: "arrived", label: "Just Arrived", count: 3 },
   { key: "counter", label: "On the Counter" },
   { key: "proprietor", label: "From the Proprietor" },
-] as const;
+];
 
 const StatusPills = () => {
   const [active, setActive] = useState<string>("counter");
