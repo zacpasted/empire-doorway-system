@@ -563,6 +563,102 @@ const JustArrived = () => (
   </section>
 );
 
+// ===================== Rooms Constellation =====================
+const ROOMS = [
+  { to: "/library/stacks",       name: "The Stacks",        meta: "57 Briefcases", img: briefcaseImg },
+  { to: "/library/cinema",       name: "The Cinema",        meta: "12 Sessions",   img: cinemaImg },
+  { to: "/library/periodicals",  name: "The Periodicals",   meta: "9 Essays",      img: volumeImg },
+  { to: "/library/vault",        name: "The Vault",         meta: "4 Sealed",      img: chamberImg },
+  { to: "/library/reading-room", name: "The Reading Room",  meta: "Your 3 Items",  img: heroImg },
+  { to: "/library/index",        name: "The Index",         meta: "All Records",   img: shelfwallImg },
+];
+
+const RoomTile = ({ room }: { room: typeof ROOMS[number] }) => {
+  const [hover, setHover] = useState(false);
+  return (
+    <Link
+      to={room.to}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="block flex-shrink-0"
+      style={{
+        width: 180,
+        background: BONE,
+        border: `1px solid ${hover ? "rgba(201,169,110,0.6)" : "rgba(201,169,110,0.25)"}`,
+        borderRadius: 6,
+        overflow: "hidden",
+        transform: `translateY(${hover ? -4 : 0}px)`,
+        transition: "transform 220ms cubic-bezier(0.22,1,0.36,1), border-color 220ms ease-out, box-shadow 220ms ease-out",
+        boxShadow: hover ? "0 12px 28px rgba(10,10,10,0.14)" : "none",
+      }}
+    >
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+        <img
+          src={room.img}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: hover ? "saturate(1.06) brightness(0.96)" : "saturate(1.0) brightness(0.94)",
+            transition: "filter 220ms ease-out",
+          }}
+        />
+      </div>
+      <div className="px-3 pt-3 pb-3 text-center">
+        <div
+          style={{
+            fontFamily: CORMORANT,
+            fontStyle: "italic",
+            fontSize: 18,
+            color: CHARCOAL,
+            lineHeight: 1.2,
+          }}
+        >
+          {room.name}
+        </div>
+        <div
+          style={{
+            ...MONO,
+            color: "rgba(10,10,10,0.5)",
+            fontSize: 10,
+            marginTop: 6,
+          }}
+        >
+          {room.meta}
+        </div>
+        <div
+          aria-hidden
+          style={{
+            fontFamily: CORMORANT,
+            color: GOLD_BRIGHT,
+            fontSize: 12,
+            marginTop: 8,
+            lineHeight: 1,
+          }}
+        >
+          ❦
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+const RoomsConstellation = () => (
+  <section className="mt-20 md:mt-24">
+    <div className="flex items-center gap-5 mb-7">
+      <span aria-hidden className="flex-1 h-px" style={{ background: "rgba(201,169,110,0.35)" }} />
+      <span style={{ ...MONO, color: "rgba(10,10,10,0.6)", letterSpacing: "0.28em" }}>
+        The Rooms of the Library
+      </span>
+      <span aria-hidden className="flex-1 h-px" style={{ background: "rgba(201,169,110,0.35)" }} />
+    </div>
+    <div className="flex gap-4 overflow-x-auto pb-3 -mx-6 px-6 md:mx-0 md:px-0 md:justify-center snap-x snap-mandatory">
+      {ROOMS.map((r) => (
+        <div key={r.to} className="snap-start"><RoomTile room={r} /></div>
+      ))}
+    </div>
+  </section>
+);
+
 // ===================== Page =====================
 const LibraryHome = () => {
   const { session, member, loading } = useMember();
