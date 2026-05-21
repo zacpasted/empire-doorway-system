@@ -35,6 +35,51 @@ export type Database = {
         }
         Relationships: []
       }
+      applications: {
+        Row: {
+          approved_at: string | null
+          card_no: number
+          email: string
+          first_name: string
+          id: string
+          invited_at: string | null
+          last_name: string
+          practice_name: string
+          role: string
+          status: string
+          submitted_at: string
+          why_now: string | null
+        }
+        Insert: {
+          approved_at?: string | null
+          card_no?: never
+          email: string
+          first_name: string
+          id?: string
+          invited_at?: string | null
+          last_name: string
+          practice_name: string
+          role: string
+          status?: string
+          submitted_at?: string
+          why_now?: string | null
+        }
+        Update: {
+          approved_at?: string | null
+          card_no?: never
+          email?: string
+          first_name?: string
+          id?: string
+          invited_at?: string | null
+          last_name?: string
+          practice_name?: string
+          role?: string
+          status?: string
+          submitted_at?: string
+          why_now?: string | null
+        }
+        Relationships: []
+      }
       assets: {
         Row: {
           case_number: number
