@@ -682,11 +682,49 @@ const LibraryHome = () => {
   const firstName = member?.first_name || "Guest";
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden" style={{ background: BONE, color: CHARCOAL }}>
+    <div
+      className="lib-atrium-root relative min-h-screen w-full overflow-x-hidden"
+      style={{
+        background:
+          "radial-gradient(at 30% 18%, #F9F4EA 0%, #F4F1EC 55%, #ECE3D5 100%)",
+        color: CHARCOAL,
+      }}
+    >
       <style>{`
         @keyframes lib-hero-breathe { 0% { transform: scale(1); } 100% { transform: scale(1.03); } }
         @keyframes lib-atrium-in { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
         .lib-atrium-in { animation: lib-atrium-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes lib-candle-flicker-a {
+          0%   { opacity: 0.82; transform: translate(-50%, -50%) scale(1.00); }
+          40%  { opacity: 0.96; transform: translate(-50%, -50%) scale(1.025); }
+          70%  { opacity: 0.88; transform: translate(-50%, -50%) scale(1.015); }
+          100% { opacity: 1.00; transform: translate(-50%, -50%) scale(1.04); }
+        }
+        @keyframes lib-candle-flicker-b {
+          0%   { opacity: 0.78; transform: translate(-50%, -50%) scale(1.00); }
+          55%  { opacity: 0.92; transform: translate(-50%, -50%) scale(1.02); }
+          100% { opacity: 1.00; transform: translate(-50%, -50%) scale(1.035); }
+        }
+        @keyframes lib-wax-breathe {
+          0%, 100% { filter: drop-shadow(0 0 0 rgba(212,181,122,0)) brightness(1.0); }
+          50%      { filter: drop-shadow(0 0 10px rgba(212,181,122,0.45)) brightness(1.08); }
+        }
+        .lib-wax-breathe { animation: lib-wax-breathe 4.2s ease-in-out infinite; }
+        /* Custom cursors (scoped to Library) */
+        .lib-atrium-root { cursor: url('/cursors/cursor-dot.svg') 7 7, default; }
+        .lib-atrium-root a,
+        .lib-atrium-root button,
+        .lib-atrium-root [role="button"] { cursor: url('/cursors/cursor-key.svg') 7 12, pointer; }
+        /* Drop cap on the dispatch line */
+        .lib-dispatch::first-letter {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-style: italic;
+          font-size: 2.4em;
+          line-height: 0.9;
+          color: #C9A96E;
+          padding-right: 0.06em;
+          vertical-align: -0.08em;
+        }
       `}</style>
 
       <LeftRail />
