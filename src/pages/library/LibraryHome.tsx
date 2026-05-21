@@ -679,7 +679,7 @@ const LibraryHome = () => {
       `}</style>
 
       <LeftRail />
-      <MemberPill name={member?.first_name ? `${member.first_name}${member.last_name ? " " + member.last_name : ""}` : "Guest Reader"} number="0247" />
+      <MemberPill name={member?.first_name ? `Dr ${member.first_name}` : "Guest Reader"} number="0247" />
 
       <div className="lib-atrium-in" style={{ paddingLeft: 0 }}>
         <div className="md:pl-[var(--rail-w-left)]">
