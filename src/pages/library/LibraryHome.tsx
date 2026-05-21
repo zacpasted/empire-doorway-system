@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowRight, Play } from "lucide-react";
 import { LeftRail } from "@/components/library/chrome/LeftRail";
 import { useMember } from "@/hooks/useMember";
