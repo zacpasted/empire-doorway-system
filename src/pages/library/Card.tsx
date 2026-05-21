@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LibraryCard } from "@/components/library/LibraryCard";
 import { useMember } from "@/hooks/useMember";
 import { supabase } from "@/integrations/supabase/client";
+import pMonogramUrl from "@/assets/pasted-p-oval.png";
 
 // === PALETTE (matches LibraryHome cinematic) ===
 const WALNUT_DEEP = "#14100C";
@@ -56,9 +57,10 @@ const CardPage = () => {
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          opacity: 0.07,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='150' viewBox='0 0 120 150'%3E%3Cg fill='none' stroke='%23F4F1EC' stroke-width='1'%3E%3Cellipse cx='60' cy='75' rx='22' ry='30'/%3E%3C/g%3E%3Ctext x='60' y='86' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-style='italic' font-size='34' fill='%23F4F1EC'%3EP%3C/text%3E%3C/svg%3E")`,
-          backgroundSize: "120px 150px",
+          opacity: 0.09,
+          backgroundImage: `url(${pMonogramUrl})`,
+          backgroundSize: "110px 115px",
+          backgroundRepeat: "repeat",
         }}
       />
       {/* upper-left tungsten light wash */}
