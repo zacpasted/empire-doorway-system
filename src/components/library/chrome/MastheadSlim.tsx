@@ -21,7 +21,7 @@ export const MastheadSlim = ({ memberName, memberNumber }: Props) => {
         borderBottom: "1px solid var(--lib-border)",
       }}
     >
-      <div className="h-full w-full grid grid-cols-3 items-center px-4 md:px-6">
+      <div className="h-full w-full grid grid-cols-3 items-center pl-14 pr-3 md:px-6">
         <div />
         <Link
           to="/library"
