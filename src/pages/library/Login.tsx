@@ -62,11 +62,11 @@ const Login = () => {
           </p>
 
           <div
-            className="px-6 md:px-10 py-10 md:py-12 text-left"
+            className="px-6 md:px-12 py-10 md:py-14 text-left"
             style={{
-              background: "rgba(244,241,236,0.04)",
-              border: "1px solid var(--pst-border-dark)",
-              backdropFilter: "blur(4px)",
+              background: "var(--pst-bone)",
+              border: "1px solid var(--pst-gold)",
+              borderRadius: 2,
             }}
           >
             <MagicLinkForm mode="login" />
