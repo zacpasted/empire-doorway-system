@@ -85,6 +85,9 @@ const labelStyle: React.CSSProperties = {
 const inputStyle: React.CSSProperties = {
   borderBottom: "1px solid rgba(10,10,10,0.18)",
   transition: "border-color 200ms ease",
+  fontFamily: '"Cormorant Garamond", Georgia, serif',
+  fontSize: "16px",
+  lineHeight: 1.3,
 };
 
 export const ClaimGate = () => {
