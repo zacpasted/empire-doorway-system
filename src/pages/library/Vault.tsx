@@ -525,7 +525,7 @@ const Vault = () => {
                   <div className="flex flex-col items-center gap-6">
                     <button
                       type="button"
-                      onClick={() => navigate("/library", { replace: true })}
+                      onClick={() => navigate("/library/apply")}
                       className="lib-mono cursor-pointer"
                       style={{
                         padding: "14px 36px",
@@ -547,10 +547,10 @@ const Vault = () => {
                         e.currentTarget.style.borderColor = "rgba(201,169,110,0.55)";
                       }}
                     >
-                      Enter the Library
+                      Apply for your card
                     </button>
                     <Link
-                      to="/login"
+                      to="/library/login"
                       className="lib-mono"
                       style={{
                         fontSize: 10,
