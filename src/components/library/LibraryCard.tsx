@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { toPng } from "html-to-image";
+import { PMonogram } from "@/components/library/PMonogram";
 
 type Props = { firstName: string; memberNumber: number; joinedAt: string | Date };
 
