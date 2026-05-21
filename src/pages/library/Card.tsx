@@ -32,14 +32,10 @@ const monthYear = (iso?: string | null) => {
 };
 
 const CardPage = () => {
-  const { session, member, loading } = useMember();
-  const navigate = useNavigate();
+  const { member, loading } = useMember();
   useEffect(() => { document.title = "Your Card — The PASTED Library"; }, []);
-  useEffect(() => {
-    if (!loading && !session) navigate("/login", { replace: true });
-  }, [loading, session, navigate]);
 
-  if (loading || !session || !member) {
+  if (loading) {
     return <div className="min-h-screen" style={{ background: WALNUT_DEEP }} />;
   }
 
@@ -87,14 +83,16 @@ const CardPage = () => {
           ← The Library
         </Link>
         <div className="hidden md:block" style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10 }}>
-          Pasted Society / Member Record
+          Pasted Society / {member ? "Member Record" : "Public Gallery"}
         </div>
-        <button
-          onClick={() => supabase.auth.signOut().then(() => { window.location.href = "/"; })}
-          style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}`, background: "transparent" }}
-        >
-          Sign Out
-        </button>
+        {member && (
+          <button
+            onClick={() => supabase.auth.signOut().then(() => { window.location.href = "/"; })}
+            style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}`, background: "transparent" }}
+          >
+            Sign Out
+          </button>
+        )}
       </header>
 
       {/* Internal structural frame */}
@@ -114,7 +112,7 @@ const CardPage = () => {
       <main className="relative z-20 flex-1 flex flex-col items-center justify-center px-6 py-16 md:py-20 text-center">
         <div className="flex items-center gap-3 md:gap-4 mb-8" style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10, letterSpacing: "0.4em" }}>
           <span aria-hidden className="block" style={{ height: 1, width: "clamp(24px, 5vw, 48px)", background: "rgba(184,134,43,0.4)" }} />
-          <span>Member № {pad4(member.member_number)}</span>
+          <span>{member ? `Member № ${pad4(member.member_number)}` : "The House Card"}</span>
           <span aria-hidden className="block" style={{ height: 1, width: "clamp(24px, 5vw, 48px)", background: "rgba(184,134,43,0.4)" }} />
         </div>
 
@@ -131,21 +129,23 @@ const CardPage = () => {
             textShadow: "0 4px 32px rgba(0,0,0,0.45)",
           }}
         >
-          Your card.
+          {member ? "Your card." : "A card, kept ready."}
         </h1>
         <p
           className="mt-5 max-w-md"
           style={{ fontFamily: DM, fontSize: 14, color: "rgba(244,241,236,0.72)", lineHeight: 1.7 }}
         >
-          Kept on record since {monthYear(member.created_at)}. Show it at the door.
+          {member
+            ? `Kept on record since ${monthYear(member.created_at)}. Show it at the door.`
+            : "Claim a card and the Library will recognise you on your return."}
         </p>
 
         {/* The card */}
         <div className="w-full mt-14 md:mt-20 flex justify-center">
           <LibraryCard
-            firstName={member.first_name || "Friend"}
-            memberNumber={member.member_number}
-            joinedAt={member.created_at}
+            firstName={member?.first_name || "Guest of the House"}
+            memberNumber={member?.member_number ?? 0}
+            joinedAt={member?.created_at}
           />
         </div>
 

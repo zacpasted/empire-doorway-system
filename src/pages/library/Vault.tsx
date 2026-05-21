@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ClaimGate } from "@/components/library/ClaimGate";
-import { useMember } from "@/hooks/useMember";
+import { Link, useNavigate } from "react-router-dom";
 
 const ROTATING_MEMBERS = [
   "MEMBER 0001 — DR DREW BALLARD",
@@ -44,7 +42,6 @@ const TIMING = {
 type Beat = 1 | 2 | 3 | 4 | 5 | 6;
 
 const Vault = () => {
-  const { session, loading } = useMember();
   const navigate = useNavigate();
   const [rotIdx, setRotIdx] = useState(0);
   const [rotVisible, setRotVisible] = useState(true);
@@ -81,10 +78,6 @@ const Vault = () => {
     document.head.appendChild(link);
     return () => { try { document.head.removeChild(link); } catch {} };
   }, [reducedMotion]);
-
-  useEffect(() => {
-    if (!loading && session) navigate("/library", { replace: true });
-  }, [loading, session, navigate]);
 
   // Rotating member ticker
   useEffect(() => {
@@ -529,7 +522,47 @@ const Vault = () => {
               />
               {gateOpen && (
                 <div className="relative flex justify-center">
-                  <ClaimGate />
+                  <div className="flex flex-col items-center gap-6">
+                    <button
+                      type="button"
+                      onClick={() => navigate("/library", { replace: true })}
+                      className="lib-mono cursor-pointer"
+                      style={{
+                        padding: "14px 36px",
+                        background: "rgba(201,169,110,0.12)",
+                        border: "1px solid rgba(201,169,110,0.55)",
+                        borderRadius: 2,
+                        color: "#C9A96E",
+                        fontSize: 12,
+                        letterSpacing: "0.28em",
+                        textTransform: "uppercase",
+                        transition: "background 200ms ease-out, border-color 200ms ease-out",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "rgba(201,169,110,0.22)";
+                        e.currentTarget.style.borderColor = "rgba(201,169,110,0.85)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "rgba(201,169,110,0.12)";
+                        e.currentTarget.style.borderColor = "rgba(201,169,110,0.55)";
+                      }}
+                    >
+                      Enter the Library
+                    </button>
+                    <Link
+                      to="/login"
+                      className="lib-mono"
+                      style={{
+                        fontSize: 10,
+                        letterSpacing: "0.22em",
+                        textTransform: "uppercase",
+                        color: "rgba(244,241,236,0.45)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Have a card? Sign in
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
