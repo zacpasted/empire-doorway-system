@@ -78,6 +78,9 @@ const Hero = ({ firstName }: { firstName: string }) => (
       }}
     />
 
+    {/* candle glow + drifting dust */}
+    <HeroAtmosphere />
+
     {/* inlaid welcome — lower left */}
     <div className="absolute left-6 md:left-12 lg:left-16 bottom-[26%] md:bottom-[28%]">
       <h1
