@@ -3,3 +3,5 @@ project_id = "hnprsbwlkwbtmaueveok"
 [functions]
   [functions.auth-email-hook]
     verify_jwt = false
+  [functions.auto-approve-applications]
+    verify_jwt = false
