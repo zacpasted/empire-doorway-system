@@ -32,14 +32,10 @@ const monthYear = (iso?: string | null) => {
 };
 
 const CardPage = () => {
-  const { session, member, loading } = useMember();
-  const navigate = useNavigate();
+  const { member, loading } = useMember();
   useEffect(() => { document.title = "Your Card — The PASTED Library"; }, []);
-  useEffect(() => {
-    if (!loading && !session) navigate("/login", { replace: true });
-  }, [loading, session, navigate]);
 
-  if (loading || !session || !member) {
+  if (loading) {
     return <div className="min-h-screen" style={{ background: WALNUT_DEEP }} />;
   }
 
