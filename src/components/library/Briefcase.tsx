@@ -1,3 +1,5 @@
+import pMonogramUrl from "@/assets/pasted-p-oval.png";
+
 type Props = {
   width?: number;
   height?: number;
@@ -50,21 +52,8 @@ export const Briefcase = ({ width = 280, height = 200, className, open = false }
       {/* clasps */}
       <rect x="70" y="92" width="22" height="14" fill="#C9A96E" opacity="0.9" />
       <rect x="188" y="92" width="22" height="14" fill="#C9A96E" opacity="0.9" />
-      {/* monogram */}
-      <circle cx="140" cy="125" r="22" fill="none" stroke="#C9A96E" strokeWidth="1.25" opacity="0.95" />
-      <text
-        x="140"
-        y="134"
-        textAnchor="middle"
-        fontFamily="'Playfair Display', Georgia, serif"
-        fontStyle="italic"
-        fontWeight={400}
-        fontSize="26"
-        fill="#C9A96E"
-        opacity="0.95"
-      >
-        P
-      </text>
+      {/* monogram (PNG asset, embedded in SVG) */}
+      <image href={pMonogramUrl} x="110" y="100" width="60" height="63" opacity="0.95" preserveAspectRatio="xMidYMid meet" />
       {/* subtle grain */}
       <rect x="20" y="34" width="240" height="150" fill="#000" opacity="0.04" />
     </svg>

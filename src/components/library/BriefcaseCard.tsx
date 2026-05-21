@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import briefcaseClosed from "@/assets/briefcase-closed.jpg";
+import { PMonogram } from "@/components/library/PMonogram";
 
 type Props = {
   slug: string;
@@ -37,10 +38,9 @@ export const BriefcaseCard = ({ slug, caseNumber, section, title, fileFormat, fi
           draggable={false}
         />
         {/* P monogram overlay on the case face */}
-        <svg viewBox="0 0 100 100" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[22%] h-auto opacity-90" aria-hidden="true">
-          <circle cx="50" cy="50" r="38" fill="none" stroke="#C9A96E" strokeWidth="1.4" />
-          <text x="50" y="64" textAnchor="middle" fontFamily="'Playfair Display', Georgia, serif" fontStyle="italic" fontSize="48" fill="#C9A96E">P</text>
-        </svg>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[22%] opacity-90">
+          <PMonogram size={64} color="#C9A96E" style={{ width: "100%", height: "auto", aspectRatio: "1 / 1.05" }} />
+        </div>
       </div>
       <div className="h-px w-full bg-lib-gold/0 group-hover:bg-lib-gold/60 transition-colors duration-200 mt-2" />
       <div className="pt-3 space-y-2">

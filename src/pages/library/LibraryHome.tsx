@@ -8,6 +8,8 @@ import counterImg from "@/assets/library-v8-librarian-desk.jpg";
 import cinemaImg from "@/assets/library-v8-desk-night.jpg";
 import briefcaseImg from "@/assets/briefcase-closed.jpg";
 import waxSeal from "@/assets/library-wax-seal.png";
+import pMonogramUrl from "@/assets/pasted-p-oval.png";
+import { PMonogram } from "@/components/library/PMonogram";
 
 // === PALETTE ===
 const BONE = "#F4F1EC";
@@ -218,9 +220,10 @@ const VaultCard = () => (
       aria-hidden
       className="absolute inset-0 pointer-events-none"
       style={{
-        opacity: 0.08,
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='100' viewBox='0 0 80 100'%3E%3Cg fill='none' stroke='%23F4F1EC' stroke-width='0.8'%3E%3Cellipse cx='40' cy='50' rx='14' ry='20'/%3E%3C/g%3E%3Ctext x='40' y='57' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-style='italic' font-size='22' fill='%23F4F1EC'%3EP%3C/text%3E%3C/svg%3E")`,
-        backgroundSize: "80px 100px",
+        opacity: 0.1,
+        backgroundImage: `url(${pMonogramUrl})`,
+        backgroundSize: "70px 74px",
+        backgroundRepeat: "repeat",
       }}
     />
     <div className="relative p-7 flex flex-col" style={{ minHeight: 340 }}>
@@ -365,10 +368,9 @@ const JustArrived = () => (
         >
           <div className="relative w-full" style={{ aspectRatio: "7 / 5", background: CHARCOAL }}>
             <img src={briefcaseImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <svg viewBox="0 0 100 100" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[22%] h-auto opacity-90" aria-hidden>
-              <circle cx="50" cy="50" r="38" fill="none" stroke={GOLD} strokeWidth="1.4" />
-              <text x="50" y="64" textAnchor="middle" fontFamily={PLAYFAIR} fontStyle="italic" fontSize="48" fill={GOLD}>P</text>
-            </svg>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[22%] opacity-90">
+              <PMonogram size={48} color={GOLD} style={{ width: "100%", height: "auto", aspectRatio: "1 / 1.05" }} />
+            </div>
           </div>
           <div className="p-4">
             <div style={{ ...MONO, color: "rgba(10,10,10,0.5)", fontSize: 10 }}>№ {a.n}</div>
@@ -483,10 +485,9 @@ const LibraryHome = () => {
               <br />
               New Briefcases Arrive Weekly · Visit Your Card Any Time
             </div>
-            <svg width={28} height={36} viewBox="0 0 28 36" className="mx-auto mt-6" aria-hidden style={{ opacity: 0.3 }}>
-              <ellipse cx="14" cy="18" rx="12" ry="16" fill="none" stroke={CHARCOAL} strokeWidth="1.1" />
-              <text x="14" y="24" textAnchor="middle" fontFamily={PLAYFAIR} fontStyle="italic" fontSize="18" fill={CHARCOAL}>P</text>
-            </svg>
+            <div className="mx-auto mt-6 flex justify-center">
+              <PMonogram size={28} color={CHARCOAL} opacity={0.3} />
+            </div>
           </footer>
         </div>
       </div>
