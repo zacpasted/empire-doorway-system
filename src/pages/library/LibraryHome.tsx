@@ -418,7 +418,7 @@ const VaultCard = () => (
     <div className="relative p-7 flex flex-col" style={{ minHeight: 340 }}>
       <div className="flex items-start justify-between">
         <div style={{ ...MONO, color: GOLD_BRIGHT, fontSize: 10 }}>In the Vault · Sealed</div>
-        <img src={waxSeal} alt="" className="w-12 h-12 object-contain" style={{ opacity: 0.92 }} />
+        <img src={waxSeal} alt="" className="w-12 h-12 object-contain lib-wax-breathe" style={{ opacity: 0.95 }} />
       </div>
       <h3
         style={{
