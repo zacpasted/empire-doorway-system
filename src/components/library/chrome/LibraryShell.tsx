@@ -7,6 +7,9 @@ import { MastheadSlim } from "./MastheadSlim";
 import { PhotoHero } from "./PhotoHero";
 import { useMember } from "@/hooks/useMember";
 import type { ZoneDef } from "@/data/library-zones";
+import { PMonogram } from "@/components/library/PMonogram";
+import wallpaperUrl from "@/assets/atrium-wallpaper-damask.jpg";
+import wainscotingUrl from "@/assets/atrium-wainscoting.jpg";
 
 type Props = {
   zone: ZoneDef;
@@ -31,7 +34,23 @@ export const LibraryShell = ({
   const hasRightRail = showRightRail && zone.subsections.length > 0;
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden" style={{ background: "#F4F1EC", color: "#0A0A0A" }}>
+    <div
+      className="lib-atrium-root relative min-h-screen w-full overflow-x-hidden"
+      style={{
+        backgroundColor: "#3a0d12",
+        backgroundImage: `url(${wallpaperUrl})`,
+        backgroundRepeat: "repeat",
+        backgroundSize: "520px 520px",
+        backgroundAttachment: "fixed",
+        color: "#1A140E",
+      }}
+    >
+      <style>{`
+        .lib-atrium-root { cursor: url('/cursors/cursor-dot.svg') 7 7, default; }
+        .lib-atrium-root a,
+        .lib-atrium-root button,
+        .lib-atrium-root [role="button"] { cursor: url('/cursors/cursor-key.svg') 7 12, pointer; }
+      `}</style>
       {/* Mobile menu trigger (top-left) — replaces left rail on small screens */}
       <Sheet open={navOpen} onOpenChange={setNavOpen}>
         <SheetTrigger asChild>
@@ -70,6 +89,72 @@ export const LibraryShell = ({
           <main className="relative">
             {hero ?? <PhotoHero zone={zone} />}
             <div className="lib-zone-in">{children}</div>
+
+            {/* Gold picture rail */}
+            <div aria-hidden className="mt-24 md:mt-32 relative" style={{ height: 14 }}>
+              <div
+                className="absolute left-0 right-0"
+                style={{
+                  top: 0,
+                  height: 1,
+                  background:
+                    "linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.7) 12%, rgba(212,181,122,0.95) 50%, rgba(201,169,110,0.7) 88%, transparent 100%)",
+                  boxShadow: "0 1px 0 rgba(0,0,0,0.4)",
+                }}
+              />
+              <div
+                className="absolute left-0 right-0"
+                style={{
+                  top: 6,
+                  height: 1,
+                  background:
+                    "linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.35) 50%, transparent 100%)",
+                }}
+              />
+            </div>
+
+            {/* Walnut wainscoting + footer */}
+            <div
+              className="relative"
+              style={{
+                backgroundColor: "#2A1A0E",
+                backgroundImage: `url(${wainscotingUrl})`,
+                backgroundSize: "1200px auto",
+                backgroundRepeat: "repeat",
+                backgroundPosition: "center top",
+                boxShadow: "inset 0 14px 28px rgba(0,0,0,0.55)",
+              }}
+            >
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 50% 30%, rgba(212,181,122,0.10) 0%, transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%)",
+                }}
+              />
+              <footer className="relative px-6 py-14 text-center">
+                <div
+                  className="inline-flex flex-col items-center"
+                  style={{
+                    fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                    fontSize: 10,
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    color: "rgba(244,241,236,0.55)",
+                    lineHeight: 1.9,
+                  }}
+                >
+                  <span>The Pasted Library · Madrid · MMXXVI</span>
+                  <span style={{ color: "rgba(244,241,236,0.45)" }}>
+                    New Briefcases Arrive Weekly · Visit Your Card Any Time
+                  </span>
+                </div>
+                <div className="mx-auto mt-6 flex justify-center">
+                  <PMonogram size={28} color="#C9A96E" opacity={0.5} />
+                </div>
+              </footer>
+            </div>
           </main>
         </div>
       </div>
