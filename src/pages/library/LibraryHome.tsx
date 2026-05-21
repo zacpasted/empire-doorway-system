@@ -586,40 +586,19 @@ const LibraryHome = () => {
 
       <div className="lib-atrium-in" style={{ paddingLeft: 0 }}>
         <div className="md:pl-[var(--rail-w-left)]">
-          {/* Hero strip */}
-          <Hero />
-
-          {/* Welcome line */}
-          <section className="px-6 md:px-10 pt-20 md:pt-24 pb-12 md:pb-16 text-center">
-            <h1
-              style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 400,
-                fontSize: "clamp(36px, 5.6vw, 56px)",
-                color: CHARCOAL,
-                lineHeight: 1.05,
-                letterSpacing: "-0.01em",
-                margin: 0,
-              }}
-            >
-              Welcome back, {firstName}.
-            </h1>
+          {/* Hero + overlapping welcome card */}
+          <div className="relative">
+            <Hero firstName={firstName} />
             <div
-              className="mt-5"
-              style={{
-                ...MONO,
-                color: "rgba(10,10,10,0.5)",
-                fontSize: 11,
-                letterSpacing: "0.28em",
-              }}
+              className="px-6 md:px-10 relative"
+              style={{ marginTop: -88, zIndex: 5 }}
             >
-              The Library is Fuller than When You Left
+              <WelcomeCard />
             </div>
-          </section>
+          </div>
 
           {/* Modular grid */}
-          <section className="px-6 md:px-10">
+          <section className="px-6 md:px-10 mt-16 md:mt-20">
             <div className="grid grid-cols-12 gap-5 md:gap-7">
               {/* Row 1 */}
               <div className="col-span-12 lg:col-span-7"><CounterCard /></div>
@@ -631,6 +610,7 @@ const LibraryHome = () => {
             </div>
 
             <JustArrived />
+            <RoomsConstellation />
           </section>
 
           {/* Dispatch */}
