@@ -85,6 +85,9 @@ const labelStyle: React.CSSProperties = {
 const inputStyle: React.CSSProperties = {
   borderBottom: "1px solid rgba(10,10,10,0.18)",
   transition: "border-color 200ms ease",
+  fontFamily: '"Cormorant Garamond", Georgia, serif',
+  fontSize: "16px",
+  lineHeight: 1.3,
 };
 
 export const ClaimGate = () => {
@@ -301,7 +304,7 @@ export const ClaimGate = () => {
       }
     `}</style>
     <div
-      className={`relative w-[300px] md:w-[440px] lib-paper lib-deboss lib-card-enter ${
+      className={`relative w-[340px] sm:w-[400px] md:w-[440px] lib-paper lib-deboss lib-card-enter ${
         phase === "pressing" ? "lib-card-press" : ""
       } ${phase === "out" ? "lib-card-out" : ""}`}
       style={{
@@ -373,7 +376,7 @@ export const ClaimGate = () => {
             {renderField({ id: "last_name", type: "text", label: "LAST NAME", value: lastName, onChange: setLastName, autoComplete: "family-name" })}
           </div>
           {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
-          {renderField({ id: "practice_name", type: "text", label: "PRACTICE (CITY, STATE)", value: practiceName, onChange: setPracticeName, autoComplete: "organization", placeholder: "Practice — City, State" })}
+          {renderField({ id: "practice_name", type: "text", label: "PRACTICE · CITY, STATE", value: practiceName, onChange: setPracticeName, autoComplete: "organization", placeholder: "e.g. Bright Smile — Austin, TX" })}
 
           {/* YOUR ROLE — stamp-style selector, no boxes */}
           <div>
