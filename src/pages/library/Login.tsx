@@ -1,34 +1,82 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MagicLinkForm } from "@/components/library/MagicLinkForm";
 import { useMember } from "@/hooks/useMember";
-import heroImg from "@/assets/library-hero.jpg";
+import heroOperatory from "@/assets/pasted/hero-operatory.jpg";
 
 const Login = () => {
   const { session, loading } = useMember();
   const navigate = useNavigate();
   useEffect(() => {
-    document.title = "Sign in — The PASTED Library";
+    document.title = "Sign in — PASTED";
   }, []);
   useEffect(() => {
     if (!loading && session) navigate("/library", { replace: true });
   }, [loading, session, navigate]);
 
   return (
-    <div className="min-h-screen bg-bone text-lib-charcoal">
-      <section className="relative w-full overflow-hidden" style={{ minHeight: "min(820px, 92vh)" }}>
-        <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
-        <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 360px 80px rgba(0,0,0,0.75)" }} />
-        <div className="absolute inset-0 lib-grain pointer-events-none" />
+    <div className="min-h-screen pst-surface-charcoal relative overflow-hidden">
+      <img
+        src={heroOperatory}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ opacity: 0.55 }}
+        fetchPriority="high"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.55) 40%, rgba(10,10,10,0.95) 100%)",
+        }}
+      />
 
-        <div className="relative max-w-[1240px] mx-auto px-6 py-14 md:py-20 min-h-[inherit] flex items-center justify-center" style={{ minHeight: "min(820px, 92vh)" }}>
-          <div className="w-[320px] md:w-[460px] bg-bone px-8 md:px-12 py-12 md:py-16 text-center" style={{ borderRadius: 2, boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}>
-            <div className="lib-display text-lib-charcoal text-xl md:text-2xl">Welcome back.</div>
-            <div className="my-3 w-10 mx-auto" style={{ height: 1, background: "rgba(201,169,110,0.55)" }} />
-            <p className="lib-editorial text-lib-charcoal text-base md:text-lg mb-8">
-              A sign-in link, sent to your email.
-            </p>
+      <header className="relative z-10 px-6 md:px-12 h-20 flex items-center justify-between max-w-[1680px] mx-auto">
+        <Link to="/" className="pst-display text-[22px] tracking-[0.18em]" style={{ color: "var(--pst-bone)" }}>
+          PASTED
+        </Link>
+        <Link to="/" className="pst-link-mono" style={{ color: "var(--pst-text-dark-muted)" }}>
+          ← Back
+        </Link>
+      </header>
+
+      <section className="relative z-10 px-6 py-16 md:py-24 flex items-center justify-center">
+        <div className="w-full max-w-[520px] text-center">
+          <div className="pst-mono mb-8" style={{ color: "var(--pst-gold)" }}>
+            THE LIBRARY — MEMBERS
+          </div>
+          <div className="pst-rule-gold w-16 mx-auto mb-10" />
+
+          <h1
+            className="pst-display text-[40px] md:text-[60px] leading-[0.95]"
+            style={{ color: "var(--pst-bone)" }}
+          >
+            Welcome
+            <span className="pst-script ml-3" style={{ color: "var(--pst-gold)" }}>
+              back.
+            </span>
+          </h1>
+
+          <p className="pst-body mt-6 mb-12" style={{ color: "var(--pst-text-dark-muted)" }}>
+            A sign-in link, sent to your email. One line — no password.
+          </p>
+
+          <div
+            className="px-6 md:px-10 py-10 md:py-12 text-left"
+            style={{
+              background: "rgba(244,241,236,0.04)",
+              border: "1px solid var(--pst-border-dark)",
+              backdropFilter: "blur(4px)",
+            }}
+          >
             <MagicLinkForm mode="login" />
+          </div>
+
+          <div className="pst-mono mt-10" style={{ color: "var(--pst-text-dark-muted)" }}>
+            No card yet?{" "}
+            <Link to="/library" style={{ color: "var(--pst-gold)" }} className="pst-link-mono">
+              Claim a card →
+            </Link>
           </div>
         </div>
       </section>
