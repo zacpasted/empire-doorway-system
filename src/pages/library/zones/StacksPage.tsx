@@ -5,6 +5,8 @@ import { ChapterHead } from "@/components/library/ChapterHead";
 import { CardGrid, Cell } from "@/components/library/chrome/CardGrid";
 import { BriefcaseCard, BriefcaseFeaturedCard } from "@/components/library/chrome/cards";
 import { ZONES } from "@/data/library-zones";
+import { StacksShelfWallHero } from "@/components/library/StacksShelfWallHero";
+import { BrassCatalogueRail } from "@/components/library/BrassCatalogueRail";
 import courierImg from "@/assets/library-v9-courier.png";
 import aceImg from "@/assets/library-v9-ace.png";
 import pawnImg from "@/assets/library-v9-pawn.webp";
@@ -13,15 +15,33 @@ import deskNightImg from "@/assets/library-v8-desk-night.jpg";
 const StacksPage = () => {
   const zone = ZONES.stacks;
   const [active, setActive] = useState<string>("frameworks");
+  const [drawer, setDrawer] = useState<string>("all");
   useEffect(() => { document.title = "The Stacks — The Pasted Library"; }, []);
 
   return (
-    <LibraryShell zone={zone} activeSubsection={active} onSubsectionChange={setActive}>
+    <LibraryShell
+      zone={zone}
+      activeSubsection={active}
+      onSubsectionChange={setActive}
+      hero={<StacksShelfWallHero />}
+    >
       <StatusPillRow
         pills={[
           { id: "new", label: "Just Arrived", count: 3 },
           { id: "counter", label: "On the Counter" },
           { id: "proprietor", label: "From the Proprietor" },
+        ]}
+      />
+      <BrassCatalogueRail
+        active={drawer}
+        onSelect={setDrawer}
+        drawers={[
+          { id: "all", label: "All", count: 28 },
+          { id: "frameworks", label: "Frameworks", count: 9 },
+          { id: "playbooks", label: "Playbooks", count: 7 },
+          { id: "scripts", label: "Scripts", count: 6 },
+          { id: "decks", label: "Decks", count: 4 },
+          { id: "tools", label: "Tools", count: 2 },
         ]}
       />
       <ChapterHead zone="The Stacks" subtitle={zone.subtitle} />
