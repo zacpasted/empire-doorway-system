@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Play } from "lucide-react";
 import { LeftRail } from "@/components/library/chrome/LeftRail";
@@ -10,6 +11,10 @@ import briefcaseImg from "@/assets/briefcase-closed.jpg";
 import waxSeal from "@/assets/library-wax-seal.png";
 import pMonogramUrl from "@/assets/pasted-p-oval.png";
 import { PMonogram } from "@/components/library/PMonogram";
+import { MemberPill } from "@/components/library/MemberPill";
+import shelfwallImg from "@/assets/library-v8-shelfwall.jpg";
+import volumeImg from "@/assets/library-v8-volume.jpg";
+import chamberImg from "@/assets/library-v8-chamber.jpg";
 
 // === PALETTE ===
 const BONE = "#F4F1EC";
