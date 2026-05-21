@@ -125,11 +125,11 @@ const Hero = ({ firstName }: { firstName: string }) => (
     >
       <span className="lib-hero-live-dot" aria-hidden />
       <span>Live</span>
-      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
+      <Fleuron glyph="❧" color="rgba(212,181,122,0.7)" size={11} />
       <span>57 Briefcases</span>
-      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
+      <Fleuron glyph="❦" color="rgba(212,181,122,0.7)" size={11} />
       <span>12 Sessions</span>
-      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
+      <Fleuron glyph="✦" color="rgba(212,181,122,0.7)" size={10} />
       <span>9 Essays</span>
     </div>
   </div>
