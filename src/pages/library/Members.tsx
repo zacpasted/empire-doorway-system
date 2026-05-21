@@ -130,24 +130,26 @@ const Members = () => {
     <PageFrame>
       <TopNav
         rightSlot={
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <span style={{ ...monoLabel, color: QUIET }}>{firstName}</span>
-            <button
-              type="button"
-              onClick={signOut}
-              style={{
-                ...monoLabel,
-                color: BRASS,
-                background: "transparent",
-                border: "none",
-                borderBottom: `1px solid ${BRASS}`,
-                paddingBottom: 2,
-                cursor: "pointer",
-              }}
-            >
-              Sign out
-            </button>
-          </div>
+          user ? (
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <span style={{ ...monoLabel, color: QUIET }}>{firstName}</span>
+              <button
+                type="button"
+                onClick={signOut}
+                style={{
+                  ...monoLabel,
+                  color: BRASS,
+                  background: "transparent",
+                  border: "none",
+                  borderBottom: `1px solid ${BRASS}`,
+                  paddingBottom: 2,
+                  cursor: "pointer",
+                }}
+              >
+                Sign out
+              </button>
+            </div>
+          ) : null
         }
       />
       <Content>
