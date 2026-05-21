@@ -524,7 +524,7 @@ export const ClaimGate = () => {
                   "repeating-linear-gradient(90deg, rgba(40,5,5,0.6) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(40,5,5,0.35) 0 1px, transparent 1px 5px)",
               }}
             />
-            <span className="relative">CLAIM MY CARD</span>
+            <span className="relative">SUBMIT APPLICATION →</span>
           </button>
         </form>
 
@@ -533,7 +533,7 @@ export const ClaimGate = () => {
           className="lib-body italic leading-relaxed text-center"
           style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 14 }}
         >
-          The Card is the threshold. The Library is the first room. There are others.
+          No noise. No pitch-mail. Unsubscribe any time.
         </p>
 
         {/* Wax seal — signature at the foot of a letter */}
@@ -577,7 +577,7 @@ export const ClaimGate = () => {
             color: "rgba(10,10,10,0.45)",
           }}
         >
-          ONE EMAIL. NO SPAM. UNSUBSCRIBE AT ANY LINE.
+          WE READ EVERY APPLICATION BY HAND.
         </p>
       </div>
 
