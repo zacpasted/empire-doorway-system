@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Play } from "lucide-react";
 import { LeftRail } from "@/components/library/chrome/LeftRail";
@@ -10,6 +11,10 @@ import briefcaseImg from "@/assets/briefcase-closed.jpg";
 import waxSeal from "@/assets/library-wax-seal.png";
 import pMonogramUrl from "@/assets/pasted-p-oval.png";
 import { PMonogram } from "@/components/library/PMonogram";
+import { MemberPill } from "@/components/library/MemberPill";
+import shelfwallImg from "@/assets/library-v8-shelfwall.jpg";
+import volumeImg from "@/assets/library-v8-volume.jpg";
+import chamberImg from "@/assets/library-v8-chamber.jpg";
 
 // === PALETTE ===
 const BONE = "#F4F1EC";
@@ -32,19 +37,28 @@ const MONO: React.CSSProperties = {
   fontWeight: 500,
 };
 
-// ===================== Hero =====================
-const Hero = () => (
+// ===================== Hero (16/7, welcome inlaid) =====================
+const Hero = ({ firstName }: { firstName: string }) => (
   <div
     className="relative w-full overflow-hidden"
-    style={{ aspectRatio: "16 / 5", background: CHARCOAL }}
+    style={{ aspectRatio: "16 / 7", background: CHARCOAL }}
   >
     <img
       src={heroImg}
       alt=""
       className="absolute inset-0 w-full h-full object-cover"
-      style={{ animation: "lib-hero-breathe 12s ease-in-out infinite alternate" }}
+      style={{
+        animation: "lib-hero-breathe 12s ease-in-out infinite alternate",
+        filter: "brightness(0.78) saturate(1.05) sepia(0.06)",
+      }}
     />
-    <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.35)" }} />
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.0) 35%, rgba(10,10,10,0.55) 100%)",
+      }}
+    />
     <div
       aria-hidden
       className="absolute inset-0 pointer-events-none"
@@ -55,21 +69,185 @@ const Hero = () => (
           "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
       }}
     />
-    {/* inset label */}
+
+    {/* inlaid welcome — lower left */}
+    <div className="absolute left-6 md:left-12 lg:left-16 bottom-[26%] md:bottom-[28%]">
+      <h1
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: "clamp(28px, 4.4vw, 48px)",
+          color: BONE,
+          lineHeight: 1.05,
+          letterSpacing: "-0.01em",
+          margin: 0,
+          textShadow: "0 2px 18px rgba(10,10,10,0.55), 0 1px 2px rgba(10,10,10,0.4)",
+        }}
+      >
+        Welcome back, {firstName}.
+      </h1>
+      <div
+        className="mt-3"
+        style={{
+          ...MONO,
+          color: GOLD_BRIGHT,
+          fontSize: 11,
+          letterSpacing: "0.28em",
+          textShadow: "0 1px 8px rgba(10,10,10,0.6)",
+        }}
+      >
+        The Library is Fuller Than When You Left
+      </div>
+    </div>
+
+    {/* status — lower right */}
     <div
-      className="absolute left-5 md:left-10 bottom-5 md:bottom-8 flex items-center gap-3"
-      style={{ ...MONO, color: GOLD_BRIGHT, fontSize: 11, letterSpacing: "0.28em" }}
+      className="absolute right-6 md:right-12 lg:right-16 bottom-[26%] md:bottom-[28%] hidden sm:flex items-center gap-3"
+      style={{
+        ...MONO,
+        color: GOLD_BRIGHT,
+        fontSize: 10,
+        letterSpacing: "0.28em",
+        textShadow: "0 1px 8px rgba(10,10,10,0.6)",
+      }}
     >
-      <span>The Pasted Library</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
       <span className="lib-hero-live-dot" aria-hidden />
       <span>Live</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
+      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
       <span>57 Briefcases</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
+      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
       <span>12 Sessions</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
+      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
       <span>9 Essays</span>
+    </div>
+  </div>
+);
+
+// ===================== Editorial Status Pills =====================
+const PILLS: { key: string; label: string; count?: number }[] = [
+  { key: "arrived", label: "Just Arrived", count: 3 },
+  { key: "counter", label: "On the Counter" },
+  { key: "proprietor", label: "From the Proprietor" },
+];
+
+const StatusPills = () => {
+  const [active, setActive] = useState<string>("counter");
+  return (
+    <div className="flex items-center justify-center gap-3 flex-wrap md:flex-nowrap">
+      {PILLS.map((p) => {
+        const isActive = active === p.key;
+        return (
+          <button
+            key={p.key}
+            type="button"
+            onClick={() => setActive(p.key)}
+            className="inline-flex items-center gap-2"
+            style={{
+              height: 32,
+              padding: "0 16px",
+              borderRadius: 16,
+              background: isActive ? OXBLOOD : BONE,
+              border: `1px solid ${isActive ? OXBLOOD : "rgba(201,169,110,0.3)"}`,
+              color: isActive ? BONE : CHARCOAL,
+              fontFamily: MONO_FF,
+              fontSize: 11,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+              transition: "border-color 180ms ease-out, background 180ms ease-out, color 180ms ease-out",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              if (!isActive) e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)";
+            }}
+            onMouseLeave={(e) => {
+              if (!isActive) e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
+            }}
+          >
+            <span>{p.label}</span>
+            {p.count !== undefined && (
+              <span style={{ color: isActive ? BONE : GOLD_BRIGHT }}>· {p.count}</span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+// ===================== Floating Welcome Card =====================
+const WelcomeCard = () => (
+  <div
+    className="mx-auto"
+    style={{
+      width: "min(70%, 760px)",
+      background: BONE,
+      border: "1px solid rgba(201,169,110,0.25)",
+      borderRadius: 12,
+      padding: "36px 40px",
+      boxShadow: "0 24px 64px rgba(10,10,10,0.18)",
+      position: "relative",
+    }}
+  >
+    <div
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        opacity: 0.04,
+        borderRadius: 12,
+        backgroundImage: `url(${pMonogramUrl})`,
+        backgroundSize: "60px 64px",
+        backgroundRepeat: "repeat",
+      }}
+    />
+    <div className="relative flex flex-col items-center text-center">
+      <span
+        aria-hidden
+        style={{
+          fontFamily: CORMORANT,
+          fontSize: 18,
+          color: GOLD_BRIGHT,
+          lineHeight: 1,
+          marginBottom: 12,
+        }}
+      >
+        ❦
+      </span>
+      <div
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontSize: "clamp(24px, 3vw, 32px)",
+          color: CHARCOAL,
+          lineHeight: 1.1,
+          letterSpacing: "-0.01em",
+        }}
+      >
+        The Atrium
+      </div>
+      <div
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontSize: 18,
+          color: "rgba(10,10,10,0.7)",
+          marginTop: 6,
+        }}
+      >
+        Where you begin.
+      </div>
+      <div
+        aria-hidden
+        style={{
+          width: 80,
+          height: 1,
+          background: GOLD,
+          opacity: 0.7,
+          margin: "22px auto 24px",
+        }}
+      />
+      <StatusPills />
     </div>
   </div>
 );
@@ -385,6 +563,102 @@ const JustArrived = () => (
   </section>
 );
 
+// ===================== Rooms Constellation =====================
+const ROOMS = [
+  { to: "/library/stacks",       name: "The Stacks",        meta: "57 Briefcases", img: briefcaseImg },
+  { to: "/library/cinema",       name: "The Cinema",        meta: "12 Sessions",   img: cinemaImg },
+  { to: "/library/periodicals",  name: "The Periodicals",   meta: "9 Essays",      img: volumeImg },
+  { to: "/library/vault",        name: "The Vault",         meta: "4 Sealed",      img: chamberImg },
+  { to: "/library/reading-room", name: "The Reading Room",  meta: "Your 3 Items",  img: heroImg },
+  { to: "/library/index",        name: "The Index",         meta: "All Records",   img: shelfwallImg },
+];
+
+const RoomTile = ({ room }: { room: typeof ROOMS[number] }) => {
+  const [hover, setHover] = useState(false);
+  return (
+    <Link
+      to={room.to}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="block flex-shrink-0"
+      style={{
+        width: 180,
+        background: BONE,
+        border: `1px solid ${hover ? "rgba(201,169,110,0.6)" : "rgba(201,169,110,0.25)"}`,
+        borderRadius: 6,
+        overflow: "hidden",
+        transform: `translateY(${hover ? -4 : 0}px)`,
+        transition: "transform 220ms cubic-bezier(0.22,1,0.36,1), border-color 220ms ease-out, box-shadow 220ms ease-out",
+        boxShadow: hover ? "0 12px 28px rgba(10,10,10,0.14)" : "none",
+      }}
+    >
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+        <img
+          src={room.img}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: hover ? "saturate(1.06) brightness(0.96)" : "saturate(1.0) brightness(0.94)",
+            transition: "filter 220ms ease-out",
+          }}
+        />
+      </div>
+      <div className="px-3 pt-3 pb-3 text-center">
+        <div
+          style={{
+            fontFamily: CORMORANT,
+            fontStyle: "italic",
+            fontSize: 18,
+            color: CHARCOAL,
+            lineHeight: 1.2,
+          }}
+        >
+          {room.name}
+        </div>
+        <div
+          style={{
+            ...MONO,
+            color: "rgba(10,10,10,0.5)",
+            fontSize: 10,
+            marginTop: 6,
+          }}
+        >
+          {room.meta}
+        </div>
+        <div
+          aria-hidden
+          style={{
+            fontFamily: CORMORANT,
+            color: GOLD_BRIGHT,
+            fontSize: 12,
+            marginTop: 8,
+            lineHeight: 1,
+          }}
+        >
+          ❦
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+const RoomsConstellation = () => (
+  <section className="mt-20 md:mt-24">
+    <div className="flex items-center gap-5 mb-7">
+      <span aria-hidden className="flex-1 h-px" style={{ background: "rgba(201,169,110,0.35)" }} />
+      <span style={{ ...MONO, color: "rgba(10,10,10,0.6)", letterSpacing: "0.28em" }}>
+        The Rooms of the Library
+      </span>
+      <span aria-hidden className="flex-1 h-px" style={{ background: "rgba(201,169,110,0.35)" }} />
+    </div>
+    <div className="flex gap-4 overflow-x-auto pb-3 -mx-6 px-6 md:mx-0 md:px-0 md:justify-center snap-x snap-mandatory">
+      {ROOMS.map((r) => (
+        <div key={r.to} className="snap-start"><RoomTile room={r} /></div>
+      ))}
+    </div>
+  </section>
+);
+
 // ===================== Page =====================
 const LibraryHome = () => {
   const { session, member, loading } = useMember();
@@ -405,43 +679,23 @@ const LibraryHome = () => {
       `}</style>
 
       <LeftRail />
+      <MemberPill name={member?.first_name ? `Dr ${member.first_name}` : "Guest Reader"} number="0247" />
 
       <div className="lib-atrium-in" style={{ paddingLeft: 0 }}>
         <div className="md:pl-[var(--rail-w-left)]">
-          {/* Hero strip */}
-          <Hero />
-
-          {/* Welcome line */}
-          <section className="px-6 md:px-10 pt-20 md:pt-24 pb-12 md:pb-16 text-center">
-            <h1
-              style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 400,
-                fontSize: "clamp(36px, 5.6vw, 56px)",
-                color: CHARCOAL,
-                lineHeight: 1.05,
-                letterSpacing: "-0.01em",
-                margin: 0,
-              }}
-            >
-              Welcome back, {firstName}.
-            </h1>
+          {/* Hero + overlapping welcome card */}
+          <div className="relative">
+            <Hero firstName={firstName} />
             <div
-              className="mt-5"
-              style={{
-                ...MONO,
-                color: "rgba(10,10,10,0.5)",
-                fontSize: 11,
-                letterSpacing: "0.28em",
-              }}
+              className="px-6 md:px-10 relative"
+              style={{ marginTop: -88, zIndex: 5 }}
             >
-              The Library is Fuller than When You Left
+              <WelcomeCard />
             </div>
-          </section>
+          </div>
 
           {/* Modular grid */}
-          <section className="px-6 md:px-10">
+          <section className="px-6 md:px-10 mt-16 md:mt-20">
             <div className="grid grid-cols-12 gap-5 md:gap-7">
               {/* Row 1 */}
               <div className="col-span-12 lg:col-span-7"><CounterCard /></div>
@@ -453,6 +707,7 @@ const LibraryHome = () => {
             </div>
 
             <JustArrived />
+            <RoomsConstellation />
           </section>
 
           {/* Dispatch */}
