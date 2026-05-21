@@ -12,6 +12,7 @@ import waxSeal from "@/assets/library-wax-seal.png";
 import pMonogramUrl from "@/assets/pasted-p-oval.png";
 import { PMonogram } from "@/components/library/PMonogram";
 import { MemberPill } from "@/components/library/MemberPill";
+import { HeroAtmosphere } from "@/components/library/HeroAtmosphere";
 import shelfwallImg from "@/assets/library-v8-shelfwall.jpg";
 import volumeImg from "@/assets/library-v8-volume.jpg";
 import chamberImg from "@/assets/library-v8-chamber.jpg";
@@ -19,10 +20,17 @@ import chamberImg from "@/assets/library-v8-chamber.jpg";
 // === PALETTE ===
 const BONE = "#F4F1EC";
 const CHARCOAL = "#0A0A0A";
+const INK = "#1A140E"; // warm ink for long-form copy
 const GOLD = "#C9A96E";
 const GOLD_BRIGHT = "#D4A04F";
+const GOLD_LIT = "#D4B57A"; // amber-shift, near candle source
 const OXBLOOD = "#5C1A1F";
 const OXBLOOD_DEEP = "#3e1014";
+
+// Fleuron set (used in place of middle-dots in editorial copy)
+const Fleuron = ({ glyph = "❦", color = "rgba(201,169,110,0.65)", size = 11 }: { glyph?: string; color?: string; size?: number }) => (
+  <span aria-hidden style={{ color, fontSize: size, lineHeight: 1, padding: "0 2px" }}>{glyph}</span>
+);
 
 const PLAYFAIR = "'Playfair Display', Georgia, serif";
 const CORMORANT = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
@@ -70,6 +78,9 @@ const Hero = ({ firstName }: { firstName: string }) => (
       }}
     />
 
+    {/* candle glow + drifting dust */}
+    <HeroAtmosphere />
+
     {/* inlaid welcome — lower left */}
     <div className="absolute left-6 md:left-12 lg:left-16 bottom-[26%] md:bottom-[28%]">
       <h1
@@ -114,11 +125,11 @@ const Hero = ({ firstName }: { firstName: string }) => (
     >
       <span className="lib-hero-live-dot" aria-hidden />
       <span>Live</span>
-      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
+      <Fleuron glyph="❧" color="rgba(212,181,122,0.7)" size={11} />
       <span>57 Briefcases</span>
-      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
+      <Fleuron glyph="❦" color="rgba(212,181,122,0.7)" size={11} />
       <span>12 Sessions</span>
-      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
+      <Fleuron glyph="✦" color="rgba(212,181,122,0.7)" size={10} />
       <span>9 Essays</span>
     </div>
   </div>
@@ -407,7 +418,7 @@ const VaultCard = () => (
     <div className="relative p-7 flex flex-col" style={{ minHeight: 340 }}>
       <div className="flex items-start justify-between">
         <div style={{ ...MONO, color: GOLD_BRIGHT, fontSize: 10 }}>In the Vault · Sealed</div>
-        <img src={waxSeal} alt="" className="w-12 h-12 object-contain" style={{ opacity: 0.92 }} />
+        <img src={waxSeal} alt="" className="w-12 h-12 object-contain lib-wax-breathe" style={{ opacity: 0.95 }} />
       </div>
       <h3
         style={{
@@ -671,11 +682,49 @@ const LibraryHome = () => {
   const firstName = member?.first_name || "Guest";
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden" style={{ background: BONE, color: CHARCOAL }}>
+    <div
+      className="lib-atrium-root relative min-h-screen w-full overflow-x-hidden"
+      style={{
+        background:
+          "radial-gradient(at 30% 18%, #F9F4EA 0%, #F4F1EC 55%, #ECE3D5 100%)",
+        color: CHARCOAL,
+      }}
+    >
       <style>{`
         @keyframes lib-hero-breathe { 0% { transform: scale(1); } 100% { transform: scale(1.03); } }
         @keyframes lib-atrium-in { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
         .lib-atrium-in { animation: lib-atrium-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes lib-candle-flicker-a {
+          0%   { opacity: 0.82; transform: translate(-50%, -50%) scale(1.00); }
+          40%  { opacity: 0.96; transform: translate(-50%, -50%) scale(1.025); }
+          70%  { opacity: 0.88; transform: translate(-50%, -50%) scale(1.015); }
+          100% { opacity: 1.00; transform: translate(-50%, -50%) scale(1.04); }
+        }
+        @keyframes lib-candle-flicker-b {
+          0%   { opacity: 0.78; transform: translate(-50%, -50%) scale(1.00); }
+          55%  { opacity: 0.92; transform: translate(-50%, -50%) scale(1.02); }
+          100% { opacity: 1.00; transform: translate(-50%, -50%) scale(1.035); }
+        }
+        @keyframes lib-wax-breathe {
+          0%, 100% { filter: drop-shadow(0 0 0 rgba(212,181,122,0)) brightness(1.0); }
+          50%      { filter: drop-shadow(0 0 10px rgba(212,181,122,0.45)) brightness(1.08); }
+        }
+        .lib-wax-breathe { animation: lib-wax-breathe 4.2s ease-in-out infinite; }
+        /* Custom cursors (scoped to Library) */
+        .lib-atrium-root { cursor: url('/cursors/cursor-dot.svg') 7 7, default; }
+        .lib-atrium-root a,
+        .lib-atrium-root button,
+        .lib-atrium-root [role="button"] { cursor: url('/cursors/cursor-key.svg') 7 12, pointer; }
+        /* Drop cap on the dispatch line */
+        .lib-dispatch::first-letter {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-style: italic;
+          font-size: 2.4em;
+          line-height: 0.9;
+          color: #C9A96E;
+          padding-right: 0.06em;
+          vertical-align: -0.08em;
+        }
       `}</style>
 
       <LeftRail />
@@ -713,16 +762,19 @@ const LibraryHome = () => {
           {/* Dispatch */}
           <div className="px-6 py-20 md:py-24 text-center">
             <p
+              className="lib-dispatch mx-auto"
               style={{
                 fontFamily: CORMORANT,
                 fontStyle: "italic",
                 fontSize: 22,
-                color: "rgba(10,10,10,0.7)",
+                color: INK,
                 margin: 0,
-                lineHeight: 1.5,
+                lineHeight: 1.55,
+                maxWidth: 640,
               }}
             >
-              — A new release joins the Vault on Friday at noon. Set your hour. —
+              A new release joins the Vault on Friday at noon. Set your hour.
+              <Fleuron glyph="❦" color={GOLD} size={14} />
             </p>
           </div>
 
@@ -734,10 +786,19 @@ const LibraryHome = () => {
               borderTop: "1px solid var(--lib-border)",
             }}
           >
-            <div style={{ ...MONO, color: "rgba(10,10,10,0.4)", fontSize: 10, lineHeight: 1.9 }}>
-              The Pasted Library · Madrid · MMXXVI
-              <br />
-              New Briefcases Arrive Weekly · Visit Your Card Any Time
+            <div className="inline-flex flex-col items-center" style={{ ...MONO, color: "rgba(26,20,14,0.45)", fontSize: 10, lineHeight: 1.9 }}>
+              <span className="inline-flex items-center gap-1">
+                The Pasted Library
+                <Fleuron glyph="❦" color="rgba(201,169,110,0.55)" size={10} />
+                Madrid
+                <Fleuron glyph="❦" color="rgba(201,169,110,0.55)" size={10} />
+                MMXXVI
+              </span>
+              <span className="inline-flex items-center gap-1">
+                New Briefcases Arrive Weekly
+                <Fleuron glyph="❧" color="rgba(201,169,110,0.55)" size={10} />
+                Visit Your Card Any Time
+              </span>
             </div>
             <div className="mx-auto mt-6 flex justify-center">
               <PMonogram size={28} color={CHARCOAL} opacity={0.3} />
