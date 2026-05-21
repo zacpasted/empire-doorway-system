@@ -578,6 +578,240 @@ const JustArrived = () => (
   </section>
 );
 
+// ===================== Framed Manifesto (centerpiece) =====================
+const ManifestoFrame = () => (
+  <section className="mt-20 md:mt-24 flex justify-center">
+    <div
+      className="relative"
+      style={{
+        width: "min(460px, 90vw)",
+        aspectRatio: "0.83 / 1",
+        filter: "drop-shadow(0 24px 36px rgba(10,5,2,0.55)) drop-shadow(0 6px 10px rgba(10,5,2,0.4))",
+      }}
+    >
+      {/* parchment matte (sits inside the frame's window) */}
+      <div
+        className="absolute"
+        style={{
+          inset: "13% 12% 13% 12%",
+          background:
+            "radial-gradient(ellipse at 50% 30%, #F3E7CB 0%, #E8D9B4 60%, #D9C595 100%)",
+          boxShadow: "inset 0 0 60px rgba(120,80,30,0.35), inset 0 0 8px rgba(80,50,20,0.5)",
+        }}
+      >
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            opacity: 0.12,
+            mixBlendMode: "multiply",
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+        />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+          <div
+            style={{
+              fontFamily: CORMORANT,
+              fontStyle: "italic",
+              fontSize: "clamp(20px, 2.4vw, 28px)",
+              lineHeight: 1.25,
+              color: "#3B2410",
+              maxWidth: "22ch",
+            }}
+          >
+            A vault of work,<br />given freely.
+          </div>
+          <div
+            style={{
+              ...MONO,
+              color: "rgba(59,36,16,0.7)",
+              fontSize: 10,
+              letterSpacing: "0.3em",
+              marginTop: 18,
+            }}
+          >
+            — The Library —
+          </div>
+          <img
+            src={waxSeal}
+            alt=""
+            className="lib-wax-breathe"
+            style={{ width: 44, height: 44, marginTop: 22, opacity: 0.95 }}
+          />
+        </div>
+      </div>
+      {/* gilt frame on top */}
+      <img
+        src={giltFrameUrl}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full pointer-events-none select-none"
+        style={{ objectFit: "contain" }}
+        draggable={false}
+      />
+      {/* picture-rail cord above */}
+      <div
+        aria-hidden
+        className="absolute left-1/2 -translate-x-1/2"
+        style={{
+          top: -28,
+          width: 1,
+          height: 32,
+          background: "linear-gradient(180deg, rgba(201,169,110,0) 0%, rgba(201,169,110,0.7) 30%, rgba(201,169,110,0.9) 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute left-1/2 -translate-x-1/2 rounded-full"
+        style={{
+          top: -36,
+          width: 8,
+          height: 8,
+          background: "radial-gradient(circle at 35% 30%, #E8C97A 0%, #B8924F 60%, #6E521E 100%)",
+          boxShadow: "0 1px 2px rgba(0,0,0,0.5)",
+        }}
+      />
+    </div>
+  </section>
+);
+
+// ===================== Walnut Shelf of Briefcases =====================
+const SHELF_ARRIVALS = [
+  { n: "003", title: "On Showing Up", meta: "PDF · 12pp", rot: -3 },
+  { n: "004", title: "The Mark and the Method", meta: "PDF · 18pp", rot: 2 },
+  { n: "005", title: "A Field Report", meta: "PDF · 22pp", rot: -1 },
+  { n: "006", title: "Letters, Sent Later", meta: "PDF · 9pp", rot: 3 },
+];
+
+const ShelfBriefcase = ({
+  item,
+  delay,
+}: {
+  item: (typeof SHELF_ARRIVALS)[number];
+  delay: number;
+}) => {
+  const [hover, setHover] = useState(false);
+  return (
+    <Link
+      to="/library/stacks"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="group relative flex-shrink-0"
+      style={{
+        width: 160,
+        transform: hover
+          ? `perspective(800px) rotateY(-4deg) translateY(-6px)`
+          : `perspective(800px) rotateY(0deg) translateY(0)`,
+        transformOrigin: "bottom center",
+        transition: "transform 240ms cubic-bezier(0.22,1,0.36,1)",
+        animation: `lib-briefcase-float 6s ease-in-out ${delay}s infinite`,
+      }}
+    >
+      <div
+        className="relative overflow-hidden"
+        style={{
+          width: "100%",
+          aspectRatio: "5 / 6",
+          transform: `rotate(${item.rot * 0.5}deg)`,
+          background: "#0A0A0A",
+          boxShadow: hover
+            ? "0 22px 32px -10px rgba(0,0,0,0.7), 0 6px 10px rgba(0,0,0,0.5)"
+            : "0 14px 22px -10px rgba(0,0,0,0.7), 0 4px 6px rgba(0,0,0,0.5)",
+          borderRadius: 2,
+        }}
+      >
+        <img
+          src={briefcaseImg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "brightness(0.92) saturate(1.05)" }}
+          loading="lazy"
+        />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[28%] opacity-90">
+          <PMonogram size={48} color={GOLD} style={{ width: "100%", height: "auto", aspectRatio: "1 / 1.05" }} />
+        </div>
+      </div>
+      <div className="mt-3 text-center px-1">
+        <div style={{ ...MONO, color: GOLD_BRIGHT, fontSize: 9, letterSpacing: "0.22em" }}>№ {item.n}</div>
+        <div
+          style={{
+            fontFamily: CORMORANT,
+            fontStyle: "italic",
+            fontSize: 14,
+            color: BONE,
+            marginTop: 4,
+            lineHeight: 1.2,
+            textShadow: "0 1px 4px rgba(0,0,0,0.6)",
+          }}
+        >
+          {item.title}
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+const ShelfOfBriefcases = ({ label }: { label: string }) => (
+  <section className="mt-20 md:mt-24 relative">
+    {/* nameplate */}
+    <div className="flex justify-center mb-5">
+      <div
+        style={{
+          ...MONO,
+          color: "#2A1A0A",
+          background: "linear-gradient(180deg, #E8C97A 0%, #B8924F 60%, #8A6A2F 100%)",
+          padding: "5px 16px",
+          fontSize: 10,
+          letterSpacing: "0.32em",
+          borderRadius: 1,
+          boxShadow: "inset 0 1px 0 rgba(255,235,180,0.5), 0 1px 2px rgba(0,0,0,0.45)",
+          border: "1px solid rgba(0,0,0,0.25)",
+        }}
+      >
+        {label}
+      </div>
+    </div>
+
+    {/* briefcases sitting above shelf */}
+    <div className="relative" style={{ paddingBottom: 38 }}>
+      <div className="flex justify-center items-end gap-6 md:gap-10 px-4 relative" style={{ zIndex: 2 }}>
+        {SHELF_ARRIVALS.map((a, i) => (
+          <ShelfBriefcase key={a.n} item={a} delay={i * 1.3} />
+        ))}
+      </div>
+      {/* the walnut shelf strip */}
+      <div
+        aria-hidden
+        className="absolute left-0 right-0"
+        style={{
+          bottom: 0,
+          height: 56,
+          backgroundImage: `url(${walnutShelfUrl})`,
+          backgroundSize: "100% 220%",
+          backgroundPosition: "center 40%",
+          backgroundRepeat: "no-repeat",
+          mixBlendMode: "screen",
+          opacity: 0.95,
+          zIndex: 1,
+        }}
+      />
+      {/* shelf cast shadow on wallpaper */}
+      <div
+        aria-hidden
+        className="absolute left-0 right-0"
+        style={{
+          bottom: -8,
+          height: 28,
+          background: "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%)",
+          filter: "blur(4px)",
+          zIndex: 0,
+        }}
+      />
+    </div>
+  </section>
+);
+
 // ===================== Rooms Constellation =====================
 const ROOMS = [
   { to: "/library/stacks",       name: "The Stacks",        meta: "57 Briefcases", img: briefcaseImg },
