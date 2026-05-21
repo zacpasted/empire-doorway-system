@@ -124,42 +124,203 @@ const PMark = ({ size = 64, color = IVORY, strokeWidth = 1.2 }: { size?: number;
 );
 
 // === SCENE 1 — Corridor ===
-const SceneCorridor = () => (
-  <section id="corridor" className="relative w-full" style={{ height: "100vh", background: WALNUT_DEEP }}>
-    <img
-      src={corridorImg}
-      alt="A walnut-panelled corridor leading to the Pasted Library."
-      className="absolute inset-0 w-full h-full object-cover"
-      style={{ animation: `v9-kenburns 28s ease-in-out infinite alternate` }}
-    />
-    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,8,6,0.55) 0%, rgba(10,8,6,0.05) 45%, rgba(10,8,6,0.85) 100%)" }} />
+const CORRIDOR_INDEX = [
+  { roman: "I",   label: "Corridor",         id: "corridor" },
+  { roman: "II",  label: "The Mark",         id: "mark" },
+  { roman: "III", label: "The Four Wings",   id: "wings" },
+  { roman: "IV",  label: "Dispatches",       id: "dispatches" },
+  { roman: "V",   label: "The Reading Room", id: "reading" },
+  { roman: "VI",  label: "On the Library",   id: "ethos" },
+];
 
-    {/* top-left overlay */}
-    <div className="absolute z-10 px-6 md:px-16" style={{ left: "4%", top: "22%", maxWidth: 880 }}>
-      <div style={{ ...MONO, color: BRASS_BRIGHT, marginBottom: 28 }}>
-        Pasted Society / Vol. III — The Library
+const SceneCorridor = () => {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  return (
+    <section
+      id="corridor"
+      className="relative w-full overflow-hidden flex flex-col justify-between text-[#F4F1EC]"
+      style={{
+        minHeight: "100vh",
+        background: WALNUT_DEEP,
+        fontFamily: DM,
+        padding: "clamp(20px, 4vw, 48px)",
+      }}
+    >
+      {/* Background corridor - cinematic base */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={corridorImg}
+          alt="A walnut-panelled corridor leading to the Pasted Library."
+          className="w-full h-full object-cover"
+          style={{
+            filter: "brightness(0.42) contrast(1.08) saturate(0.85)",
+            animation: `v9-kenburns 32s ease-in-out infinite alternate`,
+          }}
+        />
+        {/* Depth layering */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(20,16,12,0.78) 0%, rgba(20,16,12,0) 38%, rgba(20,16,12,0.95) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, rgba(20,16,12,0.92) 96%)",
+          }}
+        />
+        {/* faint oxblood tint in shadows */}
+        <div
+          className="absolute inset-0 mix-blend-overlay pointer-events-none"
+          style={{ background: `${OXBLOOD}0F` }}
+        />
       </div>
-      <h1
-        style={{
-          fontFamily: PLAYFAIR,
-          fontStyle: "italic",
-          fontWeight: 400,
-          fontSize: "clamp(56px, 11vw, 140px)",
-          lineHeight: 0.92,
-          color: IVORY,
-          letterSpacing: "-0.02em",
-          margin: 0,
-        }}
-      >
-        What we<br />wrote down.
-      </h1>
-    </div>
 
-    <div className="absolute bottom-8 right-8 z-10" style={{ ...MONO, color: "rgba(244,241,236,0.5)" }}>
-      ENTER →
-    </div>
-  </section>
-);
+      {/* Internal structural frame */}
+      <div
+        aria-hidden
+        className="absolute z-10 pointer-events-none"
+        style={{
+          top: "clamp(20px, 4vw, 48px)",
+          right: "clamp(20px, 4vw, 48px)",
+          bottom: "clamp(20px, 4vw, 48px)",
+          left: "clamp(20px, 4vw, 48px)",
+          border: `1px solid rgba(184,134,43,0.16)`,
+        }}
+      />
+
+      {/* Header / Eyebrow */}
+      <header className="relative z-20 flex justify-between items-start gap-6 pt-4 md:pt-6 px-4 md:px-8">
+        <div className="flex items-center gap-3 md:gap-4" style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10, letterSpacing: "0.4em" }}>
+          <span aria-hidden className="block" style={{ height: 1, width: "clamp(24px, 5vw, 48px)", background: "rgba(184,134,43,0.4)" }} />
+          <span>Pasted Society / Vol. III — The Library</span>
+        </div>
+        <div className="hidden md:block" style={{ ...MONO, color: "rgba(244,241,236,0.3)", fontSize: 9, letterSpacing: "0.5em" }}>
+          EST. MMXXIV
+        </div>
+      </header>
+
+      {/* Centerpiece */}
+      <main className="relative z-20 px-4 md:px-8 mb-8 md:mb-12">
+        <div className="max-w-4xl">
+          <h1
+            style={{
+              fontFamily: PLAYFAIR,
+              fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: "clamp(56px, 12vw, 160px)",
+              lineHeight: 0.85,
+              color: IVORY,
+              letterSpacing: "-0.02em",
+              margin: 0,
+              textShadow: "0 4px 32px rgba(0,0,0,0.5)",
+            }}
+          >
+            What we<br />wrote down.
+          </h1>
+        </div>
+      </main>
+
+      {/* Footer / Index & Enter */}
+      <footer className="relative z-20 flex flex-col md:flex-row md:justify-between md:items-end gap-8 pb-4 md:pb-6 px-4 md:px-8">
+        {/* Corridor index */}
+        <nav aria-label="Library sections" className="hidden md:block">
+          <ul className="space-y-2.5" style={{ ...MONO, fontSize: 10, letterSpacing: "0.18em" }}>
+            {CORRIDOR_INDEX.map((entry, i) => {
+              const isActive = i === 0;
+              return (
+                <li key={entry.id}>
+                  <button
+                    onClick={() => scrollTo(entry.id)}
+                    className="group flex items-center gap-4 text-left"
+                    style={{
+                      color: isActive ? IVORY : "rgba(244,241,236,0.32)",
+                      transition: `color 500ms ${EASE}, opacity 500ms ${EASE}`,
+                      background: "transparent",
+                    }}
+                  >
+                    <span style={{ color: isActive ? BRASS_BRIGHT : "inherit", width: 18, display: "inline-block" }}>{entry.roman}</span>
+                    <span
+                      aria-hidden
+                      className="block"
+                      style={{
+                        height: 1,
+                        width: isActive ? 24 : 0,
+                        background: BRASS,
+                        transition: `width 500ms ${EASE}`,
+                      }}
+                    />
+                    <span style={{ letterSpacing: "0.22em" }}>{entry.label}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* Action cue */}
+        <button
+          onClick={() => scrollTo("mark")}
+          className="group self-end md:self-auto flex flex-col items-end cursor-pointer"
+          style={{ background: "transparent" }}
+          aria-label="Enter the Library"
+        >
+          <div style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10, letterSpacing: "0.3em", marginBottom: 18 }}>
+            Accessing Archive
+          </div>
+          <div className="flex items-center gap-6 md:gap-8">
+            <span
+              aria-hidden
+              className="enter-rule block"
+              style={{
+                height: 1,
+                width: 96,
+                background: "rgba(184,134,43,0.3)",
+                transition: `width 900ms ${EASE}, background 900ms ${EASE}`,
+              }}
+            />
+            <span
+              className="enter-word"
+              style={{
+                fontFamily: PLAYFAIR,
+                fontStyle: "italic",
+                fontSize: "clamp(22px, 2.4vw, 30px)",
+                color: IVORY,
+                transition: `transform 500ms ${EASE}`,
+                display: "inline-block",
+              }}
+            >
+              Enter →
+            </span>
+          </div>
+        </button>
+      </footer>
+
+      {/* Film grain texture */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none z-30"
+        style={{
+          opacity: 0.05,
+          mixBlendMode: "overlay",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+
+      <style>{`
+        #corridor button.group:hover .enter-rule { width: 144px; background: ${BRASS_BRIGHT}; }
+        #corridor button.group:hover .enter-word { transform: translateX(8px); }
+      `}</style>
+    </section>
+  );
+};
 
 // === SCENE 2 — The Mark (oxblood) ===
 const SceneMark = () => (
