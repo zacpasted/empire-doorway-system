@@ -13,8 +13,14 @@ import Welcome from "./pages/library/Welcome";
 import LibraryLogin from "./pages/library/Login";
 import LibraryHome from "./pages/library/LibraryHome";
 import AssetDetail from "./pages/library/AssetDetail";
-import LibraryCardPage from "./pages/library/Card";
 import Gate from "./pages/library/Gate";
+import StacksPage from "./pages/library/zones/StacksPage";
+import CinemaPage from "./pages/library/zones/CinemaPage";
+import PeriodicalsPage from "./pages/library/zones/PeriodicalsPage";
+import VaultPage from "./pages/library/zones/VaultPage";
+import ReadingRoomPage from "./pages/library/zones/ReadingRoomPage";
+import IndexPage from "./pages/library/zones/IndexPage";
+import MemberPage from "./pages/library/zones/MemberPage";
 
 const queryClient = new QueryClient();
 
@@ -31,8 +37,16 @@ const App = () => (
           <Route path="/login" element={<LibraryLogin />} />
           <Route path="/gate" element={<Gate />} />
           <Route path="/library" element={<LibraryHome />} />
+          <Route path="/library/stacks" element={<StacksPage />} />
+          <Route path="/library/cinema" element={<CinemaPage />} />
+          <Route path="/library/periodicals" element={<PeriodicalsPage />} />
+          <Route path="/library/vault" element={<VaultPage />} />
+          <Route path="/library/reading-room" element={<ReadingRoomPage />} />
+          <Route path="/library/index" element={<IndexPage />} />
+          <Route path="/library/me" element={<MemberPage />} />
+          <Route path="/card" element={<MemberPage />} />
+          <Route path="/library/asset/:slug" element={<AssetDetail />} />
           <Route path="/library/:slug" element={<AssetDetail />} />
-          <Route path="/card" element={<LibraryCardPage />} />
 
           {/* Admin (kept) */}
           <Route path="/admin/login" element={<AdminLogin />} />
