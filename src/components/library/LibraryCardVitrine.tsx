@@ -7,9 +7,7 @@ import { PMonogram } from "@/components/library/PMonogram";
  */
 export const LibraryCardVitrine = () => {
   const { member } = useMember();
-  const name = member?.first_name && member?.last_name
-    ? `${member.first_name} ${member.last_name}`
-    : member?.first_name ?? "Guest of the House";
+  const name = member?.first_name?.trim() || "Guest of the House";
   const number = member?.member_number ?? "—— · ——";
 
   return (
