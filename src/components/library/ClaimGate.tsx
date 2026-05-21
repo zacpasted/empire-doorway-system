@@ -5,19 +5,18 @@ import { supabase } from "@/integrations/supabase/client";
 import waxSeal from "@/assets/library-wax-seal.png";
 
 const schema = z.object({
-  full_name: z.string().trim().min(2, "Required").max(120).refine(
-    (v) => v.split(/\s+/).filter(Boolean).length >= 2,
-    "Enter your full name"
-  ),
+  first_name: z.string().trim().min(1, "Required").max(60),
+  last_name: z.string().trim().min(1, "Required").max(60),
   email: z.string().trim().email("Enter a valid email").max(255),
-  location: z.string().trim().min(2, "Required").max(120),
-  career_stage: z.enum(["student", "associate", "principal"], {
-    errorMap: () => ({ message: "Choose a chapter" }),
+  practice_name: z.string().trim().min(2, "Required").max(160),
+  role: z.enum(["owner", "associate", "building"], {
+    errorMap: () => ({ message: "Choose your role" }),
   }),
+  why_now: z.string().trim().min(2, "One line, please").max(200),
 });
 
 type Phase = "idle" | "pressing" | "reviewing" | "out";
-type Stage = "" | "student" | "associate" | "principal";
+type Role = "" | "owner" | "associate" | "building";
 
 const CornerFiligree = ({ rotate = 0 }: { rotate?: number }) => (
   <svg
@@ -90,10 +89,12 @@ const inputStyle: React.CSSProperties = {
 
 export const ClaimGate = () => {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [location, setLocation] = useState("");
-  const [careerStage, setCareerStage] = useState<Stage>("");
+  const [practiceName, setPracticeName] = useState("");
+  const [role, setRole] = useState<Role>("");
+  const [whyNow, setWhyNow] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -101,19 +102,13 @@ export const ClaimGate = () => {
   const submitting = phase !== "idle";
 
   const runSupabase = async () => {
-    const trimmed = fullName.trim().replace(/\s+/g, " ");
-    const parts = trimmed.split(" ");
-    const first_name = parts[0] ?? "";
-    const last_name = parts.slice(1).join(" ");
-    const roleMap = { student: "building", associate: "associate", principal: "owner" } as const;
-    const role = roleMap[careerStage as "student" | "associate" | "principal"];
     const { error: insertError } = await supabase.from("applications").insert({
-      first_name: first_name.slice(0, 60),
-      last_name: (last_name || first_name).slice(0, 60),
+      first_name: firstName.trim().slice(0, 60),
+      last_name: lastName.trim().slice(0, 60),
       email: email.trim().toLowerCase(),
-      practice_name: location.trim().slice(0, 160),
-      role,
-      why_now: null,
+      practice_name: practiceName.trim().slice(0, 160),
+      role: role as "owner" | "associate" | "building",
+      why_now: whyNow.trim().slice(0, 200) || null,
     });
     return insertError;
   };
@@ -135,9 +130,11 @@ export const ClaimGate = () => {
 
     setPhase("out");
     try {
-      const first = fullName.trim().split(/\s+/)[0] ?? "";
-      sessionStorage.setItem("pasted_first_name", first);
-      sessionStorage.setItem("pasted_full_name", fullName.trim().replace(/\s+/g, " "));
+      sessionStorage.setItem("pasted_first_name", firstName.trim());
+      sessionStorage.setItem(
+        "pasted_full_name",
+        `${firstName.trim()} ${lastName.trim()}`.trim()
+      );
     } catch { /* noop */ }
     setTimeout(() => navigate("/library/pending"), 320);
   };
@@ -146,10 +143,12 @@ export const ClaimGate = () => {
     e.preventDefault();
     setError(null);
     const parsed = schema.safeParse({
-      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
       email,
-      location,
-      career_stage: careerStage,
+      practice_name: practiceName,
+      role,
+      why_now: whyNow,
     });
     if (!parsed.success) {
       const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
@@ -162,10 +161,12 @@ export const ClaimGate = () => {
   const handleRetry = async () => {
     // Re-validate in case the user edited fields after the error.
     const parsed = schema.safeParse({
-      full_name: fullName,
+      first_name: firstName,
+      last_name: lastName,
       email,
-      location,
-      career_stage: careerStage,
+      practice_name: practiceName,
+      role,
+      why_now: whyNow,
     });
     if (!parsed.success) {
       const first = Object.values(parsed.error.flatten().fieldErrors)[0]?.[0];
@@ -358,30 +359,34 @@ export const ClaimGate = () => {
         <div className="mt-2.5 mx-auto" style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }} />
 
         <div className="lib-editorial text-lib-charcoal text-xl md:text-3xl leading-tight mt-4">
-          A vault of work,<br />given freely.
+          Apply for your<br />Library Card.
         </div>
-        <p className="lib-body text-lib-charcoal/70 mt-2 text-xs md:text-sm">
-          Claim a Card. Walk the shelves. Take what is useful.
+        <p className="lib-body text-lib-charcoal/70 mt-2 text-xs md:text-sm italic">
+          A few questions. We read every application<br />by hand. You'll hear back within 24 hours.
         </p>
 
         <div className="my-3"><KeyDivider /></div>
 
         <form onSubmit={handleSubmit} className="space-y-3 text-left">
-          {renderField({ id: "full_name", type: "text", label: "NAME", value: fullName, onChange: setFullName, autoComplete: "name" })}
+          <div className="grid grid-cols-2 gap-3">
+            {renderField({ id: "first_name", type: "text", label: "FIRST NAME", value: firstName, onChange: setFirstName, autoComplete: "given-name" })}
+            {renderField({ id: "last_name", type: "text", label: "LAST NAME", value: lastName, onChange: setLastName, autoComplete: "family-name" })}
+          </div>
           {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
+          {renderField({ id: "practice_name", type: "text", label: "PRACTICE (CITY, STATE)", value: practiceName, onChange: setPracticeName, autoComplete: "organization", placeholder: "Practice — City, State" })}
 
-          {/* YOUR CHAPTER — stamp-style selector, no boxes */}
+          {/* YOUR ROLE — stamp-style selector, no boxes */}
           <div>
-            <label style={labelStyle} className="block mb-2.5">YOUR CHAPTER</label>
+            <label style={labelStyle} className="block mb-2.5">YOUR ROLE</label>
             <div className="flex items-center gap-2">
-              {(["student", "associate", "principal"] as const).map((stage) => {
-                const active = careerStage === stage;
+              {(["owner", "associate", "building"] as const).map((r) => {
+                const active = role === r;
                 return (
                   <button
-                    key={stage}
+                    key={r}
                     type="button"
                     disabled={submitting}
-                    onClick={() => setCareerStage(stage)}
+                    onClick={() => setRole(r)}
                     className="cg-chip relative cursor-pointer overflow-hidden flex-1"
                     style={{
                       fontFamily: '"JetBrains Mono", ui-monospace, monospace',
@@ -401,7 +406,7 @@ export const ClaimGate = () => {
                       transition: "color 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease",
                     }}
                   >
-                    <span className="relative z-10">{stage}</span>
+                    <span className="relative z-10">{r}</span>
                     <span aria-hidden className="cg-chip-shimmer" />
                   </button>
                 );
@@ -431,7 +436,27 @@ export const ClaimGate = () => {
             `}</style>
           </div>
 
-          {renderField({ id: "location", type: "text", label: "CITY", value: location, onChange: setLocation, autoComplete: "address-level2", placeholder: "City, Country" })}
+          {/* WHY NOW — single-line textarea */}
+          <div>
+            <label htmlFor="why_now" style={labelStyle} className="block mb-1.5">WHY NOW — ONE LINE</label>
+            <textarea
+              id="why_now"
+              rows={2}
+              maxLength={200}
+              value={whyNow}
+              onChange={(e) => setWhyNow(e.target.value)}
+              onFocus={() => setFocusedField("why_now")}
+              onBlur={() => setFocusedField((f) => (f === "why_now" ? null : f))}
+              disabled={submitting}
+              className="w-full bg-transparent px-0 py-1.5 text-sm text-charcoal placeholder:text-charcoal/25 focus:outline-none resize-none"
+              style={{
+                ...inputStyle,
+                borderBottomColor:
+                  focusedField === "why_now" ? "rgba(201,169,110,0.6)" : "rgba(10,10,10,0.18)",
+                fontFamily: "inherit",
+              }}
+            />
+          </div>
 
           {error && (
             <div className="flex items-center justify-between gap-3">
@@ -499,7 +524,7 @@ export const ClaimGate = () => {
                   "repeating-linear-gradient(90deg, rgba(40,5,5,0.6) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(40,5,5,0.35) 0 1px, transparent 1px 5px)",
               }}
             />
-            <span className="relative">CLAIM MY CARD</span>
+            <span className="relative">SUBMIT APPLICATION →</span>
           </button>
         </form>
 
@@ -508,7 +533,7 @@ export const ClaimGate = () => {
           className="lib-body italic leading-relaxed text-center"
           style={{ color: "rgba(10,10,10,0.55)", fontSize: "11px", marginTop: 14 }}
         >
-          The Card is the threshold. The Library is the first room. There are others.
+          No noise. No pitch-mail. Unsubscribe any time.
         </p>
 
         {/* Wax seal — signature at the foot of a letter */}
@@ -552,7 +577,7 @@ export const ClaimGate = () => {
             color: "rgba(10,10,10,0.45)",
           }}
         >
-          ONE EMAIL. NO SPAM. UNSUBSCRIBE AT ANY LINE.
+          WE READ EVERY APPLICATION BY HAND.
         </p>
       </div>
 
