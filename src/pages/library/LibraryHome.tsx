@@ -923,8 +923,11 @@ const LibraryHome = () => {
     <div
       className="lib-atrium-root relative min-h-screen w-full overflow-x-hidden"
       style={{
-        background:
-          "radial-gradient(at 30% 18%, #F9F4EA 0%, #F4F1EC 55%, #ECE3D5 100%)",
+        backgroundColor: "#3a0d12",
+        backgroundImage: `url(${wallpaperUrl})`,
+        backgroundRepeat: "repeat",
+        backgroundSize: "520px 520px",
+        backgroundAttachment: "fixed",
         color: CHARCOAL,
       }}
     >
@@ -932,6 +935,10 @@ const LibraryHome = () => {
         @keyframes lib-hero-breathe { 0% { transform: scale(1); } 100% { transform: scale(1.03); } }
         @keyframes lib-atrium-in { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
         .lib-atrium-in { animation: lib-atrium-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes lib-briefcase-float {
+          0%,100% { transform: translateY(0); }
+          50%     { transform: translateY(-2px); }
+        }
         @keyframes lib-candle-flicker-a {
           0%   { opacity: 0.82; transform: translate(-50%, -50%) scale(1.00); }
           40%  { opacity: 0.96; transform: translate(-50%, -50%) scale(1.025); }
@@ -983,6 +990,7 @@ const LibraryHome = () => {
 
           {/* Modular grid */}
           <section className="px-6 md:px-10 mt-16 md:mt-20">
+            <ManifestoFrame />
             <div className="grid grid-cols-12 gap-5 md:gap-7">
               {/* Row 1 */}
               <div className="col-span-12 lg:col-span-7"><CounterCard /></div>
@@ -993,55 +1001,98 @@ const LibraryHome = () => {
               <div className="col-span-12 lg:col-span-5"><PeriodicalsCard /></div>
             </div>
 
-            <JustArrived />
+            <ShelfOfBriefcases label="JUST ARRIVED · WEEK 22" />
             <RoomsConstellation />
           </section>
 
-          {/* Dispatch */}
-          <div className="px-6 py-20 md:py-24 text-center">
-            <p
-              className="lib-dispatch mx-auto"
+          {/* ===== Picture rail (gold) — separates wall from wainscoting ===== */}
+          <div
+            aria-hidden
+            className="mt-24 md:mt-32 relative"
+            style={{ height: 14 }}
+          >
+            <div
+              className="absolute left-0 right-0"
               style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontSize: 22,
-                color: INK,
-                margin: 0,
-                lineHeight: 1.55,
-                maxWidth: 640,
+                top: 0,
+                height: 1,
+                background: "linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.7) 12%, rgba(212,181,122,0.95) 50%, rgba(201,169,110,0.7) 88%, transparent 100%)",
+                boxShadow: "0 1px 0 rgba(0,0,0,0.4)",
               }}
-            >
-              A new release joins the Vault on Friday at noon. Set your hour.
-              <Fleuron glyph="❦" color={GOLD} size={14} />
-            </p>
+            />
+            <div
+              className="absolute left-0 right-0"
+              style={{
+                top: 6,
+                height: 1,
+                background: "linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.35) 50%, transparent 100%)",
+              }}
+            />
           </div>
 
-          {/* Footer */}
-          <footer
-            className="px-6 py-12 text-center"
+          {/* ===== Wainscoting / wood-paneled lower zone ===== */}
+          <div
+            className="relative"
             style={{
-              background: BONE,
-              borderTop: "1px solid var(--lib-border)",
+              backgroundColor: "#2A1A0E",
+              backgroundImage: `url(${wainscotingUrl})`,
+              backgroundSize: "1200px auto",
+              backgroundRepeat: "repeat",
+              backgroundPosition: "center top",
+              boxShadow: "inset 0 14px 28px rgba(0,0,0,0.55)",
             }}
           >
+            {/* warm wash to harmonise with candlelight */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 30%, rgba(212,181,122,0.10) 0%, transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%)",
+              }}
+            />
+
+            {/* Dispatch */}
+            <div className="relative px-6 py-20 md:py-24 text-center">
+              <p
+                className="lib-dispatch mx-auto"
+                style={{
+                  fontFamily: CORMORANT,
+                  fontStyle: "italic",
+                  fontSize: 22,
+                  color: "#F2E6CC",
+                  margin: 0,
+                  lineHeight: 1.55,
+                  maxWidth: 640,
+                  textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                }}
+              >
+                A new release joins the Vault on Friday at noon. Set your hour.
+                <Fleuron glyph="❦" color={GOLD_BRIGHT} size={14} />
+              </p>
+            </div>
+
+            {/* Footer */}
+            <footer className="relative px-6 py-12 text-center">
             <div className="inline-flex flex-col items-center" style={{ ...MONO, color: "rgba(26,20,14,0.45)", fontSize: 10, lineHeight: 1.9 }}>
               <span className="inline-flex items-center gap-1">
-                The Pasted Library
+                <span style={{ color: "rgba(244,241,236,0.55)" }}>The Pasted Library</span>
                 <Fleuron glyph="❦" color="rgba(201,169,110,0.55)" size={10} />
-                Madrid
+                <span style={{ color: "rgba(244,241,236,0.55)" }}>Madrid</span>
                 <Fleuron glyph="❦" color="rgba(201,169,110,0.55)" size={10} />
-                MMXXVI
+                <span style={{ color: "rgba(244,241,236,0.55)" }}>MMXXVI</span>
               </span>
-              <span className="inline-flex items-center gap-1">
+              <span className="inline-flex items-center gap-1" style={{ color: "rgba(244,241,236,0.45)" }}>
                 New Briefcases Arrive Weekly
                 <Fleuron glyph="❧" color="rgba(201,169,110,0.55)" size={10} />
                 Visit Your Card Any Time
               </span>
             </div>
             <div className="mx-auto mt-6 flex justify-center">
-              <PMonogram size={28} color={CHARCOAL} opacity={0.3} />
+              <PMonogram size={28} color={GOLD} opacity={0.5} />
             </div>
-          </footer>
+            </footer>
+          </div>
         </div>
       </div>
     </div>
