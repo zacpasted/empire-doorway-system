@@ -83,14 +83,16 @@ const CardPage = () => {
           ← The Library
         </Link>
         <div className="hidden md:block" style={{ ...MONO, color: BRASS_BRIGHT, fontSize: 10 }}>
-          Pasted Society / Member Record
+          Pasted Society / {member ? "Member Record" : "Public Gallery"}
         </div>
-        <button
-          onClick={() => supabase.auth.signOut().then(() => { window.location.href = "/"; })}
-          style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}`, background: "transparent" }}
-        >
-          Sign Out
-        </button>
+        {member && (
+          <button
+            onClick={() => supabase.auth.signOut().then(() => { window.location.href = "/"; })}
+            style={{ ...MONO, color: IVORY, paddingBottom: 4, borderBottom: `1px solid ${BRASS}`, background: "transparent" }}
+          >
+            Sign Out
+          </button>
+        )}
       </header>
 
       {/* Internal structural frame */}
