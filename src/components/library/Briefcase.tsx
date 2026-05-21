@@ -1,3 +1,5 @@
+import pMonogramUrl from "@/assets/pasted-p-oval.png";
+
 type Props = {
   width?: number;
   height?: number;
@@ -50,25 +52,11 @@ export const Briefcase = ({ width = 280, height = 200, className, open = false }
       {/* clasps */}
       <rect x="70" y="92" width="22" height="14" fill="#C9A96E" opacity="0.9" />
       <rect x="188" y="92" width="22" height="14" fill="#C9A96E" opacity="0.9" />
+      {/* monogram (PNG asset, embedded in SVG) */}
+      <image href={pMonogramUrl} x="110" y="100" width="60" height="63" opacity="0.95" preserveAspectRatio="xMidYMid meet" />
       {/* subtle grain */}
       <rect x="20" y="34" width="240" height="150" fill="#000" opacity="0.04" />
     </svg>
-    {/* monogram (PNG asset) */}
-    <img
-      src={(typeof window !== "undefined" ? new URL("/src/assets/pasted-p-oval.png", import.meta.url).href : "")}
-      alt=""
-      aria-hidden
-      style={{
-        position: "absolute",
-        left: "50%",
-        top: "calc(50% - 8px)",
-        transform: "translate(-50%, -50%)",
-        width: "20%",
-        height: "auto",
-        opacity: 0.95,
-        filter: "drop-shadow(0 0 0 transparent)",
-      }}
-    />
   );
 };
 
