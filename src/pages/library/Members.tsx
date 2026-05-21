@@ -77,17 +77,14 @@ const Members = () => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_evt, session) => {
         setUser(session?.user ?? null);
-        if (!session?.user) {
-          setLoading(false);
-        }
       }
     );
 
     supabase.auth.getUser().then(({ data: { user: u } }) => {
       setUser(u);
       if (!u) {
+        // Public preview — no auth required.
         setLoading(false);
-        navigate("/library/login", { replace: true });
         return;
       }
       supabase
@@ -102,7 +99,7 @@ const Members = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, []);
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -133,24 +130,26 @@ const Members = () => {
     <PageFrame>
       <TopNav
         rightSlot={
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <span style={{ ...monoLabel, color: QUIET }}>{firstName}</span>
-            <button
-              type="button"
-              onClick={signOut}
-              style={{
-                ...monoLabel,
-                color: BRASS,
-                background: "transparent",
-                border: "none",
-                borderBottom: `1px solid ${BRASS}`,
-                paddingBottom: 2,
-                cursor: "pointer",
-              }}
-            >
-              Sign out
-            </button>
-          </div>
+          user ? (
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <span style={{ ...monoLabel, color: QUIET }}>{firstName}</span>
+              <button
+                type="button"
+                onClick={signOut}
+                style={{
+                  ...monoLabel,
+                  color: BRASS,
+                  background: "transparent",
+                  border: "none",
+                  borderBottom: `1px solid ${BRASS}`,
+                  paddingBottom: 2,
+                  cursor: "pointer",
+                }}
+              >
+                Sign out
+              </button>
+            </div>
+          ) : null
         }
       />
       <Content>
