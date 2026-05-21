@@ -88,7 +88,18 @@ export const LibraryShell = ({
         <div className="lib-shell-inner relative" style={{ paddingLeft: 0, paddingRight: 0 }}>
           <main className="relative">
             {hero ?? <PhotoHero zone={zone} />}
-            <div className="lib-zone-in">{children}</div>
+            <div
+              className="lib-zone-in relative"
+              style={{
+                background:
+                  "radial-gradient(at 30% 18%, #F9F4EA 0%, #F4F1EC 55%, #ECE3D5 100%)",
+                borderTop: "1px solid rgba(201,169,110,0.35)",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255,250,235,0.6), 0 -12px 32px rgba(0,0,0,0.25)",
+              }}
+            >
+              {children}
+            </div>
 
             {/* Gold picture rail */}
             <div aria-hidden className="mt-24 md:mt-32 relative" style={{ height: 14 }}>
