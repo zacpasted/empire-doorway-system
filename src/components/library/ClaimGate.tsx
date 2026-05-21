@@ -5,19 +5,18 @@ import { supabase } from "@/integrations/supabase/client";
 import waxSeal from "@/assets/library-wax-seal.png";
 
 const schema = z.object({
-  full_name: z.string().trim().min(2, "Required").max(120).refine(
-    (v) => v.split(/\s+/).filter(Boolean).length >= 2,
-    "Enter your full name"
-  ),
+  first_name: z.string().trim().min(1, "Required").max(60),
+  last_name: z.string().trim().min(1, "Required").max(60),
   email: z.string().trim().email("Enter a valid email").max(255),
-  location: z.string().trim().min(2, "Required").max(120),
-  career_stage: z.enum(["student", "associate", "principal"], {
-    errorMap: () => ({ message: "Choose a chapter" }),
+  practice_name: z.string().trim().min(2, "Required").max(160),
+  role: z.enum(["owner", "associate", "building"], {
+    errorMap: () => ({ message: "Choose your role" }),
   }),
+  why_now: z.string().trim().min(2, "One line, please").max(200),
 });
 
 type Phase = "idle" | "pressing" | "reviewing" | "out";
-type Stage = "" | "student" | "associate" | "principal";
+type Role = "" | "owner" | "associate" | "building";
 
 const CornerFiligree = ({ rotate = 0 }: { rotate?: number }) => (
   <svg
