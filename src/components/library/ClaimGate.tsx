@@ -359,30 +359,34 @@ export const ClaimGate = () => {
         <div className="mt-2.5 mx-auto" style={{ width: 40, height: 1, background: "rgba(201,169,110,0.55)" }} />
 
         <div className="lib-editorial text-lib-charcoal text-xl md:text-3xl leading-tight mt-4">
-          A vault of work,<br />given freely.
+          Apply for your<br />Library Card.
         </div>
-        <p className="lib-body text-lib-charcoal/70 mt-2 text-xs md:text-sm">
-          Claim a Card. Walk the shelves. Take what is useful.
+        <p className="lib-body text-lib-charcoal/70 mt-2 text-xs md:text-sm italic">
+          A few questions. We read every application<br />by hand. You'll hear back within 24 hours.
         </p>
 
         <div className="my-3"><KeyDivider /></div>
 
         <form onSubmit={handleSubmit} className="space-y-3 text-left">
-          {renderField({ id: "full_name", type: "text", label: "NAME", value: fullName, onChange: setFullName, autoComplete: "name" })}
+          <div className="grid grid-cols-2 gap-3">
+            {renderField({ id: "first_name", type: "text", label: "FIRST NAME", value: firstName, onChange: setFirstName, autoComplete: "given-name" })}
+            {renderField({ id: "last_name", type: "text", label: "LAST NAME", value: lastName, onChange: setLastName, autoComplete: "family-name" })}
+          </div>
           {renderField({ id: "email", type: "email", label: "EMAIL", value: email, onChange: setEmail, autoComplete: "email" })}
+          {renderField({ id: "practice_name", type: "text", label: "PRACTICE (CITY, STATE)", value: practiceName, onChange: setPracticeName, autoComplete: "organization", placeholder: "Practice — City, State" })}
 
-          {/* YOUR CHAPTER — stamp-style selector, no boxes */}
+          {/* YOUR ROLE — stamp-style selector, no boxes */}
           <div>
-            <label style={labelStyle} className="block mb-2.5">YOUR CHAPTER</label>
+            <label style={labelStyle} className="block mb-2.5">YOUR ROLE</label>
             <div className="flex items-center gap-2">
-              {(["student", "associate", "principal"] as const).map((stage) => {
-                const active = careerStage === stage;
+              {(["owner", "associate", "building"] as const).map((r) => {
+                const active = role === r;
                 return (
                   <button
-                    key={stage}
+                    key={r}
                     type="button"
                     disabled={submitting}
-                    onClick={() => setCareerStage(stage)}
+                    onClick={() => setRole(r)}
                     className="cg-chip relative cursor-pointer overflow-hidden flex-1"
                     style={{
                       fontFamily: '"JetBrains Mono", ui-monospace, monospace',
@@ -402,7 +406,7 @@ export const ClaimGate = () => {
                       transition: "color 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease",
                     }}
                   >
-                    <span className="relative z-10">{stage}</span>
+                    <span className="relative z-10">{r}</span>
                     <span aria-hidden className="cg-chip-shimmer" />
                   </button>
                 );
@@ -432,7 +436,27 @@ export const ClaimGate = () => {
             `}</style>
           </div>
 
-          {renderField({ id: "location", type: "text", label: "CITY", value: location, onChange: setLocation, autoComplete: "address-level2", placeholder: "City, Country" })}
+          {/* WHY NOW — single-line textarea */}
+          <div>
+            <label htmlFor="why_now" style={labelStyle} className="block mb-1.5">WHY NOW — ONE LINE</label>
+            <textarea
+              id="why_now"
+              rows={2}
+              maxLength={200}
+              value={whyNow}
+              onChange={(e) => setWhyNow(e.target.value)}
+              onFocus={() => setFocusedField("why_now")}
+              onBlur={() => setFocusedField((f) => (f === "why_now" ? null : f))}
+              disabled={submitting}
+              className="w-full bg-transparent px-0 py-1.5 text-sm text-charcoal placeholder:text-charcoal/25 focus:outline-none resize-none"
+              style={{
+                ...inputStyle,
+                borderBottomColor:
+                  focusedField === "why_now" ? "rgba(201,169,110,0.6)" : "rgba(10,10,10,0.18)",
+                fontFamily: "inherit",
+              }}
+            />
+          </div>
 
           {error && (
             <div className="flex items-center justify-between gap-3">
