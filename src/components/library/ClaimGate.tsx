@@ -71,12 +71,8 @@ const ExLibrisWatermark = () => (
   </svg>
 );
 
-const Monogram56 = () => (
-  <svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true">
-    <ellipse cx="32" cy="32" rx="20" ry="28" fill="none" stroke="#C9A96E" strokeWidth="1.2" />
-    <text x="32" y="46" textAnchor="middle" fontFamily="Playfair Display, Georgia, serif" fontStyle="italic" fontWeight="500" fontSize="40" fill="#C9A96E">P</text>
-  </svg>
-);
+import { PMonogram } from "@/components/library/PMonogram";
+const Monogram56 = () => <PMonogram size={56} color="#C9A96E" />;
 
 // Shared label styles per spec
 const labelStyle: React.CSSProperties = {

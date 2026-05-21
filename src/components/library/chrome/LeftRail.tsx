@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import { ZONES, ZONE_ORDER } from "@/data/library-zones";
+import { PMonogram } from "@/components/library/PMonogram";
 
 type RailItemProps = {
   to: string;
@@ -34,21 +35,7 @@ const RailIcon = ({ to, label, active, icon: Icon, monogram, monogramSize = 28 }
       }}
     >
       {monogram ? (
-        <svg width={monogramSize} height={monogramSize} viewBox="0 0 64 64" aria-hidden>
-          <ellipse cx="32" cy="32" rx="22" ry="28" fill="none" stroke={active ? "#7A1F1F" : "#C9A96E"} strokeWidth="1.4" />
-          <text
-            x="50%"
-            y="56%"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontFamily="'Playfair Display', Georgia, serif"
-            fontStyle="italic"
-            fontSize="34"
-            fill={active ? "#7A1F1F" : "#C9A96E"}
-          >
-            P
-          </text>
-        </svg>
+        <PMonogram size={monogramSize} color={active ? "#7A1F1F" : "#C9A96E"} />
       ) : Icon ? (
         <Icon size={22} strokeWidth={1.4} />
       ) : null}

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { PMonogram } from "@/components/library/PMonogram";
 
 type Props = {
   size?: number;
@@ -8,43 +9,17 @@ type Props = {
 
 export const Monogram = ({ size = 32, variant = "gold-on-charcoal", className }: Props) => {
   const fill =
-    variant === "charcoal-on-bone"
-      ? "#0A0A0A"
-      : variant === "gold-on-bone"
-        ? "#C9A96E"
-        : "#C9A96E";
-  const bg =
-    variant === "charcoal-on-bone"
-      ? "transparent"
-      : variant === "gold-on-bone"
-        ? "transparent"
-        : "#0A0A0A";
-  const stroke = variant === "gold-on-charcoal" ? "#C9A96E" : fill;
-
+    variant === "charcoal-on-bone" ? "#0A0A0A" : "#C9A96E";
+  const bg = variant === "gold-on-charcoal" ? "#0A0A0A" : "transparent";
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn("inline-block select-none", className)}
+    <span
+      className={cn("inline-flex items-center justify-center select-none", className)}
+      style={{ width: size, height: size, background: bg, borderRadius: 999 }}
       aria-label="The PASTED Library"
+      role="img"
     >
-      <circle cx="32" cy="32" r="30" fill={bg} stroke={stroke} strokeWidth="1.25" />
-      <text
-        x="50%"
-        y="54%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontFamily="'Playfair Display', Georgia, serif"
-        fontStyle="italic"
-        fontWeight={400}
-        fontSize="36"
-        fill={fill}
-      >
-        P
-      </text>
-    </svg>
+      <PMonogram size={Math.round(size * 0.86)} color={fill} />
+    </span>
   );
 };
 
