@@ -37,19 +37,28 @@ const MONO: React.CSSProperties = {
   fontWeight: 500,
 };
 
-// ===================== Hero =====================
-const Hero = () => (
+// ===================== Hero (16/7, welcome inlaid) =====================
+const Hero = ({ firstName }: { firstName: string }) => (
   <div
     className="relative w-full overflow-hidden"
-    style={{ aspectRatio: "16 / 5", background: CHARCOAL }}
+    style={{ aspectRatio: "16 / 7", background: CHARCOAL }}
   >
     <img
       src={heroImg}
       alt=""
       className="absolute inset-0 w-full h-full object-cover"
-      style={{ animation: "lib-hero-breathe 12s ease-in-out infinite alternate" }}
+      style={{
+        animation: "lib-hero-breathe 12s ease-in-out infinite alternate",
+        filter: "brightness(0.78) saturate(1.05) sepia(0.06)",
+      }}
     />
-    <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.35)" }} />
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.0) 35%, rgba(10,10,10,0.55) 100%)",
+      }}
+    />
     <div
       aria-hidden
       className="absolute inset-0 pointer-events-none"
@@ -60,21 +69,185 @@ const Hero = () => (
           "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
       }}
     />
-    {/* inset label */}
+
+    {/* inlaid welcome — lower left */}
+    <div className="absolute left-6 md:left-12 lg:left-16 bottom-[26%] md:bottom-[28%]">
+      <h1
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: "clamp(28px, 4.4vw, 48px)",
+          color: BONE,
+          lineHeight: 1.05,
+          letterSpacing: "-0.01em",
+          margin: 0,
+          textShadow: "0 2px 18px rgba(10,10,10,0.55), 0 1px 2px rgba(10,10,10,0.4)",
+        }}
+      >
+        Welcome back, {firstName}.
+      </h1>
+      <div
+        className="mt-3"
+        style={{
+          ...MONO,
+          color: GOLD_BRIGHT,
+          fontSize: 11,
+          letterSpacing: "0.28em",
+          textShadow: "0 1px 8px rgba(10,10,10,0.6)",
+        }}
+      >
+        The Library is Fuller Than When You Left
+      </div>
+    </div>
+
+    {/* status — lower right */}
     <div
-      className="absolute left-5 md:left-10 bottom-5 md:bottom-8 flex items-center gap-3"
-      style={{ ...MONO, color: GOLD_BRIGHT, fontSize: 11, letterSpacing: "0.28em" }}
+      className="absolute right-6 md:right-12 lg:right-16 bottom-[26%] md:bottom-[28%] hidden sm:flex items-center gap-3"
+      style={{
+        ...MONO,
+        color: GOLD_BRIGHT,
+        fontSize: 10,
+        letterSpacing: "0.28em",
+        textShadow: "0 1px 8px rgba(10,10,10,0.6)",
+      }}
     >
-      <span>The Pasted Library</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
       <span className="lib-hero-live-dot" aria-hidden />
       <span>Live</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
+      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
       <span>57 Briefcases</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
+      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
       <span>12 Sessions</span>
-      <span style={{ color: "rgba(212,160,79,0.5)" }}>·</span>
+      <span style={{ color: "rgba(212,160,79,0.4)" }}>·</span>
       <span>9 Essays</span>
+    </div>
+  </div>
+);
+
+// ===================== Editorial Status Pills =====================
+const PILLS = [
+  { key: "arrived", label: "Just Arrived", count: 3 },
+  { key: "counter", label: "On the Counter" },
+  { key: "proprietor", label: "From the Proprietor" },
+] as const;
+
+const StatusPills = () => {
+  const [active, setActive] = useState<string>("counter");
+  return (
+    <div className="flex items-center justify-center gap-3 flex-wrap md:flex-nowrap">
+      {PILLS.map((p) => {
+        const isActive = active === p.key;
+        return (
+          <button
+            key={p.key}
+            type="button"
+            onClick={() => setActive(p.key)}
+            className="inline-flex items-center gap-2"
+            style={{
+              height: 32,
+              padding: "0 16px",
+              borderRadius: 16,
+              background: isActive ? OXBLOOD : BONE,
+              border: `1px solid ${isActive ? OXBLOOD : "rgba(201,169,110,0.3)"}`,
+              color: isActive ? BONE : CHARCOAL,
+              fontFamily: MONO_FF,
+              fontSize: 11,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+              transition: "border-color 180ms ease-out, background 180ms ease-out, color 180ms ease-out",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              if (!isActive) e.currentTarget.style.borderColor = "rgba(201,169,110,0.6)";
+            }}
+            onMouseLeave={(e) => {
+              if (!isActive) e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
+            }}
+          >
+            <span>{p.label}</span>
+            {p.count !== undefined && (
+              <span style={{ color: isActive ? BONE : GOLD_BRIGHT }}>· {p.count}</span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+// ===================== Floating Welcome Card =====================
+const WelcomeCard = () => (
+  <div
+    className="mx-auto"
+    style={{
+      width: "min(70%, 760px)",
+      background: BONE,
+      border: "1px solid rgba(201,169,110,0.25)",
+      borderRadius: 12,
+      padding: "36px 40px",
+      boxShadow: "0 24px 64px rgba(10,10,10,0.18)",
+      position: "relative",
+    }}
+  >
+    <div
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        opacity: 0.04,
+        borderRadius: 12,
+        backgroundImage: `url(${pMonogramUrl})`,
+        backgroundSize: "60px 64px",
+        backgroundRepeat: "repeat",
+      }}
+    />
+    <div className="relative flex flex-col items-center text-center">
+      <span
+        aria-hidden
+        style={{
+          fontFamily: CORMORANT,
+          fontSize: 18,
+          color: GOLD_BRIGHT,
+          lineHeight: 1,
+          marginBottom: 12,
+        }}
+      >
+        ❦
+      </span>
+      <div
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontSize: "clamp(24px, 3vw, 32px)",
+          color: CHARCOAL,
+          lineHeight: 1.1,
+          letterSpacing: "-0.01em",
+        }}
+      >
+        The Atrium
+      </div>
+      <div
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontSize: 18,
+          color: "rgba(10,10,10,0.7)",
+          marginTop: 6,
+        }}
+      >
+        Where you begin.
+      </div>
+      <div
+        aria-hidden
+        style={{
+          width: 80,
+          height: 1,
+          background: GOLD,
+          opacity: 0.7,
+          margin: "22px auto 24px",
+        }}
+      />
+      <StatusPills />
     </div>
   </div>
 );
