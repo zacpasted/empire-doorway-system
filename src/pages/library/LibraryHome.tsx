@@ -12,6 +12,7 @@ import waxSeal from "@/assets/library-wax-seal.png";
 import pMonogramUrl from "@/assets/pasted-p-oval.png";
 import { PMonogram } from "@/components/library/PMonogram";
 import { MemberPill } from "@/components/library/MemberPill";
+import { HeroAtmosphere } from "@/components/library/HeroAtmosphere";
 import shelfwallImg from "@/assets/library-v8-shelfwall.jpg";
 import volumeImg from "@/assets/library-v8-volume.jpg";
 import chamberImg from "@/assets/library-v8-chamber.jpg";
@@ -19,10 +20,17 @@ import chamberImg from "@/assets/library-v8-chamber.jpg";
 // === PALETTE ===
 const BONE = "#F4F1EC";
 const CHARCOAL = "#0A0A0A";
+const INK = "#1A140E"; // warm ink for long-form copy
 const GOLD = "#C9A96E";
 const GOLD_BRIGHT = "#D4A04F";
+const GOLD_LIT = "#D4B57A"; // amber-shift, near candle source
 const OXBLOOD = "#5C1A1F";
 const OXBLOOD_DEEP = "#3e1014";
+
+// Fleuron set (used in place of middle-dots in editorial copy)
+const Fleuron = ({ glyph = "❦", color = "rgba(201,169,110,0.65)", size = 11 }: { glyph?: string; color?: string; size?: number }) => (
+  <span aria-hidden style={{ color, fontSize: size, lineHeight: 1, padding: "0 2px" }}>{glyph}</span>
+);
 
 const PLAYFAIR = "'Playfair Display', Georgia, serif";
 const CORMORANT = "'Cormorant Garamond', 'Playfair Display', Georgia, serif";
