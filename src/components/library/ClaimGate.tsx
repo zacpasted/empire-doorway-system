@@ -101,26 +101,21 @@ export const ClaimGate = () => {
   const submitting = phase !== "idle";
 
   const runSupabase = async () => {
-    const redirectTo = `${window.location.origin}/gate`;
     const trimmed = fullName.trim().replace(/\s+/g, " ");
     const parts = trimmed.split(" ");
     const first_name = parts[0] ?? "";
     const last_name = parts.slice(1).join(" ");
-    const { error: authError } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        emailRedirectTo: redirectTo,
-        shouldCreateUser: true,
-        data: {
-          first_name,
-          last_name,
-          full_name: trimmed,
-          location: location.trim(),
-          career_stage: careerStage,
-        },
-      },
+    const roleMap = { student: "building", associate: "associate", principal: "owner" } as const;
+    const role = roleMap[careerStage as "student" | "associate" | "principal"];
+    const { error: insertError } = await supabase.from("applications").insert({
+      first_name: first_name.slice(0, 60),
+      last_name: (last_name || first_name).slice(0, 60),
+      email: email.trim().toLowerCase(),
+      practice_name: location.trim().slice(0, 160),
+      role,
+      why_now: null,
     });
-    return authError;
+    return insertError;
   };
 
   const runSubmission = async (skipPressBeat = false) => {
@@ -144,7 +139,7 @@ export const ClaimGate = () => {
       sessionStorage.setItem("pasted_first_name", first);
       sessionStorage.setItem("pasted_full_name", fullName.trim().replace(/\s+/g, " "));
     } catch { /* noop */ }
-    setTimeout(() => navigate("/welcome"), 320);
+    setTimeout(() => navigate("/library/pending"), 320);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
