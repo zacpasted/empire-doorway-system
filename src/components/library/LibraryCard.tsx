@@ -92,21 +92,7 @@ export const LibraryCard = ({ firstName, memberNumber, joinedAt }: Props) => {
           <div className="flex items-stretch gap-3 md:gap-4">
             <div className="flex flex-col items-center justify-between">
               {/* P monogram in oval */}
-              <svg viewBox="0 0 80 100" width="100%" style={{ width: "clamp(48px, 9vw, 72px)" }} aria-hidden="true">
-                <ellipse cx="40" cy="50" rx="30" ry="40" fill="none" stroke="#D4AF6A" strokeWidth="1.4" />
-                <text
-                  x="40"
-                  y="68"
-                  textAnchor="middle"
-                  fontFamily="'Playfair Display', Georgia, serif"
-                  fontStyle="italic"
-                  fontSize="58"
-                  fontWeight="500"
-                  fill="#E2BE7A"
-                >
-                  P
-                </text>
-              </svg>
+              <PMonogram color="#E2BE7A" style={{ width: "clamp(48px, 9vw, 72px)", height: "auto", aspectRatio: "1 / 1.05" }} />
               <div />
             </div>
 
