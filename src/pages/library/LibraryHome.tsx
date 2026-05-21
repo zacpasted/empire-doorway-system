@@ -393,9 +393,8 @@ const LibraryHome = () => {
   }, []);
 
   if (loading) return <div className="min-h-screen" style={{ background: BONE }} />;
-  if (!session) return <Navigate to="/login" replace />;
 
-  const firstName = member?.first_name || "Friend";
+  const firstName = member?.first_name || "Guest";
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden" style={{ background: BONE, color: CHARCOAL }}>
