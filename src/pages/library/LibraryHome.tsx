@@ -762,16 +762,19 @@ const LibraryHome = () => {
           {/* Dispatch */}
           <div className="px-6 py-20 md:py-24 text-center">
             <p
+              className="lib-dispatch mx-auto"
               style={{
                 fontFamily: CORMORANT,
                 fontStyle: "italic",
                 fontSize: 22,
-                color: "rgba(10,10,10,0.7)",
+                color: INK,
                 margin: 0,
-                lineHeight: 1.5,
+                lineHeight: 1.55,
+                maxWidth: 640,
               }}
             >
-              — A new release joins the Vault on Friday at noon. Set your hour. —
+              A new release joins the Vault on Friday at noon. Set your hour.
+              <Fleuron glyph="❦" color={GOLD} size={14} />
             </p>
           </div>
 
