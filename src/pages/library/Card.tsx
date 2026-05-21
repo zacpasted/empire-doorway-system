@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Masthead } from "@/components/library/Masthead";
+import { LibraryLayout } from "@/components/library/LibraryLayout";
 import { LibraryCard } from "@/components/library/LibraryCard";
 import { useMember } from "@/hooks/useMember";
 
@@ -15,15 +15,14 @@ const CardPage = () => {
   if (loading || !session || !member) return <div className="min-h-screen bg-bone" />;
 
   return (
-    <div className="min-h-screen bg-bone text-lib-charcoal">
-      <Masthead memberName={member.first_name} memberNumber={member.member_number} />
-      <main className="max-w-[1240px] mx-auto px-6 py-16 md:py-24">
+    <LibraryLayout>
+      <section className="max-w-[1240px] mx-auto px-6 py-16 md:py-24">
         <LibraryCard firstName={member.first_name || "Friend"} memberNumber={member.member_number} joinedAt={member.created_at} />
         <div className="text-center mt-16">
-          <Link to="/library" className="lib-mono text-lib-charcoal/55 hover:text-oxblood transition-colors">← Return to the shelf</Link>
+          <Link to="/library" className="lib-meta text-lib-charcoal/55 hover:text-oxblood transition-colors">← Return to the Atrium</Link>
         </div>
-      </main>
-    </div>
+      </section>
+    </LibraryLayout>
   );
 };
 

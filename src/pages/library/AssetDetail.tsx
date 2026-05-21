@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useMember } from "@/hooks/useMember";
-import { Masthead } from "@/components/library/Masthead";
+import { LibraryLayout } from "@/components/library/LibraryLayout";
 import briefcaseOpen from "@/assets/briefcase-open.jpg";
 
 type Asset = {
@@ -44,21 +44,19 @@ const AssetDetail = () => {
 
   if (notFound) {
     return (
-      <div className="min-h-screen bg-bone text-lib-charcoal">
-        <Masthead memberName={member?.first_name} memberNumber={member?.member_number} />
+      <LibraryLayout>
         <div className="max-w-[720px] mx-auto px-6 py-32 text-center">
-          <p className="lib-editorial text-3xl">That briefcase is not on the shelf.</p>
-          <Link to="/library" className="lib-mono mt-8 inline-block hover:text-oxblood">← RETURN TO THE SHELF</Link>
+          <p className="lib-editorial-lg">That briefcase is not on the shelf.</p>
+          <Link to="/library/stacks" className="lib-meta mt-8 inline-block hover:text-oxblood">← Return to the Stacks</Link>
         </div>
-      </div>
+      </LibraryLayout>
     );
   }
 
   if (!asset) return <div className="min-h-screen bg-bone" />;
 
   return (
-    <div className="min-h-screen bg-bone text-lib-charcoal">
-      <Masthead memberName={member?.first_name} memberNumber={member?.member_number} />
+    <LibraryLayout>
       <article className="max-w-[1240px] mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
         <div className="relative" style={{ transform: "rotate(-2deg)" }}>
           <img
@@ -70,23 +68,23 @@ const AssetDetail = () => {
         </div>
         <div>
           <h1 className="lib-display text-4xl md:text-6xl leading-tight">{asset.title}</h1>
-          <p className="lib-mono text-lib-charcoal/55 mt-4">№ {pad3(asset.case_number)} — {asset.section.toUpperCase()}</p>
+          <p className="lib-meta text-lib-charcoal/55 mt-4">№ {pad3(asset.case_number)} — {asset.section.toUpperCase()}</p>
           <div className="lib-body text-lib-charcoal/85 mt-8 whitespace-pre-line">{asset.description}</div>
           {asset.file_url && (
-            <a href={asset.file_url} target="_blank" rel="noopener noreferrer" className="inline-block bg-oxblood text-bone py-3 px-8 lib-mono mt-10 hover:bg-lib-charcoal transition-colors duration-200 cursor-pointer" style={{ borderRadius: "2px" }}>
+            <a href={asset.file_url} target="_blank" rel="noopener noreferrer" className="inline-block bg-oxblood text-bone py-3 px-8 lib-meta mt-10 hover:bg-lib-charcoal transition-colors duration-200 cursor-pointer" style={{ borderRadius: "2px" }}>
               Take it with you
             </a>
           )}
           {(asset.file_format || asset.file_meta) && (
-            <p className="lib-mono text-lib-charcoal/45 mt-4">
+            <p className="lib-meta text-lib-charcoal/45 mt-4">
               {[asset.file_format, asset.file_meta].filter(Boolean).join(" — ")}
               {asset.published_at && ` — UPDATED ${new Date(asset.published_at).toLocaleString("en", { month: "short", year: "numeric" }).toUpperCase()}`}
             </p>
           )}
-          <Link to="/library" className="lib-mono text-lib-charcoal/55 mt-12 inline-block hover:text-oxblood transition-colors">← Return to the shelf</Link>
+          <Link to="/library/stacks" className="lib-meta text-lib-charcoal/55 mt-12 inline-block hover:text-oxblood transition-colors">← Return to the Stacks</Link>
         </div>
       </article>
-    </div>
+    </LibraryLayout>
   );
 };
 
