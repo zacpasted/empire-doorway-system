@@ -786,10 +786,19 @@ const LibraryHome = () => {
               borderTop: "1px solid var(--lib-border)",
             }}
           >
-            <div style={{ ...MONO, color: "rgba(10,10,10,0.4)", fontSize: 10, lineHeight: 1.9 }}>
-              The Pasted Library · Madrid · MMXXVI
-              <br />
-              New Briefcases Arrive Weekly · Visit Your Card Any Time
+            <div className="inline-flex flex-col items-center" style={{ ...MONO, color: "rgba(26,20,14,0.45)", fontSize: 10, lineHeight: 1.9 }}>
+              <span className="inline-flex items-center gap-1">
+                The Pasted Library
+                <Fleuron glyph="❦" color="rgba(201,169,110,0.55)" size={10} />
+                Madrid
+                <Fleuron glyph="❦" color="rgba(201,169,110,0.55)" size={10} />
+                MMXXVI
+              </span>
+              <span className="inline-flex items-center gap-1">
+                New Briefcases Arrive Weekly
+                <Fleuron glyph="❧" color="rgba(201,169,110,0.55)" size={10} />
+                Visit Your Card Any Time
+              </span>
             </div>
             <div className="mx-auto mt-6 flex justify-center">
               <PMonogram size={28} color={CHARCOAL} opacity={0.3} />
