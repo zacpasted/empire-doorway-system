@@ -80,12 +80,13 @@ export const LibraryShell = ({
 /* ---------- Mobile nav (sheet contents) ---------- */
 import { Link, useLocation } from "react-router-dom";
 import { ZONES, ZONE_ORDER } from "@/data/library-zones";
+import type { LucideIcon } from "lucide-react";
 
 const MobileNav = ({ onClose }: { onClose: () => void }) => {
   const { pathname } = useLocation();
   const isOn = (path: string) =>
     path === "/library" ? pathname === "/library" : pathname === path || pathname.startsWith(path + "/");
-  const items: { path: string; label: string; icon?: React.ComponentType<{ size?: number; strokeWidth?: number }> }[] = [
+  const items: { path: string; label: string; icon?: LucideIcon }[] = [
     { path: "/library", label: "Atrium" },
     ...ZONE_ORDER.map((slug) => ({ path: ZONES[slug].path, label: ZONES[slug].label, icon: ZONES[slug].icon })),
     { path: "/library/index", label: "Index", icon: ZONES.index.icon },
