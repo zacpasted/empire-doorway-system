@@ -17,6 +17,7 @@ type Props = {
   activeSubsection?: string;
   onSubsectionChange?: (slug: string) => void;
   hero?: ReactNode; // override default PhotoHero (e.g. Atrium cinematic)
+  surface?: "parchment" | "oxblood"; // background under children
   children: ReactNode;
 };
 
@@ -26,6 +27,7 @@ export const LibraryShell = ({
   activeSubsection,
   onSubsectionChange,
   hero,
+  surface = "parchment",
   children,
 }: Props) => {
   const { member } = useMember();
@@ -90,13 +92,24 @@ export const LibraryShell = ({
             {hero ?? <PhotoHero zone={zone} />}
             <div
               className="lib-zone-in relative"
-              style={{
-                background:
-                  "radial-gradient(at 30% 18%, #F9F4EA 0%, #F4F1EC 55%, #ECE3D5 100%)",
-                borderTop: "1px solid rgba(201,169,110,0.35)",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,250,235,0.6), 0 -12px 32px rgba(0,0,0,0.25)",
-              }}
+              style={
+                surface === "oxblood"
+                  ? {
+                      background:
+                        "radial-gradient(at 50% 0%, #4A1218 0%, #3A0E13 55%, #28080C 100%)",
+                      borderTop: "1px solid rgba(201,169,110,0.55)",
+                      boxShadow:
+                        "inset 0 1px 0 rgba(212,181,122,0.18), 0 -12px 32px rgba(0,0,0,0.55)",
+                      color: "#F4F1EC",
+                    }
+                  : {
+                      background:
+                        "radial-gradient(at 30% 18%, #F9F4EA 0%, #F4F1EC 55%, #ECE3D5 100%)",
+                      borderTop: "1px solid rgba(201,169,110,0.35)",
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,250,235,0.6), 0 -12px 32px rgba(0,0,0,0.25)",
+                    }
+              }
             >
               {children}
             </div>
