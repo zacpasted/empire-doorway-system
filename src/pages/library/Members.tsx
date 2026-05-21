@@ -77,17 +77,14 @@ const Members = () => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_evt, session) => {
         setUser(session?.user ?? null);
-        if (!session?.user) {
-          setLoading(false);
-        }
       }
     );
 
     supabase.auth.getUser().then(({ data: { user: u } }) => {
       setUser(u);
       if (!u) {
+        // Public preview — no auth required.
         setLoading(false);
-        navigate("/library/login", { replace: true });
         return;
       }
       supabase
@@ -102,7 +99,7 @@ const Members = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, []);
 
   const signOut = async () => {
     await supabase.auth.signOut();
