@@ -31,7 +31,7 @@ export const LibraryShell = ({
   const hasRightRail = showRightRail && zone.subsections.length > 0;
 
   return (
-    <div className="relative min-h-screen w-full" style={{ background: "#F4F1EC", color: "#0A0A0A" }}>
+    <div className="relative min-h-screen w-full overflow-x-hidden" style={{ background: "#F4F1EC", color: "#0A0A0A" }}>
       {/* Mobile menu trigger (top-left) — replaces left rail on small screens */}
       <Sheet open={navOpen} onOpenChange={setNavOpen}>
         <SheetTrigger asChild>
