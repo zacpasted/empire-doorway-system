@@ -60,6 +60,7 @@ export const MastheadSlim = ({ memberName, memberNumber }: Props) => {
           ) : (
             <Link
               to="/login"
+              className="hidden sm:inline-flex"
               style={{
                 fontFamily: "'JetBrains Mono', ui-monospace, monospace",
                 fontSize: 11,
