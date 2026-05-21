@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ArrowRight, Play } from "lucide-react";
 import { LeftRail } from "@/components/library/chrome/LeftRail";
 import { useMember } from "@/hooks/useMember";
 import heroImg from "@/assets/library-reading-room.jpg";
 import counterImg from "@/assets/library-v8-librarian-desk.jpg";
 import cinemaImg from "@/assets/library-v8-desk-night.jpg";
-import periodicalsImg from "@/assets/library-v8-plaque.jpg";
 import briefcaseImg from "@/assets/briefcase-closed.jpg";
 import waxSeal from "@/assets/library-wax-seal.png";
 
@@ -387,7 +386,6 @@ const JustArrived = () => (
 // ===================== Page =====================
 const LibraryHome = () => {
   const { session, member, loading } = useMember();
-  const navigate = useNavigate();
   useEffect(() => {
     document.title = "The Pasted Library";
   }, []);
