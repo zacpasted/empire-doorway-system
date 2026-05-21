@@ -16,6 +16,10 @@ import { HeroAtmosphere } from "@/components/library/HeroAtmosphere";
 import shelfwallImg from "@/assets/library-v8-shelfwall.jpg";
 import volumeImg from "@/assets/library-v8-volume.jpg";
 import chamberImg from "@/assets/library-v8-chamber.jpg";
+import wallpaperUrl from "@/assets/atrium-wallpaper-damask.jpg";
+import walnutShelfUrl from "@/assets/atrium-walnut-shelf.png";
+import wainscotingUrl from "@/assets/atrium-wainscoting.jpg";
+import giltFrameUrl from "@/assets/atrium-gilt-frame.png";
 
 // === PALETTE ===
 const BONE = "#F4F1EC";
