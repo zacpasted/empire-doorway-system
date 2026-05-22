@@ -741,34 +741,27 @@ const Library = () => {
           <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(30px, 4.6vw, 42px)", color: INK, textAlign: "center", margin: "0 0 64px", lineHeight: 1.15 }}>
             Three ways to move through it
           </h2>
-          <div className="lib-practice-cluster">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="lib-rooms-grid">
             {[
-              { t: "Read", img: worldLibraryCorridor, tag: "The Stacks", rot: -3, lift: 0, c: "Begin with the essays, notes, and frameworks that meet you where you are." },
-              { t: "Watch", img: worldScreeningRoom, tag: "The Cinema", rot: 2, lift: 32, c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
-              { t: "Build", img: worldManorGrounds, tag: "The Forge", rot: -1, lift: 0, c: "Take what matters, discard what does not, and let the work change how you show up." },
-            ].map((s, i) => (
-              <div key={s.t} style={{ marginTop: s.lift }}>
-                <div className="lib-polaroid" style={{ transform: `rotate(${s.rot}deg)` }}>
-                  <div
-                    style={{
-                      width: "100%",
-                      aspectRatio: "4 / 5",
-                      backgroundImage: `url(${s.img})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      filter: "grayscale(1)",
-                    }}
-                    aria-hidden="true"
-                  />
-                  <div className="lib-polaroid-caption">{s.t}</div>
+              { t: "Read", glyph: "R", img: worldLibraryCorridor, tag: "The Stacks", c: "Begin with the essays, notes, and frameworks that meet you where you are." },
+              { t: "Watch", glyph: "W", img: worldScreeningRoom, tag: "The Cinema", c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
+              { t: "Build", glyph: "B", img: worldManorGrounds, tag: "The Forge", c: "Take what matters, discard what does not, and let the work change how you show up." },
+            ].map((s) => (
+              <article key={s.t} className="lib-rsc-mini">
+                <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${s.img})` }} aria-hidden="true" />
+                <div className="lib-rsc-mini-body">
+                  <div className="lib-rsc-icon" aria-hidden="true">{s.glyph}</div>
+                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 26, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                    {s.t}
+                  </h3>
+                  <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                    {s.tag}
+                  </div>
+                  <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0 }}>
+                    {s.c}
+                  </p>
                 </div>
-                <div style={{ ...mono, color: BRASS, fontSize: 9, letterSpacing: "0.32em", marginTop: 18, textAlign: "center", opacity: 0.7 }}>
-                  {s.tag}
-                </div>
-                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: "10px auto 0", maxWidth: 200, textAlign: "center" }}>
-                  {s.c}
-                </p>
-              </div>
+              </article>
             ))}
           </div>
         </motion.section>
