@@ -694,23 +694,23 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Foundations
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 48px" }}>
             A vault of work, given freely.
           </h2>
           <article className="lib-rsc-card lib-rsc-card--invert">
             <div className="lib-rsc-body">
               <div className="lib-rsc-icon" aria-hidden="true">F</div>
-              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+              <h3 style={{ ...TYPE.h3, margin: 0, color: "inherit" }}>
                 Not a blog. Not a feed.
               </h3>
-              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+              <div style={{ ...TYPE.label, color: BRASS }}>
                 Folio Ref · Foundations
               </div>
-              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: CREAM_QUIET, margin: 0, maxWidth: 460 }}>
+              <p style={{ ...TYPE.body, color: CREAM_QUIET, margin: 0, maxWidth: 460 }}>
                 A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore. Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else.
               </p>
               <div style={{ marginTop: 10 }}>
@@ -719,7 +719,7 @@ const Library = () => {
             </div>
             <div className="lib-rsc-img" style={{ backgroundImage: `url(${worldArrivalCypress})` }} aria-hidden="true" />
           </article>
-          <div style={{ textAlign: "center", marginTop: 64, fontFamily: DISPLAY, fontStyle: "italic", fontSize: 32, color: BRASS, lineHeight: 1 }}>
+          <div style={{ textAlign: "center", marginTop: 64, fontFamily: DISPLAY, fontStyle: "italic", fontSize: "clamp(24px, 3vw, 32px)", color: BRASS, lineHeight: 1.1 }}>
             For those who know there is more.
           </div>
         </motion.section>
