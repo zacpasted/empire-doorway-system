@@ -313,6 +313,47 @@ const Library = () => {
         }
         .lib-practice-cluster > * { width: 220px; }
         .lib-canon-grid > div:nth-child(2n) { transform: translateY(36px); }
+        /* Lens/Vesica band — woven from editorial inspiration.
+           A painting-backed band with a cream card whose top + bottom
+           edges curve inward, like the inspiration's concave panels. */
+        .lib-lens-band {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          isolation: isolate;
+        }
+        .lib-lens-band .lens-bg {
+          position: absolute; inset: 0;
+          background-size: cover; background-position: center;
+          filter: grayscale(0.15) brightness(0.78) contrast(1.05);
+          z-index: 0;
+        }
+        .lib-lens-band .lens-bg::after {
+          content: ""; position: absolute; inset: 0;
+          background: radial-gradient(ellipse at center, rgba(26,20,16,0.25) 0%, rgba(26,20,16,0.55) 100%);
+        }
+        .lib-lens-band .lens-inner {
+          position: relative; z-index: 1;
+          padding: 96px 24px;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .lib-lens-card {
+          position: relative;
+          width: min(620px, 92%);
+          background: ${CREAM};
+          padding: 96px 56px 96px;
+          -webkit-clip-path: url(#lib-lens-clip);
+          clip-path: url(#lib-lens-clip);
+          text-align: center;
+        }
+        .lib-lens-card--dark {
+          background: #1A1410;
+          color: ${CREAM};
+        }
+        @media (max-width: 720px) {
+          .lib-lens-band .lens-inner { padding: 56px 16px; }
+          .lib-lens-card { padding: 72px 28px; }
+        }
         @media (max-width: 720px) {
           .lib-row-2col, .lib-row-sidebar, .lib-footer-row {
             grid-template-columns: 1fr !important;
@@ -335,6 +376,15 @@ const Library = () => {
       `}</style>
 
       <div className="lib-grain" aria-hidden="true" />
+
+      {/* Shared SVG clip path for the lens/vesica panels */}
+      <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+        <defs>
+          <clipPath id="lib-lens-clip" clipPathUnits="objectBoundingBox">
+            <path d="M 0,0.18 Q 0.5,-0.08 1,0.18 L 1,0.82 Q 0.5,1.08 0,0.82 Z" />
+          </clipPath>
+        </defs>
+      </svg>
 
       <motion.div
         {...fade(0)}
@@ -539,34 +589,27 @@ const Library = () => {
         {/* PANEL — PURPOSE: dark stage with floating callout */}
         <motion.section
           {...fade(0.15)}
-          className="lib-section-pad lib-torn-top"
-          style={{ background: "#2A1B1B", padding: "120px 44px 132px", position: "relative" }}
+          className="lib-torn-top lib-lens-band"
+          style={{ background: "#2A1B1B", position: "relative" }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 56, fontSize: 9, letterSpacing: "0.4em", opacity: 0.85 }}>
-            Filed under · Purpose
-          </div>
-          <div className="lib-purpose-stage">
-            <img
-              src={robes}
-              alt=""
-              aria-hidden="true"
-              className="lib-purpose-img"
-            />
-            <div className="lib-purpose-callout">
-              <div className="lib-callout-card">
-                <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 3.6vw, 34px)", color: INK, lineHeight: 1.18, margin: "0 0 22px" }}>
-                  The internet made everyone visible.{" "}
-                  <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
-                </h3>
-                <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 14px" }}>
-                  Most people are not short on content. They are short on canon. The Library exists to restore the deeper architecture — to think more clearly, build more beautifully, speak with more force, and become known without becoming hollow.
-                </p>
-                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, margin: 0 }}>
-                  Not here to make you louder. Here to make you undeniable.
-                </p>
-                <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 22, opacity: 0.8 }}>
-                  Depth over breadth
-                </div>
+          <div className="lens-bg" style={{ backgroundImage: `url(${robes})` }} aria-hidden="true" />
+          <div className="lens-inner">
+            <div className="lib-lens-card">
+              <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
+                Filed under · Purpose
+              </div>
+              <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.2, margin: "0 auto 22px", maxWidth: 460 }}>
+                The internet made everyone visible.{" "}
+                <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
+              </h3>
+              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.75, color: "rgba(26,20,16,0.82)", margin: "0 auto 14px", maxWidth: 440 }}>
+                Most people are not short on content. They are short on canon. The Library exists to restore the deeper architecture — to think more clearly, build more beautifully, speak with more force, and become known without becoming hollow.
+              </p>
+              <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, margin: "0 auto", maxWidth: 420 }}>
+                Not here to make you louder. Here to make you undeniable.
+              </p>
+              <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 24, opacity: 0.8 }}>
+                Depth over breadth
               </div>
             </div>
           </div>
