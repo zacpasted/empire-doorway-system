@@ -840,7 +840,7 @@ const Library = () => {
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-pill lib-pill--light" style={{ cursor: "default", opacity: 0.8 }}>Opening Soon</span>
+            <span className="lib-pill lib-pill--light lib-pill--disabled">Opening Soon</span>
           </div>
         </motion.section>
 
