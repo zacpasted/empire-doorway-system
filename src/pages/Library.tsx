@@ -610,10 +610,10 @@ const Library = () => {
               A private canon for the ones building taste, authority, signal, and selfhood in a world addicted to noise.
             </p>
             <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
-              <Link to="/library/members" className="lib-cta" style={{ color: CREAM, borderColor: "rgba(245,238,220,0.45)" }}>
+              <Link to="/library/members" className="lib-pill">
                 Enter the Library
               </Link>
-              <Link to="/library/apply" className="lib-cta" style={{ color: CREAM, borderColor: "rgba(245,238,220,0.25)" }}>
+              <Link to="/library/apply" className="lib-pill lib-pill--light">
                 Request Access
               </Link>
             </div>
@@ -623,29 +623,21 @@ const Library = () => {
           </div>
         </motion.section>
 
-        {/* PANEL 2 — NAV STRIP */}
-        <nav
-          className="lib-nav-strip"
-          style={{
-            display: "flex",
-            alignItems: "stretch",
-            borderTop: `1px solid ${HAIR}`,
-            borderBottom: `1px solid ${HAIR}`,
-            background: CREAM,
-          }}
-        >
-          {NAV_ITEMS.map((n, i) => (
-            <span
-              key={n}
-              className="lib-nav-item"
-              aria-disabled="true"
-              title="Under construction — opening soon"
-              style={{ cursor: "default" }}
-            >
-              <span style={{ opacity: 0.65 }}>{n}</span>
-              <span className="nav-status">Closed</span>
-            </span>
-          ))}
+        {/* PANEL 2 — TOP NAV (Royal Stable inspired) */}
+        <nav className="lib-topnav" aria-label="Library sections">
+          <div className="lib-topnav-left">
+            {NAV_ITEMS.map((n) => (
+              <span key={n} title="Opening soon" style={{ opacity: 0.55, cursor: "default" }}>
+                {n}
+              </span>
+            ))}
+          </div>
+          <Link to="/library" className="lib-topnav-mark" aria-label="The Library of PASTED">
+            The Library<span style={{ fontStyle: "normal", color: BRASS, margin: "0 8px" }}>·</span><span style={{ fontFamily: SANS, fontStyle: "normal", fontWeight: 500, fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>PASTED</span>
+          </Link>
+          <div className="lib-topnav-right">
+            <Link to="/library/apply" className="lib-pill">Request Access</Link>
+          </div>
         </nav>
 
         {/* PANEL — WHAT THE LIBRARY IS */}
