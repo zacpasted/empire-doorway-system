@@ -228,6 +228,15 @@ const Library = () => {
     ensureFonts();
     document.title =
       "The PASTED Library — A private canon on becoming undeniable";
+    const desc =
+      "A vault of work, given freely. A canon on becoming undeniable, from the studio at PASTED.";
+    let tag = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.name = "description";
+      document.head.appendChild(tag);
+    }
+    tag.content = desc;
   }, []);
 
   return (
