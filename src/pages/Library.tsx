@@ -302,6 +302,29 @@ const Library = () => {
           border: 1px solid currentColor;
           margin-bottom: 6px;
         }
+        /* Mini rsc card — same language at smaller scale (for triptychs / grids) */
+        .lib-rsc-mini {
+          display: flex; flex-direction: column;
+          border-radius: 16px;
+          overflow: hidden;
+          background: ${CREAM};
+          color: ${INK};
+          border: 1px solid rgba(184,149,76,0.22);
+          box-shadow: 0 18px 50px -28px rgba(0,0,0,0.4);
+          transition: box-shadow 320ms ease, transform 320ms ease;
+        }
+        .lib-rsc-mini:hover { box-shadow: 0 26px 60px -26px rgba(0,0,0,0.5); transform: translateY(-2px); }
+        .lib-rsc-mini--dark { background: ${DARK_CARD}; color: ${CREAM}; border-color: rgba(184,149,76,0.32); }
+        .lib-rsc-mini .lib-rsc-mini-img {
+          width: 100%; aspect-ratio: 4 / 3;
+          background-size: cover; background-position: center;
+          filter: grayscale(1) brightness(0.95);
+        }
+        .lib-rsc-mini .lib-rsc-mini-body {
+          padding: 28px 26px 30px;
+          display: flex; flex-direction: column; gap: 12px;
+        }
+        .lib-rsc-mini .lib-rsc-icon { width: 40px; height: 40px; font-size: 22px; margin-bottom: 2px; }
         @media (max-width: 720px) {
           .lib-rsc-card, .lib-rsc-card--invert {
             grid-template-columns: 1fr !important;
@@ -644,68 +667,34 @@ const Library = () => {
         <motion.section
           {...fade(0.12)}
           className="lib-section-pad"
-          style={{ padding: "120px 56px 112px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
+          style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
         >
-          <div className="lib-foundations-grid">
-            {/* LEFT: label + headline + folio callout */}
-            <div>
-              <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
-                Filed under · Foundations
-              </div>
-              <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(38px, 6vw, 64px)", color: INK, margin: "0 0 36px", lineHeight: 0.98, letterSpacing: "-0.005em" }}>
-                A vault of work,<br/>given freely.
-              </h2>
-              <div className="lib-callout-card" style={{ transform: "rotate(-1deg)", maxWidth: 420 }}>
-                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 17, lineHeight: 1.65, color: "rgba(26,20,16,0.85)", margin: "0 0 14px" }}>
-                  Not a blog. Not a feed. A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore.
-                </p>
-                <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.7, color: CREAM_QUIET, margin: 0 }}>
-                  Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else. Where we place the thinking behind the work — the psychology, the taste, the restraint, the rebellion.
-                </p>
-                <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 20 }}>
-                  Folio Ref · Foundations
-                </div>
-              </div>
-            </div>
-            {/* RIGHT: image + polaroid overlay + margin annotation */}
-            <div style={{ position: "relative" }}>
-              <div
-                style={{
-                  width: "100%",
-                  aspectRatio: "4 / 5",
-                  backgroundImage: `url(${worldArrivalCypress})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  filter: "grayscale(1) brightness(1.02)",
-                  boxShadow: "0 30px 80px -20px rgba(26,20,16,0.55)",
-                }}
-                aria-hidden="true"
-              />
-              {/* Polaroid overlay bottom-left */}
-              <div
-                className="lib-polaroid"
-                style={{ position: "absolute", left: -28, bottom: -36, width: 168, transform: "rotate(-4deg)" }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "1 / 1",
-                    backgroundImage: `url(${thumb1})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    filter: "grayscale(1)",
-                  }}
-                  aria-hidden="true"
-                />
-                <div className="lib-polaroid-caption">Marginalia</div>
-              </div>
-              {/* Margin annotation */}
-              <div className="lib-margin-anno" style={{ position: "absolute", right: -36, top: "12%" }}>
-                Archive Section — Foundations
-              </div>
-            </div>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+            Filed under · Foundations
           </div>
-          <div style={{ textAlign: "center", marginTop: 96, fontFamily: DISPLAY, fontSize: 38, color: BRASS, lineHeight: 1 }}>
+          <div className="lib-section-rule" />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+            A vault of work, given freely.
+          </h2>
+          <article className="lib-rsc-card lib-rsc-card--invert">
+            <div className="lib-rsc-body">
+              <div className="lib-rsc-icon" aria-hidden="true">F</div>
+              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                Not a blog. Not a feed.
+              </h3>
+              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                Folio Ref · Foundations
+              </div>
+              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: CREAM_QUIET, margin: 0, maxWidth: 460 }}>
+                A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore. Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else.
+              </p>
+              <div style={{ marginTop: 10 }}>
+                <Link to="/library/apply" className="lib-pill">Request a Card</Link>
+              </div>
+            </div>
+            <div className="lib-rsc-img" style={{ backgroundImage: `url(${worldArrivalCypress})` }} aria-hidden="true" />
+          </article>
+          <div style={{ textAlign: "center", marginTop: 64, fontFamily: DISPLAY, fontStyle: "italic", fontSize: 32, color: BRASS, lineHeight: 1 }}>
             For those who know there is more.
           </div>
         </motion.section>
@@ -752,34 +741,27 @@ const Library = () => {
           <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(30px, 4.6vw, 42px)", color: INK, textAlign: "center", margin: "0 0 64px", lineHeight: 1.15 }}>
             Three ways to move through it
           </h2>
-          <div className="lib-practice-cluster">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="lib-rooms-grid">
             {[
-              { t: "Read", img: worldLibraryCorridor, tag: "The Stacks", rot: -3, lift: 0, c: "Begin with the essays, notes, and frameworks that meet you where you are." },
-              { t: "Watch", img: worldScreeningRoom, tag: "The Cinema", rot: 2, lift: 32, c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
-              { t: "Build", img: worldManorGrounds, tag: "The Forge", rot: -1, lift: 0, c: "Take what matters, discard what does not, and let the work change how you show up." },
-            ].map((s, i) => (
-              <div key={s.t} style={{ marginTop: s.lift }}>
-                <div className="lib-polaroid" style={{ transform: `rotate(${s.rot}deg)` }}>
-                  <div
-                    style={{
-                      width: "100%",
-                      aspectRatio: "4 / 5",
-                      backgroundImage: `url(${s.img})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      filter: "grayscale(1)",
-                    }}
-                    aria-hidden="true"
-                  />
-                  <div className="lib-polaroid-caption">{s.t}</div>
+              { t: "Read", glyph: "R", img: worldLibraryCorridor, tag: "The Stacks", c: "Begin with the essays, notes, and frameworks that meet you where you are." },
+              { t: "Watch", glyph: "W", img: worldScreeningRoom, tag: "The Cinema", c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
+              { t: "Build", glyph: "B", img: worldManorGrounds, tag: "The Forge", c: "Take what matters, discard what does not, and let the work change how you show up." },
+            ].map((s) => (
+              <article key={s.t} className="lib-rsc-mini">
+                <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${s.img})` }} aria-hidden="true" />
+                <div className="lib-rsc-mini-body">
+                  <div className="lib-rsc-icon" aria-hidden="true">{s.glyph}</div>
+                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 26, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                    {s.t}
+                  </h3>
+                  <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                    {s.tag}
+                  </div>
+                  <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0 }}>
+                    {s.c}
+                  </p>
                 </div>
-                <div style={{ ...mono, color: BRASS, fontSize: 9, letterSpacing: "0.32em", marginTop: 18, textAlign: "center", opacity: 0.7 }}>
-                  {s.tag}
-                </div>
-                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: "10px auto 0", maxWidth: 200, textAlign: "center" }}>
-                  {s.c}
-                </p>
-              </div>
+              </article>
             ))}
           </div>
         </motion.section>
@@ -858,116 +840,78 @@ const Library = () => {
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
-            className="lib-gallery lib-canon-grid"
+            className="lib-gallery"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 28,
+              gap: 24,
             }}
           >
             {[
-              { src: worldEstateDusk, t: "Taste" },
-              { src: worldLibraryCorridor, t: "Authority" },
-              { src: worldArrivalCypress, t: "Restraint" },
-              { src: worldManorNight, t: "Signal" },
+              { src: worldEstateDusk, t: "Taste", g: "T", n: "Vol. I" },
+              { src: worldLibraryCorridor, t: "Authority", g: "A", n: "Vol. II" },
+              { src: worldArrivalCypress, t: "Restraint", g: "R", n: "Vol. III" },
+              { src: worldManorNight, t: "Signal", g: "S", n: "Vol. IV" },
             ].map((v) => (
-              <div key={v.t}>
-                <div
-                  style={{
-                    position: "relative",
-                    aspectRatio: "1 / 1",
-                    backgroundImage: `url(${v.src})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    outline: `1px solid rgba(184,149,76,0.35)`,
-                    outlineOffset: -1,
-                    filter: "grayscale(1)",
-                    transition: "filter 700ms ease",
-                  }}
-                  aria-hidden="true"
-                />
-                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 18, color: CREAM, marginTop: 12 }}>{v.t}</div>
-              </div>
+              <article key={v.t} className="lib-rsc-mini lib-rsc-mini--dark">
+                <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${v.src})`, aspectRatio: "1 / 1" }} aria-hidden="true" />
+                <div className="lib-rsc-mini-body" style={{ padding: "22px 22px 24px", gap: 10 }}>
+                  <div className="lib-rsc-icon" aria-hidden="true">{v.g}</div>
+                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 22, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                    {v.t}
+                  </h3>
+                  <div style={{ fontFamily: MONO_FF, fontSize: 9, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                    {v.n}
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-cta" style={{ cursor: "default", opacity: 0.7, color: CREAM, borderColor: "rgba(184,149,76,0.45)" }}>Opening Soon</span>
+            <span className="lib-pill lib-pill--light" style={{ cursor: "default", opacity: 0.8 }}>Opening Soon</span>
           </div>
         </motion.section>
 
-        {/* PANEL 5 — SIDEBAR LINKS + PORTRAIT */}
+        {/* PANEL 5 — ENTRY (sidebar links framed as the rsc-card system) */}
         <motion.section
           {...fade(0.24)}
-          className="lib-row-sidebar"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "0.9fr 1.1fr",
-            borderTop: `1px solid ${HAIR}`,
-          }}
+          className="lib-section-pad"
+          style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div
-            style={{
-              padding: "44px 44px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 0,
-              background: CREAM,
-            }}
-          >
-            <div style={{ ...mono, color: BRASS, marginBottom: 18, opacity: 0.8 }}>
-              For those entering deeper.
-            </div>
-            {[
-              { label: "Request Access", to: "/library/apply" },
-              { label: "See What's Coming", to: "/library/apply" },
-              { label: "Member Sign In", to: "/library/login" },
-              { label: "Visit PASTED", to: "/" },
-            ].map((item, i, arr) => (
-              <Link
-                key={item.label}
-                to={item.to}
-                className="lib-link"
-                style={{
-                  ...mono,
-                  padding: "20px 0",
-                  borderBottom: i < arr.length - 1 ? `1px solid ${HAIR}` : "none",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <span>{item.label}</span>
-                <span style={{ color: BRASS }}>→</span>
-              </Link>
-            ))}
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+            Filed under · Entry
           </div>
-          <div
-            style={{
-              position: "relative",
-              backgroundImage: `url(${portraitBW})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              minHeight: 380,
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                bottom: 28,
-                right: 28,
-                textAlign: "right",
-                fontFamily: DISPLAY,
-                fontSize: 34,
-                color: INK,
-                lineHeight: 1.05,
-                textShadow: "0 1px 8px rgba(245,238,220,0.55)",
-              }}
-            >
-              Free yourself,
-              <br />
-              the rest follows.
+          <div className="lib-section-rule" />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+            For those entering deeper.
+          </h2>
+          <article className="lib-rsc-card">
+            <div className="lib-rsc-img" style={{ backgroundImage: `url(${portraitBW})` }} aria-hidden="true" />
+            <div className="lib-rsc-body">
+              <div className="lib-rsc-icon" aria-hidden="true">E</div>
+              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                Free yourself,<br/>the rest follows.
+              </h3>
+              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                Four doors · One canon
+              </div>
+              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: "rgba(241,236,226,0.72)", margin: 0, maxWidth: 460 }}>
+                Choose where to begin. New volumes open weekly. Cards are issued to those who actually intend to read.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 12 }}>
+                {[
+                  { label: "Request Access", to: "/library/apply", primary: true },
+                  { label: "See What's Coming", to: "/library/apply" },
+                  { label: "Member Sign In", to: "/library/login" },
+                  { label: "Visit PASTED", to: "/" },
+                ].map((item) => (
+                  <Link key={item.label} to={item.to} className={`lib-pill${item.primary ? "" : " lib-pill--light"}`}>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          </article>
         </motion.section>
 
         {/* PANEL 6 — FOOTER: monogram / building / colophon */}
