@@ -779,7 +779,7 @@ const Library = () => {
                       {r.desc}
                     </p>
                     <div style={{ marginTop: 10 }}>
-                      <span className={`lib-pill${isDark ? " lib-pill--light" : ""}`} style={{ cursor: "default", opacity: 0.85 }}>
+                      <span className={`lib-pill${isDark ? " lib-pill--light" : ""} lib-pill--disabled`}>
                         Learn more
                       </span>
                     </div>
