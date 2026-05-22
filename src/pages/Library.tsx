@@ -586,7 +586,9 @@ const Library = () => {
                 Filed under · Foundations
               </div>
               <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(38px, 6vw, 64px)", color: INK, margin: "0 0 36px", lineHeight: 0.98, letterSpacing: "-0.005em" }}>
-                A vault of work,<br/>given freely.
+                A vault of work,<br/>
+                <span className="lib-ghost-word" style={{ fontSize: "clamp(46px, 7.2vw, 76px)" }}>given</span>{" "}
+                freely.
               </h2>
               <div className="lib-callout-card" style={{ transform: "rotate(-1deg)", maxWidth: 420 }}>
                 <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 17, lineHeight: 1.65, color: "rgba(26,20,16,0.85)", margin: "0 0 14px" }}>
