@@ -36,6 +36,8 @@ const ensureFonts = () => {
 };
 
 const NIGHT = "#1A1410";
+const SKY = "#B7CCDA";
+const SKY_DEEP = "#94B0C2";
 const CREAM = "#F5EEDC";
 const CREAM_DEEP = "#EFE6CF";
 const CREAM_QUIET = "rgba(26, 20, 16, 0.62)";
