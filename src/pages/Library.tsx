@@ -102,7 +102,7 @@ const Emblem = () => (
       </div>
       <div
         style={{
-          fontFamily: SCRIPT,
+          fontFamily: DISPLAY,
           fontSize: 42,
           color: INK,
           lineHeight: 1,
@@ -184,7 +184,7 @@ const Library = () => {
         .lib-link:hover { color: ${BRASS}; }
         .lib-cta {
           display: inline-block;
-          font-family: ${INTER};
+          font-family: ${SANS};
           font-weight: 500;
           font-size: 10px;
           letter-spacing: 0.36em;
@@ -201,7 +201,7 @@ const Library = () => {
         .lib-cta:hover { color: ${BRASS}; border-color: ${BRASS}; }
         .lib-cta--invite {
           display: inline-flex; align-items: baseline; gap: 10px;
-          font-family: ${INTER}; font-weight: 500;
+          font-family: ${SANS}; font-weight: 500;
           font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
           color: ${INK}; padding: 12px 0;
           border-top: 1px solid ${HAIR}; border-bottom: 1px solid ${HAIR};
@@ -211,7 +211,7 @@ const Library = () => {
         .lib-cta--invite:hover { color: ${BRASS}; border-color: ${BRASS}; }
         .lib-cta--invite .mark { color: ${BRASS}; font-size: 9px; letter-spacing: 0.2em; }
         .lib-nav-item {
-          font-family: ${INTER};
+          font-family: ${SANS};
           font-weight: 500;
           font-size: 10px;
           letter-spacing: 0.32em;
@@ -254,7 +254,7 @@ const Library = () => {
           width: 36px; height: 36px; border-radius: 999px;
           border: 1px solid ${HAIR};
           display: inline-flex; align-items: center; justify-content: center;
-          color: ${BRASS}; font-family: ${INTER}; font-size: 14px;
+          color: ${BRASS}; font-family: ${SANS}; font-size: 14px;
           transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
         }
         .lib-room-card:hover .lib-room-arrow-chip {
@@ -266,7 +266,7 @@ const Library = () => {
           position: absolute;
           top: 14px; right: -6px;
           transform: rotate(4deg);
-          font-family: ${INTER};
+          font-family: ${SANS};
           font-size: 9px;
           letter-spacing: 0.3em;
           color: ${BRASS};
@@ -311,7 +311,7 @@ const Library = () => {
           position: relative;
         }
         .lib-margin-anno {
-          font-family: ${INTER}; font-weight: 500; font-size: 9px;
+          font-family: ${SANS}; font-weight: 500; font-size: 9px;
           letter-spacing: 0.5em; text-transform: uppercase;
           color: ${INK}; opacity: 0.32;
           writing-mode: vertical-rl; transform: rotate(180deg);
@@ -612,7 +612,7 @@ const Library = () => {
               </div>
             </div>
           </div>
-          <div style={{ textAlign: "center", marginTop: 96, fontFamily: SCRIPT, fontSize: 38, color: BRASS, lineHeight: 1 }}>
+          <div style={{ textAlign: "center", marginTop: 96, fontFamily: DISPLAY, fontSize: 38, color: BRASS, lineHeight: 1 }}>
             For those who know there is more.
           </div>
         </motion.section>
@@ -844,7 +844,7 @@ const Library = () => {
                 bottom: 28,
                 right: 28,
                 textAlign: "right",
-                fontFamily: SCRIPT,
+                fontFamily: DISPLAY,
                 fontSize: 34,
                 color: INK,
                 lineHeight: 1.05,
@@ -896,7 +896,7 @@ const Library = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: SCRIPT,
+                fontFamily: DISPLAY,
                 fontSize: 38,
                 color: INK,
                 lineHeight: 1,
