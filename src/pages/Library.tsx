@@ -688,50 +688,62 @@ const Library = () => {
           className="lib-footer-row"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1.4fr 1fr",
-            alignItems: "center",
+            gridTemplateColumns: "1fr 1.2fr 1fr",
+            alignItems: "start",
             gap: 20,
-            padding: "48px 44px",
+            padding: "72px 44px 48px",
             borderTop: `1px solid ${HAIR}`,
             background: CREAM,
           }}
         >
-          {/* Monogram */}
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          {/* Deeper entry links (left) */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ ...mono, color: BRASS, opacity: 0.8, marginBottom: 4 }}>For those entering deeper</div>
+            {[
+              { label: "Request Access", to: "/library/apply" },
+              { label: "Member Sign In", to: "/library/login" },
+              { label: "Visit PASTED", to: "/" },
+            ].map((l) => (
+              <Link key={l.label} to={l.to} className="lib-link" style={{ ...mono, color: INK, opacity: 0.7 }}>
+                {l.label} —
+              </Link>
+            ))}
+          </div>
+          {/* Centered circular monogram */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
             <div
               style={{
-                width: 64,
-                height: 64,
+                width: 88,
+                height: 88,
+                borderRadius: "50%",
                 border: `1px solid ${BRASS}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontFamily: SCRIPT,
-                fontSize: 36,
-                color: BRASS,
+                fontSize: 38,
+                color: INK,
                 lineHeight: 1,
+                marginBottom: 18,
               }}
               aria-label="PASTED Library monogram"
             >
-              PL
+              P.L
             </div>
-          </div>
-          {/* Building */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
             <img
               src={buildingLine}
               alt="Illustration of the Library"
-              width={260}
-              height={130}
+              width={200}
+              height={100}
               loading="lazy"
               style={{
-                width: 260,
+                width: 200,
                 height: "auto",
                 mixBlendMode: "multiply",
-                opacity: 0.92,
+                opacity: 0.7,
               }}
             />
-            <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 14, color: CREAM_QUIET, marginTop: 10 }}>
+            <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 13, color: CREAM_QUIET, marginTop: 12, maxWidth: 280 }}>
               Signal over sound. Taste over tricks. Becoming over performance.
             </div>
           </div>
