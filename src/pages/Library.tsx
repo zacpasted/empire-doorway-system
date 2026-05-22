@@ -176,18 +176,29 @@ const Library = () => {
           font-family: ${INTER};
           font-weight: 500;
           font-size: 10px;
-          letter-spacing: 0.32em;
+          letter-spacing: 0.36em;
           text-transform: uppercase;
           color: ${INK};
-          padding: 12px 22px;
-          border: 1px solid ${BRASS};
-          border-radius: 2px;
+          padding: 14px 0 10px;
+          border: none;
+          border-top: 1px solid ${BRASS};
+          border-bottom: 1px solid ${BRASS};
+          border-radius: 0;
           text-decoration: none;
-          transition: background 200ms ease, color 200ms ease;
+          transition: color 200ms ease, border-color 200ms ease;
         }
-        .lib-cta:hover { background: ${BRASS}; color: ${CREAM}; }
-        .lib-cta--solid { background: ${INK}; color: ${CREAM}; border-color: ${INK}; }
-        .lib-cta--solid:hover { background: ${BRASS}; border-color: ${BRASS}; }
+        .lib-cta:hover { color: ${BRASS}; border-color: ${BRASS}; }
+        .lib-cta--invite {
+          display: inline-flex; align-items: baseline; gap: 10px;
+          font-family: ${INTER}; font-weight: 500;
+          font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
+          color: ${INK}; padding: 12px 0;
+          border-top: 1px solid ${HAIR}; border-bottom: 1px solid ${HAIR};
+          min-width: 220px; justify-content: space-between;
+          text-decoration: none; transition: color 200ms ease, border-color 200ms ease;
+        }
+        .lib-cta--invite:hover { color: ${BRASS}; border-color: ${BRASS}; }
+        .lib-cta--invite .mark { color: ${BRASS}; font-size: 9px; letter-spacing: 0.2em; }
         .lib-nav-item {
           font-family: ${INTER};
           font-weight: 500;
@@ -196,10 +207,15 @@ const Library = () => {
           text-transform: uppercase;
           color: ${INK};
           text-decoration: none;
-          padding: 16px 8px;
+          padding: 18px 8px;
           flex: 1;
           text-align: center;
           transition: color 200ms ease;
+          position: relative;
+        }
+        .lib-nav-item .nav-status {
+          display: block; margin-top: 6px; font-size: 8px;
+          letter-spacing: 0.32em; color: ${BRASS}; opacity: 0.7;
         }
         .lib-nav-item:hover { color: ${BRASS}; }
         .lib-nav-item + .lib-nav-item { border-left: 1px solid ${HAIR}; }
@@ -238,16 +254,19 @@ const Library = () => {
           width: 56px;
           margin: 0 auto 18px;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 720px) {
           .lib-row-2col, .lib-row-sidebar, .lib-footer-row {
             grid-template-columns: 1fr !important;
           }
-          .lib-nav-strip { flex-wrap: wrap; }
-          .lib-nav-item { flex: 1 0 50%; border-left: none !important; border-top: 1px solid ${HAIR}; }
+          .lib-nav-strip { flex-direction: column; }
+          .lib-nav-item { flex: 1 0 100%; border-left: none !important; border-top: 1px solid ${HAIR}; text-align: left; padding: 18px 24px; display: flex; justify-content: space-between; align-items: baseline; }
+          .lib-nav-item .nav-status { margin-top: 0; }
           .lib-gallery { grid-template-columns: repeat(2, 1fr) !important; }
           .lib-steps-grid, .lib-rooms-grid { grid-template-columns: 1fr !important; }
           .lib-room-card { grid-template-columns: 48px 1fr !important; }
           .lib-room-card > .lib-room-arrow { display: none; }
+          .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
+          .lib-2col-text { padding: 48px 24px !important; }
         }
       `}</style>
 
