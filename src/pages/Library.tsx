@@ -1007,7 +1007,7 @@ const Library = () => {
           {/* Colophon */}
           <div
             style={{
-              ...mono,
+              ...TYPE.label,
               color: CREAM_QUIET,
               textAlign: "right",
               lineHeight: 2,
@@ -1015,7 +1015,7 @@ const Library = () => {
           >
             <div>The Library</div>
             <div>of PASTED</div>
-            <div style={{ fontFamily: CORMORANT, fontStyle: "italic", textTransform: "none", letterSpacing: 0, fontSize: 13, marginTop: 4 }}>
+            <div style={{ ...TYPE.caption, fontSize: 13, textTransform: "none", letterSpacing: 0, marginTop: 6 }}>
               A private canon on becoming undeniable.
             </div>
           </div>
