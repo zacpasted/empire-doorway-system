@@ -342,6 +342,33 @@ const Library = () => {
         }
         .lib-practice-cluster > * { width: 220px; }
         .lib-canon-grid > div:nth-child(2n) { transform: translateY(36px); }
+        /* Ghost / outlined italic display word, Saile-style */
+        .lib-ghost-word {
+          font-family: ${CORMORANT};
+          font-style: italic;
+          font-weight: 400;
+          color: transparent;
+          -webkit-text-stroke: 1px ${INK};
+          letter-spacing: -0.01em;
+          line-height: 0.9;
+          display: inline-block;
+        }
+        /* Polaroid scatter cluster over landscape */
+        .lib-scatter-stage {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          background-size: cover;
+          background-position: center;
+          overflow: hidden;
+        }
+        .lib-scatter-stage::before {
+          content: ""; position: absolute; inset: 0;
+          background: linear-gradient(180deg, rgba(183,204,218,0.08) 0%, rgba(26,20,16,0.32) 100%);
+        }
+        .lib-scatter-item {
+          position: absolute;
+        }
         /* Lens/Vesica band — woven from editorial inspiration.
            A painting-backed band with a cream card whose top + bottom
            edges curve inward, like the inspiration's concave panels. */
