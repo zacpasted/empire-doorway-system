@@ -87,7 +87,7 @@ const Emblem = () => (
           marginBottom: 6,
         }}
       >
-        EST · MMXXVI
+        The Library of PASTED
       </div>
       <div
         style={{
@@ -306,16 +306,16 @@ const Library = () => {
           />
           {/* Hero archival corner marks */}
           <div style={{ position: "absolute", top: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            EST · MMXXVI
+            The Library
           </div>
           <div style={{ position: "absolute", top: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            VOL · I
+            of PASTED
           </div>
           <div style={{ position: "absolute", bottom: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
             PRIVATE CANON
           </div>
           <div style={{ position: "absolute", bottom: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            ACCESSION · 001
+            By Invitation
           </div>
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...mono, color: CREAM, opacity: 0.85 }}>
             The Library of PASTED
