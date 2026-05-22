@@ -733,20 +733,20 @@ const Library = () => {
           <div className="lens-bg" style={{ backgroundImage: `url(${worldLibraryCorridor})` }} aria-hidden="true" />
           <div className="lens-inner">
             <div className="lib-lens-card">
-              <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
+              <div style={{ ...TYPE.label, color: BRASS, marginBottom: 22 }}>
                 Filed under · Purpose
               </div>
-              <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.2, margin: "0 auto 22px", maxWidth: 460 }}>
+              <h3 style={{ ...TYPE.h3, fontFamily: CORMORANT, color: INK, margin: "0 auto 24px", maxWidth: 480 }}>
                 The internet made everyone visible.{" "}
                 <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
               </h3>
-              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.75, color: "rgba(26,20,16,0.82)", margin: "0 auto 14px", maxWidth: 440 }}>
+              <p style={{ ...TYPE.body, lineHeight: 1.75, color: "rgba(26,20,16,0.82)", margin: "0 auto 16px", maxWidth: 460 }}>
                 Most people are not short on content. They are short on canon. The Library exists to restore the deeper architecture — to think more clearly, build more beautifully, speak with more force, and become known without becoming hollow.
               </p>
-              <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, margin: "0 auto", maxWidth: 420 }}>
+              <p style={{ ...TYPE.caption, fontSize: 16, color: INK, margin: "0 auto", maxWidth: 440 }}>
                 Not here to make you louder. Here to make you undeniable.
               </p>
-              <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 24, opacity: 0.8 }}>
+              <div style={{ ...TYPE.labelTiny, color: BRASS, marginTop: 28, opacity: 0.8 }}>
                 Depth over breadth
               </div>
             </div>
