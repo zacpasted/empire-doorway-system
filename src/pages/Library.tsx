@@ -120,20 +120,6 @@ const Emblem = () => (
 
 const NAV_ITEMS = ["Stacks", "Reading Room", "Vault", "Cinema", "Periodicals"];
 
-const TOP_NAV = [
-  { label: "Atrium", to: "/library" },
-  { label: "Stacks", to: "/library/stacks" },
-  { label: "Reading Room", to: "/library/reading-room" },
-  { label: "Vault", to: "/library/vault" },
-  { label: "Cinema", to: "/library/cinema" },
-  { label: "Periodicals", to: "/library/periodicals" },
-  { label: "Apply", to: "/library/apply" },
-];
-
-/* Damask SVG ground used for the masthead band (Mansion-style). */
-const DAMASK_BG =
-  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23B8954C' stroke-opacity='0.18' stroke-width='0.6'><path d='M80 4 C 110 30 110 60 80 80 C 50 60 50 30 80 4 Z'/><path d='M80 156 C 110 130 110 100 80 80 C 50 100 50 130 80 156 Z'/><path d='M4 80 C 30 50 60 50 80 80 C 60 110 30 110 4 80 Z'/><path d='M156 80 C 130 50 100 50 80 80 C 100 110 130 110 156 80 Z'/><circle cx='80' cy='80' r='2.2' fill='%23B8954C' fill-opacity='0.35' stroke='none'/></g></svg>\")";
-
 const Library = () => {
   const reduced = useReducedMotion();
 
@@ -281,100 +267,10 @@ const Library = () => {
           .lib-room-card > .lib-room-arrow { display: none; }
           .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
           .lib-2col-text { padding: 48px 24px !important; }
-          .lib-status-band { grid-template-columns: 1fr !important; }
-          .lib-status-cell { border-left: none !important; border-top: 1px solid ${HAIR}; }
-          .lib-status-cell:first-child { border-top: none; }
-          .lib-top-nav { gap: 0 !important; padding: 8px 12px 14px !important; }
-          .lib-top-nav a { padding: 6px 8px !important; font-size: 9px !important; }
         }
       `}</style>
 
       <div className="lib-grain" aria-hidden="true" />
-
-      {/* MASTHEAD BAND — dark damask, centered crest + horizontal nav (Mansion / Anderson Social) */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: 720,
-          margin: "0 auto",
-          background: "#120D0A",
-          color: CREAM,
-          backgroundImage: DAMASK_BG,
-          backgroundSize: "160px 160px",
-          borderBottom: `1px solid rgba(184,149,76,0.35)`,
-          boxShadow: "0 40px 80px rgba(0,0,0,0.45)",
-        }}
-      >
-        <div style={{ padding: "26px 24px 18px", textAlign: "center" }}>
-          <div style={{ ...mono, color: BRASS, opacity: 0.85, marginBottom: 10 }}>
-            EST · MMXXVI · MADRID
-          </div>
-          <div
-            aria-label="PASTED Library crest"
-            style={{
-              width: 48,
-              height: 48,
-              margin: "0 auto 8px",
-              borderRadius: "50%",
-              border: `1px solid ${BRASS}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: SCRIPT,
-              fontSize: 22,
-              color: CREAM,
-              lineHeight: 1,
-            }}
-          >
-            P.L
-          </div>
-          <div
-            style={{
-              fontFamily: CORMORANT,
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: 22,
-              letterSpacing: "0.04em",
-              color: CREAM,
-            }}
-          >
-            The PASTED Library
-          </div>
-        </div>
-        <nav
-          className="lib-top-nav"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: 0,
-            padding: "10px 16px 18px",
-            borderTop: "1px solid rgba(184,149,76,0.18)",
-          }}
-        >
-          {TOP_NAV.map((n, i) => (
-            <span key={n.label} style={{ display: "inline-flex", alignItems: "center" }}>
-              <Link
-                to={n.to}
-                style={{
-                  ...mono,
-                  color: CREAM,
-                  opacity: 0.82,
-                  textDecoration: "none",
-                  padding: "6px 14px",
-                }}
-              >
-                {n.label}
-              </Link>
-              {i < TOP_NAV.length - 1 && (
-                <span aria-hidden style={{ color: BRASS, opacity: 0.55, fontSize: 8 }}>·</span>
-              )}
-            </span>
-          ))}
-        </nav>
-      </div>
 
       <motion.div
         {...fade(0)}
@@ -410,16 +306,19 @@ const Library = () => {
           />
           {/* Hero archival corner marks */}
           <div style={{ position: "absolute", top: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            PASTED
+            EST · MMXXVI
           </div>
           <div style={{ position: "absolute", top: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            AW · MMXXVI
+            VOL · I
           </div>
           <div style={{ position: "absolute", bottom: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
             PRIVATE CANON
           </div>
           <div style={{ position: "absolute", bottom: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
             ACCESSION · 001
+          </div>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...mono, color: CREAM, opacity: 0.85 }}>
+            The Library of PASTED
           </div>
           <div
             style={{
@@ -433,37 +332,15 @@ const Library = () => {
               textAlign: "center",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 28, marginBottom: 18 }}>
-              <span style={{ ...mono, color: CREAM, opacity: 0.8, fontSize: 10 }}>PASTED</span>
-              <span aria-hidden style={{ width: 28, height: 1, background: "rgba(245,238,220,0.5)" }} />
-              <span style={{ ...mono, color: BRASS, fontSize: 10 }}>AW · MMXXVI</span>
-            </div>
-            <div
-              style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: "clamp(64px, 11vw, 120px)",
-                color: CREAM,
-                lineHeight: 0.95,
-                letterSpacing: "0.005em",
-                textShadow: "0 4px 28px rgba(0,0,0,0.6)",
-                marginBottom: 6,
-              }}
-            >
-              The Library
-            </div>
-            <div style={{ ...mono, color: BRASS, opacity: 0.9, fontSize: 9, marginBottom: 22 }}>
-              A PRIVATE CANON · VOLUME I
-            </div>
+            <Emblem />
             <h1
               style={{
                 fontFamily: CORMORANT,
                 fontStyle: "italic",
                 fontWeight: 400,
-                fontSize: "clamp(24px, 3.6vw, 34px)",
+                fontSize: "clamp(36px, 5.6vw, 58px)",
                 color: CREAM,
-                margin: "0 0 14px",
+                margin: "24px 0 14px",
                 lineHeight: 1.05,
                 letterSpacing: "0.005em",
                 textShadow: "0 2px 18px rgba(0,0,0,0.55)",
@@ -500,50 +377,7 @@ const Library = () => {
           </div>
         </motion.section>
 
-        {/* PANEL — STATUS BAND (Anderson Social-style horizontal rooms band) */}
-        <div
-          className="lib-status-band"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            borderTop: `1px solid ${HAIR}`,
-            borderBottom: `1px solid ${HAIR}`,
-            background: CREAM,
-          }}
-        >
-          {[
-            { name: "The Atrium", hours: "Open · Daily", note: "You are here" },
-            { name: "The Stacks", hours: "Opening Soon", note: "Essays · Frameworks" },
-            { name: "The Cinema", hours: "Opening Soon", note: "Films · Visual Studies" },
-          ].map((s, i) => (
-            <div
-              key={s.name}
-              style={{
-                padding: "28px 22px",
-                textAlign: "center",
-                borderLeft: i === 0 ? "none" : `1px solid ${HAIR}`,
-              }}
-              className="lib-status-cell"
-            >
-              <div style={{ ...mono, color: BRASS, marginBottom: 10, fontSize: 9 }}>{s.hours}</div>
-              <div
-                style={{
-                  fontFamily: CORMORANT,
-                  fontStyle: "italic",
-                  fontSize: 22,
-                  color: INK,
-                  lineHeight: 1.1,
-                  marginBottom: 6,
-                }}
-              >
-                {s.name}
-              </div>
-              <div style={{ ...mono, color: INK, opacity: 0.5, fontSize: 9 }}>{s.note}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* PANEL 2 — NAV STRIP (full room index) */}
+        {/* PANEL 2 — NAV STRIP */}
         <nav
           className="lib-nav-strip"
           style={{
