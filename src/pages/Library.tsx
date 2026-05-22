@@ -31,29 +31,32 @@ const ensureFonts = () => {
   link.id = FONT_LINK_ID;
   link.rel = "stylesheet";
   link.href =
-    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500&family=Pinyon+Script&display=swap";
+    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap";
   document.head.appendChild(link);
 };
 
-const NIGHT = "#1A1410";
-const CREAM = "#F5EEDC";
-const CREAM_DEEP = "#EFE6CF";
-const CREAM_QUIET = "rgba(26, 20, 16, 0.62)";
-const INK = "#1A1410";
-const BRASS = "#B8954C";
-const HAIR = "rgba(26, 20, 16, 0.16)";
+const NIGHT = "#2A1B14";
+const DARK_CARD = "#3A2618";
+const CREAM = "#F1ECE2";
+const CREAM_DEEP = "#E8E0D0";
+const CREAM_QUIET = "rgba(42, 27, 20, 0.62)";
+const INK = "#1F1611";
+const BRASS = "#B8924F";
+const BRASS_BRIGHT = "#D4AA6A";
+const HAIR = "rgba(31, 22, 17, 0.14)";
 
 const CORMORANT = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
-const SCRIPT = "'Pinyon Script', 'Cormorant Garamond', cursive";
-const INTER = "Inter, system-ui, -apple-system, sans-serif";
+const DISPLAY = "'Playfair Display', 'Cormorant Garamond', Georgia, serif";
+const SANS = "'DM Sans', system-ui, -apple-system, sans-serif";
+const MONO_FF = "'JetBrains Mono', ui-monospace, monospace";
 const FEATURES = '"liga","dlig","swsh","salt","kern"';
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const mono = {
-  fontFamily: INTER,
+  fontFamily: MONO_FF,
   fontWeight: 500 as const,
   fontSize: 10,
-  letterSpacing: "0.32em",
+  letterSpacing: "0.28em",
   textTransform: "uppercase" as const,
 };
 
@@ -99,7 +102,9 @@ const Emblem = () => (
       </div>
       <div
         style={{
-          fontFamily: SCRIPT,
+          fontFamily: DISPLAY,
+          fontStyle: "italic",
+          fontWeight: 400,
           fontSize: 42,
           color: INK,
           lineHeight: 1,
@@ -181,7 +186,7 @@ const Library = () => {
         .lib-link:hover { color: ${BRASS}; }
         .lib-cta {
           display: inline-block;
-          font-family: ${INTER};
+          font-family: ${SANS};
           font-weight: 500;
           font-size: 10px;
           letter-spacing: 0.36em;
@@ -198,7 +203,7 @@ const Library = () => {
         .lib-cta:hover { color: ${BRASS}; border-color: ${BRASS}; }
         .lib-cta--invite {
           display: inline-flex; align-items: baseline; gap: 10px;
-          font-family: ${INTER}; font-weight: 500;
+          font-family: ${SANS}; font-weight: 500;
           font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
           color: ${INK}; padding: 12px 0;
           border-top: 1px solid ${HAIR}; border-bottom: 1px solid ${HAIR};
@@ -207,8 +212,107 @@ const Library = () => {
         }
         .lib-cta--invite:hover { color: ${BRASS}; border-color: ${BRASS}; }
         .lib-cta--invite .mark { color: ${BRASS}; font-size: 9px; letter-spacing: 0.2em; }
+        /* Gold pill button (Royal Stable Club inspiration) */
+        .lib-pill {
+          display: inline-flex; align-items: center; justify-content: center;
+          gap: 8px;
+          font-family: ${SANS};
+          font-weight: 500;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: ${INK};
+          background: ${BRASS};
+          padding: 12px 22px;
+          border-radius: 999px;
+          border: 1px solid ${BRASS};
+          text-decoration: none;
+          transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+          cursor: pointer;
+        }
+        .lib-pill:hover { background: ${BRASS_BRIGHT}; border-color: ${BRASS_BRIGHT}; }
+        .lib-pill--ghost {
+          background: transparent;
+          color: ${BRASS};
+        }
+        .lib-pill--ghost:hover { background: ${BRASS}; color: ${INK}; }
+        .lib-pill--light {
+          background: transparent;
+          color: ${CREAM};
+          border-color: rgba(245,238,220,0.6);
+        }
+        .lib-pill--light:hover { background: ${BRASS}; color: ${INK}; border-color: ${BRASS}; }
+        /* Royal-Stable-style top nav */
+        .lib-topnav {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: center;
+          padding: 18px 28px;
+          background: ${CREAM};
+          border-bottom: 1px solid ${HAIR};
+        }
+        .lib-topnav .lib-topnav-left {
+          display: flex; align-items: center; gap: 22px;
+          font-family: ${SANS}; font-size: 12px; color: ${INK};
+        }
+        .lib-topnav .lib-topnav-left a {
+          color: ${INK}; text-decoration: none;
+          letter-spacing: 0.04em;
+          transition: color 200ms ease;
+        }
+        .lib-topnav .lib-topnav-left a:hover { color: ${BRASS}; }
+        .lib-topnav .lib-topnav-mark {
+          font-family: ${DISPLAY}; font-style: italic; font-weight: 400;
+          font-size: 22px; color: ${INK}; letter-spacing: 0.01em;
+          white-space: nowrap;
+        }
+        .lib-topnav .lib-topnav-right { display: flex; justify-content: flex-end; }
+        @media (max-width: 720px) {
+          .lib-topnav { grid-template-columns: 1fr auto; padding: 14px 18px; }
+          .lib-topnav .lib-topnav-left { display: none; }
+          .lib-topnav .lib-topnav-mark { font-size: 18px; }
+        }
+        /* Alternating Rooms cards inspired by Royal Stable Club */
+        .lib-rsc-card {
+          display: grid;
+          grid-template-columns: 1.05fr 1fr;
+          gap: 0;
+          border-radius: 18px;
+          overflow: hidden;
+          background: ${DARK_CARD};
+          color: ${CREAM};
+          box-shadow: 0 20px 60px -28px rgba(0,0,0,0.45);
+        }
+        .lib-rsc-card--invert { grid-template-columns: 1fr 1.05fr; background: ${CREAM}; color: ${INK}; }
+        .lib-rsc-card--invert .lib-rsc-img { order: 2; }
+        .lib-rsc-card--invert .lib-rsc-body { order: 1; }
+        .lib-rsc-img {
+          min-height: 320px;
+          background-size: cover; background-position: center;
+        }
+        .lib-rsc-body {
+          padding: 56px 52px;
+          display: flex; flex-direction: column; justify-content: center;
+          gap: 18px;
+        }
+        .lib-rsc-icon {
+          width: 48px; height: 48px; border-radius: 999px;
+          display: inline-flex; align-items: center; justify-content: center;
+          color: ${BRASS}; font-family: ${DISPLAY}; font-style: italic; font-size: 26px;
+          border: 1px solid currentColor;
+          margin-bottom: 6px;
+        }
+        @media (max-width: 720px) {
+          .lib-rsc-card, .lib-rsc-card--invert {
+            grid-template-columns: 1fr !important;
+          }
+          .lib-rsc-card--invert .lib-rsc-img { order: 0; }
+          .lib-rsc-card--invert .lib-rsc-body { order: 1; }
+          .lib-rsc-body { padding: 32px 24px; }
+          .lib-rsc-img { min-height: 220px; }
+        }
         .lib-nav-item {
-          font-family: ${INTER};
+          font-family: ${SANS};
           font-weight: 500;
           font-size: 10px;
           letter-spacing: 0.32em;
@@ -251,7 +355,7 @@ const Library = () => {
           width: 36px; height: 36px; border-radius: 999px;
           border: 1px solid ${HAIR};
           display: inline-flex; align-items: center; justify-content: center;
-          color: ${BRASS}; font-family: ${INTER}; font-size: 14px;
+          color: ${BRASS}; font-family: ${SANS}; font-size: 14px;
           transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
         }
         .lib-room-card:hover .lib-room-arrow-chip {
@@ -263,7 +367,7 @@ const Library = () => {
           position: absolute;
           top: 14px; right: -6px;
           transform: rotate(4deg);
-          font-family: ${INTER};
+          font-family: ${SANS};
           font-size: 9px;
           letter-spacing: 0.3em;
           color: ${BRASS};
@@ -308,7 +412,7 @@ const Library = () => {
           position: relative;
         }
         .lib-margin-anno {
-          font-family: ${INTER}; font-weight: 500; font-size: 9px;
+          font-family: ${SANS}; font-weight: 500; font-size: 9px;
           letter-spacing: 0.5em; text-transform: uppercase;
           color: ${INK}; opacity: 0.32;
           writing-mode: vertical-rl; transform: rotate(180deg);
@@ -506,10 +610,10 @@ const Library = () => {
               A private canon for the ones building taste, authority, signal, and selfhood in a world addicted to noise.
             </p>
             <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
-              <Link to="/library/members" className="lib-cta" style={{ color: CREAM, borderColor: "rgba(245,238,220,0.45)" }}>
+              <Link to="/library/members" className="lib-pill">
                 Enter the Library
               </Link>
-              <Link to="/library/apply" className="lib-cta" style={{ color: CREAM, borderColor: "rgba(245,238,220,0.25)" }}>
+              <Link to="/library/apply" className="lib-pill lib-pill--light">
                 Request Access
               </Link>
             </div>
@@ -519,29 +623,21 @@ const Library = () => {
           </div>
         </motion.section>
 
-        {/* PANEL 2 — NAV STRIP */}
-        <nav
-          className="lib-nav-strip"
-          style={{
-            display: "flex",
-            alignItems: "stretch",
-            borderTop: `1px solid ${HAIR}`,
-            borderBottom: `1px solid ${HAIR}`,
-            background: CREAM,
-          }}
-        >
-          {NAV_ITEMS.map((n, i) => (
-            <span
-              key={n}
-              className="lib-nav-item"
-              aria-disabled="true"
-              title="Under construction — opening soon"
-              style={{ cursor: "default" }}
-            >
-              <span style={{ opacity: 0.65 }}>{n}</span>
-              <span className="nav-status">Closed</span>
-            </span>
-          ))}
+        {/* PANEL 2 — TOP NAV (Royal Stable inspired) */}
+        <nav className="lib-topnav" aria-label="Library sections">
+          <div className="lib-topnav-left">
+            {NAV_ITEMS.map((n) => (
+              <span key={n} title="Opening soon" style={{ opacity: 0.55, cursor: "default" }}>
+                {n}
+              </span>
+            ))}
+          </div>
+          <Link to="/library" className="lib-topnav-mark" aria-label="The Library of PASTED">
+            The Library<span style={{ fontStyle: "normal", color: BRASS, margin: "0 8px" }}>·</span><span style={{ fontFamily: SANS, fontStyle: "normal", fontWeight: 500, fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase" }}>PASTED</span>
+          </Link>
+          <div className="lib-topnav-right">
+            <Link to="/library/apply" className="lib-pill">Request Access</Link>
+          </div>
         </nav>
 
         {/* PANEL — WHAT THE LIBRARY IS */}
@@ -609,7 +705,7 @@ const Library = () => {
               </div>
             </div>
           </div>
-          <div style={{ textAlign: "center", marginTop: 96, fontFamily: SCRIPT, fontSize: 38, color: BRASS, lineHeight: 1 }}>
+          <div style={{ textAlign: "center", marginTop: 96, fontFamily: DISPLAY, fontSize: 38, color: BRASS, lineHeight: 1 }}>
             For those who know there is more.
           </div>
         </motion.section>
@@ -701,24 +797,43 @@ const Library = () => {
           <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
             Each room holds a different kind of becoming.
           </h2>
-          <div className="lib-rooms-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
             {[
-              { name: "The Stacks", status: "Open Soon", disabled: true, img: worldLibraryCorridor, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
-              { name: "The Reading Room", status: "Under Construction", disabled: true, img: worldManorGrounds, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
-              { name: "The Vault", status: "Under Construction", disabled: true, img: worldManorNight, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
-              { name: "The Cinema", status: "Under Construction", disabled: true, img: worldScreeningRoom, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
-              { name: "Periodicals", status: "Under Construction", disabled: true, img: worldManorPasture, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
-            ].map((r) => (
-              <div key={r.name} className="lib-room-card" data-disabled={r.disabled || undefined}>
-                <div className="lib-room-thumb" style={{ backgroundImage: `url(${r.img})` }} aria-hidden="true" />
-                <div>
-                  <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: 26, color: INK, margin: "0 0 6px", lineHeight: 1.1 }}>{r.name}</h3>
-                  <div style={{ ...mono, color: BRASS, fontSize: 9, marginBottom: 10 }}>{r.status}</div>
-                  <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0, maxWidth: 540 }}>{r.desc}</p>
-                </div>
-                <div className="lib-room-arrow-chip" aria-hidden="true">→</div>
-              </div>
-            ))}
+              { name: "The Stacks", glyph: "S", status: "Open Soon", img: worldLibraryCorridor, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
+              { name: "The Reading Room", glyph: "R", status: "Under Construction", img: worldManorGrounds, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
+              { name: "The Vault", glyph: "V", status: "Under Construction", img: worldManorNight, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
+              { name: "The Cinema", glyph: "C", status: "Under Construction", img: worldScreeningRoom, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
+              { name: "Periodicals", glyph: "P", status: "Under Construction", img: worldManorPasture, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
+            ].map((r, i) => {
+              const invert = i % 2 === 1;
+              const isDark = !invert;
+              const subColor = isDark ? "rgba(241,236,226,0.72)" : CREAM_QUIET;
+              return (
+                <article
+                  key={r.name}
+                  className={`lib-rsc-card${invert ? " lib-rsc-card--invert" : ""}`}
+                >
+                  <div className="lib-rsc-body">
+                    <div className="lib-rsc-icon" aria-hidden="true">{r.glyph}</div>
+                    <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                      {r.name}
+                    </h3>
+                    <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                      {r.status}
+                    </div>
+                    <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: subColor, margin: 0, maxWidth: 460 }}>
+                      {r.desc}
+                    </p>
+                    <div style={{ marginTop: 10 }}>
+                      <span className={`lib-pill${isDark ? " lib-pill--light" : ""}`} style={{ cursor: "default", opacity: 0.85 }}>
+                        Learn more
+                      </span>
+                    </div>
+                  </div>
+                  <div className="lib-rsc-img" style={{ backgroundImage: `url(${r.img})` }} aria-hidden="true" />
+                </article>
+              );
+            })}
           </div>
         </motion.section>
 
@@ -841,7 +956,7 @@ const Library = () => {
                 bottom: 28,
                 right: 28,
                 textAlign: "right",
-                fontFamily: SCRIPT,
+                fontFamily: DISPLAY,
                 fontSize: 34,
                 color: INK,
                 lineHeight: 1.05,
@@ -893,7 +1008,7 @@ const Library = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: SCRIPT,
+                fontFamily: DISPLAY,
                 fontSize: 38,
                 color: INK,
                 lineHeight: 1,
