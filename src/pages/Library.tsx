@@ -120,6 +120,20 @@ const Emblem = () => (
 
 const NAV_ITEMS = ["Stacks", "Reading Room", "Vault", "Cinema", "Periodicals"];
 
+const TOP_NAV = [
+  { label: "Atrium", to: "/library" },
+  { label: "Stacks", to: "/library/stacks" },
+  { label: "Reading Room", to: "/library/reading-room" },
+  { label: "Vault", to: "/library/vault" },
+  { label: "Cinema", to: "/library/cinema" },
+  { label: "Periodicals", to: "/library/periodicals" },
+  { label: "Apply", to: "/library/apply" },
+];
+
+/* Damask SVG ground used for the masthead band (Mansion-style). */
+const DAMASK_BG =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23B8954C' stroke-opacity='0.18' stroke-width='0.6'><path d='M80 4 C 110 30 110 60 80 80 C 50 60 50 30 80 4 Z'/><path d='M80 156 C 110 130 110 100 80 80 C 50 100 50 130 80 156 Z'/><path d='M4 80 C 30 50 60 50 80 80 C 60 110 30 110 4 80 Z'/><path d='M156 80 C 130 50 100 50 80 80 C 100 110 130 110 156 80 Z'/><circle cx='80' cy='80' r='2.2' fill='%23B8954C' fill-opacity='0.35' stroke='none'/></g></svg>\")";
+
 const Library = () => {
   const reduced = useReducedMotion();
 
@@ -271,6 +285,91 @@ const Library = () => {
       `}</style>
 
       <div className="lib-grain" aria-hidden="true" />
+
+      {/* MASTHEAD BAND — dark damask, centered crest + horizontal nav (Mansion / Anderson Social) */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          maxWidth: 720,
+          margin: "0 auto",
+          background: "#120D0A",
+          color: CREAM,
+          backgroundImage: DAMASK_BG,
+          backgroundSize: "160px 160px",
+          borderBottom: `1px solid rgba(184,149,76,0.35)`,
+          boxShadow: "0 40px 80px rgba(0,0,0,0.45)",
+        }}
+      >
+        <div style={{ padding: "26px 24px 18px", textAlign: "center" }}>
+          <div style={{ ...mono, color: BRASS, opacity: 0.85, marginBottom: 10 }}>
+            EST · MMXXVI · MADRID
+          </div>
+          <div
+            aria-label="PASTED Library crest"
+            style={{
+              width: 48,
+              height: 48,
+              margin: "0 auto 8px",
+              borderRadius: "50%",
+              border: `1px solid ${BRASS}`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: SCRIPT,
+              fontSize: 22,
+              color: CREAM,
+              lineHeight: 1,
+            }}
+          >
+            P.L
+          </div>
+          <div
+            style={{
+              fontFamily: CORMORANT,
+              fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: 22,
+              letterSpacing: "0.04em",
+              color: CREAM,
+            }}
+          >
+            The PASTED Library
+          </div>
+        </div>
+        <nav
+          className="lib-top-nav"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 0,
+            padding: "10px 16px 18px",
+            borderTop: "1px solid rgba(184,149,76,0.18)",
+          }}
+        >
+          {TOP_NAV.map((n, i) => (
+            <span key={n.label} style={{ display: "inline-flex", alignItems: "center" }}>
+              <Link
+                to={n.to}
+                style={{
+                  ...mono,
+                  color: CREAM,
+                  opacity: 0.82,
+                  textDecoration: "none",
+                  padding: "6px 14px",
+                }}
+              >
+                {n.label}
+              </Link>
+              {i < TOP_NAV.length - 1 && (
+                <span aria-hidden style={{ color: BRASS, opacity: 0.55, fontSize: 8 }}>·</span>
+              )}
+            </span>
+          ))}
+        </nav>
+      </div>
 
       <motion.div
         {...fade(0)}
