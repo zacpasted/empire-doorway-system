@@ -840,116 +840,78 @@ const Library = () => {
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
-            className="lib-gallery lib-canon-grid"
+            className="lib-gallery"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 28,
+              gap: 24,
             }}
           >
             {[
-              { src: worldEstateDusk, t: "Taste" },
-              { src: worldLibraryCorridor, t: "Authority" },
-              { src: worldArrivalCypress, t: "Restraint" },
-              { src: worldManorNight, t: "Signal" },
+              { src: worldEstateDusk, t: "Taste", g: "T", n: "Vol. I" },
+              { src: worldLibraryCorridor, t: "Authority", g: "A", n: "Vol. II" },
+              { src: worldArrivalCypress, t: "Restraint", g: "R", n: "Vol. III" },
+              { src: worldManorNight, t: "Signal", g: "S", n: "Vol. IV" },
             ].map((v) => (
-              <div key={v.t}>
-                <div
-                  style={{
-                    position: "relative",
-                    aspectRatio: "1 / 1",
-                    backgroundImage: `url(${v.src})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    outline: `1px solid rgba(184,149,76,0.35)`,
-                    outlineOffset: -1,
-                    filter: "grayscale(1)",
-                    transition: "filter 700ms ease",
-                  }}
-                  aria-hidden="true"
-                />
-                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 18, color: CREAM, marginTop: 12 }}>{v.t}</div>
-              </div>
+              <article key={v.t} className="lib-rsc-mini lib-rsc-mini--dark">
+                <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${v.src})`, aspectRatio: "1 / 1" }} aria-hidden="true" />
+                <div className="lib-rsc-mini-body" style={{ padding: "22px 22px 24px", gap: 10 }}>
+                  <div className="lib-rsc-icon" aria-hidden="true">{v.g}</div>
+                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 22, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                    {v.t}
+                  </h3>
+                  <div style={{ fontFamily: MONO_FF, fontSize: 9, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                    {v.n}
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-cta" style={{ cursor: "default", opacity: 0.7, color: CREAM, borderColor: "rgba(184,149,76,0.45)" }}>Opening Soon</span>
+            <span className="lib-pill lib-pill--light" style={{ cursor: "default", opacity: 0.8 }}>Opening Soon</span>
           </div>
         </motion.section>
 
-        {/* PANEL 5 — SIDEBAR LINKS + PORTRAIT */}
+        {/* PANEL 5 — ENTRY (sidebar links framed as the rsc-card system) */}
         <motion.section
           {...fade(0.24)}
-          className="lib-row-sidebar"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "0.9fr 1.1fr",
-            borderTop: `1px solid ${HAIR}`,
-          }}
+          className="lib-section-pad"
+          style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div
-            style={{
-              padding: "44px 44px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 0,
-              background: CREAM,
-            }}
-          >
-            <div style={{ ...mono, color: BRASS, marginBottom: 18, opacity: 0.8 }}>
-              For those entering deeper.
-            </div>
-            {[
-              { label: "Request Access", to: "/library/apply" },
-              { label: "See What's Coming", to: "/library/apply" },
-              { label: "Member Sign In", to: "/library/login" },
-              { label: "Visit PASTED", to: "/" },
-            ].map((item, i, arr) => (
-              <Link
-                key={item.label}
-                to={item.to}
-                className="lib-link"
-                style={{
-                  ...mono,
-                  padding: "20px 0",
-                  borderBottom: i < arr.length - 1 ? `1px solid ${HAIR}` : "none",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <span>{item.label}</span>
-                <span style={{ color: BRASS }}>→</span>
-              </Link>
-            ))}
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+            Filed under · Entry
           </div>
-          <div
-            style={{
-              position: "relative",
-              backgroundImage: `url(${portraitBW})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              minHeight: 380,
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                bottom: 28,
-                right: 28,
-                textAlign: "right",
-                fontFamily: DISPLAY,
-                fontSize: 34,
-                color: INK,
-                lineHeight: 1.05,
-                textShadow: "0 1px 8px rgba(245,238,220,0.55)",
-              }}
-            >
-              Free yourself,
-              <br />
-              the rest follows.
+          <div className="lib-section-rule" />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+            For those entering deeper.
+          </h2>
+          <article className="lib-rsc-card">
+            <div className="lib-rsc-img" style={{ backgroundImage: `url(${portraitBW})` }} aria-hidden="true" />
+            <div className="lib-rsc-body">
+              <div className="lib-rsc-icon" aria-hidden="true">E</div>
+              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                Free yourself,<br/>the rest follows.
+              </h3>
+              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                Four doors · One canon
+              </div>
+              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: "rgba(241,236,226,0.72)", margin: 0, maxWidth: 460 }}>
+                Choose where to begin. New volumes open weekly. Cards are issued to those who actually intend to read.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 12 }}>
+                {[
+                  { label: "Request Access", to: "/library/apply", primary: true },
+                  { label: "See What's Coming", to: "/library/apply" },
+                  { label: "Member Sign In", to: "/library/login" },
+                  { label: "Visit PASTED", to: "/" },
+                ].map((item) => (
+                  <Link key={item.label} to={item.to} className={`lib-pill${item.primary ? "" : " lib-pill--light"}`}>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          </article>
         </motion.section>
 
         {/* PANEL 6 — FOOTER: monogram / building / colophon */}
