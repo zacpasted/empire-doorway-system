@@ -955,13 +955,13 @@ const Library = () => {
         >
           {/* Deeper entry links (left) */}
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div style={{ ...mono, color: BRASS, opacity: 0.8, marginBottom: 4 }}>For those entering deeper</div>
+            <div style={{ ...TYPE.label, color: BRASS, opacity: 0.8, marginBottom: 6 }}>For those entering deeper</div>
             {[
               { label: "Request Access", to: "/library/apply" },
               { label: "Member Sign In", to: "/library/login" },
               { label: "Visit PASTED", to: "/" },
             ].map((l) => (
-              <Link key={l.label} to={l.to} className="lib-link" style={{ ...mono, color: INK, opacity: 0.7 }}>
+              <Link key={l.label} to={l.to} className="lib-link" style={{ ...TYPE.label, color: INK, opacity: 0.7 }}>
                 {l.label} —
               </Link>
             ))}
