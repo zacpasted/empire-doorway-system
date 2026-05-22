@@ -383,7 +383,6 @@ const Library = () => {
           .lib-nav-item .nav-status { margin-top: 0; }
           .lib-gallery { grid-template-columns: repeat(2, 1fr) !important; }
           .lib-steps-grid, .lib-rooms-grid { grid-template-columns: 1fr !important; }
-          .lib-room-card { grid-template-columns: 48px 1fr !important; }
           .lib-room-card { grid-template-columns: 88px 1fr !important; padding: 12px !important; gap: 14px !important; }
           .lib-room-thumb { width: 88px !important; height: 72px !important; }
           .lib-room-card > .lib-room-arrow-chip { display: none; }
