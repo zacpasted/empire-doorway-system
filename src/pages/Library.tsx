@@ -553,19 +553,19 @@ const Library = () => {
           className="lib-section-pad"
           style={{
             borderTop: `1px solid ${HAIR}`,
-            background: CREAM_DEEP,
+            background: "#2A1B1B",
             padding: "104px 44px",
           }}
         >
           <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ V</div>
-          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+          <div style={{ ...mono, color: CREAM, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
             Filed under · Selected Volumes
           </div>
-          <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: INK, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
+          <div className="lib-section-rule" style={{ background: "rgba(245,238,220,0.2)" }} />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: CREAM, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
             The Canon
           </h2>
-          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: CREAM_QUIET, textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
+          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
@@ -590,18 +590,20 @@ const Library = () => {
                     backgroundImage: `url(${v.src})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    outline: `1px solid ${HAIR}`,
+                    outline: `1px solid rgba(184,149,76,0.35)`,
                     outlineOffset: -1,
+                    filter: "grayscale(1)",
+                    transition: "filter 700ms ease",
                   }}
                   aria-hidden="true"
                 />
                 <div style={{ marginTop: 10, ...mono, color: BRASS, fontSize: 9 }}>{v.n}</div>
-                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, marginTop: 2 }}>{v.t}</div>
+                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: CREAM, marginTop: 2 }}>{v.t}</div>
               </div>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-cta" style={{ cursor: "default", opacity: 0.6 }}>Opening Soon</span>
+            <span className="lib-cta" style={{ cursor: "default", opacity: 0.7, color: CREAM, borderColor: "rgba(184,149,76,0.45)" }}>Opening Soon</span>
           </div>
         </motion.section>
 
