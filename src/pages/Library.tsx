@@ -854,14 +854,14 @@ const Library = () => {
             padding: "120px 44px 132px",
           }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em", opacity: 0.85 }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20, opacity: 0.85 }}>
             Filed under · Selected Volumes
           </div>
           <div className="lib-section-rule" style={{ background: "rgba(245,238,220,0.2)" }} />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: CREAM, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
+          <h2 style={{ ...TYPE.h2, color: CREAM, margin: "0 0 16px", textAlign: "center" }}>
             The Canon
           </h2>
-          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
+          <p style={{ ...TYPE.caption, fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 36px", maxWidth: 480 }}>
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
@@ -882,10 +882,10 @@ const Library = () => {
                 <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${v.src})`, aspectRatio: "1 / 1" }} aria-hidden="true" />
                 <div className="lib-rsc-mini-body" style={{ padding: "22px 22px 24px", gap: 10 }}>
                   <div className="lib-rsc-icon" aria-hidden="true">{v.g}</div>
-                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 22, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                  <h3 style={{ ...TYPE.h3Mini, margin: 0, color: "inherit" }}>
                     {v.t}
                   </h3>
-                  <div style={{ fontFamily: MONO_FF, fontSize: 9, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                  <div style={{ ...TYPE.labelTiny, color: BRASS }}>
                     {v.n}
                   </div>
                 </div>
