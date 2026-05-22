@@ -669,6 +669,13 @@ const Library = () => {
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
           />
+          <div className="lib-hero-mast-title">THE PASTED LIBRARY</div>
+          <motion.div
+            className="lib-hero-spine"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          />
           <motion.div
             className="lib-hero-mast-right"
             initial={{ opacity: 0 }}
@@ -682,17 +689,6 @@ const Library = () => {
 
         {/* Title block */}
         <div className="lib-hero-title-block">
-          <motion.div
-            className="lib-hero-eyebrow"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.95 }}
-          >
-            <span className="lib-eyerule" />
-            <span>THE PASTED LIBRARY</span>
-            <span className="lib-eyerule" />
-          </motion.div>
-
           <h1 ref={heroH1Ref} className="lib-hero-h1">
             <span className="lib-hero-line">
               <WordReveal delay={1.05}>A private canon on</WordReveal>
@@ -719,12 +715,15 @@ const Library = () => {
           </motion.p>
 
           <motion.div
-            className="lib-hero-fleuron"
+            className="lib-hero-divider"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 2.0 }}
+            aria-hidden="true"
           >
-            ✦
+            <span className="lib-hero-divider-rule" />
+            <span className="lib-hero-divider-fleuron">✦</span>
+            <span className="lib-hero-divider-rule" />
           </motion.div>
 
           <motion.div
@@ -733,7 +732,7 @@ const Library = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 2.1 }}
           >
-            CURRENTLY · VOLUME I IN CIRCULATION
+            VOL. I <span className="lib-hero-meta-dot">·</span> NO. 01 <span className="lib-hero-meta-dot">·</span> MMXXVI
           </motion.div>
         </div>
 
@@ -747,11 +746,11 @@ const Library = () => {
         >
           <div className="lib-hero-glow" />
           <div className="lib-hero-spines">
-            {VOLUMES.map((v) => (
+            {VOLUMES.map((v, i) => (
               <div
                 key={v.id}
-                className={`lib-hero-spine-peek lib-hero-spine-peek--${v.state} ${
-                  v.numeral === "I" ? "lib-hero-spine-peek--rim" : ""
+                className={`lib-hero-spine-peek lib-hero-spine-peek--${v.state} lib-hero-spine-peek--pos${i + 1} ${
+                  v.numeral === "I" ? "lib-hero-spine-peek--lead" : ""
                 }`}
               />
             ))}
