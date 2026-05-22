@@ -759,55 +759,54 @@ const Library = () => {
           className="lib-section-pad lib-torn-top"
           style={{
             borderTop: `1px solid ${HAIR}`,
-            background: "#2A1B1B",
+            background: SKY,
             padding: "120px 44px 132px",
           }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em", opacity: 0.85 }}>
+          <div style={{ ...mono, color: INK, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em", opacity: 0.7 }}>
             Filed under · Selected Volumes
           </div>
-          <div className="lib-section-rule" style={{ background: "rgba(245,238,220,0.2)" }} />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: CREAM, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
-            The Canon
+          <div className="lib-section-rule" style={{ background: "rgba(26,20,16,0.2)" }} />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(36px, 5.4vw, 56px)", color: INK, margin: "0 0 14px", textAlign: "center", lineHeight: 1.0 }}>
+            The <span className="lib-ghost-word" style={{ fontSize: "clamp(40px, 6.4vw, 68px)" }}>Canon</span>
           </h2>
-          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
+          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: "rgba(26,20,16,0.7)", textAlign: "center", margin: "0 auto 44px", maxWidth: 460 }}>
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
+          {/* Landscape stage with scattered polaroids */}
           <div
-            className="lib-gallery lib-canon-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 28,
-            }}
+            className="lib-scatter-stage"
+            style={{ backgroundImage: `url(${worldManorPasture})` }}
+            aria-hidden="true"
           >
             {[
-              { src: worldEstateDusk, t: "Taste" },
-              { src: worldLibraryCorridor, t: "Authority" },
-              { src: worldArrivalCypress, t: "Restraint" },
-              { src: worldManorNight, t: "Signal" },
-            ].map((v) => (
-              <div key={v.t}>
+              { src: worldLibraryCorridor, t: "Authority", x: "6%", y: "12%", rot: -5, w: 168 },
+              { src: worldEstateDusk, t: "Taste", x: "30%", y: "28%", rot: 3, w: 188 },
+              { src: worldArrivalCypress, t: "Restraint", x: "54%", y: "10%", rot: -2, w: 172 },
+              { src: worldManorNight, t: "Signal", x: "74%", y: "34%", rot: 4, w: 180 },
+            ].map((p) => (
+              <div
+                key={p.t}
+                className="lib-scatter-item lib-polaroid"
+                style={{ left: p.x, top: p.y, width: p.w, transform: `rotate(${p.rot}deg)` }}
+              >
                 <div
                   style={{
-                    position: "relative",
-                    aspectRatio: "1 / 1",
-                    backgroundImage: `url(${v.src})`,
+                    width: "100%",
+                    aspectRatio: "4 / 5",
+                    backgroundImage: `url(${p.src})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    outline: `1px solid rgba(184,149,76,0.35)`,
-                    outlineOffset: -1,
                     filter: "grayscale(1)",
-                    transition: "filter 700ms ease",
                   }}
                   aria-hidden="true"
                 />
-                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 18, color: CREAM, marginTop: 12 }}>{v.t}</div>
+                <div className="lib-polaroid-caption">{p.t}</div>
               </div>
             ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-cta" style={{ cursor: "default", opacity: 0.7, color: CREAM, borderColor: "rgba(184,149,76,0.45)" }}>Opening Soon</span>
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <span className="lib-cta" style={{ cursor: "default", opacity: 0.75, color: INK, borderColor: "rgba(26,20,16,0.45)" }}>Opening Soon</span>
           </div>
         </motion.section>
 
