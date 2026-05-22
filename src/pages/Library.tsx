@@ -433,7 +433,7 @@ const Library = () => {
             position: "relative",
             width: "100%",
             aspectRatio: "16 / 11",
-            backgroundImage: `url(${heroStacks})`,
+            backgroundImage: `url(${worldEstateDusk})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -577,7 +577,7 @@ const Library = () => {
                 style={{
                   width: "100%",
                   aspectRatio: "4 / 5",
-                  backgroundImage: `url(${figureBW})`,
+                  backgroundImage: `url(${worldArrivalCypress})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   filter: "grayscale(1) brightness(1.02)",
@@ -620,7 +620,7 @@ const Library = () => {
           className="lib-torn-top lib-lens-band"
           style={{ background: "#2A1B1B", position: "relative" }}
         >
-          <div className="lens-bg" style={{ backgroundImage: `url(${robes})` }} aria-hidden="true" />
+          <div className="lens-bg" style={{ backgroundImage: `url(${worldLibraryCorridor})` }} aria-hidden="true" />
           <div className="lens-inner">
             <div className="lib-lens-card">
               <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
@@ -658,9 +658,9 @@ const Library = () => {
           </h2>
           <div className="lib-practice-cluster">
             {[
-              { t: "Read", img: thumb2, tag: "The Stacks", rot: -3, lift: 0, c: "Begin with the essays, notes, and frameworks that meet you where you are." },
-              { t: "Watch", img: thumb3, tag: "The Cinema", rot: 2, lift: 32, c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
-              { t: "Build", img: thumb4, tag: "The Forge", rot: -1, lift: 0, c: "Take what matters, discard what does not, and let the work change how you show up." },
+              { t: "Read", img: worldLibraryCorridor, tag: "The Stacks", rot: -3, lift: 0, c: "Begin with the essays, notes, and frameworks that meet you where you are." },
+              { t: "Watch", img: worldScreeningRoom, tag: "The Cinema", rot: 2, lift: 32, c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
+              { t: "Build", img: worldManorGrounds, tag: "The Forge", rot: -1, lift: 0, c: "Take what matters, discard what does not, and let the work change how you show up." },
             ].map((s, i) => (
               <div key={s.t} style={{ marginTop: s.lift }}>
                 <div className="lib-polaroid" style={{ transform: `rotate(${s.rot}deg)` }}>
@@ -703,11 +703,11 @@ const Library = () => {
           </h2>
           <div className="lib-rooms-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
             {[
-              { name: "The Stacks", status: "Open Soon", disabled: true, img: thumb1, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
-              { name: "The Reading Room", status: "Under Construction", disabled: true, img: thumb2, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
-              { name: "The Vault", status: "Under Construction", disabled: true, img: thumb3, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
-              { name: "The Cinema", status: "Under Construction", disabled: true, img: thumb4, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
-              { name: "Periodicals", status: "Under Construction", disabled: true, img: figureBW, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
+              { name: "The Stacks", status: "Open Soon", disabled: true, img: worldLibraryCorridor, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
+              { name: "The Reading Room", status: "Under Construction", disabled: true, img: worldManorGrounds, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
+              { name: "The Vault", status: "Under Construction", disabled: true, img: worldManorNight, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
+              { name: "The Cinema", status: "Under Construction", disabled: true, img: worldScreeningRoom, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
+              { name: "Periodicals", status: "Under Construction", disabled: true, img: worldManorPasture, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
             ].map((r) => (
               <div key={r.name} className="lib-room-card" data-disabled={r.disabled || undefined}>
                 <div className="lib-room-thumb" style={{ backgroundImage: `url(${r.img})` }} aria-hidden="true" />
@@ -751,10 +751,10 @@ const Library = () => {
             }}
           >
             {[
-              { src: thumb1, t: "Taste" },
-              { src: thumb2, t: "Authority" },
-              { src: thumb3, t: "Restraint" },
-              { src: thumb4, t: "Signal" },
+              { src: worldEstateDusk, t: "Taste" },
+              { src: worldLibraryCorridor, t: "Authority" },
+              { src: worldArrivalCypress, t: "Restraint" },
+              { src: worldManorNight, t: "Signal" },
             ].map((v) => (
               <div key={v.t}>
                 <div
