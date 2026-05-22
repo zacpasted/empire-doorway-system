@@ -10,6 +10,13 @@ import thumb2 from "@/assets/library-thumb-2.jpg";
 import thumb3 from "@/assets/library-thumb-3.jpg";
 import thumb4 from "@/assets/library-thumb-4.jpg";
 import robes from "@/assets/library-robes.jpg";
+import worldEstateDusk from "@/assets/world-estate-dusk.jpg";
+import worldArrivalCypress from "@/assets/world-arrival-cypress.jpg";
+import worldLibraryCorridor from "@/assets/world-library-corridor.jpg";
+import worldScreeningRoom from "@/assets/world-screening-room.jpg";
+import worldManorNight from "@/assets/world-manor-night.jpg";
+import worldManorGrounds from "@/assets/world-manor-grounds.jpg";
+import worldManorPasture from "@/assets/world-manor-pasture.jpg";
 
 /**
  * THE PASTED LIBRARY — Atrium
