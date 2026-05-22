@@ -302,6 +302,29 @@ const Library = () => {
           border: 1px solid currentColor;
           margin-bottom: 6px;
         }
+        /* Mini rsc card — same language at smaller scale (for triptychs / grids) */
+        .lib-rsc-mini {
+          display: flex; flex-direction: column;
+          border-radius: 16px;
+          overflow: hidden;
+          background: ${CREAM};
+          color: ${INK};
+          border: 1px solid rgba(184,149,76,0.22);
+          box-shadow: 0 18px 50px -28px rgba(0,0,0,0.4);
+          transition: box-shadow 320ms ease, transform 320ms ease;
+        }
+        .lib-rsc-mini:hover { box-shadow: 0 26px 60px -26px rgba(0,0,0,0.5); transform: translateY(-2px); }
+        .lib-rsc-mini--dark { background: ${DARK_CARD}; color: ${CREAM}; border-color: rgba(184,149,76,0.32); }
+        .lib-rsc-mini .lib-rsc-mini-img {
+          width: 100%; aspect-ratio: 4 / 3;
+          background-size: cover; background-position: center;
+          filter: grayscale(1) brightness(0.95);
+        }
+        .lib-rsc-mini .lib-rsc-mini-body {
+          padding: 28px 26px 30px;
+          display: flex; flex-direction: column; gap: 12px;
+        }
+        .lib-rsc-mini .lib-rsc-icon { width: 40px; height: 40px; font-size: 22px; margin-bottom: 2px; }
         @media (max-width: 720px) {
           .lib-rsc-card, .lib-rsc-card--invert {
             grid-template-columns: 1fr !important;
