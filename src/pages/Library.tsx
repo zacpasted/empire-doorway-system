@@ -60,6 +60,67 @@ const mono = {
   textTransform: "uppercase" as const,
 };
 
+/* PASTED typography scale — standardized across Library */
+const TYPE = {
+  h1: {
+    fontFamily: CORMORANT,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: "clamp(44px, 7vw, 64px)",
+    lineHeight: 1.05,
+    letterSpacing: "-0.005em",
+  },
+  h2: {
+    fontFamily: CORMORANT,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: "clamp(34px, 6vw, 52px)",
+    lineHeight: 1.12,
+    letterSpacing: "-0.005em",
+  },
+  h3: {
+    fontFamily: DISPLAY,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: "clamp(22px, 3vw, 32px)",
+    lineHeight: 1.15,
+    letterSpacing: "0",
+  },
+  h3Mini: {
+    fontFamily: DISPLAY,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: 22,
+    lineHeight: 1.15,
+    letterSpacing: "0",
+  },
+  body: {
+    fontFamily: CORMORANT,
+    fontSize: 16,
+    lineHeight: 1.65,
+  },
+  caption: {
+    fontFamily: CORMORANT,
+    fontStyle: "italic" as const,
+    fontSize: 15,
+    lineHeight: 1.55,
+  },
+  label: {
+    fontFamily: MONO_FF,
+    fontWeight: 500 as const,
+    fontSize: 10,
+    letterSpacing: "0.28em",
+    textTransform: "uppercase" as const,
+  },
+  labelTiny: {
+    fontFamily: MONO_FF,
+    fontWeight: 500 as const,
+    fontSize: 9,
+    letterSpacing: "0.32em",
+    textTransform: "uppercase" as const,
+  },
+} as const;
+
 /* Diamond emblem with wordmark */
 const Emblem = () => (
   <div
@@ -546,19 +607,19 @@ const Library = () => {
             }}
           />
           {/* Hero archival corner marks */}
-          <div style={{ position: "absolute", top: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", top: 16, left: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             The Library
           </div>
-          <div style={{ position: "absolute", top: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", top: 16, right: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             of PASTED
           </div>
-          <div style={{ position: "absolute", bottom: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", bottom: 16, left: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             PRIVATE CANON
           </div>
-          <div style={{ position: "absolute", bottom: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", bottom: 16, right: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             By Invitation
           </div>
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...mono, color: CREAM, opacity: 0.85 }}>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...TYPE.label, color: CREAM, opacity: 0.85 }}>
             The Library of PASTED
           </div>
           <div
@@ -576,14 +637,9 @@ const Library = () => {
             <Emblem />
             <h1
               style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 400,
-                fontSize: "clamp(36px, 5.6vw, 58px)",
+                ...TYPE.h1,
                 color: CREAM,
-                margin: "24px 0 14px",
-                lineHeight: 1.05,
-                letterSpacing: "0.005em",
+                margin: "28px 0 16px",
                 textShadow: "0 2px 18px rgba(0,0,0,0.55)",
               }}
             >
@@ -591,14 +647,11 @@ const Library = () => {
             </h1>
             <p
               style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: "clamp(16px, 1.9vw, 19px)",
+                ...TYPE.caption,
+                fontSize: "clamp(16px, 1.9vw, 18px)",
                 color: CREAM_DEEP,
-                maxWidth: 480,
+                maxWidth: 500,
                 margin: 0,
-                lineHeight: 1.55,
                 textShadow: "0 1px 12px rgba(0,0,0,0.6)",
               }}
             >
@@ -612,7 +665,7 @@ const Library = () => {
                 Request Access
               </Link>
             </div>
-            <div style={{ ...mono, color: BRASS, marginTop: 18, opacity: 0.85, fontSize: 9 }}>
+            <div style={{ ...TYPE.labelTiny, color: BRASS, marginTop: 20, opacity: 0.85 }}>
               The rooms are being restored · New volumes opening soon
             </div>
           </div>
@@ -641,23 +694,23 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Foundations
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 48px" }}>
             A vault of work, given freely.
           </h2>
           <article className="lib-rsc-card lib-rsc-card--invert">
             <div className="lib-rsc-body">
               <div className="lib-rsc-icon" aria-hidden="true">F</div>
-              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+              <h3 style={{ ...TYPE.h3, margin: 0, color: "inherit" }}>
                 Not a blog. Not a feed.
               </h3>
-              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+              <div style={{ ...TYPE.label, color: BRASS }}>
                 Folio Ref · Foundations
               </div>
-              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: CREAM_QUIET, margin: 0, maxWidth: 460 }}>
+              <p style={{ ...TYPE.body, color: CREAM_QUIET, margin: 0, maxWidth: 460 }}>
                 A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore. Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else.
               </p>
               <div style={{ marginTop: 10 }}>
@@ -666,7 +719,7 @@ const Library = () => {
             </div>
             <div className="lib-rsc-img" style={{ backgroundImage: `url(${worldArrivalCypress})` }} aria-hidden="true" />
           </article>
-          <div style={{ textAlign: "center", marginTop: 64, fontFamily: DISPLAY, fontStyle: "italic", fontSize: 32, color: BRASS, lineHeight: 1 }}>
+          <div style={{ textAlign: "center", marginTop: 64, fontFamily: DISPLAY, fontStyle: "italic", fontSize: "clamp(24px, 3vw, 32px)", color: BRASS, lineHeight: 1.1 }}>
             For those who know there is more.
           </div>
         </motion.section>
@@ -680,20 +733,20 @@ const Library = () => {
           <div className="lens-bg" style={{ backgroundImage: `url(${worldLibraryCorridor})` }} aria-hidden="true" />
           <div className="lens-inner">
             <div className="lib-lens-card">
-              <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
+              <div style={{ ...TYPE.label, color: BRASS, marginBottom: 22 }}>
                 Filed under · Purpose
               </div>
-              <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.2, margin: "0 auto 22px", maxWidth: 460 }}>
+              <h3 style={{ ...TYPE.h3, fontFamily: CORMORANT, color: INK, margin: "0 auto 24px", maxWidth: 480 }}>
                 The internet made everyone visible.{" "}
                 <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
               </h3>
-              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.75, color: "rgba(26,20,16,0.82)", margin: "0 auto 14px", maxWidth: 440 }}>
+              <p style={{ ...TYPE.body, lineHeight: 1.75, color: "rgba(26,20,16,0.82)", margin: "0 auto 16px", maxWidth: 460 }}>
                 Most people are not short on content. They are short on canon. The Library exists to restore the deeper architecture — to think more clearly, build more beautifully, speak with more force, and become known without becoming hollow.
               </p>
-              <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, margin: "0 auto", maxWidth: 420 }}>
+              <p style={{ ...TYPE.caption, fontSize: 16, color: INK, margin: "0 auto", maxWidth: 440 }}>
                 Not here to make you louder. Here to make you undeniable.
               </p>
-              <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 24, opacity: 0.8 }}>
+              <div style={{ ...TYPE.labelTiny, color: BRASS, marginTop: 28, opacity: 0.8 }}>
                 Depth over breadth
               </div>
             </div>
@@ -706,11 +759,11 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "120px 44px 132px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Practice
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(30px, 4.6vw, 42px)", color: INK, textAlign: "center", margin: "0 0 64px", lineHeight: 1.15 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 64px" }}>
             Three ways to move through it
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="lib-rooms-grid">
@@ -723,13 +776,13 @@ const Library = () => {
                 <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${s.img})` }} aria-hidden="true" />
                 <div className="lib-rsc-mini-body">
                   <div className="lib-rsc-icon" aria-hidden="true">{s.glyph}</div>
-                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 26, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                  <h3 style={{ ...TYPE.h3Mini, margin: 0, color: "inherit" }}>
                     {s.t}
                   </h3>
-                  <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                  <div style={{ ...TYPE.label, color: BRASS }}>
                     {s.tag}
                   </div>
-                  <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0 }}>
+                  <p style={{ ...TYPE.body, fontSize: 15, color: CREAM_QUIET, margin: 0 }}>
                     {s.c}
                   </p>
                 </div>
@@ -744,11 +797,11 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Architecture
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 48px" }}>
             Each room holds a different kind of becoming.
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
@@ -769,13 +822,13 @@ const Library = () => {
                 >
                   <div className="lib-rsc-body">
                     <div className="lib-rsc-icon" aria-hidden="true">{r.glyph}</div>
-                    <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                    <h3 style={{ ...TYPE.h3, margin: 0, color: "inherit" }}>
                       {r.name}
                     </h3>
-                    <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                    <div style={{ ...TYPE.label, color: BRASS }}>
                       {r.status}
                     </div>
-                    <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: subColor, margin: 0, maxWidth: 460 }}>
+                    <p style={{ ...TYPE.body, color: subColor, margin: 0, maxWidth: 460 }}>
                       {r.desc}
                     </p>
                     <div style={{ marginTop: 10 }}>
@@ -801,14 +854,14 @@ const Library = () => {
             padding: "120px 44px 132px",
           }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em", opacity: 0.85 }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20, opacity: 0.85 }}>
             Filed under · Selected Volumes
           </div>
           <div className="lib-section-rule" style={{ background: "rgba(245,238,220,0.2)" }} />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: CREAM, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
+          <h2 style={{ ...TYPE.h2, color: CREAM, margin: "0 0 16px", textAlign: "center" }}>
             The Canon
           </h2>
-          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
+          <p style={{ ...TYPE.caption, fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 36px", maxWidth: 480 }}>
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
@@ -829,10 +882,10 @@ const Library = () => {
                 <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${v.src})`, aspectRatio: "1 / 1" }} aria-hidden="true" />
                 <div className="lib-rsc-mini-body" style={{ padding: "22px 22px 24px", gap: 10 }}>
                   <div className="lib-rsc-icon" aria-hidden="true">{v.g}</div>
-                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 22, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                  <h3 style={{ ...TYPE.h3Mini, margin: 0, color: "inherit" }}>
                     {v.t}
                   </h3>
-                  <div style={{ fontFamily: MONO_FF, fontSize: 9, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                  <div style={{ ...TYPE.labelTiny, color: BRASS }}>
                     {v.n}
                   </div>
                 </div>
@@ -850,24 +903,24 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Entry
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 48px" }}>
             For those entering deeper.
           </h2>
           <article className="lib-rsc-card">
             <div className="lib-rsc-img" style={{ backgroundImage: `url(${portraitBW})` }} aria-hidden="true" />
             <div className="lib-rsc-body">
               <div className="lib-rsc-icon" aria-hidden="true">E</div>
-              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+              <h3 style={{ ...TYPE.h3, margin: 0, color: "inherit" }}>
                 Free yourself,<br/>the rest follows.
               </h3>
-              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+              <div style={{ ...TYPE.label, color: BRASS }}>
                 Four doors · One canon
               </div>
-              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: "rgba(241,236,226,0.72)", margin: 0, maxWidth: 460 }}>
+              <p style={{ ...TYPE.body, color: "rgba(241,236,226,0.72)", margin: 0, maxWidth: 460 }}>
                 Choose where to begin. New volumes open weekly. Cards are issued to those who actually intend to read.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 12 }}>
@@ -902,13 +955,13 @@ const Library = () => {
         >
           {/* Deeper entry links (left) */}
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div style={{ ...mono, color: BRASS, opacity: 0.8, marginBottom: 4 }}>For those entering deeper</div>
+            <div style={{ ...TYPE.label, color: BRASS, opacity: 0.8, marginBottom: 6 }}>For those entering deeper</div>
             {[
               { label: "Request Access", to: "/library/apply" },
               { label: "Member Sign In", to: "/library/login" },
               { label: "Visit PASTED", to: "/" },
             ].map((l) => (
-              <Link key={l.label} to={l.to} className="lib-link" style={{ ...mono, color: INK, opacity: 0.7 }}>
+              <Link key={l.label} to={l.to} className="lib-link" style={{ ...TYPE.label, color: INK, opacity: 0.7 }}>
                 {l.label} —
               </Link>
             ))}
@@ -954,7 +1007,7 @@ const Library = () => {
           {/* Colophon */}
           <div
             style={{
-              ...mono,
+              ...TYPE.label,
               color: CREAM_QUIET,
               textAlign: "right",
               lineHeight: 2,
@@ -962,7 +1015,7 @@ const Library = () => {
           >
             <div>The Library</div>
             <div>of PASTED</div>
-            <div style={{ fontFamily: CORMORANT, fontStyle: "italic", textTransform: "none", letterSpacing: 0, fontSize: 13, marginTop: 4 }}>
+            <div style={{ ...TYPE.caption, fontSize: 13, textTransform: "none", letterSpacing: 0, marginTop: 6 }}>
               A private canon on becoming undeniable.
             </div>
           </div>
