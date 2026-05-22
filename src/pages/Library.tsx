@@ -405,19 +405,16 @@ const Library = () => {
           />
           {/* Hero archival corner marks */}
           <div style={{ position: "absolute", top: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            EST · MMXXVI
+            PASTED
           </div>
           <div style={{ position: "absolute", top: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            VOL · I
+            AW · MMXXVI
           </div>
           <div style={{ position: "absolute", bottom: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
             PRIVATE CANON
           </div>
           <div style={{ position: "absolute", bottom: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
             ACCESSION · 001
-          </div>
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...mono, color: CREAM, opacity: 0.85 }}>
-            The Library of PASTED
           </div>
           <div
             style={{
@@ -431,15 +428,37 @@ const Library = () => {
               textAlign: "center",
             }}
           >
-            <Emblem />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 28, marginBottom: 18 }}>
+              <span style={{ ...mono, color: CREAM, opacity: 0.8, fontSize: 10 }}>PASTED</span>
+              <span aria-hidden style={{ width: 28, height: 1, background: "rgba(245,238,220,0.5)" }} />
+              <span style={{ ...mono, color: BRASS, fontSize: 10 }}>AW · MMXXVI</span>
+            </div>
+            <div
+              style={{
+                fontFamily: CORMORANT,
+                fontStyle: "italic",
+                fontWeight: 300,
+                fontSize: "clamp(64px, 11vw, 120px)",
+                color: CREAM,
+                lineHeight: 0.95,
+                letterSpacing: "0.005em",
+                textShadow: "0 4px 28px rgba(0,0,0,0.6)",
+                marginBottom: 6,
+              }}
+            >
+              The Library
+            </div>
+            <div style={{ ...mono, color: BRASS, opacity: 0.9, fontSize: 9, marginBottom: 22 }}>
+              A PRIVATE CANON · VOLUME I
+            </div>
             <h1
               style={{
                 fontFamily: CORMORANT,
                 fontStyle: "italic",
                 fontWeight: 400,
-                fontSize: "clamp(36px, 5.6vw, 58px)",
+                fontSize: "clamp(24px, 3.6vw, 34px)",
                 color: CREAM,
-                margin: "24px 0 14px",
+                margin: "0 0 14px",
                 lineHeight: 1.05,
                 letterSpacing: "0.005em",
                 textShadow: "0 2px 18px rgba(0,0,0,0.55)",
@@ -476,7 +495,50 @@ const Library = () => {
           </div>
         </motion.section>
 
-        {/* PANEL 2 — NAV STRIP */}
+        {/* PANEL — STATUS BAND (Anderson Social-style horizontal rooms band) */}
+        <div
+          className="lib-status-band"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            borderTop: `1px solid ${HAIR}`,
+            borderBottom: `1px solid ${HAIR}`,
+            background: CREAM,
+          }}
+        >
+          {[
+            { name: "The Atrium", hours: "Open · Daily", note: "You are here" },
+            { name: "The Stacks", hours: "Opening Soon", note: "Essays · Frameworks" },
+            { name: "The Cinema", hours: "Opening Soon", note: "Films · Visual Studies" },
+          ].map((s, i) => (
+            <div
+              key={s.name}
+              style={{
+                padding: "28px 22px",
+                textAlign: "center",
+                borderLeft: i === 0 ? "none" : `1px solid ${HAIR}`,
+              }}
+              className="lib-status-cell"
+            >
+              <div style={{ ...mono, color: BRASS, marginBottom: 10, fontSize: 9 }}>{s.hours}</div>
+              <div
+                style={{
+                  fontFamily: CORMORANT,
+                  fontStyle: "italic",
+                  fontSize: 22,
+                  color: INK,
+                  lineHeight: 1.1,
+                  marginBottom: 6,
+                }}
+              >
+                {s.name}
+              </div>
+              <div style={{ ...mono, color: INK, opacity: 0.5, fontSize: 9 }}>{s.note}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* PANEL 2 — NAV STRIP (full room index) */}
         <nav
           className="lib-nav-strip"
           style={{
