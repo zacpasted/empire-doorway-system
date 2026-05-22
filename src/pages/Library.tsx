@@ -184,35 +184,7 @@ const Library = () => {
           transition: color 200ms ease;
         }
         .lib-link:hover { color: ${BRASS}; }
-        .lib-cta {
-          display: inline-block;
-          font-family: ${SANS};
-          font-weight: 500;
-          font-size: 10px;
-          letter-spacing: 0.36em;
-          text-transform: uppercase;
-          color: ${INK};
-          padding: 14px 0 10px;
-          border: none;
-          border-top: 1px solid ${BRASS};
-          border-bottom: 1px solid ${BRASS};
-          border-radius: 0;
-          text-decoration: none;
-          transition: color 200ms ease, border-color 200ms ease;
-        }
-        .lib-cta:hover { color: ${BRASS}; border-color: ${BRASS}; }
-        .lib-cta--invite {
-          display: inline-flex; align-items: baseline; gap: 10px;
-          font-family: ${SANS}; font-weight: 500;
-          font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
-          color: ${INK}; padding: 12px 0;
-          border-top: 1px solid ${HAIR}; border-bottom: 1px solid ${HAIR};
-          min-width: 220px; justify-content: space-between;
-          text-decoration: none; transition: color 200ms ease, border-color 200ms ease;
-        }
-        .lib-cta--invite:hover { color: ${BRASS}; border-color: ${BRASS}; }
-        .lib-cta--invite .mark { color: ${BRASS}; font-size: 9px; letter-spacing: 0.2em; }
-        /* Gold pill button (Royal Stable Club inspiration) */
+        /* Gold pill button — unified across every CTA and section */
         .lib-pill {
           display: inline-flex; align-items: center; justify-content: center;
           gap: 8px;
@@ -231,17 +203,17 @@ const Library = () => {
           cursor: pointer;
         }
         .lib-pill:hover { background: ${BRASS_BRIGHT}; border-color: ${BRASS_BRIGHT}; }
-        .lib-pill--ghost {
-          background: transparent;
-          color: ${BRASS};
-        }
-        .lib-pill--ghost:hover { background: ${BRASS}; color: ${INK}; }
         .lib-pill--light {
           background: transparent;
           color: ${CREAM};
           border-color: rgba(245,238,220,0.6);
         }
         .lib-pill--light:hover { background: ${BRASS}; color: ${INK}; border-color: ${BRASS}; }
+        .lib-pill--disabled {
+          cursor: default;
+          opacity: 0.75;
+          pointer-events: none;
+        }
         /* Royal-Stable-style top nav */
         .lib-topnav {
           display: grid;
@@ -807,7 +779,7 @@ const Library = () => {
                       {r.desc}
                     </p>
                     <div style={{ marginTop: 10 }}>
-                      <span className={`lib-pill${isDark ? " lib-pill--light" : ""}`} style={{ cursor: "default", opacity: 0.85 }}>
+                      <span className={`lib-pill${isDark ? " lib-pill--light" : ""} lib-pill--disabled`}>
                         Learn more
                       </span>
                     </div>
@@ -868,7 +840,7 @@ const Library = () => {
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-pill lib-pill--light" style={{ cursor: "default", opacity: 0.8 }}>Opening Soon</span>
+            <span className="lib-pill lib-pill--light lib-pill--disabled">Opening Soon</span>
           </div>
         </motion.section>
 
