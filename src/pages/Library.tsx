@@ -903,24 +903,24 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Entry
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 48px" }}>
             For those entering deeper.
           </h2>
           <article className="lib-rsc-card">
             <div className="lib-rsc-img" style={{ backgroundImage: `url(${portraitBW})` }} aria-hidden="true" />
             <div className="lib-rsc-body">
               <div className="lib-rsc-icon" aria-hidden="true">E</div>
-              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+              <h3 style={{ ...TYPE.h3, margin: 0, color: "inherit" }}>
                 Free yourself,<br/>the rest follows.
               </h3>
-              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+              <div style={{ ...TYPE.label, color: BRASS }}>
                 Four doors · One canon
               </div>
-              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: "rgba(241,236,226,0.72)", margin: 0, maxWidth: 460 }}>
+              <p style={{ ...TYPE.body, color: "rgba(241,236,226,0.72)", margin: 0, maxWidth: 460 }}>
                 Choose where to begin. New volumes open weekly. Cards are issued to those who actually intend to read.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 12 }}>
