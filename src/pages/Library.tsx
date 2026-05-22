@@ -468,7 +468,8 @@ const Library = () => {
             <div style={{ ...mono, color: BRASS, marginBottom: 6 }}>§ II</div>
             <div style={{ ...mono, color: INK, opacity: 0.55, marginBottom: 18, fontSize: 9 }}>Filed under · Purpose</div>
             <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.25, margin: "0 0 24px" }}>
-              Because the internet made everyone visible. It did not make everyone meaningful.
+              Because the internet made everyone visible.{" "}
+              <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
             </h2>
             <p style={{ fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 16px" }}>
               Most people are not short on content. They are short on canon. They have tactics, templates, trends, posts, offers, hooks, frameworks, advice, and noise. What they do not have is a deeper architecture for who they are becoming.
@@ -552,19 +553,19 @@ const Library = () => {
           className="lib-section-pad"
           style={{
             borderTop: `1px solid ${HAIR}`,
-            background: CREAM_DEEP,
+            background: "#2A1B1B",
             padding: "104px 44px",
           }}
         >
           <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ V</div>
-          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+          <div style={{ ...mono, color: CREAM, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
             Filed under · Selected Volumes
           </div>
-          <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: INK, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
+          <div className="lib-section-rule" style={{ background: "rgba(245,238,220,0.2)" }} />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: CREAM, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
             The Canon
           </h2>
-          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: CREAM_QUIET, textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
+          <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: "rgba(245,238,220,0.7)", textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
@@ -589,18 +590,20 @@ const Library = () => {
                     backgroundImage: `url(${v.src})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    outline: `1px solid ${HAIR}`,
+                    outline: `1px solid rgba(184,149,76,0.35)`,
                     outlineOffset: -1,
+                    filter: "grayscale(1)",
+                    transition: "filter 700ms ease",
                   }}
                   aria-hidden="true"
                 />
                 <div style={{ marginTop: 10, ...mono, color: BRASS, fontSize: 9 }}>{v.n}</div>
-                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, marginTop: 2 }}>{v.t}</div>
+                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: CREAM, marginTop: 2 }}>{v.t}</div>
               </div>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 36 }}>
-            <span className="lib-cta" style={{ cursor: "default", opacity: 0.6 }}>Opening Soon</span>
+            <span className="lib-cta" style={{ cursor: "default", opacity: 0.7, color: CREAM, borderColor: "rgba(184,149,76,0.45)" }}>Opening Soon</span>
           </div>
         </motion.section>
 
@@ -685,50 +688,62 @@ const Library = () => {
           className="lib-footer-row"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1.4fr 1fr",
-            alignItems: "center",
+            gridTemplateColumns: "1fr 1.2fr 1fr",
+            alignItems: "start",
             gap: 20,
-            padding: "48px 44px",
+            padding: "72px 44px 48px",
             borderTop: `1px solid ${HAIR}`,
             background: CREAM,
           }}
         >
-          {/* Monogram */}
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          {/* Deeper entry links (left) */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ ...mono, color: BRASS, opacity: 0.8, marginBottom: 4 }}>For those entering deeper</div>
+            {[
+              { label: "Request Access", to: "/library/apply" },
+              { label: "Member Sign In", to: "/library/login" },
+              { label: "Visit PASTED", to: "/" },
+            ].map((l) => (
+              <Link key={l.label} to={l.to} className="lib-link" style={{ ...mono, color: INK, opacity: 0.7 }}>
+                {l.label} —
+              </Link>
+            ))}
+          </div>
+          {/* Centered circular monogram */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
             <div
               style={{
-                width: 64,
-                height: 64,
+                width: 88,
+                height: 88,
+                borderRadius: "50%",
                 border: `1px solid ${BRASS}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontFamily: SCRIPT,
-                fontSize: 36,
-                color: BRASS,
+                fontSize: 38,
+                color: INK,
                 lineHeight: 1,
+                marginBottom: 18,
               }}
               aria-label="PASTED Library monogram"
             >
-              PL
+              P.L
             </div>
-          </div>
-          {/* Building */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
             <img
               src={buildingLine}
               alt="Illustration of the Library"
-              width={260}
-              height={130}
+              width={200}
+              height={100}
               loading="lazy"
               style={{
-                width: 260,
+                width: 200,
                 height: "auto",
                 mixBlendMode: "multiply",
-                opacity: 0.92,
+                opacity: 0.7,
               }}
             />
-            <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 14, color: CREAM_QUIET, marginTop: 10 }}>
+            <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 13, color: CREAM_QUIET, marginTop: 12, maxWidth: 280 }}>
               Signal over sound. Taste over tricks. Becoming over performance.
             </div>
           </div>
