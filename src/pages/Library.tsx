@@ -212,6 +212,105 @@ const Library = () => {
         }
         .lib-cta--invite:hover { color: ${BRASS}; border-color: ${BRASS}; }
         .lib-cta--invite .mark { color: ${BRASS}; font-size: 9px; letter-spacing: 0.2em; }
+        /* Gold pill button (Royal Stable Club inspiration) */
+        .lib-pill {
+          display: inline-flex; align-items: center; justify-content: center;
+          gap: 8px;
+          font-family: ${SANS};
+          font-weight: 500;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: ${INK};
+          background: ${BRASS};
+          padding: 12px 22px;
+          border-radius: 999px;
+          border: 1px solid ${BRASS};
+          text-decoration: none;
+          transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+          cursor: pointer;
+        }
+        .lib-pill:hover { background: ${BRASS_BRIGHT}; border-color: ${BRASS_BRIGHT}; }
+        .lib-pill--ghost {
+          background: transparent;
+          color: ${BRASS};
+        }
+        .lib-pill--ghost:hover { background: ${BRASS}; color: ${INK}; }
+        .lib-pill--light {
+          background: transparent;
+          color: ${CREAM};
+          border-color: rgba(245,238,220,0.6);
+        }
+        .lib-pill--light:hover { background: ${BRASS}; color: ${INK}; border-color: ${BRASS}; }
+        /* Royal-Stable-style top nav */
+        .lib-topnav {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: center;
+          padding: 18px 28px;
+          background: ${CREAM};
+          border-bottom: 1px solid ${HAIR};
+        }
+        .lib-topnav .lib-topnav-left {
+          display: flex; align-items: center; gap: 22px;
+          font-family: ${SANS}; font-size: 12px; color: ${INK};
+        }
+        .lib-topnav .lib-topnav-left a {
+          color: ${INK}; text-decoration: none;
+          letter-spacing: 0.04em;
+          transition: color 200ms ease;
+        }
+        .lib-topnav .lib-topnav-left a:hover { color: ${BRASS}; }
+        .lib-topnav .lib-topnav-mark {
+          font-family: ${DISPLAY}; font-style: italic; font-weight: 400;
+          font-size: 22px; color: ${INK}; letter-spacing: 0.01em;
+          white-space: nowrap;
+        }
+        .lib-topnav .lib-topnav-right { display: flex; justify-content: flex-end; }
+        @media (max-width: 720px) {
+          .lib-topnav { grid-template-columns: 1fr auto; padding: 14px 18px; }
+          .lib-topnav .lib-topnav-left { display: none; }
+          .lib-topnav .lib-topnav-mark { font-size: 18px; }
+        }
+        /* Alternating Rooms cards inspired by Royal Stable Club */
+        .lib-rsc-card {
+          display: grid;
+          grid-template-columns: 1.05fr 1fr;
+          gap: 0;
+          border-radius: 18px;
+          overflow: hidden;
+          background: ${DARK_CARD};
+          color: ${CREAM};
+          box-shadow: 0 20px 60px -28px rgba(0,0,0,0.45);
+        }
+        .lib-rsc-card--invert { grid-template-columns: 1fr 1.05fr; background: ${CREAM}; color: ${INK}; }
+        .lib-rsc-card--invert .lib-rsc-img { order: 2; }
+        .lib-rsc-card--invert .lib-rsc-body { order: 1; }
+        .lib-rsc-img {
+          min-height: 320px;
+          background-size: cover; background-position: center;
+        }
+        .lib-rsc-body {
+          padding: 56px 52px;
+          display: flex; flex-direction: column; justify-content: center;
+          gap: 18px;
+        }
+        .lib-rsc-icon {
+          width: 48px; height: 48px; border-radius: 999px;
+          display: inline-flex; align-items: center; justify-content: center;
+          color: ${BRASS}; font-family: ${DISPLAY}; font-style: italic; font-size: 26px;
+          border: 1px solid currentColor;
+          margin-bottom: 6px;
+        }
+        @media (max-width: 720px) {
+          .lib-rsc-card, .lib-rsc-card--invert {
+            grid-template-columns: 1fr !important;
+          }
+          .lib-rsc-card--invert .lib-rsc-img { order: 0; }
+          .lib-rsc-card--invert .lib-rsc-body { order: 1; }
+          .lib-rsc-body { padding: 32px 24px; }
+          .lib-rsc-img { min-height: 220px; }
+        }
         .lib-nav-item {
           font-family: ${SANS};
           font-weight: 500;
