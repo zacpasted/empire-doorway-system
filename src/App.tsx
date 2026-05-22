@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 // The PASTED Library — launch rebuild
 import Atrium from "./pages/library/Atrium";
 import Vault from "./pages/library/Vault";
+import Library from "./pages/Library";
 import Apply from "./pages/library/Apply";
 import Pending from "./pages/library/Pending";
 import SignIn from "./pages/library/SignIn";
@@ -35,8 +36,9 @@ const App = () => (
         <Routes>
           {/* The PASTED Library — public */}
           <Route path="/" element={<Navigate to="/library" replace />} />
-          <Route path="/library" element={<Vault />} />
+          <Route path="/library" element={<Library />} />
           <Route path="/library/atrium" element={<Atrium />} />
+          <Route path="/library/gate" element={<Vault />} />
           <Route path="/library/apply" element={<Apply />} />
           <Route path="/library/pending" element={<Pending />} />
           <Route path="/library/login" element={<SignIn />} />
