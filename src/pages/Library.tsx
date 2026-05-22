@@ -103,6 +103,8 @@ const Emblem = () => (
       <div
         style={{
           fontFamily: DISPLAY,
+          fontStyle: "italic",
+          fontWeight: 400,
           fontSize: 42,
           color: INK,
           lineHeight: 1,
