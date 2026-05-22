@@ -470,78 +470,105 @@ const Library = () => {
         <motion.section
           {...fade(0.12)}
           className="lib-section-pad"
-          style={{ padding: "112px 44px 96px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
+          style={{ padding: "120px 56px 112px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
         >
-          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
-            Filed under · Foundations
+          <div className="lib-foundations-grid">
+            {/* LEFT: label + headline + folio callout */}
+            <div>
+              <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
+                Filed under · Foundations
+              </div>
+              <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(38px, 6vw, 64px)", color: INK, margin: "0 0 36px", lineHeight: 0.98, letterSpacing: "-0.005em" }}>
+                A vault of work,<br/>given freely.
+              </h2>
+              <div className="lib-callout-card" style={{ transform: "rotate(-1deg)", maxWidth: 420 }}>
+                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 17, lineHeight: 1.65, color: "rgba(26,20,16,0.85)", margin: "0 0 14px" }}>
+                  Not a blog. Not a feed. A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore.
+                </p>
+                <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.7, color: CREAM_QUIET, margin: 0 }}>
+                  Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else. Where we place the thinking behind the work — the psychology, the taste, the restraint, the rebellion.
+                </p>
+                <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 20 }}>
+                  Folio Ref · Foundations
+                </div>
+              </div>
+            </div>
+            {/* RIGHT: image + polaroid overlay + margin annotation */}
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "4 / 5",
+                  backgroundImage: `url(${figureBW})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  filter: "grayscale(1) brightness(1.02)",
+                  boxShadow: "0 30px 80px -20px rgba(26,20,16,0.55)",
+                }}
+                aria-hidden="true"
+              />
+              {/* Polaroid overlay bottom-left */}
+              <div
+                className="lib-polaroid"
+                style={{ position: "absolute", left: -28, bottom: -36, width: 168, transform: "rotate(-4deg)" }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "1 / 1",
+                    backgroundImage: `url(${thumb1})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    filter: "grayscale(1)",
+                  }}
+                  aria-hidden="true"
+                />
+                <div className="lib-polaroid-caption">Marginalia</div>
+              </div>
+              {/* Margin annotation */}
+              <div className="lib-margin-anno" style={{ position: "absolute", right: -36, top: "12%" }}>
+                Archive Section — Foundations
+              </div>
+            </div>
           </div>
-          <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.4vw, 40px)", color: INK, textAlign: "center", margin: "0 0 36px", lineHeight: 1.15 }}>
-            A vault of work, given freely.
-          </h2>
-          <div style={{ maxWidth: 560, margin: "0 auto", fontFamily: CORMORANT, fontSize: 18, lineHeight: 1.75, color: "rgba(26,20,16,0.82)" }}>
-            <p style={{ margin: "0 0 16px" }}>
-              The Library of PASTED is not a blog. It is not a content feed. It is not another place to collect information you will never use.
-            </p>
-            <p style={{ margin: "0 0 16px" }}>
-              It is a private canon of ideas, essays, films, frameworks, observations, and operating principles for people trying to become harder to ignore.
-            </p>
-            <p style={{ margin: "0 0 16px" }}>
-              Built for doctors, founders, creators, operators, and uncommon minds who are no longer interested in sounding like everyone else.
-            </p>
-            <p style={{ margin: 0 }}>
-              This is where we place the thinking behind the work. The psychology. The taste. The strategy. The restraint. The rebellion. The parts of brand, business, and becoming that rarely fit inside a caption.
-            </p>
-          </div>
-          <div style={{ textAlign: "center", marginTop: 56, fontFamily: SCRIPT, fontSize: 38, color: BRASS, lineHeight: 1 }}>
+          <div style={{ textAlign: "center", marginTop: 96, fontFamily: SCRIPT, fontSize: 38, color: BRASS, lineHeight: 1 }}>
             For those who know there is more.
           </div>
         </motion.section>
 
-        {/* PANEL — FIGURE PHOTOGRAPH (kept) */}
+        {/* PANEL — PURPOSE: dark stage with floating callout */}
         <motion.section
           {...fade(0.15)}
-          className="lib-row-2col"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.05fr 1fr",
-            borderTop: `1px solid ${HAIR}`,
-          }}
+          className="lib-section-pad lib-torn-top"
+          style={{ background: "#2A1B1B", padding: "120px 44px 132px", position: "relative" }}
         >
-          <div
-            style={{
-              backgroundImage: `url(${figureBW})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              minHeight: 420,
-            }}
-            aria-hidden="true"
-          />
-          <div
-            className="lib-2col-text"
-            style={{
-              padding: "88px 48px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "center",
-              background: CREAM,
-            }}
-          >
-            <div style={{ ...mono, color: INK, opacity: 0.55, marginBottom: 18, fontSize: 9 }}>Filed under · Purpose</div>
-            <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.25, margin: "0 0 24px" }}>
-              Because the internet made everyone visible.{" "}
-              <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
-            </h2>
-            <p style={{ fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 16px" }}>
-              Most people are not short on content. They are short on canon. They have tactics, templates, trends, posts, offers, hooks, frameworks, advice, and noise. What they do not have is a deeper architecture for who they are becoming.
-            </p>
-            <p style={{ fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 18px" }}>
-              The Library exists to restore that architecture. A place to think more clearly. To build more beautifully. To speak with more force. To sell without becoming cheap. To become known without becoming hollow.
-            </p>
-            <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 18, color: INK, margin: 0 }}>
-              This is not here to make you louder. It is here to make you undeniable.
-            </p>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 56, fontSize: 9, letterSpacing: "0.4em", opacity: 0.85 }}>
+            Filed under · Purpose
+          </div>
+          <div className="lib-purpose-stage">
+            <img
+              src={robes}
+              alt=""
+              aria-hidden="true"
+              className="lib-purpose-img"
+            />
+            <div className="lib-purpose-callout">
+              <div className="lib-callout-card">
+                <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 3.6vw, 34px)", color: INK, lineHeight: 1.18, margin: "0 0 22px" }}>
+                  The internet made everyone visible.{" "}
+                  <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
+                </h3>
+                <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 14px" }}>
+                  Most people are not short on content. They are short on canon. The Library exists to restore the deeper architecture — to think more clearly, build more beautifully, speak with more force, and become known without becoming hollow.
+                </p>
+                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: INK, margin: 0 }}>
+                  Not here to make you louder. Here to make you undeniable.
+                </p>
+                <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 22, opacity: 0.8 }}>
+                  Depth over breadth
+                </div>
+              </div>
+            </div>
           </div>
         </motion.section>
 
@@ -549,25 +576,42 @@ const Library = () => {
         <motion.section
           {...fade(0.18)}
           className="lib-section-pad"
-          style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
+          style={{ padding: "120px 44px 132px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
             Filed under · Practice
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
-            Three ways to move through it.
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(30px, 4.6vw, 42px)", color: INK, textAlign: "center", margin: "0 0 64px", lineHeight: 1.15 }}>
+            Three ways to move through it
           </h2>
-          <div className="lib-steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+          <div className="lib-practice-cluster">
             {[
-              { t: "Read Slowly", c: "These are not scraps for skimming. Begin with the essays, notes, and frameworks that meet you where you are." },
-              { t: "Watch Carefully", c: "The films and visual studies are designed to sharpen taste, rhythm, story, and perception." },
-              { t: "Build Differently", c: "Take what matters, discard what does not, and let the work change the way you show up in the world." },
-            ].map((s) => (
-              <div key={s.t} className="lib-step">
-                <div style={{ width: 24, height: 1, background: BRASS, marginBottom: 18, opacity: 0.7 }} />
-                <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: 24, color: INK, margin: "0 0 10px" }}>{s.t}</h3>
-                <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0 }}>{s.c}</p>
+              { t: "Read", img: thumb2, tag: "The Stacks", rot: -3, lift: 0, c: "Begin with the essays, notes, and frameworks that meet you where you are." },
+              { t: "Watch", img: thumb3, tag: "The Cinema", rot: 2, lift: 32, c: "Films and visual studies to sharpen taste, rhythm, story, and perception." },
+              { t: "Build", img: thumb4, tag: "The Forge", rot: -1, lift: 0, c: "Take what matters, discard what does not, and let the work change how you show up." },
+            ].map((s, i) => (
+              <div key={s.t} style={{ marginTop: s.lift }}>
+                <div className="lib-polaroid" style={{ transform: `rotate(${s.rot}deg)` }}>
+                  <div
+                    style={{
+                      width: "100%",
+                      aspectRatio: "4 / 5",
+                      backgroundImage: `url(${s.img})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      filter: "grayscale(1)",
+                    }}
+                    aria-hidden="true"
+                  />
+                  <div className="lib-polaroid-caption">{s.t}</div>
+                </div>
+                <div style={{ ...mono, color: BRASS, fontSize: 9, letterSpacing: "0.32em", marginTop: 18, textAlign: "center", opacity: 0.7 }}>
+                  {s.tag}
+                </div>
+                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: "10px auto 0", maxWidth: 200, textAlign: "center" }}>
+                  {s.c}
+                </p>
               </div>
             ))}
           </div>
@@ -579,7 +623,7 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
             Filed under · Architecture
           </div>
           <div className="lib-section-rule" />
@@ -610,14 +654,14 @@ const Library = () => {
         {/* PANEL 4 — GALLERY STRIP */}
         <motion.section
           {...fade(0.22)}
-          className="lib-section-pad"
+          className="lib-section-pad lib-torn-top"
           style={{
             borderTop: `1px solid ${HAIR}`,
             background: "#2A1B1B",
-            padding: "104px 44px",
+            padding: "120px 44px 132px",
           }}
         >
-          <div style={{ ...mono, color: CREAM, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em", opacity: 0.85 }}>
             Filed under · Selected Volumes
           </div>
           <div className="lib-section-rule" style={{ background: "rgba(245,238,220,0.2)" }} />
@@ -628,11 +672,11 @@ const Library = () => {
             Selected volumes from the Library. Fragments, studies, and principles worth returning to.
           </p>
           <div
-            className="lib-gallery"
+            className="lib-gallery lib-canon-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 16,
+              gap: 28,
             }}
           >
             {[
