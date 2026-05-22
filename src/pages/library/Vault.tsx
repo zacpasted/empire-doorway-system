@@ -562,6 +562,21 @@ const Vault = () => {
                     >
                       Have a card? Sign in
                     </Link>
+                    <Link
+                      to="/library/members"
+                      className="lib-mono"
+                      style={{
+                        fontSize: 10,
+                        letterSpacing: "0.22em",
+                        textTransform: "uppercase",
+                        color: "rgba(201,169,110,0.65)",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(201,169,110,0.45)",
+                        paddingBottom: 2,
+                      }}
+                    >
+                      Enter as guest →
+                    </Link>
                   </div>
                 </div>
               )}
