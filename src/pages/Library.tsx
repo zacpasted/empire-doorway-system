@@ -60,6 +60,67 @@ const mono = {
   textTransform: "uppercase" as const,
 };
 
+/* PASTED typography scale — standardized across Library */
+const TYPE = {
+  h1: {
+    fontFamily: CORMORANT,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: "clamp(44px, 7vw, 64px)",
+    lineHeight: 1.05,
+    letterSpacing: "-0.005em",
+  },
+  h2: {
+    fontFamily: CORMORANT,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: "clamp(34px, 6vw, 52px)",
+    lineHeight: 1.12,
+    letterSpacing: "-0.005em",
+  },
+  h3: {
+    fontFamily: DISPLAY,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: "clamp(22px, 3vw, 32px)",
+    lineHeight: 1.15,
+    letterSpacing: "0",
+  },
+  h3Mini: {
+    fontFamily: DISPLAY,
+    fontStyle: "italic" as const,
+    fontWeight: 400 as const,
+    fontSize: 22,
+    lineHeight: 1.15,
+    letterSpacing: "0",
+  },
+  body: {
+    fontFamily: CORMORANT,
+    fontSize: 16,
+    lineHeight: 1.65,
+  },
+  caption: {
+    fontFamily: CORMORANT,
+    fontStyle: "italic" as const,
+    fontSize: 15,
+    lineHeight: 1.55,
+  },
+  label: {
+    fontFamily: MONO_FF,
+    fontWeight: 500 as const,
+    fontSize: 10,
+    letterSpacing: "0.28em",
+    textTransform: "uppercase" as const,
+  },
+  labelTiny: {
+    fontFamily: MONO_FF,
+    fontWeight: 500 as const,
+    fontSize: 9,
+    letterSpacing: "0.32em",
+    textTransform: "uppercase" as const,
+  },
+} as const;
+
 /* Diamond emblem with wordmark */
 const Emblem = () => (
   <div
