@@ -222,13 +222,33 @@ const Library = () => {
         .lib-nav-item + .lib-nav-item { border-left: 1px solid ${HAIR}; }
         .lib-room-card {
           position: relative;
-          padding: 28px 28px 26px;
+          padding: 18px 22px 18px 18px;
           border: 1px solid ${HAIR};
           background: ${CREAM};
           display: grid;
-          grid-template-columns: 64px 1fr auto;
-          gap: 20px;
-          align-items: start;
+          grid-template-columns: 132px 1fr auto;
+          gap: 24px;
+          align-items: center;
+          border-radius: 14px;
+          transition: box-shadow 300ms ease, transform 300ms ease;
+        }
+        .lib-room-card:hover { box-shadow: 0 18px 40px -22px rgba(26,20,16,0.45); }
+        .lib-room-thumb {
+          width: 132px; height: 96px;
+          border-radius: 12px;
+          background-size: cover; background-position: center;
+          filter: grayscale(1) brightness(0.95);
+          box-shadow: inset 0 0 0 1px rgba(184,149,76,0.35);
+        }
+        .lib-room-arrow-chip {
+          width: 36px; height: 36px; border-radius: 999px;
+          border: 1px solid ${HAIR};
+          display: inline-flex; align-items: center; justify-content: center;
+          color: ${BRASS}; font-family: ${INTER}; font-size: 14px;
+          transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+        }
+        .lib-room-card:hover .lib-room-arrow-chip {
+          border-color: ${BRASS}; background: rgba(184,149,76,0.08);
         }
         .lib-room-card[data-disabled="true"] { opacity: 0.78; }
         .lib-room-card[data-disabled="true"]::after {
@@ -364,7 +384,9 @@ const Library = () => {
           .lib-gallery { grid-template-columns: repeat(2, 1fr) !important; }
           .lib-steps-grid, .lib-rooms-grid { grid-template-columns: 1fr !important; }
           .lib-room-card { grid-template-columns: 48px 1fr !important; }
-          .lib-room-card > .lib-room-arrow { display: none; }
+          .lib-room-card { grid-template-columns: 88px 1fr !important; padding: 12px !important; gap: 14px !important; }
+          .lib-room-thumb { width: 88px !important; height: 72px !important; }
+          .lib-room-card > .lib-room-arrow-chip { display: none; }
           .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
           .lib-2col-text { padding: 48px 24px !important; }
           .lib-foundations-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
