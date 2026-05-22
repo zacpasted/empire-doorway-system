@@ -797,24 +797,43 @@ const Library = () => {
           <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
             Each room holds a different kind of becoming.
           </h2>
-          <div className="lib-rooms-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
             {[
-              { name: "The Stacks", status: "Open Soon", disabled: true, img: worldLibraryCorridor, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
-              { name: "The Reading Room", status: "Under Construction", disabled: true, img: worldManorGrounds, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
-              { name: "The Vault", status: "Under Construction", disabled: true, img: worldManorNight, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
-              { name: "The Cinema", status: "Under Construction", disabled: true, img: worldScreeningRoom, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
-              { name: "Periodicals", status: "Under Construction", disabled: true, img: worldManorPasture, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
-            ].map((r) => (
-              <div key={r.name} className="lib-room-card" data-disabled={r.disabled || undefined}>
-                <div className="lib-room-thumb" style={{ backgroundImage: `url(${r.img})` }} aria-hidden="true" />
-                <div>
-                  <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: 26, color: INK, margin: "0 0 6px", lineHeight: 1.1 }}>{r.name}</h3>
-                  <div style={{ ...mono, color: BRASS, fontSize: 9, marginBottom: 10 }}>{r.status}</div>
-                  <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0, maxWidth: 540 }}>{r.desc}</p>
-                </div>
-                <div className="lib-room-arrow-chip" aria-hidden="true">→</div>
-              </div>
-            ))}
+              { name: "The Stacks", glyph: "S", status: "Open Soon", img: worldLibraryCorridor, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
+              { name: "The Reading Room", glyph: "R", status: "Under Construction", img: worldManorGrounds, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
+              { name: "The Vault", glyph: "V", status: "Under Construction", img: worldManorNight, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
+              { name: "The Cinema", glyph: "C", status: "Under Construction", img: worldScreeningRoom, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
+              { name: "Periodicals", glyph: "P", status: "Under Construction", img: worldManorPasture, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
+            ].map((r, i) => {
+              const invert = i % 2 === 1;
+              const isDark = !invert;
+              const subColor = isDark ? "rgba(241,236,226,0.72)" : CREAM_QUIET;
+              return (
+                <article
+                  key={r.name}
+                  className={`lib-rsc-card${invert ? " lib-rsc-card--invert" : ""}`}
+                >
+                  <div className="lib-rsc-body">
+                    <div className="lib-rsc-icon" aria-hidden="true">{r.glyph}</div>
+                    <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                      {r.name}
+                    </h3>
+                    <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                      {r.status}
+                    </div>
+                    <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: subColor, margin: 0, maxWidth: 460 }}>
+                      {r.desc}
+                    </p>
+                    <div style={{ marginTop: 10 }}>
+                      <span className={`lib-pill${isDark ? " lib-pill--light" : ""}`} style={{ cursor: "default", opacity: 0.85 }}>
+                        Learn more
+                      </span>
+                    </div>
+                  </div>
+                  <div className="lib-rsc-img" style={{ backgroundImage: `url(${r.img})` }} aria-hidden="true" />
+                </article>
+              );
+            })}
           </div>
         </motion.section>
 
