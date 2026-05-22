@@ -667,68 +667,34 @@ const Library = () => {
         <motion.section
           {...fade(0.12)}
           className="lib-section-pad"
-          style={{ padding: "120px 56px 112px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
+          style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}`, position: "relative" }}
         >
-          <div className="lib-foundations-grid">
-            {/* LEFT: label + headline + folio callout */}
-            <div>
-              <div style={{ ...mono, color: BRASS, marginBottom: 22, fontSize: 9, letterSpacing: "0.4em" }}>
-                Filed under · Foundations
-              </div>
-              <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(38px, 6vw, 64px)", color: INK, margin: "0 0 36px", lineHeight: 0.98, letterSpacing: "-0.005em" }}>
-                A vault of work,<br/>given freely.
-              </h2>
-              <div className="lib-callout-card" style={{ transform: "rotate(-1deg)", maxWidth: 420 }}>
-                <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 17, lineHeight: 1.65, color: "rgba(26,20,16,0.85)", margin: "0 0 14px" }}>
-                  Not a blog. Not a feed. A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore.
-                </p>
-                <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.7, color: CREAM_QUIET, margin: 0 }}>
-                  Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else. Where we place the thinking behind the work — the psychology, the taste, the restraint, the rebellion.
-                </p>
-                <div style={{ ...mono, color: BRASS, fontSize: 8, letterSpacing: "0.36em", marginTop: 20 }}>
-                  Folio Ref · Foundations
-                </div>
-              </div>
-            </div>
-            {/* RIGHT: image + polaroid overlay + margin annotation */}
-            <div style={{ position: "relative" }}>
-              <div
-                style={{
-                  width: "100%",
-                  aspectRatio: "4 / 5",
-                  backgroundImage: `url(${worldArrivalCypress})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  filter: "grayscale(1) brightness(1.02)",
-                  boxShadow: "0 30px 80px -20px rgba(26,20,16,0.55)",
-                }}
-                aria-hidden="true"
-              />
-              {/* Polaroid overlay bottom-left */}
-              <div
-                className="lib-polaroid"
-                style={{ position: "absolute", left: -28, bottom: -36, width: 168, transform: "rotate(-4deg)" }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "1 / 1",
-                    backgroundImage: `url(${thumb1})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    filter: "grayscale(1)",
-                  }}
-                  aria-hidden="true"
-                />
-                <div className="lib-polaroid-caption">Marginalia</div>
-              </div>
-              {/* Margin annotation */}
-              <div className="lib-margin-anno" style={{ position: "absolute", right: -36, top: "12%" }}>
-                Archive Section — Foundations
-              </div>
-            </div>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+            Filed under · Foundations
           </div>
-          <div style={{ textAlign: "center", marginTop: 96, fontFamily: DISPLAY, fontSize: 38, color: BRASS, lineHeight: 1 }}>
+          <div className="lib-section-rule" />
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+            A vault of work, given freely.
+          </h2>
+          <article className="lib-rsc-card lib-rsc-card--invert">
+            <div className="lib-rsc-body">
+              <div className="lib-rsc-icon" aria-hidden="true">F</div>
+              <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                Not a blog. Not a feed.
+              </h3>
+              <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                Folio Ref · Foundations
+              </div>
+              <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: CREAM_QUIET, margin: 0, maxWidth: 460 }}>
+                A private canon of essays, films, frameworks, and operating principles for people trying to become harder to ignore. Built for doctors, founders, creators, operators, and uncommon minds no longer interested in sounding like everyone else.
+              </p>
+              <div style={{ marginTop: 10 }}>
+                <Link to="/library/apply" className="lib-pill">Request a Card</Link>
+              </div>
+            </div>
+            <div className="lib-rsc-img" style={{ backgroundImage: `url(${worldArrivalCypress})` }} aria-hidden="true" />
+          </article>
+          <div style={{ textAlign: "center", marginTop: 64, fontFamily: DISPLAY, fontStyle: "italic", fontSize: 32, color: BRASS, lineHeight: 1 }}>
             For those who know there is more.
           </div>
         </motion.section>
