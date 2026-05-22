@@ -637,14 +637,9 @@ const Library = () => {
             <Emblem />
             <h1
               style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 400,
-                fontSize: "clamp(36px, 5.6vw, 58px)",
+                ...TYPE.h1,
                 color: CREAM,
-                margin: "24px 0 14px",
-                lineHeight: 1.05,
-                letterSpacing: "0.005em",
+                margin: "28px 0 16px",
                 textShadow: "0 2px 18px rgba(0,0,0,0.55)",
               }}
             >
@@ -652,14 +647,11 @@ const Library = () => {
             </h1>
             <p
               style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: "clamp(16px, 1.9vw, 19px)",
+                ...TYPE.caption,
+                fontSize: "clamp(16px, 1.9vw, 18px)",
                 color: CREAM_DEEP,
-                maxWidth: 480,
+                maxWidth: 500,
                 margin: 0,
-                lineHeight: 1.55,
                 textShadow: "0 1px 12px rgba(0,0,0,0.6)",
               }}
             >
@@ -673,7 +665,7 @@ const Library = () => {
                 Request Access
               </Link>
             </div>
-            <div style={{ ...mono, color: BRASS, marginTop: 18, opacity: 0.85, fontSize: 9 }}>
+            <div style={{ ...TYPE.labelTiny, color: BRASS, marginTop: 20, opacity: 0.85 }}>
               The rooms are being restored · New volumes opening soon
             </div>
           </div>
