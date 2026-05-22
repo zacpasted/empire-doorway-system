@@ -161,7 +161,7 @@ const Library = () => {
       style={{
         position: "relative",
         minHeight: "100vh",
-        background: NIGHT,
+        background: `linear-gradient(180deg, ${SKY} 0%, ${SKY_DEEP} 100%)`,
         color: CREAM,
         fontFamily: CORMORANT,
         fontFeatureSettings: FEATURES,
