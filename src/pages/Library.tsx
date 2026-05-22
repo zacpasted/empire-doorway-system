@@ -1,233 +1,131 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
+import heroStacks from "@/assets/library-hero-stacks.jpg";
+import figureBW from "@/assets/library-figure-bw.jpg";
+import portraitBW from "@/assets/library-portrait-bw.jpg";
+import buildingLine from "@/assets/library-building-line.jpg";
+import thumb1 from "@/assets/library-thumb-1.jpg";
+import thumb2 from "@/assets/library-thumb-2.jpg";
+import thumb3 from "@/assets/library-thumb-3.jpg";
+import thumb4 from "@/assets/library-thumb-4.jpg";
 
 /**
  * THE PASTED LIBRARY — Atrium
- * A magazine cover for an institution that has been around for a hundred years.
- * Single viewport. Three zones: masthead, hero, shelf. One CTA.
+ * Editorial panel composition (Lovebirdie-style) cast in PASTED palette.
+ * Centered frame, stacked panels divided by brass hairlines, on the night ground.
  */
 
 const FONT_LINK_ID = "library-fonts";
 const ensureFonts = () => {
   if (document.getElementById(FONT_LINK_ID)) return;
-  const pre1 = document.createElement("link");
-  pre1.rel = "preconnect";
-  pre1.href = "https://fonts.googleapis.com";
-  document.head.appendChild(pre1);
-  const pre2 = document.createElement("link");
-  pre2.rel = "preconnect";
-  pre2.href = "https://fonts.gstatic.com";
-  pre2.crossOrigin = "";
-  document.head.appendChild(pre2);
   const link = document.createElement("link");
   link.id = FONT_LINK_ID;
   link.rel = "stylesheet";
   link.href =
-    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500&display=swap";
+    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500&family=Pinyon+Script&display=swap";
   document.head.appendChild(link);
 };
 
 const NIGHT = "#1A1410";
 const CREAM = "#F5EEDC";
-const CREAM_QUIET = "rgba(245, 238, 220, 0.72)";
+const CREAM_DEEP = "#EFE6CF";
+const CREAM_QUIET = "rgba(26, 20, 16, 0.62)";
+const INK = "#1A1410";
 const BRASS = "#B8954C";
-const BRASS_GLOW = "#C89B4A";
+const HAIR = "rgba(26, 20, 16, 0.16)";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-const CORMORANT =
-  "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+const CORMORANT = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+const SCRIPT = "'Pinyon Script', 'Cormorant Garamond', cursive";
 const INTER = "Inter, system-ui, -apple-system, sans-serif";
 const FEATURES = '"liga","dlig","swsh","salt","kern"';
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-/* ============================================================
-   Word Reveal
-============================================================ */
-const WordReveal = ({
-  text,
-  startDelay = 0,
-  stagger = 0.08,
-  extraDelayOnIndex,
-  extraDelay = 0,
-}: {
-  text: string;
-  startDelay?: number;
-  stagger?: number;
-  extraDelayOnIndex?: number;
-  extraDelay?: number;
-}) => {
-  const reduced = useReducedMotion();
-  const words = text.split(" ");
-
-  if (reduced) {
-    return (
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: startDelay }}
-        style={{ display: "inline" }}
-      >
-        {text}
-      </motion.span>
-    );
-  }
-
-  let cumulative = startDelay;
-  return (
-    <>
-      {words.map((w, i) => {
-        const delay = cumulative;
-        cumulative += stagger + (extraDelayOnIndex === i ? extraDelay : 0);
-        return (
-          <span
-            key={i}
-            style={{ display: "inline-block", overflow: "hidden", verticalAlign: "baseline" }}
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay, ease: EASE }}
-              style={{ display: "inline-block" }}
-            >
-              {w}
-              {i < words.length - 1 ? "\u00A0" : ""}
-            </motion.span>
-          </span>
-        );
-      })}
-    </>
-  );
+const mono = {
+  fontFamily: INTER,
+  fontWeight: 500 as const,
+  fontSize: 10,
+  letterSpacing: "0.32em",
+  textTransform: "uppercase" as const,
 };
 
-/* ============================================================
-   Shelf — five static spines
-============================================================ */
-const SHELF_VOLUMES = [
-  { w: 84, h: "80%", bg: "linear-gradient(180deg, #C89B4A 0%, #6A5C36 100%)", op: 1, glow: true, title: true, mobileW: 64 },
-  { w: 64, h: "72%", bg: "#9B8456", op: 0.65, glow: false, title: false, mobileW: 48 },
-  { w: 54, h: "64%", bg: "#8B7A5A", op: 0.4, glow: false, title: false, mobileW: 40 },
-  { w: 46, h: "56%", bg: "#7A6F58", op: 0.25, glow: false, title: false, mobileW: 34 },
-  { w: 40, h: "50%", bg: "#6E6450", op: 0.15, glow: false, title: false, mobileW: 28 },
-];
-
-const Shelf = () => {
-  const reduced = useReducedMotion();
-  return (
-    <motion.div
-      aria-label="Five volumes in the canon: one in circulation, four forthcoming"
-      initial={{ opacity: 0, y: reduced ? 0 : 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 1.6, ease: EASE }}
-      style={{
-        position: "absolute",
-        left: 0,
-        right: 0,
-        bottom: 80,
-        height: "30vh",
-        pointerEvents: "none",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          left: 40,
-          right: 40,
-          bottom: 0,
-          height: 8,
-          background:
-            "linear-gradient(180deg, rgba(184, 149, 76, 0.2) 0%, rgba(184, 149, 76, 0) 100%)",
-        }}
+/* Diamond emblem with wordmark */
+const Emblem = () => (
+  <div
+    style={{
+      position: "relative",
+      width: 280,
+      height: 168,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+    aria-hidden="true"
+  >
+    <svg viewBox="0 0 280 168" width="280" height="168" style={{ position: "absolute", inset: 0 }}>
+      <polygon
+        points="140,8 272,84 140,160 8,84"
+        fill={CREAM}
+        stroke={BRASS}
+        strokeWidth="1.2"
       />
+      <polygon
+        points="140,16 264,84 140,152 16,84"
+        fill="none"
+        stroke={BRASS}
+        strokeWidth="0.5"
+        opacity="0.55"
+      />
+    </svg>
+    <div style={{ position: "relative", textAlign: "center", padding: "0 36px" }}>
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "center",
-          gap: 24,
-          paddingBottom: 8,
+          ...mono,
+          color: BRASS,
+          fontSize: 9,
+          letterSpacing: "0.42em",
+          marginBottom: 6,
         }}
       >
-        {SHELF_VOLUMES.map((v, i) => (
-          <div
-            key={i}
-            aria-hidden="true"
-            className="lib-spine"
-            data-mobile-w={v.mobileW}
-            style={{
-              width: v.w,
-              height: v.h,
-              background: v.bg,
-              opacity: v.op,
-              borderTop: v.glow
-                ? "1px solid rgba(245, 239, 225, 0.2)"
-                : "1px solid rgba(255,255,255,0.08)",
-              borderRadius: v.glow ? "1px 1px 0 0" : 0,
-              boxShadow: v.glow
-                ? "0 -8px 20px rgba(0,0,0,0.45), 0 0 40px rgba(184, 153, 104, 0.28)"
-                : "none",
-              position: "relative",
-              ["--mw" as string]: `${v.mobileW}px`,
-            } as React.CSSProperties}
-          >
-            {v.title && (
-              <>
-                <span
-                  style={{
-                    position: "absolute",
-                    top: 12,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    fontFamily: CORMORANT,
-                    fontStyle: "italic",
-                    fontWeight: 300,
-                    fontSize: 18,
-                    color: CREAM,
-                    lineHeight: 1,
-                    fontFeatureSettings: FEATURES,
-                  }}
-                >
-                  I
-                </span>
-                <span
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%) rotate(180deg)",
-                    writingMode: "vertical-rl",
-                    fontFamily: CORMORANT,
-                    fontStyle: "italic",
-                    fontWeight: 400,
-                    fontSize: 11,
-                    color: CREAM_QUIET,
-                    letterSpacing: "0.08em",
-                    fontFeatureSettings: FEATURES,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  The Art of Becoming
-                </span>
-              </>
-            )}
-          </div>
-        ))}
+        EST · MMXXVI
       </div>
-    </motion.div>
-  );
-};
+      <div
+        style={{
+          fontFamily: SCRIPT,
+          fontSize: 42,
+          color: INK,
+          lineHeight: 1,
+          letterSpacing: "0.01em",
+        }}
+      >
+        The Library
+      </div>
+      <div
+        style={{
+          fontFamily: CORMORANT,
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: 13,
+          color: BRASS,
+          marginTop: 6,
+          letterSpacing: "0.22em",
+          textTransform: "uppercase",
+        }}
+      >
+        of PASTED
+      </div>
+    </div>
+  </div>
+);
 
-/* ============================================================
-   Page
-============================================================ */
+const NAV_ITEMS = ["Stacks", "Reading Room", "Vault", "Cinema", "Periodicals"];
+
 const Library = () => {
   const reduced = useReducedMotion();
 
   useEffect(() => {
     ensureFonts();
-    document.title =
-      "The PASTED Library — A private canon on becoming undeniable";
+    document.title = "The PASTED Library — A private canon on becoming undeniable";
     const desc =
       "A vault of work, given freely. A canon on becoming undeniable, from the studio at PASTED.";
     let tag = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
@@ -239,9 +137,17 @@ const Library = () => {
     tag.content = desc;
   }, []);
 
+  const fade = (delay = 0) =>
+    reduced
+      ? { initial: { opacity: 1 }, animate: { opacity: 1 } }
+      : {
+          initial: { opacity: 0, y: 14 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay, ease: EASE },
+        };
+
   return (
     <div
-      className="lib-root"
       style={{
         position: "relative",
         minHeight: "100vh",
@@ -249,414 +155,392 @@ const Library = () => {
         color: CREAM,
         fontFamily: CORMORANT,
         fontFeatureSettings: FEATURES,
-        overflow: "hidden",
+        padding: "56px 24px 80px",
       }}
     >
       <style>{`
-        .lib-root * { font-feature-settings: ${FEATURES}; }
-        .lib-vignette {
-          position: fixed; inset: 0; z-index: 1; pointer-events: none;
-          background: radial-gradient(ellipse 90% 70% at 35% 25%,
-            rgba(255, 220, 160, 0.06) 0%,
-            rgba(255, 220, 160, 0.0) 35%,
-            rgba(58, 69, 85, 0.0) 60%,
-            rgba(58, 69, 85, 0.18) 100%);
-          mix-blend-mode: multiply;
-        }
         .lib-grain {
-          position: fixed; inset: 0; z-index: 2; pointer-events: none;
-          opacity: 0.10; mix-blend-mode: multiply;
+          position: fixed; inset: 0; z-index: 1; pointer-events: none;
+          opacity: 0.07; mix-blend-mode: multiply;
           background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
         }
-        .lib-apply-link::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: -6px;
-          height: 1px;
-          background: ${BRASS};
-          transform-origin: left;
-        }
-        .lib-apply-link {
+        .lib-link {
           position: relative;
-          padding: 8px 0;
+          color: ${INK};
+          text-decoration: none;
+          transition: color 200ms ease;
         }
-        .lib-apply-link:focus-visible,
-        .lib-nav-apply:focus-visible {
-          outline: 2px solid ${BRASS};
-          outline-offset: 4px;
+        .lib-link:hover { color: ${BRASS}; }
+        .lib-cta {
+          display: inline-block;
+          font-family: ${INTER};
+          font-weight: 500;
+          font-size: 10px;
+          letter-spacing: 0.32em;
+          text-transform: uppercase;
+          color: ${INK};
+          padding: 12px 22px;
+          border: 1px solid ${BRASS};
+          border-radius: 2px;
+          text-decoration: none;
+          transition: background 200ms ease, color 200ms ease;
         }
-        .lib-apply-link:hover { opacity: 0.7; }
-        .lib-nav-apply:hover { opacity: 0.7; }
-        .lib-nav-apply {
-          position: relative;
-          padding-bottom: 4px;
-          border-bottom: 1px solid ${BRASS};
+        .lib-cta:hover { background: ${BRASS}; color: ${CREAM}; }
+        .lib-cta--solid { background: ${INK}; color: ${CREAM}; border-color: ${INK}; }
+        .lib-cta--solid:hover { background: ${BRASS}; border-color: ${BRASS}; }
+        .lib-nav-item {
+          font-family: ${INTER};
+          font-weight: 500;
+          font-size: 10px;
+          letter-spacing: 0.32em;
+          text-transform: uppercase;
+          color: ${INK};
+          text-decoration: none;
+          padding: 16px 8px;
+          flex: 1;
+          text-align: center;
+          transition: color 200ms ease;
         }
-        @media (max-width: 720px) {
-          .lib-masthead-row {
-            flex-direction: column !important;
-            gap: 32px !important;
-            align-items: center !important;
-            text-align: center;
+        .lib-nav-item:hover { color: ${BRASS}; }
+        .lib-nav-item + .lib-nav-item { border-left: 1px solid ${HAIR}; }
+        @media (max-width: 640px) {
+          .lib-row-2col, .lib-row-sidebar, .lib-footer-row {
+            grid-template-columns: 1fr !important;
           }
-          .lib-masthead-side { justify-content: center !important; }
-          .lib-nav-inner { padding: 0 24px !important; }
-          .lib-nav-title { font-size: 16px !important; }
-          .lib-footer-row {
-            flex-direction: column !important;
-            gap: 8px !important;
-            text-align: center;
-          }
-          .lib-spine { width: var(--mw) !important; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+          .lib-nav-strip { flex-wrap: wrap; }
+          .lib-nav-item { flex: 1 0 50%; border-left: none !important; border-top: 1px solid ${HAIR}; }
+          .lib-gallery { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
 
-      <div className="lib-vignette" aria-hidden="true" />
       <div className="lib-grain" aria-hidden="true" />
 
-      {/* TOP NAV */}
-      <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 56,
-          zIndex: 40,
-          background: "rgba(26, 20, 16, 0.72)",
-          backdropFilter: "blur(20px) saturate(1.2)",
-          WebkitBackdropFilter: "blur(20px) saturate(1.2)",
-          borderBottom: "1px solid rgba(184, 149, 76, 0.12)",
-        }}
-      >
-        <div
-          className="lib-nav-inner"
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            height: "100%",
-            padding: "0 48px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Link
-            to="/library"
-            className="lib-nav-title"
-            style={{
-              fontFamily: CORMORANT,
-              fontStyle: "italic",
-              fontWeight: 500,
-              fontSize: 18,
-              color: CREAM,
-              letterSpacing: "0.08em",
-              textDecoration: "none",
-              fontFeatureSettings: FEATURES,
-            }}
-          >
-            PASTED <span style={{ color: BRASS }}>·</span> THE LIBRARY
-          </Link>
-          <Link
-            to="/library/apply"
-            className="lib-nav-apply"
-            style={{
-              fontFamily: INTER,
-              fontWeight: 500,
-              fontSize: 11,
-              color: BRASS,
-              textTransform: "uppercase",
-              letterSpacing: "0.32em",
-              textDecoration: "none",
-              transition: "opacity 200ms ease",
-            }}
-          >
-            Apply
-          </Link>
-        </div>
-      </motion.nav>
-
-      {/* PAGE BODY */}
-      <div
+      <motion.div
+        {...fade(0)}
         style={{
           position: "relative",
-          zIndex: 5,
-          minHeight: "100vh",
-          paddingTop: 56,
-          display: "flex",
-          flexDirection: "column",
+          zIndex: 2,
+          maxWidth: 720,
+          margin: "0 auto",
+          background: CREAM,
+          color: INK,
+          boxShadow: "0 40px 120px rgba(0,0,0,0.55), 0 2px 0 rgba(184,149,76,0.25)",
         }}
       >
-        {/* MASTHEAD ZONE */}
-        <header
+        {/* PANEL 1 — HERO PHOTOGRAPH + EMBLEM */}
+        <motion.section
+          {...fade(0.1)}
           style={{
-            padding: "64px 48px 0",
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="lib-masthead-row"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 24,
-            }}
-          >
-            {/* Monogram */}
-            <div
-              className="lib-masthead-side"
-              style={{ display: "flex", justifyContent: "flex-start", flex: "1 1 0" }}
-            >
-              <div
-                style={{
-                  width: 44,
-                  height: 44,
-                  border: `1px solid ${BRASS}`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: CORMORANT,
-                  fontStyle: "italic",
-                  fontWeight: 500,
-                  fontSize: 20,
-                  color: BRASS,
-                  letterSpacing: "0.02em",
-                  fontFeatureSettings: FEATURES,
-                }}
-              >
-                PL
-              </div>
-            </div>
-            {/* Publication name */}
-            <div
-              style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 400,
-                fontSize: 22,
-                color: CREAM,
-                letterSpacing: "0.08em",
-                whiteSpace: "nowrap",
-                fontFeatureSettings: FEATURES,
-              }}
-            >
-              THE PASTED LIBRARY
-            </div>
-            {/* Issue mark */}
-            <div
-              className="lib-masthead-side"
-              style={{ display: "flex", justifyContent: "flex-end", flex: "1 1 0" }}
-            >
-              <span
-                style={{
-                  fontFamily: INTER,
-                  fontWeight: 500,
-                  fontSize: 10,
-                  color: BRASS,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.42em",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                VOL&nbsp;·&nbsp;I&nbsp;·&nbsp;NO&nbsp;·&nbsp;01&nbsp;·&nbsp;MMXXVI
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Hairline beneath */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
-            style={{
-              height: 1,
-              background: BRASS,
-              opacity: 0.3,
-              marginTop: 24,
-              transformOrigin: "left",
-            }}
-          />
-        </header>
-
-        {/* HERO ZONE */}
-        <main
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "80px 24px 0",
             position: "relative",
-            zIndex: 5,
-          }}
-        >
-          <div style={{ maxWidth: 640, width: "100%", textAlign: "center" }}>
-            <h1
-              style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: "clamp(48px, 7.5vw, 88px)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.025em",
-                color: CREAM,
-                margin: 0,
-                fontFeatureSettings: FEATURES,
-              }}
-            >
-              <span style={{ display: "block" }}>
-                <WordReveal text="A private canon" startDelay={0.6} />
-              </span>
-              <span style={{ display: "block" }}>
-                <WordReveal text="on becoming" startDelay={0.6 + 3 * 0.08} extraDelayOnIndex={1} extraDelay={0.1} />
-              </span>
-              <span style={{ display: "block" }}>
-                <WordReveal text="undeniable." startDelay={0.6 + 5 * 0.08 + 0.1} />
-              </span>
-            </h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 1.4 }}
-              style={{
-                fontFamily: CORMORANT,
-                fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: "clamp(20px, 2.2vw, 26px)",
-                lineHeight: 1.45,
-                color: CREAM_QUIET,
-                marginTop: 56,
-                marginBottom: 0,
-                marginLeft: "auto",
-                marginRight: "auto",
-                maxWidth: 420,
-                fontFeatureSettings: FEATURES,
-              }}
-            >
-              A vault of work,
-              <br />
-              given freely.
-            </motion.p>
-
-            {/* Ruled fleuron divider */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.8 }}
-              aria-hidden="true"
-              style={{
-                marginTop: 64,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 16,
-                width: "fit-content",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            >
-              <span style={{ width: 60, height: 1, background: "rgba(184, 149, 76, 0.6)" }} />
-              <span
-                style={{
-                  fontFamily: CORMORANT,
-                  color: BRASS,
-                  fontSize: 14,
-                  lineHeight: 1,
-                }}
-              >
-                ✦
-              </span>
-              <span style={{ width: 60, height: 1, background: "rgba(184, 149, 76, 0.6)" }} />
-            </motion.div>
-
-            {/* Apply link */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 2.2 }}
-              style={{ marginTop: 40 }}
-            >
-              <Link
-                to="/library/apply"
-                aria-label="Apply for your Library Card"
-                className="lib-apply-link"
-                style={{
-                  fontFamily: CORMORANT,
-                  fontStyle: "italic",
-                  fontWeight: 500,
-                  fontSize: 22,
-                  color: BRASS,
-                  textDecoration: "none",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 12,
-                  transition: "opacity 200ms ease",
-                  fontFeatureSettings: FEATURES,
-                }}
-              >
-                Apply for your card
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 2.4 }}
-                  style={{ display: "inline-block", transform: "translateY(-1px)" }}
-                >
-                  →
-                </motion.span>
-              </Link>
-            </motion.div>
-          </div>
-        </main>
-
-        {/* SHELF ZONE */}
-        <Shelf />
-
-        {/* FOOTER */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ duration: 0.5, delay: 2.4 }}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 32,
-            padding: "0 40px",
-            zIndex: 6,
+            width: "100%",
+            aspectRatio: "16 / 11",
+            backgroundImage: `url(${heroStacks})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
           <div
-            className="lib-footer-row"
             style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "radial-gradient(ellipse at center, rgba(26,20,16,0.15) 0%, rgba(26,20,16,0.55) 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
-              fontFamily: INTER,
-              fontWeight: 400,
-              fontSize: 10,
-              color: CREAM,
-              textTransform: "uppercase",
-              letterSpacing: "0.32em",
+              justifyContent: "center",
             }}
           >
-            <span>EST · MMXXVI</span>
-            <span>A publication of PASTED</span>
+            <Emblem />
+          </div>
+        </motion.section>
+
+        {/* PANEL 2 — NAV STRIP */}
+        <nav
+          className="lib-nav-strip"
+          style={{
+            display: "flex",
+            alignItems: "stretch",
+            borderTop: `1px solid ${HAIR}`,
+            borderBottom: `1px solid ${HAIR}`,
+            background: CREAM,
+          }}
+        >
+          {NAV_ITEMS.map((n) => (
+            <Link key={n} to="/library/apply" className="lib-nav-item">
+              {n}
+            </Link>
+          ))}
+        </nav>
+
+        {/* PANEL 3 — TWO COL: FIGURE / STATEMENT + CTAS */}
+        <motion.section
+          {...fade(0.15)}
+          className="lib-row-2col"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.05fr 1fr",
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: `url(${figureBW})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 360,
+              filter: "grayscale(1) contrast(1.05)",
+            }}
+            aria-hidden="true"
+          />
+          <div
+            style={{
+              padding: "56px 44px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              background: CREAM,
+            }}
+          >
+            <div style={{ ...mono, color: BRASS, marginBottom: 20 }}>The Atrium</div>
+            <h1
+              style={{
+                fontFamily: SCRIPT,
+                fontSize: "clamp(40px, 6vw, 58px)",
+                color: INK,
+                lineHeight: 1.05,
+                margin: 0,
+                letterSpacing: "0.005em",
+              }}
+            >
+              Read, Watch,
+              <br />
+              Become.
+            </h1>
+            <p
+              style={{
+                fontFamily: CORMORANT,
+                fontStyle: "italic",
+                fontWeight: 300,
+                fontSize: 18,
+                lineHeight: 1.55,
+                color: CREAM_QUIET,
+                margin: "24px 0 32px",
+                maxWidth: 320,
+              }}
+            >
+              A private canon on becoming undeniable. A vault of work, given freely.
+            </p>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <Link to="/library/apply" className="lib-cta lib-cta--solid">
+                Apply
+              </Link>
+              <Link to="/library/members" className="lib-cta">
+                Enter
+              </Link>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* PANEL 4 — GALLERY STRIP */}
+        <motion.section
+          {...fade(0.2)}
+          style={{
+            borderTop: `1px solid ${HAIR}`,
+            background: CREAM_DEEP,
+            padding: "36px 44px 40px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              marginBottom: 20,
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: SCRIPT,
+                fontSize: 36,
+                color: INK,
+                margin: 0,
+                lineHeight: 1,
+              }}
+            >
+              The Canon
+            </h2>
+            <span style={{ ...mono, color: BRASS }}>VOL · I — V</span>
+          </div>
+          <div
+            className="lib-gallery"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 12,
+            }}
+          >
+            {[thumb1, thumb2, thumb3, thumb4].map((src, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "relative",
+                  aspectRatio: "1 / 1",
+                  backgroundImage: `url(${src})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  outline: `1px solid ${HAIR}`,
+                  outlineOffset: -1,
+                }}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
+        </motion.section>
+
+        {/* PANEL 5 — SIDEBAR LINKS + PORTRAIT */}
+        <motion.section
+          {...fade(0.25)}
+          className="lib-row-sidebar"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "0.9fr 1.1fr",
+            borderTop: `1px solid ${HAIR}`,
+          }}
+        >
+          <div
+            style={{
+              padding: "44px 44px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 0,
+              background: CREAM,
+            }}
+          >
+            {[
+              { label: "Membership Card", to: "/library/apply" },
+              { label: "Forthcoming Volumes", to: "/library/apply" },
+              { label: "Sign In", to: "/library/login" },
+              { label: "Visit the Studio", to: "/" },
+            ].map((item, i, arr) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                className="lib-link"
+                style={{
+                  ...mono,
+                  padding: "20px 0",
+                  borderBottom: i < arr.length - 1 ? `1px solid ${HAIR}` : "none",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <span>{item.label}</span>
+                <span style={{ color: BRASS }}>→</span>
+              </Link>
+            ))}
+          </div>
+          <div
+            style={{
+              position: "relative",
+              backgroundImage: `url(${portraitBW})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 380,
+              filter: "grayscale(1) contrast(1.05)",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                bottom: 28,
+                right: 28,
+                textAlign: "right",
+                fontFamily: SCRIPT,
+                fontSize: 34,
+                color: CREAM,
+                lineHeight: 1.05,
+                textShadow: "0 2px 16px rgba(0,0,0,0.55)",
+              }}
+            >
+              Free yourself,
+              <br />
+              the rest follows.
+            </div>
+          </div>
+        </motion.section>
+
+        {/* PANEL 6 — FOOTER: monogram / building / colophon */}
+        <motion.footer
+          {...fade(0.3)}
+          className="lib-footer-row"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.4fr 1fr",
+            alignItems: "center",
+            gap: 20,
+            padding: "36px 44px",
+            borderTop: `1px solid ${HAIR}`,
+            background: CREAM,
+          }}
+        >
+          {/* Monogram */}
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div
+              style={{
+                width: 64,
+                height: 64,
+                border: `1px solid ${BRASS}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: SCRIPT,
+                fontSize: 36,
+                color: BRASS,
+                lineHeight: 1,
+              }}
+              aria-label="PASTED Library monogram"
+            >
+              PL
+            </div>
+          </div>
+          {/* Building */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src={buildingLine}
+              alt="Illustration of the Library"
+              width={260}
+              height={130}
+              loading="lazy"
+              style={{
+                width: 260,
+                height: "auto",
+                mixBlendMode: "multiply",
+                opacity: 0.92,
+              }}
+            />
+          </div>
+          {/* Colophon */}
+          <div
+            style={{
+              ...mono,
+              color: CREAM_QUIET,
+              textAlign: "right",
+              lineHeight: 2,
+            }}
+          >
+            <div>The Library</div>
+            <div>of PASTED</div>
+            <div style={{ color: BRASS }}>MMXXVI</div>
           </div>
         </motion.footer>
-      </div>
+      </motion.div>
     </div>
   );
 };
