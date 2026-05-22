@@ -797,11 +797,11 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Architecture
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 48px" }}>
             Each room holds a different kind of becoming.
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
@@ -822,13 +822,13 @@ const Library = () => {
                 >
                   <div className="lib-rsc-body">
                     <div className="lib-rsc-icon" aria-hidden="true">{r.glyph}</div>
-                    <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 3.4vw, 38px)", margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                    <h3 style={{ ...TYPE.h3, margin: 0, color: "inherit" }}>
                       {r.name}
                     </h3>
-                    <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                    <div style={{ ...TYPE.label, color: BRASS }}>
                       {r.status}
                     </div>
-                    <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: subColor, margin: 0, maxWidth: 460 }}>
+                    <p style={{ ...TYPE.body, color: subColor, margin: 0, maxWidth: 460 }}>
                       {r.desc}
                     </p>
                     <div style={{ marginTop: 10 }}>
