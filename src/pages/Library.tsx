@@ -607,19 +607,19 @@ const Library = () => {
             }}
           />
           {/* Hero archival corner marks */}
-          <div style={{ position: "absolute", top: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", top: 16, left: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             The Library
           </div>
-          <div style={{ position: "absolute", top: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", top: 16, right: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             of PASTED
           </div>
-          <div style={{ position: "absolute", bottom: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", bottom: 16, left: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             PRIVATE CANON
           </div>
-          <div style={{ position: "absolute", bottom: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
+          <div style={{ position: "absolute", bottom: 16, right: 20, ...TYPE.labelTiny, color: CREAM, opacity: 0.75 }}>
             By Invitation
           </div>
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...mono, color: CREAM, opacity: 0.85 }}>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...TYPE.label, color: CREAM, opacity: 0.85 }}>
             The Library of PASTED
           </div>
           <div
