@@ -293,7 +293,6 @@ const Library = () => {
               backgroundSize: "cover",
               backgroundPosition: "center",
               minHeight: 360,
-              filter: "grayscale(1) contrast(1.05)",
             }}
             aria-hidden="true"
           />
@@ -334,11 +333,14 @@ const Library = () => {
                 maxWidth: 320,
               }}
             >
-              A private canon on becoming undeniable. A vault of work, given freely.
+              A private canon on becoming undeniable. A vault of work, given freely — the studio at PASTED, opened.
             </p>
+            <div style={{ ...mono, color: CREAM_QUIET, marginBottom: 18 }}>
+              VOL · I · NO · 01 · MMXXVI
+            </div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <Link to="/library/apply" className="lib-cta lib-cta--solid">
-                Apply
+                Apply for your card
               </Link>
               <Link to="/library/members" className="lib-cta">
                 Enter
@@ -453,7 +455,6 @@ const Library = () => {
               backgroundSize: "cover",
               backgroundPosition: "center",
               minHeight: 380,
-              filter: "grayscale(1) contrast(1.05)",
             }}
           >
             <div
@@ -464,9 +465,9 @@ const Library = () => {
                 textAlign: "right",
                 fontFamily: SCRIPT,
                 fontSize: 34,
-                color: CREAM,
+                color: INK,
                 lineHeight: 1.05,
-                textShadow: "0 2px 16px rgba(0,0,0,0.55)",
+                textShadow: "0 1px 8px rgba(245,238,220,0.55)",
               }}
             >
               Free yourself,
