@@ -222,13 +222,33 @@ const Library = () => {
         .lib-nav-item + .lib-nav-item { border-left: 1px solid ${HAIR}; }
         .lib-room-card {
           position: relative;
-          padding: 28px 28px 26px;
+          padding: 18px 22px 18px 18px;
           border: 1px solid ${HAIR};
           background: ${CREAM};
           display: grid;
-          grid-template-columns: 64px 1fr auto;
-          gap: 20px;
-          align-items: start;
+          grid-template-columns: 132px 1fr auto;
+          gap: 24px;
+          align-items: center;
+          border-radius: 14px;
+          transition: box-shadow 300ms ease, transform 300ms ease;
+        }
+        .lib-room-card:hover { box-shadow: 0 18px 40px -22px rgba(26,20,16,0.45); }
+        .lib-room-thumb {
+          width: 132px; height: 96px;
+          border-radius: 12px;
+          background-size: cover; background-position: center;
+          filter: grayscale(1) brightness(0.95);
+          box-shadow: inset 0 0 0 1px rgba(184,149,76,0.35);
+        }
+        .lib-room-arrow-chip {
+          width: 36px; height: 36px; border-radius: 999px;
+          border: 1px solid ${HAIR};
+          display: inline-flex; align-items: center; justify-content: center;
+          color: ${BRASS}; font-family: ${INTER}; font-size: 14px;
+          transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+        }
+        .lib-room-card:hover .lib-room-arrow-chip {
+          border-color: ${BRASS}; background: rgba(184,149,76,0.08);
         }
         .lib-room-card[data-disabled="true"] { opacity: 0.78; }
         .lib-room-card[data-disabled="true"]::after {
@@ -363,8 +383,9 @@ const Library = () => {
           .lib-nav-item .nav-status { margin-top: 0; }
           .lib-gallery { grid-template-columns: repeat(2, 1fr) !important; }
           .lib-steps-grid, .lib-rooms-grid { grid-template-columns: 1fr !important; }
-          .lib-room-card { grid-template-columns: 48px 1fr !important; }
-          .lib-room-card > .lib-room-arrow { display: none; }
+          .lib-room-card { grid-template-columns: 88px 1fr !important; padding: 12px !important; gap: 14px !important; }
+          .lib-room-thumb { width: 88px !important; height: 72px !important; }
+          .lib-room-card > .lib-room-arrow-chip { display: none; }
           .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
           .lib-2col-text { padding: 48px 24px !important; }
           .lib-foundations-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -675,20 +696,20 @@ const Library = () => {
           </h2>
           <div className="lib-rooms-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
             {[
-              { name: "The Stacks", status: "Open Soon", disabled: true, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
-              { name: "The Reading Room", status: "Under Construction", disabled: true, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
-              { name: "The Vault", status: "Under Construction", disabled: true, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
-              { name: "The Cinema", status: "Under Construction", disabled: true, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
-              { name: "Periodicals", status: "Under Construction", disabled: true, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
+              { name: "The Stacks", status: "Open Soon", disabled: true, img: thumb1, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
+              { name: "The Reading Room", status: "Under Construction", disabled: true, img: thumb2, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
+              { name: "The Vault", status: "Under Construction", disabled: true, img: thumb3, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
+              { name: "The Cinema", status: "Under Construction", disabled: true, img: thumb4, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
+              { name: "Periodicals", status: "Under Construction", disabled: true, img: figureBW, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
             ].map((r) => (
               <div key={r.name} className="lib-room-card" data-disabled={r.disabled || undefined}>
-                <div style={{ width: 18, height: 1, background: BRASS, marginTop: 14, opacity: 0.6 }} />
+                <div className="lib-room-thumb" style={{ backgroundImage: `url(${r.img})` }} aria-hidden="true" />
                 <div>
                   <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: 26, color: INK, margin: "0 0 6px", lineHeight: 1.1 }}>{r.name}</h3>
                   <div style={{ ...mono, color: BRASS, fontSize: 9, marginBottom: 10 }}>{r.status}</div>
                   <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0, maxWidth: 540 }}>{r.desc}</p>
                 </div>
-                <div className="lib-room-arrow" style={{ ...mono, color: BRASS, opacity: 0.5, paddingTop: 4 }}>→</div>
+                <div className="lib-room-arrow-chip" aria-hidden="true">→</div>
               </div>
             ))}
           </div>
