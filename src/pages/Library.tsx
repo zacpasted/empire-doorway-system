@@ -281,6 +281,11 @@ const Library = () => {
           .lib-room-card > .lib-room-arrow { display: none; }
           .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
           .lib-2col-text { padding: 48px 24px !important; }
+          .lib-status-band { grid-template-columns: 1fr !important; }
+          .lib-status-cell { border-left: none !important; border-top: 1px solid ${HAIR}; }
+          .lib-status-cell:first-child { border-top: none; }
+          .lib-top-nav { gap: 0 !important; padding: 8px 12px 14px !important; }
+          .lib-top-nav a { padding: 6px 8px !important; font-size: 9px !important; }
         }
       `}</style>
 
