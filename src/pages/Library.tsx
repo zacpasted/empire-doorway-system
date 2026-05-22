@@ -272,9 +272,15 @@ const Library = () => {
           }}
         >
           {NAV_ITEMS.map((n) => (
-            <Link key={n} to="/library/apply" className="lib-nav-item">
+            <span
+              key={n}
+              className="lib-nav-item"
+              aria-disabled="true"
+              title="Under construction — opening soon"
+              style={{ cursor: "default", opacity: 0.55 }}
+            >
               {n}
-            </Link>
+            </span>
           ))}
         </nav>
 
@@ -333,18 +339,25 @@ const Library = () => {
                 maxWidth: 320,
               }}
             >
-              A private canon on becoming undeniable. A vault of work, given freely — the studio at PASTED, opened.
+              A private canon on becoming undeniable. A vault of work, given freely.
             </p>
-            <div style={{ ...mono, color: CREAM_QUIET, marginBottom: 18 }}>
-              VOL · I · NO · 01 · MMXXVI
-            </div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <Link to="/library/apply" className="lib-cta lib-cta--solid">
-                Apply for your card
+                Apply
               </Link>
               <Link to="/library/members" className="lib-cta">
                 Enter
               </Link>
+            </div>
+            <div
+              style={{
+                ...mono,
+                color: BRASS,
+                marginTop: 22,
+                opacity: 0.75,
+              }}
+            >
+              The rooms — under construction · opening soon
             </div>
           </div>
         </motion.section>
