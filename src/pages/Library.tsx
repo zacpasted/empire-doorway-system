@@ -759,11 +759,11 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "120px 44px 132px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 18, fontSize: 9, letterSpacing: "0.4em" }}>
+          <div style={{ ...TYPE.label, color: BRASS, textAlign: "center", marginBottom: 20 }}>
             Filed under · Practice
           </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(30px, 4.6vw, 42px)", color: INK, textAlign: "center", margin: "0 0 64px", lineHeight: 1.15 }}>
+          <h2 style={{ ...TYPE.h2, color: INK, textAlign: "center", margin: "0 0 64px" }}>
             Three ways to move through it
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="lib-rooms-grid">
@@ -776,13 +776,13 @@ const Library = () => {
                 <div className="lib-rsc-mini-img" style={{ backgroundImage: `url(${s.img})` }} aria-hidden="true" />
                 <div className="lib-rsc-mini-body">
                   <div className="lib-rsc-icon" aria-hidden="true">{s.glyph}</div>
-                  <h3 style={{ fontFamily: DISPLAY, fontStyle: "italic", fontWeight: 400, fontSize: 26, margin: 0, lineHeight: 1.05, color: "inherit" }}>
+                  <h3 style={{ ...TYPE.h3Mini, margin: 0, color: "inherit" }}>
                     {s.t}
                   </h3>
-                  <div style={{ fontFamily: MONO_FF, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase", color: BRASS }}>
+                  <div style={{ ...TYPE.label, color: BRASS }}>
                     {s.tag}
                   </div>
-                  <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0 }}>
+                  <p style={{ ...TYPE.body, fontSize: 15, color: CREAM_QUIET, margin: 0 }}>
                     {s.c}
                   </p>
                 </div>
