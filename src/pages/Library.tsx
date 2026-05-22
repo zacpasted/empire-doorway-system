@@ -468,7 +468,8 @@ const Library = () => {
             <div style={{ ...mono, color: BRASS, marginBottom: 6 }}>§ II</div>
             <div style={{ ...mono, color: INK, opacity: 0.55, marginBottom: 18, fontSize: 9 }}>Filed under · Purpose</div>
             <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.25, margin: "0 0 24px" }}>
-              Because the internet made everyone visible. It did not make everyone meaningful.
+              Because the internet made everyone visible.{" "}
+              <span style={{ color: BRASS }}>It did not make everyone meaningful.</span>
             </h2>
             <p style={{ fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 16px" }}>
               Most people are not short on content. They are short on canon. They have tactics, templates, trends, posts, offers, hooks, frameworks, advice, and noise. What they do not have is a deeper architecture for who they are becoming.
