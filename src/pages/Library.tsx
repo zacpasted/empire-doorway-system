@@ -176,18 +176,29 @@ const Library = () => {
           font-family: ${INTER};
           font-weight: 500;
           font-size: 10px;
-          letter-spacing: 0.32em;
+          letter-spacing: 0.36em;
           text-transform: uppercase;
           color: ${INK};
-          padding: 12px 22px;
-          border: 1px solid ${BRASS};
-          border-radius: 2px;
+          padding: 14px 0 10px;
+          border: none;
+          border-top: 1px solid ${BRASS};
+          border-bottom: 1px solid ${BRASS};
+          border-radius: 0;
           text-decoration: none;
-          transition: background 200ms ease, color 200ms ease;
+          transition: color 200ms ease, border-color 200ms ease;
         }
-        .lib-cta:hover { background: ${BRASS}; color: ${CREAM}; }
-        .lib-cta--solid { background: ${INK}; color: ${CREAM}; border-color: ${INK}; }
-        .lib-cta--solid:hover { background: ${BRASS}; border-color: ${BRASS}; }
+        .lib-cta:hover { color: ${BRASS}; border-color: ${BRASS}; }
+        .lib-cta--invite {
+          display: inline-flex; align-items: baseline; gap: 10px;
+          font-family: ${INTER}; font-weight: 500;
+          font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
+          color: ${INK}; padding: 12px 0;
+          border-top: 1px solid ${HAIR}; border-bottom: 1px solid ${HAIR};
+          min-width: 220px; justify-content: space-between;
+          text-decoration: none; transition: color 200ms ease, border-color 200ms ease;
+        }
+        .lib-cta--invite:hover { color: ${BRASS}; border-color: ${BRASS}; }
+        .lib-cta--invite .mark { color: ${BRASS}; font-size: 9px; letter-spacing: 0.2em; }
         .lib-nav-item {
           font-family: ${INTER};
           font-weight: 500;
@@ -196,10 +207,15 @@ const Library = () => {
           text-transform: uppercase;
           color: ${INK};
           text-decoration: none;
-          padding: 16px 8px;
+          padding: 18px 8px;
           flex: 1;
           text-align: center;
           transition: color 200ms ease;
+          position: relative;
+        }
+        .lib-nav-item .nav-status {
+          display: block; margin-top: 6px; font-size: 8px;
+          letter-spacing: 0.32em; color: ${BRASS}; opacity: 0.7;
         }
         .lib-nav-item:hover { color: ${BRASS}; }
         .lib-nav-item + .lib-nav-item { border-left: 1px solid ${HAIR}; }
@@ -238,16 +254,19 @@ const Library = () => {
           width: 56px;
           margin: 0 auto 18px;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 720px) {
           .lib-row-2col, .lib-row-sidebar, .lib-footer-row {
             grid-template-columns: 1fr !important;
           }
-          .lib-nav-strip { flex-wrap: wrap; }
-          .lib-nav-item { flex: 1 0 50%; border-left: none !important; border-top: 1px solid ${HAIR}; }
+          .lib-nav-strip { flex-direction: column; }
+          .lib-nav-item { flex: 1 0 100%; border-left: none !important; border-top: 1px solid ${HAIR}; text-align: left; padding: 18px 24px; display: flex; justify-content: space-between; align-items: baseline; }
+          .lib-nav-item .nav-status { margin-top: 0; }
           .lib-gallery { grid-template-columns: repeat(2, 1fr) !important; }
           .lib-steps-grid, .lib-rooms-grid { grid-template-columns: 1fr !important; }
           .lib-room-card { grid-template-columns: 48px 1fr !important; }
           .lib-room-card > .lib-room-arrow { display: none; }
+          .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
+          .lib-2col-text { padding: 48px 24px !important; }
         }
       `}</style>
 
@@ -316,11 +335,14 @@ const Library = () => {
             <Emblem />
             <h1
               style={{
-                fontFamily: SCRIPT,
-                fontSize: "clamp(44px, 7vw, 72px)",
+                fontFamily: CORMORANT,
+                fontStyle: "italic",
+                fontWeight: 400,
+                fontSize: "clamp(36px, 5.6vw, 58px)",
                 color: CREAM,
-                margin: "20px 0 14px",
-                lineHeight: 1,
+                margin: "24px 0 14px",
+                lineHeight: 1.05,
+                letterSpacing: "0.005em",
                 textShadow: "0 2px 18px rgba(0,0,0,0.55)",
               }}
             >
@@ -331,21 +353,21 @@ const Library = () => {
                 fontFamily: CORMORANT,
                 fontStyle: "italic",
                 fontWeight: 300,
-                fontSize: "clamp(15px, 1.8vw, 18px)",
+                fontSize: "clamp(16px, 1.9vw, 19px)",
                 color: CREAM_DEEP,
                 maxWidth: 480,
                 margin: 0,
-                lineHeight: 1.5,
+                lineHeight: 1.55,
                 textShadow: "0 1px 12px rgba(0,0,0,0.6)",
               }}
             >
               A private canon for the ones building taste, authority, signal, and selfhood in a world addicted to noise.
             </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginTop: 22 }}>
-              <Link to="/library/members" className="lib-cta lib-cta--solid" style={{ background: CREAM, color: INK, borderColor: CREAM }}>
+            <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
+              <Link to="/library/members" className="lib-cta" style={{ color: CREAM, borderColor: "rgba(245,238,220,0.45)" }}>
                 Enter the Library
               </Link>
-              <Link to="/library/apply" className="lib-cta" style={{ color: CREAM, borderColor: CREAM }}>
+              <Link to="/library/apply" className="lib-cta" style={{ color: CREAM, borderColor: "rgba(245,238,220,0.25)" }}>
                 Request Access
               </Link>
             </div>
@@ -366,15 +388,16 @@ const Library = () => {
             background: CREAM,
           }}
         >
-          {NAV_ITEMS.map((n) => (
+          {NAV_ITEMS.map((n, i) => (
             <span
               key={n}
               className="lib-nav-item"
               aria-disabled="true"
               title="Under construction — opening soon"
-              style={{ cursor: "default", opacity: 0.55 }}
+              style={{ cursor: "default" }}
             >
-              {n}
+              <span style={{ opacity: 0.65 }}>{`${String(i + 1).padStart(2, "0")} · ${n}`}</span>
+              <span className="nav-status">Closed</span>
             </span>
           ))}
         </nav>
@@ -382,14 +405,18 @@ const Library = () => {
         {/* PANEL — WHAT THE LIBRARY IS */}
         <motion.section
           {...fade(0.12)}
-          style={{ padding: "72px 44px 64px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
+          className="lib-section-pad"
+          style={{ padding: "112px 44px 96px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 14 }}>§ I · What The Library Is</div>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ I</div>
+          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+            Filed under · Foundations
+          </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.4vw, 40px)", color: INK, textAlign: "center", margin: "0 0 28px", lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.4vw, 40px)", color: INK, textAlign: "center", margin: "0 0 36px", lineHeight: 1.15 }}>
             A vault of work, given freely.
           </h2>
-          <div style={{ maxWidth: 560, margin: "0 auto", fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: CREAM_QUIET }}>
+          <div style={{ maxWidth: 560, margin: "0 auto", fontFamily: CORMORANT, fontSize: 18, lineHeight: 1.75, color: "rgba(26,20,16,0.82)" }}>
             <p style={{ margin: "0 0 16px" }}>
               The Library of PASTED is not a blog. It is not a content feed. It is not another place to collect information you will never use.
             </p>
@@ -403,7 +430,7 @@ const Library = () => {
               This is where we place the thinking behind the work. The psychology. The taste. The strategy. The restraint. The rebellion. The parts of brand, business, and becoming that rarely fit inside a caption.
             </p>
           </div>
-          <div style={{ textAlign: "center", marginTop: 36, fontFamily: SCRIPT, fontSize: 34, color: BRASS, lineHeight: 1 }}>
+          <div style={{ textAlign: "center", marginTop: 56, fontFamily: SCRIPT, fontSize: 38, color: BRASS, lineHeight: 1 }}>
             For those who know there is more.
           </div>
         </motion.section>
@@ -423,13 +450,14 @@ const Library = () => {
               backgroundImage: `url(${figureBW})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              minHeight: 360,
+              minHeight: 420,
             }}
             aria-hidden="true"
           />
           <div
+            className="lib-2col-text"
             style={{
-              padding: "64px 44px",
+              padding: "88px 48px",
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
@@ -437,17 +465,18 @@ const Library = () => {
               background: CREAM,
             }}
           >
-            <div style={{ ...mono, color: BRASS, marginBottom: 16 }}>§ II · Why It Exists</div>
-            <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.2, margin: "0 0 20px" }}>
+            <div style={{ ...mono, color: BRASS, marginBottom: 6 }}>§ II</div>
+            <div style={{ ...mono, color: INK, opacity: 0.55, marginBottom: 18, fontSize: 9 }}>Filed under · Purpose</div>
+            <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.25, margin: "0 0 24px" }}>
               Because the internet made everyone visible. It did not make everyone meaningful.
             </h2>
-            <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: CREAM_QUIET, margin: "0 0 14px" }}>
+            <p style={{ fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 16px" }}>
               Most people are not short on content. They are short on canon. They have tactics, templates, trends, posts, offers, hooks, frameworks, advice, and noise. What they do not have is a deeper architecture for who they are becoming.
             </p>
-            <p style={{ fontFamily: CORMORANT, fontSize: 16, lineHeight: 1.65, color: CREAM_QUIET, margin: "0 0 14px" }}>
+            <p style={{ fontFamily: CORMORANT, fontSize: 17, lineHeight: 1.7, color: "rgba(26,20,16,0.82)", margin: "0 0 18px" }}>
               The Library exists to restore that architecture. A place to think more clearly. To build more beautifully. To speak with more force. To sell without becoming cheap. To become known without becoming hollow.
             </p>
-            <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 17, color: INK, margin: 0 }}>
+            <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 18, color: INK, margin: 0 }}>
               This is not here to make you louder. It is here to make you undeniable.
             </p>
           </div>
@@ -456,11 +485,15 @@ const Library = () => {
         {/* PANEL — HOW TO USE */}
         <motion.section
           {...fade(0.18)}
-          style={{ padding: "72px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
+          className="lib-section-pad"
+          style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 14 }}>§ III · How To Use The Library</div>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ III</div>
+          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+            Filed under · Practice
+          </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 36px", lineHeight: 1.2 }}>
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
             Three ways to move through it.
           </h2>
           <div className="lib-steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
@@ -481,11 +514,15 @@ const Library = () => {
         {/* PANEL — THE ROOMS */}
         <motion.section
           {...fade(0.2)}
-          style={{ padding: "72px 44px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
+          className="lib-section-pad"
+          style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 14 }}>§ IV · The Rooms</div>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ IV</div>
+          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+            Filed under · Architecture
+          </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 36px", lineHeight: 1.2 }}>
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(26px, 4vw, 34px)", color: INK, textAlign: "center", margin: "0 0 44px", lineHeight: 1.2 }}>
             Each room holds a different kind of becoming.
           </h2>
           <div className="lib-rooms-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
@@ -512,15 +549,19 @@ const Library = () => {
         {/* PANEL 4 — GALLERY STRIP */}
         <motion.section
           {...fade(0.22)}
+          className="lib-section-pad"
           style={{
             borderTop: `1px solid ${HAIR}`,
             background: CREAM_DEEP,
-            padding: "64px 44px",
+            padding: "104px 44px",
           }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 14 }}>§ V · The Canon</div>
+          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ V</div>
+          <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
+            Filed under · Selected Volumes
+          </div>
           <div className="lib-section-rule" />
-          <h2 style={{ fontFamily: SCRIPT, fontSize: 44, color: INK, margin: "0 0 10px", textAlign: "center", lineHeight: 1 }}>
+          <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(28px, 4.2vw, 38px)", color: INK, margin: "0 0 14px", textAlign: "center", lineHeight: 1.1 }}>
             The Canon
           </h2>
           <p style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: CREAM_QUIET, textAlign: "center", margin: "0 auto 32px", maxWidth: 460 }}>
