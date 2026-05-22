@@ -341,7 +341,7 @@ const Library = () => {
         style={{
           position: "relative",
           zIndex: 2,
-          maxWidth: 720,
+          maxWidth: 960,
           margin: "0 auto",
           background: CREAM,
           color: INK,
