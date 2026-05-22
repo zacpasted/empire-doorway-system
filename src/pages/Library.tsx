@@ -87,7 +87,7 @@ const Emblem = () => (
           marginBottom: 6,
         }}
       >
-        EST · MMXXVI
+        The Library of PASTED
       </div>
       <div
         style={{
@@ -306,16 +306,16 @@ const Library = () => {
           />
           {/* Hero archival corner marks */}
           <div style={{ position: "absolute", top: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            EST · MMXXVI
+            The Library
           </div>
           <div style={{ position: "absolute", top: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            VOL · I
+            of PASTED
           </div>
           <div style={{ position: "absolute", bottom: 16, left: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
             PRIVATE CANON
           </div>
           <div style={{ position: "absolute", bottom: 16, right: 20, ...mono, color: CREAM, opacity: 0.75, fontSize: 9 }}>
-            ACCESSION · 001
+            By Invitation
           </div>
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center", padding: "44px 20px 0", ...mono, color: CREAM, opacity: 0.85 }}>
             The Library of PASTED
@@ -396,7 +396,7 @@ const Library = () => {
               title="Under construction — opening soon"
               style={{ cursor: "default" }}
             >
-              <span style={{ opacity: 0.65 }}>{`${String(i + 1).padStart(2, "0")} · ${n}`}</span>
+              <span style={{ opacity: 0.65 }}>{n}</span>
               <span className="nav-status">Closed</span>
             </span>
           ))}
@@ -408,7 +408,6 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "112px 44px 96px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ I</div>
           <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
             Filed under · Foundations
           </div>
@@ -465,7 +464,6 @@ const Library = () => {
               background: CREAM,
             }}
           >
-            <div style={{ ...mono, color: BRASS, marginBottom: 6 }}>§ II</div>
             <div style={{ ...mono, color: INK, opacity: 0.55, marginBottom: 18, fontSize: 9 }}>Filed under · Purpose</div>
             <h2 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: "clamp(24px, 3.4vw, 32px)", color: INK, lineHeight: 1.25, margin: "0 0 24px" }}>
               Because the internet made everyone visible.{" "}
@@ -489,7 +487,6 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM_DEEP, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ III</div>
           <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
             Filed under · Practice
           </div>
@@ -499,12 +496,12 @@ const Library = () => {
           </h2>
           <div className="lib-steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
             {[
-              { n: "01", t: "Read Slowly", c: "These are not scraps for skimming. Begin with the essays, notes, and frameworks that meet you where you are." },
-              { n: "02", t: "Watch Carefully", c: "The films and visual studies are designed to sharpen taste, rhythm, story, and perception." },
-              { n: "03", t: "Build Differently", c: "Take what matters, discard what does not, and let the work change the way you show up in the world." },
+              { t: "Read Slowly", c: "These are not scraps for skimming. Begin with the essays, notes, and frameworks that meet you where you are." },
+              { t: "Watch Carefully", c: "The films and visual studies are designed to sharpen taste, rhythm, story, and perception." },
+              { t: "Build Differently", c: "Take what matters, discard what does not, and let the work change the way you show up in the world." },
             ].map((s) => (
-              <div key={s.n} className="lib-step">
-                <div style={{ ...mono, color: BRASS, marginBottom: 14 }}>{s.n}</div>
+              <div key={s.t} className="lib-step">
+                <div style={{ width: 24, height: 1, background: BRASS, marginBottom: 18, opacity: 0.7 }} />
                 <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: 24, color: INK, margin: "0 0 10px" }}>{s.t}</h3>
                 <p style={{ fontFamily: CORMORANT, fontSize: 15, lineHeight: 1.6, color: CREAM_QUIET, margin: 0 }}>{s.c}</p>
               </div>
@@ -518,7 +515,6 @@ const Library = () => {
           className="lib-section-pad"
           style={{ padding: "104px 44px", background: CREAM, borderTop: `1px solid ${HAIR}` }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ IV</div>
           <div style={{ ...mono, color: INK, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
             Filed under · Architecture
           </div>
@@ -528,14 +524,14 @@ const Library = () => {
           </h2>
           <div className="lib-rooms-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
             {[
-              { n: "I", name: "The Stacks", status: "Open Soon", disabled: true, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
-              { n: "II", name: "The Reading Room", status: "Under Construction", disabled: true, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
-              { n: "III", name: "The Vault", status: "Under Construction", disabled: true, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
-              { n: "IV", name: "The Cinema", status: "Under Construction", disabled: true, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
-              { n: "V", name: "Periodicals", status: "Under Construction", disabled: true, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
+              { name: "The Stacks", status: "Open Soon", disabled: true, desc: "Essays, manifestos, frameworks, and field notes on brand, desire, psychology, authority, and the architecture of becoming known." },
+              { name: "The Reading Room", status: "Under Construction", disabled: true, desc: "Long-form pieces for slower thinking. Fewer answers. Better questions. The kind of work you return to when the noise gets too loud." },
+              { name: "The Vault", status: "Under Construction", disabled: true, desc: "Private frameworks, internal notes, strategic systems, and deeper operating principles from inside the PASTED world." },
+              { name: "The Cinema", status: "Under Construction", disabled: true, desc: "Films, visual studies, content breakdowns, brand references, and cinematic artifacts for those learning to see before they create." },
+              { name: "Periodicals", status: "Under Construction", disabled: true, desc: "Ongoing dispatches, observations, cultural notes, and timely pieces from the edges of brand, business, dentistry, beauty, and taste." },
             ].map((r) => (
-              <div key={r.n} className="lib-room-card" data-disabled={r.disabled || undefined}>
-                <div style={{ ...mono, color: BRASS, fontSize: 11, paddingTop: 4 }}>RM · {r.n}</div>
+              <div key={r.name} className="lib-room-card" data-disabled={r.disabled || undefined}>
+                <div style={{ width: 18, height: 1, background: BRASS, marginTop: 14, opacity: 0.6 }} />
                 <div>
                   <h3 style={{ fontFamily: CORMORANT, fontStyle: "italic", fontWeight: 400, fontSize: 26, color: INK, margin: "0 0 6px", lineHeight: 1.1 }}>{r.name}</h3>
                   <div style={{ ...mono, color: BRASS, fontSize: 9, marginBottom: 10 }}>{r.status}</div>
@@ -557,7 +553,6 @@ const Library = () => {
             padding: "104px 44px",
           }}
         >
-          <div style={{ ...mono, color: BRASS, textAlign: "center", marginBottom: 6 }}>§ V</div>
           <div style={{ ...mono, color: CREAM, opacity: 0.55, textAlign: "center", marginBottom: 18, fontSize: 9 }}>
             Filed under · Selected Volumes
           </div>
@@ -577,12 +572,12 @@ const Library = () => {
             }}
           >
             {[
-              { src: thumb1, n: "VOL · I", t: "Taste" },
-              { src: thumb2, n: "VOL · II", t: "Authority" },
-              { src: thumb3, n: "VOL · III", t: "Restraint" },
-              { src: thumb4, n: "VOL · IV", t: "Signal" },
+              { src: thumb1, t: "Taste" },
+              { src: thumb2, t: "Authority" },
+              { src: thumb3, t: "Restraint" },
+              { src: thumb4, t: "Signal" },
             ].map((v) => (
-              <div key={v.n}>
+              <div key={v.t}>
                 <div
                   style={{
                     position: "relative",
@@ -597,8 +592,7 @@ const Library = () => {
                   }}
                   aria-hidden="true"
                 />
-                <div style={{ marginTop: 10, ...mono, color: BRASS, fontSize: 9 }}>{v.n}</div>
-                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 16, color: CREAM, marginTop: 2 }}>{v.t}</div>
+                <div style={{ fontFamily: CORMORANT, fontStyle: "italic", fontSize: 18, color: CREAM, marginTop: 12 }}>{v.t}</div>
               </div>
             ))}
           </div>
@@ -761,7 +755,6 @@ const Library = () => {
             <div style={{ fontFamily: CORMORANT, fontStyle: "italic", textTransform: "none", letterSpacing: 0, fontSize: 13, marginTop: 4 }}>
               A private canon on becoming undeniable.
             </div>
-            <div style={{ color: BRASS }}>MMXXVI</div>
           </div>
         </motion.footer>
       </motion.div>
