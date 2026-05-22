@@ -1238,12 +1238,17 @@ html.lib-cursor-on a, html.lib-cursor-on button, html.lib-cursor-on input, html.
 .lib-hero {
   position: relative; min-height: 100vh;
   background: var(--night); color: var(--cream);
-  padding: 64px 48px 0; overflow: hidden;
-  display: flex; flex-direction: column;
+  padding: 4vh 48px 0; overflow: hidden;
+  display: grid; grid-template-rows: auto 1fr auto; row-gap: 0;
 }
 .lib-hero-masthead {
-  display: flex; align-items: center; gap: 28px;
-  max-width: 1280px; margin: 0 auto; width: 100%;
+  display: flex; align-items: center; gap: 24px;
+  max-width: 1280px; margin: 0 auto 0; width: 100%;
+}
+.lib-hero-mast-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: 18px; letter-spacing: 0.08em; color: var(--cream);
+  white-space: nowrap;
 }
 .lib-monogram {
   width: 48px; height: 48px; border: 1px solid var(--brass-glow);
@@ -1265,15 +1270,10 @@ html.lib-cursor-on a, html.lib-cursor-on button, html.lib-cursor-on input, html.
   margin-top: 4px;
 }
 .lib-hero-title-block {
-  margin: auto auto 0; text-align: center; max-width: 900px; padding-top: 8vh;
+  align-self: center; justify-self: center;
+  text-align: center; max-width: 900px; width: 100%;
+  padding: 0 0;
 }
-.lib-hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 16px;
-  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11px;
-  letter-spacing: 0.42em; text-transform: uppercase; color: var(--brass-glow);
-  margin-bottom: 56px;
-}
-.lib-eyerule { width: 24px; height: 1px; background: var(--brass-glow); }
 .lib-hero-h1 {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
   font-size: clamp(56px, 9vw, 112px); line-height: 0.96;
@@ -1294,16 +1294,25 @@ html.lib-cursor-on a, html.lib-cursor-on button, html.lib-cursor-on input, html.
   font-size: clamp(17px, 1.7vw, 22px); line-height: 1.5;
   color: var(--cream-quiet);
 }
-.lib-hero-fleuron {
-  margin-top: 56px; text-align: center; color: var(--brass-glow); font-size: 20px;
+.lib-hero-divider {
+  margin-top: 56px;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+}
+.lib-hero-divider-rule {
+  display: inline-block; width: 60px; height: 1px; background: var(--brass-glow);
+}
+.lib-hero-divider-fleuron {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--brass-glow); font-size: 14px; line-height: 1;
 }
 .lib-hero-meta {
   margin-top: 28px; font-family: 'Inter', sans-serif; font-weight: 500;
-  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
   color: var(--cream-whisper);
 }
+.lib-hero-meta-dot { display: inline-block; margin: 0 0.4em; color: var(--brass-glow); }
 .lib-hero-peek {
-  position: relative; margin-top: auto; height: 32vh; min-height: 200px;
+  position: relative; height: 32vh; min-height: 200px;
   display: flex; align-items: flex-end; justify-content: center;
   overflow: hidden;
 }
@@ -1313,29 +1322,25 @@ html.lib-cursor-on a, html.lib-cursor-on button, html.lib-cursor-on input, html.
   pointer-events: none;
 }
 .lib-hero-spines {
-  display: flex; gap: 14px; height: 70%; align-items: flex-end;
+  display: flex; gap: 14px; height: 100%; align-items: flex-end;
 }
 .lib-hero-spine-peek {
-  width: 60px; height: 100%;
-  background: linear-gradient(180deg, var(--brass) 0%, var(--brass-deep) 100%);
-  border-top: 1px solid rgba(245, 239, 225, 0.18);
+  width: 46px; height: 50%;
+  background: linear-gradient(180deg, var(--bone-shadow) 0%, var(--ink-quiet) 100%);
+  border-top: 1px solid rgba(245, 239, 225, 0.12);
   border-radius: 1px 1px 0 0;
   box-shadow: 0 -8px 20px rgba(0,0,0,0.45);
-}
-.lib-hero-spine-peek--coming {
-  background: linear-gradient(180deg, var(--bone-shadow) 0%, var(--ink-quiet) 100%);
   opacity: 0.7;
 }
-.lib-hero-spine-peek--ghost {
-  background: var(--bone-shadow); opacity: 0.32;
-}
-.lib-hero-spine-peek--rim {
+.lib-hero-spine-peek--pos1 { width: 84px; height: 80%; opacity: 1; }
+.lib-hero-spine-peek--pos2 { width: 64px; height: 72%; opacity: 0.7; }
+.lib-hero-spine-peek--pos3 { width: 56px; height: 64%; opacity: 0.5; }
+.lib-hero-spine-peek--pos4 { width: 50px; height: 56%; opacity: 0.35; }
+.lib-hero-spine-peek--pos5 { width: 46px; height: 50%; opacity: 0.22; }
+.lib-hero-spine-peek--lead {
+  background: linear-gradient(180deg, var(--brass) 0%, var(--brass-deep) 100%);
+  border-top: 1px solid rgba(245, 239, 225, 0.18);
   box-shadow: 0 -8px 20px rgba(0,0,0,0.45), 0 0 40px rgba(184, 153, 104, 0.32);
-  animation: lib-rim-pulse 4s ease-in-out infinite;
-}
-@keyframes lib-rim-pulse {
-  0%, 100% { box-shadow: 0 -8px 20px rgba(0,0,0,0.45), 0 0 40px rgba(184, 153, 104, 0.18); }
-  50% { box-shadow: 0 -8px 20px rgba(0,0,0,0.45), 0 0 60px rgba(184, 153, 104, 0.34); }
 }
 
 /* SHELF */
