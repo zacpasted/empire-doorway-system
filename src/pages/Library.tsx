@@ -9,6 +9,7 @@ import thumb1 from "@/assets/library-thumb-1.jpg";
 import thumb2 from "@/assets/library-thumb-2.jpg";
 import thumb3 from "@/assets/library-thumb-3.jpg";
 import thumb4 from "@/assets/library-thumb-4.jpg";
+import robes from "@/assets/library-robes.jpg";
 
 /**
  * THE PASTED LIBRARY — Atrium
@@ -254,6 +255,64 @@ const Library = () => {
           width: 56px;
           margin: 0 auto 18px;
         }
+        /* Torn paper edges, weaving editorial inspiration */
+        .lib-torn-bottom {
+          clip-path: polygon(0% 0%, 100% 0%, 100% 96%, 97% 92%, 94% 98%, 90% 93%, 86% 99%, 82% 94%, 77% 99%, 73% 93%, 68% 98%, 63% 94%, 58% 99%, 53% 93%, 48% 98%, 43% 94%, 38% 99%, 33% 93%, 28% 98%, 23% 94%, 18% 99%, 13% 93%, 8% 97%, 3% 93%, 0% 98%);
+        }
+        .lib-torn-top {
+          clip-path: polygon(0% 4%, 3% 1%, 8% 5%, 13% 2%, 18% 6%, 23% 1%, 28% 4%, 33% 1%, 38% 5%, 43% 2%, 48% 6%, 53% 1%, 58% 5%, 63% 2%, 68% 6%, 73% 1%, 77% 4%, 82% 1%, 86% 5%, 90% 2%, 94% 5%, 97% 1%, 100% 4%, 100% 100%, 0% 100%);
+        }
+        .lib-polaroid {
+          background: #FFFFFF;
+          padding: 14px 14px 44px;
+          box-shadow: 0 18px 40px -10px rgba(26,20,16,0.45), 0 2px 0 rgba(26,20,16,0.05);
+          position: relative;
+        }
+        .lib-polaroid .lib-polaroid-caption {
+          position: absolute; left: 0; right: 0; bottom: 12px;
+          text-align: center; font-family: ${CORMORANT}; font-style: italic;
+          font-size: 16px; color: ${INK};
+        }
+        .lib-callout-card {
+          background: ${CREAM};
+          padding: 40px 36px 36px;
+          box-shadow: 0 30px 70px -20px rgba(26,20,16,0.55), 0 2px 0 rgba(184,149,76,0.18);
+          border: 1px solid rgba(184,149,76,0.18);
+          position: relative;
+        }
+        .lib-margin-anno {
+          font-family: ${INTER}; font-weight: 500; font-size: 9px;
+          letter-spacing: 0.5em; text-transform: uppercase;
+          color: ${INK}; opacity: 0.32;
+          writing-mode: vertical-rl; transform: rotate(180deg);
+          white-space: nowrap;
+        }
+        .lib-foundations-grid {
+          display: grid;
+          grid-template-columns: 5fr 7fr;
+          gap: 56px;
+          align-items: center;
+        }
+        .lib-purpose-stage {
+          position: relative;
+          width: 100%;
+          min-height: 560px;
+        }
+        .lib-purpose-stage > .lib-purpose-img {
+          width: 100%; height: 560px; object-fit: cover;
+          filter: grayscale(1) brightness(0.7);
+        }
+        .lib-purpose-stage > .lib-purpose-callout {
+          position: absolute; top: 50%; left: 50%;
+          transform: translate(-50%, -50%) rotate(1deg);
+          width: min(440px, 86%);
+        }
+        .lib-practice-cluster {
+          display: flex; flex-wrap: wrap; justify-content: center;
+          gap: 40px; padding: 0 12px;
+        }
+        .lib-practice-cluster > * { width: 220px; }
+        .lib-canon-grid > div:nth-child(2n) { transform: translateY(36px); }
         @media (max-width: 720px) {
           .lib-row-2col, .lib-row-sidebar, .lib-footer-row {
             grid-template-columns: 1fr !important;
@@ -267,6 +326,11 @@ const Library = () => {
           .lib-room-card > .lib-room-arrow { display: none; }
           .lib-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
           .lib-2col-text { padding: 48px 24px !important; }
+          .lib-foundations-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .lib-margin-anno { display: none; }
+          .lib-purpose-stage > .lib-purpose-img { height: 420px; }
+          .lib-canon-grid > div:nth-child(2n) { transform: none !important; }
+          .lib-practice-cluster > * { width: 70%; }
         }
       `}</style>
 
