@@ -31,29 +31,32 @@ const ensureFonts = () => {
   link.id = FONT_LINK_ID;
   link.rel = "stylesheet";
   link.href =
-    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500&family=Pinyon+Script&display=swap";
+    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap";
   document.head.appendChild(link);
 };
 
-const NIGHT = "#1A1410";
-const CREAM = "#F5EEDC";
-const CREAM_DEEP = "#EFE6CF";
-const CREAM_QUIET = "rgba(26, 20, 16, 0.62)";
-const INK = "#1A1410";
-const BRASS = "#B8954C";
-const HAIR = "rgba(26, 20, 16, 0.16)";
+const NIGHT = "#2A1B14";
+const DARK_CARD = "#3A2618";
+const CREAM = "#F1ECE2";
+const CREAM_DEEP = "#E8E0D0";
+const CREAM_QUIET = "rgba(42, 27, 20, 0.62)";
+const INK = "#1F1611";
+const BRASS = "#B8924F";
+const BRASS_BRIGHT = "#D4AA6A";
+const HAIR = "rgba(31, 22, 17, 0.14)";
 
 const CORMORANT = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
-const SCRIPT = "'Pinyon Script', 'Cormorant Garamond', cursive";
-const INTER = "Inter, system-ui, -apple-system, sans-serif";
+const DISPLAY = "'Playfair Display', 'Cormorant Garamond', Georgia, serif";
+const SANS = "'DM Sans', system-ui, -apple-system, sans-serif";
+const MONO_FF = "'JetBrains Mono', ui-monospace, monospace";
 const FEATURES = '"liga","dlig","swsh","salt","kern"';
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const mono = {
-  fontFamily: INTER,
+  fontFamily: MONO_FF,
   fontWeight: 500 as const,
   fontSize: 10,
-  letterSpacing: "0.32em",
+  letterSpacing: "0.28em",
   textTransform: "uppercase" as const,
 };
 
